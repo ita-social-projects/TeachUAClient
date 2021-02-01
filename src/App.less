@@ -1,0 +1,357 @@
+@import '~antd/dist/antd.less';
+
+.layout {
+  background: #f7f0e0;
+}
+
+.behind-header {
+  position: absolute;
+  height: 250px;
+  width: 100%;
+  background: url("images/header-bg.png");
+  background-size: cover;
+}
+
+.header {
+  color: #fff;
+  z-index: 1;
+  background: none;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .logo {
+  background: url("images/logo.png") no-repeat;
+  background-size: contain;
+  width: 120px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.header .logo,
+.city,
+.user-profile,
+.nav-menu,
+.left-divider {
+  display: inline-block;
+}
+
+.outlined-button,
+.outlined-button:active,
+.outlined-button:focus {
+  background: none;
+  border-radius: 6px;
+}
+
+.outlined-button:hover {
+  background: none;
+}
+
+.support-button {
+  border-color: white;
+  color: white;
+}
+
+.support-button:hover {
+  color: @primary-hover-color;
+  border-color: @primary-hover-color;
+}
+
+.show-map-button,
+.show-map-button:active,
+.show-map-button:focus {
+  background: white;
+  border: none;
+  color: @primary-hover-color;
+  font-weight: 700;
+}
+
+.show-map-button:hover {
+  color: white;
+  background: @primary-hover-color;
+}
+
+
+.header .city {
+  margin: 0 1.4vw 0 4vw;
+}
+
+.header .city .icon {
+  font-size: 1.5em;
+}
+
+.header .nav-menu {
+  line-height: 2em;
+  font-size: 1em;
+  font-weight: 600;
+  background: none;
+  border-bottom: none;
+}
+
+.header .nav-menu .ant-menu-item a {
+  color: white;
+}
+
+.header .ant-menu-item {
+  margin: 0 10px;
+}
+
+.content {
+  z-index: 1;
+}
+
+
+.footer {
+  background: white;
+  height: 200px;
+}
+
+.search .ant-select-clear {
+  background: none;
+  display: inline-block;
+}
+.search .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  box-shadow: none;
+  background: none;
+  border: none;
+  padding: 0;
+  border-bottom: 2px solid white;
+  height: 30px;
+}
+
+.search .ant-select-single .ant-select-selector .ant-select-selection-search {
+  left: 0;
+}
+
+.search .ant-select-selection-placeholder,
+.ant-select-arrow {
+  color: white;
+}
+
+.search .ant-select-arrow {
+  top: 31%;
+}
+
+.right-col {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.city-name {
+  color: white;
+  font-size: 26px;
+}
+
+.card {
+  width: 300px;
+  color:black;
+  box-shadow: 0px 100px 80px rgba(1, 16, 44, 0.03), 0px 12.5216px 10.0172px rgba(1, 16, 44, 0.035);
+  border-radius: 16px;
+}
+
+.card .ant-card-head-title {
+  white-space: normal;
+}
+.card .title {
+  display: flex;
+  align-items: center;
+  line-height: 22px;
+  height: 43.5px;
+}
+
+.card .title .name {
+  color: #002766;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 3px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.card .title .icon-box {
+  display: flex;
+  min-width: 42px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+.card .title .icon {
+  pointer-events: none;
+  user-select: none;
+  width: 24px;
+  height: 24px;
+}
+
+.card .details-button {
+  font-weight: 600;
+  height: 40px;
+  width: 100%;
+  color: @primary-hover-color;
+  border-color: @primary-hover-color;
+}
+
+.card .description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.card .details-button:hover {
+  color: #002766;
+  border-color: #002766;
+}
+
+.card .address {
+  color: #2D4C68;
+}
+
+.card .address-icon {
+  font-size: 1.5em;
+  color: @primary-hover-color;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  min-height: 83vh;
+  align-content: flex-start;
+}
+
+.cards .empty {
+  background: none;
+  border: 0;
+  height: 0;
+}
+
+.cards .ant-card-body {
+  padding: 0 24px 24px 24px;
+}
+
+.cards .empty .ant-card-body {
+  padding: 0;
+}
+
+.cards .ant-card-head {
+  border-bottom: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination .ant-pagination-item-link:hover {
+  color:#000;
+}
+
+.pagination .ant-pagination-item:hover{
+  text-decoration: none;
+  background-color: @primary-hover-color;
+}
+
+.pagination .ant-pagination-item:focus a,
+.ant-pagination-item-active {
+  color:black;
+  background-color: @primary-hover-color;
+  border-color: @primary-hover-color;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.loader .bar {
+  position: relative;
+  height: 2px;
+  background-color: white;
+  animation-name: loader-animation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes loader-animation {
+  0% {
+    width: 0%;
+  }
+  49% {
+    width: 100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+    width: 100%
+  }
+}
+
+@media (max-width: 720px) {
+  .cards {
+    justify-content: center;
+  }
+
+  @media (max-width: 570px) {
+    .header {
+      display: block;
+    }
+
+    .city-name {
+      font-size: 20px;
+    }
+
+    .search .ant-select-arrow {
+      top: 42%;
+    }
+
+    .header .left-side-menu,
+    .center-side,
+    .right-side-menu {
+      display: inline-block;
+    }
+
+    .right-side-menu {
+      width: 100%;
+    }
+
+    .header .right-side-menu .left-divider {
+      float: right;
+    }
+
+    .header .center-side {
+      float: right;
+    }
+
+    @media (max-width: 380px) {
+      .full-width {
+        flex: 0 0 100%;
+        max-width: 100%;
+        justify-content: center;
+      }
+
+      .city-name-small {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 320px) {
+      .header .outlined-button,
+      .header .right-side-menu .left-divider {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+
