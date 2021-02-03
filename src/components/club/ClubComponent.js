@@ -4,7 +4,7 @@ import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
 
-const Club = () => {
+const ClubComponent = () => {
     const {clubs, setClubs} = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
 
@@ -40,4 +40,4 @@ const Club = () => {
     );
 };
 
-export default Club;
+export default ClubComponent;
