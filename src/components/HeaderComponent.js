@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Avatar, Button, Dropdown, Menu} from "antd";
 import {Header} from "antd/es/layout/layout";
 import {Link} from "react-router-dom";
@@ -6,18 +6,17 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import {SearchContext, searchParameters} from "../context/SearchContext";
-import {doRequest} from "../requests/Requester";
+import {getClubsByParameters} from "../service/ClubService";
+import {getAllCities} from "../service/CityService";
 
 const menuCity = (cities, setData) => {
     return (
         <Menu onClick={(value) => {
             searchParameters.cityName = value.key === "all" ? "" : value.key;
-            doRequest('/clubs/search', searchParameters).then(response => setData(response));
+            getClubsByParameters(searchParameters).then(response => setData(response));
         }}>
             {
-                cities.map(city => {
-                    return (<Menu.Item  key={city.name}>{city.name}</Menu.Item>)
-                })
+                cities.map(city => (<Menu.Item key={city.name}>{city.name}</Menu.Item>))
             }
             <Menu.Item key="all" danger>Всі</Menu.Item>
         </Menu>
@@ -39,9 +38,9 @@ const HeaderComponent = () => {
 
     const {setClubs} = useContext(SearchContext);
 
-    useState(() => {
-        doRequest('/cities').then(response => setCities(response));
-    });
+    useEffect(() => {
+        getAllCities().then(response => setCities(response));
+    }, []);
 
     const onMenuChange = (elem) => {
         setCurrentPage(elem.key);
@@ -70,7 +69,9 @@ const HeaderComponent = () => {
                 <div className="left-divider">
                     <Dropdown overlay={menuCity(cities, setClubs)} className="city" placement="bottomCenter" arrow>
                         <div>
-                            <EnvironmentFilled className="icon"/> {searchParameters.cityName.length === 0 ? "Місто" : searchParameters.cityName} <CaretDownFilled/>
+                            <EnvironmentFilled
+                                className="icon"/> {searchParameters.cityName.length === 0 ? "Місто" : searchParameters.cityName}
+                            <CaretDownFilled/>
                         </div>
                     </Dropdown>
                     <Dropdown overlay={profileMenu} className="user-profile" placement="bottomCenter" arrow>

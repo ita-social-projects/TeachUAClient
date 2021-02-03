@@ -3,7 +3,7 @@ import './App.less';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/HeaderComponent";
-import ClubComponent from "./components/ClubComponent";
+import Club from "./components/club/Club";
 import FooterComponent from "./components/FooterComponent";
 import ProjectComponent from "./components/ProjectComponent";
 import {SearchContext} from "./context/SearchContext";
@@ -27,9 +27,9 @@ function App() {
                     <HeaderComponent/>
                     <Content className="content" style={{padding: '20px 50px', 'min-height': '83vh'}}>
                         <Switch>
-                            <Route path="/clubs" component={ClubComponent}/>
+                            <Route path="/clubs" component={Club}/>
                             <Route path="/projects" component={ProjectComponent}/>
-                            <Route path="/" component={ClubComponent}/>
+                            <Route path="/" component={Club}/>
                         </Switch>
                     </Content>
                 </SearchContext.Provider>
