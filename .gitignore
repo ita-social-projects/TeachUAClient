@@ -70,3 +70,5 @@ dist
 *.log
 yarn.lock
 .env
+
+build/
