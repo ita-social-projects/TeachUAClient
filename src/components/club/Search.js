@@ -64,25 +64,21 @@ const Search = ({load, setClubs}) => {
 
             <OptGroup label="Категорії">
                 {
-                    possibleResults.categories.map(result =>
-                        (
-                            <Option value={"category" + "#" + result.name}
-                                    key={"category" + "#" + result.id}>
-                                {result.name}
-                            </Option>
-                        )
+                    possibleResults.categories.map(result => (
+                        <Option value={"category" + "#" + result.name}
+                                key={"category" + "#" + result.id}>
+                            {result.name}
+                        </Option>)
                     )
                 }
             </OptGroup>
             <OptGroup label="Гуртки">
                 {
-                    possibleResults.clubs.map(result =>
-                        (
-                            <Option value={"club" + "#" + result.name}
-                                    key={"club" + "#" + result.id}>
-                                {result.name}
-                            </Option>
-                        )
+                    possibleResults.clubs.map(result => (
+                        <Option value={"club" + "#" + result.name}
+                                key={"club" + "#" + result.id}>
+                            {result.name}
+                        </Option>)
                     )
                 }
             </OptGroup>

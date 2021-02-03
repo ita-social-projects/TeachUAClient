@@ -11,14 +11,14 @@ const HeaderRight = () => {
     const [cities, setCities] = useState([]);
     const {setClubs} = useContext(SearchContext);
 
+    useEffect(() => {
+        getAllCities().then(response => setCities(response));
+    }, []);
+
     const onCityChange = (value) => {
         searchParameters.cityName = value.key === "all" ? "" : value.key;
         getClubsByParameters(searchParameters).then(response => setClubs(response));
     };
-
-    useEffect(() => {
-        getAllCities().then(response => setCities(response));
-    }, []);
 
     const menuDropdown = (
         <Menu onClick={onCityChange}>
