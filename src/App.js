@@ -2,8 +2,8 @@ import React, {useState, useMemo} from "react";
 import './App.less';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import HeaderComponent from "./components/HeaderComponent";
-import ClubComponent from "./components/ClubComponent";
+import HeaderComponent from "./components/header/HeaderComponent";
+import ClubComponent from "./components/club/ClubComponent";
 import FooterComponent from "./components/FooterComponent";
 import ProjectComponent from "./components/ProjectComponent";
 import {SearchContext} from "./context/SearchContext";
@@ -25,7 +25,7 @@ function App() {
                 <div className="behind-header"/>
                 <SearchContext.Provider value={clubProvider}>
                     <HeaderComponent/>
-                    <Content className="content" style={{padding: '20px 50px', 'min-height': '83vh'}}>
+                    <Content className="content" style={{padding: '20px 50px', minHeight: 500}}>
                         <Switch>
                             <Route path="/clubs" component={ClubComponent}/>
                             <Route path="/projects" component={ProjectComponent}/>
