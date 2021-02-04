@@ -1,13 +1,23 @@
 import axios from "axios";
 
-export const getPossibleResults = async () => {
-    return await axios.get("/search?text=").then((response) => {
+export const getPossibleResults = async (parameters) => {
+    return await axios.get("/search", {
+        params: {
+            text: "",
+            cityName: parameters.cityName
+        }
+    }).then((response) => {
         return response.data
     });
 };
 
-export const getPossibleResultsByText = async (text) => {
-    return await axios.get("/search?text=" + text).then((response) => {
+export const getPossibleResultsByText = async (text, parameters) => {
+    return await axios.get("/search", {
+        params: {
+            text: text,
+            cityName: parameters.cityName
+        }
+    }).then((response) => {
         return response.data
     });
 };

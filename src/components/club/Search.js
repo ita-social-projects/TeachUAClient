@@ -34,7 +34,10 @@ const Search = ({load, setClubs}) => {
 
 
     const onFocus = useCallback(() => {
-        getPossibleResults().then(response => setPossibleResult(response));
+        getPossibleResults(searchParameters).then(response => {
+            setPossibleResult(response);
+            console.log(response)
+        });
     }, []);
 
     const onKeyDown = useCallback((event) => {
@@ -44,7 +47,7 @@ const Search = ({load, setClubs}) => {
     }, [searchText]);
 
     const onSearch = useCallback((val) => {
-        getPossibleResultsByText(val).then(response => setPossibleResult(response));
+        getPossibleResultsByText(val, searchParameters).then(response => setPossibleResult(response));
 
         setSearchText(val);
     }, []);

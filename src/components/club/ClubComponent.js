@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Button, Col, Row} from 'antd';
+import {Button, Col, Layout, Row} from 'antd';
 import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
@@ -9,7 +9,7 @@ const ClubComponent = () => {
     const [loading, setLoading] = useState(false);
 
     return (
-        <div>
+        <Layout>
             {
                 loading ? (
                     <div className="loader">
@@ -19,10 +19,7 @@ const ClubComponent = () => {
             }
             <Row>
                 <Col span={12} className="city-name-small full-width">
-                    <h2 className="city-name">{searchParameters.cityName.length === 0 ?
-                        "Гуртки у всіх містах" :
-                        "Гуртки у місті " + searchParameters.cityName}
-                    </h2>
+                    <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
                 </Col>
                 <Col className="search right-col full-width" span={12}>
                     <Search load={setLoading} setClubs={setClubs}/>
@@ -35,8 +32,8 @@ const ClubComponent = () => {
                 <Col span={12} className="right-col">Sort</Col>
             </Row>
 
-            <ClubList load={setLoading} clubs={clubs} setClubs={setClubs}/>
-        </div>
+            <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
+        </Layout>
     );
 };
 

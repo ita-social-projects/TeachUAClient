@@ -25,7 +25,7 @@ function App() {
                 <div className="behind-header"/>
                 <SearchContext.Provider value={clubProvider}>
                     <HeaderComponent/>
-                    <Content className="content" style={{padding: '20px 50px', 'min-height': '83vh'}}>
+                    <Content className="content" style={{padding: '20px 50px', minHeight: 500}}>
                         <Switch>
                             <Route path="/clubs" component={ClubComponent}/>
                             <Route path="/projects" component={ProjectComponent}/>

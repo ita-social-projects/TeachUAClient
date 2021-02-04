@@ -5,6 +5,8 @@ export const SearchContext = createContext(null);
 export const searchParameters = {
     clubName: "",
     cityName: "",
+    districtName: "",
+    stationName: "",
     categoryName: "",
     page: 0
 };
