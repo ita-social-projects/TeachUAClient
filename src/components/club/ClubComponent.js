@@ -3,6 +3,7 @@ import {Button, Col, Layout, Row} from 'antd';
 import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
+import Loader from "../Loader";
 
 const ClubComponent = () => {
     const {clubs, setClubs} = useContext(SearchContext);
@@ -10,13 +11,7 @@ const ClubComponent = () => {
 
     return (
         <Layout>
-            {
-                loading ? (
-                    <div className="loader">
-                        <div className="bar"/>
-                    </div>
-                ) : <div/>
-            }
+            {loading ? <Loader/> : <div/>}
             <Row>
                 <Col span={12} className="city-name-small full-width">
                     <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
@@ -31,7 +26,6 @@ const ClubComponent = () => {
                 </Col>
                 <Col span={12} className="right-col">Sort</Col>
             </Row>
-
             <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
         </Layout>
     );
