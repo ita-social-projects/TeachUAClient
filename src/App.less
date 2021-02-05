@@ -1,4 +1,9 @@
 @import '~antd/dist/antd.less';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+.body {
+  font-family: 'Open Sans', sans-serif;
+}
 
 .ant-layout {
   background: none;
@@ -115,6 +120,7 @@
   background: none;
   display: inline-block;
 }
+
 .search .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
   box-shadow: none;
   background: none;
@@ -148,15 +154,24 @@
 }
 
 .card {
-  width: 300px;
-  color:black;
+  height: 288px;
+  width: 296px;
+  color: black;
   box-shadow: 0px 100px 80px rgba(1, 16, 44, 0.03), 0px 12.5216px 10.0172px rgba(1, 16, 44, 0.035);
   border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 28px;
 }
 
 .card .ant-card-head-title {
   white-space: normal;
 }
+
+.cards .ant-space-item {
+  margin-right: 0;
+  padding-bottom: 0;
+}
+
 .card .title {
   display: flex;
   align-items: center;
@@ -168,7 +183,7 @@
   color: #002766;
   font-size: 16px;
   font-weight: 700;
-  margin-left: 3px;
+  margin-left: 7px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -183,6 +198,7 @@
   justify-content: center;
   border-radius: 100%;
 }
+
 .card .title .icon {
   pointer-events: none;
   user-select: none;
@@ -203,6 +219,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+  height: 71px;
+  margin: 0;
 }
 
 .card .details-button:hover {
@@ -212,18 +230,34 @@
 
 .card .address {
   color: #2D4C68;
+  height: 24px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  opacity: 0.6;
 }
 
 .card .address-icon {
   font-size: 1.5em;
   color: @primary-hover-color;
+  margin-right: 11px;
+  margin-left: 4px;
 }
 
 .cards {
-  display: flex;
-  justify-content: space-between;
   min-height: 83vh;
   align-content: flex-start;
+  justify-content: space-between;
+  max-width: 1268px;
+}
+
+.clubs {
+  align-items: center;
+}
+
+.cards:last-child {
+  margin-bottom: 0;
 }
 
 .cards .empty {
@@ -233,7 +267,12 @@
 }
 
 .cards .ant-card-body {
-  padding: 0 24px 24px 24px;
+  padding: 0;
+  width: 248px;
+  height: 240px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
 }
 
 .cards .empty .ant-card-body {
@@ -250,17 +289,17 @@
 }
 
 .pagination .ant-pagination-item-link:hover {
-  color:#000;
+  color: #000;
 }
 
-.pagination .ant-pagination-item:hover{
+.pagination .ant-pagination-item:hover {
   text-decoration: none;
   background-color: @primary-hover-color;
 }
 
 .pagination .ant-pagination-item:focus a,
 .ant-pagination-item-active {
-  color:black;
+  color: black;
   background-color: @primary-hover-color;
   border-color: @primary-hover-color;
 }

@@ -13,7 +13,7 @@ const ClubList = ({loading, load, clubs, setClubs}) => {
             load(true);
 
             getCityById(1).then((city) => {
-                searchParameters.cityName = city.name;
+                searchParameters.cityName = "";
                 getClubsByParameters(searchParameters).then(response => {
                     setClubs(response);
                     load(false);
@@ -33,25 +33,20 @@ const ClubList = ({loading, load, clubs, setClubs}) => {
     }, []);
 
     return (!loading && clubs.content.length === 0) ? <EmptySearch/> : (
-        <Layout>
-            <Space wrap className="cards" size={[0, 16]} style={{paddingTop: 20}}>
-                {
-                    clubs.content.map((club, index) => <ClubItem club={club} key={index}/>)
-                }
-                <Card className="card empty"/>
-                <Card className="card empty"/>
+        <Layout className="clubs">
+            <Space wrap className="cards" size={[0,0]} style={{paddingTop: 20}}>
+                {clubs.content.map((club, index) => <ClubItem club={club} key={index}/>)}
             </Space>
-            {
-                !clubs.size ? <div/> : (
-                    <Pagination className="pagination"
-                                hideOnSinglePage
-                                showSizeChanger={false}
-                                onChange={onPageChange}
-                                current={searchParameters.page + 1}
-                                pageSize={clubs.size}
-                                total={clubs.totalElements}/>
-                )
-            }
+
+            {clubs.size && (
+                <Pagination className="pagination"
+                            hideOnSinglePage
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            current={searchParameters.page + 1}
+                            pageSize={clubs.size}
+                            total={clubs.totalElements}/>
+            )}
         </Layout>
     )
 };
