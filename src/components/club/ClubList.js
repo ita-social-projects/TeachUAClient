@@ -13,7 +13,7 @@ const ClubList = ({loading, load, clubs, setClubs}) => {
             load(true);
 
             getCityById(1).then((city) => {
-                searchParameters.cityName = "";
+                searchParameters.cityName = city.name;
                 getClubsByParameters(searchParameters).then(response => {
                     setClubs(response);
                     load(false);
