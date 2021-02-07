@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout} from 'antd';
-import {Content, Header} from "antd/es/layout/layout";
+import {Content, Footer, Header} from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 
 const ProjectComponent = () => {
@@ -11,6 +11,7 @@ const ProjectComponent = () => {
                 <Content>Content</Content>
                 <Sider>Sider</Sider>
             </Layout>
+            <Footer>Footer</Footer>
         </Layout>
     );
 };

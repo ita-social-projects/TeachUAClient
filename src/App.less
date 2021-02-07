@@ -81,7 +81,6 @@
   background: @primary-hover-color;
 }
 
-
 .header .city {
   margin: 0 1.4vw 0 4vw;
 }
@@ -108,12 +107,6 @@
 
 .content {
   z-index: 1;
-}
-
-
-.footer {
-  background: white;
-  height: 200px;
 }
 
 .search .ant-select-clear {
@@ -324,6 +317,149 @@
   animation-timing-function: ease-in-out;
 }
 
+.footer {
+  height: 289px;
+  width: auto;
+  padding: 49px 121px;
+  justify-content: space-between;
+  display: flex;
+  background-color: white;
+  color: #fff;
+  z-index: 1;
+}
+
+.footer .footerSocial {
+}
+
+.footer .footerSocial .footerSocialLogos {
+  background: url("images/logofooter.png") no-repeat;
+  background-size: contain;
+  width: auto;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.footer .footerSocial .footerSlogan {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  color: #2D4C68;
+
+}
+
+.footer .footerSocial .footerSocialLogos {
+  background: url("images/social.png") no-repeat;
+  width: 160px;
+  height: 22px;
+  margin-top: 30px;
+}
+
+.footer .footerPartners {
+  width: 464px;
+  height: 144px;
+}
+
+.footer .footerPartners .footerPartnersText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #002766;
+}
+
+.footer .footerPartners .sponsorsLogo {
+  display: flex;
+  margin-top: 35px;
+}
+
+.footerPartners .logo1 {
+  background: url("images/sponcoreslogo/logo1.png") no-repeat;
+  margin-right: 16px;
+  width: 80px;
+  height: 80px;
+}
+
+.footerPartners .logo2 {
+  background: url("images/sponcoreslogo/logo2.png") no-repeat;
+  margin-right: 16px;
+  width: 80px;
+  height: 80px;
+}
+
+.footerPartners .logo3 {
+  background: url("images/sponcoreslogo/logo3.png") no-repeat;
+  margin-right: 16px;
+  width: 80px;
+  height: 80px;
+}
+
+.footerPartners .logo4 {
+  background: url("images/sponcoreslogo/logo4.png") no-repeat;
+  margin-right: 16px;
+  width: 80px;
+  height: 80px;
+}
+
+.footerPartners .logo5 {
+  background: url("images/sponcoreslogo/logo5.png") no-repeat;
+  width: 80px;
+  height: 80px;
+}
+
+.footerDonate {
+  display: inline-block;
+}
+
+.footerDonate .footerDonateText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #002766;
+}
+
+.footerDonate .footerDonateDescription {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  color: #2D4C68;
+}
+
+.footerDonate .donateButton {
+  display: flex;
+  align-items: center;
+  padding: 8px 24px;
+  width: 214px;
+  height: 40px;
+  left: 0;
+  right: 30.07%;
+  top: 28px;
+  background: #FA8C16;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+
+  text-align: center;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
 @keyframes loader-animation {
   0% {
     width: 0%;
@@ -340,6 +476,14 @@
   }
 }
 
+@media (max-width: 980px) {
+  .footer {
+    display: inline-block;
+    float: right;
+  }
+
+}
+
 @media (max-width: 720px) {
   .cards {
     min-width: 0;
@@ -347,6 +491,10 @@
 
   @media (max-width: 570px) {
     .header {
+      display: block;
+    }
+
+    .footer {
       display: block;
     }
 
@@ -360,7 +508,8 @@
 
     .header .left-side-menu,
     .center-side,
-    .right-side-menu {
+    .right-side-menu,
+    .footer, .footer .footerPartners, .footer .footerSocial, .footer .footerDonate {
       display: inline-block;
     }
 
@@ -376,27 +525,30 @@
       float: right;
     }
 
-    @media (max-width: 380px) {
-      .full-width {
-        flex: 0 0 100%;
-        max-width: 100%;
-        justify-content: center;
-      }
+  }
 
-      .city-name-small {
-        text-align: center;
-      }
+  @media (max-width: 380px) {
+    .full-width {
+      flex: 0 0 100%;
+      max-width: 100%;
+      justify-content: center;
     }
 
-    @media (max-width: 320px) {
-      .header .outlined-button,
-      .header .right-side-menu .left-divider {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
+    .city-name-small {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .header .outlined-button,
+    .header .right-side-menu .left-divider,
+    .footer, .footer .footerPartners, .footer .footerDonate, .footer .footerSocial {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 }
+
 
 
