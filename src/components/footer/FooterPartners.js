@@ -3,7 +3,7 @@ import React from 'react';
 
 const FooterPartners = () => {
     return (
-        <div className="footerPartners">
+        <div className="footer-partners">
             <div className="article">
                 Наші партнери
             </div>

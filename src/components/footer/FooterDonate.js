@@ -3,7 +3,7 @@ import {Button} from "antd";
 
 const FooterDonate = () => {
     return (
-        <div className="footerDonate">
+        <div className="footer-donate">
             <div className="article">
                 Як допомогти проєкту?
             </div>
@@ -13,7 +13,8 @@ const FooterDonate = () => {
                     <span>аби покривати щоденні витрати на роботу.</span>
                 </div>
             </div>
-            <Button className="flooded-button donateButton">Допомогти проекту</Button>
+            <a target="blank" href="#"><Button className="donate-button">Допомогти
+                проекту</Button> </a>
         </div>
     );
 };

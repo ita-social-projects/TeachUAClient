@@ -6,8 +6,8 @@ import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 
 const FooterSoc = () => {
     return (
-        <div className="footerSocial">
-            <div className="footerLogo"/>
+        <div className="footer-social">
+            <div className="footer-logo"/>
             <div className="description">
                 <div className="text">
                     <span>Нам небайдуже майбутнє</span>
