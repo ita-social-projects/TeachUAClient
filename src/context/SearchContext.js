@@ -4,7 +4,7 @@ export const SearchContext = createContext(null);
 
 export const searchParameters = {
     clubName: "",
-    cityName: "",
+    cityName: "Київ",
     districtName: "",
     stationName: "",
     categoryName: "",

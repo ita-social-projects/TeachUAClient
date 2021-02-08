@@ -1,14 +1,15 @@
-import React, {useState, useMemo} from "react";
+import React, {useMemo, useState, useEffect} from "react";
 import './App.less';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
-import ClubComponent from "./components/club/ClubComponent";
+import ClubComponent from "./components/clubs/ClubComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import ProjectComponent from "./components/ProjectComponent";
-import {SearchContext} from "./context/SearchContext";
+import {SearchContext, searchParameters} from "./context/SearchContext";
+import ClubPage from "./components/clubPage/ClubPage";
+import {getCityById} from "./service/CityService";
 
-const { Sider, Content } = Layout;
+const {Sider, Content} = Layout;
 
 function App() {
     const [clubs, setClubs] = useState({
@@ -27,10 +28,10 @@ function App() {
                     <HeaderComponent/>
                     <Layout>
                         {false && (<Sider>Sider</Sider>)}
-                        <Content className="content" style={{padding: '20px 50px', minHeight: 500}}>
+                        <Content className="global-content">
                             <Switch>
-                                <Route path="/clubs" component={ClubComponent}/>
-                                <Route path="/projects" component={ProjectComponent}/>
+                                <Route path="/clubs" exact component={ClubComponent}/>
+                                <Route path="/club/:name" exact render={({match}) => <ClubPage id={match.params.name}/>}/>
                                 <Route path="/" component={ClubComponent}/>
                             </Switch>
                         </Content>

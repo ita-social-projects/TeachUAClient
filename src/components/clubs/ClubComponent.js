@@ -1,9 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Button, Col, Layout, Row} from 'antd';
 import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
 import Loader from "../Loader";
+import {getCityById} from "../../service/CityService";
 
 const ClubComponent = () => {
     const {clubs, setClubs} = useContext(SearchContext);
@@ -11,8 +12,7 @@ const ClubComponent = () => {
 
     return (
         <Layout>
-            {loading ? <Loader/> : <div/>}
-            <Row>
+            <Row style={{marginBottom: 20}}>
                 <Col span={12} className="city-name-small full-width">
                     <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
                 </Col>
@@ -22,13 +22,12 @@ const ClubComponent = () => {
             </Row>
             <Row>
                 <Col span={12}>
-                    <Button className="show-map-button">Показати на карті</Button>
+                    <Button className="flooded-button">Показати на карті</Button>
                 </Col>
                 <Col span={12} className="right-col">Sort</Col>
             </Row>
             <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
-        </Layout>
-    );
+        </Layout>)
 };
 
 export default ClubComponent;
