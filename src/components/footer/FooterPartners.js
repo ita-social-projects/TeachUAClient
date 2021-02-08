@@ -4,20 +4,15 @@ import React from 'react';
 const FooterPartners = () => {
     return (
         <div className="footerPartners">
-            <div className="footerPartnersText">
+            <div className="article">
                 Наші партнери
             </div>
-            <div className="sponsorsLogo">
-                <div className="logo1">
-                </div>
-                <div className="logo2">
-                </div>
-                <div className="logo3">
-                </div>
-                <div className="logo4">
-                </div>
-                <div className="logo5">
-                </div>
+            <div className="sponsors">
+                <img src="/static/images/footer/sponsors/logo1.png"  className="logo" alt="Logo"/>
+                <img src="/static/images/footer/sponsors/logo2.png"  className="logo" alt="Logo"/>
+                <img src="/static/images/footer/sponsors/logo3.png"  className="logo" alt="Logo"/>
+                <img src="/static/images/footer/sponsors/logo4.png"  className="logo" alt="Logo"/>
+                <img src="/static/images/footer/sponsors/logo5.png"  className="logo" alt="Logo"/>
             </div>
 
         </div>

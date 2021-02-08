@@ -4,15 +4,16 @@ import {Button} from "antd";
 const FooterDonate = () => {
     return (
         <div className="footerDonate">
-            <div className="footerDonateText">
+            <div className="article">
                 Як допомогти проєкту?
             </div>
-            <div className="footerDonateDescription">
-                Ініціатива потребує постійної фінансової підтримки, <br>
-            </br> аби покривати щоденні витрати на роботу.
+            <div className="description">
+                <div className="text">
+                    <span>Ініціатива потребує постійної фінансової підтримки,</span>
+                    <span>аби покривати щоденні витрати на роботу.</span>
+                </div>
             </div>
-            <Button className="donateButton">Допомогти проекту</Button>
-
+            <Button className="flooded-button donateButton">Допомогти проекту</Button>
         </div>
     );
 };
