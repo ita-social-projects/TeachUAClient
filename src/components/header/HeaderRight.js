@@ -9,11 +9,8 @@ const HeaderRight = () => {
 
     return (
         <div className="right-side-menu">
-            <Button className="outlined-button support-button">Допомогти</Button>
-            <div className="left-divider">
-                <Cities setClubs={setClubs}/>
-                <AuthMenu/>
-            </div>
+            <Cities setClubs={setClubs}/>
+            <AuthMenu/>
         </div>
     )
 };

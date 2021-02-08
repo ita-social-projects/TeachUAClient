@@ -12,8 +12,8 @@ const ClubComponent = () => {
 
     return (
         <Layout>
-            <Row style={{marginBottom: 20}}>
-                <Col span={12} className="city-name-small full-width">
+            <Row style={{marginBottom: 20, justifyContent:'center'}}>
+                <Col span={12} className="city-name-box">
                     <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
                 </Col>
                 <Col className="search right-col full-width" span={12}>

@@ -27,8 +27,15 @@
   background: none;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
   padding: 0 87px 0 87px;
   justify-content: space-between;
+  align-items: center;
+}
+
+.header .right-side-menu {
+  display: flex;
+  align-items: center;
 }
 
 .header .logo {
@@ -37,14 +44,6 @@
   width: 120px;
   height: 50px;
   vertical-align: middle;
-}
-
-.header .logo,
-.city,
-.user-profile,
-.nav-menu,
-.left-divider {
-  display: inline-block;
 }
 
 .outlined-button,
@@ -151,9 +150,11 @@
   justify-content: flex-end;
 }
 
+.city-name-box {
+  font-size: 20px;
+}
 .city-name {
   color: white;
-  font-size: 26px;
 }
 
 .card {
@@ -371,52 +372,32 @@
   .layout .header {
     padding: 0 10px 10px 10px;
   }
+
+  .center-side {
+    order: 1;
+  }
 }
 
-@media (max-width: 570px) {
-  .header {
-    display: block;
-  }
+@media (max-width: 500px) {
 
-  .city-name {
-    font-size: 19px;
-  }
-
-  .search .ant-select-arrow {
-    top: 42%;
-  }
-
-  .header .left-side-menu,
-  .center-side,
-  .right-side-menu {
-    display: inline-block;
-  }
-
-  .right-side-menu {
-    width: 100%;
-  }
-
-  .header .right-side-menu .left-divider {
-    float: right;
-  }
-
-  .header .center-side {
-       float: right;
-     }
-}
-
-@media (max-width: 380px) {
   .behind-header {
     height: 320px;
   }
 
-  .full-width {
-    flex: 0 0 100%;
-    max-width: 100%;
-    justify-content: center;
+  .header .right-side-menu {
+    order:  2;
+    width: 100%;
+    justify-content: space-around;
   }
 
-  .city-name-small {
+  .city-name-box {
+    min-width: 100%;
     text-align: center;
+    font-size: 14px;
+  }
+
+  .search .ant-select-arrow {
+    top: 55%;
+    right: 0;
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import {Header} from "antd/es/layout/layout";
 import HeaderRight from "./HeaderRight";
 import HeaderCenter from "./HeaderCenter";
+import {Button} from "antd";
 
 const HeaderComponent = () => {
     return (
@@ -11,6 +12,7 @@ const HeaderComponent = () => {
             </div>
 
             <HeaderCenter/>
+            <Button className="outlined-button support-button">Допомогти</Button>
             <HeaderRight/>
         </Header>
     );
