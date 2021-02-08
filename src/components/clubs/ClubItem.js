@@ -1,6 +1,8 @@
 import {Button, Card} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
+import {Link} from "react-router-dom";
+import Sider from "antd/es/layout/Sider";
 
 const ClubItem = ({club}) => {
     return (
@@ -14,10 +16,14 @@ const ClubItem = ({club}) => {
                 </div>
             </div>
             <p className="description">{club.description}</p>
-            <p className="address"><EnvironmentFilled
-                className="address-icon"/> {club.address}
-            </p>
-            <Button className="outlined-button details-button">Детальніше</Button>
+            <div className="address">
+                <EnvironmentFilled
+                    className="address-icon"/>
+                <p className="text"> {club.address}</p>
+            </div>
+            <Button className="outlined-button details-button">
+                <Link to={`/club/${club.id}`}>Детальніше</Link>
+            </Button>
         </Card>
     )
 };
