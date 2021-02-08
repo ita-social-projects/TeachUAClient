@@ -2,14 +2,14 @@ import React from 'react';
 
 const FooterSoc = () => {
     return (
-        <div className="footersocial">
-            <div className="logofooter"/>
+        <div className="footerSocial">
+            <div className="footerLogo"/>
             <div className="footerSlogan">
                 Нам небайдуже майбутнє<br>
             </br>
                 дітей та української мови
             </div>
-            <div className="social"/>
+            <div className="footerSocialLogos"/>
         </div>
     );
 };
