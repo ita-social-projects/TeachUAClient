@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
 import {Button} from "antd";
@@ -7,7 +8,7 @@ const PageContent = ({club}) => {
     return (
         <Content className="page-content">
             <div className="upper">
-                <div class="title">
+                <div className="title">
                     {club.name}
                 </div>
                 <div className="description">
@@ -28,5 +29,10 @@ const PageContent = ({club}) => {
         </Content>
     )
 };
+
+PageContent.propTypes = {
+  club: PropTypes.object.isRequired
+};
+
 
 export default PageContent;

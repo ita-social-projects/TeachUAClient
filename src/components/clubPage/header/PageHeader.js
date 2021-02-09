@@ -1,7 +1,9 @@
 import {Header} from "antd/es/layout/layout";
 import React from "react";
+import PropTypes from 'prop-types';
 import './css/PageHeader.css';
 import {Button, Col, Row} from "antd";
+import PageContent from "../content/PageContent";
 
 const PageHeader = ({club}) => {
     return (
@@ -21,6 +23,10 @@ const PageHeader = ({club}) => {
             </div>
         </Header>
     )
+};
+
+PageHeader.propTypes = {
+    club: PropTypes.object.isRequired
 };
 
 export default PageHeader;

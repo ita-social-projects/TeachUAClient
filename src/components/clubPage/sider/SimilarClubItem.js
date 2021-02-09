@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import './css/SimilarClubItem.css';
 

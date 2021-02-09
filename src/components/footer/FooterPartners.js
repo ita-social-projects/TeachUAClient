@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const FooterPartners = () => {
     return (
         <div className="footer-partners">

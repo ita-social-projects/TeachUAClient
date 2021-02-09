@@ -1,10 +1,8 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Col, Layout, Row} from 'antd';
 import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
-import Loader from "../Loader";
-import {getCityById} from "../../service/CityService";
 
 const ClubComponent = () => {
     const {clubs, setClubs} = useContext(SearchContext);

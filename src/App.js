@@ -31,7 +31,7 @@ function App() {
                         <Content className="global-content">
                             <Switch>
                                 <Route path="/clubs" exact component={ClubComponent}/>
-                                <Route path="/club/:name" exact render={({match}) => <ClubPage id={match.params.name}/>}/>
+                                <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/" component={ClubComponent}/>
                             </Switch>
                         </Content>

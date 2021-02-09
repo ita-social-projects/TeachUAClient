@@ -7,7 +7,7 @@ const SimilarClubs = ({similarClubs}) => {
     return (
         <div className="similar-clubs">
             <p className="label">Схожі гуртки у місті {searchParameters.cityName}</p>
-            {similarClubs.map(club => <SimilarClubItem club={club}/>)}
+            {similarClubs.map(club => <SimilarClubItem key={club.id} club={club}/>)}
         </div>)
 };
 
