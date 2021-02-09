@@ -13,7 +13,7 @@ const FooterDonate = () => {
                     <span>аби покривати щоденні витрати на роботу.</span>
                 </div>
             </div>
-            <a target="blank" href="#"><Button className="donate-button">Допомогти
+            <a target="blank" href="#"><Button className="flooded-button donate-button">Допомогти
                 проекту</Button> </a>
         </div>
     );
