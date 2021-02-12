@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Dropdown, Menu} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import {searchParameters} from "../../context/SearchContext";
+import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import {getAllCities} from "../../service/CityService";
 import {getClubsByParameters} from "../../service/ClubService";
@@ -21,6 +21,7 @@ class Cities extends React.Component {
 
     onCityChange = (value) => {
         searchParameters.cityName = value.key;
+        mapSearchParameters.cityName=value.key;
         getClubsByParameters(searchParameters).then(response => this.props.setClubs(response));
     };
 
