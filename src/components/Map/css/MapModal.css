@@ -1,0 +1,9 @@
+.ant-modal {
+    padding-bottom: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.ant-modal-body{
+    height:700px;
+    padding:0;
+}

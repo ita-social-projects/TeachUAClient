@@ -1,0 +1,41 @@
+.markItem{
+    width:450px;
+    height:230px;
+    padding: 15px;
+    padding-top: 25px;
+}
+.title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color:#002766;
+    line-height: 28px;
+    margin-bottom: 15px;
+}
+
+.description{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color:#2D4C68;
+    line-height: 24px;
+    margin-bottom: 15px;
+}
+
+.address-icon{
+    font-size: 1.5em;
+    color: #FFA62C;
+    margin-right:10px;
+}
+.content{
+    margin-bottom: 15px;
+}
+
+.bt{
+    font-weight: 600;
+    height: 40px;
+    width: 100%;
+    color: #FA8C16;
+    border-color: #FA8C16;
+    border-radius: 8px;
+}

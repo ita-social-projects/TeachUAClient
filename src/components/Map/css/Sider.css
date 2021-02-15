@@ -1,0 +1,17 @@
+.mapSider {
+    background-color: white;
+    height: 100%;
+}
+.selectBlock{
+    height:150px;
+    background-color: #FA8C16;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.sel {
+    margin:10px;
+}
