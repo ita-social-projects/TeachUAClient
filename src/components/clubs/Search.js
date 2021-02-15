@@ -1,19 +1,22 @@
 import {Select} from "antd";
-import React, {useCallback, useState} from "react";
+import React from "react";
 import {clearSearchParameters, searchParameters} from "../../context/SearchContext";
 import {getClubsByParameters} from "../../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../../service/SearchService";
+import PropTypes from "prop-types";
 
 const {Option, OptGroup} = Select;
 
-const Search = ({load, setClubs}) => {
-    const [searchText, setSearchText] = useState('');
-    const [possibleResults, setPossibleResult] = useState({
-        categories: [],
-        clubs: []
-    });
+class Search extends React.Component {
+    state = {
+        searchText: '',
+        possibleResults: {
+            categories: [],
+            clubs: []
+        }
+    };
 
-    const onSearchChange = useCallback((value) => {
+    onSearchChange = (value) => {
         let parameter = value.split("#")[0],
             name = value.split("#")[1];
 
@@ -25,68 +28,75 @@ const Search = ({load, setClubs}) => {
             searchParameters.clubName = name;
         }
 
-        load(true);
+        this.props.load(true);
         getClubsByParameters(searchParameters).then(response => {
-            setClubs(response);
-            load(false);
+            this.props.setClubs(response);
+            this.props.load(false);
         });
-    }, []);
+    };
 
 
-    const onFocus = useCallback(() => {
+    onFocus = () => {
         getPossibleResults(searchParameters).then(response => {
-            setPossibleResult(response);
+            this.setState({possibleResults: response});
             console.log(response)
         });
-    }, []);
+    };
 
-    const onKeyDown = useCallback((event) => {
+    onKeyDown = (event) => {
         if (event.key === 'Enter') {
-            onSearchChange("club#" + searchText)
+            this.onSearchChange("club#" + this.state.searchText)
         }
-    }, [searchText]);
+    };
 
-    const onSearch = useCallback((val) => {
-        getPossibleResultsByText(val, searchParameters).then(response => setPossibleResult(response));
+    onSearch = (val) => {
+        getPossibleResultsByText(val, searchParameters).then(response => this.setState({possibleResults: response}));
 
-        setSearchText(val);
-    }, []);
+        this.setState({searchText: val});
+    };
 
-    return (
-        <Select
-            showSearch
-            /*allowClear*/
-            onChange={onSearchChange}
-            onSearch={onSearch}
-            onFocus={onFocus}
-            onInputKeyDown={onKeyDown}
-            style={{width: 200}}
-            placeholder="Який гурток шукаєте?"
-            optionFilterProp="children"
-            defaultActiveFirstOption={false}>
+    render() {
+        return (
+            <Select
+                showSearch
+                /*allowClear*/
+                onChange={this.onSearchChange}
+                onSearch={this.onSearch}
+                onFocus={this.onFocus}
+                onInputKeyDown={this.onKeyDown}
+                style={{width: 200}}
+                placeholder="Який гурток шукаєте?"
+                optionFilterProp="children"
+                defaultActiveFirstOption={false}>
 
-            <OptGroup label="Категорії">
-                {
-                    possibleResults.categories.map(result => (
-                        <Option value={"category" + "#" + result.name}
-                                key={"category" + "#" + result.id}>
-                            {result.name}
-                        </Option>)
-                    )
-                }
-            </OptGroup>
-            <OptGroup label="Гуртки">
-                {
-                    possibleResults.clubs.map(result => (
-                        <Option value={"club" + "#" + result.name}
-                                key={"club" + "#" + result.id}>
-                            {result.name}
-                        </Option>)
-                    )
-                }
-            </OptGroup>
-        </Select>
-    )
+                <OptGroup label="Категорії">
+                    {
+                        this.state.possibleResults.categories.map(result => (
+                            <Option value={"category" + "#" + result.name}
+                                    key={"category" + "#" + result.id}>
+                                {result.name}
+                            </Option>)
+                        )
+                    }
+                </OptGroup>
+                <OptGroup label="Гуртки">
+                    {
+                        this.state.possibleResults.clubs.map(result => (
+                            <Option value={"club" + "#" + result.name}
+                                    key={"club" + "#" + result.id}>
+                                {result.name}
+                            </Option>)
+                        )
+                    }
+                </OptGroup>
+            </Select>
+        );
+    }
+}
+
+Search.propTypes = {
+    setClubs: PropTypes.func.isRequired,
+    load: PropTypes.func.isRequired,
 };
 
 export default Search;

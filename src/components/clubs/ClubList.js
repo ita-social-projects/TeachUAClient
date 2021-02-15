@@ -1,48 +1,58 @@
 import {Layout, Pagination, Space} from "antd";
 import {clearSearchParameters, searchParameters} from "../../context/SearchContext";
-import React, {useCallback, useEffect} from "react";
-import ClubItem from "./ClubItem";
+import React from "react";
+import ClubCardItem from "./ClubCardItem";
 import {getClubsByParameters} from "../../service/ClubService";
 import EmptySearch from "./EmptySearch";
 import Loader from "../Loader";
+import PropTypes from "prop-types";
 
-const ClubList = ({loading, load, clubs, setClubs}) => {
+class ClubList extends React.Component {
+    getData = () => {
+        this.props.load(true);
 
-    useEffect(() => {
-        clearSearchParameters();
-
-        load(true);
         getClubsByParameters(searchParameters).then(response => {
-            setClubs(response);
-            load(false)
+            this.props.setClubs(response);
+            this.props.load(false)
         });
-    }, []);
+    };
 
-    const onPageChange = useCallback((page) => {
+    componentDidMount() {
+        clearSearchParameters();
+        this.getData();
+    }
+
+    onPageChange = (page) => {
         searchParameters.page = page - 1;
 
-        load(true);
-        getClubsByParameters(searchParameters).then(response => {
-            setClubs(response);
-            load(false);
-        });
-    }, []);
+        this.getData();
+    };
 
-    return loading ? <Loader/> : clubs.content.length === 0 ? <EmptySearch/> : (
-        <Layout className="clubs">
-            <Space wrap className="cards" size={[0, 0]} style={{paddingTop: 20}}>
-                {clubs.content.map((club, index) => <ClubItem club={club} key={index}/>)}
-            </Space>
+    render() {
+        return this.props.loading ? <Loader/> : this.props.clubs.content.length === 0 ? <EmptySearch/> : (
+            <Layout className="clubs">
+                <Space wrap className="cards" size={[0, 0]} style={{paddingTop: 20}}>
+                    {this.props.clubs.content.map((club, index) => <ClubCardItem club={club} key={index}/>)}
+                </Space>
 
-            <Pagination className="pagination"
-                        hideOnSinglePage
-                        showSizeChanger={false}
-                        onChange={onPageChange}
-                        current={searchParameters.page + 1}
-                        pageSize={clubs.size + 1}
-                        total={clubs.totalElements}/>
+                <Pagination className="pagination"
+                            hideOnSinglePage
+                            showSizeChanger={false}
+                            onChange={this.onPageChange}
+                            current={searchParameters.page + 1}
+                            pageSize={this.props.clubs.size + 1}
+                            total={this.props.clubs.totalElements}/>
 
-        </Layout>)
+            </Layout>)
+    }
+}
+
+ClubList.propTypes = {
+    clubs: PropTypes.array.isRequired,
+    setClubs: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+    load: PropTypes.func.isRequired,
 };
 
 export default ClubList;
+

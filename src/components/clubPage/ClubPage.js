@@ -7,15 +7,23 @@ import PageSider from "./sider/PageSider";
 import {getClubById} from "../../service/ClubService";
 import Loader from "../Loader";
 import './css/ClubPage.css';
+import PageComments from "./comments/PageComments";
+import {getFeedbackListByClubId} from "../../service/FeedbackService";
 
 class ClubPage extends React.Component {
     state = {
-        club: {}
+        club: {},
+        feedback: []
     };
 
     getData = () => {
-        getClubById(this.props.match.params.id).then(response => {
+        let clubId = this.props.match.params.id;
+
+        getClubById(clubId).then(response => {
             this.setState({club: response});
+        });
+        getFeedbackListByClubId(clubId).then(response => {
+            this.setState({feedback: response});
         });
     };
 
@@ -24,7 +32,7 @@ class ClubPage extends React.Component {
     }
 
     componentDidUpdate(preProps) {
-        if(preProps.match.params.id !== this.props.match.params.id) {
+        if (preProps.match.params.id !== this.props.match.params.id) {
             this.getData();
         }
     }
@@ -34,9 +42,10 @@ class ClubPage extends React.Component {
             <Layout>
                 <PageHeader club={this.state.club}/>
                 <Layout className="club-page" style={{padding: 40, background: 'white'}}>
-                    <PageContent club={this.state.club}/>
+                    <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
                     <PageSider club={this.state.club}/>
                 </Layout>
+                <PageComments feedback={this.state.feedback}/>
             </Layout>)
     }
 }

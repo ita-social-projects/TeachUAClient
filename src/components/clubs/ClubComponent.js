@@ -1,21 +1,20 @@
 import React, {useContext, useState} from 'react';
-import {Button, Col, Layout, Row, Modal} from 'antd';
-import {SearchContext, searchParameters,mapSearchParameters} from "../../context/SearchContext";
+import {Button, Col, Layout, Row} from 'antd';
+import {SearchContext, searchParameters} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import Search from "./Search";
-import '../Map/css/MapModal.css'
-import MapComponent from "../Map/MapComponent";
-
+import '../map/css/MapModal.css'
+import MapComponent from "../map/MapComponent";
 
 
 const ClubComponent = () => {
     const {clubs, setClubs} = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
-    const [visible, setVisible] = useState(false);
+    const [mapVisible, setMapVisible] = useState(false);
 
     return (
         <Layout>
-            <Row style={{marginBottom: 20, justifyContent:'center'}}>
+            <Row style={{marginBottom: 20, justifyContent: 'center'}}>
                 <Col span={12} className="city-name-box">
                     <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
                 </Col>
@@ -25,22 +24,13 @@ const ClubComponent = () => {
             </Row>
             <Row>
                 <Col span={12}>
-                    <Button className="flooded-button" onClick={() => setVisible(true)}>Показати на карті</Button>
+                    <Button className="flooded-button"
+                            onClick={() => setMapVisible(true)}>Показати на карті</Button>
                 </Col>
                 <Col span={12} className="right-col">Sort</Col>
             </Row>
             <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
-            <Modal
-                centered
-                visible={visible}
-                onOk={() => setVisible(false)}
-                onCancel={() => setVisible(false)}
-                width={1200}
-                footer={null}
-                className='mapModal'
-            >
-                <MapComponent />
-            </Modal>
+            <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
         </Layout>)
 };
 
