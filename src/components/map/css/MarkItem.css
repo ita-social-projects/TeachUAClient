@@ -1,8 +1,8 @@
-.layout-map .markItem{
+.map-modal .markItem{
     padding: 24px;
 }
 
-.layout-map .title {
+.map-modal .title {
     font-size: 18px;
     font-weight: bold;
     color:#002766;
@@ -10,29 +10,29 @@
     margin-bottom: 15px;
 }
 
-.layout-map .description{
+.map-modal .description{
     font-size: 14px;
     font-weight: 400;
     color:#2D4C68;
     line-height: 24px;
     margin-bottom: 15px;
 }
-.layout-map .markItem .address {
+.map-modal .markItem .address {
     display: flex;
     align-items: center;
 }
 
-.layout-map .markItem .address .text {
+.map-modal .markItem .address .text {
     color: #2D4C68;
     opacity: 0.6;
     font-weight: 600;
 }
 
-.layout-map .content{
+.map-modal .content{
     margin-bottom: 15px;
 }
 
-.layout-map .bt{
+.map-modal .bt{
     font-weight: 600;
     height: 40px;
     width: 100%;
@@ -40,3 +40,4 @@
     border-color: #FA8C16;
     border-radius: 8px;
 }
+

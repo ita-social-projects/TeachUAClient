@@ -5,6 +5,7 @@
 }
 
 .map-modal .ant-modal-body {
+    display: flex;
     height: 700px;
     padding: 0;
 }
@@ -14,11 +15,6 @@
     width: 48px;
     height: 48px;
     line-height: 48px;
-}
-
-.map-modal .layout-map {
-    height: 100%;
-    width: 100%;
 }
 
 .map-modal .gm-style .gm-style-iw-c {
@@ -57,4 +53,17 @@
 .map-modal .gm-style-iw-c,
 .map-modal .gm-style-iw-t::after {
     top: -59px;
+}
+
+@media (max-width: 1200px) {
+    .map-modal {
+        width: 95% !important;
+    }
+}
+
+@media (max-width: 950px) {
+    .map-modal .map-layout {
+        flex-direction: column;
+        width: 100%;
+    }
 }

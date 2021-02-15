@@ -64,9 +64,10 @@
             align-self: center;
         }
 
-        .address {
+        .page-sider .address {
             justify-content: center;
         }
+
         .page-sider {
             margin-top: 30px;
             flex: 0 0 364px !important;

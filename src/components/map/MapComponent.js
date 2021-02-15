@@ -26,7 +26,7 @@ const MapComponent = ({visible, setVisible}) => {
             footer={null}
             className='map-modal'
         >
-            <Layout className="layout-map">
+            <Layout className="map-layout">
                 <Sider className='mapSider' width={342}>
                     <div className="selectBlock">
                         <Cities setMapClubs={setMapClubs} setZoom={setZoom}/>
@@ -38,14 +38,12 @@ const MapComponent = ({visible, setVisible}) => {
                                  setSelected={setSelected}
                     />
                 </Sider>
-                <Layout style={{height: "100%"}}>
-                    <MapContainer mapClubs={mapClubs}
-                                  zoom={zoom}
-                                  setZoom={setZoom}
-                                  selected={selected}
-                                  setSelected={setSelected}
-                    />
-                </Layout>
+                <MapContainer mapClubs={mapClubs}
+                              zoom={zoom}
+                              setZoom={setZoom}
+                              selected={selected}
+                              setSelected={setSelected}
+                />
             </Layout>
         </Modal>
     )
