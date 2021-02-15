@@ -5,16 +5,16 @@ import {MapSelectContext, MapZoomContext} from "../../context/SearchContext";
 import {useContext} from "react";
 
 const ClubItem = ({mapClub}) => {
-    const{selected, setSelected} = useContext(MapSelectContext);
-    const{zoom, setZoom} = useContext(MapZoomContext);
+    const {selected, setSelected} = useContext(MapSelectContext);
+    const {zoom, setZoom} = useContext(MapZoomContext);
 
     return (
-        <div onClick={() =>{
+        <div onClick={() => {
             setSelected(mapClub)
             setZoom(15)
         }} className="clubItem">
             <div className="title">
-                <div className="icon-box" style={{backgroundColor: mapClub.categories[0].backgroundColor}} >
+                <div className="icon-box" style={{backgroundColor: mapClub.categories[0].backgroundColor}}>
                     <img className="icon" src={mapClub.categories[0].urlLogo} alt="Category logo"/>
                 </div>
                 <div className="name">
@@ -22,7 +22,7 @@ const ClubItem = ({mapClub}) => {
                 </div>
             </div>
             <div className="content">
-                <div className="address"> <EnvironmentFilled className="address-icon"/>{mapClub.address}</div>
+                <div className="address"><EnvironmentFilled className="address-icon"/>{mapClub.address}</div>
             </div>
         </div>
     )

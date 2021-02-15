@@ -10,19 +10,19 @@ import {MapSelectContext} from "../../context/SearchContext";
 
 
 const MapClubList = ({loading, load, mapClubs, setMapClubs}) => {
-    const{selected, setSelected} = useContext(MapSelectContext);
+    const {selected, setSelected} = useContext(MapSelectContext);
 
     useEffect(() => {
-                getClubsByParameters(mapSearchParameters).then(response => {
-                    setMapClubs(response);
-                    load(false);
-                });
+        getClubsByParameters(mapSearchParameters).then(response => {
+            setMapClubs(response);
+            load(false);
+        });
 
     }, []);
     return (!loading && mapClubs.content.length === 0) ? <EmptySearch/> : (
-            <div className="clubList" style={{overflow:"scroll"}}>
-                {mapClubs.content.map((mapClub, index) => <ClubItem  mapClub={mapClub} key={index}/>)}
-            </div>
+        <div className="clubList" style={{overflow: "scroll"}}>
+            {mapClubs.content.map((mapClub, index) => <ClubItem mapClub={mapClub} key={index}/>)}
+        </div>
     )
 };
 

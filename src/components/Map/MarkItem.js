@@ -8,11 +8,11 @@ const MarkItem = ({mapClub}) => {
     return (
         <div className="markItem">
             <div className="title">
-                    {mapClub.name}
+                {mapClub.name}
             </div>
             <p className="description">{mapClub.description}</p>
             <div className="content">
-                <div className="address"> <EnvironmentFilled className="address-icon"/>{mapClub.address}</div>
+                <div className="address"><EnvironmentFilled className="address-icon"/>{mapClub.address}</div>
             </div>
             <Button className="bt">
                 <Link to={`/club/${mapClub.id}`}>Детальніше</Link>

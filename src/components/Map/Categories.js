@@ -7,7 +7,7 @@ import './css/Categories.css';
 
 
 const Categories = ({setMapClubs}) => {
-    const { Option } = Select;
+    const {Option} = Select;
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const Categories = ({setMapClubs}) => {
     const onCityChange = (value) => {
         mapSearchParameters.categoryName = value;
         getClubsByParameters(mapSearchParameters).then(response => setMapClubs(response)
-            );
+        );
     }
 
     return (
@@ -26,10 +26,10 @@ const Categories = ({setMapClubs}) => {
             onChange={onCityChange}
             showSearch
             placeholder="Всі категорії"
-            style={{borderRadius:'15px'}}
+            style={{borderRadius: '15px'}}
         >
             <Option value="">всі категорії</Option>
-            {categories.map(category => (<Option value={category.name} >{category.name}</Option>))}
+            {categories.map(category => (<Option value={category.name}>{category.name}</Option>))}
 
         </Select>
     )

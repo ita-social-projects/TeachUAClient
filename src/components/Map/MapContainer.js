@@ -29,8 +29,8 @@ const MapContainer = ({mapClubs}) => {
         setSelected()
     };
 
-    const changeZoom = () =>{
-        if(map!=null) {
+    const changeZoom = () => {
+        if (map != null) {
             setZoom(map.zoom);
             console.log(zoom);
         }
@@ -38,13 +38,13 @@ const MapContainer = ({mapClubs}) => {
 
     const center = () => {
         console.log(mapClubs);
-        if(mapClubs.content.length==0){
+        if (mapClubs.content.length == 0) {
             return {
                 lat: 50.44161765084062,
                 lng: 30.52203536749006
             }
-        }else{
-            return{
+        } else {
+            return {
                 lat: mapClubs.content[0].latitude,
                 lng: mapClubs.content[0].longitude
             }
@@ -67,17 +67,17 @@ const MapContainer = ({mapClubs}) => {
                 {(cluster) =>
                     mapClubs.content.map(club => (
                             <Marker
-                                    id={club.id}
-                                    position={{
-                                        lat: club.latitude,
-                                        lng: club.longitude
-                                    }}
-                                    clusterer={cluster}
-                                    onClick={()=>{
-                                        setSelected(club)
-                                        setZoom(15)
-                                    }}
-                                    icon={{url: '/static/images/map/location.png'}}
+                                id={club.id}
+                                position={{
+                                    lat: club.latitude,
+                                    lng: club.longitude
+                                }}
+                                clusterer={cluster}
+                                onClick={() => {
+                                    setSelected(club)
+                                    setZoom(15)
+                                }}
+                                icon={{url: '/static/images/map/location.png'}}
                             />
                         )
                     )
