@@ -2,6 +2,8 @@ import React from "react";
 import {Link, useHistory} from "react-router-dom";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import './css/SimilarClubItem.css';
+import PropTypes from "prop-types";
+import PageSider from "./PageSider";
 
 const SimilarClubItem = ({club}) => {
     return (
@@ -12,6 +14,9 @@ const SimilarClubItem = ({club}) => {
                 <Link to={`/club/${club.id}`}><div className="details">Детальніше <ArrowRightOutlined/></div></Link>
             </div>
         </div>)
+};
+SimilarClubItem.propTypes = {
+    club: PropTypes.object.isRequired
 };
 
 export default SimilarClubItem;

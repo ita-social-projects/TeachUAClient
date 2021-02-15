@@ -20,13 +20,25 @@
     width: 100%;
 }
 
+.page-header .tags-name-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header .tags {
+    margin-top: 16px;
+    max-width: 420px;
+}
+
 .page-header .name-box {
     display: flex;
     align-items: center;
 }
 
 .page-header .apply-button {
-    width: 231px;
+    width: 254px;
+    height: 40px;
+    font-size: 16px;
     align-self: center;
     border-radius: 6px;
 }
@@ -81,7 +93,7 @@
     }
 
     .apply-box,
-    .name-box {
+    .tags-name-box {
         justify-content: center;
         max-width: 100%;
         flex: 0 0 100%;

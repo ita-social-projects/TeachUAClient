@@ -8,33 +8,6 @@ import SocialMedia from "./SocialMedia";
 import SimilarClubs from "./SimilarClubs";
 import {searchParameters} from "../../../context/SearchContext";
 
-
-/*const PageSider = ({club}) => {
-    const [similarClubs, setSimilarClubs] = useState([]);
-
-    useEffect(() => {
-
-        getSimilarClubsByCategoryName(club.id, club.categories[0].name, searchParameters.cityName).then(response => {
-            setSimilarClubs(response);
-        });
-    }, [club]);
-
-    return (
-        <Sider className="page-sider" width={364}>
-            <div className="address">
-                <EnvironmentFilled
-                    className="address-icon"/>
-                <p className="text"> {club.address}</p>
-            </div>
-            <div className="map">
-                <img src="/static/map.png" alt="Map"/>
-            </div>
-            <SocialMedia/>
-            <SimilarClubs similarClubs={similarClubs}/>
-        </Sider>
-    )
-};*/
-
 class PageSider extends React.Component {
     state = {
         similarClubs: []
@@ -52,7 +25,7 @@ class PageSider extends React.Component {
     }
 
     componentDidUpdate(preProps) {
-        if(preProps.club.id !== this.props.club.id) {
+        if (preProps.club.id !== this.props.club.id) {
             this.getData();
         }
     }
@@ -68,6 +41,15 @@ class PageSider extends React.Component {
                 <div className="map">
                     <img src="/static/map.png" alt="Map"/>
                 </div>
+                <div className="age">
+                    <span className="sider-label">Вік аудиторії: </span>
+                    <span className="years">від {this.props.club.ageFrom} до {this.props.club.ageTo} років</span>
+                </div>
+                {this.props.club.center &&
+                <div className="center">
+                    <span className="sider-label">Центр розвитку: </span>
+                    <span className="name">{this.props.club.center.name}</span>
+                </div>}
                 <SocialMedia/>
                 <SimilarClubs similarClubs={this.state.similarClubs}/>
             </Sider>

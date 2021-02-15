@@ -1,6 +1,5 @@
 .page-sider {
     background: white;
-    align-self: center;
 }
 
 .page-sider .address {
@@ -32,6 +31,26 @@
     width: 100%;
 }
 
+.page-sider .age,
+.page-sider .center {
+    margin-top: 32px;
+}
+
+.page-sider .sider-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2D4C68;
+}
+
+.page-sider .age .years {
+     opacity: 0.6;
+ }
+
+.page-sider .center .name {
+    color: #2E69C9;
+}
+
+
 @media (max-width: 1264px) {
     .page-sider {
         flex: 0 0 260px !important;
@@ -41,6 +60,10 @@
     }
 
     @media (max-width: 950px) {
+        .page-sider {
+            align-self: center;
+        }
+
         .address {
             justify-content: center;
         }

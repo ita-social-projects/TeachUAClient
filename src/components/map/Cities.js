@@ -6,10 +6,9 @@ import {getClubsByParameters} from "../../service/ClubService";
 import './css/Cities.css';
 
 
-const Cities = ({setMapClubs}) => {
+const Cities = ({setMapClubs, setZoom}) => {
     const {Option} = Select;
     const [cities, setCities] = useState([]);
-    const {zoom, setZoom} = useContext(MapZoomContext);
 
     useEffect(() => {
         getAllCities().then(response => setCities(response))

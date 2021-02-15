@@ -1,8 +1,8 @@
-.mapSider {
+.layout-map .mapSider {
     background-color: white;
     height: 100%;
 }
-.selectBlock{
+.layout-map .selectBlock{
     height:150px;
     background-color: #FA8C16;
     display: flex;
@@ -10,8 +10,4 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
-}
-
-.sel {
-    margin:10px;
 }

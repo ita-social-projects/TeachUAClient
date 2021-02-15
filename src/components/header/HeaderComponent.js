@@ -1,7 +1,7 @@
 import React from 'react';
 import {Header} from "antd/es/layout/layout";
 import HeaderRight from "./HeaderRight";
-import HeaderCenter from "./HeaderCenter";
+import NavMenu from "./NavMenu";
 import {Button} from "antd";
 
 const HeaderComponent = () => {
@@ -11,8 +11,7 @@ const HeaderComponent = () => {
                 <div className="logo"/>
             </div>
 
-            <HeaderCenter/>
-            <Button className="outlined-button support-button">Допомогти</Button>
+            <NavMenu/>
             <HeaderRight/>
         </Header>
     );

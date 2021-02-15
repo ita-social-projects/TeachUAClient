@@ -1,0 +1,42 @@
+.layout-map .club-item {
+    border-bottom: 1px solid #F5F5F5;
+    height: 85px;
+    box-sizing: content-box;
+    padding: 20px 34px;
+    cursor: pointer;
+}
+
+.layout-map .club-item:hover {
+    background: #FAFAFA;
+}
+
+.layout-map .club-item .title {
+    display: flex;
+    margin-bottom: 20px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.layout-map .club-item .name {
+    color: #002766;
+    margin-left: 10px;
+}
+
+.layout-map .club-item .address {
+    display: flex;
+    align-items: center;
+}
+
+.layout-map .club-item .address .text {
+    color: #2D4C68;
+    font-weight: 600;
+    opacity: 0.6;
+}
+
+.layout-map .address-icon {
+    font-size: 1.5em;
+    color: #FFA62C;
+    margin-right: 10px;
+}
+
+

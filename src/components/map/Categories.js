@@ -18,7 +18,7 @@ const Categories = ({setMapClubs}) => {
         mapSearchParameters.categoryName = value;
         getClubsByParameters(mapSearchParameters).then(response => setMapClubs(response)
         );
-    }
+    };
 
     return (
         <Select

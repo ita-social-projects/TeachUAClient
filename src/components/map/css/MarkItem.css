@@ -1,11 +1,8 @@
-.markItem{
-    width:450px;
-    height:230px;
-    padding: 15px;
-    padding-top: 25px;
+.layout-map .markItem{
+    padding: 24px;
 }
-.title {
-    font-family: 'Open Sans', sans-serif;
+
+.layout-map .title {
     font-size: 18px;
     font-weight: bold;
     color:#002766;
@@ -13,25 +10,29 @@
     margin-bottom: 15px;
 }
 
-.description{
-    font-family: 'Open Sans', sans-serif;
+.layout-map .description{
     font-size: 14px;
     font-weight: 400;
     color:#2D4C68;
     line-height: 24px;
     margin-bottom: 15px;
 }
-
-.address-icon{
-    font-size: 1.5em;
-    color: #FFA62C;
-    margin-right:10px;
+.layout-map .markItem .address {
+    display: flex;
+    align-items: center;
 }
-.content{
+
+.layout-map .markItem .address .text {
+    color: #2D4C68;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.layout-map .content{
     margin-bottom: 15px;
 }
 
-.bt{
+.layout-map .bt{
     font-weight: 600;
     height: 40px;
     width: 100%;

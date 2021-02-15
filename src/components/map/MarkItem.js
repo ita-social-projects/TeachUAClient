@@ -12,7 +12,10 @@ const MarkItem = ({mapClub}) => {
             </div>
             <p className="description">{mapClub.description}</p>
             <div className="content">
-                <div className="address"><EnvironmentFilled className="address-icon"/>{mapClub.address}</div>
+                <div className="address">
+                    <EnvironmentFilled className="address-icon"/>
+                    <span className="text">{mapClub.address}</span>
+                </div>
             </div>
             <Button className="bt">
                 <Link to={`/club/${mapClub.id}`}>Детальніше</Link>
