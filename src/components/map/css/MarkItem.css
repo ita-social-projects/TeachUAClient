@@ -1,22 +1,27 @@
-.map-modal .markItem{
+.map-modal .markItem {
     padding: 24px;
 }
 
 .map-modal .title {
     font-size: 18px;
     font-weight: bold;
-    color:#002766;
+    color: #002766;
     line-height: 28px;
     margin-bottom: 15px;
 }
 
-.map-modal .description{
+.map-modal .description {
     font-size: 14px;
     font-weight: 400;
-    color:#2D4C68;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    color: #2D4C68;
     line-height: 24px;
     margin-bottom: 15px;
 }
+
 .map-modal .markItem .address {
     display: flex;
     align-items: center;
@@ -28,11 +33,11 @@
     font-weight: 600;
 }
 
-.map-modal .content{
+.map-modal .content {
     margin-bottom: 15px;
 }
 
-.map-modal .bt{
+.map-modal .bt {
     font-weight: 600;
     height: 40px;
     width: 100%;
@@ -41,3 +46,8 @@
     border-radius: 8px;
 }
 
+@media (max-width: 630px) {
+    .map-modal .gm-style-iw-d {
+        width: 100%;
+    }
+}
