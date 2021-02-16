@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import {Button} from "antd";
 import {SearchContext} from "../../context/SearchContext";
 import Cities from "./Cities";
 import AuthMenu from "./AuthMenu";

@@ -16,6 +16,7 @@
         height: auto;
         justify-content: flex-start;
     }
+
     .map-modal .mapSider {
         flex: 0 0 auto!important;
         min-width: 100%!important;

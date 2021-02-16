@@ -28,7 +28,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected}) => {
     };
 
     const center = () => {
-        if (mapClubs.content.length == 0) {
+        if (mapClubs.content.length === 0) {
             return {
                 lat: 50.44161765084062,
                 lng: 30.52203536749006

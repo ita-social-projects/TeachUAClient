@@ -2,10 +2,9 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080/api",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
-    "@brainhubeu/react-carousel": "^1.19.26",
     "@craco/craco": "^6.1.0",
     "@react-google-maps/api": "^2.1.1",
     "@testing-library/jest-dom": "^5.11.9",
@@ -20,8 +19,7 @@
     "react-router": "latest",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4",
-    "moment": "latest"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "craco start",

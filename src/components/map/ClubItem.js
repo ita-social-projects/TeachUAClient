@@ -1,8 +1,6 @@
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/ClubItem.css'
-import {MapSelectContext, MapZoomContext} from "../../context/SearchContext";
-import {useContext} from "react";
 
 const ClubItem = ({mapClub, setZoom, setSelected}) => {
     return (

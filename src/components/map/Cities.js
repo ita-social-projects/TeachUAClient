@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useContext} from "react";
-import {Menu, Select} from "antd";
+import React, {useEffect, useState} from "react";
+import {Select} from "antd";
 import {getAllCities} from "../../service/CityService";
-import {mapSearchParameters, MapZoomContext} from "../../context/SearchContext";
+import {mapSearchParameters} from "../../context/SearchContext";
 import {getClubsByParameters} from "../../service/ClubService";
 import './css/Cities.css';
 
@@ -11,14 +11,14 @@ const Cities = ({setMapClubs, setZoom}) => {
     const [cities, setCities] = useState([]);
 
     useEffect(() => {
-        getAllCities().then(response => setCities(response))
+        getAllCities().then(response => setCities(response));
     }, []);
 
     const onCityChange = (value) => {
         mapSearchParameters.cityName = value;
         getClubsByParameters(mapSearchParameters).then(response => setMapClubs(response));
         setZoom(10);
-    }
+    };
 
     return (
         <Select

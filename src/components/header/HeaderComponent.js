@@ -2,7 +2,6 @@ import React from 'react';
 import {Header} from "antd/es/layout/layout";
 import HeaderRight from "./HeaderRight";
 import NavMenu from "./NavMenu";
-import {Button} from "antd";
 
 const HeaderComponent = () => {
     return (

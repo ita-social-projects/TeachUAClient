@@ -18,14 +18,14 @@ const ClubCardItem = ({club}) => {
             </div>
             <div className="tags">
                 {club.categories.map(category =>
-                    <Tag className="tag" style={{
+                    <Tag className="tag" key={category.id} style={{
                         backgroundColor: category.tagBackgroundColor,
                         color: category.tagTextColor,
                     }}>
                         <div className="icon"
                              style={{
-                                 'background-color': category.tagTextColor,
-                                 '-webkit-mask': `url(${category.urlLogo}) no-repeat center / contain`
+                                 backgroundColor: category.tagTextColor,
+                                 webkitMask: `url(${category.urlLogo}) no-repeat center / contain`
                              }}/>
                         <span className="name">{category.name}</span>
                     </Tag>)
@@ -57,7 +57,7 @@ const ClubCardItem = ({club}) => {
     )
 };
 ClubCardItem.propTypes = {
-    club: PropTypes.array.isRequired
+    club: PropTypes.object.isRequired
 };
 
 export default ClubCardItem;

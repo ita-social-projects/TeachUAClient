@@ -48,7 +48,7 @@ class ClubList extends React.Component {
 }
 
 ClubList.propTypes = {
-    clubs: PropTypes.array.isRequired,
+    clubs: PropTypes.object.isRequired,
     setClubs: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     load: PropTypes.func.isRequired,
