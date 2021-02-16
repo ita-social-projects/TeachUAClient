@@ -1,8 +1,6 @@
 import React from 'react';
 import {Button, Checkbox, Form, Input} from 'antd';
 import './сss/Profile.less'
-import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
-import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 
 
 const layout = {
@@ -13,7 +11,7 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
 
-const LoginComponent = () => {
+const UserLoginComponent = () => {
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -61,4 +59,4 @@ const LoginComponent = () => {
 
 }
 
-export default LoginComponent;
+export default UserLoginComponent;

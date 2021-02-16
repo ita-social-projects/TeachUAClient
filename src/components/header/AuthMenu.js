@@ -1,17 +1,20 @@
 import React from "react";
-import {Avatar, Dropdown, Menu} from "antd";
+import {Avatar, Button, Dropdown, Menu} from "antd";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import ProfileComponent from "../profile/Profile";
+import ProfileLoginComponent from "../profile/ProfileLogin";
 import '../profile/сss/Profile.less'
+import ProfileRegistrationComponent from "../profile/ProfileRegistration";
+import UserPage from "../userPage/UserPage";
 
 
 const AuthMenu = () => {
     const profileDropdown = (
         <Menu>
-            <ProfileComponent/>
-            <Menu.Item>Профіль </Menu.Item>
-            <Menu.Item>Настройки</Menu.Item>
+
+            <Menu.Item><ProfileLoginComponent/></Menu.Item>
+            <Menu.Item> <ProfileRegistrationComponent/></Menu.Item>
+            <Menu.Item> <a target="blank" href="/user"><Button> Сторінка користувача</Button> </a></Menu.Item>
             <Menu.Item danger>Вийти</Menu.Item>
         </Menu>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Checkbox, Form, Input} from 'antd';
 import './сss/Profile.less'
 
+
 const layout = {
     labelCol: {span: 8},
     wrapperCol: {span: 16},
@@ -10,7 +11,7 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
 
-const RegistrationComponent = () => {
+const UserRegistrationComponent = () => {
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -19,7 +20,6 @@ const RegistrationComponent = () => {
         console.log('Failed:', errorInfo);
     };
     return (
-
 
         <Form
             {...layout}
@@ -35,7 +35,6 @@ const RegistrationComponent = () => {
             >
                 <Input/>
             </Form.Item>
-
             <Form.Item
                 label="Пароль"
                 name="Пароль"
@@ -60,4 +59,4 @@ const RegistrationComponent = () => {
 
 }
 
-export default RegistrationComponent;
+export default UserRegistrationComponent;

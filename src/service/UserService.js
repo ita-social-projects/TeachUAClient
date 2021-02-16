@@ -1,6 +1,13 @@
-import {API} from "./UserService";
-
 import axios from "axios";
+
+export const API = "/api";
+
+export const getUserById = async (id) => {
+    return await axios.get(API + "/user/" + id).then((response) => {
+        return response.data
+    });
+};
+
 
 
 export const SuccessRegistration = async (email, password) => {
