@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
 
-const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, lastClub, setLastClub}) => {
+const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center,setCenter}) => {
     const [map, setMap] = useState(null);
 
     const {isLoaded, loadError} = useLoadScript({
@@ -27,26 +27,12 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, lastClub,
         }
     };
 
-    const center = () => {
-        if (lastClub) {
-            return {
-                lat: lastClub.latitude,
-                lng: lastClub.longitude
-            }
-        } else {
-            return {
-                lat: 46.73259434488975,
-                lng: 23.997036169252326
-            }
-        }
-    };
-
     return (
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={zoom}
             onLoad={map => {setMap(map);}}
-            center={center()}
+            center={center}
             options={option}
             onZoomChanged={changeZoom}>
             <MarkerClusterer
@@ -72,8 +58,11 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, lastClub,
                                 clusterer={cluster}
                                 onClick={() => {
                                     setSelected(club);
-                                    setLastClub(club);
                                     setZoom(15);
+                                    setCenter({
+                                        lat: club.latitude,
+                                        lng: club.longitude
+                                    })
                                 }}
                                 icon={{url: '/static/images/map/location.png'}}/>
                         )
