@@ -14,12 +14,11 @@ const MapComponent = ({visible, setVisible}) => {
         content: [],
     });
     const [selected, setSelected] = useState(null);
-    const [lastClub, setLastClub] = useState(null);
     const [zoom, setZoom] = useState(10);
+    const [center, setCenter] = useState(null);
 
     const closeMap = () => {
         setVisible(false);
-        setLastClub(null);
         setZoom(10);
     };
 
@@ -36,14 +35,14 @@ const MapComponent = ({visible, setVisible}) => {
             <Layout className="map-layout">
                 <Sider className='mapSider' width={342}>
                     <div className="selectBlock">
-                        <Cities setMapClubs={setMapClubs} setZoom={setZoom}/>
+                        <Cities setMapClubs={setMapClubs} setZoom={setZoom} setCenter={setCenter}/>
                         <Categories setMapClubs={setMapClubs}/>
                     </div>
                     <MapClubList mapClubs={mapClubs}
                                  setMapClubs={setMapClubs}
                                  setZoom={setZoom}
                                  setSelected={setSelected}
-                                 setLastClub={setLastClub}
+                                 setCenter={setCenter}
                     />
                 </Sider>
                 <MapContainer mapClubs={mapClubs}
@@ -51,8 +50,8 @@ const MapComponent = ({visible, setVisible}) => {
                               setZoom={setZoom}
                               selected={selected}
                               setSelected={setSelected}
-                              lastClub={lastClub}
-                              setLastClub={setLastClub}
+                              center={center}
+                              setCenter={setCenter}
                 />
             </Layout>
         </Modal>
