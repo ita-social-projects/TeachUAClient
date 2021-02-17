@@ -1,0 +1,68 @@
+.modal-payment .ant-modal-body{
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 580px;
+    align-items: center
+}
+
+.modal-payment .payment-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.modal-payment .payment-dot{
+    width:12px;
+    height:12px;
+    border-radius: 100%;
+    background-color: #C4C4C4;
+    margin-left: 8px;
+    }
+.modal-payment .dot-filled{
+    background-color: #FA8C16;
+}
+.modal-payment .payment-dots{
+    display: flex;
+    margin: 0 auto;
+}
+.modal-payment .payment-label{
+    font-size: 32px;
+    color: #002766;
+    font-weight: 700;
+}
+.modal-payment .payment-row{
+    width: 85%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.modal-payment .payment-input{
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #D9D9D9;
+
+}
+.modal-payment .payment-row .label{
+    font-size: 18px;
+    color: #595959;
+}
+.modal-payment .payment-box{
+    width: 256px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+}
+
+@media (max-width:610px) {
+    .modal-payment .payment-row{
+        flex-direction: column;
+    }
+    .modal-payment .payment-box{
+        justify-content: center;
+        margin-left: 0px;
+    }
+}
