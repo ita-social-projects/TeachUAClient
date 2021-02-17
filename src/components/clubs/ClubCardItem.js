@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ClubCardItem = ({club}) => {
-    console.log(club)
     return (
         <Card className="card">
             <div className="title">

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
 
-const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected}) => {
+const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, lastClub, setLastClub}) => {
     const [map, setMap] = useState(null);
 
     const {isLoaded, loadError} = useLoadScript({
@@ -28,31 +28,39 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected}) => {
     };
 
     const center = () => {
-        if (mapClubs.content.length === 0) {
+        if (lastClub) {
             return {
-                lat: 50.44161765084062,
-                lng: 30.52203536749006
+                lat: lastClub.latitude,
+                lng: lastClub.longitude
             }
         } else {
             return {
-                lat: mapClubs.content[0].latitude,
-                lng: mapClubs.content[0].longitude
+                lat: 46.73259434488975,
+                lng: 23.997036169252326
             }
         }
-    }
+    };
 
     return (
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={zoom}
-            onLoad={map => {
-                setMap(map);
-                console.log(map)
-            }}
+            onLoad={map => {setMap(map);}}
             center={center()}
             options={option}
             onZoomChanged={changeZoom}>
-            <MarkerClusterer>
+            <MarkerClusterer
+                onClusteringEnd={(clusters) => {
+                    clusters.clusters.map((cluster) => {
+                        cluster.clusterIcon.styles = [{
+                            url: '/static/images/map/cluster.png',
+                            height: 58,
+                            width: 67,
+                            textColor: '#FFFFFF',
+                            textSize: 18,
+                        }];
+                    })
+                }}>
                 {(cluster) =>
                     mapClubs.content.map(club => (
                             <Marker
@@ -64,6 +72,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected}) => {
                                 clusterer={cluster}
                                 onClick={() => {
                                     setSelected(club);
+                                    setLastClub(club);
                                     setZoom(15);
                                 }}
                                 icon={{url: '/static/images/map/location.png'}}/>
