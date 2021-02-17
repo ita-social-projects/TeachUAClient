@@ -3,9 +3,9 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import Tags from "../Tags";
 
 const ClubCardItem = ({club}) => {
-    console.log(club)
     return (
         <Card className="card">
             <div className="title">
@@ -16,21 +16,7 @@ const ClubCardItem = ({club}) => {
                     {club.name}
                 </div>
             </div>
-            <div className="tags">
-                {club.categories.map(category =>
-                    <Tag className="tag" key={category.id} style={{
-                        backgroundColor: category.tagBackgroundColor,
-                        color: category.tagTextColor,
-                    }}>
-                        <div className="icon"
-                             style={{
-                                 backgroundColor: category.tagTextColor,
-                                 webkitMask: `url(${category.urlLogo}) no-repeat center / contain`
-                             }}/>
-                        <span className="name">{category.name}</span>
-                    </Tag>)
-                }
-            </div>
+            <Tags categories={club.categories}/>
             {club.center !== null ?
                 <div className="with-center">
                     <div className="center">
@@ -41,8 +27,8 @@ const ClubCardItem = ({club}) => {
                         </div>
                     </div>
                     <p className="description">{club.description}</p>
-                </div> : <p className="description">{club.description}</p>}
-
+                </div> :
+                <p className="description">{club.description}</p>}
             <Rate className="rating" disabled value={club.rating} />
             <div className="address">
                 <EnvironmentFilled

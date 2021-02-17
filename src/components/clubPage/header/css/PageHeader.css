@@ -17,7 +17,9 @@
 }
 
 .page-header .row {
+    display: flex;
     width: 100%;
+    justify-content: space-between;
 }
 
 .page-header .tags-name-box {
@@ -35,6 +37,10 @@
     align-items: center;
 }
 
+.page-header .apply-box {
+    display: flex;
+    justify-content: flex-end;
+}
 .page-header .apply-button {
     width: 254px;
     height: 40px;
@@ -49,53 +55,40 @@
     font-weight: 700;
     line-height: 1em;
     margin-left: 7px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
 }
 
-@media (max-width: 1264px) {
-    .page-header {
-        height: 350px;
-    }
-
-    .page-header .club-name {
-        font-size: 23px;
-    }
-}
 
 @media (max-width: 950px) {
     .page-header {
-        height: 280px;
+        height: 460px;
     }
 
     .page-header .blur {
-        height: 100px;
-        padding: 0 10px 0 10px;
+        height: 254px;
+    }
+
+    .page-header .name-box {
+        align-items: normal;
+    }
+
+    .page-header .row {
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+    }
+
+    .page-header .apply-box,
+    .page-header .tags-name-box {
+        justify-content: center;
+    }
+
+    .page-header .club-name {
+        font-size: 24px;
     }
 }
 
 @media (max-width: 550px) {
-    .page-header .club-name {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 450px) {
-    .page-header .blur{
-        align-items: normal;
-        align-content: space-between;
-    }
-
-    .page-header .club-name {
-        font-size: 16px;
-    }
-
-    .apply-box,
-    .tags-name-box {
-        justify-content: center;
-        max-width: 100%;
-        flex: 0 0 100%;
+    .page-header .apply-button {
+        width: 100%;
     }
 }

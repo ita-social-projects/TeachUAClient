@@ -2,11 +2,15 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/ClubItem.css'
 
-const ClubItem = ({mapClub, setZoom, setSelected}) => {
+const ClubItem = ({mapClub, setZoom, setSelected,setCenter}) => {
     return (
         <div onClick={() => {
-            setSelected(mapClub)
-            setZoom(15)
+            setSelected(mapClub);
+            setZoom(15);
+            setCenter({
+                lat: mapClub.latitude,
+                lng:mapClub.longitude
+            })
         }} className="club-item">
             <div className="title">
                 <div className="icon-box" style={{backgroundColor: mapClub.categories[0].backgroundColor}}>

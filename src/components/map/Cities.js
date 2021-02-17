@@ -6,7 +6,7 @@ import {getClubsByParameters} from "../../service/ClubService";
 import './css/Cities.css';
 
 
-const Cities = ({setMapClubs, setZoom}) => {
+const Cities = ({setMapClubs, setZoom, setCenter}) => {
     const {Option} = Select;
     const [cities, setCities] = useState([]);
 
@@ -18,6 +18,11 @@ const Cities = ({setMapClubs, setZoom}) => {
         mapSearchParameters.cityName = value;
         getClubsByParameters(mapSearchParameters).then(response => setMapClubs(response));
         setZoom(10);
+        cities.filter(city => city.name === value)
+            .map(city => setCenter({
+                lat: city.latitude,
+                lng: city.longitude
+            }));
     };
 
     return (

@@ -2,8 +2,6 @@ import {createContext} from "react";
 
 export const SearchContext = createContext(null);
 export const MapSearchContext = createContext(null);
-export const MapSelectContext = createContext(null);
-export const MapZoomContext = createContext(null)
 
 export const searchParameters = {
     clubName: "",
@@ -16,7 +14,7 @@ export const searchParameters = {
 
 export const mapSearchParameters = {
     cityName: "Київ",
-    categoryName: ""
+    categoryName: "",
 };
 
 export const clearSearchParameters = () => {

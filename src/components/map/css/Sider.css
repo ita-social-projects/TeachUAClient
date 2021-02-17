@@ -12,6 +12,15 @@
 }
 
 @media (max-width: 950px) {
+    .map-modal .mapSider {
+        flex: 0 0 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        width: 300px !important;
+    }
+}
+
+@media (max-width: 750px) {
     .map-modal .selectBlock{
         height: auto;
         justify-content: flex-start;

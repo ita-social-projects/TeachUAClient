@@ -3,7 +3,7 @@ import './App.less';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
-import ClubComponent from "./components/clubs/ClubComponent";
+import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {MapSearchContext, SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
@@ -29,9 +29,9 @@ function App() {
                         {false && (<Sider>Sider</Sider>)}
                         <Content className="global-content">
                             <Switch>
-                                <Route path="/clubs" exact component={ClubComponent}/>
+                                <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
-                                <Route path="/" component={ClubComponent}/>
+                                <Route path="/" component={ClubListComponent}/>
                             </Switch>
                         </Content>
                     </Layout>
