@@ -18,14 +18,11 @@ const Cities = ({setMapClubs, setZoom, setCenter}) => {
         mapSearchParameters.cityName = value;
         getClubsByParameters(mapSearchParameters).then(response => setMapClubs(response));
         setZoom(10);
-        cities.forEach(city=>{
-            if(city.name===value){
-                setCenter({
-                    lat:city.latitude,
-                    lng:city.longitude
-                })
-            }
-        })
+        cities.filter(city => city.name === value)
+            .map(city => setCenter({
+                lat: city.latitude,
+                lng: city.longitude
+            }));
     };
 
     return (

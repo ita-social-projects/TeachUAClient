@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import './css/PageHeader.css';
 import {Button, Col, Row, Tag} from "antd";
+import Tags from "../../Tags";
 
 const PageHeader = ({club}) => {
     return (
@@ -16,21 +17,7 @@ const PageHeader = ({club}) => {
                             </div>
                             <span className="club-name">{club.name}</span>
                         </div>
-                        <div className="tags">
-                            {club.categories.map(category =>
-                                <Tag className="tag" style={{
-                                    backgroundColor: category.tagBackgroundColor,
-                                    color: category.tagTextColor,
-                                }}>
-                                    <div className="icon"
-                                         style={{
-                                             'background-color': category.tagTextColor,
-                                             '-webkit-mask': `url(${category.urlLogo}) no-repeat center / contain`
-                                         }}/>
-                                    <span className="name">{category.name}</span>
-                                </Tag>)
-                            }
-                        </div>
+                        <Tags categories={club.categories}/>
                     </Col>
                     <Col className="apply-box right-col full-width" span={6}>
                         <Button className="flooded-button apply-button">Як записатись на гурток</Button>

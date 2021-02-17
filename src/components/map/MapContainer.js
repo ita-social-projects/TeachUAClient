@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
 
-const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center,setCenter}) => {
+const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, setCenter}) => {
     const [map, setMap] = useState(null);
 
     const {isLoaded, loadError} = useLoadScript({
