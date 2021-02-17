@@ -1,16 +1,32 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ClubItem from "./ClubItem";
 import EmptySearch from "../clubs/EmptySearch";
 import './css/MapClubList.css'
 import {getClubsByParameters} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";
+import {getAllCities} from "../../service/CityService";
 
 
-const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setLastClub}) => {
+const MapClubList = ({mapClubs, setMapClubs, setZoom, setSelected, setCenter}) => {
+
+
     useEffect(() => {
         getClubsByParameters(mapSearchParameters).then(response => {
             setMapClubs(response);
         });
+        getAllCities().then(response => {
+            response.forEach(city => {
+                console.log("IN STATE")
+                console.log(response)
+                if (city.name === mapSearchParameters.cityName) {
+                    setCenter({
+                        lat: city.latitude,
+                        lng: city.longitude
+                    })
+                }
+            })
+        })
+
     }, []);
 
     return mapClubs.content.length === 0 ? <EmptySearch/> : (
@@ -20,7 +36,7 @@ const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setLastClub}
                 key={index}
                 setZoom={setZoom}
                 setSelected={setSelected}
-                setLastClub={setLastClub}
+                setCenter={setCenter}
             />)}
         </div>
     )
