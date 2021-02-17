@@ -39,7 +39,6 @@ class Search extends React.Component {
     onFocus = () => {
         getPossibleResults(searchParameters).then(response => {
             this.setState({possibleResults: response});
-            console.log(response)
         });
     };
 
