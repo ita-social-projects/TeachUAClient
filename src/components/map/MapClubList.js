@@ -6,7 +6,7 @@ import {getClubsByParameters} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";
 
 
-const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected}) => {
+const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setLastClub}) => {
     useEffect(() => {
         getClubsByParameters(mapSearchParameters).then(response => {
             setMapClubs(response);
@@ -19,7 +19,9 @@ const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected}) => {
                 mapClub={mapClub}
                 key={index}
                 setZoom={setZoom}
-                setSelected={setSelected}/>)}
+                setSelected={setSelected}
+                setLastClub={setLastClub}
+            />)}
         </div>
     )
 };
