@@ -61,7 +61,7 @@
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 750px) {
     .map-modal .map-layout {
         flex-direction: column;
         width: 100%;

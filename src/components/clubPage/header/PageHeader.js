@@ -9,8 +9,8 @@ const PageHeader = ({club}) => {
     return (
         <Header className="page-header" style={{background: `url(${club.urlBackground}) 50% 50% / cover no-repeat`}}>
             <div className="blur">
-                <Row className="row">
-                    <Col span={18} className="tags-name-box full-width">
+                <div className="row">
+                    <div className="tags-name-box">
                         <div className="name-box">
                             <div className="icon-box" style={{backgroundColor: club.categories[0].backgroundColor}}>
                                 <img className="icon" src={club.categories[0].urlLogo} alt="Category logo"/>
@@ -18,11 +18,11 @@ const PageHeader = ({club}) => {
                             <span className="club-name">{club.name}</span>
                         </div>
                         <Tags categories={club.categories}/>
-                    </Col>
-                    <Col className="apply-box right-col full-width" span={6}>
+                    </div>
+                    <div className="apply-box">
                         <Button className="flooded-button apply-button">Як записатись на гурток</Button>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         </Header>
     )

@@ -98,6 +98,7 @@
     }
     .page-comments .comment-header .comment-button {
         margin-top: 10px;
+        width: 100%;
     }
     .page-comments .ant-comment-content-detail {
         font-size: 15px;

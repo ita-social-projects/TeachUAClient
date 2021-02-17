@@ -16,7 +16,7 @@
     opacity: 0.5;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 750px) {
     .map-modal .clubList {
         display: flex;
         height: auto;

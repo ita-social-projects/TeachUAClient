@@ -1,8 +1,8 @@
 import {Select} from "antd";
 import React from "react";
-import {clearSearchParameters, searchParameters} from "../../context/SearchContext";
-import {getClubsByParameters} from "../../service/ClubService";
-import {getPossibleResults, getPossibleResultsByText} from "../../service/SearchService";
+import {clearSearchParameters, searchParameters} from "../context/SearchContext";
+import {getClubsByParameters} from "../service/ClubService";
+import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import PropTypes from "prop-types";
 
 const {Option, OptGroup} = Select;
