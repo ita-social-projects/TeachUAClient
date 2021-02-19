@@ -11,16 +11,23 @@ const RegistrationRoles = ({setDisabledButton}) => {
     }
 
     return (
-            <Radio.Group className="button-container"
-                options={[{ label: (
-                    <div>
-                        <UserOutlined/>Відвідувач
-                    </div>),
-                    value: 'user' },{ label: 'Власник', value: 'owner' }]}
-                 onChange={onChangeHandle}
-                optionType="button"
-                buttonStyle="solid"
-            />
+        <Radio.Group className="button-container"
+                     options={[{
+                         label: (
+                             <div className="button-box">
+                                 <div className="ellipse"><UserOutlined className="user-icon"/></div>
+                                 Відвідувач
+                             </div>),
+                         value: 'user'
+                     }, {label: (
+                             <div className="button-box">
+                                 <div className="ellipse"><UserOutlined className="user-icon"/></div>
+                                 Власник
+                             </div>), value: 'owner'}]}
+                     onChange={onChangeHandle}
+                     optionType="button"
+                     buttonStyle="solid"
+        />
     )
 }
 

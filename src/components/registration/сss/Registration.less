@@ -40,25 +40,25 @@
   background: #FFFFFF;
 }
 
-
-
-.modal-registration .user-button {
-  height: 48px;
-  width: 180px;
-  font-size: 18px;
-  line-height: 32px;
-  display: flex;
-  align-items: center;
-  color: #000000;
-  background-color: #FFF7E6;
-  border-radius: 4px;
-  border: none;
+.modal-registration .ant-radio-button-wrapper:not(:first-child)::before {
+  display: none;
 }
 
-.modal-registration .user-button-active,
-.modal-registration .user-button:hover {
-  color: #000000;
+.modal-registration .ant-radio-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFF7E6;
+  height: 48px;
+  width: 180px;
+  border: 0;
+  border-radius: 4px;
+}
+
+.modal-registration .ant-radio-button-wrapper:hover,
+.modal-registration .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   background: #FFFFFF;
+  color: black;
   box-shadow: 0 2px 4px rgba(51, 51, 50, 0.12);
 
   .ellipse {
@@ -66,17 +66,29 @@
   }
 }
 
-.ellipse {
+
+.modal-registration .ant-radio-button-wrapper:last-child {
+  left: -5px;
+}
+
+.modal-registration .button-box {
+  display: flex;
+}
+
+.modal-registration .ellipse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 32px;
   width: 32px;
   background: #FFC069;
   border-radius: 50%;
-  display: inline-block;
   margin-right: 8px;
 }
 
-.modal-registration .anticon-user {
+.modal-registration .user-icon {
   color: #FFFFFF;
+  font-size: 21px;
 }
 
 .modal-registration .registration-content {
