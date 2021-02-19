@@ -7,6 +7,8 @@ import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {MapSearchContext, SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
+import AboutComponent from "./components/about/AboutComponent";
+import MapAutoComplete from "./components/map/MapAutoComplete";
 
 const {Sider, Content} = Layout;
 
@@ -14,6 +16,7 @@ function App() {
     const [clubs, setClubs] = useState({
         content: [],
         pageable: {},
+        size: 0,
         totalElements: 0
     });
 
@@ -29,6 +32,8 @@ function App() {
                         {false && (<Sider>Sider</Sider>)}
                         <Content className="global-content">
                             <Switch>
+                                <Route path="/test" exact component={MapAutoComplete}/>
+                                <Route path="/about" exact component={AboutComponent}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/" component={ClubListComponent}/>

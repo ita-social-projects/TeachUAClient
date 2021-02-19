@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getCategoryById = async (id) => {
-    return await axios.get("/api/category/" + id).then((response) => {
+export const getPageableCategory = async (page) => {
+    return await axios.get("/api/categories/search?page=" + page).then((response) => {
         return response.data
     });
 };

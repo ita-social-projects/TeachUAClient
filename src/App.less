@@ -13,7 +13,7 @@
 
 .behind-header {
   position: absolute;
-  height: 250px;
+  height: 150px;
   width: 100%;
   background: url("images/header-bg.png");
   background-size: cover;
@@ -79,6 +79,9 @@
   background: @primary-hover-color;
 }
 
+.show-map-button {
+  margin-left: 30px;
+}
 
 .header .city {
   margin: 0 1.4vw 0 4vw;
@@ -94,6 +97,16 @@
   font-weight: 600;
   background: none;
   border-bottom: none;
+}
+
+.header .nav-menu .ant-menu-submenu-title span {
+  color: rgba(0, 0, 0, 0);
+  background: url("images/menu.svg") no-repeat center / cover;
+  font-size: 20px;
+}
+
+.header .nav-menu .ant-menu-submenu-title span:hover {
+  outline: none;
 }
 
 .header .nav-menu .icon {
@@ -137,17 +150,28 @@
   color: white;
 }
 
+.search .advanced-icon {
+  font-size: 18px;
+  color: white;
+  background: #FA8C16;
+  padding: 3px;
+  border-radius: 4px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
 .city-name-box {
   font-size: 20px;
+  line-height: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .city-name {
   color: white;
 }
 
-.card {
+.clubs .card {
   height: 418px;
   width: 296px;
   color: black;
@@ -158,16 +182,16 @@
   margin-bottom: 28px;
 }
 
-.card .ant-card-head-title {
+.clubs .card .ant-card-head-title {
   white-space: normal;
 }
 
-.cards .ant-space-item {
+.clubs .cards .ant-space-item {
   margin-right: 0;
   padding-bottom: 0;
 }
 
-.card .title {
+.clubs .card .title {
   display: flex;
   align-items: center;
   line-height: 22px;
@@ -410,6 +434,8 @@
 .lower-header-box {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 96px;
 }
 
 
@@ -429,7 +455,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 625px) {
   .cards {
     min-width: 0;
   }
@@ -440,13 +466,31 @@
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
   .layout .global-content,
   .layout .header {
-    padding: 0 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
   }
 
-  .center-side {
+  .layout .header {
+    justify-content: space-between;
+  }
+
+  .left-side-menu {
+    order: 1;
+  }
+
+
+  .header .logo {
+    display: none;
+  }
+
+  .header .nav-menu {
+    width: 40px;
+    display: flex;
+  }
+
+  .header .nav-menu .ant-menu-item {
     order: 1;
   }
 }
@@ -454,12 +498,6 @@
 @media (max-width: 500px) {
   .behind-header {
     height: 320px;
-  }
-
-  .header .right-side-menu {
-    order: 2;
-    width: 100%;
-    justify-content: space-around;
   }
 
   .search .ant-select-arrow {

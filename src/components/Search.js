@@ -1,13 +1,15 @@
 import {Select} from "antd";
 import React from "react";
-import {clearSearchParameters, searchParameters} from "../context/SearchContext";
+import {clearSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
-import PropTypes from "prop-types";
+import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 
 const {Option, OptGroup} = Select;
 
 class Search extends React.Component {
+    static contextType = SearchContext;
+
     state = {
         searchText: '',
         possibleResults: {
@@ -28,10 +30,8 @@ class Search extends React.Component {
             searchParameters.clubName = name;
         }
 
-        this.props.load(true);
         getClubsByParameters(searchParameters).then(response => {
-            this.props.setClubs(response);
-            this.props.load(false);
+            this.context.setClubs(response);
         });
     };
 
@@ -56,46 +56,45 @@ class Search extends React.Component {
 
     render() {
         return (
-            <Select
-                showSearch
-                /*allowClear*/
-                onChange={this.onSearchChange}
-                onSearch={this.onSearch}
-                onFocus={this.onFocus}
-                onInputKeyDown={this.onKeyDown}
-                style={{width: 200}}
-                placeholder="Який гурток шукаєте?"
-                optionFilterProp="children"
-                defaultActiveFirstOption={false}>
+            <div className="search">
+                <Select
+                    showSearch
+                    /*allowClear*/
+                    onChange={this.onSearchChange}
+                    onSearch={this.onSearch}
+                    onFocus={this.onFocus}
+                    onInputKeyDown={this.onKeyDown}
+                    style={{width: 200}}
+                    placeholder="Який гурток шукаєте?"
+                    optionFilterProp="children"
+                    defaultActiveFirstOption={false}>
 
-                <OptGroup label="Категорії">
-                    {
-                        this.state.possibleResults.categories.map(result => (
-                            <Option value={"category" + "#" + result.name}
-                                    key={"category" + "#" + result.id}>
-                                {result.name}
-                            </Option>)
-                        )
-                    }
-                </OptGroup>
-                <OptGroup label="Гуртки">
-                    {
-                        this.state.possibleResults.clubs.map(result => (
-                            <Option value={"club" + "#" + result.name}
-                                    key={"club" + "#" + result.id}>
-                                {result.name}
-                            </Option>)
-                        )
-                    }
-                </OptGroup>
-            </Select>
+                    <OptGroup label="Категорії">
+                        {
+                            this.state.possibleResults.categories.map(result => (
+                                <Option value={"category" + "#" + result.name}
+                                        key={"category" + "#" + result.id}>
+                                    {result.name}
+                                </Option>)
+                            )
+                        }
+                    </OptGroup>
+                    <OptGroup label="Гуртки">
+                        {
+                            this.state.possibleResults.clubs.map(result => (
+                                <Option value={"club" + "#" + result.name}
+                                        key={"club" + "#" + result.id}>
+                                    {result.name}
+                                </Option>)
+                            )
+                        }
+                    </OptGroup>
+                </Select>
+
+                <ControlOutlined className="advanced-icon"/>
+            </div>
         );
     }
 }
-
-Search.propTypes = {
-    setClubs: PropTypes.func.isRequired,
-    load: PropTypes.func.isRequired,
-};
 
 export default Search;

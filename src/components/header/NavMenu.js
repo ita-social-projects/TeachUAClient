@@ -6,6 +6,7 @@ import CrownOutlined from "@ant-design/icons/lib/icons/CrownOutlined";
 import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import FolderOpenOutlined from "@ant-design/icons/lib/icons/FolderOpenOutlined";
 import FlagOutlined from "@ant-design/icons/lib/icons/FlagOutlined";
+import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 
 const NavMenu = () => {
     const data = window.location.pathname === '/' ? 'clubs' : localStorage.getItem("head-component-page");
@@ -18,7 +19,11 @@ const NavMenu = () => {
 
     return (
         <div className="center-side">
-            <Menu className="nav-menu" onClick={onMenuChange} selectedKeys={[currentPage]} mode="horizontal">
+            <Menu className="nav-menu"
+                  onClick={onMenuChange}
+                  selectedKeys={[currentPage]}
+                  expandIcon={<MenuOutlined />}
+                  mode="horizontal">
                 <Menu.Item key="clubs">
                     <Link to="/clubs"><ApartmentOutlined className="icon"/>Гуртки</Link>
                 </Menu.Item>

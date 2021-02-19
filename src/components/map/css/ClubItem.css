@@ -40,10 +40,8 @@
     margin-right: 10px;
 }
 
-@media (max-width: 750px) {
-    .map-modal .club-item .address .text {
-        font-size: 13px;
-    }
+
+@media (max-width: 950px) {
     .map-modal .club-item .title {
         font-size: 15px;
     }
@@ -51,19 +49,6 @@
     .map-modal .club-item {
         border-right: 1px solid #F5F5F5;
         border-bottom: none;
-    }
-}
-
-@media (max-width: 450px) {
-    .map-modal .club-item .title {
-        margin-bottom: 10px;
-    }
-
-    .map-modal .club-item .address .text {
-        font-size: 11px;
-    }
-
-    .map-modal .club-item {
-        padding: 5px;
+        min-width: 230px;
     }
 }

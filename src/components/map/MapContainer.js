@@ -8,6 +8,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: 'AIzaSyBdEOt1rGu5B5h5-wpS4WnTA5gD7-O6R30'
     });
+
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Map is loading";
 
