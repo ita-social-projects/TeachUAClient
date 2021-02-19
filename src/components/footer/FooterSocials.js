@@ -4,7 +4,7 @@ import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 
-const FooterSoc = () => {
+const FooterSocials = () => {
     return (
         <div className="footer-social">
             <div className="footer-logo"/>
@@ -27,4 +27,4 @@ const FooterSoc = () => {
     );
 };
 
-export default FooterSoc
+export default FooterSocials
