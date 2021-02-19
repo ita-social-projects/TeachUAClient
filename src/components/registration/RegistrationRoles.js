@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from "antd";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import Radio from "antd/es/radio/radio";
 
@@ -19,11 +18,13 @@ const RegistrationRoles = ({setDisabledButton}) => {
                                  Відвідувач
                              </div>),
                          value: 'user'
-                     }, {label: (
+                     }, {
+                         label: (
                              <div className="button-box">
                                  <div className="ellipse"><UserOutlined className="user-icon"/></div>
-                                 Власник
-                             </div>), value: 'owner'}]}
+                                 Керівник
+                             </div>), value: 'owner'
+                     }]}
                      onChange={onChangeHandle}
                      optionType="button"
                      buttonStyle="solid"

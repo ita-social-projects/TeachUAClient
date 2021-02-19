@@ -13,35 +13,37 @@ const RegistrationInput = ({disabledButton}) => {
                 <span className="label">
                     Прізвище
                 </span>
-                <div className="registration-box"><Input className="registration-input"  placeholder="Введіть ваше прізвище"/>
+                <div className="registration-box"><Input className="registration-input"
+                                                         placeholder="Введіть ваше прізвище"/>
                 </div>
             </div>
             <div className="registration-row">
                 <span className="label">
               Ім'я
                 </span>
-                <div className="registration-box"><Input className="registration-input"  placeholder="Введіть ваше ім'я"/>
+                <div className="registration-box"><Input className="registration-input"
+                                                         placeholder="Введіть ваше ім'я"/>
                 </div>
             </div>
             <div className="registration-row">
                 <span className="label">
              Телефон
                 </span>
-                <div className="registration-box"><Input className="registration-input" placeholder="+38(___)___ __ __">
+                <div className="registration-box"><Input className="registration-input" placeholder="+38(___) ___ __ __"
+                                                         suffix={<PhoneOutlined className="phone-icon"/>}>
                 </Input>
-                    <PhoneOutlined className="phone-icon"/>
                 </div>
             </div>
             <div className="registration-row">
                 <span className="label">
                  Email
                 </span>
-                <div className="registration-box"><Input className="registration-input"  placeholder="Введіть ваш емейл">
+                <div className="registration-box"><Input className="registration-input" placeholder="Введіть ваш емейл"
+                                                         suffix={<MailOutlined classname="mail-icon"/>}>
                 </Input>
-                    <MailOutlined classname="mail-icon"/>
                 </div>
             </div>
-            <div className="registration-footer"><Button className= "registration-button"
+            <div className="registration-footer"><Button className="registration-button"
                                                          style={{opacity: disabledButton === false ? '1' : '0.4'}}
                                                          disabled={disabledButton}>Зареєструватися</Button>
             </div>
