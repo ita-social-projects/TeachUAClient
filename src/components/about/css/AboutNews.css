@@ -10,6 +10,7 @@
     font-weight: 700;
     font-size: 32px;
 }
+
 .about-news .news-cards {
     display: flex;
     justify-content: space-around;
@@ -41,6 +42,11 @@
     justify-content: space-between;
     height: 100%;
     padding: 24px;
+}
+
+.about-news .primitive-card .content .description {
+    font-size: 18px;
+    color: #2D4C68;
 }
 
 .about-news .primitive-card .content .name {

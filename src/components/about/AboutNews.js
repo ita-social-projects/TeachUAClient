@@ -28,7 +28,11 @@ const AboutChallenge = () => {
                         header={
                             <div className="title">
                                 <img src={currentNews.urlTitleLogo}/>
-                                <div className="date">{currentNews.date}</div>
+                                <div className="date">{new Date(currentNews.date).toLocaleString('uk', {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: 'numeric'
+                                })}</div>
                                 <div className="name">{currentNews.name}</div>
                             </div>
                         }
