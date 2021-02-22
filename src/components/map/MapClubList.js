@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ClubItem from "./ClubItem";
-import EmptySearch from "../clubs/EmptySearch";
+import EmptySearch from "../clubList/EmptySearch";
 import './css/MapClubList.css'
 import {getClubsByParameters} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";

@@ -27,8 +27,8 @@ const ClubCardItem = ({club}) => {
                         </div>
                     </div>
                     <p className="description">{club.description}</p>
-                </div> : <p className="description">{club.description}</p>}
-
+                </div> :
+                <p className="description">{club.description}</p>}
             <Rate className="rating" disabled value={club.rating} />
             <div className="address">
                 <EnvironmentFilled

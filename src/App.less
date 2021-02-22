@@ -137,17 +137,10 @@
   color: white;
 }
 
-.search .ant-select-arrow {
-  top: 31%;
-}
-
-.right-col {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .city-name-box {
   font-size: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .city-name {
@@ -414,6 +407,11 @@
   animation-timing-function: ease-in-out;
 }
 
+.lower-header-box {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 @keyframes loader-animation {
   0% {
@@ -464,14 +462,7 @@
     justify-content: space-around;
   }
 
-  .city-name-box {
-    min-width: 100%;
-    text-align: center;
-    font-size: 14px;
-  }
-
   .search .ant-select-arrow {
-    top: 55%;
     right: 0;
   }
 }
