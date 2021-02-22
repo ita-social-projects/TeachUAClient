@@ -7,6 +7,7 @@ import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import FolderOpenOutlined from "@ant-design/icons/lib/icons/FolderOpenOutlined";
 import FlagOutlined from "@ant-design/icons/lib/icons/FlagOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const NavMenu = () => {
     const data = window.location.pathname === '/' ? 'clubs' : localStorage.getItem("head-component-page");
@@ -25,19 +26,19 @@ const NavMenu = () => {
                   expandIcon={<MenuOutlined />}
                   mode="horizontal">
                 <Menu.Item key="clubs">
-                    <Link to="/clubs"><ApartmentOutlined className="icon"/>Гуртки</Link>
+                    <Link to={`${ROOT_URI}/clubs`}><ApartmentOutlined className="icon"/>Гуртки</Link>
                 </Menu.Item>
                 <Menu.Item key="challenge">
-                    <Link to="/challenge"><CrownOutlined className="icon"/>Челлендж</Link>
+                    <Link to={`${ROOT_URI}/challenge`}><CrownOutlined className="icon"/>Челлендж</Link>
                 </Menu.Item>
                 <Menu.Item key="news">
-                    <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>
+                    <Link to={`${ROOT_URI}/news`}><ContainerOutlined className="icon"/>Новини</Link>
                 </Menu.Item>
                 <Menu.Item key="about">
-                    <Link to="/about"><FolderOpenOutlined className="icon"/>Проєкт</Link>
+                    <Link to={`${ROOT_URI}/about`}><FolderOpenOutlined className="icon"/>Проєкт</Link>
                 </Menu.Item>
                 <Menu.Item key="service">
-                    <Link to="/service"><FlagOutlined className="icon"/>Послуги українською</Link>
+                    <Link to={`${ROOT_URI}/service`}><FlagOutlined className="icon"/>Послуги українською</Link>
                 </Menu.Item>
             </Menu>
         </div>

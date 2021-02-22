@@ -5,7 +5,7 @@ import {Button, Layout} from "antd";
 import AboutDescription from "./AboutDescription";
 import AboutChallenge from "./AboutChallenge";
 
-import {items} from "./CarouselItems";
+import {items} from "./carousel/CarouselItems";
 import AboutCategories from "./AboutCategories";
 import AboutNews from "./AboutNews";
 

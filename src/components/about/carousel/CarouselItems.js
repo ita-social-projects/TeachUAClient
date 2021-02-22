@@ -1,10 +1,11 @@
 import {Button} from "antd";
-import './css/CarouselItems.css';
+import '../css/CarouselItems.css';
 import React from "react";
+import {ROOT_URI} from "../../../config/ApplicationConfig";
 
 export const items = [
     {
-        imageURL: "/static/images/about/slider/1.png",
+        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською</h2>
@@ -16,7 +17,7 @@ export const items = [
             </div>)
     },
     {
-        imageURL: "/static/images/about/slider/1.png",
+        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською 2 </h2>
@@ -28,7 +29,7 @@ export const items = [
             </div>)
     },
     {
-        imageURL: "/static/images/about/slider/1.png",
+        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською 3</h2>

@@ -92,6 +92,7 @@
 }
 
 .header .nav-menu {
+  width: 730px;
   line-height: 2em;
   font-size: 1em;
   font-weight: 600;
@@ -105,8 +106,10 @@
   font-size: 20px;
 }
 
-.header .nav-menu .ant-menu-submenu-title span:hover {
-  outline: none;
+.header .nav-menu .ant-menu-submenu,
+.header .nav-menu .ant-menu-submenu-active {
+  margin: 0 20px 0 0;
+  border-bottom: none!important;
 }
 
 .header .nav-menu .icon {
@@ -165,6 +168,19 @@
   line-height: 0;
   display: flex;
   align-items: flex-end;
+}
+
+.city-name-box-small-screen {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.city-name-box-small-screen .icon {
+  display: none;
+  color: #fff;
+  font-size: 21px;
 }
 
 .city-name {
@@ -455,38 +471,9 @@
   }
 }
 
-@media (max-width: 625px) {
-  .cards {
-    min-width: 0;
-  }
-
-  .layout .global-content,
-  .layout .header {
-    padding: 20px 50px 0 50px;
-  }
-}
-
-@media (max-width: 700px) {
-  .layout .global-content,
-  .layout .header {
-    padding: 10px 10px 10px 10px;
-  }
-
-  .layout .header {
-    justify-content: space-between;
-  }
-
-  .left-side-menu {
-    order: 1;
-  }
-
-
-  .header .logo {
-    display: none;
-  }
-
+@media (max-width: 1240px) {
   .header .nav-menu {
-    width: 40px;
+    width: 310px;
     display: flex;
   }
 
@@ -495,12 +482,68 @@
   }
 }
 
-@media (max-width: 500px) {
-  .behind-header {
-    height: 320px;
+@media (max-width: 900px) {
+  .left-side-menu {
+    display: none;
+    order: 1;
   }
 
-  .search .ant-select-arrow {
-    right: 0;
+  .lower-header-box {
+    flex-direction: column;
+    align-items: normal;
+    height: 85px;
+    justify-content: space-around;
+  }
+
+  .layout .global-content {
+    padding: 0 87px 20px 87px;
+  }
+
+  .lower-header-box .city-name-box {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 700px) {
+  .layout .global-content,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
+  .layout .header {
+    justify-content: space-between;
+  }
+}
+
+
+@media (max-width: 625px) {
+  .cards {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .lower-header-box .city-name {
+    font-size: 24px;
+  }
+
+  .header .nav-menu {
+    width: 40px;
+  }
+
+  .lower-header-box .show-map-button {
+    display: none;
+  }
+
+  .lower-header-box .city-name-box-small-screen .icon {
+    display: block;
+  }
+
+  .lower-header-box .advanced-icon {
+    display: none;
+  }
+
+  .lower-header-box .search,
+  .lower-header-box .search .ant-select {
+    width: 100%!important;
   }
 }

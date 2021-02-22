@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const ClubCardItem = ({club}) => {
     return (
@@ -33,7 +34,7 @@ const ClubCardItem = ({club}) => {
                 <span className="text"> {club.address}</span>
             </div>
             <Button className="outlined-button details-button">
-                <Link to={`/club/${club.id}`}>Детальніше</Link>
+                <Link to={`${ROOT_URI}/club/${club.id}`}>Детальніше</Link>
             </Button>
         </Card>
     )

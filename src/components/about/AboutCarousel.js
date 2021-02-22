@@ -10,7 +10,7 @@ const AboutCarousel = (items) => {
     return (
         <div className="about-carousel-block">
             <ArrowLeftOutlined className="arrow" onClick={() => carousel.current.prev()}/>
-            <Carousel ref={node => carousel.current = node} className="about-carousel" cautoplay>
+            <Carousel ref={node => carousel.current = node} className="about-carousel" autoplay>
                 {items.items.map((item) =>
                     <div>
                         <div className="carousel-item" style={{
