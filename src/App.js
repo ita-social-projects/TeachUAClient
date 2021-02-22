@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubComponent from "./components/clubs/ClubComponent";
 import FooterComponent from "./components/footer/FooterComponent";
+import CommentEditComponent from "./components/clubPage/comments/CommentEditComponent";
 import {MapSearchContext, SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 
@@ -31,7 +32,9 @@ function App() {
                             <Switch>
                                 <Route path="/clubs" exact component={ClubComponent}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
+                                <Route path="/test" exact component={CommentEditComponent}/>
                                 <Route path="/" component={ClubComponent}/>
+
                             </Switch>
                         </Content>
                     </Layout>
