@@ -4,17 +4,15 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
+import CategoryLogo from "../CategoryLogo";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const ClubCardItem = ({club}) => {
     return (
         <Card className="card">
             <div className="title">
-                <div className="icon-box" style={{backgroundColor: club.categories[0].backgroundColor}}>
-                    <img className="icon" src={club.categories[0].urlLogo} alt="Category logo"/>
-                </div>
-                <div className="name">
-                    {club.name}
-                </div>
+                <CategoryLogo category={club.categories[0]}/>
+                <div className="name">{club.name}</div>
             </div>
             <Tags categories={club.categories}/>
             {club.center !== null ?
@@ -35,9 +33,8 @@ const ClubCardItem = ({club}) => {
                     className="address-icon"/>
                 <span className="text"> {club.address}</span>
             </div>
-
             <Button className="outlined-button details-button">
-                <Link to={`/club/${club.id}`}>Детальніше</Link>
+                <Link to={`${ROOT_URI}/club/${club.id}`}>Детальніше</Link>
             </Button>
         </Card>
     )

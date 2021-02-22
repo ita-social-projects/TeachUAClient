@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './css/PageHeader.css';
 import {Button, Col, Row, Tag} from "antd";
 import Tags from "../../Tags";
+import CategoryLogo from "../../CategoryLogo";
 
 const PageHeader = ({club}) => {
     return (
@@ -12,9 +13,7 @@ const PageHeader = ({club}) => {
                 <div className="row">
                     <div className="tags-name-box">
                         <div className="name-box">
-                            <div className="icon-box" style={{backgroundColor: club.categories[0].backgroundColor}}>
-                                <img className="icon" src={club.categories[0].urlLogo} alt="Category logo"/>
-                            </div>
+                            <CategoryLogo category={club.categories[0]}/>
                             <span className="club-name">{club.name}</span>
                         </div>
                         <Tags categories={club.categories}/>

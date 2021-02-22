@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, setCenter}) => {
     const [map, setMap] = useState(null);
@@ -8,6 +9,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: 'AIzaSyBdEOt1rGu5B5h5-wpS4WnTA5gD7-O6R30'
     });
+
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Map is loading";
 
@@ -39,7 +41,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
                 onClusteringEnd={(clusters) => {
                     clusters.clusters.map((cluster) => {
                         cluster.clusterIcon.styles = [{
-                            url: '/static/images/map/cluster.png',
+                            url: `${ROOT_URI}/static/images/map/cluster.png`,
                             height: 58,
                             width: 67,
                             textColor: '#FFFFFF',
@@ -64,7 +66,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
                                         lng: club.longitude
                                     })
                                 }}
-                                icon={{url: '/static/images/map/location.png'}}/>
+                                icon={{url: `${ROOT_URI}/static/images/map/location.png`}}/>
                         )
                     )}
             </MarkerClusterer>

@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
-import {Button, Col, Layout, Row} from 'antd';
-import {SearchContext, searchParameters} from "../../context/SearchContext";
+import {Layout} from 'antd';
+import {SearchContext} from "../../context/SearchContext";
 import ClubList from "./ClubList";
-import Search from "../Search";
 import '../map/css/MapModal.css'
 import MapComponent from "../map/MapComponent";
 import ClubListHeader from "./ClubListHeader";
@@ -15,7 +14,7 @@ const ClubListComponent = () => {
 
     return (
         <Layout>
-            <ClubListHeader load={setLoading} setClubs={setClubs}/>
+            <ClubListHeader/>
             <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
             <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
         </Layout>)
