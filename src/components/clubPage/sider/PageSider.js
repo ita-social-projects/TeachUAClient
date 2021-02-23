@@ -7,6 +7,7 @@ import {getSimilarClubsByCategoryName} from "../../../service/ClubService";
 import SocialMedia from "./SocialMedia";
 import SimilarClubs from "./SimilarClubs";
 import {searchParameters} from "../../../context/SearchContext";
+import {ROOT_URI} from "../../../config/ApplicationConfig";
 
 class PageSider extends React.Component {
     state = {
@@ -39,7 +40,7 @@ class PageSider extends React.Component {
                     <p className="text"> {this.props.club.address}</p>
                 </div>
                 <div className="map">
-                    <img src="/static/map.png" alt="Map"/>
+                    <img src={`${ROOT_URI}/static/map.png`} alt="Map"/>
                 </div>
                 <div className="age">
                     <span className="sider-label">Вік аудиторії: </span>

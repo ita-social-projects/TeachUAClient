@@ -24,7 +24,7 @@ function App() {
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
 
     return (
-        <Router>
+        <Router basename={ROOT_URI}>
             <Layout className="layout">
                 <div className="behind-header"/>
                 <SearchContext.Provider value={clubProvider}>
@@ -33,11 +33,11 @@ function App() {
                         {false && (<Sider>Sider</Sider>)}
                         <Content className="global-content">
                             <Switch>
-                                <Route path={`${ROOT_URI}/test`} exact component={MapAutoComplete}/>
-                                <Route path={`${ROOT_URI}/about`} exact component={AboutComponent}/>
-                                <Route path={`${ROOT_URI}/clubs`} exact component={ClubListComponent}/>
-                                <Route path={`${ROOT_URI}/club/:id`} exact component={ClubPage}/>
-                                <Route path={`${ROOT_URI}/`} component={ClubListComponent}/>
+                                <Route path="/test" exact component={MapAutoComplete}/>
+                                <Route path="/about" exact component={AboutComponent}/>
+                                <Route path="/clubs" exact component={ClubListComponent}/>
+                                <Route path="/club/:id" exact component={ClubPage}/>
+                                <Route path="/" component={ClubListComponent}/>
                             </Switch>
                         </Content>
                     </Layout>

@@ -34,7 +34,7 @@ const ClubCardItem = ({club}) => {
                 <span className="text"> {club.address}</span>
             </div>
             <Button className="outlined-button details-button">
-                <Link to={`${ROOT_URI}/club/${club.id}`}>Детальніше</Link>
+                <Link to={`/club/${club.id}`}>Детальніше</Link>
             </Button>
         </Card>
     )
