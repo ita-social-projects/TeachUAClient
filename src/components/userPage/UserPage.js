@@ -10,26 +10,6 @@ import '../userPage/css/User.less'
 class UserPage extends React.Component {
 
 
-    // state = {
-    //     user: {}
-    // };
-    //
-    // getData = () => {
-    //     getUserById(this.props.match.params.id).then(response => {
-    //         this.setState({user: response});
-    //     });
-    // };
-    //
-    // componentDidMount() {
-    //     this.getData();
-    // }
-    //
-    // componentDidUpdate(preProps) {
-    //     if(preProps.match.params.id !== this.props.match.params.id) {
-    //         this.getData();
-    //     }
-    // }
-
     render() {
         return (
             <Layout className ="user-page">
@@ -37,8 +17,8 @@ class UserPage extends React.Component {
                 <Content><UserPageContent/></Content>
             </Layout>
     )
-
     }
 }
+
 
 export default withRouter(UserPage);

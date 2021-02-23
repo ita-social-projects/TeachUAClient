@@ -9,8 +9,6 @@ import UserCenterContent from "./UserCenterContent";
 import UserClubContent from "./UserClubContent";
 
 
-
-
 const UserPageContent = () => {
 
     return (
@@ -33,10 +31,5 @@ const UserPageContent = () => {
         </Content>
     )
 };
-
-// UserPageContent.propTypes = {
-//     user: PropTypes.object.isRequired
-// };
-
 
 export default UserPageContent;

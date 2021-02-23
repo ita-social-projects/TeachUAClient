@@ -2,6 +2,7 @@ import React, {useContext, useState} from "react";
 import ClubList from "../../clubList/ClubList";
 import {SearchContext} from "../../../context/SearchContext";
 
+
 const UserClubContent  = () => {
 
     const {clubs, setClubs} = useContext(SearchContext);
@@ -13,6 +14,5 @@ const UserClubContent  = () => {
         </div>
     )
 };
-
 
 export default UserClubContent;

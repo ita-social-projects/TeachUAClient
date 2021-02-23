@@ -2,7 +2,6 @@ import React from "react";
 import './css/UserContent.less';
 import {Avatar} from "antd";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import UserEditModal from "../useredit/UserEditModal";
 
 
@@ -37,10 +36,6 @@ const UserInformationComponent = () => {
         </div>
     )
 };
-
-// UserPageContent.propTypes = {
-//     user: PropTypes.object.isRequired
-// };
 
 
 export default UserInformationComponent;

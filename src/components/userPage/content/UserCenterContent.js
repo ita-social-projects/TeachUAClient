@@ -1,10 +1,9 @@
-
 import React from "react";
+
 
 const UserCenterContent  = () => {
     return (
    <div className="center-profile">
-
    </div>
     )
 };
