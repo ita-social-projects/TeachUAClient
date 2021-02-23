@@ -25,7 +25,7 @@ function App() {
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
 
     return (
-        <Router>
+        <Router basename={ROOT_URI}>
             <Layout className="layout">
                 <div className="behind-header"/>
                 <SearchContext.Provider value={clubProvider}>

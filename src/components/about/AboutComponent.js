@@ -8,6 +8,7 @@ import AboutChallenge from "./AboutChallenge";
 import {items} from "./carousel/CarouselItems";
 import AboutCategories from "./AboutCategories";
 import AboutNews from "./AboutNews";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const AboutComponent = () => {
     return (
@@ -20,7 +21,7 @@ const AboutComponent = () => {
                 text='Ми допоможемо вам перейти на українську мову викладання.
                 Тут ви можете знайти мотиваційні та практичні вебінари з експертами,
                 корисні матеріали, які вдосконалять ваші знання та навички викладати українською.'
-                imageUrl="/static/images/about/challenge.png"
+                imageUrl={`${ROOT_URI}/static/images/about/challenge.png`}
                 buttonLabel="Переглянути матеріали"
             />
             <AboutCategories/>
@@ -31,7 +32,7 @@ const AboutComponent = () => {
                 "Навчай українською" для закладів позашкільної освіти, які переходять на українську мову навчання.
                 У листопаді 2020 року на українську мову викладання перейшло близько пів сотні гуртків.
                 Ми підготували матеріали для тих, хто хоче перейти на українську.'
-                imageUrl="/static/images/about/challenge_2.png"
+                imageUrl={`${ROOT_URI}/static/images/about/challenge_2.png`}
                 buttonLabel="Дізнатись більше"
             />
         </Layout>

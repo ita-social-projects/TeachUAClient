@@ -26,19 +26,19 @@ const NavMenu = () => {
                   expandIcon={<MenuOutlined />}
                   mode="horizontal">
                 <Menu.Item key="clubs">
-                    <Link to={`${ROOT_URI}/clubs`}><ApartmentOutlined className="icon"/>Гуртки</Link>
+                    <Link to="/clubs"><ApartmentOutlined className="icon"/>Гуртки</Link>
                 </Menu.Item>
                 <Menu.Item key="challenge">
-                    <Link to={`${ROOT_URI}/challenge`}><CrownOutlined className="icon"/>Челлендж</Link>
+                    <Link to="/challenge"><CrownOutlined className="icon"/>Челлендж</Link>
                 </Menu.Item>
                 <Menu.Item key="news">
-                    <Link to={`${ROOT_URI}/news`}><ContainerOutlined className="icon"/>Новини</Link>
+                    <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>
                 </Menu.Item>
                 <Menu.Item key="about">
-                    <Link to={`${ROOT_URI}/about`}><FolderOpenOutlined className="icon"/>Проєкт</Link>
+                    <Link to="/about"><FolderOpenOutlined className="icon"/>Проєкт</Link>
                 </Menu.Item>
                 <Menu.Item key="service">
-                    <Link to={`${ROOT_URI}/service`}><FlagOutlined className="icon"/>Послуги українською</Link>
+                    <Link to="/service"><FlagOutlined className="icon"/>Послуги українською</Link>
                 </Menu.Item>
             </Menu>
         </div>

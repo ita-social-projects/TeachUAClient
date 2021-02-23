@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
 import {Button} from "antd";
-import ImageCarousel from "./ImageCarousel";
+import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 
 const PageContent = ({club, feedbackCount}) => {
