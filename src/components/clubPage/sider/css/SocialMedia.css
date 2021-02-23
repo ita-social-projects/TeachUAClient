@@ -23,9 +23,3 @@
     color: #0D2C95;
     font-size: 1.3em;
 }
-
-@media (max-width: 950px) {
-    .page-sider .social-media .links {
-        align-self: center;
-    }
-}

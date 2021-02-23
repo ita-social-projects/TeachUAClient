@@ -31,7 +31,7 @@ class ClubList extends React.Component {
     render() {
         return this.props.loading ? <Loader/> : this.props.clubs.content.length === 0 ? <EmptySearch/> : (
             <Layout className="clubs">
-                <Space wrap className="cards" size={[0, 0]} style={{paddingTop: 20}}>
+                <Space wrap className="cards" size={[0, 0]}>
                     {this.props.clubs.content.map((club, index) => <ClubCardItem club={club} key={index}/>)}
                 </Space>
 

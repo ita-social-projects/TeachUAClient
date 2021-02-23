@@ -1,13 +1,14 @@
 import axios from "axios";
+import {BASE_URL} from "../config/ApplicationConfig";
 
 export const getClubById = async (id) => {
-    return await axios.get("/api/club/" + id).then((response) => {
+    return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data
     });
 };
 
 export const getSimilarClubsByCategoryName = async (id, categoryName, cityName) => {
-    return await axios.get("/api/clubs/search/similar", {
+    return await axios.get(BASE_URL + "/api/clubs/search/similar", {
         params: {
             id: id,
             categoryName: categoryName,
@@ -19,7 +20,7 @@ export const getSimilarClubsByCategoryName = async (id, categoryName, cityName) 
 };
 
 export const getClubsByParameters = async (parameters) => {
-    return await axios.get("/api/clubs/search", {
+    return await axios.get(BASE_URL + "/api/clubs/search", {
         params: parameters,
     }).then((response) => {
         return response.data

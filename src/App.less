@@ -13,7 +13,7 @@
 
 .behind-header {
   position: absolute;
-  height: 250px;
+  height: 150px;
   width: 100%;
   background: url("images/header-bg.png");
   background-size: cover;
@@ -79,6 +79,9 @@
   background: @primary-hover-color;
 }
 
+.show-map-button {
+  margin-left: 30px;
+}
 
 .header .city {
   margin: 0 1.4vw 0 4vw;
@@ -89,11 +92,24 @@
 }
 
 .header .nav-menu {
+  width: 730px;
   line-height: 2em;
   font-size: 1em;
   font-weight: 600;
   background: none;
   border-bottom: none;
+}
+
+.header .nav-menu .ant-menu-submenu-title span {
+  color: rgba(0, 0, 0, 0);
+  background: url("images/menu.svg") no-repeat center / cover;
+  font-size: 20px;
+}
+
+.header .nav-menu .ant-menu-submenu,
+.header .nav-menu .ant-menu-submenu-active {
+  margin: 0 20px 0 0;
+  border-bottom: none!important;
 }
 
 .header .nav-menu .icon {
@@ -137,17 +153,41 @@
   color: white;
 }
 
+.search .advanced-icon {
+  font-size: 18px;
+  color: white;
+  background: #FA8C16;
+  padding: 3px;
+  border-radius: 4px;
+  margin-left: 25px;
+  cursor: pointer;
+}
+
 .city-name-box {
   font-size: 20px;
+  line-height: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.city-name-box-small-screen {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.city-name-box-small-screen .icon {
+  display: none;
+  color: #fff;
+  font-size: 21px;
 }
 
 .city-name {
   color: white;
 }
 
-.card {
+.clubs .card {
   height: 418px;
   width: 296px;
   color: black;
@@ -158,16 +198,16 @@
   margin-bottom: 28px;
 }
 
-.card .ant-card-head-title {
+.clubs .card .ant-card-head-title {
   white-space: normal;
 }
 
-.cards .ant-space-item {
+.clubs .cards .ant-space-item {
   margin-right: 0;
   padding-bottom: 0;
 }
 
-.card .title {
+.clubs .card .title {
   display: flex;
   align-items: center;
   line-height: 22px;
@@ -410,6 +450,8 @@
 .lower-header-box {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 96px;
 }
 
 
@@ -429,40 +471,79 @@
   }
 }
 
-@media (max-width: 800px) {
-  .cards {
-    min-width: 0;
+@media (max-width: 1240px) {
+  .header .nav-menu {
+    width: 310px;
+    display: flex;
   }
 
-  .layout .global-content,
-  .layout .header {
-    padding: 20px 50px 0 50px;
-  }
-}
-
-@media (max-width: 650px) {
-  .layout .global-content,
-  .layout .header {
-    padding: 0 10px 10px 10px;
-  }
-
-  .center-side {
+  .header .nav-menu .ant-menu-item {
     order: 1;
   }
 }
 
-@media (max-width: 500px) {
-  .behind-header {
-    height: 320px;
+@media (max-width: 900px) {
+  .left-side-menu {
+    display: none;
+    order: 1;
   }
 
-  .header .right-side-menu {
-    order: 2;
-    width: 100%;
+  .lower-header-box {
+    flex-direction: column;
+    align-items: normal;
+    height: 85px;
     justify-content: space-around;
   }
 
-  .search .ant-select-arrow {
-    right: 0;
+  .layout .global-content {
+    padding: 0 87px 20px 87px;
+  }
+
+  .lower-header-box .city-name-box {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 700px) {
+  .layout .global-content,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
+  .layout .header {
+    justify-content: space-between;
+  }
+}
+
+
+@media (max-width: 625px) {
+  .cards {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .lower-header-box .city-name {
+    font-size: 24px;
+  }
+
+  .header .nav-menu {
+    width: 40px;
+  }
+
+  .lower-header-box .show-map-button {
+    display: none;
+  }
+
+  .lower-header-box .city-name-box-small-screen .icon {
+    display: block;
+  }
+
+  .lower-header-box .advanced-icon {
+    display: none;
+  }
+
+  .lower-header-box .search,
+  .lower-header-box .search .ant-select {
+    width: 100%!important;
   }
 }

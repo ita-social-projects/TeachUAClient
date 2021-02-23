@@ -1,7 +1,6 @@
-import {Card, Tag} from "antd";
+import {Tag} from "antd";
 import React from "react";
 import PropTypes from "prop-types";
-import ClubList from "./clubList/ClubList";
 
 const Tags = ({categories}) => {
     return (
