@@ -12,7 +12,7 @@ const Registration = () => {
 
     return (
         <>
-            <Button type="" onClick={() => setVisible(true)}>
+            <Button type="text button" onClick={() => setVisible(true)}>
                 Зареєструватися
             </Button>
             <Modal
