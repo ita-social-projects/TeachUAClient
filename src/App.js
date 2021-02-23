@@ -7,7 +7,7 @@ import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {MapSearchContext, SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
-
+import CommentEditComponent from "./components/clubPage/comments/CommentEditComponent"
 const {Sider, Content} = Layout;
 
 function App() {
@@ -31,7 +31,9 @@ function App() {
                             <Switch>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
+                                <Route path="/test"  exact component={CommentEditComponent}/>
                                 <Route path="/" component={ClubListComponent}/>
+
                             </Switch>
                         </Content>
                     </Layout>
