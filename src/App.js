@@ -10,6 +10,7 @@ import ClubPage from "./components/clubPage/ClubPage";
 import AboutComponent from "./components/about/AboutComponent";
 import MapAutoComplete from "./components/map/MapAutoComplete";
 import {ROOT_URI} from "./config/ApplicationConfig";
+import UserPage from "./components/userPage/UserPage";
 
 const {Sider, Content} = Layout;
 
@@ -36,6 +37,7 @@ function App() {
                                 <Route path={`${ROOT_URI}/test`} exact component={MapAutoComplete}/>
                                 <Route path={`${ROOT_URI}/about`} exact component={AboutComponent}/>
                                 <Route path={`${ROOT_URI}/clubs`} exact component={ClubListComponent}/>
+                                <Route path={`${ROOT_URI}/user`} exact component={UserPage}/>
                                 <Route path={`${ROOT_URI}/club/:id`} exact component={ClubPage}/>
                                 <Route path={`${ROOT_URI}/`} component={ClubListComponent}/>
                             </Switch>

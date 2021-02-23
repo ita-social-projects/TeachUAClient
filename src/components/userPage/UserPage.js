@@ -1,11 +1,10 @@
 import React from "react";
-import Layout, {Content, Footer, Header} from "antd/es/layout/layout";
+import Layout, {Content} from "antd/es/layout/layout";
 import {withRouter} from "react-router";
 import SiderComponent from "./sider/UserSider";
 import UserPageContent from "./content/UserPageContent";
 import Sider from "antd/es/layout/Sider";
 import '../userPage/css/User.less'
-
 
 
 class UserPage extends React.Component {
@@ -33,8 +32,7 @@ class UserPage extends React.Component {
 
     render() {
         return (
-
-            <Layout>
+            <Layout className ="user-page">
                 <Sider><SiderComponent/></Sider>
                 <Content><UserPageContent/></Content>
             </Layout>
@@ -43,4 +41,4 @@ class UserPage extends React.Component {
     }
 }
 
-export default withRouter(UserPage)
+export default withRouter(UserPage);

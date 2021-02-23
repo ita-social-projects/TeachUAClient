@@ -4,15 +4,15 @@ import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import '../registration/сss/Registration.less'
 import Registration from "../registration/Registration";
+import {ROOT_URI} from "../../config/ApplicationConfig";
 
 
 const AuthMenu = () => {
     const profileDropdown = (
         <Menu>
-
-            <Menu.Item>Увійти</Menu.Item>
             <Menu.Item> <Registration/></Menu.Item>
-            <Menu.Item> <a target="blank" href="/user"><Button> Сторінка користувача</Button> </a></Menu.Item>
+            <Menu.Item> Додати гурток</Menu.Item>
+            <Menu.Item> <a target="blank" href={`${ROOT_URI}/user`} >Мій Профіль </a></Menu.Item>
             <Menu.Item danger>Вийти</Menu.Item>
         </Menu>
     );
