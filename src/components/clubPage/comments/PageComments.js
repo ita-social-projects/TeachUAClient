@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext, useState} from 'react';
 import './css/PageComments.css';
 import {Button, Comment, List, Rate, Tooltip} from "antd";
 import {Content} from "antd/es/layout/layout";
 
-const PageComments = ({feedback}) => {
+import CommentEditComponent from "./CommentEditComponent";
+
+const PageComments = ({feedback, club, feedbackAdded}) => {
+   const [commentEditVisible, setCommentEditVisible] = useState(false);
+
     return (
         <Content className="page-comments">
             <List
@@ -12,7 +16,8 @@ const PageComments = ({feedback}) => {
                 header={
                     <div className="comment-header">
                         <span className="comment-label">Коментарі</span>
-                        <Button className="outlined-button comment-button">
+                        <Button className="outlined-button comment-button"
+                                onClick={() => {setCommentEditVisible(true); console.log(commentEditVisible)}}>
                             Залишити коментар
                         </Button>
                     </div>
@@ -47,7 +52,13 @@ const PageComments = ({feedback}) => {
                     </li>
                 )}
             />
+            <CommentEditComponent
+                visible={commentEditVisible}
+                setVisible={setCommentEditVisible}
+                club={club}
+                onFeedbackAdded={feedbackAdded}/>
         </Content>
+
     )
 };
 
