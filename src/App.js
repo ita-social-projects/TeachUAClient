@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import {MapSearchContext, SearchContext} from "./context/SearchContext";
+import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 import AboutComponent from "./components/about/AboutComponent";
 import MapAutoComplete from "./components/map/MapAutoComplete";
@@ -36,8 +36,9 @@ function App() {
                             <Switch>
                                 <Route path="/test" exact component={MapAutoComplete}/>
                                 <Route path="/about" exact component={AboutComponent}/>
-                                <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
+                                <Route path="/clubs" exact component={ClubListComponent}/>
+                                <Route path="/user" exact component={UserPage}/>
                                 <Route path="/" component={ClubListComponent}/>
                             </Switch>
                         </Content>
