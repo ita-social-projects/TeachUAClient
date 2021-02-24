@@ -55,12 +55,15 @@ class CommentEditComponent extends React.Component {
             this.state.rate,
             this.state.isComplaint,
             this.state.user.id,
-            this.props.club.id).then(() => this.closeEditComponent());
+            this.props.club.id).then((feedback) => {
+                this.closeEditComponent();
+                this.props.onFeedbackAdded(feedback);
+        });
 
     };
 
     hasNoDataEntered(){
-        const hasNoRate = this.state.rate == undefined && !this.state.isComplaint;
+        const hasNoRate = (this.state.rate == undefined || this.state.rate === 0) && !this.state.isComplaint;
         const hasNoCommentText = this.state.commentText == undefined || this.state.commentText === "";
         return hasNoRate || hasNoCommentText;
     }
@@ -156,7 +159,7 @@ class CommentEditComponent extends React.Component {
                                  }
 
                                  visible={this.state.tooltipVisible}
-                                 title={this.state.rate == undefined && !this.state.isComplaint? "поставте оцінку": "напишіть опис"}
+                                 title={(this.state.rate == undefined || this.state.rate === 0) && !this.state.isComplaint? "поставте оцінку": "напишіть опис"}
                         >
                             <Form.Item>
                                 <Button

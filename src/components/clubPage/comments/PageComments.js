@@ -6,7 +6,7 @@ import {Content} from "antd/es/layout/layout";
 
 import CommentEditComponent from "./CommentEditComponent";
 
-const PageComments = ({feedback, club}) => {
+const PageComments = ({feedback, club, feedbackAdded}) => {
    const [commentEditVisible, setCommentEditVisible] = useState(false);
 
     return (
@@ -52,7 +52,11 @@ const PageComments = ({feedback, club}) => {
                     </li>
                 )}
             />
-            <CommentEditComponent visible={commentEditVisible} setVisible={setCommentEditVisible} club={club}/>
+            <CommentEditComponent
+                visible={commentEditVisible}
+                setVisible={setCommentEditVisible}
+                club={club}
+                onFeedbackAdded={feedbackAdded}/>
         </Content>
 
     )
