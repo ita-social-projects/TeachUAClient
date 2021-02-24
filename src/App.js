@@ -7,7 +7,7 @@ import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
-import AboutComponent from "./components/about/AboutComponent";
+import MainComponent from "./components/main/MainComponent";
 import MapAutoComplete from "./components/map/MapAutoComplete";
 import {ROOT_URI} from "./config/ApplicationConfig";
 import UserPage from "./components/userPage/UserPage";
@@ -34,12 +34,11 @@ function App() {
                         {false && (<Sider>Sider</Sider>)}
                         <Content className="global-content">
                             <Switch>
-                                <Route path="/test" exact component={MapAutoComplete}/>
-                                <Route path="/about" exact component={AboutComponent}/>
+                                <Route path="/about" exact component={MapAutoComplete}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user" exact component={UserPage}/>
-                                <Route path="/" component={ClubListComponent}/>
+                                <Route path="/" component={MainComponent}/>
                             </Switch>
                         </Content>
                     </Layout>

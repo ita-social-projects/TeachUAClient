@@ -18,5 +18,7 @@ export const registerUser = async (data) => {
         roleName: data.role
     }).then((response) => {
         return response.data
+    }).catch((error) => {
+        return error.response.data
     });
 };

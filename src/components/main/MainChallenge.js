@@ -2,7 +2,7 @@ import './css/AboutChallenge.css';
 import React from "react";
 import {Button} from "antd";
 
-const AboutChallenge = ({label, text, imageUrl, buttonLabel}) => {
+const MainChallenge = ({label, text, imageUrl, buttonLabel}) => {
     return (
         <div className="about-challenge">
             <div className="challenge-description">
@@ -17,4 +17,4 @@ const AboutChallenge = ({label, text, imageUrl, buttonLabel}) => {
     );
 };
 
-export default AboutChallenge;
+export default MainChallenge;

@@ -1,7 +1,7 @@
 import './css/AboutDescription.css';
 import React from "react";
 
-const AboutDescription = () => {
+const MainDescription = () => {
     return (
         <div className="about-description">
             <span className="label">Про нас</span>
@@ -13,4 +13,4 @@ const AboutDescription = () => {
     );
 };
 
-export default AboutDescription;
+export default MainDescription;

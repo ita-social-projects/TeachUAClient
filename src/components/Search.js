@@ -1,5 +1,5 @@
 import {Select} from "antd";
-import React from "react";
+import React, {createRef} from "react";
 import {clearSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
@@ -15,7 +15,8 @@ class Search extends React.Component {
         possibleResults: {
             categories: [],
             clubs: []
-        }
+        },
+        loading: false
     };
 
     onSearchChange = (value) => {
@@ -24,10 +25,22 @@ class Search extends React.Component {
 
         clearSearchParameters();
 
-        if (parameter === "category") {
-            searchParameters.categoryName = name;
-        } else if (parameter === "club") {
-            searchParameters.clubName = name;
+        switch (parameter) {
+            case "category":
+                searchParameters.categoryName = name;
+                break;
+            case "club":
+                searchParameters.clubName = name;
+                break;
+            default: {
+                if(this.state.possibleResults.categories.find(category =>
+                        category.name.toLowerCase().includes(name.toLowerCase()))) {
+                    searchParameters.categoryName = name;
+                }
+                else {
+                    searchParameters.clubName = name;
+                }
+            }
         }
 
         getClubsByParameters(searchParameters).then(response => {
@@ -35,21 +48,24 @@ class Search extends React.Component {
         });
     };
 
-
     onFocus = () => {
+        this.setState({loading:true});
         getPossibleResults(searchParameters).then(response => {
-            this.setState({possibleResults: response});
+            this.setState({possibleResults: response, loading:false})
         });
     };
 
     onKeyDown = (event) => {
         if (event.key === 'Enter') {
-            this.onSearchChange("club#" + this.state.searchText)
+            this.onSearchChange("all#" + this.state.searchText);
         }
     };
 
     onSearch = (val) => {
-        getPossibleResultsByText(val, searchParameters).then(response => this.setState({possibleResults: response}));
+        this.setState({loading:true});
+        getPossibleResultsByText(val, searchParameters).then(response => {
+            this.setState({possibleResults: response, loading:false})
+        });
 
         this.setState({searchText: val});
     };
@@ -59,14 +75,15 @@ class Search extends React.Component {
             <div className="search">
                 <Select
                     showSearch
+                    loading={this.state.loading}
                     /*allowClear*/
                     onChange={this.onSearchChange}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
+                    autoClearSearchValue={false}
                     onInputKeyDown={this.onKeyDown}
                     style={{width: 200}}
                     placeholder="Який гурток шукаєте?"
-                    optionFilterProp="children"
                     defaultActiveFirstOption={false}>
 
                     <OptGroup label="Категорії">

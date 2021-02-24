@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Form, Modal, Switch} from 'antd';
+import {Button, Form, message, Modal, Switch} from 'antd';
 import './сss/Registration.less';
 import RegistrationRoles from "./RegistrationRoles";
 import RegistrationSocial from "./RegistrationSocial";
@@ -13,9 +13,13 @@ const Registration = () => {
 
     const onFinish = (values) => {
         registerUser(values).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error.response)
+            if(response.status) {
+                message.error(response.message);
+            }
+            else {
+                message.success("Ви успішно зареєструвались!");
+                setVisible(false);
+            }
         });
     };
 
