@@ -45,7 +45,7 @@ class ClubPage extends React.Component {
                     <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
                     <PageSider club={this.state.club}/>
                 </Layout>
-                <PageComments feedback={this.state.feedback}/>
+                <PageComments feedback={this.state.feedback} club={this.state.club}/>
             </Layout>)
     }
 }
