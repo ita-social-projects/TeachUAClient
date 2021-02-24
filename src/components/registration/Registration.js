@@ -1,14 +1,28 @@
 import React, {useState} from 'react';
-import {Button, Modal, Switch} from 'antd';
+import {Button, Form, Modal, Switch} from 'antd';
 import './сss/Registration.less';
 import RegistrationRoles from "./RegistrationRoles";
 import RegistrationSocial from "./RegistrationSocial";
 import RegistrationInput from "./RegistrationInput";
+import {registerUser} from "../../service/UserService";
 
 
 const Registration = () => {
     const [visible, setVisible] = useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
+
+    const onFinish = (values) => {
+        registerUser(values).then((response) => {
+            console.log(response)
+        });
+    };
+
+    const validateMessages = {
+        required: 'Заповніть поле ${label}!',
+        types: {
+            email: '${label} is not a valid email!',
+        },
+    };
 
     return (
         <>
@@ -28,9 +42,16 @@ const Registration = () => {
                     Реєстрація
                 </div>
                 <div className="registration-content">
-                    <RegistrationRoles setDisabledButton={setDisabledButton} disabledButton={disabledButton}/>
-                    <RegistrationSocial/>
-                    <RegistrationInput disabledButton={disabledButton}/>
+                    <Form
+                        name="basic"
+                        onFinish={onFinish}
+                        validateMessages={validateMessages}
+                    >
+                        <RegistrationRoles setDisabledButton={setDisabledButton}
+                                           disabledButton={disabledButton}/>
+                        <RegistrationSocial/>
+                        <RegistrationInput disabledButton={disabledButton}/>
+                    </Form>
                 </div>
             </Modal>
         </>
