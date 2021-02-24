@@ -1,5 +1,5 @@
-.ant-modal-body {
-  height: 584px;
+.modal-registration .ant-modal-body {
+  height: 100%;
   border-radius: 16px;
   background-color: white;
   display: flex;
@@ -7,7 +7,12 @@
   padding: 0;
 }
 
-.ant-modal-content {
+.modal-registration .ant-form-item-explain {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-registration .ant-modal-content {
   border-radius: 16px;
 }
 
@@ -21,6 +26,14 @@
   border-radius: 16px;
   padding-top: 24px;
   padding-left: 32px;
+}
+
+.modal-registration .ant-form-item {
+  margin: 0;
+}
+
+.modal-registration .ant-form-item-label {
+  display: none;
 }
 
 .modal-registration .ant-modal-close-x {
@@ -115,18 +128,20 @@
   padding-bottom: 32px;
 }
 
-.logo {
+.modal-registration .logo {
   margin-right: 24px;
 }
 
 .modal-registration .registration-row {
   width: 88%;
   height: 56px;
-  padding-top: 25px;
-  padding-bottom: 8px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.modal-registration .registration-column {
+  margin-top: 20px;
 }
 
 .modal-registration .registration-or {
