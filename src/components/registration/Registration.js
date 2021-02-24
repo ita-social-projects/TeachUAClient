@@ -14,21 +14,17 @@ const Registration = () => {
     const onFinish = (values) => {
         registerUser(values).then((response) => {
             console.log(response)
+        }).catch((error) => {
+            console.log(error.response)
         });
     };
 
-    const validateMessages = {
-        required: 'Заповніть поле ${label}!',
-        types: {
-            email: '${label} is not a valid email!',
-        },
-    };
 
     return (
         <>
-            <Button type="text button" onClick={() => setVisible(true)}>
+            <span type="text" onClick={() => setVisible(true)}>
                 Зареєструватися
-            </Button>
+            </span>
             <Modal
                 className="modal-registration"
                 centered
@@ -44,8 +40,8 @@ const Registration = () => {
                 <div className="registration-content">
                     <Form
                         name="basic"
+                        requiredMark={false}
                         onFinish={onFinish}
-                        validateMessages={validateMessages}
                     >
                         <RegistrationRoles setDisabledButton={setDisabledButton}
                                            disabledButton={disabledButton}/>

@@ -17,7 +17,7 @@ class CommentEditComponent extends React.Component {
         rate: undefined,
         commentText: "",
         tooltipVisible: false,
-    }
+    };
 
     getUser(){
         // TODO: get real current user
@@ -74,7 +74,7 @@ class CommentEditComponent extends React.Component {
             <div className="comment-edit">
                 <Modal
                     visible={this.props.visible}
-
+                    centered
                     onOk={() => this.closeEditComponent()}
                     onCancel={() => this.closeEditComponent() }
                     width={521}

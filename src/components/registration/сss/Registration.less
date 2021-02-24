@@ -8,8 +8,7 @@
 }
 
 .modal-registration .ant-form-item-explain {
-  display: flex;
-  justify-content: center;
+  display: none;
 }
 
 .modal-registration .ant-modal-content {
@@ -30,10 +29,6 @@
 
 .modal-registration .ant-form-item {
   margin: 0;
-}
-
-.modal-registration .ant-form-item-label {
-  display: none;
 }
 
 .modal-registration .ant-modal-close-x {
@@ -122,7 +117,7 @@
 
 .items {
   display: flex;
-  width: 105%;
+  width: 100%;
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 32px;
@@ -142,6 +137,9 @@
 
 .modal-registration .registration-column {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-registration .registration-or {
@@ -152,15 +150,15 @@
 
 .modal-registration .registration-input {
   height: 100%;
-  width: 256px;
+  width: 65%;
   font-size: 16px;
   line-height: 24px;
-  border: 1px solid #D9D9D9;
-  border-radius: 6px;
+  margin-top: 16px;
 }
 
 .modal-registration .registration-box {
   height: 40px;
+  border-radius: 6px;
 }
 
 .modal-registration .registration-row .label {
@@ -187,11 +185,14 @@
   padding: 8px 24px;
   height: 40px;
   background: #FA8C16 !important;
-  opacity: 0.4;
   border-radius: 6px;
   font-weight: bold;
   font-size: 16px;
   color: #FFFFFF !important;
+}
+
+.registration-button:disabled{
+  opacity: 0.4;
 }
 
 .modal-registration .registration-footer {
@@ -201,35 +202,11 @@
   height: 110px;
 }
 
-@media (max-width: 420px) {
-  .ant-modal-body {
-    height: 100%;
-  }
-
-  .modal-registration .registration-content {
-    display: block;
-  }
-
-  .modal-registration .registration-row {
-    padding-left: 60px;
-    display: inline-block;
-    align-items: center;
+@media (max-width: 575px) {
+  .ant-form-item .ant-form-item-label > label {
+    text-align: left;
+    width: 100%;
   }
 }
 
-@media (max-width: 340px) {
-  .ant-modal-body {
-    height: 100%;
-  }
-
-  .modal-registration .registration-content {
-    display: block;
-  }
-
-  .modal-registration .registration-row {
-    padding-left: 10px;
-    display: inline-block;
-    align-items: center;
-  }
-}
 
