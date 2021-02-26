@@ -1,8 +1,11 @@
 import {Tag} from "antd";
-import React from "react";
+import React, {useContext} from "react";
 import PropTypes from "prop-types";
+import {UriContext} from "../context/UriContext";
 
 const Tags = ({categories}) => {
+    const uri = useContext(UriContext);
+
     return (
         <div className="tags">
             {categories.map(category =>
@@ -13,7 +16,7 @@ const Tags = ({categories}) => {
                     <div className="icon"
                          style={{
                              backgroundColor: category.tagTextColor,
-                             webkitMask: `url(${category.urlLogo}) no-repeat center / contain`
+                             webkitMask: `url(${uri + category.urlLogo}) no-repeat center / contain`
                          }}/>
                     <span className="name">{category.name}</span>
                 </Tag>)

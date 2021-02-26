@@ -3,9 +3,9 @@ import '../css/CarouselItems.css';
 import React from "react";
 import {ROOT_URI} from "../../../config/ApplicationConfig";
 
-export const items = [
+export const items = (uri) => [
     {
-        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською</h2>
@@ -17,7 +17,7 @@ export const items = [
             </div>)
     },
     {
-        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською 2 </h2>
@@ -29,7 +29,7 @@ export const items = [
             </div>)
     },
     {
-        imageURL: `${ROOT_URI}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською 3</h2>

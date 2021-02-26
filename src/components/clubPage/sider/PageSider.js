@@ -40,7 +40,7 @@ class PageSider extends React.Component {
                     <p className="text"> {this.props.club.address}</p>
                 </div>
                 <div className="map">
-                    <img src={`${ROOT_URI}/static/map.png`} alt="Map"/>
+                    {/*<img src={`${ROOT_URI}/static/map.png`} alt="Map"/>*/}
                 </div>
                 <div className="age">
                     <span className="sider-label">Вік аудиторії: </span>

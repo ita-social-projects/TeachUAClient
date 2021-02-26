@@ -1,7 +1,6 @@
 import {createContext} from "react";
 
 export const SearchContext = createContext(null);
-export const MapSearchContext = createContext(null);
 
 export const searchParameters = {
     clubName: "",

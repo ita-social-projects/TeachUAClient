@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL} from "../config/ApplicationConfig";
+import {BASE_URL, GetUri} from "../config/ApplicationConfig";
 
 export const getUserById = async (id) => {
     return await axios.get(BASE_URL + "/api/user/" + id).then((response) => {
