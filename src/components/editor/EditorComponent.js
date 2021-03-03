@@ -1,21 +1,20 @@
 import React from "react";
-import {convertToRaw, Editor, EditorState, RichUtils, setBlockType} from "draft-js";
-import getFragmentFromSelection from 'draft-js/lib/getFragmentFromSelection';
-import {stateToHTML} from 'draft-js-export-html';
+import {Editor, EditorState, RichUtils} from "draft-js";
 import {addImage, mediaBlockRenderer} from "./plugins/ImagePlugin";
 import {addLink} from "./plugins/LinkPlugin";
-import {convertToHtmlOptions, getBlockStyle} from "./plugins/BlockSetting";
+import {getBlockStyle} from "./BlockSetting";
 import './css/Editor.less';
 import {Button, Layout} from "antd";
+import {convertFromJson, convertToHtml, saveContent} from "./EditorConverter";
 
-export default class BinsEditor extends React.Component {
+export default class EditorComponent extends React.Component {
     state = {editorState: EditorState.createEmpty()};
 
     focus = () => this.refs.editor.focus();
 
     onChange = editorState => {
+        console.log(1)
         this.setState({editorState});
-        console.log();
     };
 
     handleKeyCommand = command => {
@@ -55,31 +54,17 @@ export default class BinsEditor extends React.Component {
     };
 
     onSave = () => {
-        const rawContent = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+        const cont = saveContent(this.state.editorState.getCurrentContent());
 
-        document.getElementById("test").innerHTML = stateToHTML(this.state.editorState.getCurrentContent(), convertToHtmlOptions);
+        console.log(cont);
+
+        document.getElementById("test").innerHTML = convertToHtml(cont);
     };
 
     render() {
         return (
-            <Layout className="temp-lay">
-                <div className="editor-box">
-                    <div className="editor-toolbar">
-                        <BlockStyleControls
-                            editorState={this.state.editorState}
-                            onToggle={this.clickBlockType}
-                        />
-                        <StyleButton
-                            key="link"
-                            style="link"
-                            onToggle={this.clickAddLink}
-                        />
-                        <StyleButton
-                            key={"image"}
-                            style="image"
-                            onToggle={this.clickAddImage}
-                        />
-                    </div>
+            <div className="editor-container">
+                <div className="editor-space">
                     <div onClick={this.focus}>
                         <Editor
                             blockStyleFn={getBlockStyle}
@@ -93,9 +78,23 @@ export default class BinsEditor extends React.Component {
                         />
                     </div>
                 </div>
-                <Button onClick={this.onSave}>SAVE</Button>
-                <div id="test"></div>
-            </Layout>
+                <div className="editor-toolbar">
+                    <BlockStyleControls
+                        editorState={this.state.editorState}
+                        onToggle={this.clickBlockType}
+                    />
+                    <StyleButton
+                        key="link"
+                        style="link"
+                        onToggle={this.clickAddLink}
+                    />
+                    <StyleButton
+                        key={"image"}
+                        style="image"
+                        onToggle={this.clickAddImage}
+                    />
+                </div>
+            </div>
         );
     }
 }

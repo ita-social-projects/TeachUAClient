@@ -1,11 +1,12 @@
-import {Button, Card, Rate, Tag} from "antd";
+import {Button, Card, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
-import {ROOT_URI} from "../../config/ApplicationConfig";
+import {convertFromJson, convertToHtml, getShortContent} from "../editor/EditorConverter";
+
 
 const ClubCardItem = ({club}) => {
     return (
@@ -24,9 +25,9 @@ const ClubCardItem = ({club}) => {
                             <span className="center-name">{club.center.name}</span>
                         </div>
                     </div>
-                    <p className="description">{club.description}</p>
+                    <div className="description">{getShortContent(club.description)}</div>
                 </div> :
-                <p className="description">{club.description}</p>}
+                <p className="description">{getShortContent(club.description)}</p>}
             <Rate className="rating" disabled value={club.rating} />
             <div className="address">
                 <EnvironmentFilled
@@ -42,5 +43,7 @@ const ClubCardItem = ({club}) => {
 ClubCardItem.propTypes = {
     club: PropTypes.object.isRequired
 };
+
+
 
 export default ClubCardItem;

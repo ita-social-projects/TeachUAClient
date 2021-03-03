@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL, GetUri} from "../config/ApplicationConfig";
+import {BASE_URL} from "./config/ApiConfig";
 
 
 export const getPossibleResults = async (parameters) => {

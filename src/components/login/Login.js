@@ -6,10 +6,8 @@ import {signIn} from "../../service/UserService";
 
 
 const Login = () => {
-
-    const [visible, setVisible] = useState(false);
+    const [loginVisible, setLoginVisible] = useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
-
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
@@ -17,26 +15,25 @@ const Login = () => {
                 message.error(response.message);
             }
             else {
+                console.log(response)
                 message.success("Ви успішно залогувался!");
-                setVisible(false);
+                setLoginVisible(false);
             }
         });
     };
 
-
-
     return (
         <>
-            <span type="text" onClick={() => setVisible(true)}>
+            <div onClick={() => setLoginVisible(true)}>
                 Увійти
-            </span>
+            </div>
             <Modal
                 className="modal-registration"
                 centered
                 width={520}
-                visible={visible}
-                onOk={() => setVisible(false)}
-                onCancel={() => setVisible(false)}
+                visible={loginVisible}
+                onOk={() => setLoginVisible(false)}
+                onCancel={() => setLoginVisible(false)}
                 footer={null}
             >
                 <div className="registration-header">

@@ -1,7 +1,6 @@
 import {Button} from "antd";
 import '../css/CarouselItems.css';
 import React from "react";
-import {ROOT_URI} from "../../../config/ApplicationConfig";
 
 export const items = (uri) => [
     {

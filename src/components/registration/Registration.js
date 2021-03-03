@@ -25,7 +25,7 @@ const Registration = () => {
 
 
     return (
-        <>
+        <div>
             <span type="text" onClick={() => setVisible(true)}>
                 Зареєструватися
             </span>
@@ -54,7 +54,7 @@ const Registration = () => {
                     </Form>
                 </div>
             </Modal>
-        </>
+        </div>
     );
 };
 

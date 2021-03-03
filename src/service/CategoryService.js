@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL} from "../config/ApplicationConfig";
+import {BASE_URL} from "./config/ApiConfig";
 
 export const getPageableCategory = async (page) => {
     return await axios.get(BASE_URL + "/api/categories/search?page=" + page).then((response) => {

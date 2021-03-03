@@ -5,6 +5,7 @@ import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import '../registration/сss/Registration.less'
 import Registration from "../registration/Registration";
 import {Link} from "react-router-dom";
+import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 
 
@@ -13,8 +14,8 @@ const AuthMenu = () => {
         <Menu>
             <Menu.Item> <Registration/></Menu.Item>
             <Menu.Item> <Login/></Menu.Item>
-            <Menu.Item> Додати гурток</Menu.Item>
-            <Menu.Item> <Link to={"/user/:id"}>Мій Профіль </Link></Menu.Item>
+            <Menu.Item> <AddClubModal/></Menu.Item>
+            <Menu.Item> <Link to={"/user"}>Мій Профіль </Link></Menu.Item>
             <Menu.Item danger>Вийти</Menu.Item>
         </Menu>
     );

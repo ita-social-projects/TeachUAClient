@@ -47,39 +47,49 @@ export const mediaBlockRenderer = (block) => {
 const Image = ({src, entity, id}) => {
     const leftWithText = () => {
         entity.getData().className = "edited-image edited-image-left";
-        document.getElementById(id).style="position: relative; float:left;";
+        document.getElementById(id).style="position: relative; float:left; width: 48%; margin-right: 1%;";
+        document.getElementById("image-item").style="display: block; margin: auto 0 0 0;";
+        document.getElementById("image-controls").style="margin: auto 0 0 0;"
     };
 
     const rightWithText = () => {
         entity.getData().className = "edited-image edited-image-right";
-        document.getElementById(id).style="position: relative; float:right;";
+        document.getElementById(id).style="position: relative; float:right; width: 48%; margin-left: 1%;";
+        document.getElementById("image-item").style="display: block; margin: 0 0 0 auto;";
+        document.getElementById("image-controls").style="margin: 0 0 0 auto;"
     };
 
     const leftWithoutText = () => {
         entity.getData().className = "edited-image edited-image-left-without-text";
-        document.getElementById(id).style="justify-content: flex-start;";
+        document.getElementById(id).style="width: 48%;";
+        document.getElementById("image-item").style="display: block; margin: auto 0 0 0;"
+        document.getElementById("image-controls").style="margin: auto 0 0 0;"
     };
 
     const rightWithoutText = () => {
         entity.getData().className = "edited-image edited-image-right-without-text";
-        document.getElementById(id).style="justify-content: flex-end;";
+        document.getElementById(id).style="margin: 0 0 0 auto; width: 48%;";
+        document.getElementById("image-item").style="display: block; margin: 0 0 0 auto;";
+        document.getElementById("image-controls").style="margin: 0 0 0 auto;"
     };
 
     const center = () => {
         entity.getData().className = "edited-image edited-image-center";
-        document.getElementById(id).style="margin: 0 auto; width: 40%;";
+        document.getElementById(id).style="margin: 0 auto; width: 48%;";
+        document.getElementById("image-item").style="display: block; margin: 0 auto;"
+        document.getElementById("image-controls").style="margin: 0 auto;"
     };
 
     return (
-        <div className="image-editor" id={id} style={{position: 'relative', float:'left'}}>
-            <img src={src} />
-            <div className="image-controls">
+        <div className="image-editor" id={id} style={{position: 'relative', float:'left', width:'48%', marginRight: '1%'}}>
+            <div className="image-controls" id="image-controls">
                 <div onClick={leftWithText}><PicLeftOutlined /></div>
                 <div onClick={center}><PicCenterOutlined /></div>
                 <div onClick={rightWithText}><PicRightOutlined /></div>
-                <div onClick={rightWithoutText}><AlignRightOutlined /></div>
                 <div onClick={leftWithoutText}><AlignLeftOutlined /></div>
+                <div onClick={rightWithoutText}><AlignRightOutlined /></div>
             </div>
+            <img src={src} id="image-item"/>
         </div>);
 };
 

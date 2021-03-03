@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {searchParameters} from "../../../context/SearchContext";
 import PrimitiveCard from "../../PrimitiveCard";
 import './css/SimilarClubs.css';
 import PropTypes from "prop-types";
+import {getShortContent} from "../../editor/EditorConverter";
 
-const SimilarClubs = ({similarClubs}) => {
+const SimilarClubs = ({cityName, similarClubs}) => {
     return (
         <div className="similar-clubs">
-            <p className="label">Схожі гуртки у місті {searchParameters.cityName}</p>
+            <p className="label">Схожі гуртки у місті {cityName}</p>
             {similarClubs.map(club => <PrimitiveCard key={club.id}
                                                      header={<div className="name">{club.name}</div>}
-                                                     description={club.description}
+                                                     description={getShortContent(club.description)}
                                                      link={`/club/${club.id}`}
                                                      buttonText="Детальніше"/>)}
         </div>)

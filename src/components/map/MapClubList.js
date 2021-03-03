@@ -15,18 +15,13 @@ const MapClubList = ({mapClubs, setMapClubs, setZoom, setSelected, setCenter}) =
             setMapClubs(response);
         });
         getAllCities().then(response => {
-            response.forEach(city => {
-                console.log("IN STATE")
-                console.log(response)
-                if (city.name === mapSearchParameters.cityName) {
-                    setCenter({
-                        lat: city.latitude,
-                        lng: city.longitude
-                    })
-                }
-            })
-        })
-
+            response
+                .filter(city => city.name === mapSearchParameters.cityName)
+                .map(city => setCenter({
+                    lat: city.latitude,
+                    lng: city.longitude
+                }));
+        });
     }, []);
 
     return mapClubs.content.length === 0 ? <EmptySearch/> : (

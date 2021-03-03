@@ -1,18 +1,24 @@
-import TwitterOutlined from "@ant-design/icons/lib/icons/TwitterOutlined";
-import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
-import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
-import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import './css/SocialMedia.css';
-import React from "react";
+import React, {useState, useEffect} from "react";
+import MaskIcon from "../../MaskIcon";
+import {getAllContacts} from "../../../service/ContactService";
 
 const SocialMedia = () => {
+    const [contacts, setContacts] = useState([]);
+
+    useEffect(() => {
+        getAllContacts().then(response => setContacts(response));
+        console.log(contacts)
+    }, []);
+
     return (<div className="social-media">
-            <p className="label">Ми у соц. мережах</p>
+            <span className="label">Зв’яжіться з гуртком</span>
             <div className="links">
-                <a target="_blank" href="#"><TwitterOutlined className="icon"/></a>
-                <a target="_blank" href="#"><FacebookOutlined className="icon"/></a>
-                <a target="_blank" href="#"><GoogleOutlined className="icon"/></a>
-                <a target="_blank" href="#"><InstagramOutlined className="icon"/></a>
+                {contacts.map(contact =>
+                    <div className="contact">
+                        <MaskIcon maskColor="#0D2C95" iconUrl={contact.urlLogo}/>
+                        <span className="contact-name">{contact.name}</span>
+                    </div>)}
             </div>
         </div>
     )

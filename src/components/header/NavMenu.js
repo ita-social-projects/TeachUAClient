@@ -7,7 +7,6 @@ import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import FolderOpenOutlined from "@ant-design/icons/lib/icons/FolderOpenOutlined";
 import FlagOutlined from "@ant-design/icons/lib/icons/FlagOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
-import {ROOT_URI} from "../../config/ApplicationConfig";
 
 const NavMenu = () => {
     const data = window.location.pathname === '/' ? 'clubs' : localStorage.getItem("head-component-page");
