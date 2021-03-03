@@ -5,7 +5,9 @@ import Radio from "antd/es/radio/radio";
 
 const RegistrationRoles = ({setDisabledButton}) => {
     return (
-        <Form.Item name="role">
+        <Form.Item name="role"
+        >
+
             <Radio.Group className="button-container"
                          options={[{
                              label: (
@@ -13,7 +15,7 @@ const RegistrationRoles = ({setDisabledButton}) => {
                                      <div className="ellipse"><UserOutlined className="user-icon"/></div>
                                      Відвідувач
                                  </div>),
-                             value: 'ROLE_USER'
+                                 value: 'ROLE_USER'
                          }, {
                              label: (
                                  <div className="button-box">

@@ -1,33 +1,34 @@
 import React, {useState} from 'react';
-import {Button, Form, message, Modal, Switch} from 'antd';
-import './сss/Registration.less';
-import RegistrationRoles from "./RegistrationRoles";
-import RegistrationSocial from "./RegistrationSocial";
-import RegistrationInput from "./RegistrationInput";
-import {signUp} from "../../service/UserService";
+import {Form, message, Modal} from "antd";
+import LoginSocial from "./LoginSocial";
+import LoginInput from "./LoginInput";
+import {signIn} from "../../service/UserService";
 
 
-const Registration = () => {
+const Login = () => {
+
     const [visible, setVisible] = useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
 
+
     const onFinish = (values) => {
-        signUp(values).then((response) => {
+        signIn(values).then((response) => {
             if(response.status) {
                 message.error(response.message);
             }
             else {
-                message.success("Ви успішно зареєструвались!");
+                message.success("Ви успішно залогувался!");
                 setVisible(false);
             }
         });
     };
 
 
+
     return (
         <>
             <span type="text" onClick={() => setVisible(true)}>
-                Зареєструватися
+                Увійти
             </span>
             <Modal
                 className="modal-registration"
@@ -39,7 +40,7 @@ const Registration = () => {
                 footer={null}
             >
                 <div className="registration-header">
-                    Реєстрація
+                    Вхід
                 </div>
                 <div className="registration-content">
                     <Form
@@ -47,10 +48,8 @@ const Registration = () => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <RegistrationRoles setDisabledButton={setDisabledButton}
-                                           disabledButton={disabledButton}/>
-                        <RegistrationSocial/>
-                        <RegistrationInput disabledButton={disabledButton}/>
+                        <LoginSocial/>
+                        <LoginInput/>
                     </Form>
                 </div>
             </Modal>
@@ -58,4 +57,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Login;

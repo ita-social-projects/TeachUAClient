@@ -1,12 +1,17 @@
 import React, {useContext, useState} from "react";
 import ClubList from "../../clubList/ClubList";
 import {SearchContext} from "../../../context/SearchContext";
+import {getClubsByUserId} from "../../../service/ClubService";
 
 
-const UserClubContent  = () => {
+const UserClubContent  = ({user,id}) => {
 
     const {clubs, setClubs} = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
+
+    // getClubsByUserId(id,user).then(response => {
+    //     this.setState({club: response});
+    // });
 
     return (
         <div className="user-club-content">
