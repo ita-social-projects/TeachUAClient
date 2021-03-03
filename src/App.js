@@ -45,13 +45,12 @@ function App() {
                         <SearchContext.Provider value={clubProvider}>
                             <HeaderComponent/>
                             <Layout>
-                                {false && (<Sider>Sider</Sider>)}
                                 <Content className="global-content">
                                     <Switch>
                                         <Route path="/test" exact component={EditorComponent}/>
                                         <Route path="/club/:id" exact component={ClubPage}/>
                                         <Route path="/clubs" exact component={ClubListComponent}/>
-                                        <Route path="/user" exact component={UserPage}/>
+                                        <Route path="/user/:id" exact component={UserPage}/>
                                         <Route path="/" component={MainComponent}/>
                                     </Switch>
                                 </Content>

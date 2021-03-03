@@ -23,6 +23,9 @@ const FooterSocials = () => {
                     <a target="_blank" href="#"><InstagramOutlined className="icon"/></a>
                 </div>
             </div>
+            <div className="qubstudio">
+                ©2021 Qubstudio
+            </div>
         </div>
     );
 };

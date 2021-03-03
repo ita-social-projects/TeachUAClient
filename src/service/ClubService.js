@@ -7,6 +7,18 @@ export const getClubById = async (id) => {
     });
 };
 
+export const getClubsByUserId = async (id, user) => {
+    return await axios.get(BASE_URL + "/api/clubs/" +id, {
+        params: {
+            id: id,
+            user: user
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
+
 export const getSimilarClubsByCategoryName = async (id, categoryName, cityName) => {
     return await axios.get(BASE_URL + "/api/clubs/search/similar", {
         params: {

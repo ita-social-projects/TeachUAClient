@@ -3,38 +3,43 @@ import './css/UserContent.less';
 import {Avatar} from "antd";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import UserEditModal from "../useredit/UserEditModal";
+import PropTypes from "prop-types";
 
 
-const UserInformationComponent = () => {
+
+const UserInformationComponent = ({user}) => {
     return (
         <div className="user-profile">
             <div className="user-info">
-                <Avatar size={68} icon={<UserOutlined />} />
+                <Avatar size={68} src={user.urlLogo} icon={<UserOutlined />} />
                 <div>
-                <div className="user-name"> Ім'я Прізвище
+                <div className="user-name">{user.firstName} {user.lastName}
                 </div>
-                <div className="user-role"> Роль </div>
+                <div className="user-role"> {user.roleName}</div>
             </div>
                 <div className="edit-button">
-                  <UserEditModal/>
+                  <UserEditModal user={user}/>
             </div>
             </div>
             <div className="user-contacts">
                 <div className="user-phone">
                     Телефон
                     <div className="user-phone-data">
-                        +38 (067) 000 00 00
+                        {user.phone}
                     </div>
                 </div>
                 <div className="user-email">
                     Email
                     <div className="user-email-data">
-                        test@gmail.com
+                        {user.email}
                     </div>
             </div>
             </div>
         </div>
     )
+};
+UserInformationComponent.propTypes = {
+    user: PropTypes.object.isRequired
 };
 
 
