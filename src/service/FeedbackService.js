@@ -1,6 +1,5 @@
 import axios from "axios";
-import {BASE_URL, GetUri} from "../config/ApplicationConfig";
-import {getUserById} from "./UserService";
+import {BASE_URL} from "./config/ApiConfig";
 
 export const getFeedbackListByClubId = async (id) => {
     return await axios.get(BASE_URL + "/api/feedbacks/" + id).then((response) => {

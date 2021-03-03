@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Form, Input, Layout, Select, Tooltip} from "antd";
-import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
+import {Button, Form, Input} from "antd";
+import {MailOutlined} from "@ant-design/icons";
 
 const LoginInput = () => {
     return (

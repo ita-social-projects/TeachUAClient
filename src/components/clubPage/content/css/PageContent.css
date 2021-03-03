@@ -3,20 +3,17 @@
     flex-direction: column;
     align-content: space-between;
     margin-right: 15px;
+    color: #2D4C68;
+    font-size: 18px;
 }
 
 .page-content .carousel {
     margin-bottom: 54px;
 }
 
-.page-content .upper,
-.lower {
-    max-width: 690px;
+.page-content .content {
+    max-width: 800px;
     display: block;
-}
-
-.page-content .lower {
-    margin-top: 32px;
 }
 
 .page-content .title {

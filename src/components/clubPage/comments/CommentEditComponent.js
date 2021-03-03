@@ -73,6 +73,7 @@ class CommentEditComponent extends React.Component {
         return (
             <div className="comment-edit">
                 <Modal
+                    className="comment-modal"
                     visible={this.props.visible}
                     centered
                     onOk={() => this.closeEditComponent()}

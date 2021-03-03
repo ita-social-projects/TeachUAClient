@@ -12,6 +12,7 @@ class ClubList extends React.Component {
         this.props.load(true);
 
         getClubsByParameters(searchParameters).then(response => {
+            console.log(response)
             this.props.setClubs(response);
             this.props.load(false)
         });

@@ -33,7 +33,7 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                                          src={'https://iso.500px.com/wp-content/uploads/2016/11/stock-photo-159533631-1500x1000.jpg'}
                                          alt="avatar"/>
                                     <div className="author-content">
-                                        <span className="name">{item.user.name}</span>
+                                        <span className="name">{`${item.user.firstName} ${item.user.lastName}`}</span>
                                         <Tooltip title={new Date(item.date).toLocaleString()}>
                                                 <span className="datetime">{
                                                     new Date(item.date).toLocaleString('uk', {

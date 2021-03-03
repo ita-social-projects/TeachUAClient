@@ -2,16 +2,13 @@ import {Header} from "antd/es/layout/layout";
 import React, {useContext} from "react";
 import PropTypes from 'prop-types';
 import './css/PageHeader.css';
-import {Button, Col, Row, Tag} from "antd";
+import {Button} from "antd";
 import Tags from "../../Tags";
 import CategoryLogo from "../../CategoryLogo";
-import {UriContext} from "../../../context/UriContext";
 
 const PageHeader = ({club}) => {
-    const uri = useContext(UriContext);
-
     return (
-        <Header className="page-header" style={{background: `url(${uri + club.urlBackground}) 50% 50% / cover no-repeat`}}>
+        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + club.urlBackground}) 50% 50% / cover no-repeat`}}>
             <div className="blur">
                 <div className="row">
                     <div className="tags-name-box">

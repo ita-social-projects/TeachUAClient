@@ -1,15 +1,12 @@
 import React, {useContext, useState} from 'react';
 import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
-import {ROOT_URI} from "../../config/ApplicationConfig";
-import {UriContext} from "../../context/UriContext";
 
 const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, setCenter}) => {
     const [map, setMap] = useState(null);
-    const uri = useContext(UriContext);
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBdEOt1rGu5B5h5-wpS4WnTA5gD7-O6R30'
+        googleMapsApiKey: process.env.REACT_APP_MAP_KEY
     });
 
     if (loadError) return "Error loading map";
@@ -43,7 +40,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
                 onClusteringEnd={(clusters) => {
                     clusters.clusters.map((cluster) => {
                         cluster.clusterIcon.styles = [{
-                            url: `${uri}/static/images/map/cluster.png`,
+                            url: `${process.env.PUBLIC_URL}/static/images/map/cluster.png`,
                             height: 58,
                             width: 67,
                             textColor: '#FFFFFF',
@@ -68,7 +65,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
                                         lng: club.longitude
                                     })
                                 }}
-                                icon={{url: `${uri}/static/images/map/location.png`}}/>
+                                icon={{url: `${process.env.PUBLIC_URL}/static/images/map/location.png`}}/>
                         )
                     )}
             </MarkerClusterer>

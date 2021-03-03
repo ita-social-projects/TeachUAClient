@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL} from "../config/ApplicationConfig";
+import {BASE_URL} from "./config/ApiConfig";
 
 export const getCityById = async (id) => {
     return await axios.get( BASE_URL + "/api/city/" + id).then((response) => {
