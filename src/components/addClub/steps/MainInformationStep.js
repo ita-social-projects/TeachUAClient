@@ -46,13 +46,17 @@ const MainInformationStep = ({categories, step, setStep, setResult, result}) => 
                     <Form.Item name="ageFrom"
                                style={{margin: 0}}
                                initialValue={result.ageFrom ? result.ageFrom : 2}>
-                        <InputNumber className="input-age" min={2} max={18}/>
+                        <InputNumber className="input-age"
+                                     min={2}
+                                     max={18}/>
                     </Form.Item>
                     до
                     <Form.Item name="ageTo"
                                style={{margin: 0}}
                                initialValue={result.ageTo ? result.ageTo : 18}>
-                        <InputNumber className="input-age" min={1} max={18}/>
+                        <InputNumber className="input-age"
+                                     min={3}
+                                     max={18}/>
                     </Form.Item>
                     років
                 </span>

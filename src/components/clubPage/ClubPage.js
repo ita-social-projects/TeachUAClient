@@ -1,4 +1,4 @@
-import {Layout} from "antd";
+import {Button, Layout, Result} from "antd";
 import {withRouter} from 'react-router';
 import React from "react";
 import PageHeader from "./header/PageHeader";
@@ -13,7 +13,8 @@ import {getFeedbackListByClubId} from "../../service/FeedbackService";
 class ClubPage extends React.Component {
     state = {
         club: {},
-        feedback: []
+        feedback: [],
+        clubNotFound: false,
     };
 
     getData = () => {
@@ -21,6 +22,9 @@ class ClubPage extends React.Component {
 
         getClubById(clubId).then(response => {
             this.setState({club: response});
+            if (response.status) {
+                this.setState({clubNotFound: true});
+            }
         });
         getFeedbackListByClubId(clubId).then(response => {
             this.setState({feedback: response});
@@ -38,15 +42,23 @@ class ClubPage extends React.Component {
     }
 
     render() {
-        return !this.state.club.categories ? <Loader/> : (
-            <Layout>
-                <PageHeader club={this.state.club}/>
-                <Layout className="club-page" style={{padding: 40, background: 'white'}}>
-                    <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
-                    <PageSider club={this.state.club}/>
-                </Layout>
-                <PageComments feedback={this.state.feedback} feedbackAdded={(feedback)=>this.getData()} club={this.state.club}/>
-            </Layout>)
+        return this.state.clubNotFound ?
+            <Result
+                className="club-not-found"
+                status="404"
+                title="404"
+                subTitle="Клуб який ви намагаєтесь відкрити не існує"
+            /> :
+            !this.state.club.categories ? <Loader/> : (
+                <Layout>
+                    <PageHeader club={this.state.club}/>
+                    <Layout className="club-page" style={{padding: 40, background: 'white'}}>
+                        <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
+                        <PageSider club={this.state.club}/>
+                    </Layout>
+                    <PageComments feedback={this.state.feedback} feedbackAdded={(feedback) => this.getData()}
+                                  club={this.state.club}/>
+                </Layout>)
     }
 }
 

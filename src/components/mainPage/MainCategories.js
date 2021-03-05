@@ -47,7 +47,7 @@ const MainCategories = () => {
                                            <div className="name">{category.name}</div>
                                        </div>
                                    }
-                                   description={"Ololo"}
+                                   description={category.description}
                                    link={""}
                                    buttonText="Переглянути"/>
                 )}

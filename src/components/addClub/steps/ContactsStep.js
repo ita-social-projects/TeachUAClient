@@ -1,17 +1,30 @@
-import {Form, Input, Select, Tag} from "antd";
-import React, {useState} from "react";
+import {Form, Input, message, Select} from "antd";
+import React, {useEffect, useState} from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import AddClubInputAddress from "../AddClubInputAddress";
 import MaskIcon from "../../MaskIcon";
 import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
+import {getDistrictsByCityName} from "../../../service/DisctrictService";
 
 const {Option} = Select;
 
-const ContactsStep = ({contacts, cities, district, step, setStep, setResult, result}) => {
+const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
     const [contactsForm] = Form.useForm();
-    const [validateStatus, setValidateStatus] = useState({});
+    const [cityName, setCityName] = useState(null);
+    const [cityOnInput, setCityOnInput] = useState(null);
+    const [inputAddressProps, setInputAddressProps] = useState({});
+    const [districts, setDistricts] = useState([]);
+
+    useEffect(() => {
+        getDistrictsByCityName(cityName).then(response => setDistricts(response));
+    }, [cityName]);
 
     const onFinish = (values) => {
+        if (inputAddressProps.validateStatus === 'error') {
+            message.error("Некоректно вибрана адреса");
+            return;
+        }
+
         geocodeByAddress(values.address.label)
             .then(results => getLatLng(results[0]))
             .then(({lat, lng}) => {
@@ -24,7 +37,8 @@ const ContactsStep = ({contacts, cities, district, step, setStep, setResult, res
     };
 
     const handleSelect = address => {
-        setValidateStatus({validateStatus: 'success'});
+        setInputAddressProps({validateStatus: 'success'});
+        setCityOnInput(cityName);
     };
 
     return (
@@ -46,8 +60,19 @@ const ContactsStep = ({contacts, cities, district, step, setStep, setResult, res
                     <Select
                         className="add-club-select"
                         placeholder="Виберіть місто"
+                        onChange={(value) => {
+                            if (cityName) {
+                                cityOnInput === value ?
+                                    setInputAddressProps({validateStatus: 'success'}) :
+                                    setInputAddressProps({validateStatus: 'error'});
+                            }
+
+                            setCityName(value);
+                        }
+                        }
                         optionFilterProp="children">
-                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}
+                        {cities.map(city => <Option
+                            value={city.name}>{city.name}</Option>)}
                     </Select>
                 </Form.Item>
                 <Form.Item name="districtName"
@@ -59,8 +84,7 @@ const ContactsStep = ({contacts, cities, district, step, setStep, setResult, res
                         className="add-club-select"
                         placeholder="Виберіть район"
                         optionFilterProp="children">
-                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}
-                        {/*{districts.map(district => <Option value={district.name}>{district.name}</Option>)}*/}
+                        {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
                     </Select>
                 </Form.Item>
             </div>
@@ -72,10 +96,12 @@ const ContactsStep = ({contacts, cities, district, step, setStep, setResult, res
                        rules={[{
                            required: true,
                        }]}
-                       {...validateStatus}>
+                       {...inputAddressProps}>
                 <AddClubInputAddress
                     placeholder="Введіть адресу гуртка"
                     form={contactsForm}
+                    inputText={result.address && result.address.label}
+                    setCityName={setCityName}
                     onChange={handleSelect}/>
             </Form.Item>
             <Form.Item

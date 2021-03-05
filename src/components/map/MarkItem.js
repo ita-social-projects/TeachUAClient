@@ -3,6 +3,7 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/MarkItem.css'
 import {Link} from "react-router-dom";
+import {getShortContent} from "../editor/EditorConverter";
 
 const MarkItem = ({mapClub}) => {
     return (
@@ -10,7 +11,7 @@ const MarkItem = ({mapClub}) => {
             <div className="title">
                 {mapClub.name}
             </div>
-            <p className="description">{mapClub.description}</p>
+            <p className="description">{getShortContent(mapClub.description)}</p>
             <div className="content">
                 <div className="address">
                     <EnvironmentFilled className="address-icon"/>

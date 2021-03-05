@@ -27,5 +27,9 @@ export const getShortContent = (content) => {
             shortDescription += " " + block.text
         });
 
+    if(shortDescription === ' ') {
+        return "У цього гуртка немає опису...";
+    }
+
     return shortDescription;
 };

@@ -9,8 +9,8 @@ import FlagOutlined from "@ant-design/icons/lib/icons/FlagOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 
 const NavMenu = () => {
-    const data = window.location.pathname === '/' ? 'clubs' : localStorage.getItem("head-component-page");
-    const [currentPage, setCurrentPage] = useState(data);
+    const pageKey = window.location.pathname !== process.env.PUBLIC_URL && localStorage.getItem("head-component-page");
+    const [currentPage, setCurrentPage] = useState(pageKey);
 
     const onMenuChange = (elem) => {
         setCurrentPage(elem.key);

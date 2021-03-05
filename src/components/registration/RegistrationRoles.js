@@ -4,31 +4,26 @@ import {Form, Radio} from "antd";
 
 const RegistrationRoles = ({setDisabledButton}) => {
     return (
-        <Form.Item name="role"
-        >
-
+        <Form.Item name="role">
             <Radio.Group className="button-container"
-                         options={[{
-                             label: (
-                                 <div className="button-box">
-                                     <div className="ellipse"><UserOutlined className="user-icon"/></div>
-                                     Відвідувач
-                                 </div>),
-                             value: 'ROLE_USER'
-                         }, {
-                             label: (
-                                 <div className="button-box">
-                                     <div className="ellipse"><UserOutlined className="user-icon"/></div>
-                                     Керівник
-                                 </div>),
-                             value: 'ROLE_ADMIN'
-                         }]}
                          onChange={() => setDisabledButton(false)}
                          optionType="button"
-                         buttonStyle="solid"
-            />
+                         buttonStyle="solid">
+                <Radio.Button value="ROLE_USER">
+                    <div className="button-box">
+                        <div className="ellipse"><UserOutlined className="user-icon"/></div>
+                        Відвідувач
+                    </div>
+                </Radio.Button>
+                <Radio.Button value="ROLE_ADMIN">
+                    <div className="button-box">
+                        <div className="ellipse"><UserOutlined className="user-icon"/></div>
+                        Керівник
+                    </div>
+                </Radio.Button>
+            </Radio.Group>
         </Form.Item>
     )
-}
+};
 
-export default RegistrationRoles
+export default RegistrationRoles;

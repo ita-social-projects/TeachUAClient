@@ -41,7 +41,7 @@ class ClubList extends React.Component {
                             showSizeChanger={false}
                             onChange={this.onPageChange}
                             current={searchParameters.page + 1}
-                            pageSize={this.props.clubs.size + 1}
+                            pageSize={this.props.clubs.size}
                             total={this.props.clubs.totalElements}/>
 
             </Layout>)

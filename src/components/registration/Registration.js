@@ -17,6 +17,7 @@ const Registration = () => {
                 message.error(response.message);
             }
             else {
+                console.log(response)
                 message.success("Ви успішно зареєструвались!");
                 setVisible(false);
             }
@@ -26,9 +27,9 @@ const Registration = () => {
 
     return (
         <div>
-            <span type="text" onClick={() => setVisible(true)}>
+            <div onClick={() => setVisible(true)}>
                 Зареєструватися
-            </span>
+            </div>
             <Modal
                 className="modal-registration"
                 centered
@@ -43,7 +44,6 @@ const Registration = () => {
                 </div>
                 <div className="registration-content">
                     <Form
-                        name="basic"
                         requiredMark={false}
                         onFinish={onFinish}
                     >

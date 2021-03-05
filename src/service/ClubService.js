@@ -26,6 +26,8 @@ export const addClub = async (data) => {
 export const getClubById = async (id) => {
     return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data
+    }).catch((error) => {
+        return error.response.data
     });
 };
 

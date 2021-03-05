@@ -11,10 +11,7 @@ import {addClub} from "../../../service/ClubService";
 const DescriptionStep = ({step, setStep, setResult, result}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
-    const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё]/gi, ""));
-
-
-    console.log(result)
+    const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     const onFinish = (values) => {
         values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
@@ -40,7 +37,7 @@ const DescriptionStep = ({step, setStep, setResult, result}) => {
                     name="image"
                     action={UPLOAD_IMAGE_URL}
                     maxCount={1}
-                    data={{folder: `clubs/logo/${clubName}`}}
+                    data={{folder: `clubs/${clubName}/logo`}}
                     headers={{contentType: 'multipart/form-data'}}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
@@ -54,7 +51,7 @@ const DescriptionStep = ({step, setStep, setResult, result}) => {
                     name="image"
                     action={UPLOAD_IMAGE_URL}
                     maxCount={1}
-                    data={{folder: `clubs/background/${clubName}`}}
+                    data={{folder: `clubs/${clubName}/background`}}
                     headers={{contentType: 'multipart/form-data'}}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>

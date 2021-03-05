@@ -4,7 +4,7 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
 const RegistrationInput = ({disabledButton}) => {
     return (
-        <div>
+        <div className="registration-input-box">
             <div className="registration-or"><span className="label-or">або</span></div>
             <div className="registration-column">
                 <Form.Item name="lastName"
@@ -28,13 +28,14 @@ const RegistrationInput = ({disabledButton}) => {
                 <Form.Item name="phone"
                            className="registration-input"
                            label="Телефон"
+                           initialValue="+380"
                            hasFeedback
                            rules={[{
                                required: true,
                            }]}>
                     <Input className="registration-box"
-                           initialValue="+380"
                            placeholder="+38(___) ___ __ __"
+                           pattern="^\+?3?8?(0\d{9})$"
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
@@ -47,7 +48,7 @@ const RegistrationInput = ({disabledButton}) => {
                            }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваш емейл"
-                           suffix={<MailOutlined classname="mail-icon"/>}/>
+                           suffix={<MailOutlined className="mail-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="password"
                            className="registration-input"
@@ -57,6 +58,7 @@ const RegistrationInput = ({disabledButton}) => {
                                required: true,
                            }]}>
                     <Input.Password className="registration-box"
+                                    autoComplete="on"
                                     placeholder="Введіть ваш пароль"/>
                 </Form.Item>
             </div>
