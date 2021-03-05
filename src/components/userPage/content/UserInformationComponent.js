@@ -11,7 +11,7 @@ const UserInformationComponent = ({user}) => {
     return (
         <div className="user-profile">
             <div className="user-info">
-                <Avatar size={68} src={user.urlLogo} icon={<UserOutlined />} />
+                <Avatar size={68} src={process.env.PUBLIC_URL +user.urlLogo} icon={<UserOutlined />} />
                 <div>
                 <div className="user-name">{user.firstName} {user.lastName}
                 </div>

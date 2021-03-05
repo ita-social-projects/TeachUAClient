@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, Input, message, Upload} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
+import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 
 
 const UserEditInput = ({user}) => {
@@ -84,18 +85,24 @@ const UserEditInput = ({user}) => {
                        }]}>
                 <Input.Password className="user-edit-box"/>
             </Form.Item>
-            {/*<Form.Item name="urlLogo"*/}
-            {/*           initialValue={user.urlLogo}*/}
-            {/*           className="user-edit-input"*/}
-            {/*           label="Лого"*/}
-            {/*           hasFeedback*/}
-            {/*           rules={[{*/}
-            {/*               required: true,*/}
-            {/*           }]}>*/}
-            {/*    <Upload {...props}>*/}
-            {/*        <Button icon={<UploadOutlined />}>Click to Upload</Button>*/}
-            {/*    </Upload>,*/}
-            {/*</Form.Item>*/}
+            <Form.Item name="urlLogo"
+                       initialValue={user.urlLogo}
+                       className="user-edit-input"
+                       label="Лого"
+                       hasFeedback
+                       rules={[{
+                           required: true,
+                       }]}>
+                <Upload
+                    name="image"
+                    action={UPLOAD_IMAGE_URL}
+                    maxCount={1}
+                    data={{folder: `user/logo/${user.id}`}}
+                    headers={{contentType: 'multipart/form-data'}}
+                >
+                    <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
+                </Upload>
+            </Form.Item>
             <Form.Item>
                 <div className="user-edit-footer">
                     <Button className="submit-button"

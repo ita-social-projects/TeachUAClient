@@ -1,7 +1,6 @@
 import React from 'react';
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import {Form} from "antd";
-import Radio from "antd/es/radio/radio";
+import {Form, Radio} from "antd";
 
 const RegistrationRoles = ({setDisabledButton}) => {
     return (
@@ -15,7 +14,7 @@ const RegistrationRoles = ({setDisabledButton}) => {
                                      <div className="ellipse"><UserOutlined className="user-icon"/></div>
                                      Відвідувач
                                  </div>),
-                                 value: 'ROLE_USER'
+                             value: 'ROLE_USER'
                          }, {
                              label: (
                                  <div className="button-box">
