@@ -16,6 +16,12 @@
     font-weight: 700;
 }
 
+.about-categories .more-button {
+    border-radius: 6px;
+    width: 134px;
+    font-size: 16px;
+    height: 40px;
+}
 
 .about-categories .categories-cards {
     display: flex;
@@ -71,3 +77,4 @@
 .about-categories .pagination .ant-pagination-item-active a {
     background: #FA8C16;
 }
+

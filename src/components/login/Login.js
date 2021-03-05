@@ -23,7 +23,7 @@ const Login = () => {
     };
 
     return (
-        <>
+        <div>
             <div onClick={() => setLoginVisible(true)}>
                 Увійти
             </div>
@@ -50,7 +50,7 @@ const Login = () => {
                     </Form>
                 </div>
             </Modal>
-        </>
+        </div>
     );
 };
 

@@ -19,13 +19,11 @@ const AddClubModal = () => {
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
-    const [districts, setDistricts] = useState([]);
     const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
-       // getAllDistricts().then(response => setDistricts(response));
         getAllContacts().then(response => setContacts(response));
     }, []);
 
@@ -41,7 +39,6 @@ const AddClubModal = () => {
             case 1:
                 return <ContactsStep
                     contacts={contacts}
-                    district={districts}
                     cities={cities}
                     setResult={setResult}
                     result={result}

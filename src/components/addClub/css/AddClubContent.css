@@ -75,8 +75,9 @@
     border-radius: 0 6px 6px 0;
 }
 
-.add-club-content .add-club-age  .ant-input-number-handler-wrap .ant-input-number-handler {
-    left: -2px;
+.add-club-content .add-club-age  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
+.add-club-content .add-club-age  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner{
+    margin-right: -4px;
 }
 
 .add-club-content .add-club-select {

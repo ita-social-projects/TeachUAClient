@@ -3,7 +3,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './css/AddClubInputAdress.css'
 import {Result} from "antd";
 
-const AddClubInputAddress = ({placeholder, onChange, form}) => {
+const AddClubInputAddress = ({placeholder, onChange, form, inputText}) => {
     const [request, setRequest] = useState("");
 
     const handleSearch = (text) => {
@@ -33,6 +33,7 @@ const AddClubInputAddress = ({placeholder, onChange, form}) => {
                 placeholder: placeholder,
                 noOptionsMessage: noOptionsMessage,
                 loadingMessage: () => "Пошук...",
+                inputValue: inputText,
                 onInputChange: handleSearch,
                 onChange: onChange,
             }}

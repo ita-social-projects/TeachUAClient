@@ -7,7 +7,7 @@ import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
-import MainComponent from "./components/main/MainComponent";
+import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
 import EditorComponent from "./components/editor/EditorComponent";
 
