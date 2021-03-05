@@ -31,7 +31,7 @@ const UserPageContent = ({user, id}) => {
                     </div>
                 </div>
                 <UserCenterContent/>
-                <UserClubContent/>
+                <UserClubContent id={id}/>
             </div>
         </Content>
     )

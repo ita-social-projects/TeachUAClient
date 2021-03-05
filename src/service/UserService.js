@@ -15,7 +15,7 @@ export const signUp = async (data) => {
         password: data.password,
         phone: data.phone,
         roleName: data.role,
-        urlLogo: data.urlLogo
+        urlLogo: data.urlLogo && data.urlLogo.file.response
     }).then((response) => {
         return response.data
     }).catch((error) => {
@@ -35,13 +35,15 @@ export const signIn = async (data) => {
 };
 
 export const updateUser = async (data) => {
+    console.log(data)
     return await axios.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
         phone: data.phone,
-        roleName: data.role
+        roleName: data.role,
+        urlLogo: data.urlLogo && data.urlLogo.file.response
     }).then((response) => {
         return response.data
     }).catch((error) => {

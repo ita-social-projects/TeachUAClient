@@ -5,37 +5,37 @@ import {MailOutlined} from "@ant-design/icons";
 const LoginInput = () => {
     return (
         <div>
-            <div className="registration-or"><span className="label-or">або</span></div>
-            <div className="registration-column">
+            <div className="login-or"><span className="label-or">або</span></div>
+            <div className="login-column">
                 <Form.Item name="email"
-                           className="registration-input"
+                           className="login-input"
                            label="Емейл"
                            hasFeedback
                            rules={[{
                                required: true,
                                type: 'email'
                            }]}>
-                    <Input className="registration-box"
+                    <Input className="login-box"
                            placeholder="Введіть ваш емейл"
                            suffix={<MailOutlined classname="mail-icon"/>}/>
                 </Form.Item>
 
                 <Form.Item name="password"
-                           className="registration-input"
+                           className="login-input"
                            label="Пароль"
                            hasFeedback
                            rules={[{
                                required: true,
                            }]}>
-                    <Input.Password className="registration-box"
+                    <Input.Password className="login-box"
                                     placeholder="Введіть ваш пароль"/>
                 </Form.Item>
             </div>
             <Form.Item>
-                <div className="registration-footer">
-                    <Button className="registration-button"
+                <div className="login-footer">
+                    <Button className="login-button"
                             htmlType="submit">
-                        __Увійти__
+                        Увійти
                     </Button>
                 </div>
             </Form.Item>

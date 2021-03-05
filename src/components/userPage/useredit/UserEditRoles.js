@@ -1,11 +1,8 @@
 import React from 'react';
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import {Form} from "antd";
-import Radio from "antd/es/radio/radio";
+import {Form, Radio} from "antd";
 
 const UserEditRoles =({user}) => {
-
-
 
     return (
         <Form.Item name="role"  initialValue={user.roleName}
@@ -34,9 +31,3 @@ const UserEditRoles =({user}) => {
     )
 }
 export default UserEditRoles;
-
-
-// <>
-
-// </>
-// )
