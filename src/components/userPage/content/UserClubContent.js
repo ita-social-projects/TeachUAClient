@@ -1,21 +1,29 @@
-import React, {useContext, useState} from "react";
-import ClubList from "../../clubList/ClubList";
-import {SearchContext} from "../../../context/SearchContext";
+import React, {useEffect, useState} from "react";
 import {getClubsByUserId} from "../../../service/ClubService";
 
 
-const UserClubContent  = ({user,id}) => {
+const UserClubContent = ({user, id}) => {
+    const [clubs, setClubs] = useState({
+        content: [],
+        pageable: {},
+        size: 0,
+        totalElements: 0
+    });
 
-    const {clubs, setClubs} = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
+    useEffect(() => {
 
-    // getClubsByUserId(id,user).then(response => {
-    //     this.setState({club: response});
-    // });
+        getClubsByUserId(id, user).then(response => {
+            setClubs(response)
+        });
+
+
+    }, [])
+
 
     return (
         <div className="user-club-content">
-                <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
+            {/*<ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>*/}
         </div>
     )
 };

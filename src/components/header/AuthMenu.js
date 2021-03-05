@@ -15,7 +15,7 @@ const AuthMenu = () => {
             <Menu.Item> <Registration/></Menu.Item>
             <Menu.Item> <Login/></Menu.Item>
             <Menu.Item> <AddClubModal/></Menu.Item>
-            <Menu.Item> <Link to={"/user"}>Мій Профіль </Link></Menu.Item>
+            <Menu.Item> <Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
             <Menu.Item danger>Вийти</Menu.Item>
         </Menu>
     );

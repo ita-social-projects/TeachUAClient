@@ -4,9 +4,7 @@ import {Form, Radio} from "antd";
 
 const RegistrationRoles = ({setDisabledButton}) => {
     return (
-        <Form.Item name="role"
-        >
-
+        <Form.Item name="role">
             <Radio.Group className="button-container"
                          onChange={() => setDisabledButton(false)}
                          optionType="button"

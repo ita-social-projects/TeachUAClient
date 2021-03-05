@@ -3,20 +3,20 @@ import {Form, message, Modal} from "antd";
 import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
 import {signIn} from "../../service/UserService";
+import './css/Login.less';
 
 
 const Login = () => {
     const [loginVisible, setLoginVisible] = useState(false);
-    const [disabledButton, setDisabledButton] = useState(true);
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
-            if(response.status) {
+            if (response.status) {
                 message.error(response.message);
-            }
-            else {
+            } else {
                 console.log(response)
-                message.success("Ви успішно залогувался!");
+                message.success("Ви успішно залогувалися!");
+                localStorage.setItem("id", response.id);
                 setLoginVisible(false);
             }
         });
@@ -28,7 +28,7 @@ const Login = () => {
                 Увійти
             </div>
             <Modal
-                className="modal-registration"
+                className="modal-login"
                 centered
                 width={520}
                 visible={loginVisible}
@@ -36,10 +36,10 @@ const Login = () => {
                 onCancel={() => setLoginVisible(false)}
                 footer={null}
             >
-                <div className="registration-header">
+                <div className="login-header">
                     Вхід
                 </div>
-                <div className="registration-content">
+                <div className="login-content">
                     <Form
                         name="basic"
                         requiredMark={false}
