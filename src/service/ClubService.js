@@ -1,9 +1,9 @@
-import axios from "axios";
-import {BASE_URL} from "./config/ApiConfig";
+import fetchRequest from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
 
 export const addClub = async (data) => {
 
-    return await axios.post(BASE_URL + "/api/club", {
+    return await fetchRequest.post(BASE_URL + "/api/club", {
         categoriesName: data.categories,
         name: data.name,
         ageFrom: data.ageFrom,
@@ -24,7 +24,7 @@ export const addClub = async (data) => {
 };
 
 export const getClubById = async (id) => {
-    return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data
     }).catch((error) => {
         return error.response.data
@@ -32,13 +32,13 @@ export const getClubById = async (id) => {
 };
 
 export const getClubsByUserId = async (id) => {
-    return await axios.get(BASE_URL + "/api/clubs/" + id + "?size=3").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/" + id + "?size=3").then((response) => {
         return response.data
     });
 };
 
 export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName) => {
-    return await axios.get(BASE_URL + "/api/clubs/search/similar", {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/search/similar", {
         params: {
             id: id,
             categoriesName: categoriesName,
@@ -50,7 +50,7 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
 };
 
 export const getClubsByParameters = async (parameters) => {
-    return await axios.get(BASE_URL + "/api/clubs/search", {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/search", {
         params: parameters,
     }).then((response) => {
         return response.data
