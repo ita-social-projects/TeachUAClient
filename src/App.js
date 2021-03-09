@@ -11,6 +11,7 @@ import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
 import EditorComponent from "./components/editor/EditorComponent";
 import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandler";
+import serviceInUkr from "./components/serviceInUkr/serviceInUkr";
 
 const { Sider, Content } = Layout;
 
@@ -40,6 +41,7 @@ function App() {
                                 <Route path="/club/:id" exact component={ClubPage} />
                                 <Route path="/clubs" exact component={ClubListComponent} />
                                 <Route path="/user/:id" exact component={UserPage} />
+                                <Route path="/service" exact component={serviceInUkr} />
                                 <Route path="/" component={MainComponent} />
                             </Switch>
                         </Content>
