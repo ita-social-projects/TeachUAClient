@@ -7,7 +7,7 @@ export const getFeedbackListByClubId = async (id) => {
     });
 };
 
-export const createFeedback = async (text, rate, isComplaint, userId, clubId) => {
+export const createFeedback = async (text, rate, userId, clubId) => {
     return await axios.post(BASE_URL + "/api/feedback", {
             text: text,
             rate: rate,
