@@ -6,7 +6,6 @@ export const getFeedbackListByClubId = async (id) => {
         return response.data
     });
 };
-
 export const createFeedback = async (text, rate, userId, clubId) => {
     return await fetchRequest.post(BASE_URL + "/api/feedback", {
         text: text,

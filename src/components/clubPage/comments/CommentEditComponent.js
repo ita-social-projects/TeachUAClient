@@ -6,6 +6,7 @@ import TextArea from "antd/lib/input/TextArea";
 import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
 import {createFeedback} from "../../../service/FeedbackService";
+import {createComplaint} from "../../../service/ComplaintService";
 import {getUserById} from "../../../service/UserService";
 
 const {TabPane} = Tabs;
@@ -27,7 +28,6 @@ class CommentEditComponent extends React.Component {
     getData = () => {
 
        this.getUser().then((user)=>{
-           user.phone = "+380 (063) 000 00 00" // hardcoded user phone
            this.setState({user: user});
         })
     };
@@ -37,9 +37,8 @@ class CommentEditComponent extends React.Component {
     }
 
     componentDidUpdate(){
-        if(this.state.user.id == undefined && this.props.visible) {
+        if(this.state.user.id === undefined && this.props.visible) {
             this.getData();
-            console.log("empty")
         }
     };
 
@@ -49,22 +48,33 @@ class CommentEditComponent extends React.Component {
         this.form.resetFields();
     }
 
-    onFinish(values) {
-        createFeedback(
-            this.state.commentText,
-            this.state.rate,
-            this.state.isComplaint,
-            this.state.user.id,
-            this.props.club.id).then((feedback) => {
-                this.closeEditComponent();
-                this.props.onFeedbackAdded(feedback);
-        });
+    onFinish() {
+        if(this.state.isComplaint){
+            createComplaint(
+                this.state.commentText,
+                this.state.user.id,
+                this.props.club.id).then(() => {
+                    this.closeEditComponent();
+                    this.state.isComplaint = false;
+            });
+        }
+        else {
+            createFeedback(
+                this.state.commentText,
+                this.state.rate,
+                this.state.user.id,
+                this.props.club.id).then((feedback) => {
+                    this.closeEditComponent();
+                    this.props.onFeedbackAdded(feedback);
+                    this.state.isComplaint = false;
+            });
+        }
 
     };
 
     hasNoDataEntered(){
-        const hasNoRate = (this.state.rate == undefined || this.state.rate === 0) && !this.state.isComplaint;
-        const hasNoCommentText = this.state.commentText == undefined || this.state.commentText === "";
+        const hasNoRate = (this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint;
+        const hasNoCommentText = this.state.commentText === undefined || this.state.commentText === "";
         return hasNoRate || hasNoCommentText;
     }
 
@@ -86,10 +96,11 @@ class CommentEditComponent extends React.Component {
 
                     <span className="comment-type-tabs">
                         <Tabs
-                            defaultActiveKey="1"
+                            defaultActiveKey={this.state.isComplaint? "2": "1"}
+                            activeKey={this.state.isComplaint? "2": "1"}
                             onChange={(active) => this.setState({isComplaint: active == 2})}
                         >
-                            <TabPane tab="Коментар" key="1"></TabPane>
+                            <TabPane tab="Коментар" key="1"> </TabPane>
                             <TabPane tab="Скарга" key="2">
                                 <div className="complaint-note">
                                     Скарга не відображається у коментарях і одразу потрапляє до відповідальної особи.
@@ -101,7 +112,7 @@ class CommentEditComponent extends React.Component {
                     <Form
                         form={this.form}
                         name="comment-edit"
-                        onFinish={(v)=>this.onFinish()}
+                        onFinish={()=>this.onFinish()}
                         ref={form => this.form = form}
                         onValuesChange={(changed, all) => this.setState(all)}
 
@@ -160,7 +171,7 @@ class CommentEditComponent extends React.Component {
                                  }
 
                                  visible={this.state.tooltipVisible}
-                                 title={(this.state.rate == undefined || this.state.rate === 0) && !this.state.isComplaint? "поставте оцінку": "напишіть опис"}
+                                 title={(this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint? "поставте оцінку": "напишіть опис"}
                         >
                             <Form.Item>
                                 <Button
