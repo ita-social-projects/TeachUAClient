@@ -1,6 +1,6 @@
-import {convertToRaw, convertFromRaw} from "draft-js";
-import {stateToHTML} from "draft-js-export-html";
-import {convertToHtmlOptions} from "./BlockSetting";
+import { convertToRaw, convertFromRaw } from "draft-js";
+import { stateToHTML } from "draft-js-export-html";
+import { convertToHtmlOptions } from "./BlockSetting";
 
 export const saveContent = (content) => {
     return JSON.stringify(convertToRaw(content));
@@ -27,7 +27,7 @@ export const getShortContent = (content) => {
             shortDescription += " " + block.text
         });
 
-    if(shortDescription === ' ') {
+    if (shortDescription === ' ') {
         return "У цього гуртка немає опису...";
     }
 

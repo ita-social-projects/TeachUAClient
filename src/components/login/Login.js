@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Form, message, Modal} from "antd";
+import React, { useState } from 'react';
+import { Form, message, Modal } from "antd";
 import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
-import {signIn} from "../../service/UserService";
+import { signIn } from "../../service/UserService";
 import './css/Login.less';
 
 
@@ -17,6 +17,7 @@ const Login = () => {
                 console.log(response)
                 message.success("Ви успішно залогувалися!");
                 localStorage.setItem("id", response.id);
+                localStorage.setItem("accessToken", response.accessToken);
                 setLoginVisible(false);
             }
         });
@@ -45,8 +46,8 @@ const Login = () => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <LoginSocial/>
-                        <LoginInput/>
+                        <LoginSocial />
+                        <LoginInput />
                     </Form>
                 </div>
             </Modal>

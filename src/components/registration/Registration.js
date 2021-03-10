@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
-import {Button, Form, message, Modal, Switch} from 'antd';
+import React, { useState } from 'react';
+import { Button, Form, message, Modal, Switch } from 'antd';
 import './сss/Registration.less';
 import RegistrationRoles from "./RegistrationRoles";
 import RegistrationSocial from "./RegistrationSocial";
 import RegistrationInput from "./RegistrationInput";
-import {signUp} from "../../service/UserService";
+import { signUp } from "../../service/UserService";
 
 
 const Registration = () => {
     const [visible, setVisible] = useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
+    const [role, setRole] = useState(null);
 
     const onFinish = (values) => {
+        console.log(values);
         signUp(values).then((response) => {
-            if(response.status) {
+            if (response.status) {
                 message.error(response.message);
             }
             else {
@@ -48,9 +50,9 @@ const Registration = () => {
                         onFinish={onFinish}
                     >
                         <RegistrationRoles setDisabledButton={setDisabledButton}
-                                           disabledButton={disabledButton}/>
-                        <RegistrationSocial/>
-                        <RegistrationInput disabledButton={disabledButton}/>
+                            disabledButton={disabledButton} setRole={setRole} />
+                        <RegistrationSocial role={role} />
+                        <RegistrationInput disabledButton={disabledButton} />
                     </Form>
                 </div>
             </Modal>
