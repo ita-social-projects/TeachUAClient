@@ -9,7 +9,8 @@ import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
-import EditorComponent from "./components/editor/EditorComponent";
+import CityTable from "./components/admin/city/CityTable";
+import DistrictTable from "./components/admin/district/DistrictTable";
 
 const {Sider, Content} = Layout;
 
@@ -31,10 +32,10 @@ function App() {
                 <SearchContext.Provider value={clubProvider}>
                     <HeaderComponent/>
                     <Layout>
-                        {false && (<Sider>Sider</Sider>)}
                         <Content className="global-content">
                             <Switch>
-                                <Route path="/test" exact component={EditorComponent}/>
+                                <Route path="/admin/districts" exact component={DistrictTable}/>
+                                <Route path="/admin/cities" exact component={CityTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>

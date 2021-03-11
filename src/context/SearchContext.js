@@ -8,7 +8,8 @@ export const searchParameters = {
     districtName: "",
     stationName: "",
     categoryName: "",
-    page: 0
+    page: 0,
+    isAdvancedSearch: false
 };
 
 export const mapSearchParameters = {

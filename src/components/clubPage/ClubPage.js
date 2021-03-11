@@ -50,7 +50,7 @@ class ClubPage extends React.Component {
                 subTitle="Клуб який ви намагаєтесь відкрити не існує"
             /> :
             !this.state.club.categories ? <Loader/> : (
-                <Layout>
+                <Layout className="global-padding">
                     <PageHeader club={this.state.club}/>
                     <Layout className="club-page" style={{padding: 40, background: 'white'}}>
                         <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>

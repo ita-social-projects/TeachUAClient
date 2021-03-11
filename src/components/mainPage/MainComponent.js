@@ -10,7 +10,7 @@ import MainCategories from "./MainCategories";
 import AboutNews from "./MainNews";
 const MainComponent = () => {
     return (
-        <Layout>
+        <Layout className="global-padding">
             <AboutHeader/>
             <MainCarousel items={items(process.env.PUBLIC_URL)}/>
             <MainDescription/>

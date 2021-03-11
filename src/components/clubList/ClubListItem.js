@@ -8,14 +8,17 @@ import CategoryLogo from "../CategoryLogo";
 import {convertFromJson, convertToHtml, getShortContent} from "../editor/EditorConverter";
 
 
-const ClubCardItem = ({club}) => {
+const ClubListItem = ({club}) => {
     return (
         <Card className="card">
             <div className="title">
                 <CategoryLogo category={club.categories[0]}/>
                 <div className="name">{club.name}</div>
             </div>
-            <Tags categories={club.categories}/>
+            <div className="club-item-tags">
+                <Tags categories={club.categories.filter((_, idx) => idx < 3)}/>
+                <span>{club.categories.length > 3 && `і ще ${club.categories.length - 3}...`}</span>
+            </div>
             {club.center !== null ?
                 <div className="with-center">
                     <div className="center">
@@ -28,7 +31,7 @@ const ClubCardItem = ({club}) => {
                     <div className="description">{getShortContent(club.description)}</div>
                 </div> :
                 <p className="description">{getShortContent(club.description)}</p>}
-            <Rate className="rating" disabled value={club.rating} />
+            <Rate className="rating" disabled value={club.rating}/>
             <div className="address">
                 <EnvironmentFilled
                     className="address-icon"/>
@@ -40,10 +43,9 @@ const ClubCardItem = ({club}) => {
         </Card>
     )
 };
-ClubCardItem.propTypes = {
+ClubListItem.propTypes = {
     club: PropTypes.object.isRequired
 };
 
 
-
-export default ClubCardItem;
+export default ClubListItem;

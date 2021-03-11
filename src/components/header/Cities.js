@@ -20,9 +20,11 @@ class Cities extends React.Component {
     }
 
     onCityChange = (value) => {
-        searchParameters.cityName = value.key;
-        mapSearchParameters.cityName=value.key;
-        getClubsByParameters(searchParameters).then(response => this.props.setClubs(response));
+        if(!searchParameters.isAdvancedSearch) {
+            searchParameters.cityName = value.key;
+            mapSearchParameters.cityName = value.key;
+            getClubsByParameters(searchParameters).then(response => this.props.setClubs(response));
+        }
     };
 
     render() {
@@ -33,8 +35,12 @@ class Cities extends React.Component {
         );
 
         return (
-            <Dropdown overlay={cityList} className="city" placement="bottomCenter" arrow>
-                <div>
+            <Dropdown overlay={cityList}
+                      className="city"
+                      placement="bottomCenter"
+                      disabled={searchParameters.isAdvancedSearch}
+                      arrow>
+                <div style={{opacity: searchParameters.isAdvancedSearch ? 0.5: 1}}>
                     <EnvironmentFilled
                         className="icon"/> {searchParameters.cityName}
                     <CaretDownFilled/>

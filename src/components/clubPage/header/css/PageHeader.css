@@ -29,7 +29,7 @@
 
 .page-header .tags {
     margin-top: 16px;
-    max-width: 420px;
+    width: 100%;
 }
 
 .page-header .name-box {
@@ -88,6 +88,10 @@
 }
 
 @media (max-width: 550px) {
+    .page-header .tags {
+        margin-top: 5px;
+    }
+
     .page-header .apply-button {
         width: 100%;
     }
