@@ -1,14 +1,14 @@
-import axios from "axios";
-import {BASE_URL} from "./config/ApiConfig";
+import fetchRequest from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
 
 export const getUserById = async (id) => {
-    return await axios.get(BASE_URL + "/api/user/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
     });
 };
 
 export const signUp = async (data) => {
-    return await axios.post(BASE_URL + "/api/signup", {
+    return await fetchRequest.post(BASE_URL + "/api/signup", {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -24,7 +24,7 @@ export const signUp = async (data) => {
 };
 
 export const signIn = async (data) => {
-    return await axios.post(BASE_URL + "/api/signin", {
+    return await fetchRequest.post(BASE_URL + "/api/signin", {
         email: data.email,
         password: data.password
     }).then((response) => {
@@ -36,7 +36,7 @@ export const signIn = async (data) => {
 
 export const updateUser = async (data) => {
     console.log(data)
-    return await axios.put(BASE_URL + "/api/user/" + data.id, {
+    return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,

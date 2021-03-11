@@ -1,9 +1,9 @@
-import axios from "axios";
-import {BASE_URL} from "./config/ApiConfig";
+import fetchRequest from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
 
 
 export const getPossibleResults = async (parameters) => {
-    return await axios.get(BASE_URL + "/api/search", {
+    return await fetchRequest.get(BASE_URL + "/api/search", {
         params: {
             text: "",
             cityName: parameters.cityName
@@ -14,7 +14,7 @@ export const getPossibleResults = async (parameters) => {
 };
 
 export const getPossibleResultsByText = async (text, parameters) => {
-    return await axios.get(BASE_URL + "/api/search", {
+    return await fetchRequest.get(BASE_URL + "/api/search", {
         params: {
             text: text,
             cityName: parameters.cityName

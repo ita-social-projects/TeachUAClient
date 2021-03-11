@@ -3,16 +3,15 @@ import React, {useState, useEffect} from "react";
 import MaskIcon from "../../MaskIcon";
 import {getAllContacts} from "../../../service/ContactService";
 
-const SocialMedia = () => {
+const SocialMedia = ({label}) => {
     const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
         getAllContacts().then(response => setContacts(response));
-        console.log(contacts)
     }, []);
 
     return (<div className="social-media">
-            <span className="label">Зв’яжіться з гуртком</span>
+            <span className="label">{label}</span>
             <div className="links">
                 {contacts.map(contact =>
                     <div className="contact">
