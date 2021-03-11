@@ -6,7 +6,6 @@
 }
 
 .layout {
-  background: rgb(245, 213, 202);
   background: linear-gradient(to bottom, rgba(245, 213, 202, 1) 0%, rgba(251, 244, 228, 1) 65%, rgba(251, 247, 235, 1) 100%);
   //font-family: 'Open Sans', sans-serif;
 }
@@ -81,6 +80,7 @@
 
 .show-map-button {
   margin-left: 30px;
+  border-radius: 6px;
 }
 
 .header .city {
@@ -109,7 +109,7 @@
 .header .nav-menu .ant-menu-submenu,
 .header .nav-menu .ant-menu-submenu-active {
   margin: 0 20px 0 0;
-  border-bottom: none!important;
+  border-bottom: none !important;
 }
 
 .header .nav-menu .icon {
@@ -126,7 +126,6 @@
 
 .layout .global-content {
   z-index: 1;
-  padding: 20px 87px 20px 87px;
   min-height: 500px;
 }
 
@@ -157,7 +156,7 @@
   font-size: 18px;
   color: white;
   background: #FA8C16;
-  padding: 3px;
+  padding: 2px;
   border-radius: 4px;
   margin-left: 25px;
   cursor: pointer;
@@ -187,36 +186,9 @@
   color: white;
 }
 
-.clubs .card {
-  height: 418px;
-  width: 296px;
-  color: black;
-  box-shadow: 0px 100px 80px rgba(1, 16, 44, 0.03), 0px 12.5216px 10.0172px rgba(1, 16, 44, 0.035);
-  border-radius: 16px;
-  padding: 24px;
-  cursor: pointer;
-  margin: 0 5px 28px 5px;
-}
-
-.clubs .card .ant-card-head-title {
-  white-space: normal;
-}
-
-.clubs .cards .ant-space-item {
-  margin-right: 0;
-  padding-bottom: 0;
-}
-
-.clubs .card .title {
-  display: flex;
-  align-items: center;
-  line-height: 22px;
-  width: 100%;
-  height: 44px;
-}
-
 .tags {
   display: flex;
+  width: 170px;
   flex-wrap: wrap-reverse;
 }
 
@@ -365,69 +337,10 @@
   margin-left: 4px;
 }
 
-.cards {
-  min-height: 83vh;
-  align-content: flex-start;
-  justify-content: center;
-  max-width: 1268px;
-  min-width: 628px;
-}
 
-.clubs {
-  align-items: center;
+.global-padding {
+  padding: 20px 87px 20px 87px;
 }
-
-.cards:last-child {
-  margin-bottom: 0;
-}
-
-.cards .empty {
-  background: none;
-  box-shadow: none;
-  border: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.cards .ant-card-body {
-  padding: 0;
-  width: 248px;
-  height: 370px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-}
-
-.cards .empty .ant-card-body {
-  padding: 0;
-}
-
-.cards .ant-card-head {
-  border-bottom: none;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-}
-
-.pagination .ant-pagination-item-link:hover {
-  color: #000;
-}
-
-.pagination .ant-pagination-item:hover {
-  text-decoration: none;
-  background-color: @primary-hover-color;
-}
-
-.pagination .ant-pagination-item:focus a,
-.ant-pagination-item-active {
-  color: black;
-  background-color: @primary-hover-color;
-  border-color: @primary-hover-color;
-}
-
 
 .full-width {
   width: 100%;
@@ -456,9 +369,63 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 96px;
 }
 
+.popConfirm-cancel-button:hover {
+  background: #FE7729;
+}
+
+.popConfirm-ok-button {
+  background: #0050B3;
+  box-shadow: none;
+}
+
+.popConfirm-ok-button:hover {
+  background: #1890FF;
+}
+
+.table .table-action {
+  color: #0050B3;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.table .ant-pagination-item a {
+  color: black;
+  background: white;
+}
+
+.table .ant-pagination-item-active a,
+.table .ant-pagination-item a:hover {
+  color: white;
+  background: #FE7729;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #0050B3;
+}
+
+.ant-dropdown-menu-item-selected {
+  background: #fafafa;
+  color: black;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-link {
+  color: #2E69C9;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-primary{
+  background: #FA8C16;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-primary:hover{
+  background: #FFA940;
+}
+
+.table-header {
+  padding: 12px 8px;
+  background: #f0f0f0;
+}
 
 @keyframes loader-animation {
   0% {
@@ -500,7 +467,7 @@
     justify-content: space-around;
   }
 
-  .layout .global-content {
+  .global-padding {
     padding: 0 87px 20px 87px;
   }
 
@@ -508,8 +475,9 @@
     justify-content: space-between;
   }
 }
+
 @media (max-width: 700px) {
-  .layout .global-content,
+  .global-padding,
   .layout .header {
     padding: 0 10px 0 10px;
   }
@@ -521,7 +489,7 @@
 
 
 @media (max-width: 625px) {
-  .cards {
+  .content-clubs {
     min-width: 0;
   }
 }
@@ -549,6 +517,6 @@
 
   .lower-header-box .search,
   .lower-header-box .search .ant-select {
-    width: 100%!important;
+    width: 100% !important;
   }
 }
