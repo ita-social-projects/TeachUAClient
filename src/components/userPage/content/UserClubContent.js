@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {getClubsByUserId} from "../../../service/ClubService";
+import React, {useState} from "react";
+import UserClubList from "./UserClubList";
 
 
-const UserClubContent = ({user, id}) => {
+const UserClubContent = () => {
     const [clubs, setClubs] = useState({
         content: [],
         pageable: {},
@@ -11,19 +11,10 @@ const UserClubContent = ({user, id}) => {
     });
 
     const [loading, setLoading] = useState(false);
-    useEffect(() => {
-
-        getClubsByUserId(id, user).then(response => {
-            setClubs(response)
-        });
-
-
-    }, [])
-
 
     return (
         <div className="user-club-content">
-            {/*<ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>*/}
+            <UserClubList load={loading} setLoad={setLoading} clubs={clubs} setClubs={setClubs}/>
         </div>
     )
 };

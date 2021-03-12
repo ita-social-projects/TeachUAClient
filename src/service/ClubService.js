@@ -31,8 +31,8 @@ export const getClubById = async (id) => {
     });
 };
 
-export const getClubsByUserId = async (id) => {
-    return await axios.get(BASE_URL + "/api/clubs/" + id + "?size=3").then((response) => {
+export const getClubsByUserId = async (id, page) => {
+    return await axios.get(BASE_URL + "/api/clubs/" + id +"?page=" +page).then((response) => {
         return response.data
     });
 };
