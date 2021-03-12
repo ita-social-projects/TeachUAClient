@@ -8,14 +8,14 @@ import ClubListHeader from "./ClubListHeader";
 
 
 const ClubListComponent = () => {
-    const {clubs, setClubs} = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
     const [mapVisible, setMapVisible] = useState(false);
+    const [advancedSearch, setAdvancedSearch] = useState(false);
 
     return (
         <Layout>
-            <ClubListHeader/>
-            <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs}/>
+            <ClubListHeader setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+            <ClubList loading={loading} load={setLoading} advancedSearch={advancedSearch}/>
             <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
         </Layout>)
 };

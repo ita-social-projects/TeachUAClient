@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Select} from "antd";
-import {mapSearchParameters} from "../../context/SearchContext";
-import {getClubsByParameters} from "../../service/ClubService";
-import {getAllCategories} from "../../service/CategoryService";
+import React, { useEffect, useState } from "react";
+import { Select } from "antd";
+import { mapSearchParameters } from "../../context/SearchContext";
+import { getClubsByParameters } from "../../service/ClubService";
+import { getAllCategories } from "../../service/CategoryService";
 import './css/Categories.css';
 
 
-const Categories = ({setMapClubs}) => {
-    const {Option} = Select;
+const Categories = ({ setMapClubs }) => {
+    const { Option } = Select;
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -25,10 +25,10 @@ const Categories = ({setMapClubs}) => {
             className="selectCity"
             onChange={onCityChange}
             showSearch
-            placeholder="Всі категорії"
-            style={{borderRadius: '15px'}}
+            placeholder={mapSearchParameters.categoryName == "" ? "Всі категорії" : mapSearchParameters.categoryName}
+            style={{ borderRadius: '15px' }}
         >
-            <Option value="">всі категорії</Option>
+            <Option value="">Всі категорії</Option>
             {categories.map(category => (<Option value={category.name}>{category.name}</Option>))}
 
         </Select>

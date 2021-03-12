@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ClubItem from "./ClubItem";
-import EmptySearch from "../clubList/EmptySearch";
+import EmptySearch from "../EmptySearch";
 import './css/MapClubList.css'
-import {getClubsByParameters} from "../../service/ClubService";
-import {mapSearchParameters} from "../../context/SearchContext";
-import {getAllCities} from "../../service/CityService";
+import { getClubsByParameters } from "../../service/ClubService";
+import { mapSearchParameters } from "../../context/SearchContext";
+import { getAllCities } from "../../service/CityService";
 
 
-const MapClubList = ({mapClubs, setMapClubs, setZoom, setSelected, setCenter}) => {
-
+const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setCenter }) => {
 
     useEffect(() => {
         getClubsByParameters(mapSearchParameters).then(response => {
@@ -22,9 +21,9 @@ const MapClubList = ({mapClubs, setMapClubs, setZoom, setSelected, setCenter}) =
                     lng: city.longitude
                 }));
         });
-    }, []);
+    }, [mapSearchParameters.cityName, mapSearchParameters.categoryName]);
 
-    return mapClubs.content.length === 0 ? <EmptySearch/> : (
+    return mapClubs.content.length === 0 ? <EmptySearch /> : (
         <div className="clubList">
             {mapClubs.content.map((mapClub, index) => <ClubItem
                 mapClub={mapClub}

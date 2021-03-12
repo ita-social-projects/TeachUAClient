@@ -68,8 +68,7 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
                             }
 
                             setCityName(value);
-                        }
-                        }
+                        }}
                         optionFilterProp="children">
                         {cities.map(city => <Option
                             value={city.name}>{city.name}</Option>)}

@@ -1,8 +1,9 @@
 import axios from "axios";
 import {BASE_URL} from "./config/ApiConfig";
+import {replaceCommaToSemicolon} from "../util/CategoryUtil";
+import {searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
-
     return await axios.post(BASE_URL + "/api/club", {
         categoriesName: data.categories,
         name: data.name,
@@ -41,7 +42,7 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     return await axios.get(BASE_URL + "/api/clubs/search/similar", {
         params: {
             id: id,
-            categoriesName: categoriesName,
+            categoriesName: replaceCommaToSemicolon(categoriesName),
             cityName: cityName
         },
     }).then((response) => {
@@ -49,9 +50,32 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     });
 };
 
-export const getClubsByParameters = async (parameters) => {
+export const getClubsByAdvancedSearch = async (parameters, page) => {
+    return await axios.get(BASE_URL + "/api/clubs/search/advanced", {
+        params: {
+            ageFrom: parameters.ageFrom,
+            ageTo: parameters.ageTo,
+            cityName: parameters.cityName ? parameters.cityName : searchParameters.cityName,
+            districtName: parameters.districtName,
+            stationName: parameters.stationName,
+            categoriesName: parameters.categoriesName && replaceCommaToSemicolon(parameters.categoriesName),
+            isCenter: parameters.isCenter,
+            page: page,
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
+
+export const getClubsByParameters = async (parameters, page) => {
     return await axios.get(BASE_URL + "/api/clubs/search", {
-        params: parameters,
+        params: {
+            clubName: parameters.clubName,
+            cityName: parameters.cityName,
+            categoryName: parameters.categoryName,
+            page: page,
+        },
     }).then((response) => {
         return response.data
     });

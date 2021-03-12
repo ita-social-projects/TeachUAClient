@@ -1,6 +1,6 @@
 import {Empty} from 'antd';
 import React from "react";
-import './css/EmptySearch.less';
+import './css/EmptySearch.css';
 
 const EmptySearch = () => {
     return (
