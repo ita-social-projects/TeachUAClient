@@ -28,24 +28,19 @@ const CityTable = () => {
                 sorter: (a, b) => a.name.length - b.name.length,
             },
             {
-                title: "Координати",
-                children: [
-                    {
-                        title: 'Довгота',
-                        dataIndex: 'longitude',
-                        render: (longitude) => Number.parseFloat(longitude).toFixed(4),
-                        width: '20%',
-                        editable: true
-                    },
-                    {
-                        title: 'Широта',
-                        dataIndex: 'latitude',
-                        render: (latitude) => Number.parseFloat(latitude).toFixed(4),
-                        width: '20%',
-                        editable: true,
-                    }
-                ]
+                title: 'Довгота',
+                dataIndex: 'longitude',
+                render: (longitude) => Number.parseFloat(longitude).toFixed(4),
+                width: '20%',
+                editable: true
             },
+            {
+                title: 'Широта',
+                dataIndex: 'latitude',
+                render: (latitude) => Number.parseFloat(latitude).toFixed(4),
+                width: '20%',
+                editable: true,
+            }
         ];
 
         const actions = (record) => [
