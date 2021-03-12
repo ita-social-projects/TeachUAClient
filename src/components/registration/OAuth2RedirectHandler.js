@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import { saveToken, saveUserId } from '../../service/StorageService';
+import { message } from "antd";
 
 class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -11,21 +13,29 @@ class OAuth2RedirectHandler extends Component {
     render() {
         { console.log(" SAVE TOKEN _______________________________________"); }
         const token = this.getUrlParameter('token');
+        const userId = this.getUrlParameter('id');
         const error = this.getUrlParameter('error');
-        localStorage.setItem("accessToken", token);
+        saveToken(token);
+        saveUserId(userId);
         if (token) {
-            return <Redirect to={{
-                pathname: "/",
-                state: { from: this.props.location }
-            }} />;
+            return (<div>
+                {message.success("Ви успішно залогувалися!")}
+                <Redirect to={{
+                    pathname: `/user/${userId}`,
+                    state: { from: this.props.location }
+                }} />
+            </div>)
         } else {
-            return <Redirect to={{
-                pathname: "/dev/login",
-                state: {
-                    from: this.props.location,
-                    error: error
-                }
-            }} />;
+            return (<div>
+                <Redirect to={{
+                    pathname: "/",
+                    state: {
+                        from: this.props.location,
+                        error: error
+                    }
+                }} />
+                {message.success(error)}
+            </div>)
         }
     }
 }

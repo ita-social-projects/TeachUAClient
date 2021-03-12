@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Select} from "antd";
-import {getAllCities} from "../../service/CityService";
-import {mapSearchParameters} from "../../context/SearchContext";
-import {getClubsByParameters} from "../../service/ClubService";
+import React, { useEffect, useState } from "react";
+import { Select } from "antd";
+import { getAllCities } from "../../service/CityService";
+import { mapSearchParameters } from "../../context/SearchContext";
+import { getClubsByParameters } from "../../service/ClubService";
 import './css/Cities.css';
 
 
-const Cities = ({setMapClubs, setZoom, setCenter}) => {
-    const {Option} = Select;
+const Cities = ({ setMapClubs, setZoom, setCenter }) => {
+    const { Option } = Select;
     const [cities, setCities] = useState([]);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Cities = ({setMapClubs, setZoom, setCenter}) => {
             }}
             showSearch
             placeholder={mapSearchParameters.cityName}
-            style={{borderRadius: '30px'}}
+            style={{ borderRadius: '30px' }}
         >
             {cities.map(city => (<Option value={city.name}>{city.name}</Option>))}
         </Select>
