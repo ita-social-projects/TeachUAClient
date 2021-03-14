@@ -4,7 +4,7 @@ import { BASE_URL } from "./config/ApiConfig";
 export const addContactType = async (data) => {
     return await fetchRequest.post(BASE_URL + "/api/contact-type", {
         name: data.name,
-        urlLogo: data.urlLogo
+        urlLogo: data.urlLogo && data.urlLogo.file.response
     }).then((response) => {
         return response.data
     }).catch((error) => {

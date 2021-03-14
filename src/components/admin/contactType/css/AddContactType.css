@@ -1,32 +1,17 @@
 .add-contact-type {
     display: flex;
-}
-
-.add-contact-type .add-contact-type-content {
-    display: flex;
-    align-items: center;
-    width: 70%;
+    flex-wrap: wrap;
 }
 
 .add-contact-type .add-contact-type-input {
-    width: 30%;
-}
-
-.add-contact-type .add-contact-type-input .css-yk16xz-control {
-    border: 2px solid #FA8C16;
-    box-shadow: none;
-}
-
-.add-contact-type .add-contact-type-input .css-1pahdxg-control {
-    border: 2px solid #FFA940;
-    box-shadow: none;
+    width: 200px;
+    margin: 0 5px 0 5px;
 }
 
 .add-contact-type .add-contact-type-button {
     background: #FA8C16;
     color: #fff;
     margin-left: 10px;
-    height: 38px;
 }
 
 .add-contact-type .add-contact-type-button:hover {
