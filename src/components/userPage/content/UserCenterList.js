@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router";
 import {getCentersByUserId} from "../../../service/CenterService";
 import Loader from "../../Loader";
-import EmptySearch from "../../clubList/EmptySearch";
+import EmptySearch from "../../EmptySearch";
 import {Layout, Pagination, Space} from "antd";
 import UserCenterCardItem from "./UserCenterCardItem";
 import './css/UserCenter.less';
