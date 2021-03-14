@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input} from 'antd';
 import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
 const RegistrationInput = ({disabledButton}) => {
@@ -13,7 +13,12 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                           }]}>
+                               message: 'Поле необхідне для введення',
+                           },
+                               {
+                                   pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23})$/,
+                                   message: 'Невірний формат прізвища',
+                               }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваше прізвище"/>
                 </Form.Item>
@@ -21,7 +26,14 @@ const RegistrationInput = ({disabledButton}) => {
                            className="registration-input"
                            label="Ім'я"
                            hasFeedback
-                           rules={[{required: true}]}>
+                           rules={[{
+                               required: true,
+                               message: 'Поле необхідне для введення',
+                           },
+                               {
+                                   pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23}|[А-Я,І][а-я]{1,50}\-[А-Я,І][а-я,і]{1,50})$/,
+                                   message: 'Невірний формат імені',
+                               }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваше ім'я"/>
                 </Form.Item>
@@ -32,10 +44,14 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                           }]}>
+                               message: 'Поле необхідне для введення'
+                           },
+                               {
+                                   pattern: /^\+?[3]?[8]?[0][-\(]?\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$/,
+                                   message: 'Телефон введено невірно'
+                               }]}>
                     <Input className="registration-box"
                            placeholder="+38(___) ___ __ __"
-                           pattern="^\+?3?8?(0\d{9})$"
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
@@ -44,8 +60,12 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               type: 'email'
-                           }]}>
+                               message: 'Поле необхідне для введення'
+                           },
+                               {
+                                   type: 'email',
+                                   message: 'Введено не валідний емейл',
+                               }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваш емейл"
                            suffix={<MailOutlined className="mail-icon"/>}/>
@@ -56,20 +76,54 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                           }]}>
+                               message: 'Поле необхідне для введення'
+                           },
+                               {
+                                   pattern: /^\S{6,}$/,
+                                   message: 'Невірний формат паролю'
+                               },
+                               {
+                                   min: 6,
+                                   message: 'Пароль повинен бути довшим ніж 6 символів'
+                               }
+                           ]}>
                     <Input.Password className="registration-box"
-                                    autoComplete="on"
                                     placeholder="Введіть ваш пароль"/>
+                </Form.Item>
+                <Form.Item name="confirm"
+                           className="registration-input"
+                           label="Пароль"
+                           hasFeedback
+                           rules={[
+                               {
+                                   required: true,
+                                   message: 'Поле необхідне для введення',
+
+                               },
+                               ({getFieldValue}) => ({
+                                   validator(_, value) {
+                                       if (!value || getFieldValue('password') === value) {
+                                           return Promise.resolve();
+                                       }
+
+                                       return Promise.reject(new Error('Паролі повинні відповідати один-одному'));
+                                   },
+                               }),
+                           ]}
+                >
+                    <Input.Password className="registration-box"
+                                    placeholder="Підтвердіть ваш пароль"/>
                 </Form.Item>
             </div>
             <Form.Item>
                 <div className="registration-footer">
-                        <Button className="registration-button"
-                                htmlType="submit"
-                                disabled={disabledButton}>
-                            Зареєструватися
-                        </Button>
+                    <Button className="registration-button"
+                            htmlType="submit"
+                            disabled={disabledButton}>
+                        Зареєструватися
+                    </Button>
                 </div>
+
             </Form.Item>
         </div>
     )
