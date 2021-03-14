@@ -1,4 +1,4 @@
-import {Select} from "antd";
+import {AutoComplete, Select} from "antd";
 import React, {createRef} from "react";
 import {clearSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
@@ -11,7 +11,6 @@ class Search extends React.Component {
     static contextType = SearchContext;
 
     state = {
-        searchText: '',
         possibleResults: {
             categories: [],
             clubs: []
@@ -19,26 +18,23 @@ class Search extends React.Component {
         loading: false
     };
 
-    onSearchChange = (value) => {
+    onSearchChange = (value, option) => {
         if (!searchParameters.isAdvancedSearch) {
-            let parameter = value.split("#")[0],
-                name = value.split("#")[1];
-
             clearSearchParameters();
 
-            switch (parameter) {
+            switch (option.type) {
                 case "category":
-                    searchParameters.categoryName = name;
+                    searchParameters.categoryName = value;
                     break;
                 case "club":
-                    searchParameters.clubName = name;
+                    searchParameters.clubName = value;
                     break;
                 default: {
                     if (this.state.possibleResults.categories.find(category =>
-                        category.name.toLowerCase().includes(name.toLowerCase()))) {
-                        searchParameters.categoryName = name;
+                        category.name.toLowerCase().includes(value.toLowerCase()))) {
+                        searchParameters.categoryName = value;
                     } else {
-                        searchParameters.clubName = name;
+                        searchParameters.clubName = value;
                     }
                 }
             }
@@ -58,7 +54,7 @@ class Search extends React.Component {
 
     onKeyDown = (event) => {
         if (event.key === 'Enter') {
-            this.onSearchChange("all#" + this.state.searchText);
+            event.target.defaultValue && this.onSearchChange(event.target.defaultValue, {type: "all"});
         }
     };
 
@@ -67,8 +63,6 @@ class Search extends React.Component {
         getPossibleResultsByText(val, searchParameters).then(response => {
             this.setState({possibleResults: response, loading: false})
         });
-
-        this.setState({searchText: val});
     };
 
     handleAdvancedSearch = () => {
@@ -81,14 +75,13 @@ class Search extends React.Component {
     render() {
         return (
             <div className="search">
-                <Select
-                    showSearch
+                <AutoComplete
+                    allowClear={true}
                     loading={this.state.loading}
                     disabled={searchParameters.isAdvancedSearch}
-                    onChange={this.onSearchChange}
+                    onSelect={this.onSearchChange}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
-                    autoClearSearchValue={false}
                     onInputKeyDown={this.onKeyDown}
                     style={{
                         width: 200,
@@ -100,7 +93,8 @@ class Search extends React.Component {
                     <OptGroup label="Категорії">
                         {
                             this.state.possibleResults.categories.map(result => (
-                                <Option value={"category" + "#" + result.name}
+                                <Option value={result.name}
+                                        type={"category"}
                                         key={"category" + "#" + result.id}>
                                     {result.name}
                                 </Option>)
@@ -110,14 +104,15 @@ class Search extends React.Component {
                     <OptGroup label="Гуртки">
                         {
                             this.state.possibleResults.clubs.map(result => (
-                                <Option value={"club" + "#" + result.name}
+                                <Option value={result.name}
+                                        type={"club"}
                                         key={"club" + "#" + result.id}>
                                     {result.name}
                                 </Option>)
                             )
                         }
                     </OptGroup>
-                </Select>
+                </AutoComplete>
 
                 <ControlOutlined className="advanced-icon"
                                  onClick={this.handleAdvancedSearch}/>
