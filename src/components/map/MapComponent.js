@@ -10,16 +10,13 @@ const { Sider } = Layout;
 
 
 const MapComponent = ({ visible, setVisible }) => {
-    const [mapClubs, setMapClubs] = useState({
-        content: [],
-    });
+    const [mapClubs, setMapClubs] = useState([]);
     const [selected, setSelected] = useState(null);
     const [zoom, setZoom] = useState(10);
     const [center, setCenter] = useState(null);
 
     const closeMap = () => {
         setVisible(false);
-        setZoom(10);
     };
 
     return (

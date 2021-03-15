@@ -50,6 +50,17 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     });
 };
 
+export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/search/simple", {
+        params: {
+            cityName: mapSearchParameters.cityName,
+            categoryName: mapSearchParameters.categoryName
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
 export const getClubsByAdvancedSearch = async (parameters, page) => {
     return await axios.get(BASE_URL + "/api/clubs/search/advanced", {
         params: {
@@ -67,7 +78,6 @@ export const getClubsByAdvancedSearch = async (parameters, page) => {
     });
 };
 
-
 export const getClubsByParameters = async (parameters, page) => {
     return await axios.get(BASE_URL + "/api/clubs/search", {
         params: {
@@ -76,6 +86,7 @@ export const getClubsByParameters = async (parameters, page) => {
             categoryName: parameters.categoryName,
             page: page,
         },
+
     }).then((response) => {
         return response.data
     });
