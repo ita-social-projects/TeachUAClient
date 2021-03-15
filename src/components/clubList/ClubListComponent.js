@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Layout } from 'antd';
-import { mapSearchParameters, SearchContext } from "../../context/SearchContext";
+import React, {useContext, useState} from 'react';
+import {Layout} from 'antd';
+import {SearchContext} from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import '../map/css/MapModal.css'
 import MapComponent from "../map/MapComponent";
@@ -9,15 +9,15 @@ import { getClubsByCategoryAndCity } from '../../service/ClubService';
 
 
 const ClubListComponent = () => {
-    const { clubs, setClubs } = useContext(SearchContext);
     const [loading, setLoading] = useState(false);
     const [mapVisible, setMapVisible] = useState(false);
+    const [advancedSearch, setAdvancedSearch] = useState(false);
 
     return (
         <Layout>
-            <ClubListHeader />
-            <ClubList loading={loading} load={setLoading} clubs={clubs} setClubs={setClubs} />
-            <MapComponent visible={mapVisible} setVisible={setMapVisible} />
+            <ClubListHeader setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+            <ClubList loading={loading} load={setLoading} advancedSearch={advancedSearch}/>
+            <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
         </Layout>)
 };
 

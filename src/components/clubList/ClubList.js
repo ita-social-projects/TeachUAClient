@@ -1,51 +1,70 @@
-import { Layout, Pagination, Space } from "antd";
-import { clearSearchParameters, searchParameters } from "../../context/SearchContext";
-import React from "react";
-import ClubCardItem from "./ClubCardItem";
-import { getClubsByParameters } from "../../service/ClubService";
-import EmptySearch from "./EmptySearch";
-import Loader from "../Loader";
+import {Form, Layout, Pagination, Space} from "antd";
+import {SearchContext, searchParameters} from "../../context/SearchContext";
+import React, {useContext, useEffect, useState} from "react";
+import ClubListItem from "./ClubListItem";
+import {getClubsByAdvancedSearch, getClubsByParameters} from "../../service/ClubService";
+import EmptySearch from "../EmptySearch";
 import PropTypes from "prop-types";
+import "./css/ClubList.less";
+import ClubListSider from "./ClubListSider";
 
-class ClubList extends React.Component {
-    getData = () => {
-        this.props.load(true);
-        getClubsByParameters(searchParameters).then(response => {
-            console.log(response)
-            this.props.setClubs(response);
-            this.props.load(false)
-        });
+const {Content} = Layout;
+
+const ClubList = ({loading, load, advancedSearch}) => {
+    const [searchForm] = Form.useForm();
+    const {clubs, setClubs} = useContext(SearchContext);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const getData = (page) => {
+        const checkUndefPage = page === undefined ? 0 : page;
+        const params = searchForm.getFieldsValue();
+
+        if (!advancedSearch) {
+            getClubsByParameters(searchParameters, checkUndefPage).then(response => {
+                setClubs(response);
+            });
+        } else {
+            getClubsByAdvancedSearch(params, checkUndefPage).then(response => {
+                setClubs(response);
+            });
+        }
     };
 
-    componentDidMount() {
-        clearSearchParameters();
-        this.getData();
-    }
+    useEffect(() => {
+        getData();
+    }, [advancedSearch]);
 
-    onPageChange = (page) => {
-        searchParameters.page = page - 1;
+    const onPageChange = (page) => {
+        setCurrentPage(page - 1);
 
-        this.getData();
+        getData(page - 1);
     };
 
-    render() {
-        return this.props.loading ? <Loader /> : this.props.clubs.content.length === 0 ? <EmptySearch /> : (
-            <Layout className="clubs">
-                <Space wrap className="cards" size={[0, 0]}>
-                    {this.props.clubs.content.map((club, index) => <ClubCardItem club={club} key={index} />)}
-                </Space>
+    return (
+        <Layout className="club-list">
+            {advancedSearch &&
+            <ClubListSider setCurrentPage={setCurrentPage}
+                           form={searchForm}
+                           getAdvancedData={getData}
+            />}
+            {!loading && clubs.content.length === 0 ? <EmptySearch/> : (
+                <Content className="club-list-content">
+                    <Space wrap className="content-clubs" size={[0, 0]}>
+                        {clubs.content.map((club, index) => <ClubListItem club={club} key={index}/>)}
+                    </Space>
 
-                <Pagination className="pagination"
-                    hideOnSinglePage
-                    showSizeChanger={false}
-                    onChange={this.onPageChange}
-                    current={searchParameters.page + 1}
-                    pageSize={this.props.clubs.size}
-                    total={this.props.clubs.totalElements} />
-
-            </Layout>)
-    }
-}
+                    <Pagination className="pagination"
+                                hideOnSinglePage
+                                showSizeChanger={false}
+                                onChange={onPageChange}
+                                current={currentPage + 1}
+                                pageSize={clubs.size}
+                                total={clubs.totalElements}/>
+                </Content>
+            )}
+        </Layout>
+    )
+};
 
 ClubList.propTypes = {
     clubs: PropTypes.object.isRequired,

@@ -1,22 +1,16 @@
 import React from 'react';
-import { Button, Rate, Modal } from 'antd';
+import {Button, Modal, Rate} from 'antd';
 import "./css/ClubInfo.css"
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import SocialMedia from '../clubPage/sider/SocialMedia';
 import ImageCarousel from '../ImageCarousel';
-import { convertToHtml, getShortContent } from "../editor/EditorConverter";
+import {getShortContent} from "../editor/EditorConverter";
 
 
 const ClubInfo = ({ visible, setVisible, club }) => {
-    const onCanel = () => {
-        setVisible(false);
-        console.log(visible);
-        console.log(setVisible);
-    }
-
     const images = [
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
@@ -32,7 +26,7 @@ const ClubInfo = ({ visible, setVisible, club }) => {
         <Modal
             centered
             visible={visible}
-            onCancel={() => onCanel()}
+            onCancel={() => setVisible(false)}
             width={900}
             footer={null}
             className='clubInfo'
@@ -43,7 +37,10 @@ const ClubInfo = ({ visible, setVisible, club }) => {
                     <div className="club-name">{club.name}</div>
                 </div>
                 <Tags className="categories" categories={club.categories} />
-                <Rate className="rating" disabled value={club.rating} />
+                <div className="rating">
+                    <Rate allowHalf disabled value={club.rating}/>
+                    <span className="feedback">{3} відгуків</span>
+                </div>
                 <div className="address">
                     <EnvironmentFilled className="address-icon" />
                     <span className="text">{club.address}</span>
@@ -52,8 +49,8 @@ const ClubInfo = ({ visible, setVisible, club }) => {
                     <span className="sider-label">Вік аудиторії: </span>
                     <span className="years">від {club.ageFrom} до {club.ageTo} років</span>
                 </div>
-                <SocialMedia className="socialMedia" />
-                <Button className="button">
+                <SocialMedia className="socialMedia" label="Контакти гуртка"/>
+                <Button className="flooded-button more-button">
                     <Link to={`/club/${club.id}`}>Більше про гурток</Link>
                 </Button>
                 <div className="about-club" >
@@ -64,6 +61,6 @@ const ClubInfo = ({ visible, setVisible, club }) => {
             </div>
         </Modal>
     )
-}
+};
 
 export default ClubInfo;

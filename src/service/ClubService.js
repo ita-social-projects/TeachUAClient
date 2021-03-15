@@ -1,9 +1,10 @@
-import fetchRequest from "./FetchRequest";
-import { BASE_URL } from "./config/ApiConfig";
+import axios from "axios";
+import {BASE_URL} from "./config/ApiConfig";
+import {replaceCommaToSemicolon} from "../util/CategoryUtil";
+import {searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
-
-    return await fetchRequest.post(BASE_URL + "/api/club", {
+    return await axios.post(BASE_URL + "/api/club", {
         categoriesName: data.categories,
         name: data.name,
         ageFrom: data.ageFrom,
@@ -24,24 +25,24 @@ export const addClub = async (data) => {
 };
 
 export const getClubById = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/club/" + id).then((response) => {
+    return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data
     }).catch((error) => {
         return error.response.data
     });
 };
 
-export const getClubsByUserId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/clubs/" + id + "?size=3").then((response) => {
+export const getClubsByUserId = async (id, page) => {
+    return await axios.get(BASE_URL + "/api/clubs/" + id +"?page=" +page).then((response) => {
         return response.data
     });
 };
 
 export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName) => {
-    return await fetchRequest.get(BASE_URL + "/api/clubs/search/similar", {
+    return await axios.get(BASE_URL + "/api/clubs/search/similar", {
         params: {
             id: id,
-            categoriesName: categoriesName,
+            categoriesName: replaceCommaToSemicolon(categoriesName),
             cityName: cityName
         },
     }).then((response) => {
@@ -60,9 +61,32 @@ export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
     });
 };
 
-export const getClubsByParameters = async (parameters) => {
-    return await fetchRequest.get(BASE_URL + "/api/clubs/search", {
-        params: parameters,
+export const getClubsByAdvancedSearch = async (parameters, page) => {
+    return await axios.get(BASE_URL + "/api/clubs/search/advanced", {
+        params: {
+            ageFrom: parameters.ageFrom,
+            ageTo: parameters.ageTo,
+            cityName: parameters.cityName ? parameters.cityName : searchParameters.cityName,
+            districtName: parameters.districtName,
+            stationName: parameters.stationName,
+            categoriesName: parameters.categoriesName && replaceCommaToSemicolon(parameters.categoriesName),
+            isCenter: parameters.isCenter,
+            page: page,
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
+export const getClubsByParameters = async (parameters, page) => {
+    return await axios.get(BASE_URL + "/api/clubs/search", {
+        params: {
+            clubName: parameters.clubName,
+            cityName: parameters.cityName,
+            categoryName: parameters.categoryName,
+            page: page,
+        },
+
     }).then((response) => {
         return response.data
     });

@@ -9,11 +9,9 @@ import UserCenterContent from "./UserCenterContent";
 import UserClubContent from "./UserClubContent";
 import PropTypes from "prop-types";
 import PageContent from "../../clubPage/content/PageContent";
-import {getClubById, getClubsByUserId} from "../../../service/ClubService";
 
 
 const UserPageContent = ({user, id}) => {
-
 
 
     return (
@@ -30,7 +28,7 @@ const UserPageContent = ({user, id}) => {
                         </Dropdown>
                     </div>
                 </div>
-                <UserCenterContent/>
+                <UserCenterContent id={id}/>
                 <UserClubContent id={id}/>
             </div>
         </Content>
@@ -40,6 +38,5 @@ const UserPageContent = ({user, id}) => {
 PageContent.propTypes = {
     user: PropTypes.object.isRequired
 };
-
 
 export default UserPageContent;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Dropdown, Menu } from "antd";
+import {Avatar, Dropdown, Menu} from "antd";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import '../registration/сss/Registration.less'
@@ -35,10 +35,11 @@ const AuthMenu = () => {
         }
     }
 
+
     return (
         <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow>
             <div>
-                <Avatar size="large" icon={<UserOutlined />} /> <CaretDownFilled />
+                <Avatar size="large" icon={<UserOutlined/>}/> <CaretDownFilled/>
             </div>
         </Dropdown>
     )

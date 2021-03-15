@@ -53,7 +53,7 @@ class PageSider extends React.Component {
                     <span className="sider-label">Центр розвитку: </span>
                     <span className="name">{this.props.club.center.name}</span>
                 </div>}
-                <SocialMedia/>
+                <SocialMedia label="Зв’яжіться з гуртком"/>
                 <SimilarClubs cityName={this.props.club.city.name} similarClubs={this.state.similarClubs}/>
             </Sider>
         )
