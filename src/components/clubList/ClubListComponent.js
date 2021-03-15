@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Layout } from 'antd';
-import { SearchContext } from "../../context/SearchContext";
+import { mapSearchParameters, SearchContext } from "../../context/SearchContext";
 import ClubList from "./ClubList";
 import '../map/css/MapModal.css'
 import MapComponent from "../map/MapComponent";
 import ClubListHeader from "./ClubListHeader";
+import { getClubsByCategoryAndCity } from '../../service/ClubService';
 
 
 const ClubListComponent = () => {

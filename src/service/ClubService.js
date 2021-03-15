@@ -49,6 +49,17 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     });
 };
 
+export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/search/simple", {
+        params: {
+            cityName: mapSearchParameters.cityName,
+            categoryName: mapSearchParameters.categoryName
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
 export const getClubsByParameters = async (parameters) => {
     return await fetchRequest.get(BASE_URL + "/api/clubs/search", {
         params: parameters,

@@ -1,31 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ClubItem from "./ClubItem";
 import EmptySearch from "../clubList/EmptySearch";
 import './css/MapClubList.css'
-import { getClubsByParameters } from "../../service/ClubService";
-import { mapSearchParameters } from "../../context/SearchContext";
+import { getClubsByCategoryAndCity } from "../../service/ClubService";
+import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
 import { getAllCities } from "../../service/CityService";
 
 
 const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setCenter }) => {
 
     useEffect(() => {
-        getClubsByParameters(mapSearchParameters).then(response => {
+        getClubsByCategoryAndCity(mapSearchParameters).then(response => {
             setMapClubs(response);
         });
+        console.log(mapClubs);
         getAllCities().then(response => {
             response
                 .filter(city => city.name === mapSearchParameters.cityName)
-                .map(city => setCenter({
-                    lat: city.latitude,
-                    lng: city.longitude
-                }));
+                .map(city => {
+                    setCenter({
+                        lat: city.latitude,
+                        lng: city.longitude
+                    })
+                    setZoom(10);
+                });
         });
     }, [mapSearchParameters.cityName, mapSearchParameters.categoryName]);
 
-    return mapClubs.content.length === 0 ? <EmptySearch /> : (
+    return mapClubs.length === 0 ? <EmptySearch /> : (
         <div className="clubList">
-            {mapClubs.content.map((mapClub, index) => <ClubItem
+            {mapClubs.map((mapClub, index) => <ClubItem
                 mapClub={mapClub}
                 key={index}
                 setZoom={setZoom}
