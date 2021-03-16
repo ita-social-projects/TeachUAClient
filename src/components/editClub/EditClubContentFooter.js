@@ -2,8 +2,11 @@ import {Button} from "antd";
 import React from "react";
 
 
-const EditClubContentFooter = () => {
+const EditClubContentFooter = (result) => {
 
+    // const submit = (result) => {
+    //     result
+    // }
 
     return (
         <div className="add-club-content-footer">

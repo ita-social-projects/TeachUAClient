@@ -1,4 +1,4 @@
-import {Form, Upload} from "antd";
+import {Button, Form, Upload} from "antd";
 import React, {useRef} from "react";
 import EditClubContentFooter from "../EditClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -7,6 +7,7 @@ import {saveContent} from "../../editor/EditorConverter";
 import {transToEng} from "../../../util/Translit";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {addClub} from "../../../service/ClubService";
+import "../css/MainInformationTab.less"
 
 const DescriptionStep = ({setResult, result}) => {
     const [descriptionForm] = Form.useForm();
@@ -29,7 +30,7 @@ const DescriptionStep = ({setResult, result}) => {
             form={descriptionForm}
             onFinish={onFinish}>
             <Form.Item name="urlLogo"
-                       className="add-club-row"
+                       className="edit-club-row"
                        label="Логотип"
                        >
                 <Upload
@@ -39,11 +40,11 @@ const DescriptionStep = ({setResult, result}) => {
                     data={{folder: `clubs/${clubName}/logo`}}
                     headers={{contentType: 'multipart/form-data'}}
                 >
-                    <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
+                    <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                 </Upload>
             </Form.Item>
             <Form.Item name="urlBackground"
-                       className="add-club-row"
+                       className="edit-club-row"
                        label="Фото">
                 <Upload
                     name="image"
@@ -52,15 +53,15 @@ const DescriptionStep = ({setResult, result}) => {
                     data={{folder: `clubs/${clubName}/background`}}
                     headers={{contentType: 'multipart/form-data'}}
                 >
-                    <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
+                    <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                 </Upload>
             </Form.Item>
-            <Form.Item className="add-club-row"
+            <Form.Item className="edit-club-row"
                        label="Опис">
                 <EditorComponent ref={editorRef}
                                  />
             </Form.Item>
-            <EditClubContentFooter/>
+            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 };

@@ -24,7 +24,7 @@ export const addClub = async (data) => {
     });
 };
 
-export const updateCityBuId = async (data) => {
+export const updateClubBuId = async (data) => {
     return await axios.put(BASE_URL + "/api/club/" + data.id, {
         categoriesName: data.categories,
         name: data.name,
@@ -32,12 +32,12 @@ export const updateCityBuId = async (data) => {
         ageTo: data.ageTo,
         cityName: data.cityName,
         description: data.description,
-        address: data.address.value.structured_formatting.main_text,
+        address: data.address,
         latitude: data.latitude,
         longitude: data.longitude,
         districtName: data.districtName,
-        urlLogo: data.urlLogo && data.urlLogo.file.response,
-        urlBackground: data.urlBackground && data.urlBackground.file.response
+        urlLogo: data.urlLogo,
+        urlBackground: data.urlBackground
     }).then((response) => {
         return response.data
     }).catch((error) => {

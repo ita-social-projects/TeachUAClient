@@ -1,10 +1,11 @@
-import {Form, Input, message, Select} from "antd";
+import {Button, Form, Input, message, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import EditClubContentFooter from "../EditClubContentFooter";
 import EditClubInputAddress from "../EditClubInputAddress";
 import MaskIcon from "../../MaskIcon";
 import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
 import {getDistrictsByCityName} from "../../../service/DisctrictService";
+import "../css/MainInformationTab.less"
 
 const {Option} = Select;
 
@@ -47,13 +48,13 @@ const ContactsStep = ({contacts, cities, setResult, result}) => {
             requiredMark={false}
             onFinish={onFinish}>
 
-            <div className="add-club-inline">
+            <div className="edit-club-inline">
                 <Form.Item name="cityName"
-                           className="add-club-row"
+                           className="edit-club-row"
                            label="Місто"
-                           initialValue={result.clubCity}>
+                           initialValue={result.city.name}>
                     <Select
-                        className="add-club-select"
+                        className="edit-club-select"
                         placeholder="Виберіть місто"
                         onChange={(value) => {
                             if (cityName) {
@@ -71,12 +72,12 @@ const ContactsStep = ({contacts, cities, setResult, result}) => {
                     </Select>
                 </Form.Item>
                 <Form.Item name="districtName"
-                           className="add-club-row"
+                           className="edit-club-row"
                            label="Район"
-                           initialValue={result.clubDistrict}
-                           hasFeedback>
+                           initialValue={result.district.name}
+                           >
                     <Select
-                        className="add-club-select"
+                        className="edit-club-select"
                         placeholder="Виберіть район"
                         optionFilterProp="children">
                         {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
@@ -84,12 +85,13 @@ const ContactsStep = ({contacts, cities, setResult, result}) => {
                 </Form.Item>
             </div>
             <Form.Item name="address"
-                       className="add-club-row"
+                       className="edit-club-row"
                        label="Адреса"
                        validateTrigger={handleSelect}
-                       {...inputAddressProps}>
+                       {...inputAddressProps}
+            >
                 <EditClubInputAddress
-                    placeholder="Введіть адресу гуртка"
+                    placeholder={result.address}
                     form={contactsForm}
                     inputText={result.address && result.address.label}
                     setCityName={setCityName}
@@ -97,18 +99,18 @@ const ContactsStep = ({contacts, cities, setResult, result}) => {
             </Form.Item>
             <Form.Item
                 label="Контакти"
-                className="add-club-row add-club-contacts">
+                className="edit-club-row edit-club-contacts">
                 {contacts.map(contact =>
                     <Form.Item name={`clubContact${contact.name}`}
-                               className="add-club-contact"
+                               className="edit-club-contact"
                                initialValue={result[`clubContact${contact.name}`]}
-                               hasFeedback>
-                        <Input className="add-club-input"
+                               >
+                        <Input className="edit-club-input"
                                placeholder="Заповніть поле"
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
                     </Form.Item>)}
             </Form.Item>
-            <EditClubContentFooter/>
+            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 };

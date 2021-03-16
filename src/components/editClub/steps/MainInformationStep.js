@@ -1,46 +1,42 @@
-import {Checkbox, Form, Input, InputNumber} from "antd";
+import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
 import React from "react";
 import EditClubContentFooter from "../EditClubContentFooter";
 import "../css/MainInformationTab.less"
+import {updateClubBuId} from "../../../service/ClubService";
 
 const MainInformationStep = ({categories, setResult, result}) => {
     const onFinish = (values) => {
-        setResult(values);
+
+        setResult(Object.assign(result, values));
+
+        updateClubBuId(result).then(response => console.log(response));
     };
 
     const categoriesName = result.categories.map((category) => category.name)
 
-    const checked = (value) => {
-        console.log(result);
-        console.log(categoriesName, value);
-        console.log(categoriesName.includes(value));
-        return categoriesName.includes(value);
-    }
-
     return (
-        <Form className="main-information"
-              name="basic"
+        <Form name="basic"
               onFinish={onFinish}>
             <Form.Item name="name"
                        className="edit-club-row edit-club-name"
                        label="Назва"
             >
-                <Input className="edit-club-row edit-club-input"
+                <Input className="edit-club-input"
                        value={result.name}
                        placeholder="Назва гуртка"
                        defaultValue={result.name}
                 />
             </Form.Item>
             <Form.Item name="categories"
-                       className="edit-club-row edit-club-category"
+                       className="edit-club-row"
                        label="Категорія"
-                       initialValue={result.clubCategory}
+                       initialValue={categoriesName}
             >
                 <Checkbox.Group className="edit-club-categories"
                 >
                     {categories.map(category => <Checkbox
                         value={category.name}
-                        checked={checked(category.name)}>
+                    >
                         {category.name}
                     </Checkbox>)}
                 </Checkbox.Group>
@@ -54,7 +50,7 @@ const MainInformationStep = ({categories, setResult, result}) => {
                     <Form.Item name="ageFrom"
                                style={{margin: 0}}
                                initialValue={result.ageFrom ? result.ageFrom : 2}>
-                        <InputNumber
+                        <InputNumber className="input-age"
                             min={2}
                             max={18}/>
                     </Form.Item>
@@ -62,14 +58,24 @@ const MainInformationStep = ({categories, setResult, result}) => {
                     <Form.Item name="ageTo"
                                style={{margin: 0}}
                                initialValue={result.ageTo ? result.ageTo : 18}>
-                        <InputNumber
+                        <InputNumber className="input-age"
                             min={3}
                             max={18}/>
                     </Form.Item>
                     років
                 </span>
             </Form.Item>
-            <EditClubContentFooter/>
+            <Form.Item name="center"
+                       className="edit-club-row"
+                        label="Приналежність до центру"
+                       initialValue={result.center.name}>
+                <Select
+                    className="edit-club-select"
+                    placeholder="Обрати центр"
+                    />
+            </Form.Item>
+            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+
         </Form>
     )
 };
