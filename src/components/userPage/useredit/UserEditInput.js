@@ -37,8 +37,12 @@ const UserEditInput = ({user}) => {
                        alert="Необхідне поле"
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть ваше прізвище"
-                       }]}>
+                           message: "Будь ласка введіть Ваше прізвище"
+                       },
+                           {
+                               pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23})$/,
+                               message: 'Невірний формат прізвища',
+                           }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
             <Form.Item name="firstName"
@@ -48,9 +52,12 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть ваше ім'я"
-
-                       }]}>
+                           message: "Будь ласка введіть Ваше ім'я"
+                       },
+                           {
+                               pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23}|[А-Я,І][а-я]{1,50}\-[А-Я,І][а-я,і]{1,50})$/,
+                               message: 'Невірний формат імені',
+                           }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
             <Form.Item name="phone"
@@ -60,8 +67,12 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть ваш номер телефону"
-                       }]}>
+                           message: "Будь ласка введіть Ваш номер телефону"
+                       },
+                           {
+                               pattern: /^\+?[3]?[8]?[0][-\(]?\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$/,
+                               message: 'Телефон введено невірно'
+                           }]}>
                 <Input addonBefore={prefixSelector} />
             </Form.Item>
             <Form.Item name="email"
@@ -71,8 +82,11 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           type: 'email'
-                       }]}>
+                           message: 'Будь ласка введіть Ваш емейл'},
+                           {
+                               type: 'email',
+                               message: 'Введено не валідний емейл',
+                           }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
             <Form.Item name="password"

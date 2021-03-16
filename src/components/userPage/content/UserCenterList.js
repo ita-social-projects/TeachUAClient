@@ -40,7 +40,7 @@ const UserCenterList = ({load, setLoad, match}) => {
     };
 
 
-    return load ? <Loader/> : centers.content.length === 0 ? <EmptySearch/> : (
+    return load ? <Loader/> : (
         <Layout className="user-centers">
             <Space wrap className="centers-cards" size={[0, 0]}>
                 {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index}/>)}

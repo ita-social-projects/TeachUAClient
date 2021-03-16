@@ -41,7 +41,7 @@ const UserClubList = ({load, setLoad, match}) => {
         getData();
     };
 
-    return load ? <Loader/> : clubs.content.length === 0 ? <EmptySearch/> : (
+    return load ? <Loader/>  : (
         <div className="test">
             <Layout className="user-clubs">
                 <Space wrap className="cards" size={[0, 0]}>

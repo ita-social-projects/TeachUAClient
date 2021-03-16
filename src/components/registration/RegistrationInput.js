@@ -56,7 +56,7 @@ const RegistrationInput = ({disabledButton}) => {
                 </Form.Item>
                 <Form.Item name="email"
                            className="registration-input"
-                           label="Емейл"
+                           label="Email"
                            hasFeedback
                            rules={[{
                                required: true,
@@ -64,7 +64,7 @@ const RegistrationInput = ({disabledButton}) => {
                            },
                                {
                                    type: 'email',
-                                   message: 'Введено не валідний емейл',
+                                   message: 'Введено не валідний email',
                                }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваш емейл"
@@ -79,12 +79,12 @@ const RegistrationInput = ({disabledButton}) => {
                                message: 'Поле необхідне для введення'
                            },
                                {
-                                   pattern: /^\S{6,}$/,
+                                   pattern: /^\S{8,}$/,
                                    message: 'Невірний формат паролю'
                                },
                                {
                                    min: 6,
-                                   message: 'Пароль повинен бути довшим ніж 6 символів'
+                                   message: 'Пароль повинен бути довшим ніж 8 символів'
                                }
                            ]}>
                     <Input.Password className="registration-box"
@@ -92,7 +92,7 @@ const RegistrationInput = ({disabledButton}) => {
                 </Form.Item>
                 <Form.Item name="confirm"
                            className="registration-input"
-                           label="Пароль"
+                           label="      "
                            hasFeedback
                            rules={[
                                {
