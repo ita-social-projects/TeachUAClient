@@ -10,7 +10,7 @@ import ImageCarousel from '../ImageCarousel';
 import {getShortContent} from "../editor/EditorConverter";
 
 
-const ClubInfo = ({ visible, setVisible, club }) => {
+const ClubItemInfo = ({ visible, setVisible, club }) => {
     const images = [
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
@@ -63,4 +63,4 @@ const ClubInfo = ({ visible, setVisible, club }) => {
     )
 };
 
-export default ClubInfo;
+export default ClubItemInfo;

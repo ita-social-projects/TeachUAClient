@@ -1,26 +1,24 @@
 import {Button, Card, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
 import {getShortContent} from "../editor/EditorConverter";
-import ClubInfo from "./ClubInfo";
 
 
-const ClubListItem = ({club}) => {
-    const [visible, setVisible] = useState(false);
-
+const ClubListItem = ({club, onClubInfoClick}) => {
     return (
         <div>
-            <Card className="card" onClick={() => setVisible(true)}>
+            <Card className="card" onClick={() => onClubInfoClick(club)}>
                 <div className="title">
                     <CategoryLogo category={club.categories[0]}/>
                     <div className="name">{club.name}</div>
                 </div>
-                <div className="club-item-tags">
-                    <Tags categories={club.categories.filter((_, idx) => idx < 3)}/>
+                <div className="club-tags-box">
+                    <Tags className="club-tags"
+                          categories={club.categories.filter((_, idx) => idx < 3)}/>
                     <span>{club.categories.length > 3 && `і ще ${club.categories.length - 3}...`}</span>
                 </div>
                 {club.center !== null ?
@@ -45,7 +43,6 @@ const ClubListItem = ({club}) => {
                     <Link to={`/club/${club.id}`}>Детальніше</Link>
                 </Button>
             </Card>
-            <ClubInfo visible={visible} setVisible={setVisible} club={club}/>
         </div>
     )
 };

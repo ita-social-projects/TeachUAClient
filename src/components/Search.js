@@ -4,6 +4,7 @@ import {clearSearchParameters, SearchContext, searchParameters} from "../context
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
+import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 
 const {Option, OptGroup} = Select;
 
@@ -83,6 +84,7 @@ class Search extends React.Component {
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
+                    suffix={<SearchOutlined />}
                     style={{
                         width: 200,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1

@@ -50,7 +50,7 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     });
 };
 
-export const getClubsByAdvancedSearch = async (parameters, page) => {
+export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPath) => {
     return await axios.get(BASE_URL + "/api/clubs/search/advanced", {
         params: {
             ageFrom: parameters.ageFrom,
@@ -61,6 +61,7 @@ export const getClubsByAdvancedSearch = async (parameters, page) => {
             categoriesName: parameters.categoriesName && replaceCommaToSemicolon(parameters.categoriesName),
             isCenter: parameters.isCenter,
             page: page,
+            sort: `${sortBy},${sortPath}`
         },
     }).then((response) => {
         return response.data
