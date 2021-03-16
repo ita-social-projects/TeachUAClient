@@ -4,6 +4,7 @@ import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
 import { signIn } from "../../service/UserService";
 import './css/Login.less';
+import { saveUserId, saveToken } from '../../service/StorageService';
 
 
 const Login = () => {
@@ -16,8 +17,8 @@ const Login = () => {
             } else {
                 console.log(response)
                 message.success("Ви успішно залогувалися!");
-                localStorage.setItem("id", response.id);
-                localStorage.setItem("accessToken", response.accessToken);
+                saveUserId(response.id);
+                saveToken(response.accessToken);
                 setLoginVisible(false);
             }
         });

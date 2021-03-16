@@ -14,9 +14,9 @@ const RegistrationSocial = ({ role }) => {
     return (
         <div className="icons">
             <div className={style}>
-                <a target="_blank" href={GOOGLE_AUTH_URL + "&role=" + role}> <img src={`${process.env.PUBLIC_URL}/static/images/user/google.png`} className="logo" alt="Logo" />
+                <a href={GOOGLE_AUTH_URL + "&role=" + role}> <img src={`${process.env.PUBLIC_URL}/static/images/user/google.png`} className="logo" alt="Logo" />
                 </a>
-                <a target="_blank" href={FACEBOOK_AUTH_URL + "&role=" + role}> <img src={`${process.env.PUBLIC_URL}/static/images/user/facebook.png`} className="logo" alt="Logo" />
+                <a href={FACEBOOK_AUTH_URL + "&role=" + role}> <img src={`${process.env.PUBLIC_URL}/static/images/user/facebook.png`} className="logo" alt="Logo" />
                 </a>
             </div>
         </div>

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {withRouter} from "react-router";
-import {getCentersByUserId} from "../../../service/CenterService";
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router";
+import { getCentersByUserId } from "../../../service/CenterService";
 import Loader from "../../Loader";
-import {Layout, Pagination, Space} from "antd";
+import { Layout, Pagination, Space } from "antd";
 import UserCenterCardItem from "./UserCenterCardItem";
 import './css/UserCenter.less';
 import EmptySearch from "../../EmptySearch";
 
-const UserCenterList = ({load, setLoad, match}) => {
+const UserCenterList = ({ load, setLoad, match }) => {
     const [centers, setCenters] = useState({
         content: [],
         pageable: {},
@@ -30,8 +30,8 @@ const UserCenterList = ({load, setLoad, match}) => {
     };
 
     useEffect(() => {
-            getData()
-        }, []
+        getData()
+    }, []
     )
 
     const onPageChange = (page) => {
@@ -39,19 +39,18 @@ const UserCenterList = ({load, setLoad, match}) => {
         getData();
     };
 
-
-    return load ? <Loader/> : (
+    return load ? <Loader /> : (
         <Layout className="user-centers">
             <Space wrap className="centers-cards" size={[0, 0]}>
-                {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index}/>)}
+                {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index} />)}
             </Space>
             <Pagination className="user-clubs-pagination"
-                        hideOnSinglePage
-                        showSizeChanger={false}
-                        onChange={onPageChange}
-                        current={page + 1}
-                        pageSize={centers.size}
-                        total={centers.totalElements}/>
+                hideOnSinglePage
+                showSizeChanger={false}
+                onChange={onPageChange}
+                current={page + 1}
+                pageSize={centers.size}
+                total={centers.totalElements} />
         </Layout>
     )
 }

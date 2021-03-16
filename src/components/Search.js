@@ -1,11 +1,11 @@
-import {Select} from "antd";
-import React, {createRef} from "react";
-import {clearSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
-import {getClubsByParameters} from "../service/ClubService";
-import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
+import { Select } from "antd";
+import React, { createRef } from "react";
+import { clearSearchParameters, mapSearchParameters, SearchContext, searchParameters } from "../context/SearchContext";
+import { getClubsByParameters } from "../service/ClubService";
+import { getPossibleResults, getPossibleResultsByText } from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 
-const {Option, OptGroup} = Select;
+const { Option, OptGroup } = Select;
 
 class Search extends React.Component {
     static contextType = SearchContext;
@@ -29,6 +29,7 @@ class Search extends React.Component {
             switch (parameter) {
                 case "category":
                     searchParameters.categoryName = name;
+                    mapSearchParameters.categoryName = name;
                     break;
                 case "club":
                     searchParameters.clubName = name;
@@ -50,9 +51,9 @@ class Search extends React.Component {
     };
 
     onFocus = () => {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         getPossibleResults(searchParameters).then(response => {
-            this.setState({possibleResults: response, loading: false})
+            this.setState({ possibleResults: response, loading: false })
         });
     };
 
@@ -63,12 +64,12 @@ class Search extends React.Component {
     };
 
     onSearch = (val) => {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         getPossibleResultsByText(val, searchParameters).then(response => {
-            this.setState({possibleResults: response, loading: false})
+            this.setState({ possibleResults: response, loading: false })
         });
 
-        this.setState({searchText: val});
+        this.setState({ searchText: val });
     };
 
     handleAdvancedSearch = () => {
@@ -101,7 +102,7 @@ class Search extends React.Component {
                         {
                             this.state.possibleResults.categories.map(result => (
                                 <Option value={"category" + "#" + result.name}
-                                        key={"category" + "#" + result.id}>
+                                    key={"category" + "#" + result.id}>
                                     {result.name}
                                 </Option>)
                             )
@@ -111,7 +112,7 @@ class Search extends React.Component {
                         {
                             this.state.possibleResults.clubs.map(result => (
                                 <Option value={"club" + "#" + result.name}
-                                        key={"club" + "#" + result.id}>
+                                    key={"club" + "#" + result.id}>
                                     {result.name}
                                 </Option>)
                             )
@@ -120,7 +121,7 @@ class Search extends React.Component {
                 </Select>
 
                 <ControlOutlined className="advanced-icon"
-                                 onClick={this.handleAdvancedSearch}/>
+                    onClick={this.handleAdvancedSearch} />
             </div>
         );
     }
