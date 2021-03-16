@@ -92,7 +92,7 @@ const ContactTypeTable = () => {
             urlLogo: uploadFile !== record.urlLogo ? uploadFile.file.response : uploadFile
         });
 
-        editCellValue(form.field, contactTypes, record.id).then((editedData) => {
+        editCellValue(form, contactTypes, record.id).then((editedData) => {
             updateContactTypeById(editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message);

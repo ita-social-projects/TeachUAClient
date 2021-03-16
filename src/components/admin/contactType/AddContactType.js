@@ -33,14 +33,13 @@ const AddContactType = ({contactTypes, setContactTypes}) => {
                                message: "Введіть назву контакта"
                            }]}>
                     <Input className="add-contact-type-input"
-                           placeholder="Назва району">
+                           placeholder="Назва контакта">
                     </Input>
                 </Form.Item>
-                {/*<Avatar/>*/}
                 <Form.Item name="urlLogo"
                            rules={[{
                                required: true,
-                               message: "Введіть назву контакта"
+                               message: "Завантажте лого"
                            }]}>
                     <Upload
                         name="image"
