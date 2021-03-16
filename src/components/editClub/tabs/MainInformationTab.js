@@ -1,10 +1,9 @@
 import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
 import React from "react";
-import EditClubContentFooter from "../EditClubContentFooter";
 import "../css/MainInformationTab.less"
 import {updateClubBuId} from "../../../service/ClubService";
 
-const MainInformationStep = ({categories, setResult, result}) => {
+const MainInformationTab = ({categories, setResult, result}) => {
     const onFinish = (values) => {
 
         setResult(Object.assign(result, values));
@@ -75,9 +74,8 @@ const MainInformationStep = ({categories, setResult, result}) => {
                     />
             </Form.Item>
             <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
-
         </Form>
     )
 };
 
-export default MainInformationStep;
+export default MainInformationTab;

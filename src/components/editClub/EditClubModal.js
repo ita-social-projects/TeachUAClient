@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Layout, Modal} from 'antd';
+import {Modal} from 'antd';
 import "./css/EditMainInformationTab.less"
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
 import {getClubById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
-
 
 const EditClubModal = () => {
     const [visible, setVisible] = useState(false);
@@ -21,8 +20,6 @@ const EditClubModal = () => {
         getAllContacts().then(response => setContacts(response));
         getClubById(1).then(response => setResult(response));
     }, []);
-
-
 
     return (
         <div>

@@ -9,7 +9,7 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {addClub} from "../../../service/ClubService";
 import "../css/MainInformationTab.less"
 
-const DescriptionStep = ({setResult, result}) => {
+const DescriptionTab = ({setResult, result}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
@@ -66,4 +66,4 @@ const DescriptionStep = ({setResult, result}) => {
     )
 };
 
-export default DescriptionStep;
+export default DescriptionTab;

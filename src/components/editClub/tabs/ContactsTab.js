@@ -9,7 +9,7 @@ import "../css/MainInformationTab.less"
 
 const {Option} = Select;
 
-const ContactsStep = ({contacts, cities, setResult, result}) => {
+const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
     const [cityName, setCityName] = useState(null);
     const [cityOnInput, setCityOnInput] = useState(null);
@@ -115,4 +115,4 @@ const ContactsStep = ({contacts, cities, setResult, result}) => {
     )
 };
 
-export default ContactsStep;
+export default ContactsTab;
