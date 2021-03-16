@@ -67,10 +67,13 @@ class Search extends React.Component {
     };
 
     handleAdvancedSearch = () => {
-        this.props.advancedSearch ?
-            this.props.setAdvancedSearch(false) : this.props.setAdvancedSearch(true);
-        this.props.advancedSearch ?
-            searchParameters.isAdvancedSearch = false : searchParameters.isAdvancedSearch = true;
+        if (this.props.advancedSearch) {
+            this.props.setAdvancedSearch(false);
+            searchParameters.isAdvancedSearch = false
+        } else {
+            this.props.setAdvancedSearch(true);
+            searchParameters.isAdvancedSearch = true;
+        }
     };
 
     render() {
@@ -84,7 +87,7 @@ class Search extends React.Component {
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
-                    suffix={<SearchOutlined />}
+                    suffix={<SearchOutlined/>}
                     style={{
                         width: 200,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1
