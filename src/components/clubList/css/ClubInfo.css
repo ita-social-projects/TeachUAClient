@@ -27,7 +27,7 @@
 
 .clubInfo .ant-modal-body {
     display: flex;
-    height: 944px;
+    max-height: 944px;
     padding: 0;
 }
 

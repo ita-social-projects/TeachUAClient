@@ -6,9 +6,6 @@ export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
     }).catch((error) => {
-        console.log("CATCH ERROR");
-        console.log(error);
-        return window.location.href = '/clubs';
     });
 };
 

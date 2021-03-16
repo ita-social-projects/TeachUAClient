@@ -1,7 +1,8 @@
 import axios from "axios";
-import {BASE_URL} from "./config/ApiConfig";
-import {replaceCommaToSemicolon} from "../util/CategoryUtil";
-import {searchParameters} from "../context/SearchContext";
+import fetchRequest from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
+import { replaceCommaToSemicolon } from "../util/CategoryUtil";
+import { searchParameters } from "../context/SearchContext";
 
 export const addClub = async (data) => {
     return await axios.post(BASE_URL + "/api/club", {
@@ -33,7 +34,7 @@ export const getClubById = async (id) => {
 };
 
 export const getClubsByUserId = async (id, page) => {
-    return await axios.get(BASE_URL + "/api/clubs/" + id +"?page=" +page).then((response) => {
+    return await axios.get(BASE_URL + "/api/clubs/" + id + "?page=" + page).then((response) => {
         return response.data
     });
 };

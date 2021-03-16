@@ -16,7 +16,7 @@ const Categories = ({ setMapClubs }) => {
         setCategory(mapSearchParameters.categoryName);
     }, [mapSearchParameters.categoryName]);
 
-    const onCityChange = (value) => {
+    const onCategoryChange = (value) => {
         mapSearchParameters.categoryName = value;
         getClubsByCategoryAndCity(mapSearchParameters).then(response => setMapClubs(response)
         );
@@ -25,7 +25,7 @@ const Categories = ({ setMapClubs }) => {
     return (
         <Select
             className="selectCity"
-            onChange={onCityChange}
+            onChange={onCategoryChange}
             showSearch
             value={category}
             placeholder={mapSearchParameters.categoryName == "" ? "Всі категорії" : mapSearchParameters.categoryName}
