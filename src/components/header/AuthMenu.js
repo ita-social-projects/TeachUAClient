@@ -7,6 +7,7 @@ import Registration from "../registration/Registration";
 import {Link} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
+import EditClubModal from "../editClub/EditClubModal";
 
 
 
@@ -16,6 +17,7 @@ const AuthMenu = () => {
             <Menu.Item> <Registration/></Menu.Item>
             <Menu.Item> <Login/></Menu.Item>
             <Menu.Item> <AddClubModal/></Menu.Item>
+            <Menu.Item> <EditClubModal/></Menu.Item>
             <Menu.Item> <Link to={`/admin/cities`}>Редагувати міста</Link></Menu.Item>
             <Menu.Item> <Link to={`/admin/contact-types`}>Редагувати контакти</Link></Menu.Item>
             <Menu.Item> <Link to={`/admin/districts`}>Редагувати райони</Link></Menu.Item>
