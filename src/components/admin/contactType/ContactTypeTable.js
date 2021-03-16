@@ -27,16 +27,18 @@ const ContactTypeTable = () => {
             sorter: (a, b) => a.name.length - b.name.length,
         },
         {
-            title: 'Url Logo',
+            title: 'Директорія',
             dataIndex: 'urlLogo',
             width: '30%',
             editable: false,
         },
         {
-            title: 'Image',
+            title: 'Картинка',
             dataIndex: 'urlLogo',
             width: '10%',
-            editable: false,
+            inputType: 'upload',
+            uploadFolder: 'contact-types',
+            editable: true,
             render: urlLogo => <Image
                 width={100}
                 height={100}
@@ -83,7 +85,14 @@ const ContactTypeTable = () => {
     };
 
     const save = async (record) => {
-        editCellValue(form, contactTypes, record.id).then((editedData) => {
+        const uploadFile = form.getFieldValue('urlLogo');
+
+        form.setFieldsValue({
+            ...form.getFieldsValue(),
+            urlLogo: uploadFile !== record.urlLogo ? uploadFile.file.response : uploadFile
+        });
+
+        editCellValue(form.field, contactTypes, record.id).then((editedData) => {
             updateContactTypeById(editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message);

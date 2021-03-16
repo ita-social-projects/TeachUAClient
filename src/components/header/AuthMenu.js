@@ -17,7 +17,7 @@ const AuthMenu = () => {
             <Menu.Item> <Login/></Menu.Item>
             <Menu.Item> <AddClubModal/></Menu.Item>
             <Menu.Item> <Link to={`/admin/cities`}>Редагувати міста</Link></Menu.Item>
-            <Menu.Item> <Link to={`/admin/contact-types`}>Редагувати типи контактів</Link></Menu.Item>
+            <Menu.Item> <Link to={`/admin/contact-types`}>Редагувати контакти</Link></Menu.Item>
             <Menu.Item> <Link to={`/admin/districts`}>Редагувати райони</Link></Menu.Item>
             <Menu.Item> <Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
             <Menu.Item danger>Вийти</Menu.Item>

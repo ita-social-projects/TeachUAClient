@@ -59,6 +59,7 @@ const EditableTable = ({bordered, className, columns, data, onSave, form, action
                 record,
                 inputType: col.inputType ? col.inputType : 'text',
                 selectData: col.selectData,
+                uploadFolder: col.uploadFolder,
                 dataIndex: col.dataIndex,
                 title: col.title,
                 editing: record.id === editingKey,
