@@ -5,6 +5,8 @@ import Loader from "../../Loader";
 import { withRouter } from "react-router";
 import UserClubCardItem from "./UserClubCardItem";
 import './css/UserClub.less';
+import Loader from "../../Loader";
+import EmptySearch from "../../EmptySearch";
 
 
 const UserClubList = ({ load, setLoad, match }) => {
@@ -39,6 +41,7 @@ const UserClubList = ({ load, setLoad, match }) => {
         setPage(page - 1)
         getData();
     };
+
 
     return load ? <Loader /> : (
         <div className="test">
