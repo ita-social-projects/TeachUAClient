@@ -17,7 +17,14 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                     <div className="comment-header">
                         <span className="comment-label">Коментарі</span>
                         <Button className="outlined-button comment-button"
-                                onClick={() => {setCommentEditVisible(true); console.log(commentEditVisible)}}>
+                                onClick={() => {
+                                    if(localStorage.getItem('id') != null)
+                                        setCommentEditVisible(true);
+                                    else
+                                        alert("Увійдіть або зареєструйтеся!!!");
+
+                                }}
+                        >
                             Залишити коментар
                         </Button>
                     </div>
