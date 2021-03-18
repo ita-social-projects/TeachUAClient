@@ -73,7 +73,7 @@ const UserEditInput = ({user}) => {
                                pattern: /^\+?[3]?[8]?[0][-\(]?\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$/,
                                message: 'Телефон введено невірно'
                            }]}>
-                <Input addonBefore={prefixSelector} />
+                <Input addonBefore={prefixSelector}/>
             </Form.Item>
             <Form.Item name="email"
                        initialValue={user.email}
@@ -82,7 +82,8 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           message: 'Будь ласка введіть Ваш емейл'},
+                           message: 'Будь ласка введіть Ваш емейл'
+                       },
                            {
                                type: 'email',
                                message: 'Введено не валідний емейл',

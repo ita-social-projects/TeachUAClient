@@ -2,7 +2,6 @@ import {Avatar, Card} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/UserCenterCardItem.less';
-import UserEditModal from "../useredit/UserEditModal";
 import PropTypes from "prop-types";
 import UserClubCardItem from "./UserClubCardItem";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";

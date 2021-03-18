@@ -28,7 +28,7 @@ const NavMenu = () => {
                     <Link to="/clubs"><ApartmentOutlined className="icon"/>Гуртки</Link>
                 </Menu.Item>
                 <Menu.Item key="challenge">
-                    <Link to="/challenge"><CrownOutlined className="icon"/>Челлендж</Link>
+                    <Link to="/challenge"><CrownOutlined className="icon"/>Челендж</Link>
                 </Menu.Item>
                 <Menu.Item key="news">
                     <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>

@@ -4,8 +4,8 @@ import {addImage, mediaBlockRenderer} from "./plugins/ImagePlugin";
 import {addLink} from "./plugins/LinkPlugin";
 import {getBlockStyle} from "./BlockSetting";
 import './css/Editor.less';
-import {Button, Layout} from "antd";
-import {convertFromJson, convertToHtml, saveContent} from "./EditorConverter";
+import {convertToHtml, saveContent} from "./EditorConverter";
+import EditorStyleButton from "./EditorStyleButton";
 
 export default class EditorComponent extends React.Component {
     state = {editorState: EditorState.createEmpty()};
@@ -13,7 +13,6 @@ export default class EditorComponent extends React.Component {
     focus = () => this.refs.editor.focus();
 
     onChange = editorState => {
-        console.log(1)
         this.setState({editorState});
     };
 
@@ -83,32 +82,18 @@ export default class EditorComponent extends React.Component {
                         editorState={this.state.editorState}
                         onToggle={this.clickBlockType}
                     />
-                    <StyleButton
+                    <EditorStyleButton
                         key="link"
                         style="link"
                         onToggle={this.clickAddLink}
                     />
-                    <StyleButton
+                    <EditorStyleButton
                         key={"image"}
                         style="image"
                         onToggle={this.clickAddImage}
                     />
                 </div>
             </div>
-        );
-    }
-}
-
-class StyleButton extends React.Component {
-    onClick = () => {
-        this.props.onToggle(this.props.style);
-    };
-
-    render() {
-        const className = `toolbar-button ${this.props.active ? "toolbar-active-button" : ""} ${this.props.style}`;
-        return (
-            <div className={className}
-                 onMouseDown={this.onClick}/>
         );
     }
 }
@@ -129,7 +114,7 @@ const BlockStyleControls = ({editorState, onToggle}) => {
         .getType();
 
     return blockTypes.map((type) =>
-        <StyleButton
+        <EditorStyleButton
             key={type.label}
             active={type.style === blockType}
             icon={type.label}
