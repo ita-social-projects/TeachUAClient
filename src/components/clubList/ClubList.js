@@ -1,4 +1,4 @@
-import {Form, Layout, Pagination, Space} from "antd";
+import {Form, Layout, Pagination} from "antd";
 import {SearchContext, searchParameters} from "../../context/SearchContext";
 import React, {useContext, useEffect, useState} from "react";
 import ClubListItem from "./ClubListItem";
@@ -9,8 +9,7 @@ import "./css/ClubList.less";
 import ClubListSider from "./ClubListSider";
 import ClubListControl from "./ClubListControl";
 import ClubListRectangleItem from "./ClubListRectangleItem";
-import ClubItemInfo from "./ClubItemInfo";
-import Loader from "../Loader";
+import ClubListItemInfo from "./ClubListItemInfo";
 
 const {Content} = Layout;
 
@@ -52,7 +51,7 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
         getData(page - 1);
     };
 
-    const onClubInfoClick = (club) => {
+    const onClubClick = (club) => {
        setClickedClub(club);
        setClubInfoVisible(true);
     };
@@ -76,14 +75,15 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
                                      sortBy={sortBy}
                                      sortDirection={sortDirection}
                                      setView={setView}/>}
+
                     <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
                         {clubs.content.map((club, index) =>
                             view === 'BLOCK' ?
-                                <ClubListItem club={club} key={index} onClubInfoClick={onClubInfoClick}/> :
-                                <ClubListRectangleItem club={club} key={index}  onClubInfoClick={onClubInfoClick}/>)}
+                                <ClubListItem club={club} key={index} onClubClick={onClubClick}/> :
+                                <ClubListRectangleItem club={club} key={index}  onClubClick={onClubClick}/>)}
                     </div>
 
-                    {clickedClub && <ClubItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible} club={clickedClub}/>}
+                    {clickedClub && <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible} club={clickedClub}/>}
 
                     <Pagination className="pagination"
                                 hideOnSinglePage

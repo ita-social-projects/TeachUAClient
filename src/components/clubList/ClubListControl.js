@@ -29,10 +29,7 @@ const ClubListControl = ({setSortBy, setSortDirection, sortBy, sortDirection, se
             <Radio.Group className="club-control-view"
                          optionType="button"
                          defaultValue="BLOCK"
-                         onChange={(value) => {
-                             setView(value.target.value)
-                             console.log(value)
-                         }}
+                         onChange={(value) => setView(value.target.value)}
                          buttonStyle="solid">
                 <Radio.Button value="LIST"
                               className="club-view-button">

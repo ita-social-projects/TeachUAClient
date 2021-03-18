@@ -8,10 +8,10 @@ import CategoryLogo from "../CategoryLogo";
 import "./css/ClubListRectangleItem.css"
 
 
-const ClubListRectangleItem = ({club, onClubInfoClick}) => {
+const ClubListRectangleItem = ({club, onClubClick}) => {
     return (
         <div>
-            <Card className="card list-rectangle-item" onClick={() => onClubInfoClick(club)}>
+            <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}>
                 <div className="item-rectangle-row">
                     <div className="title">
                         <CategoryLogo category={club.categories[0]}/>

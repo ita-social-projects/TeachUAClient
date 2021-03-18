@@ -8,10 +8,10 @@ import CategoryLogo from "../CategoryLogo";
 import {getShortContent} from "../editor/EditorConverter";
 
 
-const ClubListItem = ({club, onClubInfoClick}) => {
+const ClubListItem = ({club, onClubClick}) => {
     return (
         <div>
-            <Card className="card" onClick={() => onClubInfoClick(club)}>
+            <Card className="card" onClick={() => onClubClick(club)}>
                 <div className="title">
                     <CategoryLogo category={club.categories[0]}/>
                     <div className="name">{club.name}</div>
