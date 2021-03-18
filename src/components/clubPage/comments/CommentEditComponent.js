@@ -21,15 +21,14 @@ class CommentEditComponent extends React.Component {
     };
 
     getUser() {
-        // TODO: get real current user
-        return getUserById(1); // hardcoded user id
+        return getUserById(localStorage.getItem('id'));
     }
 
     getData = () => {
-
-        this.getUser().then((user) => {
-            this.setState({ user: user });
-        })
+        if(this.props.visible)
+            this.getUser().then((user) => {
+                this.setState({ user: user });
+            })
     };
 
     componentDidMount() {
