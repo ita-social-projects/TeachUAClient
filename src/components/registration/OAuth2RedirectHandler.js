@@ -11,19 +11,30 @@ class OAuth2RedirectHandler extends Component {
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     };
     render() {
-        { console.log(" SAVE TOKEN _______________________________________"); }
+        message.config({
+            maxCount: 1
+        });
+
         const token = this.getUrlParameter('token');
         const userId = this.getUrlParameter('id');
         const error = this.getUrlParameter('error');
+        const successMesage = (msg) => {
+            message.success(msg);
+        }
+        const errorMesage = (err) => {
+            message.error(err);
+        }
         saveToken(token);
         saveUserId(userId);
         if (token) {
             return (<div>
-                {message.success("Ви успішно залогувалися!")}
                 <Redirect to={{
                     pathname: `/user/${userId}`,
                     state: { from: this.props.location }
-                }} />
+                }}>
+                    {successMesage("Успішний вхід в систему")}
+                    {console.log("SOME INF")}
+                </Redirect>
             </div>)
         } else {
             return (<div>
@@ -34,7 +45,7 @@ class OAuth2RedirectHandler extends Component {
                         error: error
                     }
                 }} />
-                {message.success(error)}
+                {errorMesage(error)}
             </div>)
         }
     }
