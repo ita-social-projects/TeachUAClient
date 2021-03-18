@@ -1,7 +1,7 @@
-import React, {useMemo, useState} from "react";
+import React, { useMemo, useState } from "react";
 import './App.less';
-import {Layout} from 'antd';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Layout } from 'antd';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
