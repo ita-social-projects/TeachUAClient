@@ -1,12 +1,13 @@
 import React from "react";
 
-import {withRouter} from "react-router";
+import { withRouter, Redirect } from "react-router";
 import SiderComponent from "./sider/UserSider";
 import UserPageContent from "./content/UserPageContent";
 import '../userPage/css/User.less'
-import {getUserById} from "../../service/UserService";
-import Layout, {Content} from "antd/es/layout/layout";
+import { getUserById } from "../../service/UserService";
+import Layout, { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
+import { getToken } from "../../service/StorageService";
 
 
 
@@ -18,7 +19,7 @@ class UserPage extends React.Component {
     getData = () => {
         let userId = this.props.match.params.id;
         getUserById(userId).then(response => {
-            this.setState({user: response});
+            this.setState({ user: response });
         });
     };
 
@@ -33,10 +34,15 @@ class UserPage extends React.Component {
     }
 
     render() {
+        if (!getToken()) {
+            return (
+                <Redirect to="/" />
+            )
+        }
         return (
             <Layout className="user-page">
-                <Sider><SiderComponent user={this.state.user}/></Sider>
-                <Content><UserPageContent user={this.state.user} id={this.props.match.params.id}/></Content>
+                <Sider><SiderComponent user={this.state.user} /></Sider>
+                <Content><UserPageContent user={this.state.user} id={this.props.match.params.id} /></Content>
             </Layout>
         )
     }

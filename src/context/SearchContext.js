@@ -13,10 +13,7 @@ export const searchParameters = {
 };
 
 export const mapSearchParameters = {
-    clubName: "",
     cityName: "Київ",
-    districtName: "",
-    stationName: "",
     categoryName: "",
 };
 
