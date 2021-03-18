@@ -1,7 +1,8 @@
 import axios from "axios";
-import {BASE_URL} from "./config/ApiConfig";
-import {replaceCommaToSemicolon} from "../util/CategoryUtil";
-import {searchParameters} from "../context/SearchContext";
+import fetchRequest from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
+import { replaceCommaToSemicolon } from "../util/CategoryUtil";
+import { searchParameters } from "../context/SearchContext";
 
 export const addClub = async (data) => {
     return await axios.post(BASE_URL + "/api/club", {
@@ -24,6 +25,27 @@ export const addClub = async (data) => {
     });
 };
 
+export const updateClubBuId = async (data) => {
+    return await axios.put(BASE_URL + "/api/club/" + data.id, {
+        categoriesName: data.categories,
+        name: data.name,
+        ageFrom: data.ageFrom,
+        ageTo: data.ageTo,
+        cityName: data.cityName,
+        description: data.description,
+        address: data.address,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        districtName: data.districtName,
+        urlLogo: data.urlLogo,
+        urlBackground: data.urlBackground
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
 export const getClubById = async (id) => {
     return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data
@@ -33,7 +55,7 @@ export const getClubById = async (id) => {
 };
 
 export const getClubsByUserId = async (id, page) => {
-    return await axios.get(BASE_URL + "/api/clubs/" + id +"?page=" +page).then((response) => {
+    return await axios.get(BASE_URL + "/api/clubs/" + id + "?page=" + page).then((response) => {
         return response.data
     });
 };
@@ -50,6 +72,17 @@ export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName
     });
 };
 
+export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/search/simple", {
+        params: {
+            cityName: mapSearchParameters.cityName,
+            categoryName: mapSearchParameters.categoryName
+        },
+    }).then((response) => {
+        return response.data
+    });
+};
+
 export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPath) => {
     return await axios.get(BASE_URL + "/api/clubs/search/advanced", {
         params: {
@@ -60,14 +93,13 @@ export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPat
             stationName: parameters.stationName,
             categoriesName: parameters.categoriesName && replaceCommaToSemicolon(parameters.categoriesName),
             isCenter: parameters.isCenter,
+            sort: `${sortBy},${sortPath}`,
             page: page,
-            sort: `${sortBy},${sortPath}`
         },
     }).then((response) => {
         return response.data
     });
 };
-
 
 export const getClubsByParameters = async (parameters, page) => {
     return await axios.get(BASE_URL + "/api/clubs/search", {
@@ -77,6 +109,7 @@ export const getClubsByParameters = async (parameters, page) => {
             categoryName: parameters.categoryName,
             page: page,
         },
+
     }).then((response) => {
         return response.data
     });

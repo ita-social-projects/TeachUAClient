@@ -5,7 +5,6 @@ import Loader from "../../Loader";
 import {Layout, Pagination, Space} from "antd";
 import UserCenterCardItem from "./UserCenterCardItem";
 import './css/UserCenter.less';
-import EmptySearch from "../../EmptySearch";
 
 const UserCenterList = ({load, setLoad, match}) => {
     const [centers, setCenters] = useState({
@@ -39,8 +38,7 @@ const UserCenterList = ({load, setLoad, match}) => {
         getData();
     };
 
-
-    return load ? <Loader/> : centers.content.length === 0 ? <EmptySearch/> : (
+    return load ? <Loader/> : (
         <Layout className="user-centers">
             <Space wrap className="centers-cards" size={[0, 0]}>
                 {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index}/>)}

@@ -1,6 +1,6 @@
 import {AutoComplete, Select} from "antd";
 import React, {createRef} from "react";
-import {clearSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
+import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
@@ -26,6 +26,7 @@ class Search extends React.Component {
             switch (option.type) {
                 case "category":
                     searchParameters.categoryName = value;
+                    mapSearchParameters.categoryName = value;
                     break;
                 case "club":
                     searchParameters.clubName = value;

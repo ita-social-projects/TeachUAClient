@@ -5,7 +5,6 @@ import Loader from "../../Loader";
 import {withRouter} from "react-router";
 import UserClubCardItem from "./UserClubCardItem";
 import './css/UserClub.less';
-import EmptySearch from "../../EmptySearch";
 
 
 const UserClubList = ({load, setLoad, match}) => {
@@ -41,7 +40,8 @@ const UserClubList = ({load, setLoad, match}) => {
         getData();
     };
 
-    return load ? <Loader/> : clubs.content.length === 0 ? <EmptySearch/> : (
+
+    return load ? <Loader/> : (
         <div className="test">
             <Layout className="user-clubs">
                 <Space wrap className="cards" size={[0, 0]}>

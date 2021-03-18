@@ -1,13 +1,13 @@
 import React from 'react';
-import {Button, Modal, Rate} from 'antd';
+import { Button, Modal, Rate } from 'antd';
 import "./css/ClubInfo.css"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import SocialMedia from '../clubPage/sider/SocialMedia';
 import ImageCarousel from '../ImageCarousel';
-import {getShortContent} from "../editor/EditorConverter";
+import { getShortContent } from "../editor/EditorConverter";
 
 
 const ClubListItemInfo = ({ visible, setVisible, club }) => {
@@ -38,7 +38,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                 </div>
                 <Tags className="categories" categories={club.categories} />
                 <div className="rating">
-                    <Rate allowHalf disabled value={club.rating}/>
+                    <Rate allowHalf disabled value={club.rating} />
                     <span className="feedback">{3} відгуків</span>
                 </div>
                 <div className="address">
@@ -49,7 +49,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                     <span className="sider-label">Вік аудиторії: </span>
                     <span className="years">від {club.ageFrom} до {club.ageTo} років</span>
                 </div>
-                <SocialMedia className="socialMedia" label="Контакти гуртка"/>
+                <SocialMedia className="socialMedia" label="Контакти гуртка" />
                 <Button className="flooded-button more-button">
                     <Link to={`/club/${club.id}`}>Більше про гурток</Link>
                 </Button>

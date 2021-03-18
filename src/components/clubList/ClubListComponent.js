@@ -4,6 +4,7 @@ import ClubList from "./ClubList";
 import '../map/css/MapModal.css'
 import MapComponent from "../map/MapComponent";
 import ClubListHeader from "./ClubListHeader";
+import { getClubsByCategoryAndCity } from '../../service/ClubService';
 
 
 const ClubListComponent = () => {

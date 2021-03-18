@@ -1,11 +1,11 @@
-import React, {useContext, useState} from 'react';
-import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
+import React, { useState } from 'react';
+import { GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript } from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
 
-const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, setCenter}) => {
+const MapContainer = ({ mapClubs, zoom, setZoom, selected, setSelected, center, setCenter }) => {
     const [map, setMap] = useState(null);
 
-    const {isLoaded, loadError} = useLoadScript({
+    const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_MAP_KEY
     });
 
@@ -32,7 +32,7 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={zoom}
-            onLoad={map => {setMap(map);}}
+            onLoad={map => { setMap(map); }}
             center={center}
             options={option}
             onZoomChanged={changeZoom}>
@@ -49,33 +49,33 @@ const MapContainer = ({mapClubs, zoom, setZoom, selected, setSelected, center, s
                     })
                 }}>
                 {(cluster) =>
-                    mapClubs.content.map(club => (
-                            <Marker
-                                id={club.id}
-                                position={{
+                    mapClubs.map(club => (
+                        <Marker
+                            id={club.id}
+                            position={{
+                                lat: club.latitude,
+                                lng: club.longitude
+                            }}
+                            clusterer={cluster}
+                            onClick={() => {
+                                setSelected(club);
+                                setZoom(15);
+                                setCenter({
                                     lat: club.latitude,
                                     lng: club.longitude
-                                }}
-                                clusterer={cluster}
-                                onClick={() => {
-                                    setSelected(club);
-                                    setZoom(15);
-                                    setCenter({
-                                        lat: club.latitude,
-                                        lng: club.longitude
-                                    })
-                                }}
-                                icon={{url: `${process.env.PUBLIC_URL}/static/images/map/location.png`}}/>
-                        )
+                                })
+                            }}
+                            icon={{ url: `${process.env.PUBLIC_URL}/static/images/map/location.png` }} />
+                    )
                     )}
             </MarkerClusterer>
 
             {selected && (
-                <InfoWindow position={{lat: selected.latitude, lng: selected.longitude}}
-                            onCloseClick={() => {
-                                setSelected(null);
-                            }}>
-                    <MarkItem mapClub={selected}/>
+                <InfoWindow position={{ lat: selected.latitude, lng: selected.longitude }}
+                    onCloseClick={() => {
+                        setSelected(null);
+                    }}>
+                    <MarkItem mapClub={selected} />
                 </InfoWindow>)}
         </GoogleMap>
     )
