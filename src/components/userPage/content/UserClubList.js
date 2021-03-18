@@ -1,13 +1,13 @@
-import { Layout, Pagination, Space } from "antd";
-import React, { useEffect, useState } from "react";
-import { getClubsByUserId } from "../../../service/ClubService";
+import {Layout, Pagination, Space} from "antd";
+import React, {useEffect, useState} from "react";
+import {getClubsByUserId} from "../../../service/ClubService";
 import Loader from "../../Loader";
-import EmptySearch from "../../EmptySearch";
 import {withRouter} from "react-router";
 import UserClubCardItem from "./UserClubCardItem";
 import './css/UserClub.less';
 
-const UserClubList = ({ load, setLoad, match }) => {
+
+const UserClubList = ({load, setLoad, match}) => {
     const [clubs, setClubs] = useState({
         content: [],
         pageable: {},
@@ -31,8 +31,8 @@ const UserClubList = ({ load, setLoad, match }) => {
 
 
     useEffect(() => {
-        getData()
-    }, []
+            getData()
+        }, []
     )
 
     const onPageChange = (page) => {
@@ -41,19 +41,19 @@ const UserClubList = ({ load, setLoad, match }) => {
     };
 
 
-    return load ? <Loader /> : (
+    return load ? <Loader/> : (
         <div className="test">
             <Layout className="user-clubs">
                 <Space wrap className="cards" size={[0, 0]}>
-                    {clubs.content.map((club, index) => <UserClubCardItem club={club} key={index} />)}
+                    {clubs.content.map((club, index) => <UserClubCardItem club={club} key={index}/>)}
                 </Space>
                 <Pagination className="user-clubs-pagination"
-                    hideOnSinglePage
-                    showSizeChanger={false}
-                    onChange={onPageChange}
-                    current={page + 1}
-                    pageSize={clubs.size}
-                    total={clubs.totalElements} />
+                            hideOnSinglePage
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            current={page + 1}
+                            pageSize={clubs.size}
+                            total={clubs.totalElements}/>
             </Layout>
         </div>
     )

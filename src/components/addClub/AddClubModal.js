@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, Modal} from 'antd';
 import './css/AddClubModal.css';
 import "./css/AddClubContent.css";
@@ -9,7 +9,6 @@ import ContactsStep from "./steps/ContactsStep";
 import DescriptionStep from "./steps/DescriptionStep";
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
-import {getAllDistricts} from "../../service/DisctrictService";
 import {getAllContacts} from "../../service/ContactService";
 
 

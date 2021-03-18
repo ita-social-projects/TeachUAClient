@@ -3,9 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import MaskIcon from "./MaskIcon";
 
-const Tags = ({categories}) => {
+const Tags = ({categories, className}) => {
     return (
-        <div className="tags">
+        <div className={`tags ${className ? className : ''}`}>
             {categories.map(category =>
                 <Tag className="tag" key={category.id} style={{
                     backgroundColor: category.tagBackgroundColor,
