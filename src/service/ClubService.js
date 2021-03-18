@@ -25,6 +25,27 @@ export const addClub = async (data) => {
     });
 };
 
+export const updateClubBuId = async (data) => {
+    return await axios.put(BASE_URL + "/api/club/" + data.id, {
+        categoriesName: data.categories,
+        name: data.name,
+        ageFrom: data.ageFrom,
+        ageTo: data.ageTo,
+        cityName: data.cityName,
+        description: data.description,
+        address: data.address,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        districtName: data.districtName,
+        urlLogo: data.urlLogo,
+        urlBackground: data.urlBackground
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
 export const getClubById = async (id) => {
     return await axios.get(BASE_URL + "/api/club/" + id).then((response) => {
         return response.data

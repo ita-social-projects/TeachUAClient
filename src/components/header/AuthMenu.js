@@ -35,7 +35,6 @@ const AuthMenu = () => {
         }
     }
 
-
     return (
         <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow>
             <div>

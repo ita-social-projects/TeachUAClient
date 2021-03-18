@@ -1,10 +1,23 @@
-import {Form, Input, InputNumber, Select} from "antd";
+import {Form, Input, InputNumber, Select, Upload} from "antd";
 import React from "react";
+import {UPLOAD_IMAGE_URL} from "../service/config/ApiConfig";
+import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 
-const EditableColumn = ({editing, dataIndex, title, inputType, selectData, record, index, children, ...restProps}) => {
+const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children, ...restProps}) => {
     let inputNode;
 
     switch (inputType) {
+        case 'upload':
+            inputNode = <Upload
+                name="image"
+                action={UPLOAD_IMAGE_URL}
+                maxCount={1}
+                data={{folder: uploadFolder}}
+                headers={{contentType: 'multipart/form-data'}}
+            >
+                <span className="upload"><UploadOutlined className="icon"/>Завантажити</span>
+            </Upload>;
+            break;
         case 'number':
             inputNode = <InputNumber/>;
             break;
