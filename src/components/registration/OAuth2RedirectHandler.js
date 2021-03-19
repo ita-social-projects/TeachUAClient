@@ -33,7 +33,6 @@ class OAuth2RedirectHandler extends Component {
                     state: { from: this.props.location }
                 }}>
                     {successMesage("Успішний вхід в систему")}
-                    {console.log("SOME INF")}
                 </Redirect>
             </div>)
         } else {
