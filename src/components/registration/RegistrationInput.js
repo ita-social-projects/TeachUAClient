@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, Input} from 'antd';
 import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
+
 const RegistrationInput = ({disabledButton}) => {
     return (
         <div className="registration-input-box">
@@ -13,45 +14,90 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               message: 'Поле необхідне для введення',
+                               message: 'Введіть прізвище',
                            },
                                {
-                                   pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23})$/,
-                                   message: 'Невірний формат прізвища',
+                                   required: false,
+                                   pattern: /^[^0-9]*$/,
+                                   message: 'Прізвище не може містити цифри',
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^-'\s]*$/,
+                                   message: 'Прізвище повинно починатися і закінчуватися літерою',
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/,
+                                   message: 'Прізвище не може містити спеціальні символи',
+                               },
+                               {
+                                   max: 25,
+                                   message: 'Прізвище не може містити більше, ніж 25 символів',
                                }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваше прізвище"/>
                 </Form.Item>
                 <Form.Item name="firstName"
                            className="registration-input"
-                           label="Ім'я"
+                           label="Ім`я"
                            hasFeedback
                            rules={[{
                                required: true,
-                               message: 'Поле необхідне для введення',
+                               message: "Введіть ім`я",
                            },
                                {
-                                   pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23}|[А-Я,І][а-я]{1,50}\-[А-Я,І][а-я,і]{1,50})$/,
-                                   message: 'Невірний формат імені',
+                                   required: true,
+                                   pattern: /^[^0-9]*$/,
+                                   message: "Ім`я не може містити цифри",
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^-'\s]*$/,
+                                   message: "Ім`я повинно починатися і закінчуватися літерою",
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/,
+                                   message: "Ім`я не може містити спеціальні символи",
+                               },
+                               {
+                                   max: 25,
+                                   message: "Ім`я не може містити більше, ніж 25 символів",
                                }]}>
                     <Input className="registration-box"
-                           placeholder="Введіть ваше ім'я"/>
+                           placeholder="Введіть ваше ім`я"/>
                 </Form.Item>
                 <Form.Item name="phone"
                            className="registration-input"
                            label="Телефон"
-                           initialValue="+380"
                            hasFeedback
                            rules={[{
                                required: true,
-                               message: 'Поле необхідне для введення'
+                               message: 'Введіть номер телефону'
                            },
                                {
-                                   pattern: /^\+?[3]?[8]?[0][-\(]?\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$/,
-                                   message: 'Телефон введено невірно'
+                                   required: false,
+                                   pattern: /^[^A-Za-z]*$/,
+                                   message: 'Телефон не може містити літери',
+                               },
+                               {
+                                   required: true,
+                                   pattern: /^[^\s]*$/,
+                                   message: 'Телефон не може містити пробіли',
+                               },
+                               {
+                                   max: 9,
+                                   message: "Телефон не відповідає вказаному формату",
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                                   message: 'Телефон не може містити спеціальні символи',
                                }]}>
                     <Input className="registration-box"
-                           placeholder="+38(___) ___ __ __"
+                           placeholder="__________"
+                           prefix='+380'
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
@@ -60,11 +106,11 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               message: 'Поле необхідне для введення'
+                               message: 'Введіть email'
                            },
                                {
                                    type: 'email',
-                                   message: 'Введено не валідний email',
+                                   message: 'Некоректний формат email',
                                }]}>
                     <Input className="registration-box"
                            placeholder="Введіть ваш емейл"
@@ -76,29 +122,30 @@ const RegistrationInput = ({disabledButton}) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               message: 'Поле необхідне для введення'
+                               message: 'Введіть пароль'
                            },
                                {
-                                   pattern: /^\S{8,}$/,
-                                   message: 'Невірний формат паролю'
+                                   pattern: /^\S{8,20}$/,
+                                   message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
                                },
-                               {
-                                   min: 6,
-                                   message: 'Пароль повинен бути довшим ніж 8 символів'
-                               }
                            ]}>
                     <Input.Password className="registration-box"
                                     placeholder="Введіть ваш пароль"/>
                 </Form.Item>
                 <Form.Item name="confirm"
                            className="registration-input"
-                           label="      "
+                           label={<label className="confirm-password">
+                               <p className="dead">Підтвердження</p>
+                               <p className="dead">паролю</p>
+                               <div className="small-media">
+                                   Підтвердження паролю
+                               </div>
+                           </label>}
                            hasFeedback
                            rules={[
                                {
                                    required: true,
-                                   message: 'Поле необхідне для введення',
-
+                                   message: 'Підтвердіть пароль',
                                },
                                ({getFieldValue}) => ({
                                    validator(_, value) {
@@ -106,7 +153,7 @@ const RegistrationInput = ({disabledButton}) => {
                                            return Promise.resolve();
                                        }
 
-                                       return Promise.reject(new Error('Паролі повинні відповідати один-одному'));
+                                       return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));
                                    },
                                }),
                            ]}
@@ -114,6 +161,9 @@ const RegistrationInput = ({disabledButton}) => {
                     <Input.Password className="registration-box"
                                     placeholder="Підтвердіть ваш пароль"/>
                 </Form.Item>
+            </div>
+            <div className="agreement-text">
+                Натискаючи кнопку "Зареєструватися", я даю згоду на обробку персональних даних
             </div>
             <Form.Item>
                 <div className="registration-footer">

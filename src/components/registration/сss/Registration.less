@@ -7,16 +7,13 @@
   padding: 0;
 }
 
-.modal-registration .registration-input label {
-  font-size: 18px;
-  width: 94px;
-  text-align: right;
-  padding-right: 16px;
-  display: block;
-  color: #2D4C68;
+
+.confirm-password .registration-input label {
+  font-size: 5px;
+
 }
 
-.modal-registration  .ant-form-item label:after {
+.modal-registration .ant-form-item label:after {
   content: none;
 }
 
@@ -84,6 +81,7 @@
     background: #FA8C16;
   }
 }
+
 //
 //.ant-btn-text{
 //text-align: left;
@@ -135,6 +133,7 @@
   -webkit-filter: grayscale(50%);
   filter: grayscale(100%);
 }
+
 .modal-registration .items-active {
   display: flex;
   width: 100%;
@@ -146,10 +145,8 @@
 
 .modal-registration .logo {
   margin-right: 12px;
-  margin-left:12px;
-
+  margin-left: 12px;
 }
-
 
 
 .modal-registration .registration-or {
@@ -167,14 +164,38 @@
 
 .modal-registration .registration-input {
   width: 65%;
-  display: flex;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
+.modal-registration .registration-input label {
+  font-size: 18px;
+  width: 110px;
+  text-align: right;
+  padding-right: 16px;
+  display: block;
+  color: #2D4C68;
+}
+
+.confirm-password {
+  margin-top: 0 !important;
+}
+
+.dead {
+  margin-top: -15px;
+  float: right;
+}
+
+.small-media {
+  display: none;
+}
+
+.modal-registration .ant-form-item-label {
+  display: contents !important;
+}
 
 .modal-registration .registration-box {
-  height: 40px;
+  height: 50px;
   border-radius: 6px;
 }
 
@@ -192,6 +213,15 @@
   width: 20px;
 }
 
+.modal-registration .agreement-text{
+  padding-top: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  color:red;
+  position: center;
+  text-align: center;
+}
+
 .modal-registration .registration-button {
   padding: 8px 24px;
   height: 40px;
@@ -202,7 +232,7 @@
   color: #FFFFFF !important;
 }
 
-.modal-registration .registration-button:disabled{
+.modal-registration .registration-button:disabled {
   opacity: 0.4;
 }
 
@@ -214,12 +244,19 @@
 }
 
 
-
 @media (max-width: 575px) {
   .ant-form-item .ant-form-item-label > label {
     text-align: left;
     width: 100%;
+    display: contents;
+  }
+
+  .dead {
+    display: none;
+  }
+
+  .small-media {
+    display: flex;
+    width: 400px;
   }
 }
-
-
