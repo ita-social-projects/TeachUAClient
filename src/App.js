@@ -12,7 +12,7 @@ import UserPage from "./components/userPage/UserPage";
 import CityTable from "./components/admin/city/CityTable";
 import DistrictTable from "./components/admin/district/DistrictTable";
 import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandler";
-import serviceInUkr from "./components/serviceInUkr/serviceInUkr";
+import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 
@@ -46,7 +46,7 @@ function App() {
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler} />
-                                <Route path="/service" exact component={serviceInUkr} />
+                                <Route path="/service" exact component={ServiceInUkr} />
                                 <Route path="/about" exact component={AboutProject} />
                                 <Route path="/" component={MainComponent} />
                             </Switch>
