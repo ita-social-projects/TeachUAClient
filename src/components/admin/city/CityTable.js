@@ -1,4 +1,4 @@
-import {deleteCityById, getAllCities, updateCityBuId} from "../../../service/CityService";
+import {deleteCityById, getAllCities, updateCityById} from "../../../service/CityService";
 import {Form, message, Popconfirm} from "antd";
 import React, {useEffect, useState} from "react";
 import "./css/AddCity.css";
@@ -84,9 +84,12 @@ const CityTable = () => {
 
         const save = async (record) => {
             editCellValue(form, cities, record.id).then((editedData) => {
-                updateCityBuId(editedData.item).then(response => {
-                    if (response.status) {
-                        message.warning(response.message);
+                updateCityById(editedData.item).then(response => {
+                    const st=response.status;
+                    const badStatuses=[ "500", "401", "400", "403" ]
+
+                    if (badStatuses.includes(st)) {
+                        message.warning("Response status: "+ st);
                         return;
                     }
 

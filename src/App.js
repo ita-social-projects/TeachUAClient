@@ -10,6 +10,7 @@ import ClubPage from "./components/clubPage/ClubPage";
 import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
 import CityTable from "./components/admin/city/CityTable";
+import UsersTable from "./components/admin/users/UsersTable";
 import DistrictTable from "./components/admin/district/DistrictTable";
 import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandler";
 import serviceInUkr from "./components/serviceInUkr/serviceInUkr";
@@ -40,6 +41,7 @@ function App() {
                         <Content className="global-content">
                             <Switch>
                                 <Route path="/admin/districts" exact component={DistrictTable}/>
+                                <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
