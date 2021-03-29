@@ -13,7 +13,7 @@ export const addCity = async (data) => {
     });
 };
 
-export const updateCityBuId = async (data) => {
+export const updateCityById = async (data) => {
     return await axios.put(BASE_URL + "/api/city/" + data.id, {
         name: data.name,
         latitude: data.latitude,
@@ -27,7 +27,7 @@ export const updateCityBuId = async (data) => {
 
 
 export const deleteCityById = async (id) => {
-    return await axios.delete(BASE_URL + "/api/city/" + id).then((response) => {
+    return await axios.delete(BASE_URL + "/api/city/" + id,).then((response) => {
         return response.data
     }).catch((error) => {
         return error.response.data
