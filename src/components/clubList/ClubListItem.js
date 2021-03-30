@@ -1,4 +1,4 @@
-import {Button, Card, Rate} from "antd";
+import {Button, Card, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -6,6 +6,9 @@ import PropTypes from "prop-types";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
 import {getShortContent} from "../editor/EditorConverter";
+import FullscreenOutlined from "@ant-design/icons/lib/icons/FullscreenOutlined";
+import ExpandAltOutlined from "@ant-design/icons/lib/icons/ExpandAltOutlined";
+import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 
 
 const ClubListItem = ({club, onClubClick}) => {
@@ -37,7 +40,22 @@ const ClubListItem = ({club, onClubClick}) => {
                 <div className="address">
                     <EnvironmentFilled
                         className="address-icon"/>
-                    <span className="text"> {club.address}</span>
+                    {
+                        club.locations.length === 1 ? <span className="text"> {club.locations[0].address}</span>
+                            :
+                            <Popover
+                                title="Локації"
+                                placement="topRight"
+                                content={club.locations.map(location =>
+                                <div>
+                                    <EnvironmentFilled className="address-small-icon"/>
+                                    <span className="text"> {location.address}</span>
+                                </div>
+                            )}>
+                                <span className="text">{club.locations[0].address}, і ще {club.locations.length - 1}</span>
+                                <EyeOutlined className="expand-icon"/>
+                            </Popover>
+                    }
                 </div>
                 <Button className="outlined-button details-button">
                     <Link to={`/club/${club.id}`}>Детальніше</Link>

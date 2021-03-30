@@ -1,10 +1,12 @@
 import {AutoComplete, Select} from "antd";
-import React, {createRef} from "react";
+import React from "react";
+import {withRouter} from 'react-router-dom';
 import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
+import ClearOutlined from "@ant-design/icons/lib/icons/ClearOutlined";
 
 const {Option, OptGroup} = Select;
 
@@ -20,6 +22,10 @@ class Search extends React.Component {
     };
 
     onSearchChange = (value, option) => {
+        if (this.props.redirect) {
+            this.props.history.push("/clubs");
+        }
+
         if (!searchParameters.isAdvancedSearch) {
             clearSearchParameters();
 
@@ -41,6 +47,15 @@ class Search extends React.Component {
                 }
             }
 
+            getClubsByParameters(searchParameters).then(response => {
+                this.context.setClubs(response);
+            });
+        }
+    };
+
+    onClear = () => {
+        if (!this.props.advancedSearch) {
+            clearSearchParameters();
             getClubsByParameters(searchParameters).then(response => {
                 this.context.setClubs(response);
             });
@@ -120,11 +135,18 @@ class Search extends React.Component {
                     </OptGroup>
                 </AutoComplete>
 
-                <ControlOutlined className="advanced-icon"
-                                 onClick={this.handleAdvancedSearch}/>
+                {!this.props.redirect &&
+                <div className="search-icon-group">
+                    <ClearOutlined className="clear-icon"
+                                   style={{opacity: searchParameters.isAdvancedSearch ? 0.5 : 1}}
+                                   onClick={this.onClear}/>
+                    <ControlOutlined className="advanced-icon"
+                                     onClick={this.handleAdvancedSearch}/>
+                </div>}
+
             </div>
         );
     }
 }
 
-export default Search;
+export default withRouter(Search);

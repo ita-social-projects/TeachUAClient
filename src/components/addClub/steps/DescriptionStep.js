@@ -1,5 +1,5 @@
 import {Form, Upload} from "antd";
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import EditorComponent from "../../editor/EditorComponent";
@@ -8,10 +8,16 @@ import {transToEng} from "../../../util/Translit";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {addClub} from "../../../service/ClubService";
 
-const DescriptionStep = ({step, setStep, setResult, result}) => {
+const DescriptionStep = ({step, setStep, setResult, result, setVisible}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+
+    useEffect(() => {
+        if(result) {
+            descriptionForm.setFieldsValue({...result})
+        }
+    }, []);
 
     const onFinish = (values) => {
         values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
@@ -20,7 +26,11 @@ const DescriptionStep = ({step, setStep, setResult, result}) => {
 
         setResult(Object.assign(result, values));
 
-        addClub(result).then(response => console.log(response));
+        addClub(result).then(response => {
+            setVisible(false);
+            setResult(null);
+            setStep(0);
+        });
     };
 
     return (

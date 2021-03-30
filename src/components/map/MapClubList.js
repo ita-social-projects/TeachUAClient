@@ -13,7 +13,7 @@ const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setCenter })
         getClubsByCategoryAndCity(mapSearchParameters).then(response => {
             setMapClubs(response);
         });
-        console.log(mapClubs);
+
         getAllCities().then(response => {
             response
                 .filter(city => city.name === mapSearchParameters.cityName)
@@ -21,7 +21,7 @@ const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setCenter })
                     setCenter({
                         lat: city.latitude,
                         lng: city.longitude
-                    })
+                    });
                     setZoom(10);
                 });
         });
