@@ -16,6 +16,7 @@ import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandl
 import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
+import QuestionTable from "./components/admin/question/QuestionTable";
 
 
 const { Content } = Layout;
@@ -41,6 +42,7 @@ function App() {
                         <Content className="global-content">
                             <Switch>
                                 <Route path="/admin/districts" exact component={DistrictTable}/>
+                                <Route path="/admin/questions" exact component={QuestionTable}/>
                                 <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
