@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Layout, Modal} from 'antd';
+import {Button, Layout, Modal} from 'antd';
 import './css/AddClubModal.css';
 import "./css/AddClubContent.css";
 import {Content} from "antd/es/layout/layout";
@@ -12,7 +12,7 @@ import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
 
 
-const AddClubModal = () => {
+const AddClubModal = ({button}) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
@@ -48,15 +48,17 @@ const AddClubModal = () => {
                     setResult={setResult}
                     result={result}
                     step={step}
+                    setVisible={setVisible}
                     setStep={setStep}/>;
         }
     };
 
     return (
         <div>
-            <div onClick={() => setVisible(true)}>
-                Додати гурток
-            </div>
+            {button ?
+                <Button onClick={() => setVisible(true)}
+                        className="add-club-button">Додати гурток</Button>
+                : <div onClick={() => setVisible(true)}>Додати гурток</div>}
             <Modal
                 className="modal-add-club"
                 centered

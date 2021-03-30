@@ -20,7 +20,7 @@ const ClubCarousel = ({ clubs }) => {
                         <div className="club-inf">
                             <div className="address">
                                 <EnvironmentFilled className="address-icon" />
-                                <div className="text">{club.city.name}</div>
+                                <div className="text">{club.locations[0].city.name}</div>
                             </div>
                             <div className="club-name">
                                 {club.name}

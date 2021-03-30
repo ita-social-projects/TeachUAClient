@@ -3,14 +3,14 @@ import React from "react";
 import './css/ClubItem.css'
 import CategoryLogo from "../CategoryLogo";
 
-const ClubItem = ({mapClub, setZoom, setSelected,setCenter}) => {
+const ClubItem = ({mapClub, setZoom, setSelected, setCenter}) => {
     return (
         <div onClick={() => {
             setSelected(mapClub);
             setZoom(15);
             setCenter({
                 lat: mapClub.latitude,
-                lng:mapClub.longitude
+                lng: mapClub.longitude
             })
         }} className="club-item">
             <div className="title">

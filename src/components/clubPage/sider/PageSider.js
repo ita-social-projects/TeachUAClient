@@ -16,7 +16,7 @@ class PageSider extends React.Component {
     getData = () => {
         const categoriesName = Array.from(this.props.club.categories, category => category.name);
 
-        getSimilarClubsByCategoryName(this.props.club.id, categoriesName, this.props.club.city.name).then(response => {
+        getSimilarClubsByCategoryName(this.props.club.id, categoriesName, this.props.cityName).then(response => {
             this.setState({similarClubs: response});
         });
 
@@ -54,7 +54,7 @@ class PageSider extends React.Component {
                     <span className="name">{this.props.club.center.name}</span>
                 </div>}
                 <SocialMedia label="Зв’яжіться з гуртком"/>
-                <SimilarClubs cityName={this.props.club.city.name} similarClubs={this.state.similarClubs}/>
+                <SimilarClubs cityName={this.props.cityName} similarClubs={this.state.similarClubs}/>
             </Sider>
         )
     }

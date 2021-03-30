@@ -18,7 +18,7 @@ import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 
 
-const {Sider, Content} = Layout;
+const { Content } = Layout;
 
 function App() {
     const [clubs, setClubs] = useState({
