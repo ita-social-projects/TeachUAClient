@@ -7,6 +7,7 @@ import FooterSocials from "./FooterSocials";
 
 
 const FooterComponent = () => {
+
     return (
         <Footer className="footer">
             <FooterSocials/>

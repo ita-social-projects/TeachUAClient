@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, {useMemo, useState} from "react";
 import './App.less';
-import { Layout } from 'antd';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Layout} from 'antd';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import { SearchContext } from "./context/SearchContext";
+import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
@@ -18,7 +18,7 @@ import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 
 
-const { Sider, Content } = Layout;
+const {Sider, Content} = Layout;
 
 function App() {
     const [clubs, setClubs] = useState({
@@ -29,14 +29,14 @@ function App() {
     });
 
 
-    const clubProvider = useMemo(() => ({ clubs, setClubs }), [clubs, setClubs]);
+    const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
 
     return (
         <Layout className="layout">
-            <div className="behind-header" />
+            <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
                 <SearchContext.Provider value={clubProvider}>
-                    <HeaderComponent />
+                    <HeaderComponent/>
                     <Layout>
                         <Content className="global-content">
                             <Switch>
@@ -55,7 +55,7 @@ function App() {
                         </Content>
                     </Layout>
                 </SearchContext.Provider>
-                <FooterComponent />
+                <FooterComponent/>
             </Router>
         </Layout>
     );
