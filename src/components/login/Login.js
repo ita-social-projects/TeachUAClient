@@ -12,9 +12,13 @@ const Login = () => {
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
-            if (response.status) {
-                message.error(response.message);
-            } else {
+            if (response.status>=500) {
+                message.error("Ваш email не підтверджено. Будь ласка підтвердіть email");
+            } else if(response.status<500){
+                message.error("Введено невірний пароль або email");
+            }
+
+            else {
                 console.log(response)
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);

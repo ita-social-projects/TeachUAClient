@@ -1,9 +1,11 @@
-import React from 'react';
-import {Button, Form, Input} from 'antd';
+import React, {useState} from 'react';
+import {Button, Form, Input, message} from 'antd';
 import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
+import './сss/Registration.less';
 
 
 const RegistrationInput = ({disabledButton}) => {
+
     return (
         <div className="registration-input-box">
             <div className="registration-or"><span className="label-or">або</span></div>
@@ -169,7 +171,9 @@ const RegistrationInput = ({disabledButton}) => {
                 <div className="registration-footer">
                     <Button className="registration-button"
                             htmlType="submit"
-                            disabled={disabledButton}>
+                            disabled={disabledButton}
+                    >
+
                         Зареєструватися
                     </Button>
                 </div>
