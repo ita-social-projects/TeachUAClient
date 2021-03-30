@@ -22,14 +22,14 @@ const QuestionTable = () => {
                 title: 'Питання',
                 dataIndex: 'title',
                 width: '25%',
+                inputType: 'textarea',
                 editable: true,
-                defaultSortOrder: 'ascend',
-                sorter: (a, b) => a.title.length - b.title.length,
             },
             {
                 title: 'Відповідь',
                 dataIndex: 'text',
                 width: '50%',
+                inputType: 'textarea',
                 editable: true,
             }
         ];

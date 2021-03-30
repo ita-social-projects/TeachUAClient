@@ -3,7 +3,7 @@ import {Button, Form, Input, message} from "antd";
 import {addToTable} from "../../../util/TableUtil";
 import {addQuestion} from "../../../service/QuestionService";
 
-const {TextArea} = Input
+const {TextArea} = Input;
 
 const AddQuestion = ({questions, setQuestions}) => {
     const onFinish = (values) => {
