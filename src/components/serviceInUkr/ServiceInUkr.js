@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "antd/lib/layout/layout";
 import "./css/serviceInUkr.css";
 import TwitterOutlined from "@ant-design/icons/lib/icons/TwitterOutlined";
@@ -7,9 +7,19 @@ import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import {Button, Collapse} from "antd";
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
+import {getAllQuestions} from "../../service/QuestionService";
 
-const serviceInUkr = () => {
+const ServiceInUkr = () => {
     const {Panel} = Collapse;
+    const [questions, setQuestions] = useState([]);
+
+    const getData = () => {
+        getAllQuestions().then(response => setQuestions(response))
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <Layout className="serviceInUkr global-padding">
@@ -46,43 +56,21 @@ const serviceInUkr = () => {
             </div>
             <div className="faq">
                 <div className="faq-title">Популярні Питання (FAQ)</div>
-
-                <Collapse class="collapse"
-                          defaultActiveKey={['1']}
-                          expandIconPosition="right"
-                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
-                                                                          rotate={isActive ? 90 : 0}/>}
-                >
-                    <Panel className="panel"
-                           header="Як діяти, якщо вам відмовляють в інформації чи послугах українською мовою" key="1">
-                        <p>- Спочатку варто спробувати владнати ситуацію на місці та попросити працівника обслуговувати
-                            вас державною мовою.
-                            - У разі відмови працівника, звернутись до керівництва закладу або на “гарячу лінію”
-                            установи.
-                            - У разі відмови або не забезпечення надання інформації (послуг) державною мовою необхідно
-                            зафіксувати факт відмови (за допомогою аудіо-, відео, письмового підтвердження очевидців
-                            тощо) та дані суб’єкта господарювання (назву, місцезнаходження, контакти суб’єкта).
-                        </p>
-                    </Panel>
-                </Collapse>
-                <Collapse class="collapse"
-                          expandIconPosition="right"
-                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
-                                                                          rotate={isActive ? 90 : 0}/>}>
-                    <Panel className="panel" header="Куди можна подавати скаргу" key="2">
-                        <p>Текст відсутній</p>
-                    </Panel>
-                </Collapse>
-                <Collapse class="collapse"
-                          expandIconPosition="right"
-                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
-                                                                          rotate={isActive ? 90 : 0}/>}>
-                    <Panel className="panel" header="Що має містити скарга" key="3">
-                        <p>Текст відсутній</p>
-                    </Panel>
-                </Collapse>
+                {questions.map(question =>
+                    <Collapse class="collapse"
+                              defaultActiveKey={['1']}
+                              expandIconPosition="right"
+                              expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
+                                                                              rotate={isActive ? 90 : 0}/>}
+                    >
+                        <Panel className="panel"
+                               header={question.title} key={question.id}>
+                            <p>{question.text}</p>
+                        </Panel>
+                    </Collapse>
+                )}
             </div>
         </Layout>
     )
 }
-export default serviceInUkr;
+export default ServiceInUkr;

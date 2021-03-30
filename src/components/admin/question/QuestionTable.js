@@ -1,50 +1,41 @@
-import {deleteCityById, getAllCities, updateCityById} from "../../../service/CityService";
 import {Form, message, Popconfirm} from "antd";
 import React, {useEffect, useState} from "react";
-import "./css/AddCity.css";
-import AddCity from "./AddCity";
 import EditableTable from "../../EditableTable";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
+import {deleteQuestionById, getAllQuestions, updateQuestionById} from "../../../service/QuestionService";
+import AddQuestion from "./AddQuestion";
 
-const CityTable = () => {
+const QuestionTable = () => {
         const [form] = Form.useForm();
-        const [cities, setCities] = useState([]);
+        const [questions, setQuestions] = useState([]);
 
         const columns = [
             {
                 title: 'ID',
                 dataIndex: 'id',
-                width: '10%',
+                width: '5%',
                 editable: false,
                 defaultSortOrder: 'ascend',
                 sorter: (a, b) => a.id - b.id,
             },
             {
-                title: 'Name',
-                dataIndex: 'name',
-                width: '15%',
+                title: 'Питання',
+                dataIndex: 'title',
+                width: '25%',
                 editable: true,
                 defaultSortOrder: 'ascend',
-                sorter: (a, b) => a.name.length - b.name.length,
+                sorter: (a, b) => a.title.length - b.title.length,
             },
             {
-                title: 'Довгота',
-                dataIndex: 'longitude',
-                render: (longitude) => Number.parseFloat(longitude).toFixed(4),
-                width: '20%',
-                editable: true
-            },
-            {
-                title: 'Широта',
-                dataIndex: 'latitude',
-                render: (latitude) => Number.parseFloat(latitude).toFixed(4),
-                width: '20%',
+                title: 'Відповідь',
+                dataIndex: 'text',
+                width: '50%',
                 editable: true,
             }
         ];
 
         const actions = (record) => [
-            <Popconfirm title="Видалити місто?"
+            <Popconfirm title="Видалити питання?"
                         cancelText="Ні"
                         okText="Так"
                         cancelButtonProps={{
@@ -59,8 +50,8 @@ const CityTable = () => {
         ];
 
         const getData = () => {
-            getAllCities().then(response => {
-                setCities(response)
+            getAllQuestions().then(response => {
+                setQuestions(response)
             });
         };
 
@@ -69,31 +60,28 @@ const CityTable = () => {
         }, []);
 
         const remove = (record) => {
-            deleteCityById(record.id)
+            deleteQuestionById(record.id)
                 .then((response) => {
                     if (response.status) {
                         message.warning(response.message);
                         return;
                     }
 
-                    message.success(`Місто ${record.name} успішно видалене`);
+                    message.success(`Питання ${record.title} успішно видалене`);
 
-                    setCities(deleteFromTable(cities, record.id));
+                    setQuestions(deleteFromTable(questions, record.id));
                 });
         };
 
         const save = async (record) => {
-            editCellValue(form, cities, record.id).then((editedData) => {
-                updateCityById(editedData.item).then(response => {
-                    const st=response.status;
-                    const badStatuses=[ "500", "401", "400", "403" ]
-
-                    if (badStatuses.includes(st)) {
-                        message.warning("Response status: "+ st);
+            editCellValue(form, questions, record.id).then((editedData) => {
+                updateQuestionById(editedData.item).then(response => {
+                    if (response.status) {
+                        message.warning(response.message);
                         return;
                     }
 
-                    setCities(editedData.data);
+                    setQuestions(editedData.data);
                 });
             });
         };
@@ -103,13 +91,14 @@ const CityTable = () => {
                 className="city-table"
                 bordered
                 columns={columns}
-                data={cities}
+                data={questions}
                 onSave={save}
                 form={form}
                 actions={actions}
-                footer={<AddCity cities={cities} setCities={setCities}/>}/>
+                footer={<AddQuestion questions={questions} setQuestions={setQuestions}/>}
+            />
         );
     }
 ;
 
-export default CityTable;
+export default QuestionTable;
