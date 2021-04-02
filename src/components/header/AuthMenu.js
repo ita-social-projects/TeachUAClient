@@ -4,7 +4,7 @@ import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import '../registration/сss/Registration.less'
 import Registration from "../registration/Registration";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import {deleteToken, deleteUserId, getToken} from "../../service/StorageService";

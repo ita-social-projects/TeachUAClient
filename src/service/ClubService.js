@@ -11,6 +11,7 @@ export const addClub = async (data) => {
         name: data.name,
         ageFrom: data.ageFrom,
         ageTo: data.ageTo,
+        isOnline: data.isOnline,
         description: data.description,
         locations: data.locations,
         urlLogo: data.urlLogo && data.urlLogo.file.response,
@@ -90,6 +91,7 @@ export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPat
             stationName: parameters.stationName,
             categoriesName: parameters.categoriesName && replaceCommaToSemicolon(parameters.categoriesName),
             isCenter: parameters.isCenter,
+            isOnline: parameters.isOnline ? parameters.isOnline.length === 0 ? null : true : null,
             sort: `${sortBy},${sortPath}`,
             page: page,
         },
@@ -103,6 +105,7 @@ export const getClubsByParameters = async (parameters, page) => {
         params: {
             clubName: parameters.clubName,
             cityName: parameters.cityName,
+            isOnline: parameters.isOnline,
             categoryName: parameters.categoryName,
             page: page,
         },

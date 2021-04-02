@@ -4,11 +4,6 @@ import {LiqPayPay, LiqPaySubscribe} from "react-liqpay";
 
 const FooterDonate = () => {
 
-
-    console.log(process.env.REACT_APP_PUBLIC_KEY)
-    console.log(process.env.REACT_APP_PRIVATE_KEY)
-
-
     return (
         <div className="footer-donate">
             <div className="article">

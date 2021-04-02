@@ -10,6 +10,7 @@ import ClubListSider from "./ClubListSider";
 import ClubListControl from "./ClubListControl";
 import ClubListRectangleItem from "./ClubListRectangleItem";
 import ClubListItemInfo from "./ClubListItemInfo";
+import ClubListEmptySearch from "./ClubListEmptySearch";
 
 const {Content} = Layout;
 
@@ -52,8 +53,8 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
     };
 
     const onClubClick = (club) => {
-       setClickedClub(club);
-       setClubInfoVisible(true);
+        setClickedClub(club);
+        setClubInfoVisible(true);
     };
 
     return (
@@ -63,37 +64,49 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
                            form={searchForm}
                            getAdvancedData={getData}
             />}
-            {!loading && clubs.content.length === 0 ? <EmptySearch/> : (
-                <Content className="club-list-content"
-                         style={{
-                             maxWidth: advancedSearch ? '944px' : '1264px',
-                         }}>
+            <Content className="club-list-content"
+                     style={{
+                         maxWidth: advancedSearch ? '944px' : '1264px',
+                     }}>
 
-                    {advancedSearch &&
-                    <ClubListControl setSortBy={setSortBy}
-                                     setSortDirection={setSortDirection}
-                                     sortBy={sortBy}
-                                     sortDirection={sortDirection}
-                                     setView={setView}/>}
+                {advancedSearch &&
+                <ClubListControl setSortBy={setSortBy}
+                                 setSortDirection={setSortDirection}
+                                 sortBy={sortBy}
+                                 view={view}
+                                 sortDirection={sortDirection}
+                                 setView={setView}/>}
 
-                    <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
-                        {clubs.content.map((club, index) =>
-                            view === 'BLOCK' ?
-                                <ClubListItem club={club} key={index} onClubClick={onClubClick}/> :
-                                <ClubListRectangleItem club={club} key={index}  onClubClick={onClubClick}/>)}
+                {!loading && clubs.content.length === 0 ? <ClubListEmptySearch/> :
+                    <div>
+                        {
+                            !advancedSearch ?
+                                <div className="content-clubs-list content-clubs-block">
+                                    {clubs.content.map((club, index) =>
+                                        <ClubListItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                </div>
+                                : <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
+                                    {clubs.content.map((club, index) =>
+                                        view === 'BLOCK' ?
+                                            <ClubListItem club={club} key={index} onClubClick={onClubClick}/> :
+                                            <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                </div>
+                        }
+
+                        {clickedClub &&
+                        <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
+                                          club={clickedClub}/>}
+
+                        <Pagination className="pagination"
+                                    hideOnSinglePage
+                                    showSizeChanger={false}
+                                    onChange={onPageChange}
+                                    current={currentPage + 1}
+                                    pageSize={clubs.size}
+                                    total={clubs.totalElements}/>
                     </div>
-
-                    {clickedClub && <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible} club={clickedClub}/>}
-
-                    <Pagination className="pagination"
-                                hideOnSinglePage
-                                showSizeChanger={false}
-                                onChange={onPageChange}
-                                current={currentPage + 1}
-                                pageSize={clubs.size}
-                                total={clubs.totalElements}/>
-                </Content>
-            )}
+                }
+            </Content>
         </Layout>
     )
 };
