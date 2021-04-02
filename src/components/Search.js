@@ -96,7 +96,6 @@ class Search extends React.Component {
         return (
             <div className="search">
                 <AutoComplete
-                    allowClear={true}
                     loading={this.state.loading}
                     disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSearchChange}

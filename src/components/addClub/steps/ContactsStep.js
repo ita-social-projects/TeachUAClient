@@ -1,10 +1,11 @@
-import {Form, Input, List, message, Popconfirm, Select} from "antd";
+import {Form, Input, List, message, Popconfirm, Select, Switch, Tooltip} from "antd";
 import React, {useState, useEffect} from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
+import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
     const [locations, setLocations] = useState([]);
@@ -14,15 +15,15 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
     const [contactsFrom] = Form.useForm();
 
     useEffect(() => {
-        if(result) {
+        if (result) {
             contactsFrom.setFieldsValue({...result});
         }
     }, []);
 
     const onFinish = (values) => {
         if (locations.length <= 0) {
-            message.error("Додайте локації");
-            return;
+            values.isOnline = true;
+            message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
 
         values.locations = locations;
@@ -86,6 +87,17 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
                     Додати локацію
                 </span>
             </Form.Item>
+            <div className="add-club-inline">
+                <Form.Item name="isOnline"
+                           className="add-club-row"
+                           label="Доступний онлайн?"
+                >
+                    <Switch checkedChildren="Так" unCheckedChildren="Ні"/>
+                </Form.Item>
+                <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн">
+                    <InfoCircleOutlined className="info-icon"/>
+                </Tooltip>
+            </div>
             <Form.Item
                 label="Контакти"
                 className="add-club-row add-club-contacts">

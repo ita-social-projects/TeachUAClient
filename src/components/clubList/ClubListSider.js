@@ -4,11 +4,9 @@ import "./css/ClubListSider.css"
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getDistrictsByCityName} from "../../service/DisctrictService";
-import {searchParameters} from "../../context/SearchContext";
 
 const {Sider} = Layout;
 const {Option} = Select;
-
 
 const ClubListSider = ({setCurrentPage, form, getAdvancedData}) => {
     const [cityName, setCityName] = useState(null);
@@ -31,7 +29,7 @@ const ClubListSider = ({setCurrentPage, form, getAdvancedData}) => {
         getDistrictsByCityName(cityName).then(response => setDistricts(response));
     }, [cityName]);
 
-    const onValuesChange = () => {
+    const onValuesChange = (values) => {
         getData();
     };
 
@@ -50,14 +48,19 @@ const ClubListSider = ({setCurrentPage, form, getAdvancedData}) => {
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
-                        onChange={(value) => setCityName(value)}>
+                        onChange={(value) => {
+                            setCityName(value)
+                            form.setFieldsValue({districtName: undefined})
+                        }}>
                         {cities.map(city => <Option value={city.name}>{city.name}</Option>)}
+                        <Option value="online">Без локації</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item name="districtName"
                            className="club-list-row"
                            label="Район міста">
                     <Select
+                        allowClear
                         className="club-list-select"
                         placeholder="Виберіть район"
                         optionFilterProp="children">
@@ -74,12 +77,19 @@ const ClubListSider = ({setCurrentPage, form, getAdvancedData}) => {
                 </Form.Item>
                 <Form.Item name="isCenter"
                            className="club-list-row"
-                           label="Категорії"
+                           label="Гурток/Центр"
                            initialValue={false}>
                     <Radio.Group className="club-list-kind">
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
                     </Radio.Group>
+                </Form.Item>
+                <Form.Item name="isOnline"
+                           className="club-list-row"
+                           label="Ремоут">
+                    <Checkbox.Group className="club-list-categories">
+                        <Checkbox disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
+                    </Checkbox.Group>
                 </Form.Item>
                 <Form.Item label="Вік дитини"
                            className="club-list-row"

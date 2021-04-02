@@ -4,7 +4,7 @@ import ArrowDownOutlined from "@ant-design/icons/lib/icons/ArrowDownOutlined";
 import ArrowUpOutlined from "@ant-design/icons/lib/icons/ArrowUpOutlined";
 import {Radio} from "antd";
 
-const ClubListControl = ({setSortBy, setSortDirection, sortBy, sortDirection, setView}) => {
+const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirection, setView}) => {
     return (
         <div className="club-list-control">
             <div className="club-control-sort">
@@ -13,22 +13,20 @@ const ClubListControl = ({setSortBy, setSortDirection, sortBy, sortDirection, se
                       onClick={() => setSortBy('name')}
                       style={{color: sortBy === 'name' && '#FA8C16'}}>за алфавітом</span>
                 <span className="control-sort-option"
-                      style={{color: sortBy === 'popular' && '#FA8C16'}}>за популярністю</span>
-                <span className="control-sort-option"
                       onClick={() => setSortBy('rating')}
                       style={{color: sortBy === 'rating' && '#FA8C16'}}>за рейтингом</span>
                 <div className="control-sort-arrows">
                     <ArrowUpOutlined className="control-sort-arrow"
-                                     style={{color: sortDirection === 'asc' && '#FFC069'}}
-                                     onClick={() => setSortDirection('asc')}/>
+                                     style={{color: sortDirection === 'desc' && '#FFC069'}}
+                                     onClick={() => setSortDirection('desc')}/>
                     <ArrowDownOutlined className="control-sort-arrow"
-                                       style={{color: sortDirection === 'desc' && '#FFC069'}}
-                                       onClick={() => setSortDirection('desc')}/>
+                                       style={{color: sortDirection === 'asc' && '#FFC069'}}
+                                       onClick={() => setSortDirection('asc')}/>
                 </div>
             </div>
             <Radio.Group className="club-control-view"
                          optionType="button"
-                         defaultValue="BLOCK"
+                         defaultValue={view}
                          onChange={(value) => setView(value.target.value)}
                          buttonStyle="solid">
                 <Radio.Button value="LIST"
