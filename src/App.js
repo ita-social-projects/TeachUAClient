@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import {SearchContext} from "./context/SearchContext";
+import {SearchContext, searchParameters} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
