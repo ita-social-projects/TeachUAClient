@@ -110,8 +110,9 @@ const ImportDatabase = () => {
 
                     </div>
 
-                    <span class="import-db-buttons">
-                        <Form.Item name="excel-file"
+                    <span className="import-db-buttons">
+                        <Form.Item
+                                   name="excel-file"
                                    rules={[{
                                        required: true,
                                        message: "Завантажте Excel-файл"
@@ -128,9 +129,11 @@ const ImportDatabase = () => {
                                 <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
-                        <Button onClick={() => loadDataToDatabase()} className="flooded-button send-data-button">Відправити дані у БД</Button>
+                        <Button onClick={() => loadDataToDatabase()} className="flooded-button send-data-button">Відправити всі дані у БД</Button>
                     </span>
-
+                    <div className="import-warning">
+                        *При співпадінні імен, існучі гуртки чи клуби будуть перезаписані
+                    </div>
                     <div style={mistakes.length !== 0 ? {} : {display: 'none'}}>
                         <Paragraph>
                             <Text

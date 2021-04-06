@@ -31,12 +31,16 @@
     flex-direction: column !important;
 }
 
-
 .import-db-list-item {
     padding: 0;
     margin: 0;
 }
-
+.import-warning{
+    color:grey;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
 
 .import-db-buttons {
     margin-top: 2em;
@@ -46,10 +50,14 @@
 
 }
 
+.ant-form-item{
+    margin-bottom: 10px;
+}
+
 .send-data-button {
     width: auto;
     display: block;
-    margin-left: 10px;
+    margin-left: auto;
     margin-right: auto;
 }
 
