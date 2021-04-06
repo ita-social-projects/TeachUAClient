@@ -17,6 +17,7 @@ import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 import QuestionTable from "./components/admin/question/QuestionTable";
+import ImportDatabase from "./components/admin/databaseTransfer/ImportDatabase";
 
 
 const { Content } = Layout;
@@ -45,6 +46,7 @@ function App() {
                                 <Route path="/admin/questions" exact component={QuestionTable}/>
                                 <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
+                                <Route path="/admin/import-database" exact component={ImportDatabase}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
