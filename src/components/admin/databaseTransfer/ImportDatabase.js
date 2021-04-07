@@ -5,7 +5,7 @@ import {UPLOAD_EXCEL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Text from "antd/lib/typography/Text";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
 import {loadExcelToDatabase} from "../../../service/DataTransferService";
 
@@ -46,14 +46,30 @@ const ImportDatabase = () => {
         return string;
     }
 
+    const ICON_WARNING = 1;
+    const ICON_ERROR = 2;
+    const ICON_OK = 3;
+
+    const renderIcon = (type)=>{
+        switch (type){
+            case ICON_WARNING:
+                return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
+            case ICON_ERROR:
+                return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
+            case ICON_OK:
+                return (<CheckCircleOutlined className="icon ok-icon"/>)
+        }
+    }
+
     const mistakesList = () => {
+        mistakes.sort((a,b)=> b.critical - a.critical);
         return (
             <List
                 size="small"
                 dataSource={mistakes}
                 renderItem={item =>
                     <List.Item className="import-db-list-item">
-                        <CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>
+                        {renderIcon(item.critical?ICON_ERROR: ICON_WARNING)}
                         {`
                             ${item.sheetName}.  
                             ${shortString(item.columnName)}: 
@@ -69,6 +85,16 @@ const ImportDatabase = () => {
     const loadDataToDatabase = () =>{
         if(dataLoaded)
             loadExcelToDatabase(dataToLoad)
+    }
+
+
+
+    const renderStatistic = (name, okCount, totalCount)=>{
+        return (
+            <span>
+                {renderIcon(ICON_OK)}
+                {name}: {okCount} з {totalCount}  рядків
+            </span>)
     }
 
     return (
@@ -91,23 +117,11 @@ const ImportDatabase = () => {
                     <div
                         style={dataLoaded ? {} : {display: 'none'}}
                         className="import-report">
-
-                        <span>
-                             <CheckCircleOutlined className="icon ok-icon"/>
-                            Гуртки: {report["Гурток"]} з {dataLoaded ? dataToLoad.clubs.length : 0}  рядків  </span>
-                        <span>
-                             <CheckCircleOutlined className="icon ok-icon"/>
-                            Центри: {report["Центр"]} з {dataLoaded ? dataToLoad.centers.length : 0}  рядків  </span>
-                        <span>
-                             <CheckCircleOutlined className="icon ok-icon"/>
-                            Райони: {report["Райони"]} з {dataLoaded ? dataToLoad.districts.length : 0} рядків   </span>
-                        <span>
-                             <CheckCircleOutlined className="icon ok-icon"/>
-                            Метро: {report["Метро"]} з {dataLoaded ? dataToLoad.stations.length : 0}  рядків  </span>
-                        <span>
-                             <CheckCircleOutlined className="icon ok-icon"/>
-                            Категорії: {report["Категорії"]} з {dataLoaded ? dataToLoad.categories.length : 0}  рядків  </span>
-
+                        {renderStatistic("Гуртки", report["Гурток"], dataLoaded ? dataToLoad.clubs.length : 0)}
+                        {renderStatistic("Центри", report["Центр"], dataLoaded ? dataToLoad.centers.length : 0)}
+                        {renderStatistic("Райони", report["Райони"], dataLoaded ? dataToLoad.districts.length : 0)}
+                        {renderStatistic("Метро", report["Метро"], dataLoaded ? dataToLoad.stations.length : 0)}
+                        {renderStatistic("Категорії", report["Категорії"], dataLoaded ? dataToLoad.categories.length : 0)}
                     </div>
 
                     <span className="import-db-buttons">
