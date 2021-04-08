@@ -18,8 +18,10 @@ import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 import ApproveClubTable from "./components/admin/club/approveClub/ApproveClubTable";
 import QuestionTable from "./components/admin/question/QuestionTable";
+import ImportDatabase from "./components/admin/databaseTransfer/ImportDatabase";
 import ChangeOwnerTable from "./components/admin/club/changeOwner/ChangeOwnerTable";
 import StationTable from "./components/admin/station/StationTable";
+
 
 const { Content } = Layout;
 
@@ -46,6 +48,7 @@ function App() {
                                 <Route path="/admin/questions" exact component={QuestionTable}/>
                                 <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
+                                <Route path="/admin/import-database" exact component={ImportDatabase}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
                                 <Route path="/admin/questions" exact component={QuestionTable}/>
                                 <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
