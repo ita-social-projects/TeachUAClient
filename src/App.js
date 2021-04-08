@@ -60,7 +60,7 @@ function App() {
                                 <Route path="/user/:id" exact component={UserPage}/>
                                 <Route path="/verify" exact component={VerifyPage}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
-                                <Route path="/service" exact component={serviceInUkr}/>
+                                <Route path="/service" exact component={ServiceInUkr}/>
                                 <Route path="/about" exact component={AboutProject}/>
                                 <Route path="/" component={MainComponent}/>
                             </Switch>
