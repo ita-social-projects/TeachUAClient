@@ -15,6 +15,7 @@ import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandl
 import serviceInUkr from "./components/serviceInUkr/serviceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
+import VerifyPage from "./components/verifyPage/VerifyPage";
 
 
 const {Sider, Content} = Layout;
@@ -45,6 +46,7 @@ function App() {
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>
+                                <Route path="/verify" exact component={VerifyPage}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                 <Route path="/service" exact component={serviceInUkr}/>
                                 <Route path="/about" exact component={AboutProject}/>
