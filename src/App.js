@@ -16,9 +16,10 @@ import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandl
 import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
+import ApproveClubTable from "./components/admin/club/approveClub/ApproveClubTable";
 import QuestionTable from "./components/admin/question/QuestionTable";
+import ChangeOwnerTable from "./components/admin/club/changeOwner/ChangeOwnerTable";
 import StationTable from "./components/admin/station/StationTable";
-
 
 const { Content } = Layout;
 
@@ -29,7 +30,6 @@ function App() {
         size: 0,
         totalElements: 0
     });
-
 
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
 
@@ -47,6 +47,9 @@ function App() {
                                 <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
+                                <Route path="/admin/questions" exact component={QuestionTable}/>
+                                <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
+                                <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                 <Route path="/admin/stations" exact component={StationTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>

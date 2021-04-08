@@ -1,12 +1,21 @@
 import fetchRequest from "./FetchRequest";
-import { BASE_URL } from "./config/ApiConfig";
-import { Redirect } from 'react-router-dom'
+import {BASE_URL} from "./config/ApiConfig";
 
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
     }).catch((error) => {
     });
+};
+
+export const getUserByEmail = async (params) => {
+    return await fetchRequest.get(BASE_URL + "/api/user", {params})
+        .then((response) => {
+            return response.data
+        })
+        .catch((error) => {
+            return error.response.data
+        });
 };
 
 export const signUp = async (data) => {
@@ -72,18 +81,17 @@ export const updateUserByAdmin = async (data) => {
 };
 
 export const getAllUsers = async () => {
-  console.log("getAllUsers method ")
-  return await fetchRequest.get(BASE_URL+"/api/users")
-      .then((response)=>{
-          return response.data
-      }).catch((error) => {
-          return error.response.data
-      })
+    return await fetchRequest.get(BASE_URL + "/api/users")
+        .then((response) => {
+            return response.data
+        }).catch((error) => {
+            return error.response.data
+        })
 };
 
 export const deleteUserById = async (id) => {
-    return await fetchRequest.delete(BASE_URL + "/api/user/"+id, {
-        id:id
+    return await fetchRequest.delete(BASE_URL + "/api/user/" + id, {
+        id: id
     }).then((response) => {
         return response.data
     }).catch((error) => {
