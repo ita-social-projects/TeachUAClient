@@ -17,6 +17,7 @@ import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
 import QuestionTable from "./components/admin/question/QuestionTable";
+import StationTable from "./components/admin/station/StationTable";
 
 
 const { Content } = Layout;
@@ -46,6 +47,7 @@ function App() {
                                 <Route path="/admin/users" exact component={UsersTable}/>
                                 <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
                                 <Route path="/admin/cities" exact component={CityTable}/>
+                                <Route path="/admin/stations" exact component={StationTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>
