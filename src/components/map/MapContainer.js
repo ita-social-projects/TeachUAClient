@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript } from "@react-google-maps/api";
+import React, {useState} from 'react';
+import {GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript} from "@react-google-maps/api";
 import MarkItem from "./MarkItem";
+import {searchParameters} from "../../context/SearchContext";
 
-const MapContainer = ({ mapClubs, zoom, setZoom, selected, setSelected, center, setCenter }) => {
+const MapContainer = ({mapClubs, location, setLocation, zoom, setZoom, selected, setSelected, center, setCenter}) => {
     const [map, setMap] = useState(null);
 
-    const { isLoaded, loadError } = useLoadScript({
+    const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_MAP_KEY
     });
 
@@ -28,11 +29,15 @@ const MapContainer = ({ mapClubs, zoom, setZoom, selected, setSelected, center, 
         }
     };
 
+    console.log(mapClubs);
+
     return (
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={zoom}
-            onLoad={map => { setMap(map); }}
+            onLoad={map => {
+                setMap(map);
+            }}
             center={center}
             options={option}
             onZoomChanged={changeZoom}>
@@ -49,37 +54,37 @@ const MapContainer = ({ mapClubs, zoom, setZoom, selected, setSelected, center, 
                     })
                 }}>
                 {(cluster) =>
-                    mapClubs.map(club => (
-                        <Marker
-                            id={club.id}
-                            position={{
-                                lat: club.latitude,
-                                lng: club.longitude
-                            }}
-                            clusterer={cluster}
-                            onClick={() => {
-                                setSelected(club);
-                                setZoom(15);
-                                setCenter({
-                                    lat: club.latitude,
-                                    lng: club.longitude
-                                })
-                            }}
-                            icon={{ url: `${process.env.PUBLIC_URL}/static/images/map/location.png` }} />
-                    )
+                    mapClubs.map(club =>
+                        club.locations.map(loc =>
+                            loc.city.name === searchParameters.cityName && <Marker
+                                id={club.id}
+                                position={{
+                                    lat: loc.latitude,
+                                    lng: loc.longitude
+                                }}
+                                clusterer={cluster}
+                                onClick={() => {
+                                    setLocation(loc);
+                                    setSelected(club);
+                                    setZoom(15);
+                                    setCenter({
+                                        lat: loc.latitude,
+                                        lng: loc.longitude
+                                    })
+                                }}
+                                icon={{url: `${process.env.PUBLIC_URL}/static/images/map/location.png`}}/>)
                     )}
             </MarkerClusterer>
 
             {selected && (
-                <InfoWindow position={{ lat: selected.latitude, lng: selected.longitude }}
-                    onCloseClick={() => {
-                        setSelected(null);
-                    }}>
-                    <MarkItem mapClub={selected} />
+                <InfoWindow position={{lat: location.latitude, lng: location.longitude}}
+                            onCloseClick={() => {
+                                setSelected(null);
+                            }}>
+                    <MarkItem mapClub={selected} location={location}/>
                 </InfoWindow>)}
         </GoogleMap>
     )
-
 }
 
 export default MapContainer;

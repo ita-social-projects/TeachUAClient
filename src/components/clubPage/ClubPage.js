@@ -9,16 +9,18 @@ import Loader from "../Loader";
 import './css/ClubPage.css';
 import PageComments from "./comments/PageComments";
 import {getFeedbackListByClubId} from "../../service/FeedbackService";
+import {searchParameters} from "../../context/SearchContext";
 
 class ClubPage extends React.Component {
     state = {
         club: {},
+        cityName: "",
         feedback: [],
         clubNotFound: false,
     };
 
     getData = () => {
-        let clubId = this.props.match.params.id;
+        const clubId = this.props.match.params.id;
 
         getClubById(clubId).then(response => {
             this.setState({club: response});
@@ -32,6 +34,7 @@ class ClubPage extends React.Component {
     };
 
     componentDidMount() {
+        this.setState({cityName: searchParameters.cityName});
         this.getData();
     }
 
@@ -54,9 +57,9 @@ class ClubPage extends React.Component {
                     <PageHeader club={this.state.club}/>
                     <Layout className="club-page" style={{padding: 40, background: 'white'}}>
                         <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
-                        <PageSider club={this.state.club}/>
+                        <PageSider cityName={this.state.cityName} club={this.state.club}/>
                     </Layout>
-                    <PageComments feedback={this.state.feedback} feedbackAdded={(feedback) => this.getData()}
+                    <PageComments feedback={this.state.feedback} feedbackAdded={this.getData}
                                   club={this.state.club}/>
                 </Layout>)
     }

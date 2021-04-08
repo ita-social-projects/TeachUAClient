@@ -3,6 +3,8 @@ import React from "react";
 import {UPLOAD_IMAGE_URL} from "../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 
+const { TextArea } = Input;
+
 const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children, ...restProps}) => {
     let inputNode;
 
@@ -17,6 +19,10 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
             >
                 <span className="upload"><UploadOutlined className="icon"/>Завантажити</span>
             </Upload>;
+            break;
+        case 'textarea':
+            inputNode = <TextArea rows={4}
+                                  placeholder="Текст"/>;
             break;
         case 'number':
             inputNode = <InputNumber/>;

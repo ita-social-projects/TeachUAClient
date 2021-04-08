@@ -1,15 +1,15 @@
 import React from "react";
 
-import { Button, Form, Input, Modal, Rate, Tabs, Tooltip } from "antd";
+import {Button, Form, Input, Modal, Rate, Tabs, Tooltip} from "antd";
 import './css/CommentEditComponent.less';
 import TextArea from "antd/lib/input/TextArea";
-import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 
-import { createFeedback } from "../../../service/FeedbackService";
-import { createComplaint } from "../../../service/ComplaintService";
-import { getUserById } from "../../../service/UserService";
+import {createFeedback} from "../../../service/FeedbackService";
+import {createComplaint} from "../../../service/ComplaintService";
+import {getUserById} from "../../../service/UserService";
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 class CommentEditComponent extends React.Component {
     state = {
@@ -25,10 +25,9 @@ class CommentEditComponent extends React.Component {
     }
 
     getData = () => {
-        if(this.props.visible)
-            this.getUser().then((user) => {
-                this.setState({ user: user });
-            })
+        this.getUser().then((user) => {
+            this.setState({user: user});
+        })
     };
 
     componentDidMount() {
@@ -43,7 +42,7 @@ class CommentEditComponent extends React.Component {
 
     closeEditComponent() {
         this.props.setVisible(false)
-        this.setState({ user: {}, commentText: undefined, rate: undefined });
+        this.setState({user: {}, commentText: undefined, rate: undefined});
         this.form.resetFields();
     }
 
@@ -53,20 +52,19 @@ class CommentEditComponent extends React.Component {
                 this.state.commentText,
                 this.state.user.id,
                 this.props.club.id).then(() => {
-                    this.closeEditComponent();
-                    this.state.isComplaint = false;
-                });
-        }
-        else {
+                this.closeEditComponent();
+                this.state.isComplaint = false;
+            });
+        } else {
             createFeedback(
                 this.state.commentText,
                 this.state.rate,
                 this.state.user.id,
                 this.props.club.id).then((feedback) => {
-                    this.closeEditComponent();
-                    this.props.onFeedbackAdded(feedback);
-                    this.state.isComplaint = false;
-                });
+                this.closeEditComponent();
+                this.props.onFeedbackAdded(feedback);
+                this.state.isComplaint = false;
+            });
         }
 
     };
@@ -97,7 +95,7 @@ class CommentEditComponent extends React.Component {
                         <Tabs
                             defaultActiveKey={this.state.isComplaint ? "2" : "1"}
                             activeKey={this.state.isComplaint ? "2" : "1"}
-                            onChange={(active) => this.setState({ isComplaint: active == 2 })}
+                            onChange={(active) => this.setState({isComplaint: active == 2})}
                         >
                             <TabPane tab="Коментар" key="1"> </TabPane>
                             <TabPane tab="Скарга" key="2">
@@ -123,10 +121,10 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 label="Телефон"
                                 labelAlign={"right"}
-                                style={{ marginBottom: 16 }}>
+                                style={{marginBottom: 16}}>
                                 <Input
                                     className="comment-input-box"
-                                    suffix={<PhoneOutlined className="phone-icon" />}
+                                    suffix={<PhoneOutlined className="phone-icon"/>}
                                     value={this.state.user.phone}
                                     readOnly={true}
                                 />
@@ -134,11 +132,11 @@ class CommentEditComponent extends React.Component {
 
                             <Form.Item
                                 label="Email"
-                                style={{ marginBottom: 16 }}
+                                style={{marginBottom: 16}}
                             >
                                 <Input
                                     className="comment-input-box"
-                                    suffix={<MailOutlined classname="mail-icon" />}
+                                    suffix={<MailOutlined classname="mail-icon"/>}
                                     value={this.state.user.email}
                                     readOnly={true}
 
@@ -146,10 +144,10 @@ class CommentEditComponent extends React.Component {
                             </Form.Item>
 
                             <Form.Item
-                                style={this.state.isComplaint ? { display: 'none' } : {}}
+                                style={this.state.isComplaint ? {display: 'none'} : {}}
                                 label="Оцінка"
                                 name="rate">
-                                <Rate className="edit-field-input" />
+                                <Rate className="edit-field-input"/>
                             </Form.Item>
 
 
@@ -157,20 +155,20 @@ class CommentEditComponent extends React.Component {
                                 label="Опис"
                                 name="commentText"
                                 value="Dsd">
-                                <TextArea autoSize={{ minRows: 5, maxRows: 5 }} placeholder="Додайте опис" />
+                                <TextArea autoSize={{minRows: 5, maxRows: 5}} placeholder="Додайте опис"/>
                             </Form.Item>
                         </div>
 
                         <Tooltip placement="top"
-                            className="comment-tooltip"
-                            onVisibleChange={(v) =>
-                                this.setState({
-                                    tooltipVisible: this.hasNoDataEntered() && v
-                                })
-                            }
+                                 className="comment-tooltip"
+                                 onVisibleChange={(v) =>
+                                     this.setState({
+                                         tooltipVisible: this.hasNoDataEntered() && v
+                                     })
+                                 }
 
-                            visible={this.state.tooltipVisible}
-                            title={(this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint ? "поставте оцінку" : "напишіть опис"}
+                                 visible={this.state.tooltipVisible}
+                                 title={(this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint ? "поставте оцінку" : "напишіть опис"}
                         >
                             <Form.Item>
                                 <Button

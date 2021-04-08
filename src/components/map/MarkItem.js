@@ -5,7 +5,7 @@ import './css/MarkItem.css'
 import {Link} from "react-router-dom";
 import {getShortContent} from "../editor/EditorConverter";
 
-const MarkItem = ({mapClub}) => {
+const MarkItem = ({mapClub, location}) => {
     return (
         <div className="markItem">
             <div className="title">
@@ -15,7 +15,7 @@ const MarkItem = ({mapClub}) => {
             <div className="content">
                 <div className="address">
                     <EnvironmentFilled className="address-icon"/>
-                    <span className="text">{mapClub.address}</span>
+                    <span className="text">{location.address}</span>
                 </div>
             </div>
             <Button className="bt">

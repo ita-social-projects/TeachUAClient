@@ -87,7 +87,7 @@ const EditableTable = ({bordered, className, columns, data, onSave, form, action
                 }}
                 size="middle"
                 tableLayout="fixed"
-                className={`table ${className}`}
+                className={`table ${className ? className : ''}`}
                 footer={() => footer}
             />
         </Form>

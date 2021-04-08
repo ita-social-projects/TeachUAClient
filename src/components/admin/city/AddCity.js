@@ -56,7 +56,7 @@ const AddCity = ({cities, setCities}) => {
                         }
                     }}
                 />
-                <Button className="flooded-button add-city-button" onClick={onClick}>Добавити</Button>
+                <Button className="flooded-button add-city-button" onClick={onClick}>Додати</Button>
             </div>
         </div>
     );

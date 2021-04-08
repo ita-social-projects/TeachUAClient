@@ -31,7 +31,7 @@ const Cities = ({ setMapClubs, setZoom, setCenter }) => {
             setCenter({
                 lat: 49.0384,
                 lng: 31.4513
-            })
+            });
             setZoom(6);
         }
     };

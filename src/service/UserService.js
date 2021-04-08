@@ -44,8 +44,46 @@ export const updateUser = async (data) => {
         email: data.email,
         password: data.password,
         phone: data.phone,
-        roleName: data.role,
-        urlLogo: data.urlLogo && data.urlLogo.file.response
+        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
+export const updateUserByAdmin = async (data) => {
+    console.log(data)
+    return await fetchRequest.put(BASE_URL + "/api/user/update", {
+        id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+        roleName: data.roleName,
+        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
+        status: data.status
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
+export const getAllUsers = async () => {
+  console.log("getAllUsers method ")
+  return await fetchRequest.get(BASE_URL+"/api/users")
+      .then((response)=>{
+          return response.data
+      }).catch((error) => {
+          return error.response.data
+      })
+};
+
+export const deleteUserById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/user/"+id, {
+        id:id
     }).then((response) => {
         return response.data
     }).catch((error) => {

@@ -46,12 +46,14 @@
 .outlined-button,
 .outlined-button:active,
 .outlined-button:focus {
-  background: none;
+  border-color: #FA8C16;
+  color: #FA8C16;
   border-radius: 6px;
 }
 
 .outlined-button:hover {
-  background: none;
+  border-color: #FFA940;
+  color: #FFA940;
 }
 
 .support-button {
@@ -124,9 +126,25 @@
   margin: 0 10px;
 }
 
+.header .add-club-button {
+  width: 149px;
+  height: 40px;
+  background: #FA8C16;
+  border: none;
+  color: white;
+  margin-right: 1.4vw;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
 .layout .global-content {
   z-index: 1;
   min-height: 500px;
+}
+
+.search {
+  display: flex;
+  align-items: flex-end;
 }
 
 .search .ant-select-clear {
@@ -152,13 +170,14 @@
   color: white;
 }
 
+.search .clear-icon,
 .search .advanced-icon {
   font-size: 18px;
   color: white;
   background: #FA8C16;
   padding: 2px;
+  margin-left: 5px;
   border-radius: 4px;
-  margin-left: 25px;
   cursor: pointer;
 }
 
@@ -325,11 +344,20 @@
   opacity: 0.6;
 }
 
+.address-small-icon {
+  color: #FFA62C;
+}
+
 .card .address-icon {
   font-size: 1.5em;
   color: #FFA62C;
   margin-right: 11px;
   margin-left: 4px;
+}
+
+.card .expand-icon {
+  font-size: 1em;
+  margin-left: 5px;
 }
 
 .card .rating {
@@ -413,17 +441,21 @@
   color: #2E69C9;
 }
 
-.ant-table-filter-dropdown-btns .ant-btn-primary{
+.ant-table-filter-dropdown-btns .ant-btn-primary {
   background: #FA8C16;
 }
 
-.ant-table-filter-dropdown-btns .ant-btn-primary:hover{
+.ant-table-filter-dropdown-btns .ant-btn-primary:hover {
   background: #FFA940;
 }
 
 .table-header {
   padding: 12px 8px;
   background: #f0f0f0;
+}
+
+.ant-message .anticon-info-circle {
+  color: #0050B3;
 }
 
 @keyframes loader-animation {

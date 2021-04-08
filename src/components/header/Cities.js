@@ -5,6 +5,7 @@ import {mapSearchParameters, searchParameters} from "../../context/SearchContext
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import {getAllCities} from "../../service/CityService";
 import {getClubsByParameters} from "../../service/ClubService";
+import {withRouter} from "react-router";
 
 class Cities extends React.Component {
     state = {
@@ -20,10 +21,15 @@ class Cities extends React.Component {
     }
 
     onCityChange = (value) => {
-        if(!searchParameters.isAdvancedSearch) {
-            searchParameters.cityName = value.key;
+        if (!searchParameters.isAdvancedSearch) {
+            searchParameters.cityName = value.key === "online" ? "Без локації" : value.key;
             mapSearchParameters.cityName = value.key;
+            searchParameters.isOnline = value.key === "online" && true;
             getClubsByParameters(searchParameters).then(response => this.props.setClubs(response));
+
+            if(this.props.location.pathname !== "/clubs") {
+                this.props.history.push("/clubs");
+            }
         }
     };
 
@@ -31,6 +37,7 @@ class Cities extends React.Component {
         const cityList = (
             <Menu onClick={this.onCityChange}>
                 {this.state.cities.map(city => (<Menu.Item key={city.name}>{city.name}</Menu.Item>))}
+                <Menu.Item key="online">Без локації</Menu.Item>
             </Menu>
         );
 
@@ -40,7 +47,7 @@ class Cities extends React.Component {
                       placement="bottomCenter"
                       disabled={searchParameters.isAdvancedSearch}
                       arrow>
-                <div style={{opacity: searchParameters.isAdvancedSearch ? 0.5: 1}}>
+                <div style={{opacity: searchParameters.isAdvancedSearch ? 0.5 : 1}}>
                     <EnvironmentFilled
                         className="icon"/> {searchParameters.cityName}
                     <CaretDownFilled/>
@@ -50,5 +57,5 @@ class Cities extends React.Component {
     }
 }
 
-export default Cities;
+export default withRouter(Cities);
 

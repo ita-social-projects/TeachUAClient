@@ -29,7 +29,6 @@ const Registration = () => {
             } else {
                 setVisible(false);
             }
-            ;
         });
     };
 

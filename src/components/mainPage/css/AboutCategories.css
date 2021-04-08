@@ -47,7 +47,8 @@
 }
 
 .about-categories .pagination {
-    margin-top: 60px;
+    margin: 60px auto 0 auto;
+
 }
 
 .about-categories .pagination .ant-pagination-item {

@@ -22,7 +22,6 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                                         setCommentEditVisible(true);
                                     else
                                         alert("Увійдіть або зареєструйтеся!!!");
-
                                 }}
                         >
                             Залишити коментар
@@ -59,11 +58,11 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                     </li>
                 )}
             />
-            <CommentEditComponent
+            {localStorage.getItem('id') && <CommentEditComponent
                 visible={commentEditVisible}
                 setVisible={setCommentEditVisible}
                 club={club}
-                onFeedbackAdded={feedbackAdded}/>
+                onFeedbackAdded={feedbackAdded}/>}
         </Content>
 
     )
