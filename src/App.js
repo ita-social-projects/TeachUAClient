@@ -16,6 +16,7 @@ import OAuth2RedirectHandler from "./components/registration/OAuth2RedirectHandl
 import ServiceInUkr from "./components/serviceInUkr/ServiceInUkr";
 import ContactTypeTable from "./components/admin/contactType/ContactTypeTable";
 import AboutProject from "./components/AboutProject/AboutProject";
+import VerifyPage from "./components/verifyPage/VerifyPage";
 import ApproveClubTable from "./components/admin/club/approveClub/ApproveClubTable";
 import QuestionTable from "./components/admin/question/QuestionTable";
 import ImportDatabase from "./components/admin/databaseTransfer/ImportDatabase";
@@ -57,10 +58,11 @@ function App() {
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>
-                                <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler} />
-                                <Route path="/service" exact component={ServiceInUkr} />
-                                <Route path="/about" exact component={AboutProject} />
-                                <Route path="/" component={MainComponent} />
+                                <Route path="/verify" exact component={VerifyPage}/>
+                                <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
+                                <Route path="/service" exact component={serviceInUkr}/>
+                                <Route path="/about" exact component={AboutProject}/>
+                                <Route path="/" component={MainComponent}/>
                             </Switch>
                         </Content>
                     </Layout>

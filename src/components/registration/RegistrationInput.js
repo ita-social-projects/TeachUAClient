@@ -30,7 +30,7 @@ const RegistrationInput = ({disabledButton}) => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/,
+                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|/\\:;“’<,>.?๐฿]*$/,
                                    message: 'Прізвище не може містити спеціальні символи',
                                },
                                {
@@ -60,7 +60,7 @@ const RegistrationInput = ({disabledButton}) => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/,
+                                   pattern: /^[^`~!@#$%^&*()_+={}\[\]|/\\:;“’<,>.?๐฿]*$/,
                                    message: "Ім`я не може містити спеціальні символи",
                                },
                                {
@@ -80,7 +80,7 @@ const RegistrationInput = ({disabledButton}) => {
                            },
                                {
                                    required: false,
-                                   pattern: /^[^A-Za-z]*$/,
+                                   pattern: /^[^A-Za-z|А-ЯІЇа-яії]*$/,
                                    message: 'Телефон не може містити літери',
                                },
                                {
@@ -89,7 +89,7 @@ const RegistrationInput = ({disabledButton}) => {
                                    message: 'Телефон не може містити пробіли',
                                },
                                {
-                                   max: 9,
+                                   max: 10,
                                    message: "Телефон не відповідає вказаному формату",
                                },
                                {
@@ -99,7 +99,7 @@ const RegistrationInput = ({disabledButton}) => {
                                }]}>
                     <Input className="registration-box"
                            placeholder="__________"
-                           prefix='+380'
+                           prefix='+38'
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
