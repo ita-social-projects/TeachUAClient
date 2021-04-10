@@ -31,7 +31,7 @@ const FooterDonate = () => {
 
                 server_url="https://www.liqpay.ua/api/3/checkout"
                 extra={[<button className="flooded-button donate-button">
-                    <span>Допомога проекту</span>
+                    <span>Допомога проєкту</span>
                 </button>]}
             />
         </div>
