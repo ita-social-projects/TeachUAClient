@@ -3,20 +3,16 @@ import React, {useState, useEffect} from "react";
 import MaskIcon from "../../MaskIcon";
 import {getAllContacts} from "../../../service/ContactService";
 
-const SocialMedia = ({label}) => {
-    const [contacts, setContacts] = useState([]);
+const SocialMedia = ({label, contacts}) => {
 
-    useEffect(() => {
-        getAllContacts().then(response => setContacts(response));
-    }, []);
-
+    const contactsArray=Array.from(contacts);
     return (<div className="social-media">
             <span className="label">{label}</span>
             <div className="links">
-                {contacts.map(contact =>
-                    <div className="contact">
-                        <MaskIcon maskColor="#0D2C95" iconUrl={contact.urlLogo}/>
-                        <span className="contact-name">{contact.name}</span>
+                {contactsArray.map(contact =>
+                    <div className="contact" key={contact.contact_data}>
+                        <MaskIcon  maskColor="#0D2C95" iconUrl={contact.contactType.urlLogo}/>
+                        <span className="contact-name">{contact.contact_data}</span>
                     </div>)}
             </div>
         </div>

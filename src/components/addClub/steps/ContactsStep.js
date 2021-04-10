@@ -9,26 +9,31 @@ import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
     const [locations, setLocations] = useState([]);
+    const [contacts_data, setContactsData] = useState({});
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
-    const [contactsFrom] = Form.useForm();
+    const [contactsForm] = Form.useForm();
 
     useEffect(() => {
         if (result) {
-            contactsFrom.setFieldsValue({...result});
+            contactsForm.setFieldsValue({...result});
         }
     }, []);
 
     const onFinish = (values) => {
+        console.log("================= values in onFinish");
+        console.log(values);
         if (locations.length <= 0) {
             values.isOnline = true;
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
 
+        values.contacts = JSON.stringify(contacts_data);
         values.locations = locations;
 
         setResult(Object.assign(result, values));
+        console.log(result);
         setStep(2);
     };
 
@@ -47,12 +52,21 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
         setLocations(newData);
     };
 
+    const changeContacts = (event,contact) =>{
+        setContactsData({
+            ...contacts_data,
+            // [event.target.name] : 'contact_id: '.concat(contact.id,', contact_data: ',event.target.value)
+            [contact.id] : event.target.value
+        });
+    };
+
     return (
         <Form
             name="basic"
             requiredMark={false}
-            form={contactsFrom}
-            onFinish={onFinish}>
+            form={contactsForm}
+            onFinish={onFinish}
+        >
             <Form.Item name="locations"
                        className="add-club-row"
                        label="Локації"
@@ -100,14 +114,18 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
             </div>
             <Form.Item
                 label="Контакти"
-                className="add-club-row add-club-contacts">
+                className="add-club-row add-club-contacts"
+                name="contacts"
+            >
                 {contacts.map(contact =>
-                    <Form.Item name={`clubContact${contact.name}`}
+                    <Form.Item name={`contact${contact.name}`}
                                className="add-club-contact"
-                               initialValue={result[`clubContact${contact.name}`]}
+                               initialValue={result[`contact${contact.name}`]}
                                hasFeedback>
                         <Input className="add-club-input"
                                placeholder="Заповніть поле"
+                               name={contact.name}
+                               onChange={(e)=>changeContacts(e,contact)}
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
                     </Form.Item>)}
             </Form.Item>
