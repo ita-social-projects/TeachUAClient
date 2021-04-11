@@ -1,8 +1,7 @@
-import axios from "axios";
 import fetchRequest from "./FetchRequest";
-import { BASE_URL } from "./config/ApiConfig";
-import { replaceCommaToSemicolon } from "../util/CategoryUtil";
-import { searchParameters } from "../context/SearchContext";
+import {BASE_URL} from "./config/ApiConfig";
+import {replaceCommaToSemicolon} from "../util/CategoryUtil";
+import {searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
     data.locations.map(location => location.address = location.address.value.structured_formatting.main_text);
@@ -27,18 +26,21 @@ export const addClub = async (data) => {
 
 export const updateClubBuId = async (data) => {
     return await fetchRequest.put(BASE_URL + "/api/club/" + data.id, {
-        categoriesName: data.categories,
-        name: data.name,
         ageFrom: data.ageFrom,
         ageTo: data.ageTo,
-        cityName: data.cityName,
+        name: data.name,
         description: data.description,
-        address: data.address,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        districtName: data.districtName,
+        urlWeb: data.urlWeb,
         urlLogo: data.urlLogo,
-        urlBackground: data.urlBackground
+        urlBackground: data.urlBackground,
+        workTime: data.workTime,
+        categories: data.categories,
+        user: data.user,
+        center: data.center,
+        rating: data.rating,
+        locations: data.locations,
+        isApproved: data.isApproved,
+        isOnline: data.isOnline,
     }).then((response) => {
         return response.data
     }).catch((error) => {
@@ -114,5 +116,46 @@ export const getClubsByParameters = async (parameters, page) => {
 
     }).then((response) => {
         return response.data
+    });
+};
+
+export const getAllClubs = async () => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs").then((response) => {
+        return response.data
+    });
+};
+
+export const changeClubOwner = async (params, id) => {
+    return await fetchRequest.get(BASE_URL + "/api/user", {params})
+        .then((response) => {
+            return fetchRequest.patch(BASE_URL + "/api/club/" + id, {
+                user: {
+                    id: response.data.id,
+                    email: response.data.email,
+                    password: response.data.password,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName,
+                    phone: response.data.phone,
+                    urlLogo: response.data.urlLogo,
+                    provider: response.data.provider,
+                    providerId: response.data.providerId,
+                    status: response.data.status,
+                    verificationCode: response.data.verificationCode
+                }
+            }).then((response) => {
+                return response.data
+            }).catch((error) => {
+                return error.response.data
+            });
+        })
+
+}
+
+
+export const deleteClubById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/club/" + id).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.data
     });
 };
