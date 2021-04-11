@@ -75,3 +75,4 @@ yarn.lock
 .env.development
 
 build/
+.DS_Store

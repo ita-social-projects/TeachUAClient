@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import {deleteToken, deleteUserId, getToken} from "../../service/StorageService";
+import {DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 
 const {SubMenu} = Menu;
 
@@ -30,9 +31,17 @@ const AuthMenu = () => {
                     <SubMenu title="Адмін">
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/stations">Станції/зупинки</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
+
+                        <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
+                        <Menu.Item><Link target="_blank" to={{pathname: DOWNLOAD_DATABASE_SQL}} download>Експортувати дані</Link></Menu.Item>
+
+                        <Menu.Item><Link to="/admin/club-approve">Підтвердення</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+
                     </SubMenu>
                 </Menu>
             )
