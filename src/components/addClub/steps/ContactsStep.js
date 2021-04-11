@@ -55,7 +55,6 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
     const changeContacts = (event,contact) =>{
         setContactsData({
             ...contacts_data,
-            // [event.target.name] : 'contact_id: '.concat(contact.id,', contact_data: ',event.target.value)
             [contact.id] : event.target.value
         });
     };
