@@ -50,7 +50,7 @@ const AuthMenu = () => {
                     <SubMenu title="Адмін">
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/stations">Станції/зупинки</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
