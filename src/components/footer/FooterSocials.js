@@ -39,7 +39,7 @@ const FooterSocials = () => {
                 </div>
             </div>
             <div className="qubstudio">
-                ©2021 Qubstudio
+                ©2021 Design by Qubstudio & Development by SoftServe
             </div>
         </div>
     );
