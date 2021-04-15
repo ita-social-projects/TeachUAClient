@@ -34,6 +34,21 @@
     width: 296px;
     height: 310px;
 }
+.arrows-prev {
+    font-size: 21px;
+    color: #FA8C16;
+    position: absolute;
+    left: 40px;
+    margin-top: 170px;
+}
+
+.arrows-next {
+    font-size: 21px;
+    color: #FA8C16;
+    position: absolute;
+    right: 40px;
+    margin-top: 170px;
+}
 
 .about-categories .primitive-card .content {
     display: flex;

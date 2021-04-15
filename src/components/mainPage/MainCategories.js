@@ -5,8 +5,10 @@ import PrimitiveCard from "../PrimitiveCard";
 import './css/AboutCategories.css';
 import CategoryLogo from "../CategoryLogo";
 import {Button, Layout, Pagination} from "antd";
-import {searchParameters} from "../../context/SearchContext";
+import './css/AboutCarousel.css';
 import {Link} from "react-router-dom";
+import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
+import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
 const MainCategories = () => {
     const [categories, setCategories] = useState({
@@ -14,11 +16,12 @@ const MainCategories = () => {
         size: 0
     });
     const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     const getData = (page) => {
         getPageableCategory(page).then(response => {
             setCategories(response);
-            console.log(response)
+            setTotalPages(response.totalPages);
         });
     };
 
@@ -26,10 +29,25 @@ const MainCategories = () => {
         getData(currentPage);
     }, []);
 
-    const onPageChange = (page) => {
-        setCurrentPage(page - 1);
-        getData(page - 1);
+    const onPageChangePrev = (page) => {
+        if (page === 0) {
+            setCurrentPage(totalPages - 1);
+            getData(totalPages - 1);
+        } else {
+            setCurrentPage(page - 1);
+            getData(page - 1);
+        }
     };
+
+    const onPageChangeNext = (page) => {
+        if (page === totalPages - 1) {
+            setCurrentPage(0);
+            getData(0);
+        } else {
+            setCurrentPage(page + 1);
+            getData(page + 1);
+        }
+    }
 
     return (
         <div className="about-categories">
@@ -37,28 +55,29 @@ const MainCategories = () => {
                 <h2 className="label">Оберіть напрям гуртків</h2>
                 <Link to="/clubs"><Button className="flooded-button more-button">Всі гуртки</Button></Link>
             </div>
-
-            <div className="categories-cards">
-                {categories.content.map(category =>
-                    <PrimitiveCard key={category.id}
-                                   header={
-                                       <div className="title">
-                                           <CategoryLogo category={category}/>
-                                           <div className="name">{category.name}</div>
-                                       </div>
-                                   }
-                                   description={category.description}
-                                   link={""}
-                                   buttonText="Переглянути"/>
-                )}
+            <div className="categories-carousel-block">
+                <ArrowLeftOutlined className="arrows-prev" onClick={() => onPageChangePrev(currentPage)}/>
+                <ArrowRightOutlined className="arrows-next" onClick={() => onPageChangeNext(currentPage)}/>
+                <div className="categories-cards">
+                    {categories.content.map(category =>
+                        <PrimitiveCard key={category.id}
+                                       header={
+                                           <div className="title">
+                                               <CategoryLogo category={category}/>
+                                               <div className="name">{category.name}</div>
+                                           </div>
+                                       }
+                                       description={category.description}
+                                       link={""}
+                                       buttonText="Переглянути"/>
+                    )}
+                </div>
             </div>
-
             <Pagination
                 className="pagination"
                 hideOnSinglePage
                 size="small"
                 showSizeChanger={false}
-                onChange={onPageChange}
                 current={currentPage + 1}
                 pageSize={categories.size}
                 total={categories.totalElements}/>
