@@ -5,6 +5,7 @@ import {getAllContacts} from "../../../service/ContactService";
 
 const SocialMedia = ({label, contacts}) => {
 
+    //console.log(contacts);
     const contactsArray=Array.from(contacts);
     return (<div className="social-media">
             <span className="label">{label}</span>
