@@ -49,7 +49,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                     <span className="sider-label">Вік аудиторії: </span>
                     <span className="years">від {club.ageFrom} до {club.ageTo} років</span>
                 </div>
-                <SocialMedia className="socialMedia" label="Контакти гуртка" />
+                <SocialMedia className="socialMedia" label="Контакти гуртка" contacts={club.contacts} />
                 <Button className="flooded-button more-button">
                     <Link to={`/club/${club.id}`}>Більше про гурток</Link>
                 </Button>
