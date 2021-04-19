@@ -24,6 +24,7 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
     const [sortDirection, setSortDirection] = useState(defaultSortDir);
     const [view, setView] = useState(defaultSortView);
 
+
     const getData = (page) => {
         const checkUndefPage = page === undefined ? 0 : page;
         const params = searchForm.getFieldsValue();
@@ -31,25 +32,33 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
         load(true);
         if (!advancedSearch) {
             getClubsByParameters(searchParameters, checkUndefPage).then(response => {
+                console.log("getData, loading === "+loading);
                 setClubs(response);
                 load(false);
+                console.log("getData, loading === "+loading);
             });
         } else {
             getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
+                console.log("getData, loading === "+loading);
                 setClubs(response);
                 load(false);
+                console.log("getData, loading === "+loading);
             });
         }
+        console.log("=== getData method ends, loading === " + loading);
     };
 
     useEffect(() => {
+        console.log("useEffect method starts");
         getData();
+        console.log("useEffect method ends ");
     }, [advancedSearch, sortBy, sortDirection]);
 
     const onPageChange = (page) => {
         setCurrentPage(page - 1);
-
+        console.log("=== onPageChange method starts ");
         getData(page - 1);
+        console.log("=== onPageChange method ends ");
     };
 
     const onClubClick = (club) => {
