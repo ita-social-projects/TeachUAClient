@@ -22,7 +22,7 @@ import QuestionTable from "./components/admin/question/QuestionTable";
 import ImportDatabase from "./components/admin/databaseTransfer/ImportDatabase";
 import ChangeOwnerTable from "./components/admin/club/changeOwner/ChangeOwnerTable";
 import StationTable from "./components/admin/station/StationTable";
-
+import CategoryTable from "./components/admin/category/CategoryTable";
 
 const { Content } = Layout;
 
@@ -45,6 +45,7 @@ function App() {
                     <Layout>
                         <Content className="global-content">
                             <Switch>
+                                <Route path="/admin/categories" exact component={CategoryTable}/>
                                 <Route path="/admin/districts" exact component={DistrictTable}/>
                                 <Route path="/admin/questions" exact component={QuestionTable}/>
                                 <Route path="/admin/users" exact component={UsersTable}/>
