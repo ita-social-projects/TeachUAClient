@@ -125,7 +125,7 @@ class Search extends React.Component {
                     onInputKeyDown={this.onKeyDown}
                     onClear = {this.onClear}
                     style={{
-                        width: 250,
+                        width: 200,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1
                     }}
                     placeholder="Який гурток шукаєте?"
@@ -159,17 +159,14 @@ class Search extends React.Component {
                 </AutoComplete>
 
                 <div className="search-icon-group">
-
                     <SearchOutlined className="advanced-icon"
                                     style = {{
                                         borderRadius: 0,
                                         backgroundColor: "transparent",
                                         color:"white",
-                                        // borderBottomStyle: "solid",
-                                        // borderBottomColor: "white",
-                                        // borderBottomWith: 4 ,
                                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
-                                        margin: 0
+                                        marginLeft: 0,
+                                        marginRight: 12
                                     }}
                                     onClick={this.searchOnClick}
                     />
@@ -177,7 +174,6 @@ class Search extends React.Component {
                     <ControlOutlined className="advanced-icon"
                                      style={{color:"orange", backgroundColor:"white"}}
                                      onClick={this.handleAdvancedSearch}
-
                     />
                 </div>
 
