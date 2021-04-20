@@ -4,7 +4,6 @@ import React, {useEffect, useState} from "react";
 import EditableTable from "../../EditableTable";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import {getAllStations, updateStationById, deleteStationById} from "../../../service/StationService";
-import {getAllDistrict} from "../../../service/DisctrictService";
 import AddStation from "../station/AddStation";
 
 const StationTable = () => {
@@ -61,7 +60,6 @@ const StationTable = () => {
     const getData = () => {
         getAllCities().then(response => setCities(response));
         getAllStations().then(response => setStations(response));
-        console.log('Getting data')
     };
 
     useEffect(() => {
