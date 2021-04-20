@@ -1,4 +1,4 @@
-import {AutoComplete, Select} from "antd";
+import {AutoComplete, Select } from "antd";
 import React from "react";
 import {withRouter} from 'react-router-dom';
 import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
@@ -6,7 +6,6 @@ import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
-import ClearOutlined from "@ant-design/icons/lib/icons/ClearOutlined";
 
 const {Option, OptGroup} = Select;
 
@@ -18,7 +17,9 @@ class Search extends React.Component {
             categories: [],
             clubs: []
         },
-        loading: false
+        loading: false,
+        input: '',
+        searchClicked: false
     };
 
     onSearchChange = (value, option) => {
@@ -27,7 +28,7 @@ class Search extends React.Component {
         }
 
         if (!searchParameters.isAdvancedSearch) {
-            clearSearchParameters();
+            //clearSearchParameters();
 
             switch (option.type) {
                 case "category":
@@ -48,6 +49,7 @@ class Search extends React.Component {
             }
 
             getClubsByParameters(searchParameters).then(response => {
+                console.log("=== getClubsByParameters called from onSearchChange method ")
                 this.context.setClubs(response);
             });
         }
@@ -56,13 +58,16 @@ class Search extends React.Component {
     onClear = () => {
         if (!this.props.advancedSearch) {
             clearSearchParameters();
+            console.log("getClubsByParameters called from Search component onClear method");
             getClubsByParameters(searchParameters).then(response => {
                 this.context.setClubs(response);
+                console.log("onClear method,  context.clubs= "+this.context.clubs)
             });
-        }
+            }
     };
 
     onFocus = () => {
+        console.log("=== onFocus method ")
         this.setState({loading: true});
         getPossibleResults(searchParameters).then(response => {
             this.setState({possibleResults: response, loading: false})
@@ -71,11 +76,25 @@ class Search extends React.Component {
 
     onKeyDown = (event) => {
         if (event.key === 'Enter') {
+            console.log("=== onKeyDown method run, value = "+event.target.defaultValue);
             event.target.defaultValue && this.onSearchChange(event.target.defaultValue, {type: "all"});
         }
     };
 
+    searchOnClick = () =>{
+        this.state.searchClicked=true;
+        if(this.state.searchClicked){
+            this.setState({loading: true});
+            console.log("=== searchOnClick method run, value = "+this.state.input);
+            this.onSearchChange(this.state.input, {type: "all"});
+            this.setState({loading: false});
+        }
+        this.state.searchClicked=false;
+    };
+
     onSearch = (val) => {
+        this.state.input=val;
+        console.log("=== onSearch method run, input: "+ this.state.input)
         this.setState({loading: true});
         getPossibleResultsByText(val, searchParameters).then(response => {
             this.setState({possibleResults: response, loading: false})
@@ -95,20 +114,24 @@ class Search extends React.Component {
     render() {
         return (
             <div className="search">
+
                 <AutoComplete
+                    allowClear={true}
                     loading={this.state.loading}
                     disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSearchChange}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
-                    suffix={<SearchOutlined/>}
+                    onClear = {this.onClear}
                     style={{
                         width: 200,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1
                     }}
                     placeholder="Який гурток шукаєте?"
-                    defaultActiveFirstOption={false}>
+                    defaultActiveFirstOption={false}
+                    defaultValue = {searchParameters.clubName}
+                >
 
                     <OptGroup label="Категорії">
                         {
@@ -132,16 +155,27 @@ class Search extends React.Component {
                             )
                         }
                     </OptGroup>
+
                 </AutoComplete>
 
-                {!this.props.redirect &&
                 <div className="search-icon-group">
-                    <ClearOutlined className="clear-icon"
-                                   style={{opacity: searchParameters.isAdvancedSearch ? 0.5 : 1}}
-                                   onClick={this.onClear}/>
+                    <SearchOutlined className="advanced-icon"
+                                    style = {{
+                                        borderRadius: 0,
+                                        backgroundColor: "transparent",
+                                        color:"white",
+                                        opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
+                                        marginLeft: 0,
+                                        marginRight: 12
+                                    }}
+                                    onClick={this.searchOnClick}
+                    />
+
                     <ControlOutlined className="advanced-icon"
-                                     onClick={this.handleAdvancedSearch}/>
-                </div>}
+                                     style={{color:"orange", backgroundColor:"white"}}
+                                     onClick={this.handleAdvancedSearch}
+                    />
+                </div>
 
             </div>
         );
