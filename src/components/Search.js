@@ -93,8 +93,10 @@ class Search extends React.Component {
     };
 
     onSearch = (val) => {
-        this.state.input=val;
         console.log("=== onSearch method run, input: "+ this.state.input)
+        this.state.input=val;
+
+        this.onSearchChange(val,"all");
         this.setState({loading: true});
         getPossibleResultsByText(val, searchParameters).then(response => {
             this.setState({possibleResults: response, loading: false})
@@ -125,7 +127,7 @@ class Search extends React.Component {
                     onInputKeyDown={this.onKeyDown}
                     onClear = {this.onClear}
                     style={{
-                        width: 200,
+                        width: 230,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1
                     }}
                     placeholder="Який гурток шукаєте?"
