@@ -49,10 +49,15 @@ class Search extends React.Component {
             }
 
             getClubsByParameters(searchParameters).then(response => {
-                console.log("=== getClubsByParameters called from onSearchChange method ")
+                console.log("=== getClubsByParameters called from onSearchChange method , clubs: "+response);
                 this.context.setClubs(response);
             });
         }
+    };
+
+    onSelect = (value, option) => {
+        this.state.input=value;
+        this.onSearchChange(value, option);
     };
 
     onClear = () => {
@@ -121,7 +126,7 @@ class Search extends React.Component {
                     allowClear={true}
                     loading={this.state.loading}
                     disabled={searchParameters.isAdvancedSearch}
-                    onSelect={this.onSearchChange}
+                    onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
