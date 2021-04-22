@@ -39,7 +39,7 @@ const ServiceInUkr = () => {
                 </div>
                 <div className="help-button">
                     <a target="blank" href="#"><Button className="flooded-button donate-button">Допомогти
-                        проекту</Button> </a>
+                        проєкту</Button> </a>
                 </div>
             </div>
             <div className="content">
