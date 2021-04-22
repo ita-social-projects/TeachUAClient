@@ -4,7 +4,6 @@ import {deleteCategoryById, getAllCategories, updateCategoryById} from "../../..
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import EditableTable from "../../EditableTable";
 import AddCategory from "./AddCategory";
-import {CirclePicker, CompactPicker} from "react-color";
 
 const CategoryTable = () => {
     const [form] = Form.useForm();
@@ -56,11 +55,8 @@ const CategoryTable = () => {
             title: 'Background Color',
             dataIndex: 'backgroundColor',
             width: '10%',
-            //inputType: 'color',
-            inputType: 'text',
+            inputType: 'color',
             editable: true,
-            // render: backgroundColor =>
-            //     <CirclePicker color={backgroundColor}/>
         },
         {
             title: 'Tag Background Color',
