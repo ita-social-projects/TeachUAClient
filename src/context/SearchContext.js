@@ -22,3 +22,7 @@ export const clearSearchParameters = () => {
     searchParameters.categoryName = "";
     searchParameters.clubName = "";
 };
+
+export const searchInputData = {
+    input: ""
+}

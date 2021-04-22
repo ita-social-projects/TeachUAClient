@@ -1,7 +1,13 @@
 import {AutoComplete, Select } from "antd";
 import React from "react";
 import {withRouter} from 'react-router-dom';
-import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../context/SearchContext";
+import {
+    clearSearchParameters,
+    mapSearchParameters,
+    SearchContext,
+    searchInputData,
+    searchParameters
+} from "../context/SearchContext";
 import {getClubsByParameters} from "../service/ClubService";
 import {getPossibleResults, getPossibleResultsByText} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
@@ -18,7 +24,6 @@ class Search extends React.Component {
             clubs: []
         },
         loading: false,
-        input: '',
         searchClicked: false
     };
 
@@ -28,7 +33,9 @@ class Search extends React.Component {
         }
 
         if (!searchParameters.isAdvancedSearch) {
-            //clearSearchParameters();
+            clearSearchParameters();
+
+            console.log(option.type);
 
             switch (option.type) {
                 case "category":
@@ -41,24 +48,35 @@ class Search extends React.Component {
                 default: {
                     if (this.state.possibleResults.categories.find(category =>
                         category.name.toLowerCase().includes(value.toLowerCase()))) {
+                        console.log("default section , category is found")
                         searchParameters.categoryName = value;
+                        console.log("===categoryName: "+searchParameters.categoryName);
+                        console.log("===clubName: "+searchParameters.clubName);
                     } else {
+                        console.log("default section , category is NOT found")
                         searchParameters.clubName = value;
                     }
                 }
             }
 
             getClubsByParameters(searchParameters).then(response => {
-                console.log("=== getClubsByParameters called from onSearchChange method ")
+                console.log("=== getClubsByParameters called from onSearchChange method , clubs: "+response);
                 this.context.setClubs(response);
             });
         }
     };
 
+    onSelect = (value, option) => {
+        searchInputData.input=value;
+        console.log("=== onSelect called , value: "+value+" , option: "+option);
+        this.onSearchChange(value, option);
+    };
+
     onClear = () => {
         if (!this.props.advancedSearch) {
             clearSearchParameters();
-            console.log("getClubsByParameters called from Search component onClear method");
+            searchInputData.input = "";
+            console.log("getClubsByParameters called from Search component onClear method, searchInput: "+searchInputData.input);
             getClubsByParameters(searchParameters).then(response => {
                 this.context.setClubs(response);
                 console.log("onClear method,  context.clubs= "+this.context.clubs)
@@ -85,16 +103,16 @@ class Search extends React.Component {
         this.state.searchClicked=true;
         if(this.state.searchClicked){
             this.setState({loading: true});
-            console.log("=== searchOnClick method run, value = "+this.state.input);
-            this.onSearchChange(this.state.input, {type: "all"});
+            console.log("=== searchOnClick method run, searchInputData = "+searchInputData.input);
+            this.onSearchChange(searchInputData.input, {type: "all"});
             this.setState({loading: false});
         }
         this.state.searchClicked=false;
     };
 
     onSearch = (val) => {
-        console.log("=== onSearch method run, input: "+ this.state.input)
-        this.state.input=val;
+        searchInputData.input=val;
+        console.log("=== onSearch method run, input: "+ searchInputData.input)
 
         this.onSearchChange(val,"all");
         this.setState({loading: true});
@@ -121,7 +139,7 @@ class Search extends React.Component {
                     allowClear={true}
                     loading={this.state.loading}
                     disabled={searchParameters.isAdvancedSearch}
-                    onSelect={this.onSearchChange}
+                    onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
@@ -132,7 +150,7 @@ class Search extends React.Component {
                     }}
                     placeholder="Який гурток шукаєте?"
                     defaultActiveFirstOption={false}
-                    defaultValue = {searchParameters.clubName}
+                    defaultValue = {searchInputData.input}
                 >
 
                     <OptGroup label="Категорії">
