@@ -11,8 +11,18 @@ const MapClubList = ({ mapClubs, setMapClubs, setZoom, setSelected, setCenter })
 
     useEffect(() => {
         getClubsByCategoryAndCity(mapSearchParameters).then(response => {
-            setMapClubs(response);
+            const arr = [];
+            response.map(club => {
+                club.locations.map(location => {
+                    const mapClub = JSON.parse(JSON.stringify(club));
+                    mapClub.location = location;
+                    arr.push(mapClub);
+                })
+            })
+            setMapClubs(arr);
         });
+
+
 
         getAllCities().then(response => {
             response

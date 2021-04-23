@@ -1,11 +1,11 @@
-import {Button} from "antd";
+import { Button } from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/MarkItem.css'
-import {Link} from "react-router-dom";
-import {getShortContent} from "../editor/EditorConverter";
+import { Link } from "react-router-dom";
+import { getShortContent } from "../editor/EditorConverter";
 
-const MarkItem = ({mapClub, location}) => {
+const MarkItem = ({ mapClub }) => {
     return (
         <div className="markItem">
             <div className="title">
@@ -14,8 +14,8 @@ const MarkItem = ({mapClub, location}) => {
             <p className="description">{getShortContent(mapClub.description)}</p>
             <div className="content">
                 <div className="address">
-                    <EnvironmentFilled className="address-icon"/>
-                    <span className="text">{location.address}</span>
+                    <EnvironmentFilled className="address-icon" />
+                    <span className="text">{mapClub.location.address}</span>
                 </div>
             </div>
             <Button className="bt">
