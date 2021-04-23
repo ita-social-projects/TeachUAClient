@@ -31,7 +31,7 @@ export const addCategory = async(data) => {
 
 export const updateCategoryById = async(data) => {
     return await fetchRequest.put(BASE_URL + "/api/category/" + data.id, {
-        name: data.name,
+        name: data.name.text,
         description: data.description,
         urlLogo: data.urlLogo,
         backgroundColor: data.backgroundColor,
