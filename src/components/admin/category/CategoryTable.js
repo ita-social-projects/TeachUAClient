@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Form, Popconfirm, message, Image} from "antd";
+import {Form, Popconfirm, message, Image, Input} from "antd";
 import {deleteCategoryById, getAllCategories, updateCategoryById} from "../../../service/CategoryService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import EditableTable from "../../EditableTable";
@@ -10,12 +10,30 @@ const CategoryTable = () => {
     const [categories, setCategories] = useState([]);
 
     const getData = () => {
-        getAllCategories().then(response => setCategories(response));
+        getAllCategories().then(response => {
+            const arr = [];
+            response.map(category => {
+                const item = category;
+                item.name = {
+                    text: category.name,
+                    tagBackgroundColor: category.tagBackgroundColor,
+                    tagTextColor: category.tagTextColor
+                }
+                arr.push(item);
+            })
+            setCategories(arr);
+        });
     }
 
     useEffect(() => {
         getData()
     }, []);
+
+    // function getBackgroundColor(thi) {
+    //     let xx =  categories.find(x => x.backgroundColor).backgroundColor;
+    //     console.log(thi + "`````````````````````````````````````````````````");
+    //     return xx;
+    // }
 
     const columns = [
         {
@@ -30,7 +48,12 @@ const CategoryTable = () => {
             title: 'Назва',
             dataIndex: 'name',
             width: '15%',
-            editable: true
+            editable: false,
+            render: name => <div
+                style={{backgroundColor: name.tagBackgroundColor, color: name.tagTextColor}}
+            >
+            {name.text}
+            </div>
         },
         {
             title: 'Опис',
@@ -49,24 +72,26 @@ const CategoryTable = () => {
                 style={{backgroundColor: categories[0].backgroundColor}}
                 width={50}
                 height={50}
-                src={process.env.PUBLIC_URL + urlLogo} />
+                src={`${process.env.PUBLIC_URL}` + urlLogo} />
         },
         {
             title: 'Background Color',
             dataIndex: 'backgroundColor',
             width: '10%',
             inputType: 'color',
-            editable: true,
+            editable: true
         },
         {
             title: 'Tag Background Color',
             dataIndex: 'tagBackgroundColor',
+            inputType: 'color',
             width: '10%',
             editable: true
         },
         {
             title: 'Tag Text Color',
             dataIndex: 'tagTextColor',
+            inputType: 'color',
             width: '10%',
             editable: true
         }
