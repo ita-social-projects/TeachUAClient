@@ -53,7 +53,7 @@ const AddCategory = ({categories, setCategories, setAddCategory}) => {
                 </Form.Item>
                 <Form.Item name="urlLogo"
                            rules={[{
-                               required: false,
+                               required: true,
                                message: "Завантажте лого"
                            }]}>
                     <Upload
@@ -70,29 +70,32 @@ const AddCategory = ({categories, setCategories, setAddCategory}) => {
                                required: true,
                                message: "Введіть Background Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Background Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label for="head">Background Color</label>
+                    </div>
                 </Form.Item>
                 <Form.Item name="tagBackgroundColor"
                            rules={[{
                                required: true,
                                message: "Введіть Tag Background Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Tag Background Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label htmlFor="head">Tag Background Color</label>
+                    </div>
                 </Form.Item>
                 <Form.Item name="tagTextColor"
                            rules={[{
                                required: true,
                                message: "Введіть Tag Text Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Tag Text Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label htmlFor="head">Tag Text Color</label>
+                    </div>
                 </Form.Item>
-                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити</Button>
+                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити категорію</Button>
             </Form>
         </div>
     );
