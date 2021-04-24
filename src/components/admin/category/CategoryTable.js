@@ -1,24 +1,42 @@
 import React, {useEffect, useState} from "react";
-import {Form, Popconfirm, message, Image, Input} from "antd";
+import {Form, Popconfirm, message, Image} from "antd";
 import {deleteCategoryById, getAllCategories, updateCategoryById} from "../../../service/CategoryService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import EditableTable from "../../EditableTable";
 import AddCategory from "./AddCategory";
 
+function Item(text, tagBackgroundColor, tagTextColor) {
+    this.text = text;
+    this.tagBackgroundColor = tagBackgroundColor;
+    this.tagTextColor = tagTextColor;
+}
+
+Item.prototype.toString = function func1() {
+    return this.text;
+}
+
+function LogoItem(urlLogo, backgroundColor) {
+    this.urlLogo = urlLogo;
+    this.backgroundColor = backgroundColor;
+}
+
+LogoItem.prototype.toString = function f1() {
+    return this.urlLogo;
+}
+
 const CategoryTable = () => {
     const [form] = Form.useForm();
     const [categories, setCategories] = useState([]);
+
+    const [addCategory, setAddCategory] = useState([]);
 
     const getData = () => {
         getAllCategories().then(response => {
             const arr = [];
             response.map(category => {
                 const item = category;
-                item.name = {
-                    text: category.name,
-                    tagBackgroundColor: category.tagBackgroundColor,
-                    tagTextColor: category.tagTextColor
-                }
+                item.name = new Item(category.name, category.tagBackgroundColor, category.tagTextColor);
+                item.urlLogo = new LogoItem(category.urlLogo, category.backgroundColor);
                 arr.push(item);
             })
             setCategories(arr);
@@ -27,13 +45,7 @@ const CategoryTable = () => {
 
     useEffect(() => {
         getData()
-    }, []);
-
-    // function getBackgroundColor(thi) {
-    //     let xx =  categories.find(x => x.backgroundColor).backgroundColor;
-    //     console.log(thi + "`````````````````````````````````````````````````");
-    //     return xx;
-    // }
+    }, [addCategory]);
 
     const columns = [
         {
@@ -48,7 +60,7 @@ const CategoryTable = () => {
             title: 'Назва',
             dataIndex: 'name',
             width: '15%',
-            editable: false,
+            editable: true,
             render: name => <div
                 style={{backgroundColor: name.tagBackgroundColor, color: name.tagTextColor}}
             >
@@ -69,10 +81,10 @@ const CategoryTable = () => {
             uploadFolder: 'categories',
             editable: true,
             render: urlLogo => <Image
-                style={{backgroundColor: categories[0].backgroundColor}}
+                style={{backgroundColor: urlLogo.backgroundColor}}
                 width={50}
                 height={50}
-                src={`${process.env.PUBLIC_URL}` + urlLogo} />
+                src={`${process.env.PUBLIC_URL}` + urlLogo.urlLogo} />
         },
         {
             title: 'Background Color',
@@ -122,13 +134,20 @@ const CategoryTable = () => {
     };
 
     const save = async (record) => {
+        const uploadFile = form.getFieldValue('urlLogo');
+
+        form.setFieldsValue({
+            ...form.getFieldsValue(),
+            urlLogo: uploadFile !== record.urlLogo ? uploadFile.file.response : uploadFile
+        });
+
         editCellValue(form, categories, record.id).then((editedData) => {
             updateCategoryById(editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message)
                     return;
                 }
-                setCategories(editedData.data);
+                getData();
             });
         });
     };
@@ -142,7 +161,7 @@ const CategoryTable = () => {
             onSave={save}
             form={form}
             actions={actions}
-            footer={<AddCategory categories={categories} setCategories={setCategories}/>}
+            footer={<AddCategory categories={categories} setCategories={setCategories} setAddCategory={setAddCategory}/>}
         />
     )
 }

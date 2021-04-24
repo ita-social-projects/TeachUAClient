@@ -6,7 +6,10 @@ import {addToTable} from "../../../util/TableUtil";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 
-const AddCategory = ({categories, setCategories}) => {
+const AddCategory = ({categories, setCategories, setAddCategory}) => {
+
+    const [categoryForm] = Form.useForm();
+
     const onFinish = (values) => {
         addCategory(values)
             .then((response) => {
@@ -18,6 +21,8 @@ const AddCategory = ({categories, setCategories}) => {
                 message.success("Категорія '" + response.name + "' успішно додана!");
 
                 setCategories(addToTable(categories, response));
+                categoryForm.resetFields();
+                setAddCategory(response);
             });
     };
 
@@ -26,7 +31,8 @@ const AddCategory = ({categories, setCategories}) => {
             <Form className="add-category-type"
                   name="basic"
                   requiredMark={false}
-                  onFinish={onFinish}>
+                  onFinish={onFinish}
+                  form={categoryForm}>
                 <Form.Item name="name"
                            rules={[{
                                required: true,
