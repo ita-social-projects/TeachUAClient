@@ -15,6 +15,7 @@ export const getAllCategories = async() => {
 
 export const addCategory = async(data) => {
     return await fetchRequest.post(BASE_URL + "/api/category", {
+        sortby: data.sortby,
         name: data.name,
         description: data.description,
         urlLogo: data.urlLogo && data.urlLogo.file.response,
@@ -30,6 +31,7 @@ export const addCategory = async(data) => {
 
 export const updateCategoryById = async(data) => {
     return await fetchRequest.put(BASE_URL + "/api/category/" + data.id, {
+        sortby: data.sortby,
         name: data.name.text ? data.name.text : data.name,
         description: data.description,
         urlLogo: data.urlLogo.urlLogo ? data.urlLogo.urlLogo : data.urlLogo,

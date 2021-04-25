@@ -33,6 +33,15 @@ const AddCategory = ({categories, setCategories, setAddCategory}) => {
                   requiredMark={false}
                   onFinish={onFinish}
                   form={categoryForm}>
+                <Form.Item name="sortby"
+                           rules={[{
+                               required: true,
+                               message: "Введіть число для сортування"
+                           }]}>
+                    <Input className="add-category-type-input"
+                           placeholder="Sort by"  >
+                    </Input>
+                </Form.Item>
                 <Form.Item name="name"
                            rules={[{
                                required: true,
