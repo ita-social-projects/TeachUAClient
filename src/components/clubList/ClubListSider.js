@@ -71,8 +71,9 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     className="club-list-row"
                     label="Категорії">
                     <Checkbox.Group className="club-list-categories">
-                        {categories.map(category => <Checkbox style={{ display: "flex" }}
-                            value={category.name}>{category.name}</Checkbox>)}
+                        {categories.sort((a, b) => a.sortby - b.sortby)
+                            .map(category => <Checkbox style={{display: "flex"}}
+                                                       value={category.name}>{category.name}</Checkbox>)}
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item name="isCenter"
