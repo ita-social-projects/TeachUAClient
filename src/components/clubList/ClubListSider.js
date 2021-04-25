@@ -4,6 +4,7 @@ import "./css/ClubListSider.css"
 import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
+import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
 
 const { Sider } = Layout;
 const { Option } = Select;
@@ -43,7 +44,9 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 onValuesChange={onValuesChange}>
                 <Form.Item name="cityName"
                     className="club-list-row"
-                    label="Місто">
+                    label="Місто"
+                    initialValue={searchParameters.cityName === "Без локації" ? "online" : searchParameters.cityName}
+                >
                     <Select
                         className="club-list-select"
                         placeholder="Виберіть місто"
@@ -52,7 +55,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                             setCityName(value)
                             form.setFieldsValue({ districtName: undefined })
                         }}>
-                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}
+                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}ss
                         <Option value="online">Без локації</Option>
                     </Select>
                 </Form.Item>
