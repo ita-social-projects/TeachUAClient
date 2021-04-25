@@ -1,24 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Layout, Modal} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Layout, Modal } from 'antd';
 import './css/AddClubModal.css';
 import "./css/AddClubContent.css";
-import {Content} from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import AddClubSider from "./AddClubSider";
 import MainInformationStep from "./steps/MainInformationStep";
 import ContactsStep from "./steps/ContactsStep";
 import DescriptionStep from "./steps/DescriptionStep";
-import {getAllCategories} from "../../service/CategoryService";
-import {getAllCities} from "../../service/CityService";
-import {getAllContacts} from "../../service/ContactService";
+import { getAllCategories } from "../../service/CategoryService";
+import { getAllCities } from "../../service/CityService";
+import { getAllContacts } from "../../service/ContactService";
 
 
-const AddClubModal = ({button}) => {
+const AddClubModal = ({ button }) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [locations, setLocations] = useState([]);
 
     useEffect(() => {
         getAllCategories().then(response => setCategories(response));
@@ -34,7 +35,7 @@ const AddClubModal = ({button}) => {
                     setResult={setResult}
                     result={result}
                     step={step}
-                    setStep={setStep}/>;
+                    setStep={setStep} />;
             case 1:
                 return <ContactsStep
                     contacts={contacts}
@@ -42,14 +43,16 @@ const AddClubModal = ({button}) => {
                     setResult={setResult}
                     result={result}
                     step={step}
-                    setStep={setStep}/>;
+                    setStep={setStep}
+                    locations={locations}
+                    setLocations={setLocations} />;
             case 2:
                 return <DescriptionStep
                     setResult={setResult}
                     result={result}
                     step={step}
                     setVisible={setVisible}
-                    setStep={setStep}/>;
+                    setStep={setStep} />;
         }
     };
 
@@ -57,7 +60,7 @@ const AddClubModal = ({button}) => {
         <div>
             {button ?
                 <Button onClick={() => setVisible(true)}
-                        className="add-club-button">Додати гурток</Button>
+                    className="add-club-button">Додати гурток</Button>
                 : <div onClick={() => setVisible(true)}>Додати гурток</div>}
             <Modal
                 className="modal-add-club"
@@ -68,7 +71,7 @@ const AddClubModal = ({button}) => {
                 onCancel={() => setVisible(false)}
                 footer={null}>
                 <Layout>
-                    <AddClubSider step={step}/>
+                    <AddClubSider step={step} />
                     <Content className="add-club-container">
                         <div className="add-club-header">
                             Додати гурток
