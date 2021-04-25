@@ -1,12 +1,12 @@
 import './css/AboutDescription.css';
-import React, {useState, useEffect} from "react";
-import {getPageableCategory} from "../../service/CategoryService";
+import React, { useState, useEffect } from "react";
+import { getPageableCategory } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
 import './css/AboutCategories.css';
 import CategoryLogo from "../CategoryLogo";
-import {Button, Layout, Pagination} from "antd";
+import { Button, Layout, Pagination } from "antd";
 import './css/AboutCarousel.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
@@ -28,6 +28,11 @@ const MainCategories = () => {
     useEffect(() => {
         getData(currentPage);
     }, []);
+
+    const onChange = (current) => {
+        setCurrentPage(current - 1);
+        getData(current - 1)
+    }
 
     const onPageChangePrev = (page) => {
         if (page === 0) {
@@ -56,20 +61,20 @@ const MainCategories = () => {
                 <Link to="/clubs"><Button className="flooded-button more-button">Всі гуртки</Button></Link>
             </div>
             <div className="categories-carousel-block">
-                <ArrowLeftOutlined className="arrows-prev" onClick={() => onPageChangePrev(currentPage)}/>
-                <ArrowRightOutlined className="arrows-next" onClick={() => onPageChangeNext(currentPage)}/>
+                <ArrowLeftOutlined className="arrows-prev" onClick={() => onPageChangePrev(currentPage)} />
+                <ArrowRightOutlined className="arrows-next" onClick={() => onPageChangeNext(currentPage)} />
                 <div className="categories-cards">
                     {categories.content.map(category =>
                         <PrimitiveCard key={category.id}
-                                       header={
-                                           <div className="title">
-                                               <CategoryLogo category={category}/>
-                                               <div className="name">{category.name}</div>
-                                           </div>
-                                       }
-                                       description={category.description}
-                                       link={""}
-                                       buttonText="Переглянути"/>
+                            header={
+                                <div className="title">
+                                    <CategoryLogo category={category} />
+                                    <div className="name">{category.name}</div>
+                                </div>
+                            }
+                            description={category.description}
+                            link={""}
+                            buttonText="Переглянути" />
                     )}
                 </div>
             </div>
@@ -80,7 +85,9 @@ const MainCategories = () => {
                 showSizeChanger={false}
                 current={currentPage + 1}
                 pageSize={categories.size}
-                total={categories.totalElements}/>
+                total={categories.totalElements}
+                onChange={onChange}
+            />
         </div>
     );
 };
