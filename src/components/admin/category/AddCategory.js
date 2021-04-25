@@ -6,7 +6,10 @@ import {addToTable} from "../../../util/TableUtil";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 
-const AddCategory = ({categories, setCategories}) => {
+const AddCategory = ({categories, setCategories, setAddCategory}) => {
+
+    const [categoryForm] = Form.useForm();
+
     const onFinish = (values) => {
         addCategory(values)
             .then((response) => {
@@ -18,6 +21,8 @@ const AddCategory = ({categories, setCategories}) => {
                 message.success("Категорія '" + response.name + "' успішно додана!");
 
                 setCategories(addToTable(categories, response));
+                categoryForm.resetFields();
+                setAddCategory(response);
             });
     };
 
@@ -26,7 +31,8 @@ const AddCategory = ({categories, setCategories}) => {
             <Form className="add-category-type"
                   name="basic"
                   requiredMark={false}
-                  onFinish={onFinish}>
+                  onFinish={onFinish}
+                  form={categoryForm}>
                 <Form.Item name="name"
                            rules={[{
                                required: true,
@@ -47,7 +53,7 @@ const AddCategory = ({categories, setCategories}) => {
                 </Form.Item>
                 <Form.Item name="urlLogo"
                            rules={[{
-                               required: false,
+                               required: true,
                                message: "Завантажте лого"
                            }]}>
                     <Upload
@@ -64,29 +70,32 @@ const AddCategory = ({categories, setCategories}) => {
                                required: true,
                                message: "Введіть Background Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Background Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label for="head">Background Color</label>
+                    </div>
                 </Form.Item>
                 <Form.Item name="tagBackgroundColor"
                            rules={[{
                                required: true,
                                message: "Введіть Tag Background Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Tag Background Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label htmlFor="head">Tag Background Color</label>
+                    </div>
                 </Form.Item>
                 <Form.Item name="tagTextColor"
                            rules={[{
                                required: true,
                                message: "Введіть Tag Text Color"
                            }]}>
-                    <Input className="add-category-type-input"
-                           placeholder="Tag Text Color">
-                    </Input>
+                    <div>
+                        <Input type="color" name="head" defaultValue="#FA8C16"/>
+                        <label htmlFor="head">Tag Text Color</label>
+                    </div>
                 </Form.Item>
-                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити</Button>
+                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити категорію</Button>
             </Form>
         </div>
     );
