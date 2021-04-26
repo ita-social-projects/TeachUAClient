@@ -17,18 +17,18 @@ const ClubListItem = ({ club, onClubClick }) => {
 
     return (
         <div>
-            <Card className="card" onClick={() => onClubClick(club)}>
-                <div className="title">
+            <Card className="card" >
+                <div className="title" onClick={() => onClubClick(club)}>
                     <CategoryLogo category={club.categories[0]} />
                     <div className="name">{club.name}</div>
                 </div>
-                <div className="club-tags-box">
+                <div className="club-tags-box" onClick={() => onClubClick(club)}>
                     <Tags className="club-tags"
                         categories={club.categories.filter((_, idx) => idx < 2)} />
                     <span className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>
                 </div>
                 {club.center !== null ?
-                    <div className="with-center">
+                    <div className="with-center" onClick={() => onClubClick(club)}>
                         <div className="center">
                             <img className="center-logo" src={club.center.urlLogo} alt="Center logo" />
                             <div className="center-description">
@@ -44,7 +44,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                     {/*<DribbbleOutlined className="club-online-icon"/>*/}
                     <span className="club-online-label">Гурток онлайн</span>
                 </div>}
-                <Rate className="rating" disabled value={club.rating} />
+                <Rate className="rating" disabled value={club.rating} onClick={() => onClubClick(club)} />
                 {
                     club.locations.length > 0 &&
                     <div className="address" onClick={() => { setVisible(true) }}>

@@ -64,7 +64,7 @@ const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir
     const onClubClick = (club) => {
         console.log(club);
         setClickedClub(club);
-        setClubInfoVisible(false);
+        setClubInfoVisible(true);
     };
 
     return (
