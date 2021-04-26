@@ -32,7 +32,7 @@ const Categories = ({ setMapClubs }) => {
             style={{ borderRadius: '15px' }}
         >
             <Option value="">Всі категорії</Option>
-            {categories.map(category => (<Option value={category.name}>{category.name}</Option>))}
+            {categories.sort((a, b) => a.sortby - b.sortby).map(category => (<Option value={category.name}>{category.name}</Option>))}
 
         </Select>
     )

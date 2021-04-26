@@ -67,8 +67,14 @@ const CategoryTable = () => {
             dataIndex: 'name',
             width: '15%',
             editable: true,
-            render: name => <div
-                style={{backgroundColor: name.tagBackgroundColor, color: name.tagTextColor}}
+            render: name => <div className="ant-tag tag"
+                style={{backgroundColor: name.tagBackgroundColor,
+                    color: name.tagTextColor,
+                    maxWidth: "200px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    borderRadius: "10px"}}
             >
             {name.text}
             </div>
