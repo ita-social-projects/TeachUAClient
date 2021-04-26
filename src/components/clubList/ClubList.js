@@ -1,8 +1,8 @@
-import {Form, Layout, Pagination} from "antd";
-import {SearchContext, searchParameters} from "../../context/SearchContext";
-import React, {useContext, useEffect, useState} from "react";
+import { Form, Layout, Pagination } from "antd";
+import { SearchContext, searchParameters } from "../../context/SearchContext";
+import React, { useContext, useEffect, useState } from "react";
 import ClubListItem from "./ClubListItem";
-import {getClubsByAdvancedSearch, getClubsByParameters} from "../../service/ClubService";
+import { getClubsByAdvancedSearch, getClubsByParameters } from "../../service/ClubService";
 import EmptySearch from "../EmptySearch";
 import PropTypes from "prop-types";
 import "./css/ClubList.less";
@@ -12,11 +12,11 @@ import ClubListRectangleItem from "./ClubListRectangleItem";
 import ClubListItemInfo from "./ClubListItemInfo";
 import ClubListEmptySearch from "./ClubListEmptySearch";
 
-const {Content} = Layout;
+const { Content } = Layout;
 
-const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir, defaultSortView}) => {
+const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir, defaultSortView }) => {
     const [searchForm] = Form.useForm();
-    const {clubs, setClubs} = useContext(SearchContext);
+    const { clubs, setClubs } = useContext(SearchContext);
     const [currentPage, setCurrentPage] = useState(0);
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
@@ -32,17 +32,17 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
         load(true);
         if (!advancedSearch) {
             getClubsByParameters(searchParameters, checkUndefPage).then(response => {
-                console.log("getData, loading === "+loading);
+                console.log("getData, loading === " + loading);
                 setClubs(response);
                 load(false);
-                console.log("getData, loading === "+loading);
+                console.log("getData, loading === " + loading);
             });
         } else {
             getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
-                console.log("getData, loading === "+loading);
+                console.log("getData, loading === " + loading);
                 setClubs(response);
                 load(false);
-                console.log("getData, loading === "+loading);
+                console.log("getData, loading === " + loading);
             });
         }
         console.log("=== getData method ends, loading === " + loading);
@@ -64,56 +64,56 @@ const ClubList = ({loading, load, advancedSearch, defaultSortBy, defaultSortDir,
     const onClubClick = (club) => {
         console.log(club);
         setClickedClub(club);
-        setClubInfoVisible(true);
+        setClubInfoVisible(false);
     };
 
     return (
         <Layout className="club-list">
             {advancedSearch &&
-            <ClubListSider setCurrentPage={setCurrentPage}
-                           form={searchForm}
-                           getAdvancedData={getData}
-            />}
+                <ClubListSider setCurrentPage={setCurrentPage}
+                    form={searchForm}
+                    getAdvancedData={getData}
+                />}
             <Content className="club-list-content"
-                     style={{
-                         maxWidth: advancedSearch ? '944px' : '1264px',
-                     }}>
+                style={{
+                    maxWidth: advancedSearch ? '944px' : '1264px',
+                }}>
 
                 {advancedSearch &&
-                <ClubListControl setSortBy={setSortBy}
-                                 setSortDirection={setSortDirection}
-                                 sortBy={sortBy}
-                                 view={view}
-                                 sortDirection={sortDirection}
-                                 setView={setView}/>}
+                    <ClubListControl setSortBy={setSortBy}
+                        setSortDirection={setSortDirection}
+                        sortBy={sortBy}
+                        view={view}
+                        sortDirection={sortDirection}
+                        setView={setView} />}
 
-                {!loading && clubs.content.length === 0 ? <ClubListEmptySearch/> :
+                {!loading && clubs.content.length === 0 ? <ClubListEmptySearch /> :
                     <div>
                         {
                             !advancedSearch ?
                                 <div className="content-clubs-list content-clubs-block">
                                     {clubs.content.map((club, index) =>
-                                        <ClubListItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                        <ClubListItem club={club} key={index} onClubClick={onClubClick} />)}
                                 </div>
                                 : <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
                                     {clubs.content.map((club, index) =>
                                         view === 'BLOCK' ?
-                                            <ClubListItem club={club} key={index} onClubClick={onClubClick}/> :
-                                            <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                            <ClubListItem club={club} key={index} onClubClick={onClubClick} /> :
+                                            <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick} />)}
                                 </div>
                         }
 
                         {clickedClub &&
-                        <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
-                                          club={clickedClub}/>}
+                            <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
+                                club={clickedClub} />}
 
                         <Pagination className="pagination"
-                                    hideOnSinglePage
-                                    showSizeChanger={false}
-                                    onChange={onPageChange}
-                                    current={currentPage + 1}
-                                    pageSize={clubs.size}
-                                    total={clubs.totalElements}/>
+                            hideOnSinglePage
+                            showSizeChanger={false}
+                            onChange={onPageChange}
+                            current={currentPage + 1}
+                            pageSize={clubs.size}
+                            total={clubs.totalElements} />
                     </div>
                 }
             </Content>

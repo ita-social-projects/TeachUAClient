@@ -11,6 +11,7 @@ import { deleteToken, deleteUserId, getToken, getUserId } from "../../service/St
 import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
+import { List } from "rc-field-form";
 
 const { SubMenu } = Menu;
 
@@ -47,7 +48,7 @@ const AuthMenu = () => {
                         <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                         <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
                     </Menu.ItemGroup>
-                    <Menu.ItemGroup title="Адмін" >
+                    <Menu.ItemGroup title="Адміністрування" >
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>

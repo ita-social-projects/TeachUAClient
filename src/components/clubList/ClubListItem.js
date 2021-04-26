@@ -1,6 +1,6 @@
 import { Button, Card, Popover, Rate } from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
@@ -8,9 +8,13 @@ import CategoryLogo from "../CategoryLogo";
 import { getShortContent } from "../editor/EditorConverter";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
+import ClubItemMap from "./ClubItemMap";
 
 
 const ClubListItem = ({ club, onClubClick }) => {
+    const [visible, setVisible] = useState(false);
+
+
     return (
         <div>
             <Card className="card" onClick={() => onClubClick(club)}>
@@ -43,7 +47,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                 <Rate className="rating" disabled value={club.rating} />
                 {
                     club.locations.length > 0 &&
-                    <div className="address">
+                    <div className="address" onClick={() => { setVisible(true) }}>
                         <EnvironmentFilled
                             className="address-icon" />
                         {
@@ -70,6 +74,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                     <Link to={`/club/${club.id}`}>Детальніше</Link>
                 </Button>
             </Card>
+            <ClubItemMap club={club} visible={visible} setVisible={setVisible} />
         </div >
     )
 };
