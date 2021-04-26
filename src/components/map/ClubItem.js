@@ -12,7 +12,6 @@ const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
                 lat: mapClub.location.latitude,
                 lng: mapClub.location.longitude
             })
-            console.log(mapClub.location.latitude)
         }} className="club-item">
             <div className="title">
                 <CategoryLogo category={mapClub.categories[0]} />
@@ -20,7 +19,7 @@ const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
             </div>
             <div className="address">
                 <EnvironmentFilled className="address-icon" />
-                <span className="text"> {mapClub.location.address}</span>
+                <span className="text"> {mapClub.location.address || ''}</span>
             </div>
         </div>
     )

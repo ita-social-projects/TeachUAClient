@@ -64,10 +64,23 @@
 .add-club-content .add-club-age .input-age {
     margin: 0 16px 0 8px;
     border: 1px solid #D9D9D9;
-    color: #D9D9D9;
+    color: #595959;
     border-radius: 6px;
     width: 43px;
     height: 40px;
+}
+
+.add-club-content .ant-input-number-input-wrap {
+    height:100%;
+    display:flex;
+    align-items: center;
+}
+.add-club-content .ant-input-number-input-wrap input{
+    text-align: center;
+}
+
+.add-club-content .add-club-categories label{
+    display: flex;
 }
 
 .add-club-content .add-club-age .ant-input-number-handler-wrap {
@@ -172,4 +185,8 @@
 
 .add-club-content .ant-switch-checked {
     background: #0050B3;
+}
+
+.description-step .editor-space {
+    color:#595959;
 }

@@ -20,7 +20,17 @@ const Cities = ({ setMapClubs, setZoom, setCenter }) => {
 
     const onCityChange = (value) => {
         mapSearchParameters.cityName = value;
-        getClubsByCategoryAndCity(mapSearchParameters).then(response => setMapClubs(response));
+        getClubsByCategoryAndCity(mapSearchParameters).then(response => {
+            const arr = [];
+            response.map(club => {
+                club.locations.map(location => {
+                    const mapClub = JSON.parse(JSON.stringify(club));
+                    mapClub.location = location;
+                    arr.push(mapClub);
+                })
+            })
+            setMapClubs(arr);
+        });
         setZoom(10);
         cities.filter(city => city.name === value)
             .map(city => setCenter({
