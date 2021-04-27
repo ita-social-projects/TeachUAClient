@@ -11,7 +11,6 @@ import { deleteToken, deleteUserId, getToken, getUserId } from "../../service/St
 import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
-import { List } from "rc-field-form";
 
 const { SubMenu } = Menu;
 
