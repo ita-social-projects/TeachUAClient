@@ -59,8 +59,6 @@ const CategoryTable = () => {
             dataIndex: 'sortby',
             width: '6%',
             editable: true,
-            defaultSortOrder: 'ascend',
-            sorter: (a, b) => a.sortby - b.sortby
         },
         {
             title: 'Назва',
