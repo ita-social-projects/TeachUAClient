@@ -12,6 +12,7 @@ import { getClubsByParameters } from "../service/ClubService";
 import { getPossibleResults, getPossibleResultsByText } from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
+import {getAllCategories} from "../service/CategoryService";
 
 const { Option, OptGroup } = Select;
 
@@ -23,9 +24,19 @@ class Search extends React.Component {
             categories: [],
             clubs: []
         },
+        allCategories: [],
         loading: false,
         searchClicked: false
     };
+
+    componentDidMount() {
+        getAllCategories().then((response) => {
+            console.log("Search=> componentDidMount start")
+            //console.log("response : "+ response);
+            this.setState({ allCategories: response });
+            console.log("allCategories : "+this.state.allCategories);
+        })
+    }
 
     onSearchChange = (value, option) => {
         if (this.props.redirect) {
@@ -46,7 +57,7 @@ class Search extends React.Component {
                     searchParameters.clubName = value;
                     break;
                 default: {
-                    if (this.state.possibleResults.categories.find(category =>
+                    if (this.state.allCategories.find(category =>
                         category.name.toLowerCase().includes(value.toLowerCase()))) {
                         console.log("default section , category is found")
                         searchParameters.categoryName = value;
