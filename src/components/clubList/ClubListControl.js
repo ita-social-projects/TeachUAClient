@@ -8,7 +8,7 @@ const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirecti
     return (
         <div className="club-list-control">
             <div className="club-control-sort">
-                <span className="control-sort-label">Сортувати за:</span>
+                <span className="control-sort-label">Сортувати:</span>
                 <span className="control-sort-option"
                       onClick={() => setSortBy('name')}
                       style={{color: sortBy === 'name' && '#FA8C16'}}>за алфавітом</span>

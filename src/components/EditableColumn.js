@@ -32,6 +32,10 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
                                 options={selectData.map(data => ({value: data}))}/>;
             break;
         }
+        case 'color': {
+            inputNode = <Input type="color" />
+            break;
+        }
         default: {
             inputNode = <Input/>;
             break;

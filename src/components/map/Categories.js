@@ -18,7 +18,17 @@ const Categories = ({ setMapClubs }) => {
 
     const onCategoryChange = (value) => {
         mapSearchParameters.categoryName = value;
-        getClubsByCategoryAndCity(mapSearchParameters).then(response => setMapClubs(response)
+        getClubsByCategoryAndCity(mapSearchParameters).then(response => {
+            const arr = [];
+            response.map(club => {
+                club.locations.map(location => {
+                    const mapClub = JSON.parse(JSON.stringify(club));
+                    mapClub.location = location;
+                    arr.push(mapClub);
+                })
+            })
+            setMapClubs(arr);
+        }
         );
     };
 

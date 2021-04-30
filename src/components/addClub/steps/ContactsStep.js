@@ -1,5 +1,5 @@
-import {Form, Input, List, message, Popconfirm, Select, Switch, Tooltip} from "antd";
-import React, {useState, useEffect} from "react";
+import { Form, Input, List, message, Popconfirm, Select, Switch, Tooltip } from "antd";
+import React, { useState, useEffect } from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
@@ -7,8 +7,7 @@ import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
-const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
-    const [locations, setLocations] = useState([]);
+const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
     const [contacts_data, setContactsData] = useState({});
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
@@ -17,7 +16,7 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
 
     useEffect(() => {
         if (result) {
-            contactsForm.setFieldsValue({...result});
+            contactsForm.setFieldsValue({ ...result });
         }
     }, []);
 
@@ -52,10 +51,10 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
         setLocations(newData);
     };
 
-    const changeContacts = (event,contact) =>{
+    const changeContacts = (event, contact) => {
         setContactsData({
             ...contacts_data,
-            [contact.id] : event.target.value
+            [contact.id]: event.target.value
         });
     };
 
@@ -67,9 +66,9 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
             onFinish={onFinish}
         >
             <Form.Item name="locations"
-                       className="add-club-row"
-                       label="Локації"
-                       initialValue={result.locations}>
+                className="add-club-row"
+                label="Локації"
+                initialValue={result.locations}>
                 <List
                     className="add-club-location-list"
                     itemLayout="horizontal"
@@ -78,15 +77,15 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
                         <List.Item
                             actions={[
                                 <div>
-                                    <EditOutlined key="edit" onClick={() => onEdit(item)}/>
+                                    <EditOutlined key="edit" onClick={() => onEdit(item)} />
                                     <Popconfirm key="delete"
-                                                title="Видалити локацію?"
-                                                cancelText="Ні"
-                                                okText="Так"
-                                                cancelButtonProps={{className: "popConfirm-cancel-button"}}
-                                                okButtonProps={{className: "popConfirm-ok-button"}}
-                                                onConfirm={() => onRemove(item)}>
-                                        <DeleteOutlined/>
+                                        title="Видалити локацію?"
+                                        cancelText="Ні"
+                                        okText="Так"
+                                        cancelButtonProps={{ className: "popConfirm-cancel-button" }}
+                                        okButtonProps={{ className: "popConfirm-ok-button" }}
+                                        onConfirm={() => onRemove(item)}>
+                                        <DeleteOutlined />
                                     </Popconfirm>
                                 </div>]}
                         >
@@ -95,20 +94,20 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
                                 description={`Адреса: ${item.address.value.structured_formatting.main_text}`}
                             />
                         </List.Item>
-                    )}/>
+                    )} />
                 <span className="add-club-location" onClick={() => setLocationVisible(true)}>
                     Додати локацію
                 </span>
             </Form.Item>
             <div className="add-club-inline">
                 <Form.Item name="isOnline"
-                           className="add-club-row"
-                           label="Доступний онлайн?"
+                    className="add-club-row"
+                    label="Доступний онлайн?"
                 >
-                    <Switch checkedChildren="Так" unCheckedChildren="Ні"/>
+                    <Switch checkedChildren="Так" unCheckedChildren="Ні" />
                 </Form.Item>
                 <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн">
-                    <InfoCircleOutlined className="info-icon"/>
+                    <InfoCircleOutlined className="info-icon" />
                 </Tooltip>
             </div>
             <Form.Item
@@ -118,18 +117,18 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
             >
                 {contacts.map(contact =>
                     <Form.Item name={`contact${contact.name}`}
-                               className="add-club-contact"
-                               initialValue={result[`contact${contact.name}`]}
-                               hasFeedback>
+                        className="add-club-contact"
+                        initialValue={result[`contact${contact.name}`]}
+                        hasFeedback>
                         <Input className="add-club-input"
-                               placeholder="Заповніть поле"
-                               name={contact.name}
-                               onChange={(e)=>changeContacts(e,contact)}
-                               suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
+                            placeholder="Заповніть поле"
+                            name={contact.name}
+                            onChange={(e) => changeContacts(e, contact)}
+                            suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
                     </Form.Item>)}
             </Form.Item>
 
-            <AddClubContentFooter step={step} setStep={setStep}/>
+            <AddClubContentFooter step={step} setStep={setStep} />
 
             <AddLocationModal
                 form={locationForm}
@@ -139,7 +138,7 @@ const ContactsStep = ({contacts, cities, step, setStep, setResult, result}) => {
                 setVisible={setLocationVisible}
                 editedLocation={editedLocation}
                 setEditedLocation={setEditedLocation}
-                cities={cities}/>
+                cities={cities} />
         </Form>
     )
 };

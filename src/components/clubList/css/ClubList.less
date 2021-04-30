@@ -90,11 +90,20 @@
 
 .club-list .club-tags-box {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  height:50px;
 }
 
 .club-list .club-tags {
   width: 180px;
+}
+
+.club-list .and {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+.club-list .expand-icon{
+  margin-top: 5px;
 }
 
 .club-list .club-online {
@@ -102,6 +111,32 @@
   align-items: center;
   color: #2E69C9;
   opacity: 0.9;
+}
+
+
+.club-list .card .address .oneAddress{
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+  max-width:199px;
+  color: #2D4C68;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.club-list .card .address .popover{
+  display:flex;
+}
+
+.club-list .card .address .text{
+  display:flex;
+}
+
+
+.club-list .card .address .text .oneAddress{
+  max-width: 135px;
+  opacity: 1;
 }
 
 .club-list .club-online-icon {

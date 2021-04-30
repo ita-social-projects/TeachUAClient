@@ -20,7 +20,7 @@ const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
             </div>
             <div className="address">
                 <EnvironmentFilled className="address-icon" />
-                <span className="text"> {mapClub.location.address}</span>
+                <span className="text"> {mapClub.location.address || ''}</span>
             </div>
         </div>
     )

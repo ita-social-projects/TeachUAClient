@@ -1,32 +1,36 @@
-import {Button, Card, Popover, Rate} from "antd";
+import { Button, Card, Popover, Rate } from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
-import {getShortContent} from "../editor/EditorConverter";
+import { getShortContent } from "../editor/EditorConverter";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
+import ClubItemMap from "./ClubItemMap";
 
 
-const ClubListItem = ({club, onClubClick}) => {
+const ClubListItem = ({ club, onClubClick }) => {
+    const [visible, setVisible] = useState(false);
+
+
     return (
         <div>
-            <Card className="card" onClick={() => onClubClick(club)}>
-                <div className="title">
-                    <CategoryLogo category={club.categories[0]}/>
+            <Card className="card" >
+                <div className="title" onClick={() => onClubClick(club)}>
+                    <CategoryLogo category={club.categories[0]} />
                     <div className="name">{club.name}</div>
                 </div>
-                <div className="club-tags-box">
+                <div className="club-tags-box" onClick={() => onClubClick(club)}>
                     <Tags className="club-tags"
-                          categories={club.categories.filter((_, idx) => idx < 3)}/>
-                    <span>{club.categories.length > 3 && `і ще ${club.categories.length - 3}...`}</span>
+                        categories={club.categories.filter((_, idx) => idx < 2)} />
+                    <span className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>
                 </div>
                 {club.center !== null ?
-                    <div className="with-center">
+                    <div className="with-center" onClick={() => onClubClick(club)}>
                         <div className="center">
-                            <img className="center-logo" src={club.center.urlLogo} alt="Center logo"/>
+                            <img className="center-logo" src={club.center.urlLogo} alt="Center logo" />
                             <div className="center-description">
                                 <span className="center-label">Центр розвитку</span>
                                 <span className="center-name">{club.center.name}</span>
@@ -36,31 +40,32 @@ const ClubListItem = ({club, onClubClick}) => {
                     </div> :
                     <p className="description">{getShortContent(club.description)}</p>}
                 {club.isOnline && <div className="club-online">
-                    <DesktopOutlined className="club-online-icon"/>
+                    <DesktopOutlined className="club-online-icon" />
                     {/*<DribbbleOutlined className="club-online-icon"/>*/}
                     <span className="club-online-label">Гурток онлайн</span>
                 </div>}
-                <Rate className="rating" disabled value={club.rating}/>
+                <Rate className="rating" disabled value={club.rating} onClick={() => onClubClick(club)} />
                 {
                     club.locations.length > 0 &&
-                    <div className="address">
+                    <div className="address" onClick={() => { setVisible(true) }}>
                         <EnvironmentFilled
-                            className="address-icon"/>
+                            className="address-icon" />
                         {
-                            club.locations.length === 1 ? <span className="text"> {club.locations[0].address}</span>
+                            club.locations.length === 1 ? <span className="oneAddress"> {club.locations[0].address}</span>
                                 :
                                 <Popover
+                                    className="popover"
                                     title="Локації"
                                     placement="topRight"
                                     content={club.locations.map(location =>
                                         <div>
-                                            <EnvironmentFilled className="address-small-icon"/>
+                                            <EnvironmentFilled className="address-small-icon" />
                                             <span className="text"> {location.address}</span>
                                         </div>
                                     )}>
-                                <span
-                                    className="text">{club.locations[0].address}, і ще {club.locations.length - 1}</span>
-                                    <EyeOutlined className="expand-icon"/>
+                                    <span className="text"><span className="oneAddress"
+                                    >{club.locations[0].address}</span>, і ще {club.locations.length - 1}</span>
+                                    <EyeOutlined className="expand-icon" />
                                 </Popover>
                         }
                     </div>
@@ -69,7 +74,8 @@ const ClubListItem = ({club, onClubClick}) => {
                     <Link to={`/club/${club.id}`}>Детальніше</Link>
                 </Button>
             </Card>
-        </div>
+            <ClubItemMap club={club} visible={visible} setVisible={setVisible} />
+        </div >
     )
 };
 ClubListItem.propTypes = {
