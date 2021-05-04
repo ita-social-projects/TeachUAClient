@@ -9,7 +9,7 @@ import { mapSearchParameters, searchParameters } from "../../context/SearchConte
 const { Sider } = Layout;
 const { Option } = Select;
 
-const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
+const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
@@ -31,6 +31,10 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
     }, [cityName]);
 
     const onValuesChange = (values) => {
+       //  if(values.isCenter){
+       //      setCenterChecked(true);
+       //      console.log("ClubListSider, center option is : "+isCenterChecked);
+       // }
         getData();
     };
 
@@ -42,6 +46,17 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 requiredMark={false}
                 form={form}
                 onValuesChange={onValuesChange}>
+
+                <Form.Item name="isCenter"
+                           className="club-list-row"
+                           label="Гурток/Центр"
+                           initialValue={false}>
+                    <Radio.Group className="club-list-kind">
+                        <Radio value={false}>Гурток</Radio>
+                        <Radio value={true}>Центр</Radio>
+                    </Radio.Group>
+                </Form.Item>
+
                 <Form.Item name="cityName"
                     className="club-list-row"
                     label="Місто"
@@ -55,7 +70,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                             setCityName(value)
                             form.setFieldsValue({ districtName: undefined })
                         }}>
-                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}ss
+                        {cities.map(city => <Option value={city.name} key={city.id}>{city.name}</Option>)}ss
                         <Option value="online">Без локації</Option>
                     </Select>
                 </Form.Item>
@@ -67,31 +82,34 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                         className="club-list-select"
                         placeholder="Виберіть район"
                         optionFilterProp="children">
-                        {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
+                        {districts.map(district => <Option value={district.name} key={district.id}>{district.name}</Option>)}
                     </Select>
                 </Form.Item>
                 <Form.Item name="categoriesName"
                     className="club-list-row"
-                    label="Категорії">
-                    <Checkbox.Group className="club-list-categories">
+                    label="Категорії"
+                    disabled={isCenterChecked}
+                >
+                    <Checkbox.Group className="club-list-categories"
+                                    disabled={isCenterChecked}
+                    >
                         {categories.sort((a, b) => a.sortby - b.sortby)
                             .map(category => <Checkbox style={{display: "flex"}}
-                                                       value={category.name}>{category.name}</Checkbox>)}
+                                                       value={category.name}
+                                                       key={category.id}
+                            >
+                                {category.name}
+                            </Checkbox>)}
                     </Checkbox.Group>
                 </Form.Item>
-                <Form.Item name="isCenter"
-                    className="club-list-row"
-                    label="Гурток/Центр"
-                    initialValue={false}>
-                    <Radio.Group className="club-list-kind">
-                        <Radio value={false}>Гурток</Radio>
-                        <Radio value={true}>Центр</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item name="isOnline"
-                    className="club-list-row"
-                    label="Ремоут">
-                    <Checkbox.Group className="club-list-categories">
+
+                <Form.Item  name="isOnline"
+                            className="club-list-row"
+                            label="Ремоут"
+                >
+                    <Checkbox.Group className="club-list-categories"
+                                    disabled={isCenterChecked}
+                    >
                         <Checkbox style={{ display: "flex" }} disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
                     </Checkbox.Group>
                 </Form.Item>

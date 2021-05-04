@@ -1,9 +1,9 @@
-import './css/SocialMedia.css';
+import '../components/clubPage/sider/css/SocialMedia.css';
 import React, {useState, useEffect} from "react";
-import MaskIcon from "../../MaskIcon";
-import {getAllContacts} from "../../../service/ContactService";
+import MaskIcon from "../components/MaskIcon";
+import {getAllContacts} from "../service/ContactService";
 
-const SocialMedia = ({label, contacts}) => {
+const ContactsInfoUtil = ({label, contacts}) => {
 
     //console.log(contacts);
     const contactsArray=Array.from(contacts);
@@ -20,4 +20,4 @@ const SocialMedia = ({label, contacts}) => {
     )
 };
 
-export default SocialMedia;
+export default ContactsInfoUtil;

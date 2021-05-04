@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Sider from "antd/es/layout/Sider";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import {getSimilarClubsByCategoryName} from "../../../service/ClubService";
-import SocialMedia from "./SocialMedia";
+import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 import SimilarClubs from "./SimilarClubs";
 import {searchParameters} from "../../../context/SearchContext";
 
@@ -53,7 +53,7 @@ class PageSider extends React.Component {
                     <span className="sider-label">Центр розвитку: </span>
                     <span className="name">{this.props.club.center.name}</span>
                 </div>}
-                <SocialMedia label="Зв’яжіться з гуртком" contacts={this.props.club.contacts}/>
+                <ContactsInfoUtil label="Зв’яжіться з гуртком" contacts={this.props.club.contacts}/>
                 <SimilarClubs cityName={this.props.cityName} similarClubs={this.state.similarClubs}/>
             </Sider>
         )

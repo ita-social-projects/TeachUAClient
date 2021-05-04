@@ -12,8 +12,8 @@ import ClubItemMap from "./ClubItemMap";
 
 
 const ClubListItem = ({ club, onClubClick }) => {
-    const [visible, setVisible] = useState(false);
 
+    const [visible, setVisible] = useState(false);
 
     return (
         <div>
