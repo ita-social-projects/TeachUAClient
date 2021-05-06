@@ -25,7 +25,6 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
         if (editedLocation) {
             setEditedLocation(null);
         }
-
         setVisible(false);
         form.resetFields();
     };
@@ -163,7 +162,7 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                             }]}
                             {...inputAddressProps}>
                             <AddClubInputAddress
-                                placeholder="Введіть адресу локації"
+                                editedLocation={editedLocation}
                                 form={form}
                                 setCityName={setCityName}
                                 onChange={handleSelect} />
