@@ -6,6 +6,7 @@ import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
+import Checkbox from "antd/es/checkbox/Checkbox";
 
 const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
     const [contacts_data, setContactsData] = useState({});
@@ -101,10 +102,9 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             </Form.Item>
             <div className="add-club-inline">
                 <Form.Item name="isOnline"
-                    className="add-club-row"
-                    label="Доступний онлайн?"
+                    className="check-online"
                 >
-                    <Switch checkedChildren="Так" unCheckedChildren="Ні" />
+                    <input type="checkbox"/> Доступний онлайн
                 </Form.Item>
                 <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн">
                     <InfoCircleOutlined className="info-icon" />

@@ -23,6 +23,11 @@
     text-align: left;
 }
 
+.check-online {
+    color: #FE7729;
+    font-weight: 700;
+}
+
 .add-club-content .add-club-input {
     height: 40px;
     border-radius: 6px;
