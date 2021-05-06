@@ -122,7 +122,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             </Form.Item>
                             <Form.Item name="districtName"
                                        className="add-club-row"
-                                       label="Район"
+                                       label="Район міста"
                                        hasFeedback>
                                 <Select
                                     className="add-club-select"
