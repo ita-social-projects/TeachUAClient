@@ -75,8 +75,8 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     label="Категорії">
                     <Checkbox.Group className="club-list-categories">
                         {categories.sort((a, b) => a.sortby - b.sortby)
-                            .map(category => <Checkbox style={{display: "flex"}}
-                                                       value={category.name}>{category.name}</Checkbox>)}
+                            .map(category => <Checkbox style={{ display: "flex" }}
+                                value={category.name}>{category.name}</Checkbox>)}
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item name="isCenter"
@@ -95,31 +95,17 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                         <Checkbox style={{ display: "flex" }} disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
                     </Checkbox.Group>
                 </Form.Item>
-                <Form.Item label="Вік дитини"
+                <Form.Item
+                    name="age"
+                    label="Вік дитини"
                     className="club-list-row"
                     inititalValue={0}>
-                    <span className="club-list-age">
-                        Від
-                    <Form.Item name="ageFrom"
-                            style={{ margin: 0 }}
-                            initialValue={2}>
-                            <InputNumber className="input-age"
-                                min={2}
-                                max={18} />
-                        </Form.Item>
-                    до
-                    <Form.Item name="ageTo"
-                            style={{ margin: 0 }}
-                            initialValue={18}>
-                            <InputNumber className="input-age"
-                                min={3}
-                                max={18} />
-                        </Form.Item>
-                    років
-                </span>
+                    <InputNumber className="age"
+                        min={2}
+                        max={18} />
                 </Form.Item>
             </Form>
-        </Sider>
+        </Sider >
     )
 };
 
