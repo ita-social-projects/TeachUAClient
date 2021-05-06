@@ -7,6 +7,8 @@ import { saveContent } from "../../editor/EditorConverter";
 import { transToEng } from "../../../util/Translit";
 import { UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
 import { addClub } from "../../../service/ClubService";
+import "../css/AddClubContent.css";
+
 
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible }) => {
     const [descriptionForm] = Form.useForm();
@@ -38,7 +40,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible }) => {
             name="basic"
             form={descriptionForm}
             requiredMark={false}
-            onFinish={onFinish}>
+            onFinish={onFinish}
+            className="description-step">
             <Form.Item name="urlLogo"
                 className="add-club-row"
                 label="Логотип"
