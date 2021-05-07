@@ -14,14 +14,13 @@
     display: flex;
     margin-bottom: 20px;
     font-size: 16px;
-    line-height: 15px;
+    line-height: 22px;
     align-items: center;
     text-overflow: ellipsis;
 }
 
 .map-modal .club-item .name {
     color: #002766;
-    max-height: 44px;
     white-space: normal;
     margin-left: 10px;
     overflow: hidden;
