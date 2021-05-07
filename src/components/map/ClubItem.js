@@ -9,8 +9,8 @@ const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
             setSelected(mapClub);
             setZoom(15);
             setCenter({
-                lat: mapClub.location.latitude,
-                lng: mapClub.location.longitude
+                lat: mapClub?.location.latitude,
+                lng: mapClub?.location.longitude
             })
         }} className="club-item">
             <div className="title">

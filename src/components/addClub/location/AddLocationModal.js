@@ -1,17 +1,17 @@
-import {Button, Form, Input, message, Modal, Select, Tooltip} from "antd";
-import React, {useEffect, useState} from "react";
+import { Button, Form, Input, message, Modal, Select, Tooltip } from "antd";
+import React, { useEffect, useState } from "react";
 import '../css/AddClubModal.css';
 import "../css/AddClubContent.css";
 import AddClubInputAddress from "../AddClubInputAddress";
-import {getDistrictsByCityName} from "../../../service/DisctrictService";
-import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
-import {addToTable} from "../../../util/TableUtil";
-import {Content} from "antd/es/layout/layout";
+import { getDistrictsByCityName } from "../../../service/DisctrictService";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { addToTable } from "../../../util/TableUtil";
+import { Content } from "antd/es/layout/layout";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
-const {Option} = Select;
+const { Option } = Select;
 
-const AddLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
+const AddLocationModal = ({ form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation }) => {
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
@@ -25,7 +25,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         if (editedLocation) {
             setEditedLocation(null);
         }
-
         setVisible(false);
         form.resetFields();
     };
@@ -52,16 +51,26 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const handleSelect = (address) => {
         geocodeByAddress(address.label)
             .then(results => getLatLng(results[0]))
-            .then(({lat, lng}) => {
+            .then(({ lat, lng }) => {
                 form.setFieldsValue({
                     longitude: lng,
                     latitude: lat
                 });
             });
 
-        setInputAddressProps({validateStatus: 'success'});
+        setInputAddressProps({ validateStatus: 'success' });
         setCityOnInput(cityName);
     };
+
+    const changeCity = () => {
+        const fields = form.getFieldValue();
+        form.resetFields();
+        form.setFieldsValue({
+            name: fields.name,
+            cityName: fields.cityName,
+            phone: fields.phone
+        });
+    }
 
     return (
         <Modal
@@ -85,34 +94,34 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                         onFinish={onFinish}
                     >
                         <Form.Item name="name"
-                                   className="add-club-row"
-                                   label="Назва"
-                                   hasFeedback
-                                   rules={[{
-                                       required: true,
-                                   }]}>
+                            className="add-club-row"
+                            label="Назва"
+                            hasFeedback
+                            rules={[{
+                                required: true,
+                            }]}>
                             <Input className="add-club-input"
-                                   placeholder="Назва локації"/>
+                                placeholder="Назва локації" />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="cityName"
-                                       className="add-club-row"
-                                       label="Місто"
-                                       initialValue={editedLocation && editedLocation.cityName}
-                                       hasFeedback
-                                       rules={[{
-                                           required: true,
-                                       }]}>
+                                className="add-club-row"
+                                label="Місто"
+                                initialValue={editedLocation && editedLocation.cityName}
+                                hasFeedback
+                                rules={[{
+                                    required: true,
+                                }]}>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місто"
                                     onChange={(value) => {
                                         if (cityName) {
                                             cityOnInput === value ?
-                                                setInputAddressProps({validateStatus: 'success'}) :
-                                                setInputAddressProps({validateStatus: 'error'});
+                                                setInputAddressProps({ validateStatus: 'success' }) :
+                                                setInputAddressProps({ validateStatus: 'error' });
                                         }
-
+                                        changeCity();
                                         setCityName(value);
                                     }}
                                     optionFilterProp="children">
@@ -121,9 +130,9 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 </Select>
                             </Form.Item>
                             <Form.Item name="districtName"
-                                       className="add-club-row"
-                                       label="Район"
-                                       hasFeedback>
+                                className="add-club-row"
+                                label="Район"
+                                hasFeedback>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
@@ -132,9 +141,9 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 </Select>
                             </Form.Item>
                             <Form.Item name="stationName"
-                                       className="add-club-row"
-                                       label="Метро/Місцевість"
-                                       hasFeedback>
+                                className="add-club-row"
+                                label="Метро/Місцевість"
+                                hasFeedback>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
@@ -144,50 +153,50 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             </Form.Item>
                         </div>
                         <Form.Item name="address"
-                                   className="add-club-row"
-                                   label="Адреса"
-                                   hasFeedback
-                                   validateTrigger={handleSelect}
-                                   rules={[{
-                                       required: true,
-                                   }]}
-                                   {...inputAddressProps}>
+                            className="add-club-row"
+                            label="Адреса"
+                            hasFeedback
+                            validateTrigger={handleSelect}
+                            rules={[{
+                                required: true,
+                            }]}
+                            {...inputAddressProps}>
                             <AddClubInputAddress
-                                placeholder="Введіть адресу локації"
+                                editedLocation={editedLocation}
                                 form={form}
                                 setCityName={setCityName}
-                                onChange={handleSelect}/>
+                                onChange={handleSelect} />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="longitude"
-                                       className="add-club-row"
-                                       label="Довгота"
-                                       hasFeedback
-                                       rules={[{
-                                           required: true,
-                                       }]}>
+                                className="add-club-row"
+                                label="Довгота"
+                                hasFeedback
+                                rules={[{
+                                    required: true,
+                                }]}>
                                 <Input className="add-club-input add-club-select"
-                                       suffix={
-                                           <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                               <InfoCircleOutlined className="info-icon"/>
-                                           </Tooltip>
-                                       }
-                                       placeholder="Довгота"/>
+                                    suffix={
+                                        <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                            <InfoCircleOutlined className="info-icon" />
+                                        </Tooltip>
+                                    }
+                                    placeholder="Довгота" />
                             </Form.Item>
                             <Form.Item name="latitude"
-                                       className="add-club-row"
-                                       label="Широта"
-                                       hasFeedback
-                                       rules={[{
-                                           required: true,
-                                       }]}>
+                                className="add-club-row"
+                                label="Широта"
+                                hasFeedback
+                                rules={[{
+                                    required: true,
+                                }]}>
                                 <Input className="add-club-input add-club-select"
-                                       suffix={
-                                           <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                               <InfoCircleOutlined className="info-icon"/>
-                                           </Tooltip>
-                                       }
-                                       placeholder="Широта"/>
+                                    suffix={
+                                        <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                            <InfoCircleOutlined className="info-icon" />
+                                        </Tooltip>
+                                    }
+                                    placeholder="Широта" />
                             </Form.Item>
                         </div>
                         <Form.Item name="phone"
@@ -199,7 +208,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        pattern: /^(\+38|38)?\d{10}$/
                                    }]}>
                             <Input className="add-club-input"
-                                   placeholder="Номер телефону локації"/>
+                                placeholder="Номер телефону локації" />
                         </Form.Item>
 
                         <div className="add-club-content-footer add-club-add-location-button">

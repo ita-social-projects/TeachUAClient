@@ -1,14 +1,26 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import './css/AddClubInputAdress.css'
-import {Result} from "antd";
+import { Result } from "antd";
 
-const AddClubInputAddress = ({placeholder, onChange, form, inputText}) => {
+const place = "PLACEHOLDER";
+
+const AddClubInputAddress = ({ editedLocation, onChange, form, inputText }) => {
     const [request, setRequest] = useState("");
+    const [placeholder, setPlaceholed] = useState("Введіть адресу локації");
 
     const handleSearch = (text) => {
         setRequest(form.getFieldValue("cityName") + " " + text);
     };
+
+    useEffect(() => {
+        if (editedLocation) {
+            setPlaceholed(editedLocation.address.value.description);
+        }
+        else {
+            setPlaceholed("Введіть адресу локації");
+        }
+    }, [editedLocation])
 
     const noOptionsMessage = () => {
         const city = form.getFieldValue("cityName");
@@ -17,7 +29,7 @@ const AddClubInputAddress = ({placeholder, onChange, form, inputText}) => {
             <Result
                 status="error"
                 title="Виберіть місто"
-                subTitle="Щоб почати вводити адресу виберіть місто"/> :
+                subTitle="Щоб почати вводити адресу виберіть місто" /> :
             <Result
                 status="success"
                 title={`Вибране місто ${city}`}
