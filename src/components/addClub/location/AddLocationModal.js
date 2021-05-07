@@ -94,12 +94,14 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                         onFinish={onFinish}
                     >
                         <Form.Item name="name"
-                            className="add-club-row"
-                            label="Назва"
-                            hasFeedback
-                            rules={[{
-                                required: true,
-                            }]}>
+                                   className="add-club-row"
+                                   label="Назва"
+                                   hasFeedback
+                                   rules={[{
+                                       required: true,
+                                       max:100,
+                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){4,}(?<!\s)$/
+                                   }]}>
                             <Input className="add-club-input"
                                 placeholder="Назва локації" />
                         </Form.Item>
