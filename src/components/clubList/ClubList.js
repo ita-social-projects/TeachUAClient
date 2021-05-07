@@ -38,6 +38,7 @@ const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir
                 console.log("getData, loading === " + loading);
             });
         } else {
+            console.log(params);
             getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
                 console.log("getData, loading === " + loading);
                 setClubs(response);
