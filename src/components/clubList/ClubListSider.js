@@ -100,9 +100,12 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     label="Вік дитини"
                     className="club-list-row"
                     inititalValue={0}>
-                    <InputNumber className="age"
-                        min={2}
-                        max={18} />
+                    <span>
+                        <InputNumber className="age"
+                            min={2}
+                            max={18} />
+                            років</span>
+
                 </Form.Item>
             </Form>
         </Sider >
