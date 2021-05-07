@@ -15,7 +15,6 @@ const AddClubInputAddress = ({ editedLocation, onChange, form, inputText }) => {
 
     useEffect(() => {
         if (editedLocation) {
-            console.log(editedLocation);
             setPlaceholed(editedLocation.address.value.description);
         }
         else {
