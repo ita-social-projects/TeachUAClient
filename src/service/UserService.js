@@ -46,7 +46,6 @@ export const signIn = async (data) => {
 };
 
 export const updateUser = async (data) => {
-    console.log(data)
     return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -62,7 +61,6 @@ export const updateUser = async (data) => {
 };
 
 export const updateUserByAdmin = async (data) => {
-    console.log(data)
     return await fetchRequest.put(BASE_URL + "/api/user/update", {
         id: data.id,
         firstName: data.firstName,
