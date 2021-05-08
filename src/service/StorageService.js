@@ -1,5 +1,3 @@
-
-
 export const saveToken = (token) => {
     localStorage.setItem("accessToken", token)
 }

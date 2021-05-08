@@ -25,7 +25,6 @@ export const updateCityById = async (data) => {
     });
 };
 
-
 export const deleteCityById = async (id) => {
     return await axios.delete(BASE_URL + "/api/city/" + id,).then((response) => {
         return response.data
