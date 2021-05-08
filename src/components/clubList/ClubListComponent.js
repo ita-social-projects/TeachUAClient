@@ -14,7 +14,7 @@ const ClubListComponent = () => {
 
     const [loading, setLoading] = useState(false);
     const [mapVisible, setMapVisible] = useState(false);
-    const [advancedSearch, setAdvancedSearch] = useState(false);
+    const [advancedSearch, setAdvancedSearch] = useState(true);
 
     return (
         <Layout>
