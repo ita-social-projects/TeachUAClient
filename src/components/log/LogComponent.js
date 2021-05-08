@@ -22,16 +22,16 @@ const LogComponent = () => {
 
     return (
         <div>
-            <div>
-                <Divider orientation="center">List of Logs</Divider>
-                <Button onClick={deleteLog}>Delete Logs</Button>
+            <Divider>List of Logs</Divider>
+            <div className="delete-button">
+                <Button onClick={deleteLog}>Delete All Logs</Button>
             </div>
             <List className="box"
                   bordered
                   dataSource={logs}
                   renderItem={item => (
                       <List.Item onClick={() => {window.location.assign(`/dev/log/${item}`)}}>
-                          <p>{item}</p>
+                          <Button>{item}</Button>
                       </List.Item>
                   )}
             />
