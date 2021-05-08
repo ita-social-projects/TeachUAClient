@@ -1,6 +1,5 @@
 import React from 'react';
 import TwitterOutlined from "@ant-design/icons/lib/icons/TwitterOutlined";
-import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import Icon, { createFromIconfontCN } from '@ant-design/icons';
@@ -22,7 +21,9 @@ const FooterSocials = () => {
 
     return (
         <div className="footer-social">
-            <div className="footer-logo"/>
+            <a href="/dev/">
+                <div className="footer-logo"/>
+            </a>
             <div className="description">
                 <div className="text">
                     <span>Нам небайдуже майбутнє</span>

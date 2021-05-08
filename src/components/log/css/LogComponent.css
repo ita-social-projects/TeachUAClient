@@ -2,3 +2,20 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.delete-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-button .ant-btn {
+    background: #FA8C16;
+    color: black;
+    border-color: #FA8C16;
+}
+
+.back-button {
+    background: #FA8C16;
+    color: black;
+    border-color: #FA8C16;
+}
