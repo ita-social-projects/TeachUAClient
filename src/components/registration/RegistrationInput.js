@@ -127,7 +127,7 @@ const RegistrationInput = ({disabledButton}) => {
                                message: 'Введіть пароль'
                            },
                                {
-                                   pattern: /^\S{8,20}$/,
+                                   pattern: /^.{8,20}$/,
                                    message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
                                },
                            ]}>
