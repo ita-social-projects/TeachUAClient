@@ -11,7 +11,7 @@ import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
 
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible, clubs, setClubs }) => {
+const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
@@ -30,6 +30,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, clubs, 
         addClub(result).then(response => {
             setVisible(false);
             setResult(null);
+            setLocations([]);
             setStep(0);
             if (clubs) {
                 getAllClubsByUserId(getUserId()).then(response => {

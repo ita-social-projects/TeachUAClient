@@ -56,6 +56,7 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
                     step={step}
                     setVisible={setVisible}
                     setStep={setStep}
+                    setLocations={setLocations}
                     clubs={clubs}
                     setClubs={setClubs} />;
         }

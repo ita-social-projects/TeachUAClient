@@ -8,7 +8,7 @@ import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 
 
-const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult }) => {
+const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations }) => {
     const [clubsOfCenterForm] = Form.useForm();
 
     const nextStep = () => {
@@ -23,9 +23,11 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
 
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
-        nextStep();
         addCenter(result).then(response => {
             console.log(response);
+            setResult(null)
+            setLocations([]);
+            nextStep();
         })
     }
 

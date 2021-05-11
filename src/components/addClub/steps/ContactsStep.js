@@ -90,8 +90,8 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                                 </div>]}
                         >
                             <List.Item.Meta
-                                title={item.name}
-                                description={`Адреса: ${item.address.value.structured_formatting.main_text}`}
+                                title={item?.name}
+                                description={`Адреса: ${item?.address.value?.structured_formatting.main_text}`}
                             />
                         </List.Item>
                     )} />

@@ -17,7 +17,6 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
 
     useEffect(() => {
         if (result) {
-            console.log(result)
             mainInformationFrom.setFieldsValue({ ...result })
         }
     }, [])
@@ -25,8 +24,8 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
     const onFinish = (values) => {
         console.log('Success: ', values);
         setResult(Object.assign(result, values));
-        nextStep();
         mainInformationFrom.resetFields();
+        nextStep();
     };
 
     return (

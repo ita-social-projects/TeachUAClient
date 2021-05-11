@@ -45,13 +45,13 @@ const AddCenter = () => {
                 })
             ))
         });
-        console.log(locations)
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
         setResult({
             userId: getUserId()
         })
-    }, [])
+        console.log("ADD CENTER USE EFFECT")
+    }, [visible])
 
     const currentComponnet = (step) => {
         switch (step) {
@@ -94,6 +94,7 @@ const AddCenter = () => {
                     setClubs={setClubs}
                     result={result}
                     setResult={setResult}
+                    setLocations={setLocations}
                 />;
         }
     };
