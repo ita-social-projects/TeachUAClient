@@ -94,12 +94,14 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                         onFinish={onFinish}
                     >
                         <Form.Item name="name"
-                            className="add-club-row"
-                            label="Назва"
-                            hasFeedback
-                            rules={[{
-                                required: true,
-                            }]}>
+                                   className="add-club-row"
+                                   label="Назва"
+                                   hasFeedback
+                                   rules={[{
+                                       required: true,
+                                       max:100,
+                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){4,}(?<!\s)$/
+                                   }]}>
                             <Input className="add-club-input"
                                 placeholder="Назва локації" />
                         </Form.Item>
@@ -130,9 +132,9 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                                 </Select>
                             </Form.Item>
                             <Form.Item name="districtName"
-                                className="add-club-row"
-                                label="Район"
-                                hasFeedback>
+                                       className="add-club-row"
+                                       label="Район міста"
+                                       hasFeedback>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
@@ -200,12 +202,13 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                             </Form.Item>
                         </div>
                         <Form.Item name="phone"
-                            className="add-club-row"
-                            label="Номер телефону"
-                            hasFeedback
-                            rules={[{
-                                required: true,
-                            }]}>
+                                   className="add-club-row"
+                                   label="Номер телефону"
+                                   hasFeedback
+                                   rules={[{
+                                       required: true,
+                                       pattern: /^(\+38|38)?\d{10}$/
+                                   }]}>
                             <Input className="add-club-input"
                                 placeholder="Номер телефону локації" />
                         </Form.Item>

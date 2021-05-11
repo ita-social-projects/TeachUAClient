@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, Form, InputNumber, Layout, Radio, Select } from "antd";
-import "./css/ClubListSider.css"
+import "./css/ClubListSider.css";
 import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
-import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
+import { searchParameters } from "../../context/SearchContext";
 
 const { Sider } = Layout;
 const { Option } = Select;
@@ -21,17 +21,28 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
     };
 
     useEffect(() => {
-        getAllCategories().then(response => setCategories(response));
-        getAllCities().then(response => setCities(response));
+        getAllCategories().then((response) => setCategories(response));
+        getAllCities().then((response) => setCities(response));
         getData();
     }, []);
 
     useEffect(() => {
-        getDistrictsByCityName(cityName).then(response => setDistricts(response));
+        const city = !cityName ? searchParameters.cityName : cityName;
+        getDistrictsByCityName(city).then((response) => {
+            setDistricts(response);
+        });
     }, [cityName]);
 
     const onValuesChange = (values) => {
+        if (values.hasOwnProperty("cityName")) {
+            form.setFieldsValue({ districtName: undefined });
+        }
         getData();
+    };
+
+    const onCityChange = (value) => {
+        setCityName(value);
+        form.setFieldsValue({ districtName: undefined });
     };
 
     return (
@@ -41,75 +52,108 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 name="basic"
                 requiredMark={false}
                 form={form}
-                onValuesChange={onValuesChange}>
-                <Form.Item name="cityName"
+                onValuesChange={onValuesChange}
+            >
+                <Form.Item
+                    name="cityName"
                     className="club-list-row"
                     label="Місто"
-                    initialValue={searchParameters.cityName === "Без локації" ? "online" : searchParameters.cityName}
+                    initialValue={
+                        searchParameters.cityName === "Без локації"
+                            ? "online"
+                            : searchParameters.cityName
+                    }
                 >
                     <Select
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
-                        onChange={(value) => {
-                            setCityName(value)
-                            form.setFieldsValue({ districtName: undefined })
-                        }}>
-                        {cities.map(city => <Option value={city.name}>{city.name}</Option>)}ss
+                        onChange={onCityChange}
+                    >
+                        {cities.map((city) => (
+                            <Option value={city.name}>{city.name}</Option>
+                        ))}
+                        ss
                         <Option value="online">Без локації</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item name="districtName"
+                <Form.Item
+                    name="districtName"
                     className="club-list-row"
-                    label="Район міста">
+                    label="Район міста"
+                >
                     <Select
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть район"
-                        optionFilterProp="children">
-                        {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
+                        optionFilterProp="children"
+                    >
+                        {districts.map((district) => (
+                            <Option value={district.name}>
+                                {district.name}
+                            </Option>
+                        ))}
                     </Select>
                 </Form.Item>
-                <Form.Item name="categoriesName"
+                <Form.Item
+                    name="categoriesName"
                     className="club-list-row"
-                    label="Категорії">
+                    label="Категорії"
+                >
                     <Checkbox.Group className="club-list-categories">
-                        {categories.sort((a, b) => a.sortby - b.sortby)
-                            .map(category => <Checkbox style={{ display: "flex" }}
-                                value={category.name}>{category.name}</Checkbox>)}
+                        {categories
+                            .sort((a, b) => a.sortby - b.sortby)
+                            .map((category) => (
+                                <Checkbox
+                                    style={{ display: "flex" }}
+                                    value={category.name}
+                                >
+                                    {category.name}
+                                </Checkbox>
+                            ))}
                     </Checkbox.Group>
                 </Form.Item>
-                <Form.Item name="isCenter"
+                <Form.Item
+                    name="isCenter"
                     className="club-list-row"
                     label="Гурток/Центр"
-                    initialValue={false}>
+                    initialValue={false}
+                >
                     <Radio.Group className="club-list-kind">
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
                     </Radio.Group>
                 </Form.Item>
-                <Form.Item name="isOnline"
+                <Form.Item
+                    name="isOnline"
                     className="club-list-row"
-                    label="Ремоут">
+                    label="Ремоут"
+                >
                     <Checkbox.Group className="club-list-categories">
-                        <Checkbox style={{ display: "flex" }} disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
+                        <Checkbox
+                            style={{ display: "flex" }}
+                            disabled={
+                                form.getFieldValue("cityName") === "online"
+                            }
+                        >
+                            Доступний онлайн
+                        </Checkbox>
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item
                     name="age"
                     label="Вік дитини"
                     className="club-list-row"
-                    inititalValue={0}>
+                    inititalValue={0}
+                >
                     <span>
-                        <InputNumber className="age"
-                            min={2}
-                            max={18} />
-                            років</span>
-
+                        <InputNumber className="age" min={2} max={18} />
+                        років
+                    </span>
                 </Form.Item>
             </Form>
-        </Sider >
-    )
+        </Sider>
+    );
 };
 
 export default ClubListSider;

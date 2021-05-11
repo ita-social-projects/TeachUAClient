@@ -58,7 +58,7 @@ const MainCategories = () => {
         <div className="about-categories">
             <div className="categories-header">
                 <h2 className="label">Оберіть напрям гуртків</h2>
-                <Link to="/clubs"><Button className="flooded-button more-button">Всі гуртки</Button></Link>
+                <a href="/dev/clubs"><Button className="flooded-button more-button">Всі гуртки</Button> </a>
             </div>
             <div className="categories-carousel-block">
                 <ArrowLeftOutlined className="arrows-prev" onClick={() => onPageChangePrev(currentPage)} />

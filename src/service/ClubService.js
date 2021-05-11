@@ -105,7 +105,6 @@ export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPat
 };
 
 export const getClubsByParameters = async (parameters, page) => {
-    //console.log("getClubsByParameters begin, parameters: "+parameters);
     return await fetchRequest.get(BASE_URL + "/api/clubs/search", {
         params: {
             clubName: parameters.clubName,
@@ -151,7 +150,6 @@ export const changeClubOwner = async (params, id) => {
         })
 
 }
-
 
 export const deleteClubById = async (id) => {
     return await fetchRequest.delete(BASE_URL + "/api/club/" + id).then((response) => {
