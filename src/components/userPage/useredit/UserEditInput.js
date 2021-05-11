@@ -37,10 +37,11 @@ const UserEditInput = ({user}) => {
                        alert="Необхідне поле"
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть Ваше прізвище"
+                           message: "Будь ласка введіть Ваше прізвище",
+                           max:15
                        },
                            {
-                               pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23})$/,
+                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}(?<!\s)$/,
                                message: 'Невірний формат прізвища',
                            }]}>
                 <Input className="user-edit-box"/>
@@ -52,10 +53,11 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть Ваше ім'я"
+                           message: "Будь ласка введіть Ваше ім'я",
+                           max:15
                        },
                            {
-                               pattern: /^([А-Я,І][а-я,і]{1,50}|[A-Z][a-z]{1,23}|[А-Я,І][а-я]{1,50}\-[А-Я,І][а-я,і]{1,50})$/,
+                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}(?<!\s)$/,
                                message: 'Невірний формат імені',
                            }]}>
                 <Input className="user-edit-box"/>
