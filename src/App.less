@@ -1,0 +1,624 @@
+@import '~antd/dist/antd.less';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
+.ant-layout {
+  background: none;
+}
+
+.layout {
+  background: linear-gradient(to bottom, rgba(245, 213, 202, 1) 0%, rgba(251, 244, 228, 1) 65%, rgba(251, 247, 235, 1) 100%);
+}
+
+.behind-header {
+  position: absolute;
+  height: 150px;
+  width: 100%;
+  background: url("images/header-bg.png");
+  background-size: cover;
+}
+
+.header {
+  color: #fff;
+  z-index: 1;
+  background: none;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 87px 0 87px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .right-side-menu {
+  display: flex;
+  align-items: center;
+}
+
+.header .logo {
+  background: url("images/logo.png") no-repeat;
+  background-size: contain;
+  width: 120px;
+  height: 50px;
+  margin-top: 18px;
+  vertical-align: middle;
+}
+
+.outlined-button,
+.outlined-button:active,
+.outlined-button:focus {
+  border-color: #FA8C16;
+  color: #FA8C16;
+  border-radius: 6px;
+}
+
+.outlined-button:hover {
+  border-color: #FFA940;
+  color: #FFA940;
+}
+
+.support-button {
+  border-color: white;
+  color: white;
+}
+
+.support-button:hover {
+  color: @primary-hover-color;
+  border-color: @primary-hover-color;
+}
+
+.flooded-button,
+.flooded-button:active,
+.flooded-button:focus {
+  background: white;
+  border: none;
+  color: @primary-hover-color;
+  font-weight: 700;
+}
+
+.flooded-button:hover {
+  color: white;
+  background: @primary-hover-color;
+}
+
+.show-map-button {
+  height: 35px;
+  margin-left: 30px;
+  border-radius: 6px;
+}
+
+.header .city {
+  margin: 0 1.4vw 0 4vw;
+  font-size: 16px;
+}
+
+.header .city .icon {
+  font-size: 1.5em;
+}
+
+.header .nav-menu {
+  width: 690px;
+  line-height: 2em;
+  font-size: 1em;
+  font-weight: 600;
+  background: none;
+  border-bottom: none;
+}
+
+.header .nav-menu .ant-menu-submenu-title span {
+  color: rgba(0, 0, 0, 0);
+  background: url("images/menu.svg") no-repeat center / cover;
+  font-size: 20px;
+  display: none;
+}
+
+.header .nav-menu .ant-menu-submenu,
+.header .nav-menu .ant-menu-submenu-active {
+  margin: 0 20px 0 0;
+  border-bottom: none !important;
+}
+
+.header .nav-menu .icon {
+  font-size: 18px;
+}
+
+.header .nav-menu .ant-menu-item a {
+  color: white;
+}
+
+.header .ant-menu-item {
+  margin: 0 10px;
+}
+
+.header .add-club-button {
+  width: 149px;
+  height: 40px;
+  background: #FA8C16;
+  border: none;
+  color: white;
+  margin-right: 1.4vw;
+  font-weight: 700;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.layout .global-content {
+  z-index: 1;
+  min-height: 500px;
+}
+
+.search {
+  display: flex;
+  align-items: flex-end;
+}
+
+.search .ant-select-clear {
+  background: none;
+  display: inline-block;
+}
+
+.search .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  box-shadow: none;
+  background: none;
+  border: none;
+  padding: 0;
+  border-bottom: 2px solid white;
+  height: 30px;
+  font-size: 16px;
+}
+
+.search .ant-select-single .ant-select-selector .ant-select-selection-search {
+  left: 0;
+}
+
+.search .ant-select-selection-placeholder,
+.search .ant-select-arrow {
+  color: white;
+  font-size: 16px;
+}
+
+.search .clear-icon,
+.search .advanced-icon {
+  font-size: 18px;
+  color: white;
+  background: #FA8C16;
+  padding: 2px;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.city-name-box {
+  font-size: 20px;
+  line-height: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.city-name-box-small-screen {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.city-name-box-small-screen .icon {
+  display: none;
+  color: #fff;
+  font-size: 21px;
+}
+
+.city-name {
+  color: white;
+  padding-bottom: 5px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.tags .tag {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-top: 3px;
+  height: 22px;
+  max-width: 163px;
+  overflow: hidden;
+  border: none;
+  padding: 1px 8px;
+}
+
+.tags .tag .icon {
+  width: 14px;
+  min-width: 14px;
+  height: 14px;
+  margin-right: 4.8px;
+}
+
+.tags .tag .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card .title .name {
+  color: #002766;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 7px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.icon-box {
+  display: inline-flex;
+  min-width: 42px;
+  min-height: 42px;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.icon {
+  pointer-events: none;
+  user-select: none;
+  width: 24px;
+  height: 24px;
+}
+
+.card .details-button {
+  font-weight: 600;
+  height: 40px;
+  width: 100%;
+  color: @primary-hover-color;
+  border-color: @primary-hover-color;
+}
+
+.card .center {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.card .center .center-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+}
+
+.card .center .center-description {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 600;
+  width: 100px;
+  margin-left: 8px;
+}
+
+.card .center .center-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #2E69C9;
+}
+
+.card .center .center-label {
+  color: #2D4C68;
+  opacity: 0.6;
+}
+
+.card .description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  width: 100%;
+  overflow: hidden;
+  height: 110px;
+  margin-top: 15px;
+  color: #2D4C68;
+}
+
+.card .with-center {
+  overflow: hidden;
+}
+
+.card .with-center .description {
+  -webkit-line-clamp: 3;
+  height: 68px;
+}
+
+.card .details-button:hover {
+  color: #002766;
+  border-color: #002766;
+}
+
+.card .address {
+  color: #2D4C68;
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  display: flex;
+  font-weight: 600;
+}
+
+.card .address .text {
+  opacity: 0.6;
+}
+
+.address-small-icon {
+  color: #FFA62C;
+}
+
+.card .address-icon {
+  font-size: 1.5em;
+  color: #FFA62C;
+  margin-right: 11px;
+  margin-left: 4px;
+}
+
+.card .expand-icon {
+  font-size: 1em;
+  margin-left: 5px;
+}
+
+.card .rating {
+  margin-left: 4px;
+}
+
+
+.global-padding {
+  padding: 20px 87px 20px 87px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.loader .bar {
+  position: relative;
+  height: 2px;
+  background-color: white;
+  border-radius: 25px;
+  animation-name: loader-animation;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.lower-header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.popConfirm-cancel-button:hover {
+  background: #FE7729;
+}
+
+.popConfirm-ok-button {
+  background: #0050B3;
+  box-shadow: none;
+}
+
+.popConfirm-ok-button:hover {
+  background: #1890FF;
+}
+
+.table .table-action {
+  color: #0050B3;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.table .ant-pagination-item a {
+  color: black;
+  background: white;
+}
+
+.table .ant-pagination-item-active a,
+.table .ant-pagination-item a:hover {
+  color: white;
+  background: #FE7729;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #0050B3;
+}
+
+.ant-dropdown-menu-item-selected {
+  background: #fafafa;
+  color: black;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-link {
+  color: #2E69C9;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-primary {
+  background: #FA8C16;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-primary:hover {
+  background: #FFA940;
+}
+
+.table-header {
+  padding: 12px 8px;
+  background: #f0f0f0;
+}
+
+.ant-message .anticon-info-circle {
+  color: #0050B3;
+}
+
+@keyframes loader-animation {
+  0% {
+    width: 0%;
+  }
+  49% {
+    width: 100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+    width: 100%
+  }
+}
+
+.ant-menu-item-active {
+  background-color: #FA8C16;
+}
+
+@media  screen and (max-width: 2500px) {
+  .header .nav-menu {
+    width: 740px;
+    display: flex;
+  }
+
+  .header .nav-menu .ant-menu-item {
+    order: 1;
+  }
+
+  .header {
+    padding: 0 15px !important;
+  }
+
+  .ant-layout-header header {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1215px) and (max-width: 1240px) {
+  .header .nav-menu {
+    display: flex;
+  }
+
+  .header .nav-menu .ant-menu-item {
+    order: 1;
+  }
+
+  .city-name-box {
+    font-size: 18px !important;
+  }
+
+  .right-side-menu {
+    width: 325px;
+  }
+
+  .header .city {
+    margin: 0 1vw;
+  }
+}
+
+@media (max-width: 1214px) {
+  .left-side-menu {
+    display: inline-block;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
+  }
+
+  .header .nav-menu {
+    width: 300px;
+    display: flex;
+  }
+
+  .lower-header-box {
+    flex-direction: column;
+    align-items: normal;
+    height: 85px;
+    justify-content: space-around;
+  }
+
+  .global-padding {
+    padding: 0 87px 20px 87px;
+  }
+
+  .lower-header-box .city-name-box {
+    justify-content: space-between;
+  }
+
+  .header {
+    padding: 0 50px !important;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .global-padding,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
+  .layout .header {
+    justify-content: space-between;
+  }
+
+  .header .nav-menu {
+    width: 180px;
+    display: flex;
+  }
+
+  .ant-layout-header {
+    padding: 0 30px !important;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .content-clubs {
+    min-width: 0;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+  }
+
+  .header .nav-menu {
+    width: 40px;
+  }
+
+  .lower-header-box .show-map-button {
+    display: none;
+  }
+
+  .lower-header-box .city-name-box-small-screen .icon {
+    display: block;
+  }
+
+  .lower-header-box .advanced-icon {
+    display: none;
+  }
+
+  .lower-header-box .search,
+  .lower-header-box .search .ant-select {
+    width: 100% !important;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 20px;
+  }
+}

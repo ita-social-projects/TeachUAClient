@@ -1,0 +1,29 @@
+.modal-add-club .add-club-sider {
+    border-radius: 16px 0 0 16px;
+    background: #FAFAFA;
+    padding: 32px 0 32px 32px;
+    min-height: 600px;
+}
+
+.add-club-sider .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+    background: #FA8C16;
+    color: white;
+}
+
+.add-club-sider .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: #FA8C16;
+}
+
+.add-club-sider .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon .ant-steps-icon {
+    color: white;
+}
+
+.add-club-sider .ant-steps-item-wait .ant-steps-item-icon {
+    background: #E8E8E8;
+    border: none;
+}
+
+
+.add-club-sider .ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
+    color: #2D4C68;
+}
