@@ -63,6 +63,12 @@ export const getClubsByUserId = async (id, page) => {
     });
 };
 
+export const getAllClubsByUserId = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubs/user/" + id).then((response) => {
+        return response.data
+    });
+};
+
 export const getSimilarClubsByCategoryName = async (id, categoriesName, cityName) => {
     return await fetchRequest.get(BASE_URL + "/api/clubs/search/similar", {
         params: {

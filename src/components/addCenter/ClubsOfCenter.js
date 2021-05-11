@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import CategoryLogo from "../CategoryLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
-import { getClubsByUserId } from '../../service/ClubService';
+import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService';
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 
 
 const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult }) => {
-    const [param, setParam] = useState(false);
     const [clubsOfCenterForm] = Form.useForm();
 
     const nextStep = () => {
@@ -24,28 +23,20 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
 
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
-        console.log("RESULT");
-        console.log(result);
         nextStep();
         addCenter(result).then(response => {
             console.log(response);
         })
-
     }
+
     useEffect(() => {
         if (result) {
-            console.log(result);
             clubsOfCenterForm.setFieldsValue({ ...result });
         }
-        getClubsByUserId(getUserId(), 0).then(response => {
+        getAllClubsByUserId(getUserId()).then(response => {
             setClubs(response);
-            console.log("USE EFFFFFFFFFFFECCCCTTTTT");
-            console.log(response);
         })
-        if (param) {
-            setParam(true);
-        }
-    }, [param]);
+    }, []);
 
     return (
         <Form
@@ -64,7 +55,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                         message: "Виберіть гуртки приналежні до центру"
                     }]}>
                     <Checkbox.Group >
-                        {clubs.content.map(club => (
+                        {clubs.map(club => (
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>
                                     <div className="checkbox-item-content">
@@ -79,7 +70,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             </div>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
-                <button className="finish-btn" htmlType="submit">Додати гурток і завершити</button>
+                <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>
             </div>
         </Form>
     )

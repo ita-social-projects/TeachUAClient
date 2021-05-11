@@ -6,7 +6,7 @@ import MainInformation from './MainInformation';
 import Contacts from './Contacts';
 import Description from './Description';
 import ClubsOfCenter from './ClubsOfCenter';
-import { getClubsByUserId } from "../../service/ClubService";
+import { getAllClubsByUserId, getClubsByUserId } from "../../service/ClubService";
 import { getUserId } from "../../service/StorageService";
 import { getAllCities } from '../../service/CityService';
 import { getAllContacts } from '../../service/ContactService';
@@ -25,9 +25,10 @@ const AddCenter = () => {
     const [result, setResult] = useState({});
 
     useEffect(() => {
-        getClubsByUserId(getUserId(), 0).then(response => {
+        getAllClubsByUserId(getUserId()).then(response => {
+            console.log(response);
             setClubs(response)
-            response.content.map(club => (
+            response.map(club => (
                 club.locations.map(location => {
                     console.log(location)
                     locations.push({

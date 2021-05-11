@@ -6,7 +6,7 @@ import EditorComponent from "../../editor/EditorComponent";
 import { saveContent } from "../../editor/EditorConverter";
 import { transToEng } from "../../../util/Translit";
 import { UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
-import { addClub, getClubsByUserId } from "../../../service/ClubService";
+import { addClub, getAllClubsByUserId } from "../../../service/ClubService";
 import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
 
@@ -32,8 +32,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, clubs, 
             setResult(null);
             setStep(0);
             if (clubs) {
-                getClubsByUserId(getUserId(), 0).then(response => {
-                    setClubs(response)
+                getAllClubsByUserId(getUserId()).then(response => {
+                    setClubs(response);
                 })
             }
         });
