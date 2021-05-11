@@ -80,7 +80,7 @@ const RegistrationInput = ({disabledButton}) => {
                            },
                                {
                                    required: false,
-                                   pattern: /^[^A-Za-z|А-ЯІЇа-яії]*$/,
+                                   pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
                                    message: 'Телефон не може містити літери',
                                },
                                {
@@ -89,7 +89,7 @@ const RegistrationInput = ({disabledButton}) => {
                                    message: 'Телефон не може містити пробіли',
                                },
                                {
-                                   max: 10,
+                                   pattern: /^.{10}$/,
                                    message: "Телефон не відповідає вказаному формату",
                                },
                                {
