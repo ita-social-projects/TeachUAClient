@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {Layout} from 'antd';
 import ClubList from "./ClubList";
 import '../map/css/MapModal.css'
@@ -15,6 +17,14 @@ const ClubListComponent = () => {
     const [loading, setLoading] = useState(false);
     const [mapVisible, setMapVisible] = useState(false);
     const [advancedSearch, setAdvancedSearch] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        console.log(location);
+        if (typeof location.state !== "undefined") {
+            setAdvancedSearch(location.state.showAdvancedSearch);
+        }
+     }, [location]);
 
     return (
         <Layout>
