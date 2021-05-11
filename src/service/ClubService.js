@@ -12,6 +12,7 @@ export const addClub = async (data) => {
         ageTo: data.ageTo,
         isOnline: data.isOnline,
         description: data.description,
+        userId: data.userId,
         locations: data.locations,
         urlLogo: data.urlLogo && data.urlLogo.file.response,
         urlBackground: data.urlBackground && data.urlBackground.file.response,

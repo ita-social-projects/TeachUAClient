@@ -8,13 +8,14 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
 
     useEffect(() => {
         if (result) {
+            console.log(result);
             mainForm.setFieldsValue({ ...result })
         }
     }, []);
 
     const onFinish = (values) => {
         if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
-            setResult(values);
+            setResult(Object.assign(result, values));
             setStep(1);
             mainForm.resetFields();
         }
