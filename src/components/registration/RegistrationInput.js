@@ -25,7 +25,7 @@ const RegistrationInput = ({disabledButton}) => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^-'\s]*$/,
+                                   pattern: /^(?=[^-'\s]).*(?<=[^-'\s])$/,
                                    message: 'Прізвище повинно починатися і закінчуватися літерою',
                                },
                                {
@@ -55,7 +55,7 @@ const RegistrationInput = ({disabledButton}) => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^-'\s]*$/,
+                                   pattern: /^(?=[^-'\s]).*(?<=[^-'\s])$/,
                                    message: "Ім`я повинно починатися і закінчуватися літерою",
                                },
                                {
