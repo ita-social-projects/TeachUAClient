@@ -4,6 +4,7 @@ import "./css/ClubListSider.css";
 import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
+import { getStationsByCity } from "../../service/StationService";
 import { searchParameters } from "../../context/SearchContext";
 
 const { Sider } = Layout;
@@ -14,6 +15,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
+    const [stations, setStations] = useState([]);
 
     const getData = () => {
         setCurrentPage(0);
@@ -31,11 +33,16 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
         getDistrictsByCityName(city).then((response) => {
             setDistricts(response);
         });
+        getStationsByCity(city).then((response) => {
+            console.log("getStationsByCity", response);
+            setStations(response);
+        });
     }, [cityName]);
 
     const onValuesChange = (values) => {
         if (values.hasOwnProperty("cityName")) {
             form.setFieldsValue({ districtName: undefined });
+            form.setFieldsValue({ stationName: undefined });
         }
         getData();
     };
@@ -43,6 +50,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
     const onCityChange = (value) => {
         setCityName(value);
         form.setFieldsValue({ districtName: undefined });
+        form.setFieldsValue({ stationName: undefined });
     };
 
     return (
@@ -52,8 +60,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 name="basic"
                 requiredMark={false}
                 form={form}
-                onValuesChange={onValuesChange}
-            >
+                onValuesChange={onValuesChange}>
                 <Form.Item
                     name="cityName"
                     className="club-list-row"
@@ -62,14 +69,12 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                         searchParameters.cityName === "Без локації"
                             ? "online"
                             : searchParameters.cityName
-                    }
-                >
+                    }>
                     <Select
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
-                        onChange={onCityChange}
-                    >
+                        onChange={onCityChange}>
                         {cities.map((city) => (
                             <Option value={city.name}>{city.name}</Option>
                         ))}
@@ -80,14 +85,12 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 <Form.Item
                     name="districtName"
                     className="club-list-row"
-                    label="Район міста"
-                >
+                    label="Район міста">
                     <Select
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть район"
-                        optionFilterProp="children"
-                    >
+                        optionFilterProp="children">
                         {districts.map((district) => (
                             <Option value={district.name}>
                                 {district.name}
@@ -96,18 +99,30 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     </Select>
                 </Form.Item>
                 <Form.Item
+                    name="stationName"
+                    className="club-list-row"
+                    label="Найближча станція метро">
+                    <Select
+                        allowClear
+                        className="club-list-select"
+                        placeholder="Виберіть станцію"
+                        optionFilterProp="children">
+                        {stations.map((station) => (
+                            <Option value={station.name}>{station.name}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+                <Form.Item
                     name="categoriesName"
                     className="club-list-row"
-                    label="Категорії"
-                >
+                    label="Категорії">
                     <Checkbox.Group className="club-list-categories">
                         {categories
                             .sort((a, b) => a.sortby - b.sortby)
                             .map((category) => (
                                 <Checkbox
                                     style={{ display: "flex" }}
-                                    value={category.name}
-                                >
+                                    value={category.name}>
                                     {category.name}
                                 </Checkbox>
                             ))}
@@ -117,8 +132,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     name="isCenter"
                     className="club-list-row"
                     label="Гурток/Центр"
-                    initialValue={false}
-                >
+                    initialValue={false}>
                     <Radio.Group className="club-list-kind">
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
@@ -127,15 +141,13 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                 <Form.Item
                     name="isOnline"
                     className="club-list-row"
-                    label="Ремоут"
-                >
+                    label="Ремоут">
                     <Checkbox.Group className="club-list-categories">
                         <Checkbox
                             style={{ display: "flex" }}
                             disabled={
                                 form.getFieldValue("cityName") === "online"
-                            }
-                        >
+                            }>
                             Доступний онлайн
                         </Checkbox>
                     </Checkbox.Group>
@@ -144,8 +156,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData }) => {
                     name="age"
                     label="Вік дитини"
                     className="club-list-row"
-                    inititalValue={0}
-                >
+                    inititalValue={0}>
                     <span>
                         <InputNumber className="age" min={2} max={18} />
                         років
