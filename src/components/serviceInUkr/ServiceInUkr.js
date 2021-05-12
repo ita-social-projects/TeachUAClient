@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import Layout from "antd/lib/layout/layout";
 import "./css/serviceInUkr.css";
-import TwitterOutlined from "@ant-design/icons/lib/icons/TwitterOutlined";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import {Button, Collapse} from "antd";
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
 import {getAllQuestions} from "../../service/QuestionService";
+import Search from "../Search";
+import "../AboutProject/css/aboutProject.css";
 
 const ServiceInUkr = () => {
     const {Panel} = Collapse;
@@ -23,18 +24,24 @@ const ServiceInUkr = () => {
 
     return (
         <Layout className="serviceInUkr global-padding">
+            <div className="lower-header-box about-header">
+                <div className="city-name-box">
+                    <h2 className="city-name">Ініціатива “Навчай українською”</h2>
+                </div>
+                <Search redirect/>
+            </div>
             <div className="title"
                  style={{background: `url(${process.env.PUBLIC_URL}/static/images/service/ukr_service.png) center / cover`}}>
                 <span className="text">Послуги українською</span>
             </div>
+            <p/><p/>
             <div className="social-info">
                 <div className="social-media">
                     <span className="text">Ми у соц. мережах</span>
                     <div className="links">
-                        <a target="_blank" href="#"><TwitterOutlined className="icon"/></a>
-                        <a target="_blank" href="#"><FacebookOutlined className="icon"/></a>
-                        <a target="_blank" href="#"><GoogleOutlined className="icon"/></a>
-                        <a target="_blank" href="#"><InstagramOutlined className="icon"/></a>
+                        <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon"/></a>
+                        <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><GoogleOutlined className="icon"/></a>
+                        <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined className="icon"/></a>
                     </div>
                 </div>
                 <div className="help-button">

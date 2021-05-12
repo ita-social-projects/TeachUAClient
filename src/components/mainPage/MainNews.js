@@ -1,8 +1,6 @@
 import './css/AboutNews.css';
 import React, {useEffect, useState} from "react";
-import CategoryLogo from "../CategoryLogo";
 import PrimitiveCard from "../PrimitiveCard";
-import {getPageableCategory} from "../../service/CategoryService";
 import {getPageableNews} from "../../service/NewsService";
 
 const AboutChallenge = () => {
