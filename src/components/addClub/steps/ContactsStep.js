@@ -7,6 +7,8 @@ import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
+import {Button} from "antd";
+
 const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
     const [contacts_data, setContactsData] = useState({});
     const [locationVisible, setLocationVisible] = useState(false);
@@ -19,6 +21,17 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             contactsForm.setFieldsValue({ ...result });
         }
     }, []);
+
+    const nextStep = () => {
+        console.log("FIELDS VALUE")
+        console.log(contactsForm.getFieldValue());
+        setStep(step + 1);
+    }
+
+    const prevStep = () => {
+        setResult(Object.assign(result, contactsForm.getFieldValue()));
+        setStep(step - 1);
+    }
 
     const onFinish = (values) => {
         console.log("================= values in onFinish");
@@ -33,7 +46,8 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
 
         setResult(Object.assign(result, values));
         console.log(result);
-        setStep(2);
+        nextStep();
+        contactsForm.resetFields();
     };
 
     const onEdit = (item) => {
@@ -128,7 +142,10 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                     </Form.Item>)}
             </Form.Item>
 
-            <AddClubContentFooter step={step} setStep={setStep} />
+            <div className="add-club-content-footer">
+                <Button ghost={true} className="add-club-content-prev" type="button" onClick={prevStep}>Назад</Button>
+                <Button className="flooded-button add-club-content-next" htmlType="submit">Наступний крок</Button>
+            </div>
 
             <AddLocationModal
                 form={locationForm}
