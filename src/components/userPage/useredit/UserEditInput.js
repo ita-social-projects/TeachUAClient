@@ -97,6 +97,7 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
+                           message: "Будь ласка введіть Ваш пароль"
                        }]}>
                 <Input.Password className="user-edit-box"/>
             </Form.Item>
@@ -107,6 +108,7 @@ const UserEditInput = ({user}) => {
                        hasFeedback
                        rules={[{
                            required: true,
+                           message: "Будь ласка завантажте Логотип"
                        }]}>
                 <Upload
                     name="image"
