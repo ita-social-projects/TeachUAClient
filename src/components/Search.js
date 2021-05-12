@@ -32,7 +32,6 @@ class Search extends React.Component {
     componentDidMount() {
         getAllCategories().then((response) => {
             console.log("Search=> componentDidMount start")
-            //console.log("response : "+ response);
             this.setState({ allCategories: response });
             console.log("allCategories : "+this.state.allCategories);
         })
@@ -57,6 +56,8 @@ class Search extends React.Component {
                     searchParameters.clubName = value;
                     break;
                 default: {
+                    console.log("=============allCategories===========");
+                    console.log(this.state.allCategories);
                     if (this.state.allCategories.find(category =>
                         category.name.toLowerCase().includes(value.toLowerCase()))) {
                         console.log("default section , category is found")
@@ -71,7 +72,8 @@ class Search extends React.Component {
             }
 
             getClubsByParameters(searchParameters).then(response => {
-                console.log("=== getClubsByParameters called from onSearchChange method , clubs: " + response);
+                console.log("=== getClubsByParameters called from onSearchChange method , clubs: ");
+                console.log( response);
                 this.context.setClubs(response);
             });
         }

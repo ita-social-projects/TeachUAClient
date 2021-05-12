@@ -1,16 +1,14 @@
 import { Form, Layout, Pagination } from "antd";
 import { SearchContext, searchParameters } from "../../context/SearchContext";
 import React, { useContext, useEffect, useState } from "react";
-import ClubListItem from "./ClubListItem";
 import { getClubsByAdvancedSearch, getClubsByParameters } from "../../service/ClubService";
-import EmptySearch from "../EmptySearch";
 import PropTypes from "prop-types";
 import "./css/ClubList.less";
+import "../centerList/css/CenterList.less"
 import ClubListSider from "./ClubListSider";
-import ClubListControl from "./ClubListControl";
-import ClubListRectangleItem from "./ClubListRectangleItem";
-import ClubListItemInfo from "./ClubListItemInfo";
-import ClubListEmptySearch from "./ClubListEmptySearch";
+import {getCentersByAdvancedSearch} from "../../service/CenterService";
+import CenterListDisplayContent from "../centerList/CenterListDisplayContent";
+import ClubsListDisplayContent from "./ClubsListDisplayContent";
 
 const { Content } = Layout;
 
@@ -23,37 +21,68 @@ const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir
     const [sortBy, setSortBy] = useState(defaultSortBy);
     const [sortDirection, setSortDirection] = useState(defaultSortDir);
     const [view, setView] = useState(defaultSortView);
+    const [isCenterChecked, setIsCenterChecked] = useState(false);
+    const [centers, setCenters] = useState({
+        content: [],
+        pageable: {},
+        size: 0,
+        totalElements: 0
+    });
+    const [centerInfoVisible, setCenterInfoVisible] = useState(false);
+    const [clickedCenter, setClickedCenter] = useState(null);
 
 
     const getData = (page) => {
-        const checkUndefPage = page === undefined ? 0 : page;
-        const params = searchForm.getFieldsValue();
+        console.log("loading = "+ loading);
+            console.log("ClubList => getData method ");
+            const checkUndefPage = page === undefined ? 0 : page;
+            const params = searchForm.getFieldsValue();
 
-        load(true);
-        if (!advancedSearch) {
-            getClubsByParameters(searchParameters, checkUndefPage).then(response => {
-                console.log("getData, loading === " + loading);
-                setClubs(response);
-                load(false);
-                console.log("getData, loading === " + loading);
-            });
-        } else {
-            console.log(params);
-            getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
-                console.log("getData, loading === " + loading);
-                setClubs(response);
-                load(false);
-                console.log("getData, loading === " + loading);
-            });
-        }
-        console.log("=== getData method ends, loading === " + loading);
+            console.log("isCenter : "+params.isCenter);
+
+            if (!advancedSearch) {
+                setIsCenterChecked(false);
+                if(centers.length>0){
+                    setCenters([]);
+                }
+                console.log("advancedSearch is false");
+                getClubsByParameters(searchParameters, checkUndefPage).then(response => {
+                    console.log("getData, loading === response: " + response);
+                    setClubs(response);
+                    console.log("getData, loading === " + loading);
+                });
+            } else {
+                if(isCenterChecked){
+                    getCentersByAdvancedSearch(params,page).then(response =>{
+                        console.log(response);
+                        setCenters(response);
+                    });
+                    console.log("getCentersByAdvancedSearch method done");
+                    console.log(centers);
+                }else {
+                    console.log("isCenterChecked");
+                    console.log(isCenterChecked);
+                    getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
+                        console.log("getData, loading === clubs in response: " );
+                        console.log( response);
+                        setClubs(response);
+                        console.log("getData, loading === " + loading);
+                    });
+                };
+
+            };
+            console.log(centers);
+            load(false);
+            console.log("=== getData method ends, loading === " + loading);
     };
 
     useEffect(() => {
         console.log("useEffect method starts");
+        console.log(loading );
         getData();
         console.log("useEffect method ends ");
-    }, [advancedSearch, sortBy, sortDirection]);
+    }, [advancedSearch, sortBy, sortDirection,isCenterChecked,view]);
+
 
     const onPageChange = (page) => {
         setCurrentPage(page - 1);
@@ -66,60 +95,56 @@ const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir
         console.log(club);
         setClickedClub(club);
         setClubInfoVisible(true);
+
     };
+    const onCenterClick = (center) =>{
+        console.log(center);
+        setClickedCenter(center);
+        setCenterInfoVisible(true);
 
+    }
     return (
-        <Layout className="club-list">
-            {advancedSearch &&
-                <ClubListSider setCurrentPage={setCurrentPage}
-                    form={searchForm}
-                    getAdvancedData={getData}
-                />}
-            <Content className="club-list-content"
-                style={{
-                    maxWidth: advancedSearch ? '944px' : '1264px',
-                }}>
-
+            <Layout className="club-list">
                 {advancedSearch &&
-                    <ClubListControl setSortBy={setSortBy}
-                        setSortDirection={setSortDirection}
-                        sortBy={sortBy}
-                        view={view}
-                        sortDirection={sortDirection}
-                        setView={setView} />}
-
-                {!loading && clubs.content.length === 0 ? <ClubListEmptySearch /> :
-                    <div>
-                        {
-                            !advancedSearch ?
-                                <div className="content-clubs-list content-clubs-block">
-                                    {clubs.content.map((club, index) =>
-                                        <ClubListItem club={club} key={index} onClubClick={onClubClick} />)}
-                                </div>
-                                : <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
-                                    {clubs.content.map((club, index) =>
-                                        view === 'BLOCK' ?
-                                            <ClubListItem club={club} key={index} onClubClick={onClubClick} /> :
-                                            <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick} />)}
-                                </div>
-                        }
-
-                        {clickedClub &&
-                            <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
-                                club={clickedClub} />}
-
-                        <Pagination className="pagination"
-                            hideOnSinglePage
-                            showSizeChanger={false}
-                            onChange={onPageChange}
-                            current={currentPage + 1}
-                            pageSize={clubs.size}
-                            total={clubs.totalElements} />
-                    </div>
+                    <ClubListSider  setCurrentPage={setCurrentPage}
+                                    form={searchForm}
+                                    getAdvancedData={getData}
+                                    isCenterChecked={isCenterChecked}
+                                    setIsCenterChecked = {setIsCenterChecked}
+                    />
                 }
-            </Content>
+
+                { isCenterChecked  ?
+                    <CenterListDisplayContent   view={view}
+                                                centers={centers}
+                                                setView={setView}
+                                                advancedSearch={advancedSearch}
+                                                loading={loading}
+                                                currentPage={currentPage}
+                                                onPageChange={onPageChange}
+                                                setSortBy={setSortBy}
+                                                setSortDirection={setSortDirection}
+                                                sortBy={sortBy}
+                                                sortDirection={sortDirection}
+
+                    />
+                     :
+                    <ClubsListDisplayContent clubs={clubs}
+                                             view={view}
+                                             setView={setView}
+                                             advancedSearch={advancedSearch}
+                                             loading={loading}
+                                             currentPage={currentPage}
+                                             onPageChange={onPageChange}
+                                             setSortBy={setSortBy}
+                                             setSortDirection={setSortDirection}
+                                             sortBy={sortBy}
+                                             sortDirection={sortDirection}
+                    />
+            }
         </Layout>
-    )
+    );
+
 };
 
 ClubList.propTypes = {
@@ -131,4 +156,3 @@ ClubList.propTypes = {
 };
 
 export default ClubList;
-

@@ -1,0 +1,37 @@
+.club-list .center-list-content .list-rectangle-item {
+    width: 100%;
+    height: 95px;
+}
+
+.center-list-content .list-rectangle-item .ant-card-body {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.center-list-content .list-rectangle-item .item-rectangle-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.center-list-content .list-rectangle-item .center-description {
+    width: 150px;
+}
+
+.center-list-content .list-rectangle-item .details-button {
+    width: 248px;
+}
+.center-list-content .list-rectangle-item .address {
+    width: 220px;
+}
+.center-list-content .list-rectangle-item .rating {
+    width: 150px;
+}
+
+.center-list-content .list-rectangle-item .item-rating-address {
+    display: flex;
+    align-items: flex-end;
+}

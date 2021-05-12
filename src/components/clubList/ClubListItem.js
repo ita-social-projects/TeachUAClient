@@ -12,12 +12,12 @@ import ClubItemMap from "./ClubItemMap";
 
 
 const ClubListItem = ({ club, onClubClick }) => {
-    const [visible, setVisible] = useState(false);
 
+    const [visible, setVisible] = useState(false);
 
     return (
         <div>
-            <Card className="card" >
+            <Card className="card" key={club.name}>
                 <div className="title" onClick={() => onClubClick(club)}>
                     <CategoryLogo category={club.categories[0]} />
                     <div className="name">{club.name}</div>
