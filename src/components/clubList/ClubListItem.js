@@ -17,7 +17,7 @@ const ClubListItem = ({ club, onClubClick }) => {
 
     return (
         <div>
-            <Card className="card" >
+            <Card className="card" key={club.name}>
                 <div className="title" onClick={() => onClubClick(club)}>
                     <CategoryLogo category={club.categories[0]} />
                     <div className="name">{club.name}</div>

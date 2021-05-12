@@ -9,7 +9,7 @@ import { mapSearchParameters, searchParameters } from "../../context/SearchConte
 const { Sider } = Layout;
 const { Option } = Select;
 
-const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked }) => {
+const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked, setIsCenterChecked }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
@@ -31,10 +31,8 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked 
     }, [cityName]);
 
     const onValuesChange = (values) => {
-       //  if(values.isCenter){
-       //      setCenterChecked(true);
-       //      console.log("ClubListSider, center option is : "+isCenterChecked);
-       // }
+        console.log("=======  ClubListSider ===>  onValueChange  ========");
+        setIsCenterChecked(values.isCenter);
         getData();
     };
 
@@ -85,6 +83,16 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked 
                         {districts.map(district => <Option value={district.name} key={district.id}>{district.name}</Option>)}
                     </Select>
                 </Form.Item>
+                <Form.Item  name="isOnline"
+                            className="club-list-row"
+                            label="Ремоут"
+                >
+                    <Checkbox.Group className="club-list-categories"
+                                    disabled={isCenterChecked}
+                    >
+                        <Checkbox style={{ display: "flex" }} disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
+                    </Checkbox.Group>
+                </Form.Item>
                 <Form.Item name="categoriesName"
                     className="club-list-row"
                     label="Категорії"
@@ -100,17 +108,6 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked 
                             >
                                 {category.name}
                             </Checkbox>)}
-                    </Checkbox.Group>
-                </Form.Item>
-
-                <Form.Item  name="isOnline"
-                            className="club-list-row"
-                            label="Ремоут"
-                >
-                    <Checkbox.Group className="club-list-categories"
-                                    disabled={isCenterChecked}
-                    >
-                        <Checkbox style={{ display: "flex" }} disabled={form.getFieldValue("cityName") === 'online'}>Доступний онлайн</Checkbox>
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item label="Вік дитини"

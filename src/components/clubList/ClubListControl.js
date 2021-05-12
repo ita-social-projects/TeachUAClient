@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./css/ClubListControl.css";
 import ArrowDownOutlined from "@ant-design/icons/lib/icons/ArrowDownOutlined";
 import ArrowUpOutlined from "@ant-design/icons/lib/icons/ArrowUpOutlined";
 import {Radio} from "antd";
 
 const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirection, setView}) => {
+
+    // useEffect(() => {
+    //
+    // },[])
+
     return (
         <div className="club-list-control">
             <div className="club-control-sort">
@@ -27,7 +32,9 @@ const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirecti
             <Radio.Group className="club-control-view"
                          optionType="button"
                          defaultValue={view}
-                         onChange={(value) => setView(value.target.value)}
+                         onChange={(value) => {setView(value.target.value);
+                             console.log(value.target.value);
+                         }}
                          buttonStyle="solid">
                 <Radio.Button value="LIST"
                               className="club-view-button">

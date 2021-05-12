@@ -4,6 +4,8 @@ import MainInformationTab from "./tabs/MainInformationTab";
 import ContactsTab from "./tabs/ContactsTab";
 import DescriptionTab from "./tabs/DescriptionTab";
 import "./css/Tabs.less"
+
+
 const {TabPane} = Tabs;
 
 const EditClubTabs = ({

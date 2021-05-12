@@ -5,6 +5,7 @@ import '../map/css/MapModal.css'
 import MapComponent from "../map/MapComponent";
 import ClubListHeader from "./ClubListHeader";
 import { getClubsByCategoryAndCity } from '../../service/ClubService';
+import Loader from "../Loader";
 
 
 const ClubListComponent = () => {
@@ -17,6 +18,7 @@ const ClubListComponent = () => {
     const [advancedSearch, setAdvancedSearch] = useState(false);
 
     return (
+        loading ? <Loader/> :
         <Layout>
             <ClubListHeader setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
             <ClubList loading={loading}

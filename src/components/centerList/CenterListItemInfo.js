@@ -6,7 +6,7 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import ContactsInfoUtil from '../../util/ContactsInfoUtil';
 import ImageCarousel from '../ImageCarousel';
 import CenterLogo from "./CenterLogo";
-
+import "./css/CenterInfo.css"
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
@@ -27,12 +27,12 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
             onCancel={() => setVisible(false)}
             width={900}
             footer={null}
-            className='clubInfo'
+            className='centerInfo'
         >
             <div className="container">
                 <div className="title">
                     <CenterLogo urlLogo={center.urlLogo} />
-                    <div className="club-name">{center.name}</div>
+                    <div className="center-name">{center.name}</div>
                 </div>
                 <div className="rating">
                     <span className="feedback">{3} відгуків</span>

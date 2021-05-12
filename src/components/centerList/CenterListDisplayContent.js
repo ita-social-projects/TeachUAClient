@@ -1,19 +1,33 @@
 import PropTypes from "prop-types";
 import ClubListEmptySearch from "../clubList/ClubListEmptySearch";
-import ClubListItemInfo from "../clubList/ClubListItemInfo";
 import { Layout, Pagination } from "antd";
 import React, {useEffect, useState} from "react";
 import CenterListItem from "./CenterListItem";
 import CenterListRectangleItem from "./CenterListRectangleItem";
+import "./css/CenterList.less"
+import Loader from "../Loader";
+import ClubListControl from "../clubList/ClubListControl";
+import CenterListItemInfo from "./CenterListItemInfo";
 
 
-const CenterListDisplayContent = ({centers,loading, view, advancedSearch, currentPage, onPageChange }) => {
+const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearch, currentPage, onPageChange,
+                                      setSortBy, sortDirection, setSortDirection, sortBy}) => {
 
     const [centerInfoVisible, setCenterInfoVisible] = useState(false);
     const [clickedCenter, setClickedCenter] = useState(null);
 
+    const [localCenters, setLocalCenters ] = useState(null);
+
     useEffect(() => {
-        console.log("centers in centerList : "+centers);
+        console.log("centers in centerList : ");
+        console.log(centers);
+        console.log("current page is: ");
+        console.log(currentPage);
+        if(centers === undefined || centers === null){
+            setLocalCenters([]);
+        }else{
+            setLocalCenters(centers);
+        }
     },[]);
 
     const onCenterClick = (center) =>{
@@ -23,17 +37,23 @@ const CenterListDisplayContent = ({centers,loading, view, advancedSearch, curren
     }
 
     return (
-
+        !centers ? <Loader/> :
         <Layout className="center-list-content"
                      style={{
                          maxWidth: advancedSearch ? '944px' : '1264px',
                      }}>
 
+            {advancedSearch &&
+            <ClubListControl setSortBy={setSortBy}
+                             setSortDirection={setSortDirection}
+                             sortBy={sortBy}
+                             view={view}
+                             sortDirection={sortDirection}
+                             setView={setView} />}
 
-            {!loading && centers.content.length === 0 ? <ClubListEmptySearch /> :
-                <div>
-                    {
-                        <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
+            {!loading && centers.content?.length === 0 ? <ClubListEmptySearch /> :
+
+                        <div className={`content-center-list ${view === 'BLOCK' && "content-center-block"}`}>
                             {centers.content.map((center) =>
                                 view === 'BLOCK' ?
                                     <CenterListItem center={center} key={center.id} onCenterClick={onCenterClick} />
@@ -43,7 +63,7 @@ const CenterListDisplayContent = ({centers,loading, view, advancedSearch, curren
                     }
 
                     {clickedCenter &&
-                    <ClubListItemInfo visible={centerInfoVisible} setVisible={setCenterInfoVisible}
+                    <CenterListItemInfo visible={centerInfoVisible} setVisible={setCenterInfoVisible}
                                       center={clickedCenter} />}
 
                     <Pagination className="pagination"
@@ -51,22 +71,17 @@ const CenterListDisplayContent = ({centers,loading, view, advancedSearch, curren
                                 showSizeChanger={false}
                                 onChange={onPageChange}
                                 current={currentPage + 1}
-                                pageSize={centers.content.size}
-                                total={centers.totalElements} />
-                </div>
-            }
-
+                                pageSize={centers.size}
+                                total={centers.totalElements}
+                    />
         </Layout>
 
     );
 };
 
 CenterListDisplayContent.propTypes = {
-    //centers: PropTypes.object.isRequired,
-    // view: PropTypes.string.isRequired,
-    // advancedSearch: PropTypes.bool.isRequired,
-    // loading: PropTypes.bool.isRequired,
-
+    centers: PropTypes.object.isRequired,
+    view: PropTypes.string.isRequired
 };
 
 export default CenterListDisplayContent;

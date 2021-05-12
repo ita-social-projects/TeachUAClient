@@ -8,6 +8,8 @@ export const getCenterById = async (id) => {
     return await axios.get(BASE_URL + "/api/center/" + id).then((response) => {
         return response.data
     }).catch((error) => {
+        console.log(error);
+        console.log(error.response.data);
         return error.response.data
     });
 };

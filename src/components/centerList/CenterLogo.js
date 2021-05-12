@@ -10,7 +10,7 @@ const CenterLogo = ({urlLogo}) => {
 };
 
 CenterLogo.propTypes = {
-    urlLogo: PropTypes.object.isRequired
+    urlLogo: PropTypes.string.isRequired
 };
 
 export default CenterLogo;

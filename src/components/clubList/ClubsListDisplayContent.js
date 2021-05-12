@@ -9,8 +9,8 @@ import {Layout, Pagination} from "antd";
 
 const {Content} = Layout;
 
-const ClubsListDisplayContent = ({ clubs, view, loading, advancedSearch, currentPage,
-                                     onPageChange, setSortBy, sortDirection, setSortDirection, setView, sortBy  }) =>{
+const ClubsListDisplayContent = ({ clubs, view, setView, loading, advancedSearch, currentPage,
+                                     onPageChange, setSortBy, sortDirection, setSortDirection, sortBy  }) =>{
 
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
@@ -36,9 +36,7 @@ const ClubsListDisplayContent = ({ clubs, view, loading, advancedSearch, current
                              setView={setView} />}
 
             {!loading && clubs.content.length === 0 ? <ClubListEmptySearch /> :
-                <div>
-                    {
-                        !advancedSearch ?
+                !advancedSearch ?
                             <div className="content-clubs-list content-clubs-block">
                                 {clubs.content.map((club, index) =>
                                     <ClubListItem club={club} key={index} onClubClick={onClubClick} />)}
@@ -46,7 +44,8 @@ const ClubsListDisplayContent = ({ clubs, view, loading, advancedSearch, current
                             <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
                                 {clubs.content.map((club, index) =>
                                     view === 'BLOCK' ?
-                                        <ClubListItem club={club} key={index} onClubClick={onClubClick} /> :
+                                        <ClubListItem club={club} key={index} onClubClick={onClubClick} />
+                                        :
                                         <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick} />)}
                             </div>
                     }
@@ -62,8 +61,7 @@ const ClubsListDisplayContent = ({ clubs, view, loading, advancedSearch, current
                                 current={currentPage + 1}
                                 pageSize={clubs.size}
                                 total={clubs.totalElements} />
-                </div>
-            }
+
         </Content>
     );
 
