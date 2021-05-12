@@ -1,24 +1,14 @@
 import { Form, Layout, Pagination } from "antd";
 import { SearchContext, searchParameters } from "../../context/SearchContext";
 import React, { useContext, useEffect, useState } from "react";
-import ClubListItem from "./ClubListItem";
 import { getClubsByAdvancedSearch, getClubsByParameters } from "../../service/ClubService";
-import EmptySearch from "../EmptySearch";
 import PropTypes from "prop-types";
 import "./css/ClubList.less";
 import "../centerList/css/CenterList.less"
 import ClubListSider from "./ClubListSider";
-import ClubListControl from "./ClubListControl";
-import ClubListRectangleItem from "./ClubListRectangleItem";
-import ClubListItemInfo from "./ClubListItemInfo";
-import ClubListEmptySearch from "./ClubListEmptySearch";
 import {getCentersByAdvancedSearch} from "../../service/CenterService";
 import CenterListDisplayContent from "../centerList/CenterListDisplayContent";
 import ClubsListDisplayContent from "./ClubsListDisplayContent";
-import CenterListItem from "../centerList/CenterListItem";
-import CenterListRectangleItem from "../centerList/CenterListRectangleItem";
-import CenterListItemInfo from "../centerList/CenterListItemInfo";
-import Loader from "../Loader";
 
 const { Content } = Layout;
 
@@ -73,7 +63,8 @@ const ClubList = ({ loading, load, advancedSearch, defaultSortBy, defaultSortDir
                     console.log("isCenterChecked");
                     console.log(isCenterChecked);
                     getClubsByAdvancedSearch(params, checkUndefPage, sortBy, sortDirection).then(response => {
-                        console.log("getData, loading === clubs in response: " + response);
+                        console.log("getData, loading === clubs in response: " );
+                        console.log( response);
                         setClubs(response);
                         console.log("getData, loading === " + loading);
                     });

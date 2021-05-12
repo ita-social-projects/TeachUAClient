@@ -6,30 +6,37 @@ import EditorComponent from "../../editor/EditorComponent";
 import { saveContent } from "../../editor/EditorConverter";
 import { transToEng } from "../../../util/Translit";
 import { UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
-import { addClub } from "../../../service/ClubService";
+import { addClub, getAllClubsByUserId } from "../../../service/ClubService";
+import "../css/AddClubContent.css";
+import { getUserId } from "../../../service/StorageService";
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible }) => {
+
+const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     useEffect(() => {
         if (result) {
+            console.log(result);
             descriptionForm.setFieldsValue({ ...result })
         }
     }, []);
 
     const onFinish = (values) => {
         values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
-
         descriptionForm.setFieldsValue(values);
-
         setResult(Object.assign(result, values));
-
         addClub(result).then(response => {
             setVisible(false);
             setResult(null);
+            setLocations([]);
             setStep(0);
+            if (clubs) {
+                getAllClubsByUserId(getUserId()).then(response => {
+                    setClubs(response);
+                })
+            }
         });
     };
 
@@ -38,7 +45,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible }) => {
             name="basic"
             form={descriptionForm}
             requiredMark={false}
-            onFinish={onFinish}>
+            onFinish={onFinish}
+            className="description-step">
             <Form.Item name="urlLogo"
                 className="add-club-row"
                 label="Логотип"

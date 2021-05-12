@@ -136,7 +136,11 @@ class Search extends React.Component {
 
     handleAdvancedSearch = () => {
         if (this.props.redirect) {
-            this.props.history.push("/clubs");
+            //redirect with props value for component
+            this.props.history.push({
+                pathname: "/clubs",
+                state: {showAdvancedSearch: true}
+            });
         }
         else {
             if (this.props.advancedSearch) {

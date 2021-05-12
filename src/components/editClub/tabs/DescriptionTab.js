@@ -57,7 +57,12 @@ const DescriptionTab = ({setResult, result}) => {
                 </Upload>
             </Form.Item>
             <Form.Item className="edit-club-row"
-                       label="Опис">
+                       label="Опис"
+                       rules={[{
+                           required: true,
+                           max:1500,
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){39,}(?<!\s)$/
+                       }]}>>
                 <EditorComponent ref={editorRef}
                                  />
             </Form.Item>

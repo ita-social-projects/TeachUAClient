@@ -10,9 +10,9 @@ import DescriptionStep from "./steps/DescriptionStep";
 import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getAllContacts } from "../../service/ContactService";
+import { getUserId } from '../../service/StorageService';
 
-
-const AddClubModal = ({ button }) => {
+const AddClubModal = ({ button, clubs, setClubs }) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
@@ -25,7 +25,10 @@ const AddClubModal = ({ button }) => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
-    }, []);
+        setResult({
+            userId: getUserId()
+        })
+    }, [visible]);
 
     const stepComponent = (step) => {
         switch (step) {
@@ -52,7 +55,10 @@ const AddClubModal = ({ button }) => {
                     result={result}
                     step={step}
                     setVisible={setVisible}
-                    setStep={setStep} />;
+                    setStep={setStep}
+                    setLocations={setLocations}
+                    clubs={clubs}
+                    setClubs={setClubs} />;
         }
     };
 

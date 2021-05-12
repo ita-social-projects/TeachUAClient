@@ -42,12 +42,11 @@ const AuthMenu = () => {
         if (getToken()) {
             return (
                 <Menu>
-                    <Menu.ItemGroup title="Користувач">
-                        <Menu.Item><AddClubModal /></Menu.Item>
-                        <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
-                        <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.ItemGroup title="Адміністрування" >
+                    <Menu.Item><AddClubModal /></Menu.Item>
+                    <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
+                    <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
+
+                    <SubMenu title="Адміністрування" >
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
@@ -58,9 +57,9 @@ const AuthMenu = () => {
                         <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
                         <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
                             Експортувати дані</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/club-approve">Підтвердення</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
-                    </Menu.ItemGroup >
+                    </SubMenu >
                 </Menu >
             )
         } else {

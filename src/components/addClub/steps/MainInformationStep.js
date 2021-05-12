@@ -1,22 +1,38 @@
 import { Checkbox, Form, Input, InputNumber } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 
 const MainInformationStep = ({ categories, step, setStep, setResult, result }) => {
     const [mainForm] = Form.useForm();
+    const [ageValidateStatus, setAgeValidateStatus] = useState("success")
 
     useEffect(() => {
         if (result) {
+            console.log(result);
             mainForm.setFieldsValue({ ...result })
         }
     }, []);
 
     const onFinish = (values) => {
-        setResult(values);
-        setStep(1);
-
-        mainForm.resetFields();
+        if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
+            setResult(Object.assign(result, values));
+            setStep(1);
+            mainForm.resetFields();
+        }
+        else {
+            setAgeValidateStatus("error")
+        }
     };
+
+    const onChange = () => {
+        const formFields = mainForm.getFieldValue();
+        if (formFields.ageFrom && formFields.ageTo) {
+            setAgeValidateStatus("success");
+        }
+        else {
+            setAgeValidateStatus("error");
+        }
+    }
 
     return (
         <Form
@@ -49,13 +65,14 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
             <Form.Item label="Вік дитини"
                 className="add-club-row"
                 hasFeedback
-                validateStatus="success">
+                validateStatus={ageValidateStatus}>
                 <span className="add-club-age">
                     Від
                     <Form.Item name="ageFrom"
                         style={{ margin: 0 }}
-                        initialValue={2}>
-                        <InputNumber className="input-age"
+                        initialValue={2}
+                    >
+                        <InputNumber onChange={onChange} className="input-age"
                             min={2}
                             max={18} />
                     </Form.Item>
@@ -63,7 +80,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
                     <Form.Item name="ageTo"
                         style={{ margin: 0 }}
                         initialValue={18}>
-                        <InputNumber className="input-age"
+                        <InputNumber onChange={onChange} className="input-age"
                             min={3}
                             max={18} />
                     </Form.Item>

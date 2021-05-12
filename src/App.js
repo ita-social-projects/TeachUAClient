@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import {SearchContext, searchParameters} from "./context/SearchContext";
+import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
 import CenterPage from "./components/centerPage/CenterPage";
 import MainComponent from "./components/mainPage/MainComponent";
@@ -24,6 +24,8 @@ import ImportDatabase from "./components/admin/databaseTransfer/ImportDatabase";
 import ChangeOwnerTable from "./components/admin/club/changeOwner/ChangeOwnerTable";
 import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
+import LogComponent from "./components/log/LogComponent";
+import LogByNameComponent from "./components/log/LogByNameComponent";
 
 const { Content } = Layout;
 
@@ -65,6 +67,8 @@ function App() {
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                 <Route path="/service" exact component={ServiceInUkr}/>
                                 <Route path="/about" exact component={AboutProject}/>
+                                <Route path="/logs" exact component={LogComponent}/>
+                                <Route path="/log/:id" exact component={LogByNameComponent}/>
                                 <Route path="/" component={MainComponent}/>
                             </Switch>
                         </Content>
