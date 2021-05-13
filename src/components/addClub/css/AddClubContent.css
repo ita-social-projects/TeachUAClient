@@ -1,3 +1,7 @@
+.ant-form-item-explain,
+.ant-form-item-extra{
+    min-height: 0;
+}
 .modal-add-club .add-club-content {
     margin-top: 32px;
 }
