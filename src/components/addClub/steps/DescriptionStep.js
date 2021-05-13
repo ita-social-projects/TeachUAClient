@@ -1,4 +1,4 @@
-import {Form, Upload} from "antd";
+import {Form, Input, Upload} from "antd";
 import React, {useRef, useEffect, useState} from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -14,7 +14,7 @@ import {Button} from "antd";
 
 const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
-    const editorRef = useRef(null);
+    // const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     useEffect(() => {
@@ -32,12 +32,14 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     }
 
     const onFinish = (values) => {
-        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
+        // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         addClub(result).then(response => {
             setVisible(false);
+            console.log(result);
             setResult(null);
+            console.log(result);
             setLocations([]);
             setStep(0);
             if (clubs) {
@@ -85,15 +87,26 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                 </Upload>
             </Form.Item>
-            <Form.Item className="add-club-row"
-                       label="Опис">
-                <EditorComponent ref={editorRef}/>
+            <Form.Item name="description"
+                       className="add-club-row"
+                       label="Опис"
+                       hasFeedback
+                       rules={[{
+                           required: true,
+                       }]}>
+                <Input.TextArea className="editor-textarea" style={{ height: 200}}
+                                placeholder="Додайте опис гуртка"
+                />
             </Form.Item>
+            {/*<Form.Item className="add-club-row"*/}
+            {/*           label="Опис">*/}
+            {/*    <EditorComponent ref={editorRef}/>*/}
+            {/*</Form.Item>*/}
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev"
                         type="button" onClick={prevStep}>Назад</Button>
                 <Button className="flooded-button add-club-content-next"
-                        htmlType="submit" >Завершити</Button>
+                        htmlType="submit">Завершити</Button>
             </div>
         </Form>
     )
