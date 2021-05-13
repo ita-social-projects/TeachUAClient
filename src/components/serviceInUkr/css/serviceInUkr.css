@@ -1,5 +1,5 @@
 .serviceInUkr {
-    background: linear-gradient(to bottom, rgba(245, 213, 202, 1) 0%, rgba(251, 244, 228, 1) 65%, rgba(251, 247, 235, 1) 100%);
+    background: none;
 }
 
 .serviceInUkr .title {
@@ -157,4 +157,3 @@
     color: #595959;
     border-top: 1px solid #f1f1f1;
 }
-

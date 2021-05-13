@@ -93,6 +93,8 @@ export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
 };
 
 export const getClubsByAdvancedSearch = async (parameters, page, sortBy, sortPath) => {
+    console.log("getClubsByAdvancedSearch parameters: ");
+    console.log(parameters);
     return await fetchRequest.get(BASE_URL + "/api/clubs/search/advanced", {
         params: {
             age: parameters.age,

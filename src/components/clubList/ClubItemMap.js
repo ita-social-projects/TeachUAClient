@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { GoogleMap, InfoWindow, Marker, MarkerClusterer, useLoadScript } from "@react-google-maps/api";
 import MarkItem from "../map/MarkItem";
 import { Modal } from 'antd';
 import { searchParameters } from "../../context/SearchContext";
 
 const ClubItemMap = ({ club, visible, setVisible }) => {
+
     const [map, setMap] = useState(null);
     const [selected, setSelected] = useState(null);
     const [zoom, setZoom] = useState(10);
+
     const [center, setCenter] = useState({
         lat: club.locations[0]?.city.latitude,
         lng: club.locations[0]?.city.longitude
-    })
+    });
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_MAP_KEY

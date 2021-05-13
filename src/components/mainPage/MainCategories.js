@@ -4,9 +4,8 @@ import { getPageableCategory } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
 import './css/AboutCategories.css';
 import CategoryLogo from "../CategoryLogo";
-import { Button, Layout, Pagination } from "antd";
+import {Button, Pagination} from "antd";
 import './css/AboutCarousel.css';
-import { Link } from "react-router-dom";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 

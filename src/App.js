@@ -7,6 +7,7 @@ import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
 import {SearchContext} from "./context/SearchContext";
 import ClubPage from "./components/clubPage/ClubPage";
+import CenterPage from "./components/centerPage/CenterPage";
 import MainComponent from "./components/mainPage/MainComponent";
 import UserPage from "./components/userPage/UserPage";
 import CityTable from "./components/admin/city/CityTable";
@@ -59,6 +60,7 @@ function App() {
                                 <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                 <Route path="/admin/stations" exact component={StationTable}/>
                                 <Route path="/club/:id" exact component={ClubPage}/>
+                                <Route path="/center/:id" exact component={CenterPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
                                 <Route path="/user/:id" exact component={UserPage}/>
                                 <Route path="/verify" exact component={VerifyPage}/>

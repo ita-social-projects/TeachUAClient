@@ -11,7 +11,7 @@ import "./css/ClubListRectangleItem.css"
 const ClubListRectangleItem = ({club, onClubClick}) => {
     return (
         <div>
-            <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}>
+            <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}  key={club.name}>
                 <div className="item-rectangle-row">
                     <div className="title">
                         <CategoryLogo category={club.categories[0]}/>

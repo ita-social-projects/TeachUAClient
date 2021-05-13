@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React from "react";
 import AboutHeader from "./MainHeader";
 import MainCarousel from "./MainCarousel";
-import {Button, Layout} from "antd";
+import {Layout} from "antd";
 import MainDescription from "./MainDescription";
 import MainChallenge from "./MainChallenge";
 

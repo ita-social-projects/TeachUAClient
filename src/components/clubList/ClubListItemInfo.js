@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Tags from "../Tags";
 import CategoryLogo from "../CategoryLogo";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import SocialMedia from '../clubPage/sider/SocialMedia';
+import ContactsInfoUtil from '../../util/ContactsInfoUtil';
 import ImageCarousel from '../ImageCarousel';
 import { getShortContent } from "../editor/EditorConverter";
 
@@ -49,7 +49,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                     <span className="sider-label">Вік аудиторії: </span>
                     <span className="years">від {club.ageFrom} до {club.ageTo} років</span>
                 </div>
-                <SocialMedia className="socialMedia" label="Контакти гуртка" contacts={club.contacts} />
+                <ContactsInfoUtil className="socialMedia" label="Контакти гуртка" contacts={club.contacts} />
                 <Button className="flooded-button more-button">
                     <Link to={`/club/${club.id}`}>Більше про гурток</Link>
                 </Button>
