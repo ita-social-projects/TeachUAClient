@@ -58,11 +58,12 @@ const DescriptionTab = ({setResult, result}) => {
             </Form.Item>
             <Form.Item className="edit-club-row"
                        label="Опис"
+                       hasFeedback
                        rules={[{
                            required: true,
                            max:1500,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){39,}(?<!\s)$/
-                       }]}>>
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}(?<!\s)$/
+                       }]}>
                 <EditorComponent ref={editorRef}
                                  />
             </Form.Item>

@@ -50,7 +50,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
                 label="Назва"
                 hasFeedback
                 rules={[{
-                    required: true,
+                    required: true
                 }]}>
                 <Input className="add-club-input"
                     placeholder="Назва гуртка" />
