@@ -10,6 +10,10 @@
     display: none;
 }
 
+.add-club-contacts .add-club-contact .ant-form-item-explain > div {
+    display: block;
+}
+
 .add-club-content .add-club-row label {
     font-size: 18px;
     text-align: left;
