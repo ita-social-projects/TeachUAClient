@@ -4,6 +4,11 @@
 
 .add-club-content .ant-form-item-explain > div {
     display: none;
+} 
+
+/**/
+.add-club-contacts .add-club-contact .ant-form-item-explain > div {
+    display: block;
 }
 
 .add-club-content .add-club-row label {

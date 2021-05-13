@@ -20,6 +20,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
         if (result) {
             contactsForm.setFieldsValue({ ...result });
         }
+        console.log(contacts);
     }, []);
 
     const nextStep = () => {
@@ -71,6 +72,14 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             [contact.id]: event.target.value
         });
     };
+
+    const isEmailField = (contact) => {
+        return contact.name === "Пошта";
+    }
+
+    const isPhoneField = (contact) => {
+        return contact.name === "Телефон";
+    }
 
     return (
         <Form
@@ -133,10 +142,43 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                     <Form.Item name={`contact${contact.name}`}
                         className="add-club-contact"
                         initialValue={result[`contact${contact.name}`]}
-                        hasFeedback>
+                        hasFeedback
+                        rules={[
+                            isEmailField(contact) && 
+                            {
+                                required: false,
+                                type: 'email',
+                                message: "Некоректний формат email",
+                            },
+                            isPhoneField(contact) && 
+                            {
+                                required: true,
+                                message: "Введіть номер телефону",
+                            },
+                            isPhoneField(contact) && 
+                            {
+                                required: false,
+                                pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                                message: "Телефон не може містити спеціальні символи",
+                            },
+                            isPhoneField(contact) && 
+                            {
+                                required: false,
+                                pattern: /^.{10}$/,
+                                message: "Телефон не відповідає вказаному формату",
+                            },
+                            isPhoneField(contact) &&
+                            {
+                                required: false,
+                                pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                                message: "Телефон не може містити літери"
+                            }
+                            ]}
+                        >
                         <Input className="add-club-input"
-                            placeholder="Заповніть поле"
                             name={contact.name}
+                            prefix={isPhoneField(contact) ?"+38" :undefined}
+                            placeholder={isPhoneField(contact) ?"__________" :"Заповніть поле"}
                             onChange={(e) => changeContacts(e, contact)}
                             suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
                     </Form.Item>)}
