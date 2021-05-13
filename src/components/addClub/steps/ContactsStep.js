@@ -15,6 +15,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
     const [contactsForm] = Form.useForm();
+    const [checked, setChecked] = useState(result.isOnline);
 
     useEffect(() => {
         if (result) {
@@ -72,6 +73,14 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
         });
     };
 
+    const onChange = () => {
+        if (checked) {
+            setChecked(false);
+        } else {
+            setChecked(true);
+        }
+    }
+
     return (
         <Form
             name="basic"
@@ -118,7 +127,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                     className="add-club-row"
                     label="Доступний онлайн?"
                 >
-                    <Switch checkedChildren="Так" unCheckedChildren="Ні" />
+                    <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onChange} checked={checked}/>
                 </Form.Item>
                 <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн">
                     <InfoCircleOutlined className="info-icon" />
