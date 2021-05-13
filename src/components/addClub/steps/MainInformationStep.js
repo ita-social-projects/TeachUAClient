@@ -1,6 +1,6 @@
 import { Checkbox, Form, Input, InputNumber } from "antd";
+import {Button} from "antd";
 import React, { useEffect, useState } from "react";
-import AddClubContentFooter from "../AddClubContentFooter";
 
 const MainInformationStep = ({ categories, step, setStep, setResult, result }) => {
     const [mainForm] = Form.useForm();
@@ -13,11 +13,16 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
         }
     }, []);
 
+    const nextStep = () => {
+        setStep(step + 1);
+    }
+
     const onFinish = (values) => {
         if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
             setResult(Object.assign(result, values));
-            setStep(1);
             mainForm.resetFields();
+            setResult(result);
+            nextStep();
         }
         else {
             setAgeValidateStatus("error")
@@ -87,7 +92,11 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
                     років
                 </span>
             </Form.Item>
-            <AddClubContentFooter step={step} setStep={setStep} />
+            <div className="add-club-content-footer">
+                <Button htmlType="submit"
+                        className="add-club-content-prev">{step > 0 && "Назад"}</Button>
+                <Button className="flooded-button add-club-content-next" htmlType="submit">Наступний крок</Button>
+            </div>
         </Form>
     )
 };
