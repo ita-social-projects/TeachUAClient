@@ -210,7 +210,8 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                                        pattern: /^(\+38|38)?\d{10}$/
                                    }]}>
                             <Input className="add-club-input"
-                                placeholder="Номер телефону локації" />
+                                   prefix='+38'
+                                placeholder="___________" />
                         </Form.Item>
 
                         <div className="add-club-content-footer add-club-add-location-button">
