@@ -1,12 +1,12 @@
 import React from 'react';
-import {LiqPayPay, LiqPaySubscribe} from "react-liqpay";
-
+import {LiqPayPay} from "react-liqpay";
+import {Button} from "antd";
 
 const FooterDonate = () => {
 
+    //TODO: fix public key
     const publicKey = process.env.REACT_APP_PRIVATE_KEY;
     const privateKey = process.env.REACT_APP_PUBLIC_KEY;
-
 
     return (
         <div className="footer-donate">
@@ -30,9 +30,9 @@ const FooterDonate = () => {
                 sandbox="1"
 
                 server_url="https://www.liqpay.ua/api/3/checkout"
-                extra={[<button className="flooded-button donate-button">
+                extra={[<Button className="flooded-button donate-button">
                     <span>Допомога проєкту</span>
-                </button>]}
+                </Button>]}
             />
         </div>
     );
