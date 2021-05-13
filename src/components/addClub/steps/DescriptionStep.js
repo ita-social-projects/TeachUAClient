@@ -86,7 +86,13 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                 </Upload>
             </Form.Item>
             <Form.Item className="add-club-row"
-                       label="Опис">
+                       label="Опис"
+                       hasFeedback
+                       rules={[{
+                           required: true,
+                           max:1500,
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}(?<!\s)$/
+                       }]}>
                 <EditorComponent ref={editorRef}/>
             </Form.Item>
             <div className="add-club-content-footer">
