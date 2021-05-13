@@ -3,7 +3,6 @@ import {SearchContext} from "../../context/SearchContext";
 import Cities from "./Cities";
 import {useLocation} from 'react-router-dom'
 import AuthMenu from "./AuthMenu";
-import {Button} from "antd";
 import AddClubModal from "../addClub/AddClubModal";
 
 const HeaderRight = () => {
