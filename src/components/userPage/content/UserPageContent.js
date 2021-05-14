@@ -19,7 +19,7 @@ const UserPageContent = ({user, id}) => {
             <div className="content-title">Мій профіль</div>
             <UserInformationComponent user={user}/>
             <div>
-                <div className="club-title">Мої гуртки
+                <div className="club-title">Мої гуртки та центри
                     <div className="add-club-dropdown">
                         <Dropdown сlassname overlay={menu} placement="bottomRight">
                             <Button classname="add-button">
