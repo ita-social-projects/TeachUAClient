@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Layout from "antd/lib/layout/layout";
 import "./css/serviceInUkr.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
-import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
+import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import {Button, Collapse} from "antd";
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
@@ -39,8 +39,9 @@ const ServiceInUkr = () => {
                 <div className="social-media">
                     <span className="text">Ми у соц. мережах</span>
                     <div className="links">
+                        <a target="_blank" href=""></a>
                         <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon"/></a>
-                        <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><GoogleOutlined className="icon"/></a>
+                        <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined className="icon"/></a>
                         <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined className="icon"/></a>
                     </div>
                 </div>

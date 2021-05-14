@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "antd/lib/layout/layout";
 import "./css/aboutProject.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
-import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
+import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import {Button} from "antd";
 import ClubCarousel from "./ClubCarousel";
@@ -30,15 +30,15 @@ const AboutProject = () => {
                 style={{ background: `url(${process.env.PUBLIC_URL}/static/images/service/about_project.png) center / cover` }}>
                 <span className="text">Навчай українською</span>
                 <span className="content">Ініціатива</span>
-
             </div>
             <p/><p/>
             <div className="social-info">
                 <div className="social-media">
                     <span className="text">Ми у соц. мережах</span>
                     <div className="links">
+                        <a target="_blank" href=""></a>
                         <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon"/></a>
-                        <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><GoogleOutlined className="icon"/></a>
+                        <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined className="icon"/></a>
                         <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined className="icon"/></a>
                     </div>
                 </div>
