@@ -14,7 +14,7 @@ import {Button} from "antd";
 
 const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
-    // const editorRef = useRef(null);
+    const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     }
 
     const onFinish = (values) => {
-        // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
+        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         addClub(result).then(response => {
@@ -90,18 +90,16 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                        hasFeedback
                        rules={[{
                            required: true,
-                           max:1500,
+                           max: 1500,
                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}(?<!\s)$/
                        }]}>
-                <Input.TextArea className="editor-textarea" style={{ height: 200}}
-                                placeholder="Додайте опис гуртка"
-                />
+                <EditorComponent ref={editorRef}/>
             </Form.Item>
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev"
                         type="button" onClick={prevStep}>Назад</Button>
                 <Button className="flooded-button add-club-content-next"
-                        htmlType="submit" >Завершити</Button>
+                        htmlType="submit">Завершити</Button>
             </div>
         </Form>
     )
