@@ -31,7 +31,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
 
     const onChange = () => {
         const formFields = mainForm.getFieldValue();
-        if (formFields.ageFrom && formFields.ageTo) {
+        if (formFields.ageFrom && formFields.ageTo && formFields.ageFrom < formFields.ageTo) {
             setAgeValidateStatus("success");
         }
         else {
