@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
-import './css/PageContent.css';
+import './css/PageContentСenter.css';
+import {Button} from "antd";
 import {convertToHtml} from "../../editor/EditorConverter";
 
 const CenterPageContent = ({ center, loading }) => {
 
     return (
         <Content className="page-content">
-            {/*<PageRating rating={center.rating} count={feedbackCount}/>*/}
+            {/*<PageRatingCenter rating={center.rating} count={feedbackCount}/>*/}
             {!center ?
                 <div className="content">У цього центру опису немає...</div>
                 :
