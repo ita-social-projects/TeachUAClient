@@ -5,7 +5,6 @@ import FooterDonate from "./FooterDonate";
 import './css/Footer.less'
 import FooterSocials from "./FooterSocials";
 
-
 const FooterComponent = () => {
 
     return (

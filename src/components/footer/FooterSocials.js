@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleOutlined from "@ant-design/icons/lib/icons/GoogleOutlined";
+import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 
@@ -16,12 +16,12 @@ const FooterSocials = () => {
                     <span>дітей та української мови</span>
                 </div>
             </div>
-
             <div className="social-media">
                 <div className="links">
                     <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon" /></a>
-                    <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><GoogleOutlined className="icon"/></a>
+                    <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined className="icon"/></a>
                     <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined className="icon"/></a>
+                    <a target="_blank" href=""></a>
                 </div>
             </div>
             <div className="qubstudio">
