@@ -36,7 +36,7 @@ class CommentEditComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.state.user.id === undefined && this.props.visible) {
+        if (this.state.user && this.props.visible) {
             this.getData();
         }
     };
@@ -79,6 +79,7 @@ class CommentEditComponent extends React.Component {
 
     render() {
         return (
+            !this.state.user ? <div className="empty"/> :
             <div className="comment-edit">
                 <Modal
                     className="comment-modal"

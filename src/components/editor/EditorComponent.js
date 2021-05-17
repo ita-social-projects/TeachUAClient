@@ -8,11 +8,13 @@ import {convertToHtml, saveContent} from "./EditorConverter";
 import EditorStyleButton from "./EditorStyleButton";
 
 export default class EditorComponent extends React.Component {
+
     state = {editorState: EditorState.createEmpty()};
 
-    focus = () => this.refs.editor.focus();
+    focus = () => this.ref.editor.focus();
 
     onChange = editorState => {
+        console.log(editorState);
         this.setState({editorState});
     };
 

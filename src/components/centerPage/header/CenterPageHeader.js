@@ -7,12 +7,13 @@ import CenterLogo from "../../centerList/CenterLogo";
 
 const CenterPageHeader = ({center}) => {
     return (
-        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + center.urlBackground}) 50% 50% / cover no-repeat`}}>
+        !center ? <div className="empty-block"/> :
+        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + center.urlBackgroundPicture}) 50% 50% / cover no-repeat`}}>
             <div className="blur">
                 <div className="row">
                     <div className="tags-name-box">
                         <div className="name-box">
-                            <CenterLogo category={center.urlLogo} back/>
+                            <CenterLogo urlLogo={center.urlLogo} back/>
                             <span className="center-name">{center.name}</span>
                         </div>
                     </div>
