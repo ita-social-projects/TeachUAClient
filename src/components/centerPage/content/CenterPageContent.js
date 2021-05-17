@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
-import './css/PageContentСenter.css';
+import './css/PageContentCenter.css';
 import {Button} from "antd";
 import {convertToHtml} from "../../editor/EditorConverter";
 
