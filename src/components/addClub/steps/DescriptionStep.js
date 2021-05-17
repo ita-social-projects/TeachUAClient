@@ -11,6 +11,7 @@ import "../css/AddClubContent.css";
 import {getUserId} from "../../../service/StorageService";
 
 import {Button} from "antd";
+import EditorComponentWithFormatting from "../../editor/EditorComponentWithFormatting";
 
 const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
@@ -93,7 +94,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                            max: 1500,
                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}(?<!\s)$/
                        }]}>
-                <EditorComponent ref={editorRef}/>
+                <EditorComponentWithFormatting ref={editorRef}/>
             </Form.Item>
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev"
