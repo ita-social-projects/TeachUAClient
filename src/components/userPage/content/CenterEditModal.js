@@ -10,9 +10,9 @@ const CenterEditModal = () => {
 
     return (
         <>
-            <Button type="text button" onClick={() => setVisible(true)}>
+            <Button className="aro-but" type="text button" onClick={() => setVisible(true)}>
                 Редагувати
-                <ArrowRightOutlined/>
+                <ArrowRightOutlined className="aro"/>
             </Button>
             <Modal
                 className="user-edit"
