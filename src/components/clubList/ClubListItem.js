@@ -19,7 +19,6 @@ const ClubListItem = ({ club, onClubClick }) => {
 
     return (
         <div>
-            {console.log(club)}
             <Card className="card" key={club.name}>
                 <div className="title" onClick={() => onClubClick(club)}>
                     <CategoryLogo category={club.categories[0]} />
