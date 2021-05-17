@@ -24,8 +24,11 @@ const PageContent = ({club, feedbackCount}) => {
             <PageRating rating={club.rating} count={feedbackCount}/>
             <ImageCarousel className="carousel" urls={images}/>
             {!club.description ?
-                <div className="content">У цього гуртка опису немає...</div> :
-                <div className="content" dangerouslySetInnerHTML={{ __html: convertToHtml(club.description) }} />}
+                <div className="content">У цього гуртка опису немає...</div>
+                :
+                <div className="content">
+                    {JSON.parse(club.description).blocks[3].text}
+                </div>}
             <div className="full-width button-box">
                 <Button className="flooded-button apply-button">Записатись на гурток</Button>
             </div>

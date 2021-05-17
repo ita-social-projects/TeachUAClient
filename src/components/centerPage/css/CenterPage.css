@@ -10,3 +10,29 @@
     border-top: 2px solid #F1F1F1;
     border-bottom: 1px solid #F1F1F1;
 }
+
+.clubs-of-center {
+    padding: 40px;
+    background: transparent;
+    height: 600px;
+}
+
+.clubs-inscription {
+    display: flex;
+    align-items: center;
+    width: 183px;
+    height: 32px;
+    font-weight: 700;
+    line-height: 32px;
+    size: 24px;
+    color: #2D4C68;
+}
+.clubs-of-center {
+    height: 600px;
+    margin: 45px auto 0 auto;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    display: inline-block;
+}

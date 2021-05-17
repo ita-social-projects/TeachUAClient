@@ -9,6 +9,8 @@ import { getShortContent } from "../editor/EditorConverter";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import ClubItemMap from "./ClubItemMap";
+import "./css/ClubList.less"
+import {logDOM} from "@testing-library/react";
 
 
 const ClubListItem = ({ club, onClubClick }) => {
@@ -17,6 +19,7 @@ const ClubListItem = ({ club, onClubClick }) => {
 
     return (
         <div>
+            {console.log(club)}
             <Card className="card" key={club.name}>
                 <div className="title" onClick={() => onClubClick(club)}>
                     <CategoryLogo category={club.categories[0]} />
@@ -27,7 +30,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                         categories={club.categories.filter((_, idx) => idx < 2)} />
                     <span className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>
                 </div>
-                {club.center !== null ?
+                { club.center ?
                     <div className="with-center" onClick={() => onClubClick(club)}>
                         <div className="center">
                             <img className="center-logo" src={club.center.urlLogo} alt="Center logo" />
