@@ -100,7 +100,7 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                                    rules={[{
                                        required: true,
                                        max:100,
-                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){4,}(?<!\s)$/
+                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){4,}\S$/
                                    }]}>
                             <Input className="add-club-input"
                                 placeholder="Назва локації" />
