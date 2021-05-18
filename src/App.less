@@ -211,6 +211,8 @@
 .city-name {
   color: white;
   padding-bottom: 5px;
+  font-size: 20px;
+  margin-top: 20px;
 }
 
 .tags {
@@ -505,7 +507,19 @@
   }
 }
 
-@media (min-width: 1215px) and (max-width: 1240px) {
+//@media screen and (max-width: 1212px) {
+//  //.lower-header-box {
+//  //  flex-direction: row;
+//  //  align-items: normal;
+//  //  height: 85px;
+//  //  margin-top: -25px;
+//  //  justify-content: space-between;
+//  //}
+//
+//}
+
+
+@media (min-width: 1214px) and (max-width: 1256px) {
   .header .nav-menu {
     display: flex;
   }
@@ -542,10 +556,10 @@
   }
 
   .lower-header-box {
-    flex-direction: column;
+    flex-direction: row;
     align-items: normal;
-    height: 85px;
-    justify-content: space-around;
+    height: -35px;
+    justify-content: space-between;
   }
 
   .global-padding {
