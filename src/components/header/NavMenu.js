@@ -40,14 +40,16 @@ const NavMenu = () => {
                 <Menu.Item key="challenge">
                     <Link to="/challenge"><CrownOutlined className="icon"/>Челендж</Link>
                 </Menu.Item>
-                {/*<Menu.Item key="news">*/}
-                {/*    <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>*/}
-                {/*</Menu.Item>*/}
-                <Menu.Item key="about">
-                    <Link to="/about"><FolderOpenOutlined className="icon"/>Проєкт</Link>
+                {/*Замість  новин - проєкт*/}
+                <Menu.Item key="news">
+                    <Link to="/about"><ContainerOutlined className="icon"/>Проєкт</Link>
                 </Menu.Item>
+                <Menu.Item key="about">
+                    <Link to="/service"><FolderOpenOutlined className="icon"/>Послуги українською</Link>
+                </Menu.Item>
+                {/*Приховано лінк service - # та виправити на послуги українською назви*/}
                 <Menu.Item key="service">
-                    <Link to="/service"><FlagOutlined className="icon"/>Послуги українською</Link>
+                    <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>
                 </Menu.Item>
             </Menu>
         </div>
