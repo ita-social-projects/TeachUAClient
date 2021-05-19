@@ -35,9 +35,8 @@ const UserCenterCardItem = ({center}) => {
                         <CenterEditModal/>
                     </div>
                     <div className="address">
-                        <EnvironmentFilled
-                            className="address-icon"/>
-                        <span className="text">{center.address}</span>
+                        <EnvironmentFilled className="address-icon"/>
+                        <span className="text">{center.locations[0].address}</span>
                     </div>
                 </div>
             </div>

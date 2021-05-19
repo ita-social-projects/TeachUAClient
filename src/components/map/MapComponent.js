@@ -4,6 +4,7 @@ import MapContainer from "./MapContainer";
 import Cities from "./Cities";
 import Categories from "./Categories";
 import MapClubList from "./MapClubList";
+import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
 import './css/Sider.css'
 
 const { Sider } = Layout;
@@ -17,6 +18,7 @@ const MapComponent = ({ visible, setVisible }) => {
     const [center, setCenter] = useState(null);
 
     const closeMap = () => {
+        mapSearchParameters.cityName = searchParameters.cityName;
         setVisible(false);
     };
 

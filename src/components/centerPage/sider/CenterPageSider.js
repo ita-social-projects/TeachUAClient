@@ -9,7 +9,6 @@ const CenterPageSider = ({center}) => {
 
     useEffect( () =>{
         window.scrollTo(0, 0);
-        this.getData();
     },[]);
 
         return (

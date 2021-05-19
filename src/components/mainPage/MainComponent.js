@@ -23,7 +23,7 @@ const MainComponent = () => {
                 buttonLabel="Переглянути матеріали"
             />
             <MainCategories/>
-            <AboutNews/>
+            {/*<AboutNews/>*/}
             <MainChallenge
                 label='Челендж "Навчай українською"'
                 text='Близько тисячі учасників з усієї України уже взяли участь у 21-денному челенджі
