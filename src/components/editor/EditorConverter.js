@@ -3,7 +3,12 @@ import { stateToHTML } from "draft-js-export-html";
 import { convertToHtmlOptions } from "./BlockSetting";
 
 export const saveContent = (content) => {
-    return JSON.stringify(convertToRaw(content));
+    if (typeof content == "object") {
+        console.log(typeof content);
+        return JSON.stringify(convertToRaw(content));
+    } else {
+        return content;
+    }
 };
 
 export const convertToHtml = (content) => {
@@ -17,6 +22,7 @@ export const convertFromJson = (json) => {
 };
 
 export const getShortContent = (content) => {
+    console.log(content);
     const contentObject = JSON.parse(content);
 
     let shortDescription = "";
