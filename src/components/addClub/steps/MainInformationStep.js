@@ -1,8 +1,10 @@
-import { Checkbox, Form, Input, InputNumber } from "antd";
+import {Checkbox, Form, Input, InputNumber, Select} from "antd";
 import {Button} from "antd";
 import React, { useEffect, useState } from "react";
 
-const MainInformationStep = ({ categories, step, setStep, setResult, result }) => {
+const { Option } = Select;
+
+const MainInformationStep = ({ categories, step, setStep, setResult, result,centers }) => {
     const [mainForm] = Form.useForm();
     const [ageValidateStatus, setAgeValidateStatus] = useState("success")
 
@@ -18,6 +20,9 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
     }
 
     const onFinish = (values) => {
+        if(values.centerName){
+
+        }
         if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
             setResult(Object.assign(result, values));
             mainForm.resetFields();
@@ -93,6 +98,16 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result }) =
                     </Form.Item>
                     років
                 </span>
+            </Form.Item>
+            <Form.Item name="centerId"
+                       className="add-club-row"
+                       label="Приналежність до центру">
+                <Select
+                    className="add-club-select"
+                    placeholder="Назва центру"
+                    hasFeedback>
+                    {centers.map(c => <Option  value={c.id}>{c.name}</Option>)}
+                </Select>
             </Form.Item>
             <div className="add-club-content-footer">
                 <Button htmlType="submit"
