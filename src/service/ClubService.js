@@ -17,7 +17,8 @@ export const addClub = async (data) => {
         urlLogo: data.urlLogo && data.urlLogo.file.response,
         urlBackground: data.urlBackground && data.urlBackground.file.response,
         contacts: data.contacts,
-        isApproved: data.isApproved
+        isApproved: data.isApproved,
+        centerId: data.centerId,
     }).then((response) => {
         return response.data
     }).catch((error) => {
