@@ -17,6 +17,7 @@ export const convertFromJson = (json) => {
 };
 
 export const getShortContent = (content) => {
+    console.log(content);
     const contentObject = JSON.parse(content);
 
     let shortDescription = "";
