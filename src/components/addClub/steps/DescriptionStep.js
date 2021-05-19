@@ -11,7 +11,6 @@ import "../css/AddClubContent.css";
 import {getUserId} from "../../../service/StorageService";
 
 import {Button} from "antd";
-import EditorComponentWithFormatting from "../../editor/EditorComponentWithFormatting";
 
 const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
@@ -36,14 +35,11 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     }
 
     const onFinish = (values) => {
-        console.log(result.description);
-
         //before
         // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
 
+        setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const descJSON = leftDesc + result.description + rightDesc;
-        console.log(descJSON);
-        console.log(typeof descJSON);
         values.description = saveContent(descJSON);
 
         descriptionForm.setFieldsValue(values);
@@ -106,7 +102,8 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                            required: true,
                            max: 1500,
                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
-                       }]}>
+                       }]}
+                >
                 <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
                 {/*<EditorComponentWithFormatting ref={editorRef}/>*/}
             </Form.Item>
