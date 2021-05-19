@@ -40,9 +40,9 @@ const NavMenu = () => {
                 <Menu.Item key="challenge">
                     <Link to="/challenge"><CrownOutlined className="icon"/>Челендж</Link>
                 </Menu.Item>
-                <Menu.Item key="news">
-                    <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>
-                </Menu.Item>
+                {/*<Menu.Item key="news">*/}
+                {/*    <Link to="/news"><ContainerOutlined className="icon"/>Новини</Link>*/}
+                {/*</Menu.Item>*/}
                 <Menu.Item key="about">
                     <Link to="/about"><FolderOpenOutlined className="icon"/>Проєкт</Link>
                 </Menu.Item>
