@@ -207,7 +207,7 @@ const AddLocationModal = ({ form, locations, setLocations, cities, visible, setV
                                    hasFeedback
                                    rules={[{
                                        required: true,
-                                       pattern: /^(\+38|38)?\d{10}$/
+                                       pattern: /^\d{10}$/
                                    }]}>
                             <Input className="add-club-input"
                                    prefix='+38'
