@@ -48,7 +48,8 @@ const NavMenu = () => {
                     <Link to="/service"><FolderOpenOutlined className="icon"/>Послуги українською</Link>
                 </Menu.Item>
                 {/*Приховано лінк service - # та виправити на послуги українською назви*/}
-                <Menu.Item key="service">
+                {/*Забрати стиль*/}
+                <Menu.Item key="service" style={{display: 'none' }}>
                     <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>
                 </Menu.Item>
             </Menu>
