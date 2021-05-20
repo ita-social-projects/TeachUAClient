@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-.centerInfo .title {
+.centerInfo .center-title {
     display: flex;
     align-items: center;
     margin-bottom: 10px;

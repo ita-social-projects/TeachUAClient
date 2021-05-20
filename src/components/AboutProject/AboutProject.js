@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "antd/lib/layout/layout";
 import "./css/aboutProject.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
@@ -6,8 +6,8 @@ import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import { Button } from "antd";
 import ClubCarousel from "./ClubCarousel";
-import { getClubsByCategoryAndCity } from "../../service/ClubService";
-import { mapSearchParameters } from "../../context/SearchContext";
+import {getClubsByCategoryAndCity} from "../../service/ClubService";
+import {mapSearchParameters} from "../../context/SearchContext";
 import Search from "../Search";
 
 const AboutProject = () => {
@@ -28,11 +28,8 @@ const AboutProject = () => {
                 </div>
                 <Search redirect />
             </div>
-            <div
-                className="title"
-                style={{
-                    background: `url(${process.env.PUBLIC_URL}/static/images/service/about_project.png) center / cover`,
-                }}>
+            <div className="title"
+                 style={{background: `url(${process.env.PUBLIC_URL}/static/images/service/about_project.png) center / cover`}}>
                 <span className="text">Навчай українською</span>
                 <span className="content">Ініціатива</span>
             </div>
@@ -42,32 +39,22 @@ const AboutProject = () => {
                 <div className="social-media">
                     <span className="text">Ми у соц. мережах</span>
                     <div className="links">
-                        {/* <a target="_blank" href="!#"></a> */}
-                        <a
-                            href="https://www.facebook.com/teach.in.ukrainian"
-                            target="_blank"
-                            rel="noreferrer">
-                            <FacebookOutlined className="icon" />
-                        </a>
-                        <a
-                            target="_blank"
-                            href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"
-                            rel="noreferrer">
-                            <YoutubeOutlined className="icon" />
-                        </a>
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://www.instagram.com/teach.in.ukrainian/">
-                            <InstagramOutlined className="icon" />
-                        </a>
+                        <a target="_blank" href=""></a>
+                        <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined
+                            className="icon"/></a>
+                        <a target="_blank"
+                           href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined
+                            className="icon"/></a>
+                        <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined
+                            className="icon"/></a>
                     </div>
                 </div>
                 <div className="help-button">
-                    <a target="blank" href="!#">
+                    <a target="blank"
+                       href="https://secure.wayforpay.com/payment/s0f2891d77061">
                         <Button className="flooded-button donate-button">
                             Допомогти проєкту
-                        </Button>{" "}
+                        </Button>
                     </a>
                 </div>
             </div>
@@ -75,9 +62,7 @@ const AboutProject = () => {
                 <div className="about-info">
                     <div className="title-content">Про ініціативу</div>
                     <div className="content-text">
-                        Ініціатива “Навчай українською” - це небайдужі
-                        громадяни, які об'єдналися, щоб популяризувати
-                        українську мову у сфері освіти.
+                        Ініціатива “Навчай українською” - це небайдужі громадяни, які об'єдналися, щоб популяризувати українську мову у сфері освіти. Ви можете про нас більше дізнатися з нашої Facebook-сторінки.
                     </div>
                 </div>
                 <section className="organaizer">
@@ -89,23 +74,16 @@ const AboutProject = () => {
                         </div>
                         <div className="col info">
                             <div className="text">
-                                <span>
-                                    Що зміниться, якщо в Україні всі
-                                    розмовлятимуть українською? Чи змінить це
-                                    ставлення громадян до своєї країни? Чи стане
-                                    молодь більше поважати свій край? щось про
-                                    те, чому вирішила заснувати ініціативу і
-                                    кілька слів про себе)
-                                </span>
+                                <span >
+                                    Активна учасниця групи захисту мовного закону і права україномовних на послуги українською мовою в Україні. Ініціювала розпорядження департаменту культури КМДА про викладання у мистецьких школах Києва українською мовою. Експертка з комунікацій та менеджерка соціальних, освітніх та культурних проєктів. Конкретніше: консультантка з розробки та створенню телевізійного шоу про нові об’єднані територіальні громади, головний редактор програми журналістських розслідувань «Брат за брата», редактор розважальних програм Новий канал, впродовж десяти років журналістка та ведуча програми новин «Репортер» Новий канал. Хочу дізнатись, що зміниться, якщо в Україні всі розмовлятимуть українською? Чи змінить це ставлення громадян до своєї країни? Чи стане молодь більше поважати свій край?
+                            </span>
                             </div>
                             <div className="name">
                                 <span>Наталка Федечко</span>
                             </div>
                             <div className="position">
-                                <span>
-                                    Співорганізаторка Ініціативи “Навчай
-                                    українською”
-                                </span>
+                                <span >Співзасновниця та координаторка Ініціативи “Навчай українською”</span>
+
                             </div>
                         </div>
                     </div>
@@ -113,14 +91,7 @@ const AboutProject = () => {
                         <div className="col info">
                             <div className="text">
                                 <span>
-                                    Витяг. Lorem ipsum dolor sit amet,
-                                    consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna
-                                    aliqua. Porta lorem mollis aliquam ut
-                                    porttitor leo a diam sollicitudin. Ut
-                                    venenatis tellus in metus vulputate eu
-                                    scelerisque felis imperdiet. Amet aliquam id
-                                    diam maecenas.
+                                    Комунікаційна менеджерка Ініціативи "Навчай українською". Редакторка волонтерського проєкту Портал мовної політики. Учасниця спільноти "Мова об'єднує", яка займається адвокацією закону "Про забезпечення функціонування української мови як державної". Мріє, щоб ті, хто говорить українською, не почували себе дискримінованими.
                                 </span>
                             </div>
                             <div className="name">
@@ -139,77 +110,49 @@ const AboutProject = () => {
                 </section>
                 <section className="sport-clubs">
                     <div className="title-content sport">
-                        Ініціатива "Навчай українською" закликає викладачів
-                        спортивних секцій, тренерів навчати дітей українською
-                        мовою.
+                        Ініціатива "Навчай українською" закликає викладачів спортивних секцій, тренерів навчати дітей
+                        українською мовою.
                     </div>
                     <div className="content-text sport desc">
-                        Із 16 січня 2021 набуває чинності стаття 30 закону “Про
-                        забезпечення функціонування української мови як
-                        державної” про державну мову у сфері обслуговування
-                        споживачів. З 16 січня всі надавачі послуг, незалежно
-                        від форми власності, зобов’язані обслуговувати
-                        споживачів і надавати інформацію про товари і послуги
-                        державною мовою. Громадяни мають право отримати освітній
-                        послуги українською мовою у закладах позашкільної
-                        освіти.
+                        Із 16 січня 2021 набуває чинності стаття 30 закону “Про забезпечення функціонування української
+                        мови як державної” про державну мову у сфері обслуговування споживачів. З 16 січня всі надавачі
+                        послуг, незалежно від форми власності, зобов’язані обслуговувати споживачів і надавати
+                        інформацію про товари і послуги державною мовою. Громадяни мають право отримати освітній послуги
+                        українською мовою у закладах позашкільної освіти.
                     </div>
                     <div className="video">
-                        <iframe
-                            title="unique"
-                            width="100%"
-                            height="378"
-                            style={{ borderRadius: "16px" }}
-                            src="https://www.youtube.com/embed/i3umBFqDznQ"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                        <iframe width="100%" height="378" style={{borderRadius: '16px'}}
+                                src="https://www.youtube.com/embed/i3umBFqDznQ" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                     </div>
                 </section>
-                <ClubCarousel clubs={clubs} />
-                <section className="addit-information">
-                    <div className="title-content ">
-                        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                        lorem ipsum
-                    </div>
-                    <div className="content-text">
-                        Витяг. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Porta lorem mollis
-                        aliquam ut porttitor leo a diam sollicitudin. Ut
-                        venenatis tellus in metus vulputate eu scelerisque felis
-                        imperdiet. Amet aliquam id diam maecenas.
-                    </div>
-                    <div class="image">
-                        <img
-                            src={`${process.env.PUBLIC_URL}/static/images/service/about_img.jpg`}
-                            alt=""></img>
-                    </div>
-                    <div className="title-content ">
-                        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                        lorem ipsum
-                    </div>
-                    <div className="content-text">
-                        Витяг. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Porta lorem mollis
-                        aliquam ut porttitor leo a diam sollicitudin. Ut
-                        venenatis tellus in metus vulputate eu scelerisque felis
-                        imperdiet. Amet aliquam id diam maecenas.
-                    </div>
-                    <div className="title-content ">
-                        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-                        lorem ipsum
-                    </div>
-                    <div className="content-text">
-                        Витяг. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Porta lorem mollis
-                        aliquam ut porttitor leo a diam sollicitudin. Ut
-                        venenatis tellus in metus vulputate eu scelerisque felis
-                        imperdiet. Amet aliquam id diam maecenas.
-                    </div>
-                </section>
+
+                {/*<ClubCarousel clubs={clubs} />*/}
+                {/*<section className="addit-information">*/}
+                {/*    <div className="title-content ">*/}
+                {/*        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum*/}
+                {/*    </div>*/}
+                {/*    <div className="content-text">*/}
+                {/*        Витяг. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta lorem mollis aliquam ut porttitor leo a diam sollicitudin. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Amet aliquam id diam maecenas.*/}
+                {/*    </div>*/}
+                {/*    <div class="image">*/}
+                {/*        <img src={`${process.env.PUBLIC_URL}/static/images/service/about_img.jpg`}></img>*/}
+                {/*    </div>*/}
+                {/*    <div className="title-content ">*/}
+                {/*        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum*/}
+                {/*    </div>*/}
+                {/*    <div className="content-text">*/}
+                {/*        Витяг. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta lorem mollis aliquam ut porttitor leo a diam sollicitudin. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Amet aliquam id diam maecenas.*/}
+                {/*    </div>*/}
+                {/*    <div className="title-content ">*/}
+                {/*        Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum*/}
+                {/*    </div>*/}
+                {/*    <div className="content-text">*/}
+                {/*        Витяг. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta lorem mollis aliquam ut porttitor leo a diam sollicitudin. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Amet aliquam id diam maecenas.*/}
+                {/*    </div>*/}
+                {/*</section>*/}
+
             </div>
         </Layout>
     );

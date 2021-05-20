@@ -17,6 +17,9 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
+    const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
+    const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
+
     useEffect(() => {
         if (result) {
             console.log(result);
@@ -32,7 +35,13 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     }
 
     const onFinish = (values) => {
-        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
+        //before
+        // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
+
+        setResult(Object.assign(result, descriptionForm.getFieldValue()));
+        const descJSON = leftDesc + result.description + rightDesc;
+        values.description = saveContent(descJSON);
+
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         addClub(result).then(response => {
@@ -85,15 +94,18 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                 </Upload>
             </Form.Item>
-            <Form.Item className="add-club-row"
+            <Form.Item name="description"
+                       className="add-club-row"
                        label="Опис"
                        hasFeedback
                        rules={[{
                            required: true,
                            max: 1500,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}(?<!\s)$/
-                       }]}>
-                <EditorComponent ref={editorRef}/>
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
+                       }]}
+                >
+                <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
+                {/*<EditorComponentWithFormatting ref={editorRef}/>*/}
             </Form.Item>
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev"

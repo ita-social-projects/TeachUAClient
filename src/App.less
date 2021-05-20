@@ -151,6 +151,7 @@
   align-items: flex-end;
 }
 
+
 .search .ant-select-clear {
   background: none;
   display: inline-block;
@@ -210,6 +211,8 @@
 .city-name {
   color: white;
   padding-bottom: 5px;
+  font-size: 20px;
+  margin-top: 20px;
 }
 
 .tags {
@@ -487,7 +490,7 @@
 
 @media  screen and (max-width: 2500px) {
   .header .nav-menu {
-    width: 740px;
+    width: 700px;
     display: flex;
   }
 
@@ -496,7 +499,7 @@
   }
 
   .header {
-    padding: 0 15px !important;
+    padding: 0 75px !important;
   }
 
   .ant-layout-header header {
@@ -504,8 +507,21 @@
   }
 }
 
-@media (min-width: 1215px) and (max-width: 1240px) {
+//@media screen and (max-width: 1212px) {
+//  //.lower-header-box {
+//  //  flex-direction: row;
+//  //  align-items: normal;
+//  //  height: 85px;
+//  //  margin-top: -25px;
+//  //  justify-content: space-between;
+//  //}
+//
+//}
+
+
+@media (min-width: 1214px) and (max-width: 1390px) {
   .header .nav-menu {
+    width: 700px;
     display: flex;
   }
 
@@ -518,15 +534,15 @@
   }
 
   .right-side-menu {
-    width: 325px;
+    width: 28%;
   }
 
   .header .city {
-    margin: 0 1vw;
+    margin: 0 0vw;
   }
 }
 
-@media (max-width: 1214px) {
+@media screen and (max-width: 1214px) {
   .left-side-menu {
     display: inline-block;
   }
@@ -536,15 +552,15 @@
   }
 
   .header .nav-menu {
-    width: 300px;
+    width: 400px;
     display: flex;
   }
 
   .lower-header-box {
-    flex-direction: column;
+    flex-direction: row;
     align-items: normal;
-    height: 85px;
-    justify-content: space-around;
+    height: -35px;
+    justify-content: space-between;
   }
 
   .global-padding {
@@ -556,7 +572,7 @@
   }
 
   .header {
-    padding: 0 50px !important;
+    padding: 0 75px !important;
   }
 
   .header .nav-menu .ant-menu-submenu-title span {
@@ -564,7 +580,14 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 955px) {
+  .header .nav-menu {
+    width: 200px;
+    display: flex;
+  }
+}
+
+@media screen and  (max-width: 880px) {
   .global-padding,
   .layout .header {
     padding: 0 10px 0 10px;
@@ -588,7 +611,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 710px) {
   .content-clubs {
     min-width: 0;
   }

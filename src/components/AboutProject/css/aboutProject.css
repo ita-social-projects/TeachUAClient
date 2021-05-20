@@ -119,18 +119,18 @@
     align-items: center;
     justify-content: center;
     margin-top:120px;
-    margin-bottom:120px;
+    margin-bottom:270px;
 }
 
 .aboutProject .row .col {
     box-sizing: border-box;
-    width:430px;
+    width:530px;
     height:360px;
     margin: 15px;
     
 }
 .aboutProject .row .info{
-    padding-top: 45px;
+    padding-top: 10px;
     padding-bottom: 45px;
 }
 .aboutProject .row .col .text {
