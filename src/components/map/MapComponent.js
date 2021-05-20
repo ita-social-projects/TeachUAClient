@@ -19,6 +19,7 @@ const MapComponent = ({ visible, setVisible }) => {
 
     const closeMap = () => {
         mapSearchParameters.cityName = searchParameters.cityName;
+        mapSearchParameters.categoryName = "";
         setVisible(false);
     };
 
