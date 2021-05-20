@@ -14,7 +14,7 @@ const MainCarousel = (items) => {
                 {items.items.map((item) =>
                     <div>
                         <div className="carousel-item" style={{
-                            background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${item.imageURL}) no-repeat 50% 50% / cover`
+                            background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${item.imageURL}) no-repeat 50% 28% / cover`
                         }}>
                             {item.body}
                         </div>
