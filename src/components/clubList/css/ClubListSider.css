@@ -1,8 +1,8 @@
 .club-list-sider {
-    flex: 0 0 382px!important;
-    max-width: 382px!important;
-    min-width: 382px!important;
-    width: 382px!important;
+    flex: 0 0 382px !important;
+    max-width: 382px !important;
+    min-width: 382px !important;
+    width: 382px !important;
     background: white;
     padding-top: 54px;
     display: flex;
@@ -12,7 +12,7 @@
 
 .club-list-sider .club-list-label {
     font-weight: 600;
-    color: #2D4C68;
+    color: #2d4c68;
     font-size: 24px;
     opacity: 0.6;
     margin-bottom: 40px;
@@ -23,7 +23,7 @@
     text-align: left;
     padding-right: 16px;
     display: block;
-    color: #2D4C68;
+    color: #2d4c68;
 }
 
 .club-list-sider .club-list-row label:after {
@@ -46,7 +46,7 @@
 }
 
 .club-list-sider .club-list-kind label,
-.club-list-sider .club-list-categories label{
+.club-list-sider .club-list-categories label {
     width: 256px;
     font-size: 14px;
     white-space: normal;
@@ -56,17 +56,18 @@
 }
 
 .club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner {
-    border-color: #0050B3;
+    border-color: #0050b3;
 }
 
 .club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner::after,
 .club-list-sider .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #0050B3;
-    border-color: #0050B3;
+    background-color: #0050b3;
+    border-color: #0050b3;
 }
 
-.club-list-sider .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner:hover {
-    border-color: #0050B3;
+.club-list-sider .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner:hover {
+    border-color: #0050b3;
 }
 
 .club-list-sider .club-list-age {
@@ -76,34 +77,42 @@
 }
 .club-list-sider .age {
     margin: 0 10px 0 0px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid #d9d9d9;
     color: #595959;
     border-radius: 6px;
     width: 43px;
     height: 40px;
 }
-
+.club-list-sider .ant-input-number-handler-wrap {
+    display: none;
+}
 .club-list-sider .ant-input-number-input-wrap {
-    height:100%;
-    display:flex;
+    height: 100%;
+    display: flex;
     align-items: center;
 }
-.club-list-sider .ant-input-number-input-wrap input{
+.club-list-sider .ant-input-number-input-wrap input {
     text-align: center;
 }
 
-.club-list-sider  .ant-input-number-handler-wrap {
+.club-list-sider .ant-input-number-handler-wrap {
     width: 12px;
     border-radius: 0 6px 6px 0;
 }
 
-.club-list-sider .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
-.club-list-sider .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner{
+.club-list-sider
+    .ant-input-number-handler-wrap
+    .ant-input-number-handler
+    .ant-input-number-handler-up-inner,
+.club-list-sider
+    .ant-input-number-handler-wrap
+    .ant-input-number-handler
+    .ant-input-number-handler-down-inner {
     margin-right: -4px;
 }
 
 .club-list-sider .ant-switch-checked {
-    background: #0050B3;
+    background: #0050b3;
 }
 
 .club-list-sider .ant-checkbox-input:focus + .ant-checkbox-inner {
