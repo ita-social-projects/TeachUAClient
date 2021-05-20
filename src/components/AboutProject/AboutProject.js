@@ -4,7 +4,7 @@ import "./css/aboutProject.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
-import {Button} from "antd";
+import { Button } from "antd";
 import ClubCarousel from "./ClubCarousel";
 import {getClubsByCategoryAndCity} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";
@@ -13,25 +13,28 @@ import Search from "../Search";
 const AboutProject = () => {
     const [clubs, setClubs] = useState([]);
     useEffect(() => {
-        getClubsByCategoryAndCity(mapSearchParameters).then(responce => {
+        getClubsByCategoryAndCity(mapSearchParameters).then((responce) => {
             setClubs(responce);
-        })
-    }, [mapSearchParameters.cityName])
+        });
+    }, []);
 
     return (
         <Layout className="aboutProject global-padding">
             <div className="lower-header-box about-header">
                 <div className="city-name-box">
-                    <h2 className="city-name">Ініціатива “Навчай українською”</h2>
+                    <h2 className="city-name">
+                        Ініціатива “Навчай українською”
+                    </h2>
                 </div>
-                <Search redirect/>
+                <Search redirect />
             </div>
             <div className="title"
                  style={{background: `url(${process.env.PUBLIC_URL}/static/images/service/about_project.png) center / cover`}}>
                 <span className="text">Навчай українською</span>
                 <span className="content">Ініціатива</span>
             </div>
-            <p/><p/>
+            <p />
+            <p />
             <div className="social-info">
                 <div className="social-media">
                     <span className="text">Ми у соц. мережах</span>
@@ -57,23 +60,20 @@ const AboutProject = () => {
             </div>
             <div className="content">
                 <div className="about-info">
-                    <div className="title-content">
-                        Про ініціативу
-                    </div>
+                    <div className="title-content">Про ініціативу</div>
                     <div className="content-text">
-
                         Ініціатива “Навчай українською” - це небайдужі громадяни, які об'єдналися, щоб популяризувати українську мову у сфері освіти. Ви можете про нас більше дізнатися з нашої Facebook-сторінки.
-
                     </div>
                 </div>
                 <section className="organaizer">
                     <div className="row">
                         <div className="col">
-                            <img src={`${process.env.PUBLIC_URL}/static/images/service/profile_2.jpg`}></img>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/static/images/service/profile_2.jpg`}
+                                alt=""></img>
                         </div>
                         <div className="col info">
                             <div className="text">
-
                                 <span >
                                     Активна учасниця групи захисту мовного закону і права україномовних на послуги українською мовою в Україні. Ініціювала розпорядження департаменту культури КМДА про викладання у мистецьких школах Києва українською мовою. Експертка з комунікацій та менеджерка соціальних, освітніх та культурних проєктів. Конкретніше: консультантка з розробки та створенню телевізійного шоу про нові об’єднані територіальні громади, головний редактор програми журналістських розслідувань «Брат за брата», редактор розважальних програм Новий канал, впродовж десяти років журналістка та ведуча програми новин «Репортер» Новий канал. Хочу дізнатись, що зміниться, якщо в Україні всі розмовлятимуть українською? Чи змінить це ставлення громадян до своєї країни? Чи стане молодь більше поважати свій край?
                             </span>
@@ -82,7 +82,6 @@ const AboutProject = () => {
                                 <span>Наталка Федечко</span>
                             </div>
                             <div className="position">
-
                                 <span >Співзасновниця та координаторка Ініціативи “Навчай українською”</span>
 
                             </div>
@@ -103,7 +102,9 @@ const AboutProject = () => {
                             </div>
                         </div>
                         <div className="col">
-                            <img src={`${process.env.PUBLIC_URL}/static/images/service/profile_1.jpg`}></img>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/static/images/service/profile_1.jpg`}
+                                alt=""></img>
                         </div>
                     </div>
                 </section>
@@ -154,6 +155,6 @@ const AboutProject = () => {
 
             </div>
         </Layout>
-    )
-}
+    );
+};
 export default AboutProject;

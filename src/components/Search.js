@@ -1,18 +1,21 @@
 import { AutoComplete, Select } from "antd";
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import {
     clearSearchParameters,
     mapSearchParameters,
     SearchContext,
     searchInputData,
-    searchParameters
+    searchParameters,
 } from "../context/SearchContext";
 import { getClubsByParameters } from "../service/ClubService";
-import { getPossibleResults, getPossibleResultsByText } from "../service/SearchService";
+import {
+    getPossibleResults,
+    getPossibleResultsByText,
+} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
-import {getAllCategories} from "../service/CategoryService";
+import { getAllCategories } from "../service/CategoryService";
 
 const { Option, OptGroup } = Select;
 
@@ -22,19 +25,17 @@ class Search extends React.Component {
     state = {
         possibleResults: {
             categories: [],
-            clubs: []
+            clubs: [],
         },
         allCategories: [],
         loading: false,
-        searchClicked: false
+        searchClicked: false,
     };
 
     componentDidMount() {
         getAllCategories().then((response) => {
-            console.log("Search=> componentDidMount start")
             this.setState({ allCategories: response });
-            console.log("allCategories : "+this.state.allCategories);
-        })
+        });
     }
 
     onSearchChange = (value, option) => {
@@ -45,8 +46,6 @@ class Search extends React.Component {
         if (!searchParameters.isAdvancedSearch) {
             clearSearchParameters();
 
-            console.log(option.type);
-
             switch (option.type) {
                 case "category":
                     searchParameters.categoryName = value;
@@ -56,24 +55,21 @@ class Search extends React.Component {
                     searchParameters.clubName = value;
                     break;
                 default: {
-                    console.log("=============allCategories===========");
-                    console.log(this.state.allCategories);
-                    if (this.state.allCategories.find(category =>
-                        category.name.toLowerCase().includes(value.toLowerCase()))) {
-                        console.log("default section , category is found")
+                    if (
+                        this.state.allCategories.find((category) =>
+                            category.name
+                                .toLowerCase()
+                                .includes(value.toLowerCase())
+                        )
+                    ) {
                         searchParameters.categoryName = value;
-                        console.log("===categoryName: " + searchParameters.categoryName);
-                        console.log("===clubName: " + searchParameters.clubName);
                     } else {
-                        console.log("default section , category is NOT found")
                         searchParameters.clubName = value;
                     }
                 }
             }
 
-            getClubsByParameters(searchParameters).then(response => {
-                console.log("=== getClubsByParameters called from onSearchChange method , clubs: ");
-                console.log( response);
+            getClubsByParameters(searchParameters).then((response) => {
                 this.context.setClubs(response);
             });
         }
@@ -81,7 +77,6 @@ class Search extends React.Component {
 
     onSelect = (value, option) => {
         searchInputData.input = value;
-        console.log("=== onSelect called , value: " + value + " , option: " + option);
         this.onSearchChange(value, option);
     };
 
@@ -89,26 +84,23 @@ class Search extends React.Component {
         if (!this.props.advancedSearch) {
             clearSearchParameters();
             searchInputData.input = "";
-            console.log("getClubsByParameters called from Search component onClear method, searchInput: " + searchInputData.input);
-            getClubsByParameters(searchParameters).then(response => {
+            getClubsByParameters(searchParameters).then((response) => {
                 this.context.setClubs(response);
-                console.log("onClear method,  context.clubs= " + this.context.clubs)
             });
         }
     };
 
     onFocus = () => {
-        console.log("=== onFocus method ")
         this.setState({ loading: true });
-        getPossibleResults(searchParameters).then(response => {
-            this.setState({ possibleResults: response, loading: false })
+        getPossibleResults(searchParameters).then((response) => {
+            this.setState({ possibleResults: response, loading: false });
         });
     };
 
     onKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            console.log("=== onKeyDown method run, value = " + event.target.defaultValue);
-            event.target.defaultValue && this.onSearchChange(event.target.defaultValue, { type: "all" });
+        if (event.key === "Enter") {
+            event.target.defaultValue &&
+                this.onSearchChange(event.target.defaultValue, { type: "all" });
         }
     };
 
@@ -116,7 +108,6 @@ class Search extends React.Component {
         this.state.searchClicked = true;
         if (this.state.searchClicked) {
             this.setState({ loading: true });
-            console.log("=== searchOnClick method run, searchInputData = " + searchInputData.input);
             this.onSearchChange(searchInputData.input, { type: "all" });
             this.setState({ loading: false });
         }
@@ -125,12 +116,11 @@ class Search extends React.Component {
 
     onSearch = (val) => {
         searchInputData.input = val;
-        console.log("=== onSearch method run, input: " + searchInputData.input)
 
         this.onSearchChange(val, "all");
         this.setState({ loading: true });
-        getPossibleResultsByText(val, searchParameters).then(response => {
-            this.setState({ possibleResults: response, loading: false })
+        getPossibleResultsByText(val, searchParameters).then((response) => {
+            this.setState({ possibleResults: response, loading: false });
         });
     };
 
@@ -139,13 +129,12 @@ class Search extends React.Component {
             //redirect with props value for component
             this.props.history.push({
                 pathname: "/clubs",
-                state: {showAdvancedSearch: true}
+                state: { showAdvancedSearch: true },
             });
-        }
-        else {
+        } else {
             if (this.props.advancedSearch) {
                 this.props.setAdvancedSearch(false);
-                searchParameters.isAdvancedSearch = false
+                searchParameters.isAdvancedSearch = false;
             } else {
                 this.props.setAdvancedSearch(true);
                 searchParameters.isAdvancedSearch = true;
@@ -156,7 +145,6 @@ class Search extends React.Component {
     render() {
         return (
             <div className="search">
-
                 <AutoComplete
                     allowClear={true}
                     loading={this.state.loading}
@@ -168,57 +156,53 @@ class Search extends React.Component {
                     onClear={this.onClear}
                     style={{
                         width: 230,
-                        opacity: searchParameters.isAdvancedSearch ? 0.5 : 1
+                        opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
                     placeholder="Який гурток шукаєте?"
                     defaultActiveFirstOption={false}
-                    defaultValue={searchInputData.input}
-                >
-
+                    defaultValue={searchInputData.input}>
                     <OptGroup label="Категорії">
-                        {
-                            this.state.possibleResults.categories.map(result => (
-                                <Option value={result.name}
-                                    type={"category"}
-                                    key={"category" + "#" + result.id}>
-                                    {result.name}
-                                </Option>)
-                            )
-                        }
+                        {this.state.possibleResults.categories.map((result) => (
+                            <Option
+                                value={result.name}
+                                type={"category"}
+                                key={"category" + "#" + result.id}>
+                                {result.name}
+                            </Option>
+                        ))}
                     </OptGroup>
                     <OptGroup label="Гуртки">
-                        {
-                            this.state.possibleResults.clubs.map(result => (
-                                <Option value={result.name}
-                                    type={"club"}
-                                    key={"club" + "#" + result.id}>
-                                    {result.name}
-                                </Option>)
-                            )
-                        }
+                        {this.state.possibleResults.clubs.map((result) => (
+                            <Option
+                                value={result.name}
+                                type={"club"}
+                                key={"club" + "#" + result.id}>
+                                {result.name}
+                            </Option>
+                        ))}
                     </OptGroup>
-
                 </AutoComplete>
 
                 <div className="search-icon-group">
-                    <SearchOutlined className="advanced-icon"
+                    <SearchOutlined
+                        className="advanced-icon"
                         style={{
                             borderRadius: 0,
                             backgroundColor: "transparent",
                             color: "white",
-                            opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
+                            opacity: searchParameters.isAdvancedSearch
+                                ? 0.5
+                                : 1,
                             marginLeft: 0,
-                            marginRight: 12
+                            marginRight: 12,
                         }}
                         onClick={this.searchOnClick}
                     />
-
                     <ControlOutlined className="advanced-icon" title={"Розширений пошук"}
                         style={{ color: "orange", backgroundColor: "white" }}
                         onClick={this.handleAdvancedSearch}
                     />
                 </div>
-
             </div>
         );
     }
