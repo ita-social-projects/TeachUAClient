@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 export const items = (uri) => [
     {
-        imageURL: `${uri}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/aboutClubs.jpg`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про гуртки українською</h2>
@@ -17,7 +17,7 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/challenge.jpg`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про челендж "Навчай українською"</h2>
@@ -30,7 +30,7 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/1.png`,
+        imageURL: `${uri}/static/images/about/slider/aboutUs.jpg`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про нас</h2>
