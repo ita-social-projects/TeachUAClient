@@ -17,7 +17,7 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/challenge.jpg`,
+        imageURL: `${uri}/static/images/about/slider/1.png`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Про челендж "Навчай українською"</h2>
