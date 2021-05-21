@@ -22,6 +22,7 @@ const ClubListSider = ({
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
+    const [age, setAge] = useState([]);
 
     const getData = () => {
         setCurrentPage(0);
@@ -50,7 +51,22 @@ const ClubListSider = ({
             form.setFieldsValue({ districtName: undefined });
             form.setFieldsValue({ stationName: undefined });
         }
-        console.log(values);
+
+        if (values.hasOwnProperty("age")) {
+            if (!values.age) {
+                setAge(undefined);
+                form.setFieldsValue({ age: undefined });
+            } else if (values.age > 18) {
+                setAge(18);
+                form.setFieldsValue({ age: 18 });
+            } else if (values.age < 2) {
+                setAge(2);
+                form.setFieldsValue({ age: 2 });
+            } else {
+                setAge(values.age);
+                form.setFieldsValue({ age: values.age });
+            }
+        }
         getData();
     };
 
@@ -70,6 +86,7 @@ const ClubListSider = ({
             return false;
         }
     };
+
     return (
         <Sider className="club-list-sider">
             <div className="club-list-label">Розширений пошук</div>
@@ -176,10 +193,8 @@ const ClubListSider = ({
                     inititalValue={0}>
                     <span>
                         <InputNumber
-                            type="number"
                             className="age"
-                            min={2}
-                            max={18}
+                            value={age}
                             onKeyPress={onKeyPress}
                         />
                         років
