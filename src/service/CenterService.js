@@ -1,12 +1,12 @@
-import axios from "axios";
+
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 import {searchParameters} from "../context/SearchContext";
-import {replaceCommaToSemicolon} from "../util/CategoryUtil";
+
 
 
 export const getCenterById = async (id) => {
-    return await axios.get(BASE_URL + "/api/center/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/center/" + id).then((response) => {
         return response.data
     }).catch((error) => {
         console.log(error);
@@ -15,13 +15,13 @@ export const getCenterById = async (id) => {
 };
 
 export const getCentersByUserId = async (id, page) => {
-    return await axios.get(BASE_URL + "/api/centers/" + id + "?page" + page).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/centers/" + id + "?page" + page).then((response) => {
         return response.data
     });
 };
 
 export const getAllCenters = async () => {
-    return await axios.get(BASE_URL + "/api/centers").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/centers").then((response) => {
         return response.data
     });
 };

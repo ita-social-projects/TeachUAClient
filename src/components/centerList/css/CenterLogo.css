@@ -1,0 +1,9 @@
+.icon-box {
+    background-color: transparent;
+
+}
+.icon{
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+}

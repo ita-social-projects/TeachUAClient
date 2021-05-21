@@ -11,6 +11,7 @@ import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getAllContacts } from "../../service/ContactService";
 import { getUserId } from '../../service/StorageService';
+import {getAllCenters} from "../../service/CenterService";
 
 const AddClubModal = ({ button, clubs, setClubs }) => {
     const [visible, setVisible] = useState(false);
@@ -20,8 +21,10 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
     const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
+    const [centers,setCenters] = useState([]);
 
     useEffect(() => {
+        getAllCenters().then(response => setCenters(response))
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
@@ -38,7 +41,9 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
                     setResult={setResult}
                     result={result}
                     step={step}
-                    setStep={setStep} />;
+                    setStep={setStep}
+                    centers={centers}
+                />;
             case 1:
                 return <ContactsStep
                     contacts={contacts}

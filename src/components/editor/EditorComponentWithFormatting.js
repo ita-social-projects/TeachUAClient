@@ -7,14 +7,12 @@ import './css/Editor.less';
 import {convertToHtml, saveContent} from "./EditorConverter";
 import EditorStyleButton from "./EditorStyleButton";
 
-export default class EditorComponent extends React.Component {
-
+export default class EditorComponentWithFormatting extends React.Component {
     state = {editorState: EditorState.createEmpty()};
 
-    focus = () => this.ref.editor.focus();
+    focus = () => this.refs.editor.focus();
 
     onChange = editorState => {
-        console.log(editorState);
         this.setState({editorState});
     };
 
@@ -104,9 +102,6 @@ const BlockStyleControls = ({editorState, onToggle}) => {
     const blockTypes = [
         {style: 'header-two'},
         {style: 'blockquote'},
-        {style: 'left'},
-        {style: 'center'},
-        {style: 'right'},
     ];
 
     const selection = editorState.getSelection();

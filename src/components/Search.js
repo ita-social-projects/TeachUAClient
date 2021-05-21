@@ -198,9 +198,7 @@ class Search extends React.Component {
                         }}
                         onClick={this.searchOnClick}
                     />
-
-                    <ControlOutlined
-                        className="advanced-icon"
+                    <ControlOutlined className="advanced-icon" title={"Розширений пошук"}
                         style={{ color: "orange", backgroundColor: "white" }}
                         onClick={this.handleAdvancedSearch}
                     />

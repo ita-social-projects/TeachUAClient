@@ -2,10 +2,20 @@ import { Button } from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/MarkItem.css'
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
 import { getShortContent } from "../editor/EditorConverter";
 
 const MarkItem = ({ mapClub }) => {
+
+    let history = useHistory();
+
+    const showClub = () => {
+        searchParameters.cityName = mapClub.location.city.name;
+        mapSearchParameters.cityName = mapClub.location.city.name;
+        history.push(`/club/${mapClub.id}`);
+    }
+
     return (
         <div className="markItem">
             <div className="title">
@@ -18,9 +28,7 @@ const MarkItem = ({ mapClub }) => {
                     <span className="text">{mapClub.location.address}</span>
                 </div>
             </div>
-            <Button className="bt">
-                <Link to={`/club/${mapClub.id}`}>Детальніше</Link>
-            </Button>
+            <Button className="bt" onClick={showClub}>Детальніше</Button>
         </div>
     )
 };

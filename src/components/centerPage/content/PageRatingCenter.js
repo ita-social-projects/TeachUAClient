@@ -3,7 +3,7 @@ import './css/PageRating.css';
 import PropTypes from "prop-types";
 import {Rate} from "antd";
 
-const PageRating = ({rating, count}) => {
+const PageRatingCenter = ({rating, count}) => {
     let feedback;
     switch (count) {
         case 0 :
@@ -32,8 +32,8 @@ const PageRating = ({rating, count}) => {
     )
 };
 
-PageRating.propTypes = {
+PageRatingCenter.propTypes = {
     rating: PropTypes.symbol.isRequired
 };
 
-export default PageRating;
+export default PageRatingCenter;

@@ -14,6 +14,7 @@ import updateMenu from "./UpdateMenu";
 
 const UserClubCardItem = ({club}) => {
     return (
+        !club ? <div></div> :
         <Card className="card">
             <div className="title">
                 <CategoryLogo category={club.categories[0]}/>
@@ -28,6 +29,7 @@ const UserClubCardItem = ({club}) => {
             <div className="title-name">{club.name}</div>
             <Tags categories={club.categories}/>
             <p className="description">{getShortContent(club.description)}</p>
+            {/*<p className="description">{club.description}</p>*/}
             <Rate className="rating" disabled value={club.rating}/>
             <div className="address">
                 <EnvironmentFilled

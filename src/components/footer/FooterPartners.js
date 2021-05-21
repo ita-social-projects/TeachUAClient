@@ -7,23 +7,38 @@ const FooterPartners = () => {
                 Наші партнери
             </div>
             <div className="sponsors">
-                <a href="https://www.facebook.com/zakonpromovu5670">
+                <a target="blank" href="https://www.facebook.com/zakonpromovu5670">
                     <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo1.png`}
                          className="logo" alt="Mova_obyednue"/> </a>
 
-                <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo2.png`}  className="logo" alt="Logo"/>
+                <a target="blank" href="https://www.ed-era.com">
+                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/EDERA.svg`}
+                         className="logo" alt="EDERA"/>
+                </a>
 
-                <a href="https://emova.language-ua.online/">
+                <a target="blank" href="https://emova.language-ua.online">
                     <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo3.png`}
-                         className="logo" alt="Logo"/>  </a>
+                         className="logo" alt="e-mova"/>  </a>
 
-                <a href="">
-                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo4.png`}
-                         className="logo" alt="Logo"/> </a>
+                {/*<a href="">*/}
+                {/*    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo4.png`}*/}
+                {/*         className="logo" alt="Logo"/> </a>*/}
 
-                <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo5.png`}  className="logo" alt="Logo"/>
+                <a target="blank" href="https://krainafm.com.ua">
+                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/Kraina_FM.jpg`}
+                         className="logo" alt="Kraina_FM"/>
+                </a>
+
+                <a target="blank" href="https://ucf.in.ua">
+                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/ucf.svg`}
+                         className="logo" alt="ucf"/>
+                </a>
+
+                <a target="blank" href="https://prostirsvobody.org">
+                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/prostir.jpg`}
+                         className="logo" alt="prostir_svobodi"/>
+                </a>
             </div>
-
         </div>
     );
 };
