@@ -180,3 +180,12 @@
     margin-top: 32px;
     margin-bottom: 120px;
 }
+
+img {
+    position: static;
+    width: 431px;
+    height: 360px;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
+}
