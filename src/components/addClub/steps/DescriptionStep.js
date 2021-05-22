@@ -14,7 +14,6 @@ import {Button} from "antd";
 
 const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
-    const editorRef = useRef(null);
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
@@ -35,9 +34,6 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
     }
 
     const onFinish = (values) => {
-        //before
-        // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
-
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const descJSON = leftDesc + result.description + rightDesc;
         values.description = saveContent(descJSON);
@@ -81,7 +77,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
             </Form.Item>
             <Form.Item name="urlBackground"
                        className="add-club-row"
-                       label="Фото"
+                       label="Обкладинка"
                        hasFeedback>
                 <Upload
                     name="image"
@@ -91,7 +87,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                     headers={{contentType: 'multipart/form-data'}}
                     showUploadList={false}
                 >
-                    <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
+                    <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити обкладинку</span>
                 </Upload>
             </Form.Item>
             <Form.Item name="description"
@@ -105,7 +101,6 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                        }]}
                 >
                 <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
-                {/*<EditorComponentWithFormatting ref={editorRef}/>*/}
             </Form.Item>
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev"
