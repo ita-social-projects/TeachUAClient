@@ -1,17 +1,17 @@
 import {Checkbox, Form, Input, InputNumber, Select} from "antd";
 import {Button} from "antd";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
-const { Option } = Select;
+const {Option} = Select;
 
-const MainInformationStep = ({ categories, step, setStep, setResult, result,centers }) => {
+const MainInformationStep = ({categories, step, setStep, setResult, result, centers}) => {
     const [mainForm] = Form.useForm();
     const [ageValidateStatus, setAgeValidateStatus] = useState("success")
 
     useEffect(() => {
         if (result) {
             console.log(result);
-            mainForm.setFieldsValue({ ...result })
+            mainForm.setFieldsValue({...result})
         }
     }, []);
 
@@ -20,7 +20,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result,cent
     }
 
     const onFinish = (values) => {
-        if(values.centerName){
+        if (values.centerName) {
 
         }
         if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
@@ -28,8 +28,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result,cent
             mainForm.resetFields();
             setResult(result);
             nextStep();
-        }
-        else {
+        } else {
             setAgeValidateStatus("error")
         }
     };
@@ -40,8 +39,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result,cent
             formFields.ageFrom % 1 == 0 && formFields.ageTo % 1 == 0 &&
             formFields.ageFrom < formFields.ageTo) {
             setAgeValidateStatus("success");
-        }
-        else {
+        } else {
             setAgeValidateStatus("error");
         }
     }
@@ -53,48 +51,44 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result,cent
             requiredMark={true}
             onFinish={onFinish}>
             <Form.Item name="name"
-                className="add-club-row"
-                label="Назва"
-                hasFeedback
-                rules={[{
-                    required: true,
-                }]}>
+                       className="add-club-row"
+                       label="Назва"
+                       hasFeedback
+                       rules={[{
+                           required: true,
+                       }]}>
                 <Input className="add-club-input"
-                    placeholder="Назва гуртка" />
+                       placeholder="Назва гуртка"/>
             </Form.Item>
             <Form.Item name="categories"
-                className="add-club-row"
-                label="Категорія"
-                hasFeedback
-                rules={[{
-                    required: true,
-                }]}>
+                       className="add-club-row"
+                       label="Категорія"
+                       hasFeedback
+                       rules={[{
+                           required: true,
+                       }]}>
                 <Checkbox.Group className="add-club-categories">
                     {categories.map(category => <Checkbox
                         value={category.name}>{category.name}</Checkbox>)}
                 </Checkbox.Group>
             </Form.Item>
             <Form.Item label="Вік дитини"
-                className="add-club-row"
-                hasFeedback
-                validateStatus={ageValidateStatus}>
+                       className="add-club-row"
+                       hasFeedback
+                       validateStatus={ageValidateStatus}>
                 <span className="add-club-age">
                     Від
                     <Form.Item name="ageFrom"
-                        style={{ margin: 0 }}
-                        initialValue={2}
-                    >
-                        <InputNumber onChange={onChange} className="input-age"
-                            min={2}
-                            max={18} />
+                               style={{margin: 0}}>
+                        <InputNumber onChange={onChange} className="input-age" placeholder="2"
+                                     min={2}
+                                     max={18}/>
                     </Form.Item>
-                    до
                     <Form.Item name="ageTo"
-                        style={{ margin: 0 }}
-                        initialValue={18}>
-                        <InputNumber onChange={onChange} className="input-age"
-                            min={3}
-                            max={18} />
+                               style={{margin: 0}}>
+                        <InputNumber onChange={onChange} className="input-age" placeholder="18"
+                                     min={2}
+                                     max={18}/>
                     </Form.Item>
                     років
                 </span>
@@ -106,7 +100,7 @@ const MainInformationStep = ({ categories, step, setStep, setResult, result,cent
                     className="add-club-select"
                     placeholder="Назва центру"
                     hasFeedback>
-                    {centers.map(c => <Option  value={c.id}>{c.name}</Option>)}
+                    {centers.map(c => <Option value={c.id}>{c.name}</Option>)}
                 </Select>
             </Form.Item>
             <div className="add-club-content-footer">
