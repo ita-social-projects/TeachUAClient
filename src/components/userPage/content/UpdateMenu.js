@@ -1,19 +1,20 @@
 import React from "react";
-import {Menu} from "antd";
+import {Button, Menu} from "antd";
 import './css/UserClub.less';
+import {deleteClubById} from "../../../service/ClubService";
+import {Link} from "react-router-dom";
 
-
-const updateMenu = (
+const updateMenu = (clubId) => (
     <Menu classname="update-menu">
-        <Menu.Item className="menu-item">
-            <a target="_blank" rel="#" href="#">
-                Редагувати
-            </a>
-        </Menu.Item>
+        {/*<Menu.Item className="menu-item">*/}
+        {/*    <a target="_blank" rel="#" href="#">*/}
+        {/*        Редагувати*/}
+        {/*    </a>*/}
+        {/*</Menu.Item>*/}
         <Menu.Item>
-            <a target="_blank" rel="#" href="#">
-                Видалити
-            </a>
+            <a onClick={() => {
+                deleteClubById(clubId).then(window.location.reload())
+            }}>Видалити</a>
         </Menu.Item>
     </Menu>
 );
