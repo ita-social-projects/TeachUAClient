@@ -500,7 +500,7 @@
   }
 
   .header {
-    padding: 0 75px !important;
+    padding: 0 55px; // не змінювати padding, бо header падає
   }
 
   .ant-layout-header header {
@@ -544,7 +544,7 @@
   }
 }
 
-@media screen and (max-width: 1214px) {
+@media (min-width: 1106px) and (max-width: 1214px) {
   .left-side-menu {
     display: inline-block;
   }
@@ -554,7 +554,7 @@
   }
 
   .header .nav-menu {
-    width: 600px;
+    width: 500px;
     display: flex;
   }
   .city-name {
@@ -577,7 +577,7 @@
   }
 
   .header {
-    padding: 0 75px !important;
+    padding: 0 55px !important;
   }
 
   .header .nav-menu .ant-menu-submenu-title span {
@@ -585,14 +585,18 @@
   }
 }
 
-@media (max-width: 969px) {
+@media (min-width: 902px) and (max-width: 1105px) {
   .header .nav-menu {
-    width: 200px;
+    width: 400px;
     display: flex;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
   }
 }
 
-@media screen and  (max-width: 880px) {
+@media (min-width: 716px) and  (max-width: 901px) {
   .global-padding,
   .layout .header {
     padding: 0 10px 0 10px;
@@ -614,15 +618,15 @@
   .lower-header-box .city-name {
     font-size: 20px;
   }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
+  }
 }
 
-@media (max-width: 710px) {
+@media screen and (max-width: 715px) {
   .content-clubs {
     min-width: 0;
-  }
-
-  .lower-header-box .city-name {
-    font-size: 24px;
   }
 
   .header .nav-menu {
@@ -637,25 +641,55 @@
     display: block;
   }
 
-  .lower-header-box .advanced-icon {
-    display: none;
-  }
-
-  .lower-header-box .search,
-  .lower-header-box .search .ant-select {
-    width: 100% !important;
-  }
+  //.lower-header-box .advanced-icon {
+  //  display: none;
+  //}
 
   .lower-header-box .city-name {
-    font-size: 20px;
+    font-size: 15px;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
   }
 }
 
-@media screen and (min-width:480px)  {
-  .header .nav-menu {
-    display: flex;
+@media screen and (max-width: 706px) {
+  .content-clubs {
+    min-width: 0;
   }
 
+  .header .nav-menu {
+    width: 40px;
+  }
+  .lower-header-box {
+    display: flow-root;
+    align-items: flex-end;
+  }
+
+  .city-name-box-small-screen {
+    margin-top: -20px;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: -20px;
+    padding-left: 40px;
+  }
+
+  .search {
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 40px;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title span {
+    display: inline-block !important;
+  }
+}
+
+@media screen and (max-width:585px)  {
   .lower-header-box .city-name {
     font-size: 20px;
   }
