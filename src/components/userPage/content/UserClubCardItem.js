@@ -14,13 +14,12 @@ import updateMenu from "./UpdateMenu";
 
 const UserClubCardItem = ({club}) => {
     return (
-        !club ? <div></div> :
         <Card className="card">
             <div className="title">
                 <CategoryLogo category={club.categories[0]}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={updateMenu} placement="bottomRight">
+                        <Dropdown overlay={updateMenu(club.id)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
@@ -29,12 +28,11 @@ const UserClubCardItem = ({club}) => {
             <div className="title-name">{club.name}</div>
             <Tags categories={club.categories}/>
             <p className="description">{getShortContent(club.description)}</p>
-            {/*<p className="description">{club.description}</p>*/}
             <Rate className="rating" disabled value={club.rating}/>
             <div className="address">
                 <EnvironmentFilled
                     className="address-icon"/>
-                <span className="text"> {club.address}</span>
+                <span className="text"> {club.locations[0].address}</span>
             </div>
             <Button className="outlined-button details-button">
                 <Link to={`/club/${club.id}`}>Детальніше</Link>
