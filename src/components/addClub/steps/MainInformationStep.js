@@ -19,11 +19,35 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
         setStep(step + 1);
     }
 
-    const onFinish = (values) => {
-        if (values.centerName) {
+    const validateAge = (ageFrom, ageTo) => {
+        const regex = /^\d*$/;
+        return ageFrom < ageTo && regex.test(ageTo) && regex.test(ageFrom)
+            && ageTo >= 3 && ageTo <= 18 && ageFrom >= 2 && ageFrom <= 17;
+    }
 
+    const onKeyPress = (event) => {
+        const specialCharRegex = /^\d+$/;
+        const pressedKey = String.fromCharCode(
+            !event.charCode ? event.which : event.charCode
+        );
+        if (!specialCharRegex.test(pressedKey)) {
+            event.preventDefault();
+            return false;
         }
-        if (values.ageFrom && values.ageTo && values.ageFrom < values.ageTo) {
+    };
+
+    const onChange = () => {
+        const formFields = mainForm.getFieldValue();
+
+        if (validateAge(formFields.ageFrom, formFields.ageTo)) {
+            setAgeValidateStatus("success");
+        } else {
+            setAgeValidateStatus("error");
+        }
+    }
+
+    const onFinish = (values) => {
+        if (values.ageFrom && values.ageTo && validateAge(values.ageFrom, values.ageTo)) {
             setResult(Object.assign(result, values));
             mainForm.resetFields();
             setResult(result);
@@ -33,40 +57,25 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
         }
     };
 
-    const onChange = () => {
-        const formFields = mainForm.getFieldValue();
-        if (formFields.ageFrom && formFields.ageTo &&
-            formFields.ageFrom % 1 == 0 && formFields.ageTo % 1 == 0 &&
-            formFields.ageFrom < formFields.ageTo) {
-            setAgeValidateStatus("success");
-        } else {
-            setAgeValidateStatus("error");
-        }
-    }
 
     return (
         <Form
             name="basic"
             form={mainForm}
             requiredMark={true}
-            onFinish={onFinish}>
+            onFinish={onFinish}
+            noValidate >
             <Form.Item name="name"
                        className="add-club-row"
                        label="Назва"
-                       hasFeedback
-                       rules={[{
-                           required: true,
-                       }]}>
+                       hasFeedback >
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
             </Form.Item>
             <Form.Item name="categories"
                        className="add-club-row"
                        label="Категорія"
-                       hasFeedback
-                       rules={[{
-                           required: true,
-                       }]}>
+                       hasFeedback >
                 <Checkbox.Group className="add-club-categories">
                     {categories.map(category => <Checkbox
                         value={category.name}>{category.name}</Checkbox>)}
@@ -79,16 +88,25 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                 <span className="add-club-age">
                     Від
                     <Form.Item name="ageFrom"
-                               style={{margin: 0}}>
-                        <InputNumber onChange={onChange} className="input-age" placeholder="2"
-                                     min={2}
-                                     max={18}/>
+                               style={{margin: 0}}
+                               initialValue={2} >
+                        <InputNumber onChange={onChange}
+                                    onKeyPress={onKeyPress} 
+                                    className="input-age"
+                                    min={2}
+                                    max={17}
+                                    type="number" />
                     </Form.Item>
+                    до
                     <Form.Item name="ageTo"
-                               style={{margin: 0}}>
-                        <InputNumber onChange={onChange} className="input-age" placeholder="18"
-                                     min={2}
-                                     max={18}/>
+                               style={{margin: 0}}
+                               initialValue={18} >
+                        <InputNumber onChange={onChange}
+                                    onKeyPress={onKeyPress} 
+                                    className="input-age"
+                                    min={3}
+                                    max={18}
+                                    type="number" />
                     </Form.Item>
                     років
                 </span>
