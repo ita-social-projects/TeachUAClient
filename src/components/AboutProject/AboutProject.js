@@ -161,7 +161,7 @@ const AboutProject = () => {
                     </div>
                     <div className="row">
                         {/*<div className="col">*/}
-                        {/*    <img*/}
+                        {/*    <img className="image"*/}
                         {/*        src={`${process.env.PUBLIC_URL}/static/images/service/about_img_1.jpg`}*/}
                         {/*        alt=""></img>*/}
                         {/*</div>*/}
@@ -194,7 +194,7 @@ const AboutProject = () => {
                             </div>
                         </div>
                         <div className="col">
-                            <img
+                            <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_1.jpg`}
                                 alt=""></img>
                         </div>
@@ -202,7 +202,7 @@ const AboutProject = () => {
                     <div className="row">
                         <div className="col">
 
-                            <img
+                            <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_2.jpg`}
                                 alt=""></img>
                         </div>
@@ -236,7 +236,7 @@ const AboutProject = () => {
                             </div>
                         </div>
                         <div className="col">
-                            <img
+                            <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_3.png`}
                                 alt=""></img>
                         </div>
