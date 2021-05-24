@@ -532,7 +532,7 @@
   }
 
   .city-name-box {
-    font-size: 18px !important;
+    font-size: 24px !important;
   }
 
   .right-side-menu {
@@ -594,6 +594,9 @@
   .header .nav-menu .ant-menu-submenu-title span {
     display: inline-block !important;
   }
+  .city-name {
+    font-size: 24px;
+  }
 }
 
 @media (min-width: 716px) and  (max-width: 901px) {
@@ -625,12 +628,36 @@
 }
 
 @media screen and (max-width: 715px) {
+
+  .global-padding,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
   .content-clubs {
     min-width: 0;
   }
 
   .header .nav-menu {
     width: 40px;
+  }
+
+  .lower-header-box {
+    display: flow-root;
+    align-items: flex-end;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: -20px;
+    padding-left: 40px;
+  }
+
+  .search {
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 40px;
   }
 
   .lower-header-box .show-map-button {
@@ -641,17 +668,26 @@
     display: block;
   }
 
-  //.lower-header-box .advanced-icon {
-  //  display: none;
-  //}
+  .city-name-box-small-screen {
+    margin-top: -20px;
+  }
 
-  .lower-header-box .city-name {
-    font-size: 15px;
+  .header .right-side-menu {
+    margin-right: 100px;
+  }
+
+  .layout .header{
+    margin-left: -30px;
+  }
+
+  .header .logo {
+    display: none;
   }
 
   .header .nav-menu .ant-menu-submenu-title span {
     display: inline-block !important;
   }
+
 }
 
 @media screen and (max-width: 706px) {
@@ -684,13 +720,51 @@
     padding-left: 40px;
   }
 
+  .header .right-side-menu {
+    margin-right: 70px;
+  }
+
+  .layout .header{
+    margin-left: -30px;
+  }
+
+
   .header .nav-menu .ant-menu-submenu-title span {
     display: inline-block !important;
   }
+
+  .header .logo {
+    display: none;
+  }
+
 }
 
 @media screen and (max-width:585px)  {
   .lower-header-box .city-name {
     font-size: 20px;
+  }
+
+  .header .logo {
+    display: none;
+  }
+
+  .header .add-club-button {
+    display: none;
+  }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+  .lower-header-box .city-name {
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+
+  .header .right-side-menu {
+    margin-right: 10px;
+  }
+
+  .ant-select-selector {
+    width: 80% !important;
   }
 }
