@@ -4,13 +4,13 @@ import MapContainer from "./MapContainer";
 import Cities from "./Cities";
 import Categories from "./Categories";
 import MapClubList from "./MapClubList";
-import { mapSearchParameters, searchParameters } from "../../context/SearchContext";
+import {advancedSearchCityName, mapSearchParameters, searchParameters} from "../../context/SearchContext";
 import './css/Sider.css'
 
 const { Sider } = Layout;
 
 
-const MapComponent = ({ visible, setVisible }) => {
+const MapComponent = ({ visible, setVisible}) => {
     const [mapClubs, setMapClubs] = useState([]);
     const [selected, setSelected] = useState(null);
     const [location, setLocation] = useState(null);
@@ -18,7 +18,7 @@ const MapComponent = ({ visible, setVisible }) => {
     const [center, setCenter] = useState(null);
 
     const closeMap = () => {
-        mapSearchParameters.cityName = searchParameters.cityName;
+        mapSearchParameters.cityName = advancedSearchCityName.cityName;
         setVisible(false);
     };
 

@@ -5,7 +5,7 @@ import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
 import { getStationsByCity } from "../../service/StationService";
-import { searchParameters } from "../../context/SearchContext";
+import { searchParameters , advancedSearchCityName } from "../../context/SearchContext";
 
 const { Sider } = Layout;
 const { Option } = Select;
@@ -51,6 +51,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
 
     const onCityChange = (value) => {
         setCityName(value);
+        advancedSearchCityName.cityName = value;
         form.setFieldsValue({ districtName: undefined });
         form.setFieldsValue({ stationName: undefined });
     };
@@ -81,7 +82,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
                     initialValue={
                         searchParameters.cityName === "Без локації"
                             ? "online"
-                            : searchParameters.cityName
+                            : advancedSearchCityName.cityName
                     }>
                     <Select
                         className="club-list-select"

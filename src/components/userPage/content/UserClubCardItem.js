@@ -32,7 +32,9 @@ const UserClubCardItem = ({club}) => {
             <div className="address">
                 <EnvironmentFilled
                     className="address-icon"/>
-                <span className="text"> {club.address}</span>
+                {console.log(club)}
+                {console.log(club.locations[0])}
+                <span className="text"> {club.locations[0].address}</span>
             </div>
             <Button className="outlined-button details-button">
                 <Link to={`/club/${club.id}`}>Детальніше</Link>

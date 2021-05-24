@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { getAllCities } from "../../service/CityService";
-import { mapSearchParameters } from "../../context/SearchContext";
+import {advancedSearchCityName, mapSearchParameters} from "../../context/SearchContext";
 import { getClubsByCategoryAndCity } from "../../service/ClubService";
 import './css/Cities.css';
 
@@ -15,11 +15,12 @@ const Cities = ({ setMapClubs, setZoom, setCenter }) => {
         getAllCities().then(response => {
             setCities(response)
         });
-        setCity(mapSearchParameters.cityName);
-    }, [mapSearchParameters.cityName]);
+        setCity(advancedSearchCityName.cityName);
+    }, [advancedSearchCityName.cityName]);
 
     const onCityChange = (value) => {
         mapSearchParameters.cityName = value;
+        advancedSearchCityName.cityName = value;
         getClubsByCategoryAndCity(mapSearchParameters).then(response => {
             const arr = [];
             response.map(club => {

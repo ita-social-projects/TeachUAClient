@@ -26,3 +26,7 @@ export const clearSearchParameters = () => {
 export const searchInputData = {
     input: ""
 }
+
+export const advancedSearchCityName = {
+    cityName : "Київ"
+}

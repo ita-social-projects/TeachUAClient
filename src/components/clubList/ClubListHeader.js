@@ -1,4 +1,4 @@
-import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
+import {advancedSearchCityName, mapSearchParameters, searchParameters} from "../../context/SearchContext";
 import Search from "../Search";
 import React, {useState} from "react";
 import {Button} from "antd";
@@ -6,6 +6,7 @@ import MapComponent from "../map/MapComponent";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 
 const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
+
     const [mapVisible, setMapVisible] = useState(false);
 
     return (
@@ -13,7 +14,11 @@ const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
             <div className="city-name-box">
                 <div className="city-name-box-small-screen">
                     {mapSearchParameters.cityName !== 'online' ?
-                        <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
+                        (advancedSearch ?
+                            <h2 className="city-name">{"Гуртки у місті " + advancedSearchCityName.cityName}</h2>
+                            :
+                            <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
+                        )
                         : <h2 className="city-name">Гуртки без локації</h2>}
                     <EnvironmentFilled className="icon"/>
                 </div>
