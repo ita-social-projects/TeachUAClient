@@ -71,6 +71,11 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                        hasFeedback
                        rules={[{
                            required: true,
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/
+                       },
+                       {
+                           required: true,
+                           pattern: /^.*\S$/
                        }]}>
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
