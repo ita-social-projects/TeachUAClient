@@ -30,7 +30,12 @@ const AuthMenu = () => {
         getUserById(getUserId()).then(response => {
             setUser(response);
             if (response) {
-                setSource(process.env.PUBLIC_URL + response.urlLogo);
+                if (response.urlLogo?.includes("https")) {
+                    setSource(response.urlLogo);
+                }
+                else {
+                    setSource(process.env.PUBLIC_URL + response.urlLogo)
+                }
                 setStyleClass("avatarIfLogin");
             } else {
                 setStyleClass("avatarIfNotLogin");

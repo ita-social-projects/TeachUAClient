@@ -13,12 +13,9 @@ const UserInformationComponent = ({ user }) => {
     useEffect(() => {
         console.log(user);
         if (user?.urlLogo?.includes("https")) {
-            console.log("HTTPS");
-            console.log(user);
             setUserAvatart(user.urlLogo);
         }
         else {
-            console.log("NOT HTTPS")
             setUserAvatart(process.env.PUBLIC_URL + user.urlLogo)
         }
     }, [user])
