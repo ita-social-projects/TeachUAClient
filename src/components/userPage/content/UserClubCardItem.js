@@ -26,7 +26,10 @@ const UserClubCardItem = ({club}) => {
                 </div>
             </div>
             <div className="title-name">{club.name}</div>
-            <Tags categories={club.categories}/>
+            <div className="club-tags-box">
+                <Tags categories={club.categories.filter((el, index) => index < 2)}/>
+                <span className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>
+            </div>
             <p className="description">{getShortContent(club.description)}</p>
             <Rate className="rating" disabled value={club.rating}/>
             <div className="address">
