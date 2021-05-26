@@ -157,7 +157,7 @@ const AboutProject = () => {
 
                 <section className="organaizer">
                     <div className="title-content ">
-                        Історії зірок: ЗІРКИ
+                        Амбасадори проєкту
                     </div>
                     <div className="row">
                         {/*<div className="col">*/}
@@ -244,9 +244,6 @@ const AboutProject = () => {
                 </section>
 
                 <section className="quote-clubs">
-                    <div className="title-content ">
-                        ЦИТАТИ ГУРТКІВ
-                    </div>
                     <div className="title-content ">
                         Відгуки учасників челенджу
                     </div>
