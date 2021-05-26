@@ -17,13 +17,11 @@ const UserClubList = ({load, setLoad, match}) => {
 
     const [page, setPage] = useState(0);
 
-    const getData = () => {
-
+    const getData = (currPage) => {
         setLoad(true);
         let userId = match.params.id;
 
-        getClubsByUserId(userId, page).then(response => {
-            console.log(response)
+        getClubsByUserId(userId, currPage).then(response => {
             setClubs(response);
             setLoad(false)
         });
@@ -31,13 +29,13 @@ const UserClubList = ({load, setLoad, match}) => {
 
 
     useEffect(() => {
-            getData()
+            getData(page)
         }, []
     )
 
-    const onPageChange = (page) => {
-        setPage(page - 1)
-        getData();
+    const onPageChange = (currPage) => {
+        setPage(currPage - 1)
+        getData(currPage - 1);
     };
 
 
