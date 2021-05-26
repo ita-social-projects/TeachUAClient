@@ -41,15 +41,15 @@ const NavMenu = () => {
                     <Link to="/challenge"><CrownOutlined className="icon"/>Челендж</Link>
                 </Menu.Item>
                 {/*Замість  новин - про нас(проєкт)*/}
-                <Menu.Item key="news">
+                <Menu.Item key="about">
                     <Link to="/about"><ContainerOutlined className="icon"/>Про нас</Link>
                 </Menu.Item>
-                <Menu.Item key="about">
+                <Menu.Item key="service">
                     <Link to="/service"><FolderOpenOutlined className="icon"/>Послуги українською</Link>
                 </Menu.Item>
                 {/*Приховано лінк service - # та виправити на послуги українською назви*/}
                 {/*Забрати стиль*/}
-                <Menu.Item key="service" style={{display: 'none' }}>
+                <Menu.Item key="news" style={{display: 'none' }}>
                     <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>
                 </Menu.Item>
             </Menu>
