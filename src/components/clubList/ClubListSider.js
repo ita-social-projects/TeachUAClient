@@ -16,6 +16,7 @@ const ClubListSider = ({
     getAdvancedData,
     isCenterChecked,
     setIsCenterChecked,
+    activeCategory,
 }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
@@ -30,8 +31,13 @@ const ClubListSider = ({
     };
 
     useEffect(() => {
+        if (activeCategory) {
+            form.setFieldsValue({ categoriesName: [activeCategory] });
+        }
+
         getAllCategories().then((response) => setCategories(response));
         getAllCities().then((response) => setCities(response));
+
         getData();
     }, []);
 

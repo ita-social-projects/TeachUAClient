@@ -22,18 +22,20 @@ export const convertFromJson = (json) => {
 };
 
 export const getShortContent = (content) => {
-    console.log(content);
     const contentObject = JSON.parse(content);
 
     let shortDescription = "";
 
     contentObject.blocks
-        .filter(block => block.type !== 'header-two' && block.type !== 'blockquote')
-        .map(block => {
-            shortDescription += " " + block.text
+        .filter(
+            (block) =>
+                block.type !== "header-two" && block.type !== "blockquote"
+        )
+        .map((block) => {
+            shortDescription += " " + block.text;
         });
 
-    if (shortDescription === ' ') {
+    if (shortDescription === " ") {
         return "У цього гуртка немає опису...";
     }
 

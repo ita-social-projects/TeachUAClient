@@ -8,6 +8,7 @@ import { Button, Pagination } from "antd";
 import "./css/AboutCarousel.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
+//import { useHistory } from "react-router";
 
 const MainCategories = () => {
     const [categories, setCategories] = useState({
@@ -19,8 +20,6 @@ const MainCategories = () => {
 
     const getData = (page) => {
         getPageableCategory(page).then((response) => {
-            console.log("getData", pageSize, totalPages);
-            console.log(response);
             setCategories(response);
             setPageSize(pageSize === 0 ? response.size : pageSize);
             setTotalPages(response.totalPages);
@@ -32,7 +31,6 @@ const MainCategories = () => {
     }, []);
 
     const onChange = (current) => {
-        console.log("onChange", pageSize);
         setCurrentPage(current - 1);
         getData(current - 1);
     };
@@ -128,7 +126,13 @@ const MainCategories = () => {
                                 </div>
                             }
                             description={category.description}
-                            link={""}
+                            link={{
+                                pathname: "/clubs",
+                                state: {
+                                    showAdvancedSearch: true,
+                                    showActiveCategory: category.name,
+                                },
+                            }}
                             buttonText="Переглянути"
                         />
                     ))}
