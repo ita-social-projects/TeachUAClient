@@ -53,6 +53,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
         });
     };
 
+
     return (
         <Form
             name="basic"
@@ -96,8 +97,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                        hasFeedback
                        rules={[{
                            required: true,
-                           max: 1500,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><]){40,1500}\S$|\s/
                        }]}
                 >
                 <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
