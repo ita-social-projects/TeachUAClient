@@ -12,6 +12,7 @@ import ClubListSider from "./ClubListSider";
 import { getCentersByAdvancedSearch } from "../../service/CenterService";
 import CenterListDisplayContent from "../centerList/CenterListDisplayContent";
 import ClubsListDisplayContent from "./ClubsListDisplayContent";
+import { useLocation } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -41,20 +42,34 @@ const ClubList = ({
     const [centerInfoVisible, setCenterInfoVisible] = useState(false);
     const [clickedCenter, setClickedCenter] = useState(null);
 
+    const [activeCategory, setActiveCategory] = useState();
+    const location = useLocation();
+
     const getData = (page) => {
         const checkUndefPage = page === undefined ? 0 : page;
         const params = searchForm.getFieldsValue();
-
         if (!advancedSearch) {
             setIsCenterChecked(false);
             if (centers.length > 0) {
                 setCenters([]);
             }
+
+            if (typeof location.state !== "undefined") {
+                setActiveCategory(location.state.showActiveCategory);
+                searchParameters.categoryName = [
+                    location.state.showActiveCategory,
+                ];
+            }
+
             getClubsByParameters(searchParameters, checkUndefPage).then(
                 (response) => {
                     setClubs(response);
                 }
             );
+
+            if (searchParameters.categoryName) {
+                searchParameters.categoryName = "";
+            }
         } else {
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page).then((response) => {
@@ -100,6 +115,7 @@ const ClubList = ({
                     getAdvancedData={getData}
                     isCenterChecked={isCenterChecked}
                     setIsCenterChecked={setIsCenterChecked}
+                    activeCategory={activeCategory}
                 />
             )}
 
