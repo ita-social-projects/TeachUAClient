@@ -29,11 +29,9 @@ const VerifyPage = () => {
 
     return (
         <Layout className="aboutProject global-padding">
-            {/*<div className="verification-message">*/}
-            {/*</div>*/}
             <div className="login-div">
            <button className="flooded-button donate-button">
-                <Login/>
+                <Login verifyCode={getUrlParameter("code")}/>
             </button>
 
             </div>
