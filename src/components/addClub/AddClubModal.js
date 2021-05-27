@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Layout, Modal } from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Button, Form, Layout, Menu, message, Modal} from 'antd';
 import './css/AddClubModal.css';
 import "./css/AddClubContent.css";
-import { Content } from "antd/es/layout/layout";
+import {Content} from "antd/es/layout/layout";
 import AddClubSider from "./AddClubSider";
 import MainInformationStep from "./steps/MainInformationStep";
 import ContactsStep from "./steps/ContactsStep";
 import DescriptionStep from "./steps/DescriptionStep";
-import { getAllCategories } from "../../service/CategoryService";
-import { getAllCities } from "../../service/CityService";
-import { getAllContacts } from "../../service/ContactService";
-import { getUserId } from '../../service/StorageService';
+import {getAllCategories} from "../../service/CategoryService";
+import {getAllCities} from "../../service/CityService";
+import {getAllContacts} from "../../service/ContactService";
+import {getUserId, saveToken, saveUserId,getToken} from '../../service/StorageService';
 import {getAllCenters} from "../../service/CenterService";
+import LoginInput from "../login/LoginInput";
+import LoginSocial from "../login/LoginSocial";
+import {signIn} from "../../service/UserService";
+import Login from "../login/Login";
 
-const AddClubModal = ({ button, clubs, setClubs }) => {
+
+const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
@@ -21,7 +26,10 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
     const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
-    const [centers,setCenters] = useState([]);
+    const [centers, setCenters] = useState([]);
+    const [loginVisible, setLoginVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState('');
+
 
     useEffect(() => {
         getAllCenters().then(response => setCenters(response))
@@ -32,6 +40,23 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
             userId: getUserId()
         })
     }, [visible]);
+
+    const onFinish = (values) => {
+        signIn(values).then((response) => {
+            if (response.status>=500) {
+                message.error("Ваш email не підтверджено. Будь ласка підтвердіть email");
+            } else if(response.status<500){
+                message.error("Введено невірний пароль або email");
+            }
+            else {
+                console.log(response)
+                message.success("Ви успішно залогувалися!");
+                saveUserId(response.id);
+                saveToken(response.accessToken);
+                setLoginVisible(false);
+            }
+        });
+    };
 
     const stepComponent = (step) => {
         switch (step) {
@@ -53,7 +78,7 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
                     step={step}
                     setStep={setStep}
                     locations={locations}
-                    setLocations={setLocations} />;
+                    setLocations={setLocations}/>;
             case 2:
                 return <DescriptionStep
                     setResult={setResult}
@@ -63,38 +88,76 @@ const AddClubModal = ({ button, clubs, setClubs }) => {
                     setStep={setStep}
                     setLocations={setLocations}
                     clubs={clubs}
-                    setClubs={setClubs} />;
+                    setClubs={setClubs}/>;
         }
     };
 
-    return (
-        <div>
-            {button ?
-                <Button onClick={() => setVisible(true)}
-                    className="add-club-button">Додати гурток</Button>
-                : <div onClick={() => setVisible(true)}>Додати гурток</div>}
-            <Modal
-                className="modal-add-club"
-                centered
-                width={880}
-                visible={visible}
-                onOk={() => setVisible(false)}
-                onCancel={() => setVisible(false)}
-                footer={null}>
-                <Layout>
-                    <AddClubSider step={step} />
-                    <Content className="add-club-container">
-                        <div className="add-club-header">
-                            Додати гурток
-                        </div>
-                        <div className="add-club-content">
-                            {stepComponent(step)}
-                        </div>
-                    </Content>
-                </Layout>
-            </Modal>
-        </div>
-    );
-};
+    if (getToken()) {
+        return (
+            <div>
+                {button ?
+                    <Button onClick={() => setVisible(true)}
+                            className="add-club-button">Додати гурток</Button>
+                    : <div onClick={() => setVisible(true)}>Додати гурток</div>}
 
-export default AddClubModal;
+                <Modal
+                    className="modal-add-club"
+                    centered
+                    width={880}
+                    visible={visible}
+                    onOk={() => setVisible(false)}
+                    onCancel={() => setVisible(false)}
+                    footer={null}>
+                    <Layout>
+                        <AddClubSider step={step}/>
+                        <Content className="add-club-container">
+                            <div className="add-club-header">
+                                Додати гурток
+                            </div>
+                            <div className="add-club-content">
+                                {stepComponent(step)}
+                            </div>
+                        </Content>
+                    </Layout>
+                </Modal>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                {button ?
+                    <Button onClick={() => setLoginVisible(true)}
+                            className="add-club-button">Додати гурток</Button>
+                    : <div onClick={() => setLoginVisible(true)}>Додати гурток</div>}
+                <Modal
+                    className="modal-login"
+                    centered
+                    width={520}
+                    visible={loginVisible}
+                    onOk={() => setLoginVisible(false)}
+                    onCancel={() => setLoginVisible(false)}
+                    footer={null}
+                >
+                    <div className="login-header">
+                        Вхід
+                    </div>
+                    <div className="login-content">
+                        <Form
+                            name="basic"
+                            requiredMark={false}
+                            onFinish={onFinish}
+                        >
+                            <LoginSocial />
+                            <LoginInput />
+                        </Form>
+                    </div>
+                </Modal>
+
+
+            </div>
+        )
+    }
+
+    };
+
+    export default AddClubModal;
