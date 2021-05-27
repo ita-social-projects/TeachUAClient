@@ -22,7 +22,7 @@ const Login = ({isLogin}) => {
                 saveUserId(response.id);
                 saveToken(response.accessToken);
                 setLoginVisible(false);
-                isLogin("login");
+
             }
         });
     };
