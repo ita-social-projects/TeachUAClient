@@ -8,6 +8,7 @@ import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
 import {addToTable} from "../../../util/TableUtil";
 import {Content} from "antd/es/layout/layout";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
+import {getStationsByCity} from "../../../service/StationService";
 
 const {Option} = Select;
 
@@ -17,6 +18,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
     const [isActive, setActive] = useState(true)
+    const [station,setStation] = useState([])
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
@@ -26,8 +28,9 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     })
 
     useEffect(() => {
+        getStationsByCity(cityName).then(response => setStation(response))
         getDistrictsByCityName(cityName).then(response => setDistricts(response));
-    }, [cityName, form]);
+    }, [cityName]);
 
     const onChange = e => {
         if (e.target.id === "name")
@@ -179,7 +182,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
                                     optionFilterProp="children">
-                                    {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
+                                    {station.map(station => <Option value={station.name}>{station.name}</Option>)}
                                 </Select>
                             </Form.Item>
                         </div>

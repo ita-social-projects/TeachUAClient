@@ -170,7 +170,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                             },
                             isPhoneField(contact) && {
                                 required: false,
-                                pattern: /^.{10}$/,
+                                pattern: /^.{9}$/,
                                 message: "Телефон не відповідає вказаному формату"
                             },
                             isPhoneField(contact) && {
