@@ -6,7 +6,7 @@ import { signIn } from "../../service/UserService";
 import './css/Login.less';
 import { saveUserId, saveToken } from '../../service/StorageService';
 
-const Login = ({verifyCode}) => {
+const Login = ({isLogin}) => {
     const [loginVisible, setLoginVisible] = useState(false);
 
     const onFinish = (values) => {
@@ -22,9 +22,7 @@ const Login = ({verifyCode}) => {
                 saveUserId(response.id);
                 saveToken(response.accessToken);
                 setLoginVisible(false);
-                if (verifyCode !== undefined) {
-                    window.location = "https://speak-ukrainian.org.ua/dev/";
-                }
+                isLogin(false);
             }
         });
     };
