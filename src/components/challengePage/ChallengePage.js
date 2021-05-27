@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AboutHeader from "../mainPage/MainHeader";
 import {Layout} from "antd";
 import ChallengeBanner from "./ChallengeBanner";
 import ChallengeDescription from "./ChallengeDescription";
-import {items} from "./WebinarItems";
 import "./css/ChallengePage.css";
 
 const ChallengePage = () => {
-    console.log(items);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
+
     return (
         <Layout className="global-padding challenge-page">
             <AboutHeader/>
