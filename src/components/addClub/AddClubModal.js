@@ -18,7 +18,7 @@ import {signIn} from "../../service/UserService";
 import Login from "../login/Login";
 
 
-const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
+const AddClubModal = ({button, clubs, setClubs }) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
@@ -28,8 +28,6 @@ const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
     const [locations, setLocations] = useState([]);
     const [centers, setCenters] = useState([]);
     const [loginVisible, setLoginVisible] = useState(false);
-    const [isLogin, setIsLogin] = useState('');
-
 
     useEffect(() => {
         getAllCenters().then(response => setCenters(response))
@@ -40,6 +38,10 @@ const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
             userId: getUserId()
         })
     }, [visible]);
+
+    const refreshPage = ()=>{
+        window.location.reload();
+    }
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
@@ -54,6 +56,7 @@ const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
                 saveUserId(response.id);
                 saveToken(response.accessToken);
                 setLoginVisible(false);
+                refreshPage();
             }
         });
     };
@@ -150,6 +153,7 @@ const AddClubModal = ({button, clubs, setClubs,verifyCode}) => {
                             <LoginSocial />
                             <LoginInput />
                         </Form>
+
                     </div>
                 </Modal>
 
