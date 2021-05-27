@@ -68,12 +68,12 @@ const AboutProject = () => {
                 </div>
                 <section className="organaizer">
                     <div className="row">
-                        <div className="col">
+
                             <img
                                 src={`${process.env.PUBLIC_URL}/static/images/service/profile_2.jpg`}
-                                alt=""></img>
-                        </div>
-                        <div className="col info">
+                                alt="Спів-засновниця проєкту"   float="left"  width="33%"></img>
+
+                        <div className="col info" float="right" width="57%">
                             <div className="text">
                                 <span>
                                     Активна учасниця групи захисту мовного закону і права україномовних на послуги українською мовою в Україні. Ініціювала розпорядження департаменту культури КМДА про викладання у мистецьких школах Києва українською мовою. Експертка з комунікацій та менеджерка соціальних, освітніх та культурних проєктів. Конкретніше: консультантка з розробки та створенню телевізійного шоу про нові об’єднані територіальні громади, головний редактор програми журналістських розслідувань «Брат за брата», редактор розважальних програм Новий канал, впродовж десяти років журналістка та ведуча програми новин «Репортер» Новий канал. Хочу дізнатись, що зміниться, якщо в Україні всі розмовлятимуть українською? Чи змінить це ставлення громадян до своєї країни? Чи стане молодь більше поважати свій край?
@@ -82,14 +82,14 @@ const AboutProject = () => {
                             <div className="name">
                                 <span>Наталка Федечко</span>
                             </div>
-                            <div className="position">
+                              <div className="position">
                                 <span>Співзасновниця та координаторка Ініціативи “Навчай українською”</span>
 
                             </div>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col info">
+                        <div className="col info" float="left" width="57%">
                             <div className="text">
                                 <span>
                                     Комунікаційна менеджерка Ініціативи "Навчай українською". Редакторка волонтерського проєкту Портал мовної політики. Учасниця спільноти "Мова об'єднує", яка займається адвокацією закону "Про забезпечення функціонування української мови як державної". Мріє, щоб ті, хто говорить українською, не почували себе дискримінованими.
@@ -102,11 +102,9 @@ const AboutProject = () => {
                                 <span>Засновниця проєкту</span>
                             </div>
                         </div>
-                        <div className="col">
                             <img
                                 src={`${process.env.PUBLIC_URL}/static/images/service/profile_1.jpg`}
-                                alt=""></img>
-                        </div>
+                                alt="Засновниця проєкту "float="right"  width="33%"></img>
                     </div>
                 </section>
                 <section className="sport-clubs">
@@ -165,6 +163,12 @@ const AboutProject = () => {
                         {/*        src={`${process.env.PUBLIC_URL}/static/images/service/about_img_1.jpg`}*/}
                         {/*        alt=""></img>*/}
                         {/*</div>*/}
+                        <div className="col">
+
+                            <img className="image"
+                                 src={`${process.env.PUBLIC_URL}/static/images/service/Marichka_Padalko.png`}
+                                 alt="Maricka_Padalko"></img>
+                        </div>
                         <div className="col info">
                             <div className="text">
                                 <span >
@@ -196,7 +200,7 @@ const AboutProject = () => {
                         <div className="col">
                             <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_1.jpg`}
-                                alt=""></img>
+                                alt="Ihor Kondratyuk"></img>
                         </div>
                     </div>
                     <div className="row">
@@ -204,7 +208,7 @@ const AboutProject = () => {
 
                             <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_2.jpg`}
-                                alt=""></img>
+                                alt="Taras Topolia"></img>
                         </div>
                         <div className="col info">
                             <div className="text">
@@ -238,7 +242,7 @@ const AboutProject = () => {
                         <div className="col">
                             <img className="image"
                                 src={`${process.env.PUBLIC_URL}/static/images/service/about_img_3.png`}
-                                alt=""></img>
+                                alt="Sergey Stakhovsky"></img>
                         </div>
                     </div>
                 </section>
