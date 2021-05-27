@@ -97,7 +97,7 @@ const DescriptionStep = ({step, setStep, setResult, result, setVisible, setLocat
                        hasFeedback
                        rules={[{
                            required: true,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><]){40,1500}\S$|\snpm/
+                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><]){40,1500}\S$|\s/
                        }]}
                 >
                 <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
