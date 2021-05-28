@@ -25,7 +25,7 @@ export const signUp = async (data) => {
         email: data.email,
         password: data.password,
         phone: data.phone,
-        roleName: data.roleName,
+        roleName: data.role,
         urlLogo: data.urlLogo && data.urlLogo.file.response
     }).then((response) => {
         return response.data
@@ -52,7 +52,6 @@ export const updateUser = async (data) => {
         email: data.email,
         password: data.password,
         phone: data.phone,
-        roleName: data.roleName,
         urlLogo: data.urlLogo/* && data.urlLogo.file.response*/
     }).then((response) => {
         return response.data
