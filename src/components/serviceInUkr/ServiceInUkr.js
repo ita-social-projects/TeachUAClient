@@ -47,7 +47,7 @@ const ServiceInUkr = () => {
                     </div>
                 </div>
                 <div className="help-button">
-                    <a target="blank" href="#"><Button className="flooded-button donate-button">Допомогти
+                    <a target="blank" href="https://secure.wayforpay.com/payment/s0f2891d77061"><Button className="flooded-button donate-button">Допомогти
                         проєкту</Button> </a>
                 </div>
             </div>
