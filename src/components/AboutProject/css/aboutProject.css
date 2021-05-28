@@ -72,7 +72,7 @@
     height: 50px;
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 84px;
+    margin-bottom: 40px;
 }
 
 .aboutProject .help-button {
@@ -86,12 +86,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 120px;
+    margin-bottom: 15px;
 }
 
 .aboutProject .content .title-content {
     padding-top:0;
     width: 620px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #2D4C68;
+    text-align: center;
+}
+.aboutProject .content .ambassador {
+    padding-top:0;
+    width: 100%;
     margin-bottom: 24px;
     font-weight: 700;
     font-size: 28px;
@@ -109,7 +119,7 @@
     line-height: 28px;
     color: #2D4C68;
     opacity: 0.9;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .aboutProject .organaizer {
@@ -120,8 +130,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom:80px;
+    margin-top: 20px;
+    margin-bottom:10px;
 }
 
 .aboutProject .row .col {
@@ -172,7 +182,7 @@
 .aboutProject .sport-clubs .video {
     width:100%;
     margin-top: 20px;
-    margin-bottom: 120px;
+    margin-bottom: 70px;
 }
 
 .aboutProject .addit-information{
@@ -188,7 +198,7 @@
 
 .image {
     position: static;
-    width: 431px;
+   /* width: 431px;*/
     height: 360px;
     left: 0px;
     top: 0px;
