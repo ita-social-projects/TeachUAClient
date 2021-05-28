@@ -29,7 +29,8 @@ const AboutProject = () => {
                 <Search redirect/>
             </div>
             <div className="title"
-                 style={{background: `url(${process.env.PUBLIC_URL}/static/images/service/about_project.png) center / cover`}}>
+                 style={{background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)),
+                                      url(${process.env.PUBLIC_URL}/static/images/service/banerAboutUs.jpg) no-repeat 50% 25% / cover`}}>
                 <span className="text">Навчай українською</span>
                 <span className="content">Ініціатива</span>
             </div>
@@ -99,7 +100,7 @@ const AboutProject = () => {
                                 <span>Іванна Кобєлєва</span>
                             </div>
                             <div className="position">
-                                <span>Засновниця проєкту</span>
+                                <span>Комунікаційна менеджерка Ініціативи "Навчай українською"</span>
                             </div>
                         </div>
                             <img
@@ -154,7 +155,7 @@ const AboutProject = () => {
 
 
                 <section className="organaizer">
-                    <div className="title-content ">
+                    <div className="ambassador ">
                         Амбасадори проєкту
                     </div>
                     <div className="row">
@@ -166,8 +167,8 @@ const AboutProject = () => {
                         <div className="col">
 
                             <img className="image"
-                                 src={`${process.env.PUBLIC_URL}/static/images/service/Marichka_Padalko.png`}
-                                 alt="Maricka_Padalko"></img>
+                                 src={`${process.env.PUBLIC_URL}/static/images/service/Marichka_Padalko.png ` }
+                                 alt="Maricka_Padalko" ></img>
                         </div>
                         <div className="col info">
                             <div className="text">
