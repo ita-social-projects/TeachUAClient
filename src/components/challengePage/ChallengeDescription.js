@@ -1,5 +1,6 @@
 import React from 'react'
 import {items} from "./WebinarItems";
+import ChallengeVideo from "./ChallengeVideo";
 
 const ChallengeDescription = () => {
     return (
@@ -23,16 +24,11 @@ const ChallengeDescription = () => {
                 <br /><br />
                 Ви можете переглянути вебінари, які допоможуть вам у переході на українську мову викладання.
                 <br />
+                <div>
+                {items.map(item => <ChallengeVideo item={item} />)}
+                </div>
             </div>
-            <div className="webinar-items">
-                <ul>
-                    {items.map(item => 
-                        <div className="text">
-                            <li><a target="_blank" href={item.link}><span>{item.title}</span></a></li>
-                        </div>
-                    )}
-                </ul>
-            </div> 
+
         </div>
     )
 }
