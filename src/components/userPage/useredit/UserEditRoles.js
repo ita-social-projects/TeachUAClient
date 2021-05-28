@@ -5,8 +5,7 @@ import {Form, Radio} from "antd";
 const UserEditRoles =({user}) => {
 
     return (
-        <Form.Item name="role"  initialValue={user.roleName}
-        >
+        <Form.Item name="role"  initialValue={user.roleName}>
             <Radio.Group className="button-container"
                          defaultValue="ROLE_USER"
                          optionType="button"
