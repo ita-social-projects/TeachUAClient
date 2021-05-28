@@ -70,7 +70,8 @@ const AuthMenu = () => {
         } else {
             return (<Menu>
                 <Menu.Item> <Registration /></Menu.Item>
-                <Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>
+                {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
+                <Menu.Item><Login/></Menu.Item>
             </Menu>
             )
         }

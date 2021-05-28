@@ -24,6 +24,7 @@ const Login = ({verifyCode}) => {
                 setLoginVisible(false);
                 if (verifyCode !== undefined) {
                     window.location = "https://speak-ukrainian.org.ua/dev/";
+                    // window.location = "http://localhost:3000/dev";
                 }
 
             }
