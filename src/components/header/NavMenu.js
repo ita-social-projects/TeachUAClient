@@ -49,9 +49,9 @@ const NavMenu = () => {
                 </Menu.Item>
                 {/*Приховано лінк service - # та виправити на послуги українською назви*/}
                 {/*Забрати стиль*/}
-                <Menu.Item key="news" style={{display: 'none' }}>
-                    <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>
-                </Menu.Item>
+                {/*<Menu.Item key="news" style={{display: 'none' }}>*/}
+                {/*    <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>*/}
+                {/*</Menu.Item>*/}
             </Menu>
         </div>
     );
