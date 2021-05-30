@@ -1,6 +1,6 @@
 import "./css/AboutDescription.css";
 import React, { useState, useEffect } from "react";
-import { getPageableCategory } from "../../service/CategoryService";
+import { getAllCategories } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/AboutCategories.css";
 import CategoryLogo from "../CategoryLogo";
@@ -8,94 +8,98 @@ import { Button, Pagination } from "antd";
 import "./css/AboutCarousel.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
-//import { useHistory } from "react-router";
 
 const MainCategories = () => {
-    const [categories, setCategories] = useState({
-        content: [],
-    });
+    const [categories, setCategories] = useState([]);
+    const [activeCategories, setActiveCategories] = useState([]);
     const [pageSize, setPageSize] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
-    const getData = (page) => {
-        getPageableCategory(page).then((response) => {
-            setCategories(response);
-            setPageSize(pageSize === 0 ? response.size : pageSize);
-            setTotalPages(response.totalPages);
-        });
-    };
-
-    useEffect(() => {
-        getData(currentPage);
-    }, []);
-
-    const onChange = (current) => {
-        setCurrentPage(current - 1);
-        getData(current - 1);
-    };
-
-    const onPageChangePrev = (page) => {
-        onChange(page);
-        if (page === 0) {
-            setCurrentPage(totalPages - 1);
-            getData(totalPages - 1);
-        } else {
-            setCurrentPage(page - 1);
-            getData(page - 1);
-        }
-    };
-
-    const onPageChangeNext = (page) => {
-        onChange(page);
-        if (page === totalPages - 1) {
-            setCurrentPage(0);
-            getData(0);
-        } else {
-            setCurrentPage(page + 1);
-            getData(page + 1);
-        }
-    };
+    const [totalElements, setTotalElements] = useState(0);
+    const [cardWidth, setCardWidth] = useState(0);
+    const [cardContainerWidth, setCardContainerWidth] = useState(0);
 
     const getWidth = () =>
         window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth;
-
+    const [width, setWidth] = useState(getWidth());
     function useCurrentWidth() {
-        // save current window width in the state object
-        let [width, setWidth] = useState(getWidth());
-
-        // in this case useEffect will execute only once because
-        // it does not have any dependencies.
         useEffect(() => {
-            // timeoutId for debounce mechanism
             let timeoutId = null;
             const resizeListener = () => {
-                // prevent execution of previous setTimeout
                 clearTimeout(timeoutId);
-                // change width from the state object after 150 milliseconds
                 timeoutId = setTimeout(() => {
                     setWidth(getWidth());
-                    let itemsCount = Math.floor((getWidth() - 192) / 296);
-                    console.log(itemsCount);
-                    setPageSize(itemsCount);
                 }, 150);
             };
-            // set resize listener
             window.addEventListener("resize", resizeListener);
 
-            // clean up function
             return () => {
-                // remove resize listener
                 window.removeEventListener("resize", resizeListener);
             };
         }, []);
 
         return width;
     }
-
     useCurrentWidth();
+
+    useEffect(() => {
+        setPageSize(4);
+        getAllCategories().then((response) => {
+            setCategories(response);
+            setTotalElements(response.length);
+        });
+    }, []);
+    useEffect(() => {
+        setTotalPages(Math.ceil(totalElements / pageSize));
+    }, [totalElements, pageSize]);
+    useEffect(() => {
+        if (currentPage * pageSize <= categories.length) {
+            let startIndex = currentPage * pageSize;
+            let active = categories.slice(startIndex, startIndex + pageSize);
+            setActiveCategories(active);
+        } else {
+            setCurrentPage(currentPage - 1);
+        }
+    }, [categories, pageSize, currentPage]);
+    useEffect(() => {
+        if (cardWidth) {
+            let itemsToDisplay = Math.floor(cardContainerWidth / cardWidth);
+            // let maxItemsInRow = 4;
+            // itemsToDisplay =
+            //     itemsToDisplay > maxItemsInRow ? maxItemsInRow : itemsToDisplay;
+            setPageSize(itemsToDisplay);
+        }
+    }, [cardWidth, cardContainerWidth, width]);
+
+    const ref = React.createRef();
+    useEffect(() => {
+        if (ref && ref.current) {
+            const { offsetWidth } = ref.current;
+            setCardWidth(offsetWidth);
+            setCardContainerWidth(ref.current.parentNode.offsetWidth);
+        }
+    }, [ref]);
+
+    const onPageChangePrev = (page) => {
+        if (page === 0) {
+            setCurrentPage(totalPages - 1);
+        } else {
+            setCurrentPage(page - 1);
+        }
+    };
+    const onPageChangeNext = (page) => {
+        if (page === totalPages - 1) {
+            setCurrentPage(0);
+        } else {
+            setCurrentPage(page + 1);
+        }
+    };
+    const onChange = (current) => {
+        setCurrentPage(current - 1);
+    };
+
     return (
         <div className="about-categories">
             <div className="categories-header">
@@ -116,8 +120,9 @@ const MainCategories = () => {
                     onClick={() => onPageChangeNext(currentPage)}
                 />
                 <div className="categories-cards">
-                    {categories.content.map((category) => (
+                    {activeCategories.map((category) => (
                         <PrimitiveCard
+                            ref={ref}
                             key={category.id}
                             header={
                                 <div className="title">
@@ -140,13 +145,13 @@ const MainCategories = () => {
             </div>
             <Pagination
                 className="pagination"
-                responsive="true"
+                //responsive="true"
                 hideOnSinglePage
                 size="small"
                 showSizeChanger={false}
                 current={currentPage + 1}
                 pageSize={pageSize}
-                total={totalPages}
+                total={totalElements}
                 onChange={onChange}
             />
         </div>
