@@ -7,16 +7,14 @@ import PropTypes from "prop-types";
 const PrimitiveCard = forwardRef((props, ref) => {
     return (
         <div className="primitive-card" ref={ref}>
-            <div className="content">
+            <Link className="content" to={props.link}>
                 {props.header}
                 <div className="description">{props.description}</div>
-                <Link to={props.link}>
-                    <div className="details">
-                        {props.buttonText}
-                        <ArrowRightOutlined className="arrow" />
-                    </div>
-                </Link>
-            </div>
+                <div className="details">
+                    {props.buttonText}
+                    <ArrowRightOutlined className="arrow" />
+                </div>
+            </Link>
         </div>
     );
 });
