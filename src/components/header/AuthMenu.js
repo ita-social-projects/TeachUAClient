@@ -27,20 +27,21 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        getUserById(getUserId()).then(response => {
-            setUser(response);
-            if (response) {
-                if (response.urlLogo?.includes("https")) {
-                    setSource(response.urlLogo);
+        if(getUserId()) {
+            getUserById(getUserId()).then(response => {
+                setUser(response);
+                if (response) {
+                    if (response.urlLogo?.includes("https")) {
+                        setSource(response.urlLogo);
+                    } else {
+                        setSource(process.env.PUBLIC_URL + response.urlLogo)
+                    }
+                    setStyleClass("avatarIfLogin");
+                } else {
+                    setStyleClass("avatarIfNotLogin");
                 }
-                else {
-                    setSource(process.env.PUBLIC_URL + response.urlLogo)
-                }
-                setStyleClass("avatarIfLogin");
-            } else {
-                setStyleClass("avatarIfNotLogin");
-            }
-        })
+            })
+        }
     }, [isLogin])
 
     const profileDropdown = () => {
