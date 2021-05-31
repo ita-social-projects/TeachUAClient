@@ -27,6 +27,8 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
+        console.log("USER____________");
+        console.log(user);
         if(getUserId()) {
             getUserById(getUserId()).then(response => {
                 setUser(response);
@@ -51,7 +53,7 @@ const AuthMenu = () => {
                     <Menu.Item><AddClubModal /></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-
+                { user.roleName === "ROLE_ADMIN"? 
                     <SubMenu title="Адміністрування" >
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
@@ -66,6 +68,7 @@ const AuthMenu = () => {
                         <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
                     </SubMenu >
+                   :""}
                 </Menu >
             )
         } else {
