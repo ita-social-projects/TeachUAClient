@@ -38,7 +38,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
         const descJSON = leftDesc + result.description.replace(/(\r\n|\n|\r)/gm, "") + rightDesc;
         values.description = saveContent(descJSON);
 
-        descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         addClub(result).then(response => {
             setVisible(false);
