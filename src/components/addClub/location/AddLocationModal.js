@@ -54,8 +54,9 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             message.error("Некоректно вибрана адреса");
             return;
         }
+        console.log(values)
         values.key = Math.random();
-        const coordinates = [{longitude: locationForm.longitude, latitude: locationForm.latitude}]
+        const coordinates = [{latitude: locationForm.latitude,longitude: locationForm.longitude, }]
         const newValues = coordinates.reduce(
                                (result, item) =>
                                                      Object.assign({}, result, item), values)
@@ -78,7 +79,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                 locationForm.latitude = lat
                 locationForm.longitude = lng
                 form.setFieldsValue({
-                    longitudeAndLatitude: lng + "," + lat,
+                    longitudeAndLatitude: lat + "," + lng,
 
                 });
             });
@@ -204,7 +205,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                         <div className="add-club-inline">
                             <Form.Item name="longitudeAndLatitude"
                                        className="add-club-row"
-                                       label="Довгота та широта"
+                                       label="Географічні координати"
                                        hasFeedback
                                        rules={[{
                                            required: true,
