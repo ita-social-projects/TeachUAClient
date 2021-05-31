@@ -53,7 +53,7 @@ const AuthMenu = () => {
                     <Menu.Item><AddClubModal /></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-                { user.roleName === "ROLE_ADMIN"? 
+                { user !== null && user !== undefined && user.roleName === "ROLE_ADMIN"?
                     <SubMenu title="Адміністрування" >
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
