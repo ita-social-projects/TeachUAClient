@@ -35,7 +35,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
 
     const onFinish = (values) => {
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
-        const descJSON = leftDesc + result.description + rightDesc;
+        const descJSON = leftDesc + result.description.replace(/(\r\n|\n|\r)/gm, "") + rightDesc;
         values.description = saveContent(descJSON);
 
         descriptionForm.setFieldsValue(values);
