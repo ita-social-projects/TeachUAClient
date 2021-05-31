@@ -47,7 +47,7 @@ const CenterListItem = ({ center, onCenterClick }) => {
                                         </div>
                                     )}>
                                     <span className="text"><span className="oneAddress"
-                                    >{center.locations[0].address}</span>, і ще {center.locations.length - 1}</span>
+                                    >{center.locations[0].address}</span>{center.locations.length - 1}</span>
                                     <EyeOutlined className="expand-icon" />
                                 </Popover>
                         }
