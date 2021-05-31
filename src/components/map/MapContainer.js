@@ -55,7 +55,7 @@ const MapContainer = ({ mapClubs, location, setLocation, zoom, setZoom, selected
                 }}>
                 {(cluster) =>
                     mapClubs.map(club =>
-                        club.location.city.name === searchParameters.cityName && <Marker
+                        <Marker
                             id={club.id}
                             position={{
                                 lat: club.location.latitude,
