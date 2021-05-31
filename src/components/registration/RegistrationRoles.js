@@ -20,7 +20,7 @@ const RegistrationRoles = ({ setDisabledButton, setRole }) => {
                 {/*        Відвідувач*/}
                 {/*    </div>*/}
                 {/*</Radio.Button>*/}
-                <Radio.Button value="ROLE_ADMIN">
+                <Radio.Button value="ROLE_MANAGER">
                     <div className="button-box">
                         <div className="ellipse"><UserOutlined className="user-icon" /></div>
                         Керівник
