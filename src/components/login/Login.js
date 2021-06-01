@@ -23,8 +23,8 @@ const Login = ({verifyCode}) => {
                 saveToken(response.accessToken);
                 setLoginVisible(false);
                 if (verifyCode !== undefined) {
-                    window.location = "https://speak-ukrainian.org.ua/dev/";
-                    // window.location = "http://localhost:3000/dev";
+                    window.location = "https://speak-ukrainian.org.ua";
+                    // window.location = "http://localhost:3000";
                 }
 
             }

@@ -7,7 +7,7 @@ const FooterSocials = () => {
 
     return (
         <div className="footer-social">
-            <a href="/dev/">
+            <a href="">
                 <div className="footer-logo"/>
             </a>
             <div className="description">

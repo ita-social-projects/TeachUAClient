@@ -35,12 +35,14 @@ export const signUp = async (data) => {
 };
 
 export const signIn = async (data) => {
+    console.log(data);
     return await fetchRequest.post(BASE_URL + "/api/signin", {
         email: data.email,
         password: data.password
     }).then((response) => {
         return response.data
     }).catch((error) => {
+        console.log(error);
         return error.response.data
     });
 };

@@ -104,7 +104,7 @@ const MainCategories = () => {
         <div className="about-categories">
             <div className="categories-header">
                 <h2 className="label">Оберіть напрям гуртків</h2>
-                <a href="/dev/clubs">
+                <a href="/clubs">
                     <Button className="flooded-button more-button">
                         Всі гуртки
                     </Button>{" "}
