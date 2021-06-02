@@ -29,8 +29,6 @@ const MapContainer = ({ mapClubs, location, setLocation, zoom, setZoom, selected
         }
     };
 
-    console.log(mapClubs);
-
     return (
         <GoogleMap
             mapContainerStyle={mapContainerStyle}

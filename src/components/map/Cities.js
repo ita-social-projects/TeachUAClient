@@ -15,12 +15,12 @@ const Cities = ({ setMapClubs, setZoom, setCenter }) => {
         getAllCities().then(response => {
             setCities(response)
         });
-        setCity(advancedSearchCityName.cityName);
-    }, [advancedSearchCityName.cityName]);
+        setCity(mapSearchParameters.cityName);
+    }, [mapSearchParameters.cityName]);
 
     const onCityChange = (value) => {
         mapSearchParameters.cityName = value;
-        advancedSearchCityName.cityName = value;
+
         getClubsByCategoryAndCity(mapSearchParameters).then(response => {
             const arr = [];
             response.map(club => {

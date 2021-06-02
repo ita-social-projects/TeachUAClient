@@ -14,19 +14,17 @@ const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
             <div className="city-name-box">
                 <div className="city-name-box-small-screen">
                     {mapSearchParameters.cityName !== 'online' ?
-                        (advancedSearch ?
-                            <h2 className="city-name">{"Гуртки у місті " + advancedSearchCityName.cityName}</h2>
-                            :
+
                             <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
-                        )
-                        : <h2 className="city-name">Гуртки без локації</h2>}
+                            :
+                            <h2 className="city-name">Гуртки без локації</h2>}
                     <EnvironmentFilled className="icon"/>
                 </div>
                 {mapSearchParameters.cityName !== 'online' && <Button className="flooded-button show-map-button"
                         onClick={() => setMapVisible(true)}>Показати на мапі</Button>}
             </div>
             <Search setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
-            <MapComponent visible={mapVisible} setVisible={setMapVisible}/>
+            <MapComponent visible={mapVisible} setVisible={setMapVisible} cityName={searchParameters.cityName}/>
         </div>
     );
 };

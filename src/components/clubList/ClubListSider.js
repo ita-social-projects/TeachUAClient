@@ -5,7 +5,7 @@ import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
 import { getStationsByCity } from "../../service/StationService";
-import { searchParameters , advancedSearchCityName } from "../../context/SearchContext";
+import { searchParameters, mapSearchParameters } from "../../context/SearchContext";
 
 const { Sider } = Layout;
 const { Option } = Select;
@@ -34,13 +34,11 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
             setDistricts(response);
         });
         getStationsByCity(city).then((response) => {
-            console.log("getStationsByCity", response);
             setStations(response);
         });
     }, [cityName]);
 
     const onValuesChange = (values) => {
-        console.log("=======  ClubListSider ===>  onValueChange  ========");
         setIsCenterChecked(values.isCenter);
         if (values.hasOwnProperty("cityName")) {
             form.setFieldsValue({ districtName: undefined });
@@ -51,7 +49,8 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
 
     const onCityChange = (value) => {
         setCityName(value);
-        advancedSearchCityName.cityName = value;
+        searchParameters.cityName = value;
+        mapSearchParameters.cityName = value;
         form.setFieldsValue({ districtName: undefined });
         form.setFieldsValue({ stationName: undefined });
     };
@@ -82,7 +81,7 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
                     initialValue={
                         searchParameters.cityName === "Без локації"
                             ? "online"
-                            : advancedSearchCityName.cityName
+                            : searchParameters.cityName
                     }>
                     <Select
                         className="club-list-select"

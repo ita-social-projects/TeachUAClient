@@ -36,6 +36,9 @@ const ImportDatabase = () => {
     }
 
     const shortString = (string) => {
+        if(string == null){
+            return "string is null !";
+        }
         if (string.length > 22) {
 
             let dotIndex = string.indexOf('.');
