@@ -57,7 +57,7 @@ const Registration = () => {
                     >
                         <RegistrationRoles setDisabledButton={setDisabledButton}
                                            disabledButton={disabledButton} setRole={setRole}/>
-                        <RegistrationSocial role={role}/>
+                        {/*<RegistrationSocial role={role}/>*/}
                         <RegistrationInput disabledButton={disabledButton}/>
                     </Form>
                 </div>

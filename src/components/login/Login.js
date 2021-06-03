@@ -6,7 +6,7 @@ import { signIn } from "../../service/UserService";
 import './css/Login.less';
 import { saveUserId, saveToken } from '../../service/StorageService';
 
-const Login = ({isLogin}) => {
+const Login = ({verifyCode}) => {
     const [loginVisible, setLoginVisible] = useState(false);
 
     const onFinish = (values) => {
@@ -17,12 +17,18 @@ const Login = ({isLogin}) => {
                 message.error("Введено невірний пароль або email");
             }
             else {
-                console.log(response)
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
                 saveToken(response.accessToken);
                 setLoginVisible(false);
-                isLogin("login");
+                if (verifyCode !== undefined) {
+                    window.location = "https://speak-ukrainian.org.ua/dev/";
+                    // window.location = "http://localhost:3000/dev";
+                }
+                let a = setTimeout(() => {
+                    window.location.reload();
+                    clearTimeout(a);
+                    }, 1000);
             }
         });
     };
@@ -50,7 +56,7 @@ const Login = ({isLogin}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <LoginSocial />
+                        {/*<LoginSocial />*/}
                         <LoginInput />
                     </Form>
                 </div>

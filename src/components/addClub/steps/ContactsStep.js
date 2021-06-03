@@ -170,7 +170,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                             },
                             isPhoneField(contact) && {
                                 required: false,
-                                pattern: /^.{10}$/,
+                                pattern: /^.{9}$/,
                                 message: "Телефон не відповідає вказаному формату"
                             },
                             isPhoneField(contact) && {
@@ -182,7 +182,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                         hasFeedback>
                         <Input className="add-club-input"
                             name={contact.name}
-                            prefix={isPhoneField(contact) ?"+38" :undefined}
+                            prefix={isPhoneField(contact) ?"+380" :undefined}
                             placeholder={isPhoneField(contact) ?"__________" :"Заповніть поле"}
                             onChange={(e) => changeContacts(e, contact)}
                             suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />

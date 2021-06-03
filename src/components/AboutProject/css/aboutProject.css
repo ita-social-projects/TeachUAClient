@@ -24,6 +24,7 @@
 }
 
 .aboutProject .social-media {
+
     display: flex;
     height: 30px;
     width: 300px;
@@ -31,6 +32,7 @@
 }
 
 .aboutProject .social-media .links {
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,7 +72,7 @@
     height: 50px;
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 84px;
+    margin-bottom: 40px;
 }
 
 .aboutProject .help-button {
@@ -84,12 +86,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 120px;
+    margin-bottom: 15px;
 }
 
 .aboutProject .content .title-content {
     padding-top:0;
     width: 620px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: #2D4C68;
+    text-align: center;
+}
+.aboutProject .content .ambassador {
+    padding-top:0;
+    width: 100%;
     margin-bottom: 24px;
     font-weight: 700;
     font-size: 28px;
@@ -107,7 +119,7 @@
     line-height: 28px;
     color: #2D4C68;
     opacity: 0.9;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .aboutProject .organaizer {
@@ -116,21 +128,22 @@
 
 .aboutProject .row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    margin-top:120px;
-    margin-bottom:270px;
+    margin-top: 20px;
+    margin-bottom:10px;
 }
 
 .aboutProject .row .col {
     box-sizing: border-box;
-    width:530px;
-    height:360px;
-    margin: 15px;
+    width:75%;
+    /*height:360px;
+     */
+    margin: 0px 15px 15px 15px;
     
 }
 .aboutProject .row .info{
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 45px;
 }
 .aboutProject .row .col .text {
@@ -169,7 +182,7 @@
 .aboutProject .sport-clubs .video {
     width:100%;
     margin-top: 20px;
-    margin-bottom: 120px;
+    margin-bottom: 70px;
 }
 
 .aboutProject .addit-information{
@@ -177,6 +190,17 @@
 }
 
 .aboutProject .image {
+    height:auto;
+    max-width:100%;
     margin-top: 32px;
     margin-bottom: 120px;
+}
+
+.image {
+    position: static;
+   /* width: 431px;*/
+    height: 360px;
+    left: 0px;
+    top: 0px;
+    border-radius: 8px;
 }

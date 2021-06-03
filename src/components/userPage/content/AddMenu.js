@@ -11,7 +11,8 @@ const menu = (
             <AddClubModal />
         </Menu.Item>
         <Menu.Item>
-            <AddCenter />
+            <text> Додати центр</text>
+            {/*<AddCenter />*/}
         </Menu.Item>
     </Menu>
 );

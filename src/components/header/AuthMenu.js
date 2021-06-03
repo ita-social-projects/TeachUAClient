@@ -27,15 +27,21 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        getUserById(getUserId()).then(response => {
-            setUser(response);
-            if (response) {
-                setSource(process.env.PUBLIC_URL + response.urlLogo);
-                setStyleClass("avatarIfLogin");
-            } else {
-                setStyleClass("avatarIfNotLogin");
-            }
-        })
+        if(getUserId()) {
+            getUserById(getUserId()).then(response => {
+                setUser(response);
+                if (response) {
+                    if (response.urlLogo?.includes("https")) {
+                        setSource(response.urlLogo);
+                    } else {
+                        setSource(process.env.PUBLIC_URL + response.urlLogo)
+                    }
+                    setStyleClass("avatarIfLogin");
+                } else {
+                    setStyleClass("avatarIfNotLogin");
+                }
+            })
+        }
     }, [isLogin])
 
     const profileDropdown = () => {
@@ -45,7 +51,7 @@ const AuthMenu = () => {
                     <Menu.Item><AddClubModal /></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-
+                { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
                     <SubMenu title="Адміністрування" >
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
@@ -60,12 +66,14 @@ const AuthMenu = () => {
                         <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
                     </SubMenu >
+                   :""}
                 </Menu >
             )
         } else {
             return (<Menu>
                 <Menu.Item> <Registration /></Menu.Item>
-                <Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>
+                {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
+                <Menu.Item><Login/></Menu.Item>
             </Menu>
             )
         }

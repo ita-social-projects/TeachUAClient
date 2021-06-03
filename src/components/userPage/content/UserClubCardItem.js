@@ -19,22 +19,23 @@ const UserClubCardItem = ({club}) => {
                 <CategoryLogo category={club.categories[0]}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={updateMenu} placement="bottomRight">
+                        <Dropdown overlay={updateMenu(club.id)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
                 </div>
             </div>
             <div className="title-name">{club.name}</div>
-            <Tags categories={club.categories}/>
+            <div className="club-tags-box">
+                <Tags categories={club.categories.filter((el, index) => index < 2)}/>
+                <span className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>
+            </div>
             <p className="description">{getShortContent(club.description)}</p>
             <Rate className="rating" disabled value={club.rating}/>
             <div className="address">
                 <EnvironmentFilled
                     className="address-icon"/>
-                {console.log(club)}
-                {console.log(club.locations[0])}
-                <span className="text"> {club.locations[0].address}</span>
+                <span className="text"> {club.locations.length === 0 ? "Онлайн" : club.locations[0].address}</span>
             </div>
             <Button className="outlined-button details-button">
                 <Link to={`/club/${club.id}`}>Детальніше</Link>

@@ -28,6 +28,7 @@ const PageContent = ({club, feedbackCount}) => {
                 :
                 <div className="content">
                     {getShortContent(club.description)}
+                    {/*{club.description}*/}
                 </div>}
             <div className="full-width button-box">
                 <Button className="flooded-button apply-button">Записатись на гурток</Button>

@@ -1,19 +1,18 @@
-import './css/AboutNews.css';
-import React, {useEffect, useState} from "react";
+import "./css/AboutNews.css";
+import React, { useEffect, useState } from "react";
 import PrimitiveCard from "../PrimitiveCard";
-import {getPageableNews} from "../../service/NewsService";
+import { getPageableNews } from "../../service/NewsService";
 
 const AboutChallenge = () => {
     const NEWS_SIZE = 3;
 
     const [news, setNews] = useState({
-        content: []
+        content: [],
     });
 
     useEffect(() => {
-        getPageableNews(NEWS_SIZE).then(response => {
+        getPageableNews(NEWS_SIZE).then((response) => {
             setNews(response);
-            console.log(response)
         });
     }, []);
 
@@ -21,22 +20,29 @@ const AboutChallenge = () => {
         <div className="about-news">
             <h2 className="label">Новини</h2>
             <div className="news-cards">
-                {news.content.map(currentNews =>
+                {news.content.map((currentNews) => (
                     <PrimitiveCard
                         header={
                             <div className="title">
-                                <img src={currentNews.urlTitleLogo}/>
-                                <div className="date">{new Date(currentNews.date).toLocaleString('uk', {
-                                    day: 'numeric',
-                                    month: 'numeric',
-                                    year: 'numeric'
-                                })}</div>
+                                <img src={currentNews.urlTitleLogo} />
+                                <div className="date">
+                                    {new Date(currentNews.date).toLocaleString(
+                                        "uk",
+                                        {
+                                            day: "numeric",
+                                            month: "numeric",
+                                            year: "numeric",
+                                        }
+                                    )}
+                                </div>
                                 <div className="name">{currentNews.name}</div>
                             </div>
                         }
                         description={currentNews.description}
                         link={""}
-                        buttonText="Переглянути"/>)}
+                        buttonText="Переглянути"
+                    />
+                ))}
             </div>
         </div>
     );

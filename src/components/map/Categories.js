@@ -37,7 +37,7 @@ const Categories = ({ setMapClubs }) => {
             className="selectCity"
             onChange={onCategoryChange}
             showSearch
-            value={category}
+            value={category === "" ?"Всі категорії" :category}
             placeholder={mapSearchParameters.categoryName == "" ? "Всі категорії" : mapSearchParameters.categoryName}
             style={{ borderRadius: '15px' }}
         >

@@ -49,8 +49,7 @@ const UserEditModal = ({user}) => {
                     onFinish={onFinish}
                 >
                 <UserEditRoles user={user} />
-                <UserEditInput user={user}
-                    />
+                <UserEditInput user={user}/>
                 </Form>
             </Modal>
         </>

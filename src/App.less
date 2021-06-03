@@ -25,13 +25,15 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0 87px 0 87px;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .header .right-side-menu {
   display: flex;
   align-items: center;
+  margin-left: auto;
+  width: auto;
 }
 
 .header .logo {
@@ -104,7 +106,7 @@
   border-bottom: none;
 }
 
-.header .nav-menu .ant-menu-submenu-title span {
+.header .nav-menu .ant-menu-submenu-title {
   color: rgba(0, 0, 0, 0);
   background: url("images/menu.svg") no-repeat center / cover;
   font-size: 20px;
@@ -146,6 +148,15 @@
   min-height: 500px;
 }
 
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
+  margin: 0 20px;
+  margin-top: -1px;
+  margin-bottom: 0;
+  padding: 0 20px;
+  padding-left: 0;
+}
+
 .search {
   display: flex;
   align-items: flex-end;
@@ -164,7 +175,7 @@
   padding: 0;
   border-bottom: 2px solid white;
   height: 30px;
-  font-size: 16px;
+  font-size: 26px;
 }
 
 .search .ant-select-single .ant-select-selector .ant-select-selection-search {
@@ -211,7 +222,7 @@
 .city-name {
   color: white;
   padding-bottom: 5px;
-  font-size: 20px;
+  font-size: 32px;
   margin-top: 20px;
 }
 
@@ -490,7 +501,7 @@
 
 @media  screen and (max-width: 2500px) {
   .header .nav-menu {
-    //width: 810px;
+    width: 700px;
     display: flex;
   }
 
@@ -499,29 +510,18 @@
   }
 
   .header {
-    padding: 0 85px !important;
+    padding: 0 55px; // не змінювати padding, бо header падає
   }
 
   .ant-layout-header header {
     display: flex !important;
   }
+
 }
 
-//@media screen and (max-width: 1212px) {
-//  //.lower-header-box {
-//  //  flex-direction: row;
-//  //  align-items: normal;
-//  //  height: 85px;
-//  //  margin-top: -25px;
-//  //  justify-content: space-between;
-//  //}
-//
-//}
-
-
-@media (min-width: 1214px) and (max-width: 1373px) {
+@media (min-width: 1215px) and (max-width: 1390px) {
   .header .nav-menu {
-    width: 510px;
+    width: 700px;
     display: flex;
   }
 
@@ -530,30 +530,29 @@
   }
 
   .city-name-box {
-    font-size: 18px !important;
+    font-size: 24px !important;
   }
 
   .right-side-menu {
-    width: 325px;
+    width: 245px;
   }
-  //
-  //.header .city {
-  //  margin: 0 0vw;
-  //}
+
+  .header .city {
+    margin: 0 1vw;
+  }
 }
 
-@media (max-width: 1214px) {
+@media (min-width: 1186px) and (max-width: 1214px) {
   .left-side-menu {
     display: inline-block;
   }
 
-  .header .nav-menu .ant-menu-submenu-title span {
-    display: inline-block !important;
-  }
-
   .header .nav-menu {
-    width: 300px;
+    width: 500px;
     display: flex;
+  }
+  .city-name {
+    font-size: 20px;
   }
 
   .lower-header-box {
@@ -572,15 +571,29 @@
   }
 
   .header {
-    padding: 0 85px !important;
+    padding: 0 55px !important;
   }
 
-  .header .nav-menu .ant-menu-submenu-title span {
+  .header .nav-menu .ant-menu-submenu-title {
     display: inline-block !important;
   }
 }
 
-@media screen and  (max-width: 880px) {
+@media (min-width: 902px) and (max-width: 1185px) {
+  .header .nav-menu {
+    width: 400px;
+    display: flex;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
+  .city-name {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 850px) and  (max-width: 901px) {
   .global-padding,
   .layout .header {
     padding: 0 10px 0 10px;
@@ -591,7 +604,7 @@
   }
 
   .header .nav-menu {
-    width: 180px;
+    width: 290px;
     display: flex;
   }
 
@@ -602,19 +615,43 @@
   .lower-header-box .city-name {
     font-size: 20px;
   }
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
 }
 
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 849px) {
+
+  .global-padding,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
   .content-clubs {
     min-width: 0;
   }
 
-  .lower-header-box .city-name {
-    font-size: 24px;
+  .header .nav-menu {
+    width: 180px;
   }
 
-  .header .nav-menu {
-    width: 40px;
+  .lower-header-box {
+    display: flow-root;
+    align-items: flex-end;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: -20px;
+    padding-left: 40px;
+  }
+
+  .search {
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 40px;
   }
 
   .lower-header-box .show-map-button {
@@ -625,16 +662,98 @@
     display: block;
   }
 
-  .lower-header-box .advanced-icon {
-    display: none;
+  .city-name-box-small-screen {
+    margin-top: -20px;
   }
 
-  .lower-header-box .search,
-  .lower-header-box .search .ant-select {
-    width: 100% !important;
+  .header .nav-menu .ant-menu-submenu-title{
+    display: inline-block !important;
+  }
+
+}
+
+@media screen and (min-width: 900px)and(max-width: 976px) {
+  .layout .header {
+    justify-content: space-between;
+  }
+
+  .header .nav-menu {
+    width: 290px;
+    display: flex;
+  }
+
+  .ant-layout-header {
+    padding: 0 30px !important;
   }
 
   .lower-header-box .city-name {
     font-size: 20px;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
+
+}
+@media screen and (max-width: 706px) {
+  .content-clubs {
+    min-width: 0;
+  }
+
+  .header .nav-menu {
+    width: 40px;
+  }
+  .lower-header-box {
+    display: flow-root;
+    align-items: flex-end;
+  }
+
+  .city-name-box-small-screen {
+    margin-top: -20px;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: -20px;
+    padding-left: 40px;
+  }
+
+  .search {
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 40px;
+  }
+
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
+
+}
+
+@media screen and (max-width:585px)  {
+  .lower-header-box .city-name {
+    font-size: 20px;
+  }
+
+  .header .add-club-button {
+    display: none;
+  }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+  .lower-header-box .city-name {
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+
+  .header .right-side-menu {
+    margin-left: -10px;
+  }
+
+  .ant-select-selector {
+    width: 80% !important;
   }
 }

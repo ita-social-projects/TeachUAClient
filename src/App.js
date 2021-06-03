@@ -26,6 +26,7 @@ import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
+import ChallengePage from "./components/challengePage/ChallengePage";
 
 const { Content } = Layout;
 
@@ -65,6 +66,7 @@ function App() {
                                 <Route path="/user/:id" exact component={UserPage}/>
                                 <Route path="/verify" exact component={VerifyPage}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
+                                <Route path="/challenge" exact component={ChallengePage} />
                                 <Route path="/service" exact component={ServiceInUkr}/>
                                 <Route path="/about" exact component={AboutProject}/>
                                 <Route path="/logs" exact component={LogComponent}/>

@@ -1,70 +1,129 @@
-import './css/AboutDescription.css';
+import "./css/AboutDescription.css";
 import React, { useState, useEffect } from "react";
-import { getPageableCategory } from "../../service/CategoryService";
+import { getAllCategories } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
-import './css/AboutCategories.css';
+import "./css/AboutCategories.css";
 import CategoryLogo from "../CategoryLogo";
-import {Button, Pagination} from "antd";
-import './css/AboutCarousel.css';
+import { Button, Pagination } from "antd";
+import "./css/AboutCarousel.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
 const MainCategories = () => {
-    const [categories, setCategories] = useState({
-        content: [],
-        size: 0
-    });
+    const [categories, setCategories] = useState([]);
+    const [activeCategories, setActiveCategories] = useState([]);
+    const [pageSize, setPageSize] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalElements, setTotalElements] = useState(0);
+    const [cardWidth, setCardWidth] = useState(0);
+    const [cardContainerWidth, setCardContainerWidth] = useState(0);
 
-    const getData = (page) => {
-        getPageableCategory(page).then(response => {
-            setCategories(response);
-            setTotalPages(response.totalPages);
-        });
-    };
+    const getWidth = () =>
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
+    const [width, setWidth] = useState(getWidth());
+    function useCurrentWidth() {
+        useEffect(() => {
+            let timeoutId = null;
+            const resizeListener = () => {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    setWidth(getWidth());
+                }, 150);
+            };
+            window.addEventListener("resize", resizeListener);
+
+            return () => {
+                window.removeEventListener("resize", resizeListener);
+            };
+        }, []);
+
+        return width;
+    }
+    useCurrentWidth();
 
     useEffect(() => {
-        getData(currentPage);
+        setPageSize(4);
+        getAllCategories().then((response) => {
+            setCategories(response);
+            setTotalElements(response.length);
+        });
     }, []);
+    useEffect(() => {
+        setTotalPages(Math.ceil(totalElements / pageSize));
+    }, [totalElements, pageSize]);
+    useEffect(() => {
+        if (currentPage * pageSize <= categories.length) {
+            let startIndex = currentPage * pageSize;
+            let active = categories.slice(startIndex, startIndex + pageSize);
+            setActiveCategories(active);
+        } else {
+            setCurrentPage(currentPage - 1);
+        }
+    }, [categories, pageSize, currentPage]);
+    useEffect(() => {
+        if (cardWidth) {
+            let itemsToDisplay = Math.floor((cardContainerWidth-48) / cardWidth);
+            // let maxItemsInRow = 4;
+            // itemsToDisplay =
+            //     itemsToDisplay > maxItemsInRow ? maxItemsInRow : itemsToDisplay;
+            setPageSize(itemsToDisplay);
+        }
+    }, [cardWidth, cardContainerWidth, width]);
 
-    const onChange = (current) => {
-        setCurrentPage(current - 1);
-        getData(current - 1)
-    }
+    const ref = React.createRef();
+    useEffect(() => {
+        if (ref && ref.current) {
+            const { offsetWidth } = ref.current;
+            setCardWidth(offsetWidth);
+            setCardContainerWidth(ref.current.parentNode.offsetWidth);
+        }
+    }, [ref]);
 
     const onPageChangePrev = (page) => {
         if (page === 0) {
             setCurrentPage(totalPages - 1);
-            getData(totalPages - 1);
         } else {
             setCurrentPage(page - 1);
-            getData(page - 1);
         }
     };
-
     const onPageChangeNext = (page) => {
         if (page === totalPages - 1) {
             setCurrentPage(0);
-            getData(0);
         } else {
             setCurrentPage(page + 1);
-            getData(page + 1);
         }
-    }
+    };
+    const onChange = (current) => {
+        setCurrentPage(current - 1);
+    };
 
     return (
         <div className="about-categories">
             <div className="categories-header">
                 <h2 className="label">Оберіть напрям гуртків</h2>
-                <a href="/dev/clubs"><Button className="flooded-button more-button">Всі гуртки</Button> </a>
+                <a href="/dev/clubs">
+                    <Button className="flooded-button more-button">
+                        Всі гуртки
+                    </Button>{" "}
+                </a>
             </div>
             <div className="categories-carousel-block">
-                <ArrowLeftOutlined className="arrows-prev" onClick={() => onPageChangePrev(currentPage)} />
-                <ArrowRightOutlined className="arrows-next" onClick={() => onPageChangeNext(currentPage)} />
-                <div className="categories-cards">
-                    {categories.content.map(category =>
-                        <PrimitiveCard key={category.id}
+                <ArrowLeftOutlined
+                    className="arrows-prev"
+                    onClick={() => onPageChangePrev(currentPage)}
+                />
+                <ArrowRightOutlined
+                    className="arrows-next"
+                    onClick={() => onPageChangeNext(currentPage)}
+                />
+                <div className="categories-cards" >
+                    {activeCategories.map((category) => (
+                        <PrimitiveCard
+                            ref={ref}
+                            key={category.id}
                             header={
                                 <div className="title">
                                     <CategoryLogo category={category} />
@@ -72,19 +131,27 @@ const MainCategories = () => {
                                 </div>
                             }
                             description={category.description}
-                            link={""}
-                            buttonText="Переглянути" />
-                    )}
+                            link={{
+                                pathname: "/clubs",
+                                state: {
+                                    showAdvancedSearch: true,
+                                    showActiveCategory: category.name,
+                                },
+                            }}
+                            buttonText="Переглянути"
+                        />
+                    ))}
                 </div>
             </div>
             <Pagination
                 className="pagination"
+                //responsive="true"
                 hideOnSinglePage
                 size="small"
                 showSizeChanger={false}
                 current={currentPage + 1}
-                pageSize={categories.size}
-                total={categories.totalElements}
+                pageSize={pageSize}
+                total={totalElements}
                 onChange={onChange}
             />
         </div>

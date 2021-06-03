@@ -18,7 +18,9 @@ const MapComponent = ({ visible, setVisible, cityName}) => {
     const [center, setCenter] = useState(null);
 
     const closeMap = () => {
-        mapSearchParameters.cityName = cityName;
+        mapSearchParameters.cityName = searchParameters.cityName;
+        mapSearchParameters.categoryName = "";
+
         setVisible(false);
     };
 

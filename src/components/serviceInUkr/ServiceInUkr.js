@@ -31,7 +31,8 @@ const ServiceInUkr = () => {
                 <Search redirect/>
             </div>
             <div className="title"
-                 style={{background: `url(${process.env.PUBLIC_URL}/static/images/service/ukr_service.png) center / cover`}}>
+                 style={{background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), 
+                                        url(${process.env.PUBLIC_URL}/static/images/service/serviceInUkr.png) center / cover`}}>
                 <span className="text">Послуги українською</span>
             </div>
             <p/><p/>
@@ -46,7 +47,7 @@ const ServiceInUkr = () => {
                     </div>
                 </div>
                 <div className="help-button">
-                    <a target="blank" href="#"><Button className="flooded-button donate-button">Допомогти
+                    <a target="blank" href="https://secure.wayforpay.com/payment/s0f2891d77061"><Button className="flooded-button donate-button">Допомогти
                         проєкту</Button> </a>
                 </div>
             </div>

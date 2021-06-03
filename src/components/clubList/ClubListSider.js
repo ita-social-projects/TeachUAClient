@@ -10,12 +10,20 @@ import { searchParameters, mapSearchParameters } from "../../context/SearchConte
 const { Sider } = Layout;
 const { Option } = Select;
 
-const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked, setIsCenterChecked }) => {
+const ClubListSider = ({
+    setCurrentPage,
+    form,
+    getAdvancedData,
+    isCenterChecked,
+    setIsCenterChecked,
+    activeCategory,
+}) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
+    const [age, setAge] = useState([]);
 
     const getData = () => {
         setCurrentPage(0);
@@ -23,8 +31,13 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
     };
 
     useEffect(() => {
+        if (activeCategory) {
+            form.setFieldsValue({ categoriesName: [activeCategory] });
+        }
+
         getAllCategories().then((response) => setCategories(response));
         getAllCities().then((response) => setCities(response));
+
         getData();
     }, []);
 
@@ -44,6 +57,22 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
             form.setFieldsValue({ districtName: undefined });
             form.setFieldsValue({ stationName: undefined });
         }
+
+        if (values.hasOwnProperty("age")) {
+            if (!values.age) {
+                setAge(undefined);
+                form.setFieldsValue({ age: undefined });
+            } else if (values.age > 18) {
+                setAge(18);
+                form.setFieldsValue({ age: 18 });
+            } else if (values.age < 2) {
+                setAge(2);
+                form.setFieldsValue({ age: 2 });
+            } else {
+                setAge(values.age);
+                form.setFieldsValue({ age: values.age });
+            }
+        }
         getData();
     };
 
@@ -55,6 +84,17 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
         form.setFieldsValue({ stationName: undefined });
     };
 
+    const onKeyPress = (event) => {
+        const specialCharRegex = /^\d+$/;
+        const pressedKey = String.fromCharCode(
+            !event.charCode ? event.which : event.charCode
+        );
+        if (!specialCharRegex.test(pressedKey)) {
+            event.preventDefault();
+            return false;
+        }
+    };
+
     return (
         <Sider className="club-list-sider">
             <div className="club-list-label">Розширений пошук</div>
@@ -63,11 +103,11 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
                 requiredMark={false}
                 form={form}
                 onValuesChange={onValuesChange}>
-
-                <Form.Item name="isCenter"
-                           className="club-list-row"
-                           label="Гурток/Центр"
-                           initialValue={false}>
+                <Form.Item
+                    name="isCenter"
+                    className="club-list-row"
+                    label="Гурток/Центр"
+                    initialValue={false}>
                     <Radio.Group className="club-list-kind">
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
@@ -88,12 +128,10 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
                         onChange={onCityChange}>
-
                         {cities.map((city) => (
                             <Option value={city.name}>{city.name}</Option>
                         ))}
                         <Option value="online">Без локації</Option>
-
                     </Select>
                 </Form.Item>
                 <Form.Item
@@ -162,7 +200,11 @@ const ClubListSider = ({ setCurrentPage, form, getAdvancedData, isCenterChecked,
                     className="club-list-row"
                     inititalValue={0}>
                     <span>
-                        <InputNumber className="age" min={2} max={18} />
+                        <InputNumber
+                            className="age"
+                            value={age}
+                            onKeyPress={onKeyPress}
+                        />
                         років
                     </span>
                 </Form.Item>

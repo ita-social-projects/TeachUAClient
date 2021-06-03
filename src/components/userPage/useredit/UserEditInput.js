@@ -23,7 +23,7 @@ const UserEditInput = ({user}) => {
         },
     };
 
-    let prefixSelector = '+38';
+    let prefixSelector = '+380';
     return (
         <div className="user-edit-column">
             <Form.Item name="id"
