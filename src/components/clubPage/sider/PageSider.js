@@ -39,7 +39,7 @@ class PageSider extends React.Component {
                 <div className="address">
                     <EnvironmentFilled
                         className="address-icon"/>
-                    <p className="text"> {this.props.club.address}</p>
+                    <p className="text"> {this.props.club.locations.length === 0 ? "Онлайн" : this.props.club.locations[0].address}</p>
                 </div>
                 <div className="map">
                     <img src={`${process.env.PUBLIC_URL}/static/map.png`} alt="Map"/>
