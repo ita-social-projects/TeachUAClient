@@ -65,7 +65,7 @@ const MainCategories = () => {
     }, [categories, pageSize, currentPage]);
     useEffect(() => {
         if (cardWidth) {
-            let itemsToDisplay = Math.floor(cardContainerWidth / cardWidth);
+            let itemsToDisplay = Math.floor((cardContainerWidth-48) / cardWidth);
             // let maxItemsInRow = 4;
             // itemsToDisplay =
             //     itemsToDisplay > maxItemsInRow ? maxItemsInRow : itemsToDisplay;
@@ -119,7 +119,7 @@ const MainCategories = () => {
                     className="arrows-next"
                     onClick={() => onPageChangeNext(currentPage)}
                 />
-                <div className="categories-cards">
+                <div className="categories-cards" >
                     {activeCategories.map((category) => (
                         <PrimitiveCard
                             ref={ref}
