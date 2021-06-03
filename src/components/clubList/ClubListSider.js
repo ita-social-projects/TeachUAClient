@@ -51,6 +51,10 @@ const ClubListSider = ({
         });
     }, [cityName]);
 
+    useEffect(() => {
+        form.setFieldsValue({ cityName: searchParameters.cityName });
+    },[searchParameters.cityName]);
+
     const onValuesChange = (values) => {
         setIsCenterChecked(values.isCenter);
         if (values.hasOwnProperty("cityName")) {
