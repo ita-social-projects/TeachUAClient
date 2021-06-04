@@ -53,7 +53,7 @@ class PageSider extends React.Component {
                 <div className="address">
                     <EnvironmentFilled
                         className="address-icon"/>
-                    <p className="text"> {this.props.club.address}</p>
+                    <p className="text"> {this.props.club.locations.length === 0 ? "Онлайн" : this.props.club.locations[0].address}</p>
                 </div>
                 { this.checkLocation(this.props.club.locations) &&
                     <div className="map"> 

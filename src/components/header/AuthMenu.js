@@ -27,8 +27,6 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        console.log("USER____________");
-        console.log(user);
         if(getUserId()) {
             getUserById(getUserId()).then(response => {
                 setUser(response);

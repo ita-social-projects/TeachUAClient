@@ -5,7 +5,7 @@ import { getAllCategories } from "../../service/CategoryService";
 import { getAllCities } from "../../service/CityService";
 import { getDistrictsByCityName } from "../../service/DisctrictService";
 import { getStationsByCity } from "../../service/StationService";
-import { searchParameters } from "../../context/SearchContext";
+import { searchParameters, mapSearchParameters } from "../../context/SearchContext";
 
 const { Sider } = Layout;
 const { Option } = Select;
@@ -51,6 +51,10 @@ const ClubListSider = ({
         });
     }, [cityName]);
 
+    useEffect(() => {
+        form.setFieldsValue({ cityName: searchParameters.cityName });
+    },[searchParameters.cityName]);
+
     const onValuesChange = (values) => {
         setIsCenterChecked(values.isCenter);
         if (values.hasOwnProperty("cityName")) {
@@ -78,6 +82,8 @@ const ClubListSider = ({
 
     const onCityChange = (value) => {
         setCityName(value);
+        searchParameters.cityName = value;
+        mapSearchParameters.cityName = value;
         form.setFieldsValue({ districtName: undefined });
         form.setFieldsValue({ stationName: undefined });
     };

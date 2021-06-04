@@ -17,7 +17,6 @@ const Login = ({verifyCode}) => {
                 message.error("Введено невірний пароль або email");
             }
             else {
-                console.log(response)
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
                 saveToken(response.accessToken);
@@ -26,7 +25,10 @@ const Login = ({verifyCode}) => {
                     window.location = "https://speak-ukrainian.org.ua/dev/";
                     // window.location = "http://localhost:3000/dev";
                 }
-
+                let a = setTimeout(() => {
+                    window.location.reload();
+                    clearTimeout(a);
+                    }, 1000);
             }
         });
     };
