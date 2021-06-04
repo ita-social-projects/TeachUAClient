@@ -6,7 +6,7 @@ import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import {getSimilarClubsByCategoryName} from "../../../service/ClubService";
 import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 import SimilarClubs from "./SimilarClubs";
-import {searchParameters} from "../../../context/SearchContext";
+import ClubLocation from "./ClubLocaton";
 
 class PageSider extends React.Component {
     state = {
@@ -33,6 +33,20 @@ class PageSider extends React.Component {
         }
     }
 
+    checkLocation = (locations) => {
+        for (var i = 0; i < locations.length; ++i) {
+            if (locations[i].latitude == null || locations[i].longitude == null) {
+                return false;
+            }
+        }
+
+        if (locations.length === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
         return (
             <Sider className="page-sider" width={364}>
@@ -41,9 +55,11 @@ class PageSider extends React.Component {
                         className="address-icon"/>
                     <p className="text"> {this.props.club.locations.length === 0 ? "Онлайн" : this.props.club.locations[0].address}</p>
                 </div>
-                <div className="map">
-                    <img src={`${process.env.PUBLIC_URL}/static/map.png`} alt="Map"/>
-                </div>
+                { this.checkLocation(this.props.club.locations) &&
+                    <div className="map"> 
+                        <ClubLocation locations={this.props.club.locations}/>
+                    </div>
+                 }
                 <div className="age">
                     <span className="sider-label">Вік аудиторії: </span>
                     <span className="years">від {this.props.club.ageFrom} до {this.props.club.ageTo} років</span>
