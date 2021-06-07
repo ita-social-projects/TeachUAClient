@@ -10,14 +10,10 @@ import "./css/CenterInfo.css"
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/maps-satellite-images/satellite-image-of-globe.jpg",
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg",
-        "https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/maps-satellite-images/satellite-image-of-globe.jpg",
-        "https://www.metoffice.gov.uk/binaries/content/gallery/metofficegovuk/hero-images/advice/maps-satellite-images/satellite-image-of-globe.jpg"
+        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/kids_jump.png",
+        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/balls.jpg",
+        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/exercise.jpg",
+        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/pencils.jpg",
     ];
 
     return (
