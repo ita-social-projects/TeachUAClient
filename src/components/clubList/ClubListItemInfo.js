@@ -39,7 +39,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                 </div>
                 <div className="address">
                     <EnvironmentFilled className="address-icon" />
-                    <span className="text">{club.address}</span>
+                    <span className="text">{club.locations.length === 0 ? "Онлайн" : club.locations[0].address}</span>
                 </div>
                 <div className="age">
                     <span className="sider-label">Вік аудиторії: </span>
