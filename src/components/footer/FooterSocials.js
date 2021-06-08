@@ -7,7 +7,7 @@ const FooterSocials = () => {
 
     return (
         <div className="footer-social">
-            <a href="/dev/">
+            <a href={process.env.PUBLIC_URL}>
                 <div className="footer-logo"/>
             </a>
             <div className="description">

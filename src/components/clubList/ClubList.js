@@ -119,7 +119,7 @@ const ClubList = ({
                 />
             )}
 
-            {isCenterChecked ? (
+            { isCenterChecked ? (
                 <CenterListDisplayContent
                     view={view}
                     centers={centers}

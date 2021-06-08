@@ -20,7 +20,7 @@ class UserPage extends React.Component {
         getUserById(userId).then(response => {
             this.setState({ user: response });
         }).catch((error) => {
-            window.location.assign("/dev")
+            window.location.assign(process.env.PUBLIC_URL)
             deleteToken();
             deleteUserId();
         });

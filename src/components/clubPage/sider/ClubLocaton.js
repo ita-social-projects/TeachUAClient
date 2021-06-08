@@ -76,15 +76,16 @@ const MapContainer = ({ locations }) => {
     
     return (
         <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={zoom}
-        onLoad={map => {
-            setMap(map);
-            chooseCenter();
-        }}
-        center={center}
-        options={option}
-        onZoomChanged={changeZoom}>
+            mapContainerStyle={mapContainerStyle}
+            zoom={zoom}
+            onLoad={map => {
+                    setMap(map);
+                    chooseCenter();
+            }}
+            center={center}
+            options={option}
+            onZoomChanged={changeZoom}
+        >
         <MarkerClusterer
             onClusteringEnd={(clusters) => {
                 clusters.clusters.map((cluster) => {
