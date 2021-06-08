@@ -9,7 +9,6 @@ const CenterPageContent = ({ center, loading }) => {
 
     return (
         <Content className="page-content">
-            {/*<PageRatingCenter rating={center.rating} count={feedbackCount}/>*/}
             {!center ?
                 <div className="content">У цього центру опису немає...</div>
                 :

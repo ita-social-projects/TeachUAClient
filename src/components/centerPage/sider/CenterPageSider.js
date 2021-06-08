@@ -22,7 +22,6 @@ const CenterPageSider = ({center}) => {
                 </div>
                 <div className="map">
                     <MapContainer locations={center.locations}/>
-                    {/*<img src={`${process.env.PUBLIC_URL}/static/map.png`} alt="Map"/>*/}
                 </div>
 
                 <ContactsInfoUtil label="Зв’яжіться з центром " contacts={center.contacts}/>
