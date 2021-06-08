@@ -22,10 +22,16 @@ const Login = ({verifyCode}) => {
                 saveToken(response.accessToken);
                 setLoginVisible(false);
                 if (verifyCode !== undefined) {
-                    window.location = "https://speak-ukrainian.org.ua/dev/";
+                    if(process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080"){
+                        window.location = "http://localhost:3000/dev";
+                    }else{
+                        window.location = process.env.REACT_APP_ROOT_SERVER + process.env.PUBLIC_URL;
+                    }
+                    //window.location = "https://speak-ukrainian.org.ua/dev/";
                     // window.location = "http://localhost:3000/dev";
                 }
                 let a = setTimeout(() => {
+                    console.log("before reload ");
                     window.location.reload();
                     clearTimeout(a);
                     }, 1000);

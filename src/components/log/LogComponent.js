@@ -30,7 +30,7 @@ const LogComponent = () => {
                   bordered
                   dataSource={logs}
                   renderItem={item => (
-                      <List.Item onClick={() => {window.location.assign(`/dev/log/${item}`)}}>
+                      <List.Item onClick={() => {window.location.assign(process.env.PUBLIC_URL+`/log/${item}`)}}>
                           <Button>{item}</Button>
                       </List.Item>
                   )}

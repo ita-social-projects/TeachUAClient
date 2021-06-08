@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Sider from "antd/es/layout/Sider";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
+import MapContainer from "../../clubPage/sider/ClubLocaton";
+
 
 const CenterPageSider = ({center}) => {
 
@@ -19,7 +21,7 @@ const CenterPageSider = ({center}) => {
                     <p className="text"> {center.locations[0].address}</p>
                 </div>
                 <div className="map">
-                    <img src={`${process.env.PUBLIC_URL}/static/map.png`} alt="Map"/>
+                    <MapContainer locations={center.locations}/>
                 </div>
 
                 <ContactsInfoUtil label="Зв’яжіться з центром " contacts={center.contacts}/>

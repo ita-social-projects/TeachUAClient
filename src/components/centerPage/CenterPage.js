@@ -23,10 +23,7 @@ const CenterPage = () => {
     const centerId  = useParams();
 
     const getData = () => {
-            console.log("props.match.params.id : "+centerId);
-            console.log("getCenterById start====>")
             getCenterById(centerId.id).then(response => {
-                console.log(response);
 
                 setCenter(response);
             }).catch(response => {
@@ -38,8 +35,6 @@ const CenterPage = () => {
     };
 
     useEffect(() =>  {
-        console.log("======= CenterPage starts rendering ======");
-        console.log("==== loading : "+loading);
         getData();
     },[]);
 
