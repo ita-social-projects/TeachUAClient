@@ -42,7 +42,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
 
-        values.contacts = JSON.stringify(contacts_data);
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
         values.locations = locations;
 
         setResult(Object.assign(result, values));
