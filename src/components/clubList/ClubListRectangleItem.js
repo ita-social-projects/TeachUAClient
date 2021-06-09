@@ -4,7 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
-import CategoryLogo from "../CategoryLogo";
+import ClubLogo from "../clubPage/header/ClubLogo";
 import "./css/ClubListRectangleItem.css"
 
 
@@ -14,7 +14,7 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
             <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}  key={club.name}>
                 <div className="item-rectangle-row">
                     <div className="title">
-                        <CategoryLogo category={club.categories[0]}/>
+                        <ClubLogo logo={club.urlLogo} category={club.categories[0]}/>
                         <div className="name">{club.name}</div>
                     </div>
                     {club.center !== null &&

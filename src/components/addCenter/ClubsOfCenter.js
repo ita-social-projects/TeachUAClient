@@ -1,6 +1,6 @@
 import { Form, Checkbox } from 'antd';
-import { useEffect, useState } from 'react';
-import CategoryLogo from "../CategoryLogo";
+import { useEffect } from 'react';
+import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
 import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService';
@@ -61,7 +61,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>
                                     <div className="checkbox-item-content">
-                                        <CategoryLogo category={club.categories[0]} /><span className="club-name">{club.name}</span>
+                                        <ClubLogo logo={club.urlLogo} category={club.categories[0]} /><span className="club-name">{club.name}</span>
                                     </div>
                                 </Checkbox>
                             </div>

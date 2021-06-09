@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import './css/PageHeader.css';
 import {Button} from "antd";
 import Tags from "../../Tags";
-import CategoryLogo from "../../CategoryLogo";
+import ClubLogo from "./ClubLogo";
 
 const PageHeader = ({club}) => {
     return (
-        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + club.urlBackground}) 50% 50% / cover no-repeat`}}>
+        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + (club.urlBackground == null ?"/static/images/club/bg_2.png" :club.urlBackground)}) 50% 50% / cover no-repeat`}}>
             <div className="blur">
                 <div className="row">
                     <div className="tags-name-box">
                         <div className="name-box">
-                            <CategoryLogo category={club.categories[0]}/>
+                            <ClubLogo logo={club.urlLogo} category={club.categories[0]}/>
                             <span className="club-name">{club.name}</span>
                         </div>
                         <Tags categories={club.categories}/>
