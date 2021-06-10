@@ -143,7 +143,7 @@
     
 }
 .aboutProject .row .info{
-    padding-top: 26px;
+    /*padding-top: 26px;*/
     padding-bottom: 45px;
 }
 .aboutProject .row .main{
@@ -197,7 +197,7 @@
     height:auto;
     max-width:100%;
     margin-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .image {
