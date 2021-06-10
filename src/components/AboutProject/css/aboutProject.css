@@ -130,8 +130,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom:10px;
+    /*margin-top: 20px;*/
+    /*margin-bottom:10px;*/
 }
 
 .aboutProject .row .col {
@@ -143,6 +143,10 @@
     
 }
 .aboutProject .row .info{
+    padding-top: 26px;
+    padding-bottom: 45px;
+}
+.aboutProject .row .main{
     padding-top: 0px;
     padding-bottom: 45px;
 }
@@ -192,8 +196,8 @@
 .aboutProject .image {
     height:auto;
     max-width:100%;
-    margin-top: 32px;
-    margin-bottom: 120px;
+    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .image {
