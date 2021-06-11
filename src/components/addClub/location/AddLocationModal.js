@@ -84,8 +84,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                 });
             });
 
-        // setInputAddressProps({validateStatus: 'success'});
-        // setCityOnInput(cityName);
+        setInputAddressProps({validateStatus: 'success'});
+        setCityOnInput(cityName);
     };
 
     const changeCity = () => {
@@ -196,14 +196,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        required: true,
                                    }]}
                                    {...inputAddressProps}>
-                            <Input className="add-club-input"
-                                   placeholder="Адреса"
-                            />
-                            {/*<AddClubInputAddress*/}
-                            {/*    editedLocation={editedLocation}*/}
-                            {/*    form={form}*/}
-                            {/*    setCityName={setCityName}*/}
-                            {/*    onChange={handleSelect}/>*/}
+                            <AddClubInputAddress
+                                editedLocation={editedLocation}
+                                form={form}
+                                setCityName={setCityName}
+                                onChange={handleSelect}/>
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="longitudeAndLatitude"
