@@ -1,7 +1,7 @@
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/ClubItem.css'
-import CategoryLogo from "../CategoryLogo";
+import ClubLogo from "../clubPage/header/ClubLogo";
 
 const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
     return (
@@ -14,7 +14,7 @@ const ClubItem = ({ mapClub, setZoom, setSelected, setCenter }) => {
             })
         }} className="club-item">
             <div className="title">
-                <CategoryLogo category={mapClub.categories[0]} />
+                <ClubLogo logo={mapClub.urlLogo} category={mapClub.categories[0]} />
                 <div className="name">{mapClub.name}</div>
             </div>
             <div className="address">

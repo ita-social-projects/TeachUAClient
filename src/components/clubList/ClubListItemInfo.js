@@ -3,7 +3,7 @@ import { Button, Modal, Rate } from 'antd';
 import "./css/ClubInfo.css"
 import { Link } from "react-router-dom";
 import Tags from "../Tags";
-import CategoryLogo from "../CategoryLogo";
+import ClubLogo from "../clubPage/header/ClubLogo";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import ContactsInfoUtil from '../../util/ContactsInfoUtil';
 import ImageCarousel from '../ImageCarousel';
@@ -29,7 +29,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
         >
             <div className="container">
                 <div className="title">
-                    <CategoryLogo category={club.categories[0]} />
+                    <ClubLogo logo={club.urlLogo} category={club.categories[0]} />
                     <div className="club-name">{club.name}</div>
                 </div>
                 <Tags className="categories" categories={club.categories} />

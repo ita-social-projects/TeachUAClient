@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
-import CategoryLogo from "../CategoryLogo";
+import ClubLogo from "../clubPage/header/ClubLogo";
 import { getShortContent } from "../editor/EditorConverter";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
@@ -21,7 +21,7 @@ const ClubListItem = ({ club, onClubClick }) => {
         <div>
             <Card className="card" key={club.name}>
                 <div className="title" onClick={() => onClubClick(club)}>
-                    <CategoryLogo category={club.categories[0]} />
+                    <ClubLogo logo={club.urlLogo} category={club.categories[0]} />
                     <div className="name">{club.name}</div>
                 </div>
                 <div className="club-tags-box" onClick={() => onClubClick(club)}>

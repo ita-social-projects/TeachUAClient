@@ -1,34 +1,30 @@
 import { Form, Input, Upload } from "antd";
-import React, { useRef, useEffect, useState } from "react";
-import AddClubContentFooter from "../AddClubContentFooter";
+import React, { useEffect } from "react";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import EditorComponent from "../../editor/EditorComponent";
 import { saveContent } from "../../editor/EditorConverter";
-import { transToEng } from "../../../util/Translit";
+import { v4 as uuidv4 } from 'uuid';
 import { UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
 import { addClub, getAllClubsByUserId } from "../../../service/ClubService";
 import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
-
 import { Button } from "antd";
 
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
     const [descriptionForm] = Form.useForm();
-    const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+    const folderName = uuidv4();
+    const logoFolder = `clubs/${folderName}/logo`;
+    const coverFolder = `clubs/${folderName}/background`;
 
     const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
     const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
 
     useEffect(() => {
         if (result) {
-            console.log(result);
             descriptionForm.setFieldsValue({ ...result })
         }
     }, []);
 
     const prevStep = () => {
-        console.log("DESC VAL")
-        console.log(result);
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         setStep(step - 1);
     }
@@ -38,8 +34,16 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
         const text = result.description.replace(/(\r\n|\n|\r)/gm, "");
         const descJSON = leftDesc + text + rightDesc;
         values.description = saveContent(descJSON);
-
         setResult(Object.assign(result, values));
+
+        if (values.urlLogo && values.urlLogo.file) {
+            result.urlLogo = savePhoto(values.urlLogo.file, logoFolder);
+        }
+
+        if (values.urlBackground && values.urlBackground.file) {
+            result.urlBackground = savePhoto(values.urlBackground.file, coverFolder);
+        }
+
         addClub(result).then(response => {
             setVisible(false);
             setResult(null);
@@ -51,9 +55,21 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 })
             }
         });
+        
         window.location.reload();
     };
 
+    const savePhoto = (image, folder) => {
+        let data = new FormData();
+        data.append("image", image);
+        data.append("folder", folder);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", UPLOAD_IMAGE_URL, false);
+        xhr.send(data);
+        
+        return xhr.response;
+    }
 
     return (
         <Form
@@ -68,11 +84,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback>
                 <Upload
                     name="image"
-                    action={UPLOAD_IMAGE_URL}
+                    accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
-                    data={{ folder: `clubs/${clubName}/logo` }}
                     headers={{ contentType: 'multipart/form-data' }}
                     showUploadList={false}
+                    beforeUpload={() => false}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити лого</span>
                 </Upload>
@@ -83,11 +99,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback>
                 <Upload
                     name="image"
-                    action={UPLOAD_IMAGE_URL}
+                    accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
-                    data={{ folder: `clubs/${clubName}/background` }}
                     headers={{ contentType: 'multipart/form-data' }}
                     showUploadList={false}
+                    beforeUpload={() => false}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити обкладинку</span>
                 </Upload>
