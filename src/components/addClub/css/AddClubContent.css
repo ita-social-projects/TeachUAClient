@@ -6,9 +6,9 @@
     margin-top: 32px;
 }
 
-.add-club-content .ant-form-item-explain > div {
-    display: none;
-}
+/*.add-club-content .ant-form-item-explain > div {*/
+/*    display: none;*/
+/*}*/
 
 .add-club-contacts .add-club-contact .ant-form-item-explain > div {
     display: block;

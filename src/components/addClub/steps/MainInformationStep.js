@@ -69,14 +69,21 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                        className="add-club-row"
                        label="Назва"
                        hasFeedback
-                       rules={[{
-                           required: true,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/
-                       },
-                       {
-                           required: true,
-                           pattern: /^.*\S$/
-                       }]}>
+                       rules={[
+                           {
+                               required: true,
+                               message: "Введіть назву гуртка",
+                           },
+                           {
+                               required: false,
+                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                               message: "Некоректна назва гуртка",
+                           },
+                           {
+                               required: false,
+                               pattern: /^.*\S$/,
+                               message: "Некоректна назва гуртка",
+                           }]}>
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
             </Form.Item>
@@ -84,9 +91,11 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                        className="add-club-row"
                        label="Категорія"
                        hasFeedback
-                       rules={[{
-                           required: true,
-                       }]}>
+                       rules={[
+                           {
+                               required: true,
+                               message: "Це поле є обов'язковим"
+                           }]}>
                 <Checkbox.Group className="add-club-categories">
                     {categories.map(category => <Checkbox
                         value={category.name}>{category.name}</Checkbox>)}

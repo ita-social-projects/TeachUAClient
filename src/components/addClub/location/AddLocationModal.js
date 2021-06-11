@@ -17,8 +17,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
-    const [isActive, setActive] = useState(true)
-    const [station,setStation] = useState([])
+    const [isActive, setActive] = useState(false)
+    const [station, setStation] = useState([])
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
@@ -38,9 +38,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
         if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.cityName != null) {
-            setActive(false)
-        } else setActive(true)
+            setActive(true)
+        } else setActive(false)
     }
+
     const onClose = () => {
         if (editedLocation) {
             setEditedLocation(null);
@@ -56,10 +57,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         }
         console.log(values)
         values.key = Math.random();
-        const coordinates = [{latitude: locationForm.latitude,longitude: locationForm.longitude, }]
+        const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
         const newValues = coordinates.reduce(
-                               (result, item) =>
-                                                     Object.assign({}, result, item), values)
+            (result, item) =>
+                Object.assign({}, result, item), values)
         delete newValues['longitudeAndLatitude']
         if (editedLocation) {
             const index = locations.findIndex((item) => editedLocation.key === item.key);
@@ -124,13 +125,20 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    className="add-club-row"
                                    label="Назва"
                                    hasFeedback
-                                   rules={[{
-                                       required: true,
-                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/
-                                   },
+                                   rules={[
                                        {
                                            required: true,
-                                           pattern: /^.*\S$/
+                                           message: "Це поле є обов'язковим"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                                           message: "Некоректна назва локації",
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^.*\S$/,
+                                           message: "Некоректна назва локації",
                                        }]}
                         >
                             <Input className="add-club-input"
@@ -194,6 +202,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    validateTrigger={handleSelect}
                                    rules={[{
                                        required: true,
+                                       message: "Це поле є обов'язковим"
                                    }]}
                                    {...inputAddressProps}>
                             <AddClubInputAddress
@@ -209,6 +218,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        hasFeedback
                                        rules={[{
                                            required: true,
+                                           message: "Це поле є обов'язковим"
                                        }]}>
                                 <Input className="add-club-input add-club-select"
                                        suffix={
@@ -223,18 +233,29 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    className="add-club-row"
                                    label="Номер телефону"
                                    hasFeedback
-                                   rules={[{
-                                       required: true,
-                                       pattern: /^\d{9}$/
-                                   }]}>
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^\d{9}$/,
+                                           message: "Телефон не відповідає вказаному формату"
+                                       }]}>
                             <Input className="add-club-input"
                                    prefix='+380'
                                    placeholder="___________"/>
                         </Form.Item>
 
                         <div className="add-club-content-footer add-club-add-location-button">
-                            <Button disabled={isActive} htmlType="submit"
-                                    className="flooded-button add-club-content-next">Додати</Button>
+                            {
+                                isActive ?
+                                    <Button htmlType="submit"
+                                            className="flooded-button add-club-content-next">Додати</Button> :
+                                    <Button disabled={!isActive} htmlType="submit"
+                                            className="flooded-button add-club-content-next-disabled">Додати</Button>
+                            }
                         </div>
                     </Form>
                 </div>
