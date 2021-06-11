@@ -89,7 +89,7 @@ const RegistrationInput = ({disabledButton}) => {
                                    message: 'Телефон не може містити пробіли',
                                },
                                {
-                                   pattern: /^.{10}$/,
+                                   pattern: /^.{9}$/,
                                    message: "Телефон не відповідає вказаному формату",
                                },
                                {
@@ -99,7 +99,7 @@ const RegistrationInput = ({disabledButton}) => {
                                }]}>
                     <Input className="registration-box"
                            placeholder="__________"
-                           prefix='+38'
+                           prefix='+380'
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
