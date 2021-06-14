@@ -17,15 +17,15 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
-    const [isActive, setActive] = useState(false)
+    const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates,setCoordinates] = useState();
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
-        latitude: "",
-        longitude: "",
-        phoneNumber: ""
+        latAndLng:"",
+        phoneNumber: "",
+        inputAddress:""
     })
 
     useEffect(() => {
@@ -34,13 +34,17 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     }, [cityName]);
 
     const onChange = e => {
+        if (e.target.id === "address")
+            locationForm.inputAddress = e.target.value
+        if(e.target.id === "coordinates")
+            locationForm.latAndLng = e.target.value
         if (e.target.id === "name")
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.cityName != null) {
-            setActive(true)
-        } else setActive(false)
+        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+            setDisabled(false)
+        } else setDisabled(true)
     }
 
     const onClose = () => {
@@ -233,7 +237,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            required: true,
                                            message: "Це поле є обов'язковим",
                                            pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
-                                       }]}>
+                                       },{
+                                           message:"Координате не можуть містити букви",
+                                           pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
+                                       }
+                                       ]}>
                                 <Input className="add-club-input add-club-select"
                                      value={coordinates}
                                        onInput={e => setCoordinates(e.target.value) }
@@ -267,10 +275,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
 
                         <div className="add-club-content-footer add-club-add-location-button">
                             {
-                                isActive ?
+                                !isDisabled ?
                                     <Button htmlType="submit"
                                             className="flooded-button add-club-content-next">Додати</Button> :
-                                    <Button disabled={!isActive} htmlType="submit"
+                                    <Button disabled={isDisabled} htmlType="submit"
                                             className="flooded-button add-club-content-next-disabled">Додати</Button>
                             }
                         </div>
