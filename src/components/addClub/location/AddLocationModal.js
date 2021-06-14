@@ -19,6 +19,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [cityName, setCityName] = useState(null);
     const [isActive, setActive] = useState(false)
     const [station, setStation] = useState([])
+    const [coordinates,setCoordinates] = useState();
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
@@ -51,42 +52,44 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     };
 
     const onFinish = (values) => {
+        console.log(coordinates)
         if (inputAddressProps.validateStatus === 'error') {
             message.error("Некоректно вибрана адреса");
             return;
         }
         console.log(values)
         values.key = Math.random();
-        const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
-        const newValues = coordinates.reduce(
-            (result, item) =>
-                Object.assign({}, result, item), values)
-        delete newValues['longitudeAndLatitude']
+        // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
+        // const newValues = coordinates.reduce(
+        //     (result, item) =>
+        //         Object.assign({}, result, item), values)
+        // delete newValues['longitudeAndLatitude']
         if (editedLocation) {
             const index = locations.findIndex((item) => editedLocation.key === item.key);
-            locations[index] = newValues;
+            locations[index] = values;
             setLocations(locations);
         } else {
-            setLocations(addToTable(locations, newValues));
+            setLocations(addToTable(locations, values));
         }
 
         onClose();
     };
 
-    const handleSelect = (address) => {
-        geocodeByAddress(address.label)
-            .then(results => getLatLng(results[0]))
-            .then(({lat, lng}) => {
-                locationForm.latitude = lat
-                locationForm.longitude = lng
-                form.setFieldsValue({
-                    longitudeAndLatitude: lat + "," + lng,
-
-                });
-            });
-
-        setInputAddressProps({validateStatus: 'success'});
-        setCityOnInput(cityName);
+    const handleSelect = (coordinates) => {
+            console.log(coordinates)
+    //     geocodeByAddress(address.label)
+    //         .then(results => getLatLng(results[0]))
+    //         .then(({lat, lng}) => {
+    //             locationForm.latitude = lat
+    //             locationForm.longitude = lng
+    //             form.setFieldsValue({
+    //                 coordinates: lat + "," + lng,
+    //
+    //             });
+    //         });
+    //
+    //     setInputAddressProps({validateStatus: 'success'});
+    //     setCityOnInput(cityName);
     };
 
     const changeCity = () => {
@@ -199,33 +202,38 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    className="add-club-row"
                                    label="Адреса"
                                    hasFeedback
-                                   validateTrigger={handleSelect}
                                    rules={[{
                                        required: true,
                                        message: "Це поле є обов'язковим"
-                                   }]}
-                                   {...inputAddressProps}>
-                            <AddClubInputAddress
-                                editedLocation={editedLocation}
-                                form={form}
-                                setCityName={setCityName}
-                                onChange={handleSelect}/>
+                                   }]}>
+                            <Input className="add-club-input"
+                                   placeholder="Адреса"
+                            />
+                            {/*<AddClubInputAddress*/}
+                            {/*    editedLocation={editedLocation}*/}
+                            {/*    form={form}*/}
+                            {/*    setCityName={setCityName}*/}
+                            {/*    onChange={handleSelect}/>*/}
                         </Form.Item>
                         <div className="add-club-inline">
-                            <Form.Item name="longitudeAndLatitude"
+                            <Form.Item name="coordinates"
                                        className="add-club-row"
                                        label="Географічні координати"
                                        hasFeedback
                                        rules={[{
                                            required: true,
-                                           message: "Це поле є обов'язковим"
+                                           message: "Це поле є обов'язковим",
+                                           pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
                                        }]}>
                                 <Input className="add-club-input add-club-select"
-                                       suffix={
-                                           <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                               <InfoCircleOutlined className="info-icon"/>
-                                           </Tooltip>
-                                       }
+                                     value={coordinates}
+                                       onInput={e => setCoordinates(e.target.value) }
+
+                                    // suffix={
+                                       //     <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                       //         <InfoCircleOutlined className="info-icon"/>
+                                       //     </Tooltip>
+                                       // }
                                        placeholder="Довгота та широта"/>
                             </Form.Item>
                         </div>

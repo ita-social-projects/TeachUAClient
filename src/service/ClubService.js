@@ -4,11 +4,11 @@ import { replaceCommaToSemicolon } from "../util/CategoryUtil";
 import { searchParameters } from "../context/SearchContext";
 
 export const addClub = async (data) => {
-    data.locations.map(
-        (location) =>
-            (location.address =
-                location.address.value.structured_formatting.main_text)
-    );
+    // data.locations.map(
+    //     (location) =>
+    //         (location.address =
+    //             location.address.value.structured_formatting.main_text)
+    // );
     return await fetchRequest
         .post(BASE_URL + "/api/club", {
             categoriesName: data.categories,
