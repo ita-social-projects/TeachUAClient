@@ -153,6 +153,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        hasFeedback
                                        rules={[{
                                            required: true,
+                                           message: "Це поле є обов'язковим"
                                        }]}>
                                 <Select
                                     onClick={onChange}
@@ -175,7 +176,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="districtName"
                                        className="add-club-row"
                                        label="Район міста"
-                                       hasFeedback>
+                                       hasFeedback
+                                       rules={[{
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       }]}>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
@@ -186,7 +191,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="stationName"
                                        className="add-club-row"
                                        label="Метро/Місцевість"
-                                       hasFeedback>
+                                       hasFeedback
+                                       rules={[{
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       }]}>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
