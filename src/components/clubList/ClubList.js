@@ -1,6 +1,6 @@
-import { Form, Layout, Pagination } from "antd";
-import { SearchContext, searchParameters } from "../../context/SearchContext";
-import React, { useContext, useEffect, useState } from "react";
+import {Form, Layout, Pagination} from "antd";
+import {SearchContext, searchParameters} from "../../context/SearchContext";
+import React, {useContext, useEffect, useState} from "react";
 import {
     getClubsByAdvancedSearch,
     getClubsByParameters,
@@ -9,24 +9,26 @@ import PropTypes from "prop-types";
 import "./css/ClubList.less";
 import "../centerList/css/CenterList.less";
 import ClubListSider from "./ClubListSider";
-import { getCentersByAdvancedSearch } from "../../service/CenterService";
+import {getCentersByAdvancedSearch} from "../../service/CenterService";
 import CenterListDisplayContent from "../centerList/CenterListDisplayContent";
 import ClubsListDisplayContent from "./ClubsListDisplayContent";
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
-const { Content } = Layout;
+import {PageContext} from "../../context/PageContext";
+
+const {Content} = Layout;
 
 const ClubList = ({
-    loading,
-    load,
-    advancedSearch,
-    defaultSortBy,
-    defaultSortDir,
-    defaultSortView,
-}) => {
+                      loading,
+                      load,
+                      advancedSearch,
+                      defaultSortBy,
+                      defaultSortDir,
+                      defaultSortView,
+                  }) => {
     const [searchForm] = Form.useForm();
-    const { clubs, setClubs } = useContext(SearchContext);
-    const [currentPage, setCurrentPage] = useState(0);
+    const {clubs, setClubs} = useContext(SearchContext);
+    const {currentPage, setCurrentPage} = useContext(PageContext);
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
     const [sortBy, setSortBy] = useState(defaultSortBy);
@@ -119,7 +121,7 @@ const ClubList = ({
                 />
             )}
 
-            { isCenterChecked ? (
+            {isCenterChecked ? (
                 <CenterListDisplayContent
                     view={view}
                     centers={centers}

@@ -28,7 +28,9 @@ import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challengePage/ChallengePage";
 
-const { Content } = Layout;
+import {PageContext} from "./context/PageContext";
+
+const {Content} = Layout;
 
 function App() {
     const [clubs, setClubs] = useState({
@@ -38,44 +40,49 @@ function App() {
         totalElements: 0
     });
 
+    const [currentPage, setCurrentPage] = useState(0);
+
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
+    const pageProvider = useMemo(() => ({currentPage, setCurrentPage}), [currentPage, setCurrentPage]);
 
     return (
         <Layout className="layout">
             <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
-                <SearchContext.Provider value={clubProvider}>
-                    <HeaderComponent/>
-                    <Layout>
-                        <Content className="global-content">
-                            <Switch>
-                                <Route path="/admin/categories" exact component={CategoryTable}/>
-                                <Route path="/admin/districts" exact component={DistrictTable}/>
-                                <Route path="/admin/questions" exact component={QuestionTable}/>
-                                <Route path="/admin/users" exact component={UsersTable}/>
-                                <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
-                                <Route path="/admin/import-database" exact component={ImportDatabase}/>
-                                <Route path="/admin/cities" exact component={CityTable}/>
-                                <Route path="/admin/questions" exact component={QuestionTable}/>
-                                <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
-                                <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
-                                <Route path="/admin/stations" exact component={StationTable}/>
-                                <Route path="/club/:id" exact component={ClubPage}/>
-                                <Route path="/center/:id" exact component={CenterPage}/>
-                                <Route path="/clubs" exact component={ClubListComponent}/>
-                                <Route path="/user/:id" exact component={UserPage}/>
-                                <Route path="/verify" exact component={VerifyPage}/>
-                                <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
-                                <Route path="/challenge" exact component={ChallengePage} />
-                                <Route path="/service" exact component={ServiceInUkr}/>
-                                <Route path="/about" exact component={AboutProject}/>
-                                <Route path="/logs" exact component={LogComponent}/>
-                                <Route path="/log/:id" exact component={LogByNameComponent}/>
-                                <Route path="/" component={MainComponent}/>
-                            </Switch>
-                        </Content>
-                    </Layout>
-                </SearchContext.Provider>
+                <PageContext.Provider value={pageProvider}>
+                    <SearchContext.Provider value={clubProvider}>
+                        <HeaderComponent/>
+                        <Layout>
+                            <Content className="global-content">
+                                <Switch>
+                                    <Route path="/admin/categories" exact component={CategoryTable}/>
+                                    <Route path="/admin/districts" exact component={DistrictTable}/>
+                                    <Route path="/admin/questions" exact component={QuestionTable}/>
+                                    <Route path="/admin/users" exact component={UsersTable}/>
+                                    <Route path="/admin/contact-types" exact component={ContactTypeTable}/>
+                                    <Route path="/admin/import-database" exact component={ImportDatabase}/>
+                                    <Route path="/admin/cities" exact component={CityTable}/>
+                                    <Route path="/admin/questions" exact component={QuestionTable}/>
+                                    <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
+                                    <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
+                                    <Route path="/admin/stations" exact component={StationTable}/>
+                                    <Route path="/club/:id" exact component={ClubPage}/>
+                                    <Route path="/center/:id" exact component={CenterPage}/>
+                                    <Route path="/clubs" exact component={ClubListComponent}/>
+                                    <Route path="/user/:id" exact component={UserPage}/>
+                                    <Route path="/verify" exact component={VerifyPage}/>
+                                    <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
+                                    <Route path="/challenge" exact component={ChallengePage}/>
+                                    <Route path="/service" exact component={ServiceInUkr}/>
+                                    <Route path="/about" exact component={AboutProject}/>
+                                    <Route path="/logs" exact component={LogComponent}/>
+                                    <Route path="/log/:id" exact component={LogByNameComponent}/>
+                                    <Route path="/" component={MainComponent}/>
+                                </Switch>
+                            </Content>
+                        </Layout>
+                    </SearchContext.Provider>
+                </PageContext.Provider>
                 <FooterComponent/>
             </Router>
         </Layout>
