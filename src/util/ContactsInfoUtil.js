@@ -1,23 +1,58 @@
-import '../components/clubPage/sider/css/SocialMedia.css';
-import React, {useState, useEffect} from "react";
+import "../components/clubPage/sider/css/SocialMedia.css";
 import MaskIcon from "../components/MaskIcon";
-import {getAllContacts} from "../service/ContactService";
 
-const ContactsInfoUtil = ({label, contacts}) => {
+const ContactsInfoUtil = ({ label, contacts }) => {
+    const contactsArray = Array.from(contacts);
 
-    //console.log(contacts);
-    const contactsArray=Array.from(contacts);
-    return (<div className="social-media">
+    function validatePhone(phone) {
+        let numbers = phone.replace(/\D/g, "");
+        let result;
+        switch (numbers.length) {
+            case 9:
+                result = `+380${numbers}`;
+                break;
+            case 10:
+                result = `+38${numbers}`;
+                break;
+            case 11:
+                result = `+3${numbers}`;
+                break;
+            case 12:
+                result = `+${numbers}`;
+                break;
+            default:
+                result = numbers;
+                break;
+        }
+        return result;
+    }
+
+    let validatedContactData = (contact) => {
+        let result = contact.contact_data;
+        if (contact.contactType.name === "Телефон")
+            result = validatePhone(contact.contact_data);
+
+        return result;
+    };
+
+    return (
+        <div className="social-media">
             <span className="label">{label}</span>
             <div className="links">
-                {contactsArray.map(contact =>
+                {contactsArray.map((contact) => (
                     <div className="contact" key={contact.contact_data}>
-                        <MaskIcon  maskColor="#0D2C95" iconUrl={contact.contactType.urlLogo}/>
-                        <span className="contact-name">{contact.contact_data}</span>
-                    </div>)}
+                        <MaskIcon
+                            maskColor="#0D2C95"
+                            iconUrl={contact.contactType.urlLogo}
+                        />
+                        <span className="contact-name">
+                            {validatedContactData(contact)}
+                        </span>
+                    </div>
+                ))}
             </div>
         </div>
-    )
+    );
 };
 
 export default ContactsInfoUtil;
