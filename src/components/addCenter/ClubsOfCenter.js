@@ -7,7 +7,6 @@ import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 
-
 const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations }) => {
     const [clubsOfCenterForm] = Form.useForm();
 
@@ -23,6 +22,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
 
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
+        console.log(result)
         addCenter(result).then(response => {
             console.log(response);
             setResult(null)
@@ -47,29 +47,28 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             onFinish={onFinish}
             form={clubsOfCenterForm}
         >
+            <Form.Item
+            className="form-item"
+            label="Оберіть гурток"
+            name="clubs"
+            rules={[{
+                required: true,
+                message: "Виберіть гуртки приналежні до центру"
+            }]}>
             <div className="form-fields">
-                <Form.Item
-                    className="form-item"
-                    label="Оберіть гурток"
-                    name="clubs"
-                    rules={[{
-                        required: true,
-                        message: "Виберіть гуртки приналежні до центру"
-                    }]}>
-                    <Checkbox.Group >
+
+                    <Checkbox.Group  >
                         {clubs.map(club => (
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>
-                                    <div className="checkbox-item-content">
                                         <ClubLogo logo={club.urlLogo} category={club.categories[0]} /><span className="club-name">{club.name}</span>
-                                    </div>
                                 </Checkbox>
                             </div>
                         ))}
                     </Checkbox.Group>
-                </Form.Item>
-                <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} /> </span>
             </div>
+            </Form.Item>
+            <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} /> </span>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
                 <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>

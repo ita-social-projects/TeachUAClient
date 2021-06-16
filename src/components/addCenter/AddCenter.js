@@ -81,7 +81,6 @@ const AddCenter = () => {
                     step={step}
                     setStep={setStep}
                     result={result}
-                    result={result}
                     setResult={setResult}
                 />;
 
@@ -120,6 +119,7 @@ const AddCenter = () => {
                             <Step title="Опис"></Step>
                             <Step title="Гуртки"></Step>
                         </Steps>
+
                     </div>
                     <div className="content">
                         <div className="modal-title">

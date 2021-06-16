@@ -1,10 +1,12 @@
-import { Form, Input } from 'antd';
-import React, { useEffect } from 'react';
+import {Button, Form, Input} from 'antd';
+import React, {useEffect, useState} from 'react';
 import MaskIcon from '../MaskIcon';
 import "./css/Contacts.css";
 
 const Contacts = ({ step, setStep, contacts, result, setResult }) => {
     const [contactsForm] = Form.useForm();
+    const [contacts_data, setContactsData] = useState({});
+
 
     useEffect(() => {
         if (result) {
@@ -23,6 +25,19 @@ const Contacts = ({ step, setStep, contacts, result, setResult }) => {
         setResult(Object.assign(result, contactsForm.getFieldValue()));
         setStep(step - 1);
     }
+    const isEmailField = (contact) => {
+        return contact.name === "Пошта";
+    }
+
+    const isPhoneField = (contact) => {
+        return contact.name === "Телефон";
+    }
+    const changeContacts = (event, contact) => {
+        setContactsData({
+            ...contacts_data,
+            [contact.id]: event.target.value
+        });
+    };
 
     const onFinish = (values) => {
         console.log("VALUES")
@@ -45,20 +60,51 @@ const Contacts = ({ step, setStep, contacts, result, setResult }) => {
                     label="Контакти"
                     className="add-club-row add-club-contacts">
                     {contacts.map(contact =>
-                        <Form.Item name={`clubContact${contact.name}`}
-                            className="add-club-contact"
-                            initialValue={result[`clubContact${contact.name}`]}
-                            hasFeedback
-                        >
+                        <Form.Item name={`contact${contact.name}`}
+                                   className="add-club-contact"
+                                   initialValue={result[`contact${contact.name}`]}
+                                   rules={[
+                                       isEmailField(contact) &&
+                                       {
+                                           required: false,
+                                           type: "email",
+                                           message: "Некоректний формат email"
+                                       },
+                                       isPhoneField(contact) &&
+                                       {
+                                           required: true,
+                                           message: "Введіть номер телефону"
+                                       },
+                                       isPhoneField(contact) &&
+                                       {
+                                           required: false,
+                                           pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                                           message: "Телефон не може містити спеціальні символи"
+                                       },
+                                       isPhoneField(contact) && {
+                                           required: false,
+                                           pattern: /^.{9}$/,
+                                           message: "Телефон не відповідає вказаному формату"
+                                       },
+                                       isPhoneField(contact) && {
+                                           required: false,
+                                           pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                                           message: "Телефон не може містити літери"
+                                       }
+                                   ]}
+                                   hasFeedback>
                             <Input className="add-club-input"
-                                placeholder="Заповніть поле"
-                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
+                                   name={contact.name}
+                                   prefix={isPhoneField(contact) ?"+380" :undefined}
+                                   placeholder={isPhoneField(contact) ?"__________" :"Заповніть поле"}
+                                   onChange={(e) => changeContacts(e, contact)}
+                                   suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
                         </Form.Item>)}
                 </Form.Item>
             </div>
             <div className="btn">
-                <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
-                <button className="next-btn" htmlType="submit">Наступний крок</button>
+                <Button className="prev-btn" type="button" onClick={prevStep}>Назад</Button>
+                <Button className="next-btn" htmlType="submit" onClick={nextStep}>Наступний крок</Button>
             </div>
         </Form >
     )
