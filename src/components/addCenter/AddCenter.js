@@ -72,6 +72,7 @@ const AddCenter = () => {
                     step={step}
                     setStep={setStep}
                     contacts={contacts}
+                    setContacts={setContacts}
                     result={result}
                     setResult={setResult}
                 />;

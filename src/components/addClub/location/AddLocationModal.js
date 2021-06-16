@@ -56,11 +56,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     };
 
     const onFinish = (values) => {
-        console.log(coordinates)
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
-        }
+        // console.log(coordinates)
+        // if (inputAddressProps.validateStatus === 'error') {
+        //     message.error("Некоректно вибрана адреса");
+        //     return;
+        // }
         console.log(values)
         values.key = Math.random();
         // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]

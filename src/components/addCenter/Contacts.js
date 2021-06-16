@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import MaskIcon from '../MaskIcon';
 import "./css/Contacts.css";
 
-const Contacts = ({ step, setStep, contacts, result, setResult }) => {
+const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) => {
     const [contactsForm] = Form.useForm();
     const [contacts_data, setContactsData] = useState({});
 
@@ -41,10 +41,9 @@ const Contacts = ({ step, setStep, contacts, result, setResult }) => {
 
     const onFinish = (values) => {
         console.log("VALUES")
-        console.log(values);
-        setResult(Object.assign(result, values));
+        setResult(Object.assign(result,values))
+        console.log("++++" + result)
         nextStep();
-        contactsForm.resetFields();
     }
 
 
@@ -102,9 +101,9 @@ const Contacts = ({ step, setStep, contacts, result, setResult }) => {
                         </Form.Item>)}
                 </Form.Item>
             </div>
-            <div className="btn">
-                <Button className="prev-btn" type="button" onClick={prevStep}>Назад</Button>
-                <Button className="next-btn" htmlType="submit" onClick={nextStep}>Наступний крок</Button>
+            <div className="add-club-content-footer">
+                <Button ghost={true} className="add-club-content-prev" type="button" onClick={prevStep}>Назад</Button>
+                <Button className="flooded-button add-club-content-next" htmlType="submit">Наступний крок</Button>
             </div>
         </Form >
     )

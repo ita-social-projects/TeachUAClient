@@ -1,5 +1,5 @@
 import { Form, Checkbox } from 'antd';
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
@@ -9,6 +9,7 @@ import { addCenter } from '../../service/CenterService';
 
 const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations }) => {
     const [clubsOfCenterForm] = Form.useForm();
+    const [clubsId,setClubsIds] = useState([]);
 
     const nextStep = () => {
         setStep(0);
@@ -19,9 +20,13 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         setResult(Object.assign(result, clubsOfCenterForm.getFieldValue()));
         setStep(step - 1);
     }
-
+    const onChange = e => {
+        setClubsIds(e)
+    }
     const onFinish = (values) => {
+        console.log(values)
         setResult(Object.assign(result, values));
+        result.clubs = clubsId;
         console.log(result)
         addCenter(result).then(response => {
             console.log(response);
@@ -57,7 +62,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             }]}>
             <div className="form-fields">
 
-                    <Checkbox.Group  >
+                    <Checkbox.Group onChange={onChange} >
                         {clubs.map(club => (
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>

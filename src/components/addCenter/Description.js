@@ -29,6 +29,7 @@ const Description = ({ step, setStep, result, setResult }) => {
     }, [])
 
     const onFinish = (values) => {
+        console.log(values)
         values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
@@ -78,7 +79,8 @@ const Description = ({ step, setStep, result, setResult }) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><]){40,1500}\S$|\s/
+                               pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:;<=>?@_`{}~^\/[\]]{40,1500}$/,
+                               message: " Некоректний опис гуртка"
                            }]}
                 >
                     <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
