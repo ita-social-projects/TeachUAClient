@@ -15,7 +15,7 @@ const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
                 <div className="city-name-box-small-screen">
                     {mapSearchParameters.cityName !== 'online' ?
 
-                            <h2 className="city-name">{"Гуртки у місті " + searchParameters.cityName}</h2>
+                            <h2 className="city-name">{searchParameters.cityName !== undefined ? "Гуртки у місті " + searchParameters.cityName : "Гуртки у всіх містах"}</h2>
                             :
                             <h2 className="city-name">Гуртки без локації</h2>}
                     <EnvironmentFilled className="icon"/>

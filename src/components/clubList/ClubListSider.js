@@ -128,6 +128,7 @@ const ClubListSider = ({
                             : searchParameters.cityName
                     }>
                     <Select
+                        allowClear
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
