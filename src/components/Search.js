@@ -39,8 +39,8 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
-        if (this.props.redirect) {
-            this.props.history.push("/clubs");
+        if (this.props.redirect && value.length > 2) {
+            this.props.history.push("/clubs",{value});
         }
 
         if (!searchParameters.isAdvancedSearch) {
