@@ -1,4 +1,4 @@
-import {Avatar, Card} from "antd";
+import {Avatar, Card, Dropdown} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/UserCenterCardItem.less';
@@ -6,6 +6,9 @@ import PropTypes from "prop-types";
 import UserClubCardItem from "./UserClubCardItem";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import CenterEditModal from "./CenterEditModal";
+import clubUpdateMenu from "./ClubUpdateMenu";
+import {MoreOutlined} from "@ant-design/icons";
+import centerUpdateMenu from "./CenterUpdateMenu";
 
 
 const UserCenterCardItem = ({center}) => {
@@ -32,7 +35,9 @@ const UserCenterCardItem = ({center}) => {
                 </div>
                 <div className="center-right">
                     <div className="center-edit-button">
-                        <CenterEditModal/>
+                        <Dropdown overlay={centerUpdateMenu(center.id)} placement="bottomRight">
+                            <MoreOutlined/>
+                        </Dropdown>
                     </div>
                     <div className="address">
                         <EnvironmentFilled className="address-icon"/>

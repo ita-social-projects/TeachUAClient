@@ -38,6 +38,15 @@ export const getCentersByAdvancedSearch = async (parameters, page) => {
         return response.data
     });
 }
+export const deleteCenterById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/center/" + id)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.data;
+        })
+}
 
 
 export const addCenter = async (data) => {
@@ -60,4 +69,6 @@ export const addCenter = async (data) => {
     }).catch((error) => {
         return error.response.data
     })
+
+
 };

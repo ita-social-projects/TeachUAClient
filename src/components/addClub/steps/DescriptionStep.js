@@ -56,6 +56,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 })
             }
         });
+        window.location.reload()
     };
 
     const savePhoto = (image, folder) => {
