@@ -23,6 +23,7 @@ const AddCenter = () => {
     const [locations, setLocations] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [result, setResult] = useState({});
+    const [fromCenter,setFromCenter] = useState(true);
 
     useEffect(() => {
         getAllClubsByUserId(getUserId()).then(response => {
@@ -95,6 +96,7 @@ const AddCenter = () => {
                     result={result}
                     setResult={setResult}
                     setLocations={setLocations}
+                    fromCenter={fromCenter}
                 />;
         }
     };

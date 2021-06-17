@@ -7,7 +7,7 @@ import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 
-const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations }) => {
+const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
     const [clubsOfCenterForm] = Form.useForm();
     const [clubsId,setClubsIds] = useState([]);
 
@@ -24,10 +24,9 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         setClubsIds(e)
     }
     const onFinish = (values) => {
-        console.log(values)
         setResult(Object.assign(result, values));
         result.clubs = clubsId;
-        console.log(result)
+        console.log(result);
         addCenter(result).then(response => {
             console.log(response);
             setResult(null)
@@ -73,7 +72,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                     </Checkbox.Group>
             </div>
             </Form.Item>
-            <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} /> </span>
+            <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} fromCenter={fromCenter} /> </span>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
                 <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>

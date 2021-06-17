@@ -11,6 +11,9 @@ const Description = ({ step, setStep, result, setResult }) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+    const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
+    const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
+
 
     const nextStep = () => {
         setStep(step + 1);
@@ -29,8 +32,6 @@ const Description = ({ step, setStep, result, setResult }) => {
     }, [])
 
     const onFinish = (values) => {
-        console.log(values)
-        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         nextStep();
@@ -88,7 +89,7 @@ const Description = ({ step, setStep, result, setResult }) => {
             </div>
             <div className="btn">
                 <Button className="prev-btn" type="button" onClick={prevStep}>Назад</Button>
-                <Button className="next-btn" htmlType="submit" onClick={nextStep} >Наступний крок</Button>
+                <Button className="next-btn" htmlType="submit">Наступний крок</Button>
             </div>
         </Form>
 
