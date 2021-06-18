@@ -68,7 +68,7 @@ const ServiceInUkr = () => {
                 {questions.map(question =>
                     <Collapse class="collapse"
                               defaultActiveKey={['1']}
-                              expandIconPosition="right"
+                              expandIconPosition="left"
                               expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                               rotate={isActive ? 90 : 0}/>}
                     >
