@@ -43,7 +43,7 @@ const AddQuestion = ({questions, setQuestions}) => {
                 <TextArea rows={4}
                           placeholder="Відповідь"/>
             </Form.Item>
-            <Button htmlType="submit" className="flooded-button add-question-button">Добавити</Button>
+            <Button htmlType="submit" className="flooded-button add-question-button">Додати</Button>
         </Form>
         </div>
     );
