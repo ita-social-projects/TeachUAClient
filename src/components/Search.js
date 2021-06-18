@@ -1,6 +1,6 @@
-import { AutoComplete, Select } from "antd";
+import {AutoComplete, Select} from "antd";
 import React from "react";
-import { withRouter } from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {
     clearSearchParameters,
     mapSearchParameters,
@@ -8,16 +8,16 @@ import {
     searchInputData,
     searchParameters,
 } from "../context/SearchContext";
-import { getClubsByParameters } from "../service/ClubService";
+import {getClubsByParameters} from "../service/ClubService";
 import {
     getPossibleResults,
     getPossibleResultsByText,
 } from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
-import { getAllCategories } from "../service/CategoryService";
+import {getAllCategories} from "../service/CategoryService";
 
-const { Option, OptGroup } = Select;
+const {Option, OptGroup} = Select;
 
 class Search extends React.Component {
     static contextType = SearchContext;
@@ -34,13 +34,13 @@ class Search extends React.Component {
 
     componentDidMount() {
         getAllCategories().then((response) => {
-            this.setState({ allCategories: response });
+            this.setState({allCategories: response});
         });
     }
 
     onSearchChange = (value, option) => {
         if (this.props.redirect && value.length > 2) {
-            this.props.history.push("/clubs",{value});
+            this.props.history.push("/clubs", {value});
         }
 
         if (!searchParameters.isAdvancedSearch) {
@@ -50,11 +50,14 @@ class Search extends React.Component {
                 case "category":
                     searchParameters.categoryName = value;
                     mapSearchParameters.categoryName = value;
+                    // console.log("category section ");
                     break;
                 case "club":
                     searchParameters.clubName = value;
+                    // console.log("club  section ");
                     break;
                 default: {
+                    // console.log("default section while search");
                     if (
                         this.state.allCategories.find((category) =>
                             category.name
@@ -69,6 +72,7 @@ class Search extends React.Component {
                 }
             }
 
+            // console.log(searchParameters);
             getClubsByParameters(searchParameters).then((response) => {
                 this.context.setClubs(response);
             });
@@ -91,25 +95,25 @@ class Search extends React.Component {
     };
 
     onFocus = () => {
-        this.setState({ loading: true });
+        this.setState({loading: true});
         getPossibleResults(searchParameters).then((response) => {
-            this.setState({ possibleResults: response, loading: false });
+            this.setState({possibleResults: response, loading: false});
         });
     };
 
     onKeyDown = (event) => {
         if (event.key === "Enter") {
             event.target.defaultValue &&
-                this.onSearchChange(event.target.defaultValue, { type: "all" });
+            this.onSearchChange(event.target.defaultValue, {type: "all"});
         }
     };
 
     searchOnClick = () => {
         this.state.searchClicked = true;
         if (this.state.searchClicked) {
-            this.setState({ loading: true });
-            this.onSearchChange(searchInputData.input, { type: "all" });
-            this.setState({ loading: false });
+            this.setState({loading: true});
+            this.onSearchChange(searchInputData.input, {type: "all"});
+            this.setState({loading: false});
         }
         this.state.searchClicked = false;
     };
@@ -118,9 +122,9 @@ class Search extends React.Component {
         searchInputData.input = val;
 
         this.onSearchChange(val, "all");
-        this.setState({ loading: true });
+        this.setState({loading: true});
         getPossibleResultsByText(val, searchParameters).then((response) => {
-            this.setState({ possibleResults: response, loading: false });
+            this.setState({possibleResults: response, loading: false});
         });
     };
 
@@ -129,7 +133,7 @@ class Search extends React.Component {
             //redirect with props value for component
             this.props.history.push({
                 pathname: "/clubs",
-                state: { showAdvancedSearch: true },
+                state: {showAdvancedSearch: true},
             });
         } else {
             if (this.props.advancedSearch) {
@@ -199,8 +203,8 @@ class Search extends React.Component {
                         onClick={this.searchOnClick}
                     />
                     <ControlOutlined className="advanced-icon" title={"Розширений пошук"}
-                        style={{ color: "orange", backgroundColor: "white" }}
-                        onClick={this.handleAdvancedSearch}
+                                     style={{color: "orange", backgroundColor: "white"}}
+                                     onClick={this.handleAdvancedSearch}
                     />
                 </div>
             </div>
