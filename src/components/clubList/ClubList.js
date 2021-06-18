@@ -58,11 +58,11 @@ const ClubList = ({
 
             if (typeof location.state !== "undefined") {
                 setActiveCategory(location.state.showActiveCategory);
+                console.log(location.state.showActiveCategory);
                 searchParameters.categoryName = [
                     location.state.showActiveCategory,
                 ];
             }
-
             getClubsByParameters(searchParameters, checkUndefPage).then(
                 (response) => {
                     setClubs(response);
