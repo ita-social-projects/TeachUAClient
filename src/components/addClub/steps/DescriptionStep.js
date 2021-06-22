@@ -9,7 +9,7 @@ import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
 import { Button } from "antd";
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
+const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
     const [descriptionForm] = Form.useForm();
 
     const folderName = uuidv4();
@@ -56,7 +56,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 })
             }
         });
+        if(!fromCenter)
+        {
          window.location.reload();
+        }
+
     };
 
     const savePhoto = (image, folder) => {
