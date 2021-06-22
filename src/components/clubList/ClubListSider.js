@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Checkbox, Form, InputNumber, Layout, Radio, Select } from "antd";
+import React, {useEffect, useState} from "react";
+import {Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
 import "./css/ClubListSider.css";
-import { getAllCategories } from "../../service/CategoryService";
-import { getAllCities } from "../../service/CityService";
-import { getDistrictsByCityName } from "../../service/DisctrictService";
-import { getStationsByCity } from "../../service/StationService";
-import { searchParameters, mapSearchParameters } from "../../context/SearchContext";
+import {getAllCategories} from "../../service/CategoryService";
+import {getAllCities} from "../../service/CityService";
+import {getDistrictsByCityName} from "../../service/DisctrictService";
+import {getStationsByCity} from "../../service/StationService";
+import {searchParameters, mapSearchParameters} from "../../context/SearchContext";
 
-const { Sider } = Layout;
-const { Option } = Select;
+const {Sider} = Layout;
+const {Option} = Select;
 
 const ClubListSider = ({
-    setCurrentPage,
-    form,
-    getAdvancedData,
-    isCenterChecked,
-    setIsCenterChecked,
-    activeCategory,
-}) => {
+                           setCurrentPage,
+                           form,
+                           getAdvancedData,
+                           isCenterChecked,
+                           setIsCenterChecked,
+                           activeCategory,
+                       }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
@@ -32,7 +32,7 @@ const ClubListSider = ({
 
     useEffect(() => {
         if (activeCategory) {
-            form.setFieldsValue({ categoriesName: [activeCategory] });
+            form.setFieldsValue({categoriesName: [activeCategory]});
         }
 
         getAllCategories().then((response) => setCategories(response));
@@ -52,29 +52,29 @@ const ClubListSider = ({
     }, [cityName]);
 
     useEffect(() => {
-        form.setFieldsValue({ cityName: searchParameters.cityName });
-    },[searchParameters.cityName]);
+        form.setFieldsValue({cityName: searchParameters.cityName});
+    }, [searchParameters.cityName]);
 
     const onValuesChange = (values) => {
         setIsCenterChecked(values.isCenter);
         if (values.hasOwnProperty("cityName")) {
-            form.setFieldsValue({ districtName: undefined });
-            form.setFieldsValue({ stationName: undefined });
+            form.setFieldsValue({districtName: undefined});
+            form.setFieldsValue({stationName: undefined});
         }
 
         if (values.hasOwnProperty("age")) {
             if (!values.age) {
                 setAge(undefined);
-                form.setFieldsValue({ age: undefined });
+                form.setFieldsValue({age: undefined});
             } else if (values.age > 18) {
                 setAge(18);
-                form.setFieldsValue({ age: 18 });
+                form.setFieldsValue({age: 18});
             } else if (values.age < 2) {
                 setAge(2);
-                form.setFieldsValue({ age: 2 });
+                form.setFieldsValue({age: 2});
             } else {
                 setAge(values.age);
-                form.setFieldsValue({ age: values.age });
+                form.setFieldsValue({age: values.age});
             }
         }
         getData();
@@ -84,8 +84,8 @@ const ClubListSider = ({
         setCityName(value);
         searchParameters.cityName = value;
         mapSearchParameters.cityName = value;
-        form.setFieldsValue({ districtName: undefined });
-        form.setFieldsValue({ stationName: undefined });
+        form.setFieldsValue({districtName: undefined});
+        form.setFieldsValue({stationName: undefined});
     };
 
     const onKeyPress = (event) => {
@@ -128,6 +128,7 @@ const ClubListSider = ({
                             : searchParameters.cityName
                     }>
                     <Select
+                        allowClear
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
@@ -174,7 +175,7 @@ const ClubListSider = ({
                     label="Ремоут">
                     <Checkbox.Group className="club-list-categories">
                         <Checkbox
-                            style={{ display: "flex" }}
+                            style={{display: "flex"}}
                             disabled={
                                 form.getFieldValue("cityName") === "online"
                             }>
@@ -191,7 +192,7 @@ const ClubListSider = ({
                             .sort((a, b) => a.sortby - b.sortby)
                             .map((category) => (
                                 <Checkbox
-                                    style={{ display: "flex" }}
+                                    style={{display: "flex"}}
                                     value={category.name}>
                                     {category.name}
                                 </Checkbox>
