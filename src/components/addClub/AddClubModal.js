@@ -85,6 +85,7 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter }) => {
                     setLocations={setLocations}/>;
             case 2:
                 return <DescriptionStep
+                    fromCenter={fromCenter}
                     setResult={setResult}
                     result={result}
                     step={step}
