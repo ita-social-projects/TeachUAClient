@@ -11,6 +11,7 @@ import { Button } from "antd";
 
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
     const [descriptionForm] = Form.useForm();
+
     const folderName = uuidv4();
     const logoFolder = `clubs/${folderName}/logo`;
     const coverFolder = `clubs/${folderName}/background`;

@@ -9,7 +9,7 @@ import Tags from "../../Tags";
 import './css/UserClub.less';
 import './css/UserClubCardItem.less';
 import {MoreOutlined} from "@ant-design/icons";
-import updateMenu from "./UpdateMenu";
+import clubUpdateMenu from "./ClubUpdateMenu";
 
 
 const UserClubCardItem = ({club}) => {
@@ -19,7 +19,7 @@ const UserClubCardItem = ({club}) => {
                 <ClubLogo category={club.categories[0]} logo={club.urlLogo}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={updateMenu(club.id)} placement="bottomRight">
+                        <Dropdown overlay={clubUpdateMenu(club.id)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>

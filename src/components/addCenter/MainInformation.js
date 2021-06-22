@@ -70,7 +70,7 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                 </span>
             </div>
             <div className="btn">
-                <button className="next-btn" htmlType="submit">Наступний крок</button>
+                <Button className="next-btn" htmlType="submit">Наступний крок</Button>
             </div>
             <AddLocationModal
                 form={locationForm}

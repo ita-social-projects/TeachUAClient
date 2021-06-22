@@ -4,7 +4,7 @@ import './css/UserClub.less';
 import {deleteClubById} from "../../../service/ClubService";
 import {Link} from "react-router-dom";
 
-const updateMenu = (clubId) => (
+const clubUpdateMenu = (clubId) => (
     <Menu classname="update-menu">
         {/*<Menu.Item className="menu-item">*/}
         {/*    <a target="_blank" rel="#" href="#">*/}
@@ -19,4 +19,4 @@ const updateMenu = (clubId) => (
     </Menu>
 );
 
-export default updateMenu;
+export default clubUpdateMenu;

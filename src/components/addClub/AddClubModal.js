@@ -18,7 +18,7 @@ import {signIn} from "../../service/UserService";
 import Login from "../login/Login";
 
 
-const AddClubModal = ({button, clubs, setClubs }) => {
+const AddClubModal = ({button, clubs, setClubs,fromCenter }) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
@@ -71,6 +71,7 @@ const AddClubModal = ({button, clubs, setClubs }) => {
                     step={step}
                     setStep={setStep}
                     centers={centers}
+                    fromCenter={fromCenter}
                 />;
             case 1:
                 return <ContactsStep

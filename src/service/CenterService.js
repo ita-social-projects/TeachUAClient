@@ -38,18 +38,28 @@ export const getCentersByAdvancedSearch = async (parameters, page) => {
         return response.data
     });
 }
+export const deleteCenterById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/center/" + id)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.data;
+        })
+}
 
 
 export const addCenter = async (data) => {
-    data.locations.map(location => {
-        if (location.address.value) {
-            location.address = location.address.value.structured_formatting.main_text
-        }
-    });
+    // data.locations.map(location => {
+    //     if (location.address.value) {
+    //         location.address = location.address.value.structured_formatting.main_text
+    //     }
+    // });
     return await fetchRequest.post(BASE_URL + "/api/center", {
         name: data.name,
         description: data.description,
         userId: data.userId,
+        contacts: data.contacts,
         locations: data.locations,
         urlLogo: data.urlLogo && data.urlLogo.file.response,
         urlBackground: data.urlBackground && data.urlBackground.file.response,
@@ -59,4 +69,6 @@ export const addCenter = async (data) => {
     }).catch((error) => {
         return error.response.data
     })
+
+
 };

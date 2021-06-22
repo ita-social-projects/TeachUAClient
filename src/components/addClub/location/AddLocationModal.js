@@ -56,11 +56,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     };
 
     const onFinish = (values) => {
-        console.log(coordinates)
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
-        }
+        // console.log(coordinates)
+        // if (inputAddressProps.validateStatus === 'error') {
+        //     message.error("Некоректно вибрана адреса");
+        //     return;
+        // }
         console.log(values)
         values.key = Math.random();
         // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
@@ -199,10 +199,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        className="add-club-row"
                                        label="Метро/Місцевість"
                                        hasFeedback
-                                       rules={[{
-                                           required: true,
-                                           message: "Це поле є обов'язковим"
-                                       }]}>
+                                       // rules={[{
+                                       //     required: true,
+                                       //     message: "Це поле є обов'язковим"
+                                       // }]}
+                                >
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
