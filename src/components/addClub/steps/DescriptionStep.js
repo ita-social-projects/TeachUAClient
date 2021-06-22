@@ -10,7 +10,7 @@ import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
 import {uploadImage} from "../../../service/UploadService";
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs }) => {
+const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
 
@@ -40,7 +40,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
     const onFinish = (values) => {
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const text = result.description.replace(/(\r\n|\n|\r)/gm, "");
-        const descJSON = leftDesc + text + rightDesc;
+        const textEdit = text.replace(/"/gm, '\\"');
+        const descJSON = leftDesc + textEdit + rightDesc;
         values.description = saveContent(descJSON);
         setResult(Object.assign(result, values));
 
@@ -58,7 +59,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 result.urlGallery.push(uploadImage(el.originFileObj, galleryFolder));
             })
         }
-
         addClub(result).then(response => {
             setVisible(false);
             setResult(null);
@@ -70,8 +70,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 })
             }
         });
-        
-        window.location.reload();
+        if(!fromCenter)
+        {
+         window.location.reload();
+        }
+
     };
 
     return (
@@ -123,7 +126,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback
                 rules={[{
                     required: true,
-                    pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><]){40,1500}\S$|([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії @#$()%&{}, ,[\]^\/\\'’.,"!?:*|><])\n*$/
+                    pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@_`{}~^\/[\]]{40,1500}$/,
+                    message: " Некоректний опис гуртка"
                 }]}
             >
                 <Input.TextArea className="editor-textarea" style={{ height: 200 }} placeholder="Додайте опис гуртка" />

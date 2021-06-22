@@ -5,12 +5,20 @@
     justify-content: space-between;
 
 }
-
 .clubsOfCenter .ant-checkbox-group{
     width: 100%;
 }
-
+.clubsOfCenter .form-item{
+    row-gap: 0px;
+    flex-wrap: wrap;
+}
+.clubsOfCenter .form-fields{
+    overflow-y: scroll;
+    height: 300px;
+}
 .clubsOfCenter .checkbox-item{
+
+    margin-top: 20px;
     height:50px;
     border-radius:15px;
     width: 99%;
@@ -30,12 +38,10 @@
 }
 
 .clubsOfCenter .checkbox-item label {
-    display: flex;
     align-items: center;
     height:100%;
     vertical-align: middle;
     box-sizing: border-box;
-    overflow: hidden;
 }
 .clubsOfCenter .ant-checkbox {
     margin-bottom: 5px;

@@ -23,6 +23,7 @@ const AddCenter = () => {
     const [locations, setLocations] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [result, setResult] = useState({});
+    const [fromCenter,setFromCenter] = useState(true);
 
     useEffect(() => {
         getAllClubsByUserId(getUserId()).then(response => {
@@ -72,6 +73,7 @@ const AddCenter = () => {
                     step={step}
                     setStep={setStep}
                     contacts={contacts}
+                    setContacts={setContacts}
                     result={result}
                     setResult={setResult}
                 />;
@@ -80,7 +82,6 @@ const AddCenter = () => {
                 return <Description
                     step={step}
                     setStep={setStep}
-                    result={result}
                     result={result}
                     setResult={setResult}
                 />;
@@ -95,6 +96,7 @@ const AddCenter = () => {
                     result={result}
                     setResult={setResult}
                     setLocations={setLocations}
+                    fromCenter={fromCenter}
                 />;
         }
     };
@@ -120,6 +122,7 @@ const AddCenter = () => {
                             <Step title="Опис"></Step>
                             <Step title="Гуртки"></Step>
                         </Steps>
+
                     </div>
                     <div className="content">
                         <div className="modal-title">

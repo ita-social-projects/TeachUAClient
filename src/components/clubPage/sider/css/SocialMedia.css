@@ -8,7 +8,7 @@
 .page-sider .social-media .label {
     font-size: 16px;
     font-weight: 700;
-    color: #2D4C68;
+    color: #2d4c68;
 }
 
 .page-sider .social-media .links {
@@ -18,13 +18,18 @@
 
 .page-sider .social-media .contact {
     display: flex;
-    color: #2D4C68;
+    color: #2d4c68;
     font-weight: 600;
     margin-top: 12px;
 }
 
 .page-sider .social-media .contact-name {
     opacity: 0.6;
-    color: #2D4C68;
+    color: #2d4c68;
     margin-left: 11px;
+    max-width: 90%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }

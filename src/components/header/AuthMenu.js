@@ -11,6 +11,7 @@ import { deleteToken, deleteUserId, getToken, getUserId } from "../../service/St
 import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
+import AddCenter from "../addCenter/AddCenter";
 
 const { SubMenu } = Menu;
 
@@ -49,6 +50,7 @@ const AuthMenu = () => {
             return (
                 <Menu>
                     <Menu.Item><AddClubModal /></Menu.Item>
+                    <Menu.Item><AddCenter/></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
                 { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?

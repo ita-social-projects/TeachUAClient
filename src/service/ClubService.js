@@ -1,14 +1,14 @@
 import fetchRequest from "./FetchRequest";
-import { BASE_URL } from "./config/ApiConfig";
-import { replaceCommaToSemicolon } from "../util/CategoryUtil";
-import { searchParameters } from "../context/SearchContext";
+import {BASE_URL} from "./config/ApiConfig";
+import {replaceCommaToSemicolon} from "../util/CategoryUtil";
+import {searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
-    data.locations.map(
-        (location) =>
-            (location.address =
-                location.address.value.structured_formatting.main_text)
-    );
+    // data.locations.map(
+    //     (location) =>
+    //         (location.address =
+    //             location.address.value.structured_formatting.main_text)
+    // );
     return await fetchRequest
         .post(BASE_URL + "/api/club", {
             categoriesName: data.categories,
@@ -176,7 +176,7 @@ export const getAllClubs = async () => {
 
 export const changeClubOwner = async (params, id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/user", { params })
+        .get(BASE_URL + "/api/user", {params})
         .then((response) => {
             return fetchRequest
                 .patch(BASE_URL + "/api/club/" + id, {

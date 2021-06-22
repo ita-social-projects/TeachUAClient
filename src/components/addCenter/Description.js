@@ -1,9 +1,9 @@
-import { Form, Upload } from 'antd';
+import {Form, Input, Upload,Button} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import EditorComponent from "../editor/EditorComponent";
 import { UPLOAD_IMAGE_URL } from "../../service/config/ApiConfig";
 import { saveContent } from "../editor/EditorConverter";
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import "./css/Description.css";
 import { transToEng } from '../../util/Translit';
 
@@ -11,6 +11,9 @@ const Description = ({ step, setStep, result, setResult }) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+    const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
+    const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
+
 
     const nextStep = () => {
         setStep(step + 1);
@@ -29,7 +32,6 @@ const Description = ({ step, setStep, result, setResult }) => {
     }, [])
 
     const onFinish = (values) => {
-        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         nextStep();
@@ -72,14 +74,22 @@ const Description = ({ step, setStep, result, setResult }) => {
                         <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити фото</span>
                     </Upload>
                 </Form.Item>
-                <Form.Item className="add-club-row"
-                    label="Опис">
-                    <EditorComponent ref={editorRef} />
+                <Form.Item name="description"
+                           className="add-club-row"
+                           label="Опис"
+                           hasFeedback
+                           rules={[{
+                               required: true,
+                               pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:;<=>?@_`{}~^\/[\]]{40,1500}$/,
+                               message: " Некоректний опис гуртка"
+                           }]}
+                >
+                    <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
                 </Form.Item>
             </div>
             <div className="btn">
-                <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
-                <button className="next-btn" htmlType="submit" >Наступний крок</button>
+                <Button className="prev-btn" type="button" onClick={prevStep}>Назад</Button>
+                <Button className="next-btn" htmlType="submit">Наступний крок</Button>
             </div>
         </Form>
 

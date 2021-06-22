@@ -17,14 +17,15 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
-    const [isActive, setActive] = useState(false)
+    const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
+    const [coordinates,setCoordinates] = useState();
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
-        latitude: "",
-        longitude: "",
-        phoneNumber: ""
+        latAndLng:"",
+        phoneNumber: "",
+        inputAddress:""
     })
 
     useEffect(() => {
@@ -33,13 +34,17 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     }, [cityName]);
 
     const onChange = e => {
+        if (e.target.id === "address")
+            locationForm.inputAddress = e.target.value
+        if(e.target.id === "coordinates")
+            locationForm.latAndLng = e.target.value
         if (e.target.id === "name")
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.cityName != null) {
-            setActive(true)
-        } else setActive(false)
+        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+            setDisabled(false)
+        } else setDisabled(true)
     }
 
     const onClose = () => {
@@ -51,42 +56,44 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     };
 
     const onFinish = (values) => {
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
-        }
+        // console.log(coordinates)
+        // if (inputAddressProps.validateStatus === 'error') {
+        //     message.error("Некоректно вибрана адреса");
+        //     return;
+        // }
         console.log(values)
         values.key = Math.random();
-        const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
-        const newValues = coordinates.reduce(
-            (result, item) =>
-                Object.assign({}, result, item), values)
-        delete newValues['longitudeAndLatitude']
+        // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
+        // const newValues = coordinates.reduce(
+        //     (result, item) =>
+        //         Object.assign({}, result, item), values)
+        // delete newValues['longitudeAndLatitude']
         if (editedLocation) {
             const index = locations.findIndex((item) => editedLocation.key === item.key);
-            locations[index] = newValues;
+            locations[index] = values;
             setLocations(locations);
         } else {
-            setLocations(addToTable(locations, newValues));
+            setLocations(addToTable(locations, values));
         }
 
         onClose();
     };
 
-    const handleSelect = (address) => {
-        geocodeByAddress(address.label)
-            .then(results => getLatLng(results[0]))
-            .then(({lat, lng}) => {
-                locationForm.latitude = lat
-                locationForm.longitude = lng
-                form.setFieldsValue({
-                    longitudeAndLatitude: lat + "," + lng,
-
-                });
-            });
-
-        setInputAddressProps({validateStatus: 'success'});
-        setCityOnInput(cityName);
+    const handleSelect = (coordinates) => {
+            console.log(coordinates)
+    //     geocodeByAddress(address.label)
+    //         .then(results => getLatLng(results[0]))
+    //         .then(({lat, lng}) => {
+    //             locationForm.latitude = lat
+    //             locationForm.longitude = lng
+    //             form.setFieldsValue({
+    //                 coordinates: lat + "," + lng,
+    //
+    //             });
+    //         });
+    //
+    //     setInputAddressProps({validateStatus: 'success'});
+    //     setCityOnInput(cityName);
     };
 
     const changeCity = () => {
@@ -153,6 +160,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        hasFeedback
                                        rules={[{
                                            required: true,
+                                           message: "Це поле є обов'язковим"
                                        }]}>
                                 <Select
                                     onClick={onChange}
@@ -175,7 +183,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="districtName"
                                        className="add-club-row"
                                        label="Район міста"
-                                       hasFeedback>
+                                       hasFeedback
+                                       rules={[{
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       }]}>
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
@@ -186,7 +198,12 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="stationName"
                                        className="add-club-row"
                                        label="Метро/Місцевість"
-                                       hasFeedback>
+                                       hasFeedback
+                                       // rules={[{
+                                       //     required: true,
+                                       //     message: "Це поле є обов'язковим"
+                                       // }]}
+                                >
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
@@ -199,33 +216,42 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    className="add-club-row"
                                    label="Адреса"
                                    hasFeedback
-                                   validateTrigger={handleSelect}
                                    rules={[{
                                        required: true,
                                        message: "Це поле є обов'язковим"
-                                   }]}
-                                   {...inputAddressProps}>
-                            <AddClubInputAddress
-                                editedLocation={editedLocation}
-                                form={form}
-                                setCityName={setCityName}
-                                onChange={handleSelect}/>
+                                   }]}>
+                            <Input className="add-club-input"
+                                   placeholder="Адреса"
+                            />
+                            {/*<AddClubInputAddress*/}
+                            {/*    editedLocation={editedLocation}*/}
+                            {/*    form={form}*/}
+                            {/*    setCityName={setCityName}*/}
+                            {/*    onChange={handleSelect}/>*/}
                         </Form.Item>
                         <div className="add-club-inline">
-                            <Form.Item name="longitudeAndLatitude"
+                            <Form.Item name="coordinates"
                                        className="add-club-row"
                                        label="Географічні координати"
                                        hasFeedback
                                        rules={[{
                                            required: true,
-                                           message: "Це поле є обов'язковим"
-                                       }]}>
-                                <Input className="add-club-input add-club-select"
-                                       suffix={
-                                           <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                               <InfoCircleOutlined className="info-icon"/>
-                                           </Tooltip>
+                                           message: "Це поле є обов'язковим",
+                                           pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
+                                       },{
+                                           message:"Координате не можуть містити букви",
+                                           pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
                                        }
+                                       ]}>
+                                <Input className="add-club-input add-club-select"
+                                     value={coordinates}
+                                       onInput={e => setCoordinates(e.target.value) }
+
+                                    // suffix={
+                                       //     <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                       //         <InfoCircleOutlined className="info-icon"/>
+                                       //     </Tooltip>
+                                       // }
                                        placeholder="Довгота та широта"/>
                             </Form.Item>
                         </div>
@@ -250,10 +276,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
 
                         <div className="add-club-content-footer add-club-add-location-button">
                             {
-                                isActive ?
+                                !isDisabled ?
                                     <Button htmlType="submit"
                                             className="flooded-button add-club-content-next">Додати</Button> :
-                                    <Button disabled={!isActive} htmlType="submit"
+                                    <Button disabled={isDisabled} htmlType="submit"
                                             className="flooded-button add-club-content-next-disabled">Додати</Button>
                             }
                         </div>
