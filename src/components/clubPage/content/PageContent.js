@@ -6,14 +6,10 @@ import {Button} from "antd";
 import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import { getShortContent } from "../../editor/EditorConverter";
+import { BASE_URL } from "../../../service/config/ApiConfig";
 
 const PageContent = ({club, feedbackCount}) => {
-    const images = [
-        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/kids_jump.png",
-        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/balls.jpg",
-        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/exercise.jpg",
-        process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/pencils.jpg",
-    ];
+    const images = club.urlGallery.map(image => BASE_URL + image.url);
 
     return (
         <Content className="page-content">
