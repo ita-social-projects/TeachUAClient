@@ -15,7 +15,7 @@ const UserEditModal = ({user}) => {
     const onFinish = (values) => {
         updateUser(values).then((response) => {
             if(response.status) {
-                message.error(response.message);
+                window.location.reload();
             }
             else {
                 message.success("Профіль змінено успішно");

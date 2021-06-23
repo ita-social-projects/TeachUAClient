@@ -46,16 +46,30 @@ export const signIn = async (data) => {
 };
 
 export const updateUser = async (data) => {
+    // console.log( {
+    //     firstName: data.firstName,
+    //     lastName: data.lastName,
+    //     email: data.email,
+    //     password: data.password,
+    //     phone: data.phone,
+    //     urlLogo: data.urlLogo/* && data.urlLogo.file.response*/
+    // });
+    console.log(data);
     return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
         phone: data.phone,
-        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/
+        roleName: data.role,
+        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
+        status: data.status
     }).then((response) => {
+        console.log(response.data)
         return response.data
+
     }).catch((error) => {
+        console.log(error.response.data)
         return error.response.data
     });
 };

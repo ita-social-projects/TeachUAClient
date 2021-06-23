@@ -7,7 +7,8 @@ const UserEditRoles =({user}) => {
     return (
         <Form.Item name="role"  initialValue={user.roleName}>
             <Radio.Group className="button-container"
-                         defaultValue="ROLE_USER"
+                         // // initialValue={user.roleName}
+                         // defaultValue="ROLE_USER"
                          optionType="button"
                          buttonStyle="solid"
             >
