@@ -15,25 +15,34 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
+    const [contacts_data, setContactsData] = useState({});
 
     useEffect(() => {
         getDistrictsByCityName(cityName).then(response => setDistricts(response));
     }, [cityName]);
 
     const onFinish = (values) => {
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
-        }
+        // if (inputAddressProps.validateStatus === 'error') {
+        //     message.error("Некоректно вибрана адреса");
+        //     return;
+        // }
 
-        geocodeByAddress(values.address.label)
-            .then(results => getLatLng(results[0]))
-            .then(({lat, lng}) => {
-                values.latitude = lat;
-                values.longitude = lng;
+        // geocodeByAddress(values.address.label)
+        //     .then(results => getLatLng(results[0]))
+        //     .then(({lat, lng}) => {
+        //         values.latitude = lat;
+        //         values.longitude = lng;
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
+        setResult(Object.assign(result, values));
+        console.log(result);
+        // });
+    };
 
-                setResult(Object.assign(result, values));
-            });
+    const changeContacts = (event, contact) => {
+        setContactsData({
+            ...contacts_data,
+            [contact.id]: event.target.value
+        });
     };
 
     const handleSelect = address => {
@@ -52,7 +61,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="cityName"
                            className="edit-club-row"
                            label="Місто"
-                           initialValue={result.city.name}>
+                    // initialValue={result}
+                >
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть місто"
@@ -74,13 +84,13 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="districtName"
                            className="edit-club-row"
                            label="Район"
-                           initialValue={result.district.name}
-                           >
+                    // initialValue={result.district.name}
+                >
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть район"
                         optionFilterProp="children">
-                        {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
+                        {/*{districts.map(district => <Option value={district.name}>{district.name}</Option>)}*/}
                     </Select>
                 </Form.Item>
             </div>
@@ -103,14 +113,19 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 {contacts.map(contact =>
                     <Form.Item name={`clubContact${contact.name}`}
                                className="edit-club-contact"
+                        // initialValue={result.contacts}
                                initialValue={result[`clubContact${contact.name}`]}
-                               >
-                        <Input className="edit-club-input"
+                               hasFeedback
+                    >
+                        <Input name={contact.name}
+                               className="edit-club-input"
                                placeholder="Заповніть поле"
-                               suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
+                               suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}
+                               onChange={(e) => changeContacts(e, contact)}
+                        />
                     </Form.Item>)}
             </Form.Item>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+            <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 };

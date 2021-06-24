@@ -15,13 +15,14 @@ const DescriptionTab = ({setResult, result}) => {
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     const onFinish = (values) => {
-        values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
-
-        descriptionForm.setFieldsValue(values);
+        console.log(result);
+        // values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
+        //
+        // descriptionForm.setFieldsValue(values);
 
         setResult(Object.assign(result, values));
 
-        addClub(result).then(response => console.log(response));
+        // addClub(result).then(response => console.log(response));
     };
 
     return (
@@ -56,18 +57,18 @@ const DescriptionTab = ({setResult, result}) => {
                     <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                 </Upload>
             </Form.Item>
-            <Form.Item className="edit-club-row"
-                       label="Опис"
-                       hasFeedback
-                       rules={[{
-                           required: true,
-                           max:1500,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
-                       }]}>
-                <EditorComponent ref={editorRef}
-                                 />
-            </Form.Item>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+            {/*<Form.Item className="edit-club-row"*/}
+            {/*           label="Опис"*/}
+            {/*           hasFeedback*/}
+            {/*           rules={[{*/}
+            {/*               required: true,*/}
+            {/*               max:1500,*/}
+            {/*               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/*/}
+            {/*           }]}>*/}
+            {/*    <EditorComponent ref={editorRef}*/}
+            {/*                     />*/}
+            {/*</Form.Item>*/}
+            <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 };

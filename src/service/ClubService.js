@@ -34,23 +34,52 @@ export const addClub = async (data) => {
 };
 
 export const updateClubBuId = async (data) => {
+    console.log(data.categories);
+    console.log({
+        categoriesName: data.categories,
+        name: data.name,
+        ageFrom: data.ageFrom,
+        ageTo: data.ageTo,
+        isOnline: data.isOnline,
+        description: data.description,
+        userId: data.user.id,
+        locations: data.locations,
+        urlLogo: data.urlLogo,
+        urlBackground: data.urlBackground,
+        contacts: data.contacts,
+        isApproved: data.isApproved,
+        centerId: data.centerId,
+    });
     return await fetchRequest
         .put(BASE_URL + "/api/club/" + data.id, {
+            categoriesName: data.categories,
+            name: data.name,
             ageFrom: data.ageFrom,
             ageTo: data.ageTo,
-            name: data.name,
+            isOnline: data.isOnline,
             description: data.description,
-            urlWeb: data.urlWeb,
+            userId: data.userId,
+            locations: data.locations,
             urlLogo: data.urlLogo,
             urlBackground: data.urlBackground,
-            workTime: data.workTime,
-            categories: data.categories,
-            user: data.user,
-            center: data.center,
-            rating: data.rating,
-            locations: data.locations,
+            contacts: data.contacts,
             isApproved: data.isApproved,
-            isOnline: data.isOnline,
+            centerId: data.centerId,
+            // ageFrom: data.ageFrom,
+            // ageTo: data.ageTo,
+            // name: data.name,
+            // description: data.description,
+            // // urlWeb: data.urlWeb,
+            // urlLogo: data.urlLogo,
+            // urlBackground: data.urlBackground,
+            // workTime: data.workTime,
+            // categories: data.categories,
+            // user: data.user,
+            // center: data.center,
+            // rating: data.rating,
+            // locations: data.locations,
+            // isApproved: data.isApproved,
+            // isOnline: data.isOnline,
         })
         .then((response) => {
             return response.data;
@@ -64,12 +93,25 @@ export const getClubById = async (id) => {
     return await fetchRequest
         .get(BASE_URL + "/api/club/" + id)
         .then((response) => {
+            console.log(response.data);
             return response.data;
         })
         .catch((error) => {
             return error.response.data;
         });
 };
+
+// export const getClubProfileById = async (id) => {
+//     return await fetchRequest
+//         .get(BASE_URL + "/api/club_profile/" + id)
+//         .then((response) => {
+//             console.log(response.data);
+//             return response.data;
+//         })
+//         .catch((error) => {
+//             return error.response.data;
+//         });
+// };
 
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
