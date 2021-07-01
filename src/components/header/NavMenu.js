@@ -50,13 +50,10 @@ const NavMenu = () => {
                 <Menu.Item key="service">
                     <Link to="/service"><FolderOpenOutlined className="icon"/>Послуги українською</Link>
                 </Menu.Item>
-                {/*Приховано лінк service - # та виправити на послуги українською назви*/}
-                {/*Забрати стиль*/}
                 {/*Замість лого лінка в бургері головної сторінки*/}
                 <Menu.Item key="news" className="home">
                     <Link to="/"><span><HomeOutlined  className="icon"/></span><span className="home-page">Головна сторінка</span></Link>
                 </Menu.Item>
-
             </Menu>
         </div>
     );

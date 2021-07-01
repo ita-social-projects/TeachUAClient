@@ -512,7 +512,7 @@ li.ant-menu-item.ant-menu-item-only-child.home {
   display: none;
 }
 
-@media screen and (max-width: 2500px) {
+@media  screen and (max-width: 2500px) {
   .header .nav-menu {
     width: 700px;
     display: flex;
@@ -564,7 +564,6 @@ li.ant-menu-item.ant-menu-item-only-child.home {
     width: 500px;
     display: flex;
   }
-
   .city-name {
     font-size: 20px;
   }
@@ -602,12 +601,10 @@ li.ant-menu-item.ant-menu-item-only-child.home {
   .header .nav-menu .ant-menu-submenu-title {
     display: inline-block !important;
   }
-
   .city-name {
     font-size: 24px;
   }
 }
-
 
 @media screen and (min-width: 900px)and(max-width: 976px) {
   .layout .header {
@@ -706,12 +703,35 @@ li.ant-menu-item.ant-menu-item-only-child.home {
     margin-top: -20px;
   }
 
-  .header .nav-menu .ant-menu-submenu-title {
+  .header .nav-menu .ant-menu-submenu-title{
     display: inline-block !important;
   }
 
 }
 
+@media screen and (min-width: 900px)and(max-width: 976px) {
+  .layout .header {
+    justify-content: space-between;
+  }
+
+  .header .nav-menu {
+    width: 290px;
+    display: flex;
+  }
+
+  .ant-layout-header {
+    padding: 0 30px !important;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 20px;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
+
+}
 @media screen and (max-width: 706px) {
   .content-clubs {
     min-width: 0;
@@ -720,7 +740,6 @@ li.ant-menu-item.ant-menu-item-only-child.home {
   .header .nav-menu {
     width: 40px;
   }
-
   .lower-header-box {
     display: flow-root;
     align-items: flex-end;
@@ -743,6 +762,7 @@ li.ant-menu-item.ant-menu-item-only-child.home {
     padding-left: 40px;
   }
 
+
   .header .nav-menu .ant-menu-submenu-title {
     display: inline-block !important;
   }
@@ -764,6 +784,7 @@ li.ant-menu-item.ant-menu-item-only-child.home {
     display: none;
   }
 
+
   .header .add-club-button {
     display: flex;
     width: 149px;
@@ -780,7 +801,6 @@ li.ant-menu-item.ant-menu-item-only-child.home {
     margin-top: 10px;
     margin-left: -24px;
   }
-
 }
 
 @media (min-device-width: 375px) and (max-device-width: 413px) {
@@ -825,9 +845,11 @@ li.ant-menu-item.ant-menu-item-only-child.home {
   span.anticon.anticon-home.icon {
     display: inline-block;
   }
+
   span.home-page {
     display: inline-block;
   }
+
   li.ant-menu-item.ant-menu-item-only-child.home {
     display: inline-block;
   }
@@ -839,14 +861,15 @@ li.ant-menu-item.ant-menu-item-only-child.home {
   .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
     margin-left: 8px;
   }
+
   .header .right-side-menu {
     margin-left: -20px;
   }
+
   .lower-header-box .city-name {
     font-size: 18px;
     line-height: 22px;
     margin-top: 10px;
     margin-left: -24px;
   }
-
 }

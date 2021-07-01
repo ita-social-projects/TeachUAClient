@@ -65,6 +65,7 @@
         width: 100%;
     }
 }
+
 @media (min-device-width : 320px) and (max-device-width : 868px) {
     .about-challenge .challenge-description .materials-button{
         bottom:12px;
