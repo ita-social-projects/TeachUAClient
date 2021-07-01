@@ -46,14 +46,6 @@ export const signIn = async (data) => {
 };
 
 export const updateUser = async (data) => {
-    // console.log( {
-    //     firstName: data.firstName,
-    //     lastName: data.lastName,
-    //     email: data.email,
-    //     password: data.password,
-    //     phone: data.phone,
-    //     urlLogo: data.urlLogo/* && data.urlLogo.file.response*/
-    // });
     console.log(data);
     return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,

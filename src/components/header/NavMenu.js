@@ -5,7 +5,7 @@ import ApartmentOutlined from "@ant-design/icons/lib/icons/ApartmentOutlined";
 import CrownOutlined from "@ant-design/icons/lib/icons/CrownOutlined";
 import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import FolderOpenOutlined from "@ant-design/icons/lib/icons/FolderOpenOutlined";
-import FlagOutlined from "@ant-design/icons/lib/icons/FlagOutlined";
+import HomeOutlined from "@ant-design/icons/lib/icons/HomeOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import {PageContext} from "../../context/PageContext";
 
@@ -52,9 +52,11 @@ const NavMenu = () => {
                 </Menu.Item>
                 {/*Приховано лінк service - # та виправити на послуги українською назви*/}
                 {/*Забрати стиль*/}
-                {/*<Menu.Item key="news" style={{display: 'none' }}>*/}
-                {/*    <Link to="#"><FlagOutlined className="icon"/>Послуги </Link>*/}
-                {/*</Menu.Item>*/}
+                {/*Замість лого лінка в бургері головної сторінки*/}
+                <Menu.Item key="news" className="home">
+                    <Link to="/"><span><HomeOutlined  className="icon"/></span><span className="home-page">Головна сторінка</span></Link>
+                </Menu.Item>
+
             </Menu>
         </div>
     );
