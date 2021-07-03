@@ -4,7 +4,7 @@
     margin-top: 120px;
 }
 
-.about-categories .categories-header{
+.about-categories .categories-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,7 @@
 
 .about-categories .categories-header .label {
     font-size: 32px;
-    color: #2D4C68;
+    color: #2d4c68;
     font-weight: 700;
 }
 
@@ -36,7 +36,7 @@
 }
 .arrows-prev {
     font-size: 21px;
-    color: #FA8C16;
+    color: #fa8c16;
     position: absolute;
     left: 40px;
     margin-top: 170px;
@@ -44,7 +44,7 @@
 
 .arrows-next {
     font-size: 21px;
-    color: #FA8C16;
+    color: #fa8c16;
     position: absolute;
     right: 40px;
     margin-top: 170px;
@@ -63,7 +63,6 @@
 
 .about-categories .pagination {
     margin: 60px auto 0 auto;
-
 }
 
 .about-categories .pagination .ant-pagination-item {
@@ -77,7 +76,7 @@
     margin-left: 9px;
 }
 .about-categories .pagination .ant-pagination-prev,
-.about-categories .pagination .ant-pagination-next{
+.about-categories .pagination .ant-pagination-next {
     display: none;
 }
 
@@ -86,11 +85,79 @@
     border-radius: 100%;
     width: 12px;
     height: 12px;
-    background: #C4C4C4;
-
+    background: #c4c4c4;
 }
 
 .about-categories .pagination .ant-pagination-item-active a {
-    background: #FA8C16;
+    background: #fa8c16;
 }
 
+.arrows-prev,
+.arrows-next {
+    display: none;
+}
+.about-categories .categories-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-categories .categories-footer .more-button {
+    width: 296px;
+}
+.about-categories .categories-header .label {
+    margin: 0;
+}
+.about-categories .categories-header {
+    padding: 0 2rem;
+}
+.categories-header a {
+    display: none;
+}
+.about-categories .pagination {
+    margin: 30px auto 15px auto;
+}
+
+@media screen and (min-width: 576px) {
+    .arrows-prev,
+    .arrows-next {
+        display: none;
+    }
+    .categories-header a {
+        display: block;
+    }
+    .categories-footer a {
+        display: none;
+    }
+    .about-categories .pagination {
+        margin: 60px auto 0 auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .arrows-prev,
+    .arrows-next {
+        display: block;
+    }
+    .arrows-prev {
+        left: 20px;
+    }
+    .arrows-next {
+        right: 20px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .about-categories .categories-header {
+        padding: 0rem;
+    }
+    .arrows-prev {
+        left: 40px;
+    }
+    .arrows-next {
+        right: 40px;
+    }
+}
+
+/* @media screen and (min-width: 1200px) {
+    
+} */
