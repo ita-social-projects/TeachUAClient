@@ -31,3 +31,9 @@
     }
 
 }
+@media (min-width: 375px) and (max-width: 824px) {
+
+    .about-header {
+        margin-bottom: 25px;
+    }
+}
