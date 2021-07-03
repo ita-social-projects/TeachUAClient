@@ -62,7 +62,7 @@ const Login = ({verifyCode}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        {/*<LoginSocial />*/}
+                        <LoginSocial />
                         <LoginInput />
                     </Form>
                 </div>
