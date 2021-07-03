@@ -64,3 +64,18 @@
         width: 100%;
     }
 }
+
+@media (min-width: 375px) and (max-width: 824px) {
+
+    .challenge-page .banner .title {
+        font-size: 36px!important;
+        text-align: center;
+    }
+
+    .challenge-page .challenge-description {
+        margin-top: 21px !important;
+    }
+    .challenge-page .challenge-description .title {
+        text-align: center;
+    }
+}
