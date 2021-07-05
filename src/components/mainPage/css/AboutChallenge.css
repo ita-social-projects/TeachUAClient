@@ -70,4 +70,8 @@
     .about-challenge .challenge-description .materials-button{
         bottom:12px;
     }
+    .about-challenge .challenge-description .label {
+        text-align: center;
+    }
 }
+

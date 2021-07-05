@@ -53,3 +53,9 @@
         padding: 16px;
     }
 }
+
+@media (min-width: 375px) and (max-width: 824px) {
+    .about-carousel-block {
+        margin-top: 60px;
+    }
+}
