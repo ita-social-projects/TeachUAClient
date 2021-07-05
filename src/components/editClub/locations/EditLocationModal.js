@@ -1,18 +1,15 @@
 import {Button, Form, Input, message, Modal, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
-import '../css/AddClubModal.css';
-import "../css/AddClubContent.css";
-import AddClubInputAddress from "../AddClubInputAddress";
+import "../../addClub/css/AddClubModal.css";
+import "../../addClub/css/AddClubContent.css";
 import {getDistrictsByCityName} from "../../../service/DisctrictService";
-import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
 import {addToTable} from "../../../util/TableUtil";
 import {Content} from "antd/es/layout/layout";
-import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {getStationsByCity} from "../../../service/StationService";
 
 const {Option} = Select;
 
-const AddLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
+const EditLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
@@ -20,17 +17,19 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates,setCoordinates] = useState();
+    console.log(editedLocation);
     const [locationForm, setLocationForm] = useState({
         locationName: "",
-        cityName: "",
+        cityName: editedLocation != null ? (editedLocation.city !== undefined ? editedLocation.city.name : editedLocation.cityName) : "",
         latAndLng:"",
         phoneNumber: "",
         inputAddress:""
     })
-    console.log(locations);
+    console.log(editedLocation);
     useEffect(() => {
-        getStationsByCity(cityName).then(response => setStation(response))
-        getDistrictsByCityName(cityName).then(response => setDistricts(response));
+        console.log(cityName);
+        getStationsByCity(editedLocation != null ? editedLocation.city.name : "").then(response => setStation(response))
+        getDistrictsByCityName(editedLocation != null ? editedLocation.city.name : "").then(response => setDistricts(response));
     }, [cityName]);
 
     const onChange = e => {
@@ -56,11 +55,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     };
 
     const onFinish = (values) => {
-        console.log(coordinates)
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
-        }
+        // console.log(coordinates)
+        // if (inputAddressProps.validateStatus === 'error') {
+        //     message.error("Некоректно вибрана адреса");
+        //     return;
+        // }
         console.log(values)
         values.key = Math.random();
         // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
@@ -156,6 +155,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="cityName"
                                        className="add-club-row"
                                        label="Місто"
+                                       // initialValue={editedLocation && editedLocation.city.name}
                                        initialValue={editedLocation && editedLocation.cityName}
                                        hasFeedback
                                        rules={[{
@@ -183,6 +183,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="districtName"
                                        className="add-club-row"
                                        label="Район міста"
+                                       // initialValue={editedLocation && editedLocation.district.name}
+                                       initialValue={editedLocation && editedLocation.districtName}
                                        hasFeedback
                                        rules={[{
                                            required: true,
@@ -198,6 +200,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Form.Item name="stationName"
                                        className="add-club-row"
                                        label="Метро/Місцевість"
+                                       // initialValue={editedLocation && editedLocation.station.name}
+                                       initialValue={editedLocation && editedLocation.stationName}
                                        hasFeedback
                                        rules={[{
                                            required: true,
@@ -222,16 +226,12 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Input className="add-club-input"
                                    placeholder="Адреса"
                             />
-                            {/*<AddClubInputAddress*/}
-                            {/*    editedLocation={editedLocation}*/}
-                            {/*    form={form}*/}
-                            {/*    setCityName={setCityName}*/}
-                            {/*    onChange={handleSelect}/>*/}
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="coordinates"
                                        className="add-club-row"
                                        label="Географічні координати"
+                                       initialValue={editedLocation && editedLocation.coordinates}
                                        hasFeedback
                                        rules={[{
                                            required: true,
@@ -254,33 +254,34 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        placeholder="Довгота та широта"/>
                             </Form.Item>
                         </div>
-                        <Form.Item name="phone"
-                                   className="add-club-row"
-                                   label="Номер телефону"
-                                   hasFeedback
-                                   rules={[
-                                       {
-                                           required: true,
-                                           message: "Це поле є обов'язковим"
-                                       },
-                                       {
-                                           required: false,
-                                           pattern: /^\d{9}$/,
-                                           message: "Телефон не відповідає вказаному формату"
-                                       }]}>
-                            <Input className="add-club-input"
-                                   prefix='+380'
-                                   placeholder="___________"/>
-                        </Form.Item>
+                        {/*<Form.Item name="phone"*/}
+                        {/*           className="add-club-row"*/}
+                        {/*           label="Номер телефону"*/}
+                        {/*           hasFeedback*/}
+                        {/*           rules={[*/}
+                        {/*               {*/}
+                        {/*                   required: true,*/}
+                        {/*                   message: "Це поле є обов'язковим"*/}
+                        {/*               },*/}
+                        {/*               {*/}
+                        {/*                   required: false,*/}
+                        {/*                   pattern: /^\d{9}$/,*/}
+                        {/*                   message: "Телефон не відповідає вказаному формату"*/}
+                        {/*               }]}>*/}
+                        {/*    <Input className="add-club-input"*/}
+                        {/*           prefix='+380'*/}
+                        {/*           placeholder="___________"/>*/}
+                        {/*</Form.Item>*/}
 
                         <div className="add-club-content-footer add-club-add-location-button">
-                            {
-                                !isDisabled ?
+                            {/*{*/}
+                            {/*    !isDisabled ?*/}
                                     <Button htmlType="submit"
-                                            className="flooded-button add-club-content-next">Додати</Button> :
-                                    <Button disabled={isDisabled} htmlType="submit"
-                                            className="flooded-button add-club-content-next-disabled">Додати</Button>
-                            }
+                                            className="flooded-button add-club-content-next">Додати</Button>
+                            {/*:*/}
+                                     {/*<Button disabled={isDisabled} htmlType="submit"*/}
+                                     {/*        className="flooded-button add-club-content-next-disabled">Додати</Button>*/}
+                            {/*}*/}
                         </div>
                     </Form>
                 </div>
@@ -289,4 +290,4 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     );
 };
 
-export default AddLocationModal;
+export default EditLocationModal;

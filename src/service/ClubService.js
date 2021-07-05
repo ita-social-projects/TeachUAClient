@@ -34,7 +34,7 @@ export const addClub = async (data) => {
 };
 
 export const updateClubBuId = async (data) => {
-    console.log(data.categories);
+    console.log(data.locations);
     console.log({
         categoriesName: data.categories,
         name: data.name,

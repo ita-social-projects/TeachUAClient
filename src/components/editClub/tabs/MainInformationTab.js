@@ -4,7 +4,6 @@ import "../css/MainInformationTab.less"
 import {addClub, updateClubBuId} from "../../../service/ClubService";
 
 const MainInformationTab = ({categories, setResult, result}) => {
-
     const onFinish = (values) => {
         console.log(result);
         setResult(Object.assign(result, values));
