@@ -37,11 +37,9 @@ const FooterDonate = () => {
             <div className="article">
                 Як допомогти проєкту?
             </div>
-            <div className="description">
-                   <div className="text">
-                      <span>Ініціатива потребує постійної фінансової підтримки,</span>
-                      <span>аби покривати щоденні витрати на роботу.</span>
-                   </div>
+            <div className="desc" >
+                      <span>Ініціатива потребує постійної фінансової підтримки,
+                      аби покривати щоденні витрати на роботу.</span>
                 </div>
             <a target="blank"
                href="https://secure.wayforpay.com/payment/s0f2891d77061">

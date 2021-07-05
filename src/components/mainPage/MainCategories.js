@@ -65,10 +65,9 @@ const MainCategories = () => {
     }, [categories, pageSize, currentPage]);
     useEffect(() => {
         if (cardWidth) {
-            let itemsToDisplay = Math.floor((cardContainerWidth-48) / cardWidth);
-            // let maxItemsInRow = 4;
-            // itemsToDisplay =
-            //     itemsToDisplay > maxItemsInRow ? maxItemsInRow : itemsToDisplay;
+            let itemsToDisplay = Math.floor(
+                (cardContainerWidth - 20) / cardWidth
+            );
             setPageSize(itemsToDisplay);
         }
     }, [cardWidth, cardContainerWidth, width]);
@@ -104,7 +103,7 @@ const MainCategories = () => {
         <div className="about-categories">
             <div className="categories-header">
                 <h2 className="label">Оберіть напрям гуртків</h2>
-                <a href={process.env.PUBLIC_URL+"/clubs"}>
+                <a href={process.env.PUBLIC_URL + "/clubs"}>
                     <Button className="flooded-button more-button">
                         Всі гуртки
                     </Button>{" "}
@@ -119,7 +118,7 @@ const MainCategories = () => {
                     className="arrows-next"
                     onClick={() => onPageChangeNext(currentPage)}
                 />
-                <div className="categories-cards" >
+                <div className="categories-cards">
                     {activeCategories.map((category) => (
                         <PrimitiveCard
                             ref={ref}
@@ -154,6 +153,13 @@ const MainCategories = () => {
                 total={totalElements}
                 onChange={onChange}
             />
+            <div className="categories-footer">
+                <a href={process.env.PUBLIC_URL + "/clubs"}>
+                    <Button className="flooded-button more-button">
+                        Всі гуртки
+                    </Button>{" "}
+                </a>
+            </div>
         </div>
     );
 };

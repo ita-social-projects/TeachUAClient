@@ -4,7 +4,7 @@ import './css/UserClub.less';
 import {deleteClubById} from "../../../service/ClubService";
 import EditClubModal from "../../editClub/EditClubModal";
 
-const updateMenu = (clubId) => {
+const clubUpdateMenu = (clubId) => {
     return (
         <Menu classname="update-menu">
             <Menu.Item className="menu-item">
@@ -21,4 +21,4 @@ const updateMenu = (clubId) => {
     );
 }
 
-export default updateMenu;
+export default clubUpdateMenu;

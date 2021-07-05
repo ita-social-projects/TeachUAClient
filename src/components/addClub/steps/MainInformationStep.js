@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 
 const {Option} = Select;
 
-const MainInformationStep = ({categories, step, setStep, setResult, result, centers}) => {
+const MainInformationStep = ({categories, step, setStep, setResult, result, centers ,fromCenter}) => {
     const [mainForm] = Form.useForm();
     const [ageValidateStatus, setAgeValidateStatus] = useState("success")
 
@@ -131,6 +131,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                     років
                 </span>
             </Form.Item>
+            { fromCenter ? <div> </div> :
             <Form.Item name="centerId"
                        className="add-club-row"
                        label="Приналежність до центру">
@@ -141,6 +142,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                     {centers.map(c => <Option value={c.id}>{c.name}</Option>)}
                 </Select>
             </Form.Item>
+            }
             <div className="add-club-content-footer">
                 <Button htmlType="submit"
                         className="add-club-content-prev">{step > 0 && "Назад"}</Button>

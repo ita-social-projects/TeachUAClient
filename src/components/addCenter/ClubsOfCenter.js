@@ -1,5 +1,5 @@
 import { Form, Checkbox } from 'antd';
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
@@ -7,9 +7,9 @@ import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 
-
-const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations }) => {
+const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
     const [clubsOfCenterForm] = Form.useForm();
+    const [clubsId,setClubsIds] = useState([]);
 
     const nextStep = () => {
         setStep(0);
@@ -20,15 +20,20 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         setResult(Object.assign(result, clubsOfCenterForm.getFieldValue()));
         setStep(step - 1);
     }
-
+    const onChange = e => {
+        setClubsIds(e)
+    }
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
+        result.clubs = clubsId;
+        console.log(result);
         addCenter(result).then(response => {
             console.log(response);
             setResult(null)
             setLocations([]);
             nextStep();
         })
+        window.location.reload()
     }
 
     useEffect(() => {
@@ -47,29 +52,28 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             onFinish={onFinish}
             form={clubsOfCenterForm}
         >
+            <Form.Item
+            className="form-item"
+            label="Оберіть гурток"
+            name="clubs"
+            rules={[{
+                required: true,
+                message: "Виберіть гуртки приналежні до центру"
+            }]}>
             <div className="form-fields">
-                <Form.Item
-                    className="form-item"
-                    label="Оберіть гурток"
-                    name="clubs"
-                    rules={[{
-                        required: true,
-                        message: "Виберіть гуртки приналежні до центру"
-                    }]}>
-                    <Checkbox.Group >
+
+                    <Checkbox.Group onChange={onChange} >
                         {clubs.map(club => (
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>
-                                    <div className="checkbox-item-content">
                                         <ClubLogo logo={club.urlLogo} category={club.categories[0]} /><span className="club-name">{club.name}</span>
-                                    </div>
                                 </Checkbox>
                             </div>
                         ))}
                     </Checkbox.Group>
-                </Form.Item>
-                <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} /> </span>
             </div>
+            </Form.Item>
+            <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} fromCenter={fromCenter} /> </span>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
                 <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>

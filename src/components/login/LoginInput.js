@@ -5,7 +5,7 @@ import {MailOutlined} from "@ant-design/icons";
 const LoginInput = () => {
     return (
         <div>
-            {/*<div className="login-or"><span className="label-or">або</span></div>*/}
+            <div className="login-or"><span className="label-or">або</span></div>
             <div className="login-column">
                 <Form.Item name="email"
                            className="login-input"

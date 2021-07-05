@@ -501,6 +501,17 @@
   background-color: #FA8C16;
 }
 
+span.home-page {
+  display: none;
+}
+span.anticon.anticon-home.icon {
+  display: none;
+}
+
+li.ant-menu-item.ant-menu-item-only-child.home {
+  display: none;
+}
+
 @media  screen and (max-width: 2500px) {
   .header .nav-menu {
     width: 700px;
@@ -595,12 +606,7 @@
   }
 }
 
-@media (min-width: 850px) and  (max-width: 901px) {
-  .global-padding,
-  .layout .header {
-    padding: 0 10px 0 10px;
-  }
-
+@media screen and (min-width: 900px)and(max-width: 976px) {
   .layout .header {
     justify-content: space-between;
   }
@@ -621,9 +627,38 @@
   .header .nav-menu .ant-menu-submenu-title {
     display: inline-block !important;
   }
+
 }
 
-@media screen and (max-width: 849px) {
+@media (min-width: 810px) and  (max-width: 901px) {
+  .global-padding,
+  .layout .header {
+    padding: 0 10px 0 10px;
+  }
+
+  .layout .header {
+    justify-content: space-between;
+  }
+
+  .header .nav-menu {
+    width: 290px;
+    display: flex;
+  }
+
+  .ant-layout-header {
+    padding: 0 30px !important;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 24px;
+  }
+
+  .header .nav-menu .ant-menu-submenu-title {
+    display: inline-block !important;
+  }
+}
+
+@media screen and (max-width: 809px) {
 
   .global-padding,
   .layout .header {
@@ -646,7 +681,7 @@
   .lower-header-box .city-name {
     font-size: 24px;
     line-height: 32px;
-    margin-top: -20px;
+    margin-top: -10px;
     padding-left: 40px;
   }
 
@@ -734,28 +769,109 @@
 
 }
 
-@media screen and (max-width:585px)  {
-  .lower-header-box .city-name {
-    font-size: 20px;
+@media (min-device-width: 414px) and (max-device-width: 500px) {
+  span.anticon.anticon-home.icon {
+    display: inline-block;
+  }
+  span.home-page {
+    display: inline-block;
+  }
+  li.ant-menu-item.ant-menu-item-only-child.home {
+    display: inline-block;
   }
 
-  .header .add-club-button {
+  .header .logo {
     display: none;
   }
-}
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
-  .lower-header-box .city-name {
-    font-size: 16px;
-    line-height: 22px;
-    margin-top: 10px;
+
+  .header .add-club-button {
+    display: flex;
+    width: 149px;
+    height: 32px;
   }
 
   .header .right-side-menu {
-    margin-left: -10px;
+    margin-left: 30px;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 21px;
+    line-height: 22px;
+    margin-top: 10px;
+    margin-left: -24px;
+  }
+}
+
+@media (min-device-width: 375px) and (max-device-width: 413px) {
+  span.anticon.anticon-home.icon {
+    display: inline-block;
+  }
+  span.home-page {
+    display: inline-block;
+  }
+
+  li.ant-menu-item.ant-menu-item-only-child.home {
+    display: inline-block;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 21px;
+    line-height: 22px;
+    margin-top: 10px;
+    margin-left: -24px;
+  }
+
+  .header .add-club-button {
+    display: flex;
+    width: 149px;
+    height: 32px;
+  }
+
+  .header .logo {
+    display: none;
+  }
+
+  .header .right-side-menu {
+    margin-left: -15px;
   }
 
   .ant-select-selector {
     width: 80% !important;
   }
 }
+
+@media (min-device-width: 320px) and (max-device-width: 374px) {
+  span.anticon.anticon-home.icon {
+    display: inline-block;
+  }
+
+  span.home-page {
+    display: inline-block;
+  }
+
+  li.ant-menu-item.ant-menu-item-only-child.home {
+    display: inline-block;
+  }
+
+  .header .logo {
+    display: none;
+  }
+
+  .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
+    margin-left: 8px;
+  }
+
+  .header .right-side-menu {
+    margin-left: -20px;
+  }
+
+  .lower-header-box .city-name {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 10px;
+    margin-left: -24px;
+  }
+}
+
+
