@@ -92,17 +92,6 @@ const UserEditInput = ({user}) => {
                            }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
-            <Form.Item name="password"
-                       initialValue={user.password}
-                       className="user-edit-input"
-                       label="Пароль"
-                       hasFeedback
-                       rules={[{
-                           required: true,
-                           message: "Будь ласка введіть Ваш пароль"
-                       }]}>
-                <Input.Password className="user-edit-box"/>
-            </Form.Item>
             <Form.Item name="urlLogo"
                        initialValue={user.urlLogo}
                        className="user-edit-input"
@@ -121,6 +110,18 @@ const UserEditInput = ({user}) => {
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                 </Upload>
+            </Form.Item>
+            <Form.Item name="password"
+                       initialValue={user.password}
+                //className="user-edit-input"
+                // label="Пароль"
+                // hasFeedback
+                //  rules={[{
+                //      required:true,
+                //      message: "Будь ласка введіть Ваш пароль"
+                //  }]}
+            >
+                {/*<Input.Password className="user-edit-box"/>*/}
             </Form.Item>
             <Form.Item>
                 <div className="user-edit-footer">
