@@ -51,8 +51,8 @@ export const updateUser = async (data) => {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
-        password: data.password,
         phone: data.phone,
+        password: data.password,
         roleName: data.role,
         urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
         status: data.status
