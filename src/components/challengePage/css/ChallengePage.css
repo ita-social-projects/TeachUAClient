@@ -65,7 +65,7 @@
     }
 }
 
-@media (min-width: 375px) and (max-width: 824px) {
+@media (min-width: 320px) and (max-width: 824px) {
 
     .challenge-page .banner .title {
         font-size: 36px!important;
