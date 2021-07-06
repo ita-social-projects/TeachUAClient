@@ -31,9 +31,26 @@
     }
 
 }
-@media (min-width: 375px) and (max-width: 824px) {
+@media (min-width: 320px) and (max-width: 824px) {
 
     .about-header {
         margin-bottom: 25px;
+    }
+
+    .ant-avatar-lg.ant-avatar-icon {
+        margin-right: -15px;
+    }
+
+    span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-icon.avatarIfNotLogin {
+        margin-right: -15px;
+        margin-left: -9px;
+    }
+
+    .center-side {
+        margin-right: -20px;
+    }
+
+    .search-icon-group {
+        display: inline-flex;
     }
 }

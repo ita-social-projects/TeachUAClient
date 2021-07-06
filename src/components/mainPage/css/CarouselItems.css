@@ -75,7 +75,7 @@
     }
 }
 
-@media (min-width: 375px) and (max-width: 824px) {
+@media (min-width: 320px) and (max-width: 824px) {
     .about-carousel .carousel-item-1 {
         text-align: center;
 
