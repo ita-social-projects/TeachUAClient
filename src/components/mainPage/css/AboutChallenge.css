@@ -73,5 +73,12 @@
     .about-challenge .challenge-description .label {
         text-align: center;
     }
+
+}
+
+@media (min-width: 320px) and (max-width: 375px) {
+    .about-challenge .image > img {
+        height: 70%;
+    }
 }
 
