@@ -23,9 +23,9 @@ const LogComponent = () => {
     return (
         <div>
             <Divider>List of Logs</Divider>
-            <div className="delete-button">
-                <Button onClick={deleteLog}>Delete All Logs</Button>
-            </div>
+            {/*<div className="delete-button">*/}
+            {/*    <Button onClick={deleteLog}>Delete All Logs</Button>*/}
+            {/*</div>*/}
             <List className="box"
                   bordered
                   dataSource={logs}

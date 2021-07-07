@@ -72,7 +72,7 @@ const UserEditInput = ({user}) => {
                            message: "Будь ласка введіть Ваш номер телефону"
                        },
                            {
-                               pattern: /^\+?[3]?[8]?[0][-\(]?\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$/,
+                               pattern: /^\d{9}$/,
                                message: 'Телефон введено невірно'
                            }]}>
                 <Input addonBefore={prefixSelector}/>
@@ -92,17 +92,6 @@ const UserEditInput = ({user}) => {
                            }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
-            <Form.Item name="password"
-                       initialValue={user.password}
-                       className="user-edit-input"
-                       label="Пароль"
-                       hasFeedback
-                       rules={[{
-                           required: true,
-                           message: "Будь ласка введіть Ваш пароль"
-                       }]}>
-                <Input.Password className="user-edit-box"/>
-            </Form.Item>
             <Form.Item name="urlLogo"
                        initialValue={user.urlLogo}
                        className="user-edit-input"
@@ -121,6 +110,18 @@ const UserEditInput = ({user}) => {
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                 </Upload>
+            </Form.Item>
+            <Form.Item name="password"
+                       initialValue={user.password}
+                //className="user-edit-input"
+                // label="Пароль"
+                // hasFeedback
+                //  rules={[{
+                //      required:true,
+                //      message: "Будь ласка введіть Ваш пароль"
+                //  }]}
+            >
+                {/*<Input.Password className="user-edit-box"/>*/}
             </Form.Item>
             <Form.Item>
                 <div className="user-edit-footer">

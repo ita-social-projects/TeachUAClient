@@ -46,9 +46,9 @@ const UserInformationComponent = ({ user }) => {
                     </div>
                 </div>
             </div>
-            {/* <div className="edit-button">*/}
-            {/*    <UserEditModal user={user} />*/}
-            {/*</div>*/}
+             <div className="edit-button">
+                <UserEditModal user={user} />
+            </div>
         </div>
     )
 };

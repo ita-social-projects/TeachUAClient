@@ -31,7 +31,7 @@
     align-items: center;
     width: 150px;
     margin-left: 5px;
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 .serviceInUkr .social-media .icon {
@@ -146,7 +146,7 @@
 }
 
 .serviceInUkr .ant-collapse-arrow {
-    margin-top: 15px;
+    /*margin-top: 15px;*/
 }
 .serviceInUkr .ant-collapse .ant-collapse-item .ant-collapse-header {
     color: #2D4C68;
@@ -157,4 +157,78 @@
     line-height: 24px;
     color: #595959;
     border-top: 1px solid #f1f1f1;
+}
+
+@media (min-width: 320px) and (max-width: 824px) {
+    .serviceInUkr .title .text{
+        font-size: 45px !important;
+        text-align: center;
+    }
+
+    .serviceInUkr .social-info {
+        height: 10px;
+        display: contents !important;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+    }
+
+    .serviceInUkr .help-button {
+        justify-content: space-around;
+        display: flex;
+        align-items: center;
+    }
+    .content-title {
+        padding-top: 20px !important;
+    }
+
+    .serviceInUkr .social-media {
+        padding-bottom: 20px;
+    }
+
+    .serviceInUkr .social-media .text {
+        line-height: 10px;
+    }
+    .content-title, .club-title {
+        padding-left: 5px !important;
+    }
+    .serviceInUkr .content-title {
+        width: 340px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 36px;
+        color: #2D4C68;
+        text-align: center;
+    }
+
+    .serviceInUkr .content {
+        margin-bottom: 50px;
+    }
+
+    .serviceInUkr .content-text {
+        width: 305px;
+        font-size: 14px;
+        line-height: 28px;
+        color: #2D4C68;
+        opacity: 0.9;
+    }
+    .serviceInUkr .faq-title {
+        font-size: 28px;
+    }
+
+    .serviceInUkr .faq {
+        display: initial;
+    }
+    .serviceInUkr .ant-collapse > .ant-collapse-item {
+        border-bottom: none;
+        width: 307px;
+        padding-top: 16px;
+        padding-bottom: 10px;
+    }
+
+    .serviceInUkr .ant-collapse {
+        width: 304px;
+        min-width: 280px;
+    }
+
 }

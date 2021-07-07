@@ -5,3 +5,52 @@
 .search span {
     font-size: 18px;
 }
+
+@media (min-device-width : 320px) and (max-device-width : 568px) {
+    .search .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        margin-left: -24px;
+    }
+
+    .ant-select-selector {
+        width: 80% !important;
+    }
+    .ant-carousel .slick-slider {
+        margin-top: -60px;
+        align-self: flex-start;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .about-carousel-block .carousel-item {
+        height: 580px !important;
+    }
+
+    .ant-carousel .slick-dots {
+        position: static;
+        margin-top:10px;
+    }
+
+}
+@media (min-width: 320px) and (max-width: 824px) {
+
+    .about-header {
+        margin-bottom: 25px;
+    }
+
+    .ant-avatar-lg.ant-avatar-icon {
+        margin-right: -15px;
+    }
+
+    span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-icon.avatarIfNotLogin {
+        margin-right: -15px;
+        margin-left: -9px;
+    }
+
+    .center-side {
+        margin-right: -20px;
+    }
+
+    .search-icon-group {
+        display: inline-flex;
+    }
+}

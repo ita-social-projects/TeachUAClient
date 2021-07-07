@@ -65,19 +65,41 @@ const ServiceInUkr = () => {
             </div>
             <div className="faq">
                 <div className="faq-title">Популярні Питання (FAQ)</div>
-                {questions.map(question =>
-                    <Collapse class="collapse"
-                              defaultActiveKey={['1']}
-                              expandIconPosition="left"
-                              expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
-                                                                              rotate={isActive ? 90 : 0}/>}
-                    >
-                        <Panel className="panel"
-                               header={question.title} key={question.id}>
-                            <p>{question.text}</p>
-                        </Panel>
-                    </Collapse>
-                )}
+
+                <Collapse class="collapse"
+                          defaultActiveKey={['1']}
+                          expandIconPosition="left"
+                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
+                                                                          rotate={isActive ? 90 : 0}/>}
+                >
+                    <Panel className="panel"
+                           header="Як діяти, якщо вам відмовляють в інформації чи послугах українською мовою" key="1">
+                        <p>- Спочатку варто спробувати владнати ситуацію на місці та попросити працівника обслуговувати
+                            вас державною мовою.
+                            - У разі відмови працівника, звернутись до керівництва закладу або на “гарячу лінію”
+                            установи.
+                            - У разі відмови або не забезпечення надання інформації (послуг) державною мовою необхідно
+                            зафіксувати факт відмови (за допомогою аудіо-, відео, письмового підтвердження очевидців
+                            тощо) та дані суб’єкта господарювання (назву, місцезнаходження, контакти суб’єкта).
+                        </p>
+                    </Panel>
+                </Collapse>
+                <Collapse class="collapse"
+                          expandIconPosition="left"
+                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
+                                                                          rotate={isActive ? 90 : 0}/>}>
+                    <Panel className="panel" header="Куди можна подавати скаргу" key="2">
+                        <p>Ви можете подати скаргу до Уповноваженого із захисту державної мови на поштову адресу 01001, м. Київ, провулок Музейний, 12, електронну скриньку skarha@mova-ombudsman.gov.ua або заповнити відповідну форму на сайті Уповноваженого https://mova-ombudsman.gov.ua/</p>
+                    </Panel>
+                </Collapse>
+                <Collapse class="collapse"
+                          expandIconPosition="left"
+                          expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
+                                                                          rotate={isActive ? 90 : 0}/>}>
+                    <Panel className="panel" header="Що має містити скарга" key="3">
+                        <p>У скарзі обов’язково має бути зазначено: прізвище, ім’я, по батькові, місце проживання особи, викладено суть скарги, який саме суб’єкт/працівник суб’єкта, коли, за якою адресою, яким чином порушив право скаржника. Рекомендуємо також додати докази на підтвердження.</p>
+                    </Panel>
+                </Collapse>
             </div>
         </Layout>
     )
