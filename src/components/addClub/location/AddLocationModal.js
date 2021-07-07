@@ -138,12 +138,12 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            message: "Це поле є обов'язковим"
                                        },
                                        {
-                                           required: false,
+                                           required: true,
                                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
-                                           message: "Некоректна назва локації",
+                                           message: "Це поле може містити тільки українські та англійські літери",
                                        },
                                        {
-                                           required: false,
+                                           required: true,
                                            pattern: /^.*\S$/,
                                            message: "Некоректна назва локації",
                                        }]}

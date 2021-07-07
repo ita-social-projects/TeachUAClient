@@ -79,11 +79,12 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
                                message: "Некоректна назва гуртка",
                            },
-                           {
-                               required: false,
-                               pattern: /^.*\S$/,
-                               message: "Некоректна назва гуртка",
-                           }]}>
+                           // {
+                           //     required: false,
+                           //     pattern: /^.*\S$/,
+                           //     message: "Некоректна назва гуртка",
+                           // }
+                            ]}>
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
             </Form.Item>

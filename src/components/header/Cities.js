@@ -6,6 +6,7 @@ import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import {getAllCities} from "../../service/CityService";
 import {getClubsByParameters} from "../../service/ClubService";
 import {withRouter} from "react-router";
+import './css/authMenu.css';
 
 class Cities extends React.Component {
     state = {
