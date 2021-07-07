@@ -5,7 +5,6 @@ import './css/UserCenterCardItem.less';
 import PropTypes from "prop-types";
 import UserClubCardItem from "./UserClubCardItem";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import CenterEditModal from "./CenterEditModal";
 import clubUpdateMenu from "./ClubUpdateMenu";
 import {MoreOutlined} from "@ant-design/icons";
 import centerUpdateMenu from "./CenterUpdateMenu";

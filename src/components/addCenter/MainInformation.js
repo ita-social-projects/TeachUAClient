@@ -43,7 +43,12 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                     rules={[{
                         required: true,
                         message: "Введіть назву центру"
-                    }]}>
+                        },
+                        {
+                            required: false,
+                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                            message: "Некоректна назва центру",
+                        }]}>
                     <Input placeholder="Введіть назву центру" />
                 </Form.Item>
                 <Form.Item

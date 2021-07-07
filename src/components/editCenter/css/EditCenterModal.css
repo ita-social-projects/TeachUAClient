@@ -1,0 +1,9 @@
+.modal-edit-center .ant-modal-body {
+    min-height: 600px;
+}
+.modal-edit-center .header-edit-center {
+    display: flex;
+    padding: 20px 40px 32px 24px;
+    flex-direction: column;
+    justify-content: space-between;
+}

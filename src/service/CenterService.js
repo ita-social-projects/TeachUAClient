@@ -69,6 +69,27 @@ export const addCenter = async (data) => {
     }).catch((error) => {
         return error.response.data
     })
+}
+export const updateCenterById = async (data) => {
+        return await fetchRequest
+            .put(BASE_URL + "/api/center/" + data.id, {
+                name: data.name,
+                description: data.description,
+                userId: data.userId,
+                contacts: data.contacts,
+                locations: data.locations,
+                urlLogo: data.urlLogo && data.urlLogo.file.response,
+                urlBackground: data.urlBackground && data.urlBackground.file.response,
+                clubsId: data.clubs,
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                return error.response.data;
+            });
 
 
-};
+
+
+}
