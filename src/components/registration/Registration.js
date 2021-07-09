@@ -9,8 +9,9 @@ import {signUp} from "../../service/UserService";
 
 const Registration = () => {
     const [visible, setVisible] = useState(false);
-    const [disabledButton, setDisabledButton] = useState(true);
+    // const [disabledButton, setDisabledButton] = useState(true);
     const [role, setRole] = useState(null);
+    const [isChecked, setIsChecked] = useState(false);
 
 
     const onFinish = (values) => {
@@ -55,10 +56,11 @@ const Registration = () => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <RegistrationRoles setDisabledButton={setDisabledButton}
-                                           disabledButton={disabledButton} setRole={setRole}/>
+                        {/*<RegistrationRoles setDisabledButton={setDisabledButton}*/}
+                        {/*                   disabledButton={disabledButton} setRole={setRole} />*/}
+                        <RegistrationRoles setRole={setRole} />
                         {/*<RegistrationSocial role={role}/>*/}
-                        <RegistrationInput disabledButton={disabledButton}/>
+                        <RegistrationInput />
                     </Form>
                 </div>
             </Modal>
