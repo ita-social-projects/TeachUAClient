@@ -12,7 +12,7 @@ const FooterSocials = () => {
             </a>
             <div className="description">
                 <div className="text">
-                    <span>Нам небайдуже майбутнє</span>
+                    <span> Нам небайдуже майбутнє </span>
                     <span>дітей та української мови</span>
                 </div>
             </div>

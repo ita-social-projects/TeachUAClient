@@ -40,10 +40,17 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                     name="name"
                     className="form-item"
                     label="Назва центру"
-                    rules={[{
-                        required: true,
-                        message: "Введіть назву центру"
-                    }]}>
+                    rules={[
+                        {
+                            required: true,
+                            message: "Це поле є обов'язковим"
+                        },
+                        {
+                            required: true,
+                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                            message: "Це поле може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        },
+                      ]}>
                     <Input placeholder="Введіть назву центру" />
                 </Form.Item>
                 <Form.Item

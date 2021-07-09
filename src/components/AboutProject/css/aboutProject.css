@@ -32,7 +32,7 @@
 }
 
 .aboutProject .social-media .links {
-    padding-top: 20px;
+    padding-top: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,4 +207,70 @@
     left: 0px;
     top: 0px;
     border-radius: 8px;
+}
+
+@media(min-width: 375px) and (max-width: 824px) {
+    .aboutProject .title .text {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .aboutProject .social-info {
+        height: 10px;
+        display: contents !important;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+    }
+
+    .aboutProject .help-button {
+        justify-content: space-around;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
+
+    .aboutProject .content .title-content {
+        padding-top: 15px;
+        width: 343px;
+        text-align: left;
+    }
+
+    .aboutProject .content-text {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    img {
+        vertical-align: middle;
+        der-style: none;
+        margin: 0 auto;
+    }
+
+    .aboutProject .row .col .text {
+        width: 90vw;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .aboutProject .row {
+        display: grid;
+    }
+
+    .aboutProject .row .col .name {
+        text-align: center;
+        width: 90vw;
+    }
+
+    .aboutProject .row .col .position {
+        text-align: center;
+        width: 90vw;
+    }
+
+    .aboutProject .row .main {
+        padding-bottom: 0px;
+    }
+
+    .aboutProject .image {
+        margin-left: 30px;
+    }
 }

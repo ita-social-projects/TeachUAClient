@@ -21,6 +21,7 @@ export const addClub = async (data) => {
             locations: data.locations,
             urlLogo: data.urlLogo,
             urlBackground: data.urlBackground,
+            urlGallery: data.urlGallery,
             contacts: data.contacts,
             isApproved: data.isApproved,
             centerId: data.centerId,

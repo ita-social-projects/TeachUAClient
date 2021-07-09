@@ -76,14 +76,15 @@ const Description = ({ step, setStep, result, setResult }) => {
                     </Upload>
                 </Form.Item>
                 <Form.Item name="description"
-                           className="add-club-row"
+                           className="add-center-row"
                            label="Опис"
                            hasFeedback
                            rules={[{
                                required: true,
-                               pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:;<=>?@_`{}~^\/[\]]{40,1500}$/,
-                               message: " Некоректний опис центру"
-                           }]}
+                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){40,1500}$/,
+                               message: "Це поле може містити тільки українські та англійські літери, цифри та спеціальні символи"
+                           }
+                           ]}
                 >
                     <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис центру"/>
                 </Form.Item>
