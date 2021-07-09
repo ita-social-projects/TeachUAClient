@@ -53,8 +53,9 @@ const Description = ({ step, setStep, result, setResult }) => {
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
+                        accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
-                        data={{ folder: `clubs/${centerName}/logo` }}
+                        data={{ folder: `center/${centerName}/logo` }}
                         headers={{ contentType: 'multipart/form-data' }}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити лого</span>
@@ -68,7 +69,7 @@ const Description = ({ step, setStep, result, setResult }) => {
                         name="image"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
-                        data={{ folder: `clubs/${centerName}/background` }}
+                        data={{ folder: `center/${centerName}/background` }}
                         headers={{ contentType: 'multipart/form-data' }}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити фото</span>
@@ -81,10 +82,10 @@ const Description = ({ step, setStep, result, setResult }) => {
                            rules={[{
                                required: true,
                                pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:;<=>?@_`{}~^\/[\]]{40,1500}$/,
-                               message: " Некоректний опис гуртка"
+                               message: " Некоректний опис центру"
                            }]}
                 >
-                    <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
+                    <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис центру"/>
                 </Form.Item>
             </div>
             <div className="btn">
