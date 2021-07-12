@@ -31,14 +31,32 @@
     }
 
 }
+@media (min-width: 345px) and (max-width: 824px) {
+    ant-avatar-lg.ant-avatar-icon {
+        margin-right: -4px;
+    }
+
+}
+@media (min-width: 330px) and (max-width: 344px) {
+    .ant-avatar-lg.ant-avatar-icon {
+        margin-right: -11px;
+    }
+}
+
+@media (min-width: 319px) and (max-width: 329px) {
+    .ant-avatar-lg.ant-avatar-icon {
+        margin-right: -15px;
+    }
+
+    .header .add-club-button {
+        width: 139px;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 824px) {
 
     .about-header {
         margin-bottom: 25px;
-    }
-
-    .ant-avatar-lg.ant-avatar-icon {
-        margin-right: -15px;
     }
 
     span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-icon.avatarIfNotLogin {
@@ -47,7 +65,7 @@
     }
 
     .center-side {
-        margin-right: -20px;
+        margin-right: -22px;
     }
 
     .search-icon-group {
