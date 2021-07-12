@@ -38,7 +38,7 @@
 
 .clubInfo .address-icon {
     font-size: 1.5em;
-    color: #FFA62C;
+    color: #ffa62c;
     margin-right: 11px;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .clubInfo .address .text {
-    color: #2D4C68;
+    color: #2d4c68;
     opacity: 0.6;
     font-weight: 600;
     vertical-align: center;
@@ -59,7 +59,7 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 24px;
-    color: #2D4C68;
+    color: #2d4c68;
 }
 
 .clubInfo .years {
@@ -67,7 +67,7 @@
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
-    color: #2D4C68;
+    color: #2d4c68;
     opacity: 0.6;
 }
 
@@ -92,7 +92,7 @@
     line-height: 24px;
     display: flex;
     align-items: center;
-    color: #2D4C68;
+    color: #2d4c68;
 }
 
 .clubInfo .social-media .links .contact {
@@ -106,7 +106,7 @@
 
 .clubInfo .rating .feedback {
     font-size: 14px;
-    color: #0050B3;
+    color: #0050b3;
     text-decoration: underline;
     cursor: pointer;
     margin-left: 14px;
@@ -116,7 +116,7 @@
     font-weight: 700;
     height: 40px;
     width: 203px;
-    background: #FA8C16;
+    background: #fa8c16;
     color: white;
     border-radius: 6px;
     font-size: 16px;
@@ -124,7 +124,7 @@
 }
 
 .clubInfo .more-button:hover {
-    background-color: #FFA940;
+    background-color: #ffa940;
 }
 
 .clubInfo .about-club {
@@ -136,7 +136,7 @@
     font-weight: bold;
     font-size: 18px;
     line-height: 32px;
-    color: #2D4C68;
+    color: #2d4c68;
 }
 
 .clubInfo .carousel {
@@ -158,7 +158,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 28px;
-    color: #2D4C68;
+    color: #2d4c68;
     opacity: 0.9;
     overflow-y: auto;
 }
@@ -166,11 +166,70 @@
 .clubInfo .about-club .description::-webkit-scrollbar {
     width: 8px;
     height: 5px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     border-radius: 6px;
 }
 
 .clubInfo .about-club .description::-webkit-scrollbar-thumb {
-    background-color: #BFBFBF;
+    background-color: #bfbfbf;
     border-radius: 6px;
+}
+
+.clubInfo .modal-settings-btn {
+    box-shadow: none;
+    position: absolute;
+    top: 16px;
+    right: 56px;
+    z-index: 10;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.45);
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    width: 28px;
+    height: 28px;
+}
+
+.clubInfo .modal-settings-btn:focus,
+.clubInfo .modal-settings-btn:hover {
+    color: rgba(0, 0, 0, 0.75);
+    text-decoration: none;
+}
+
+.clubModal.popConfirm span {
+    background: #fa8c16;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 2px 14px 5px;
+}
+.clubModal.popConfirm span:hover {
+    background-color: #ffa940;
+}
+
+.clubModal.popConfirm,
+.clubModal.popCancel {
+    padding: 0;
+    margin-left: 16px;
+    background: transparent;
+    border: 0;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.clubModal.popCancel span {
+    background: white;
+    color: #fa8c16;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 2px 14px 5px;
+}
+.clubModal.popCancel span:hover {
+    background-color: #fa8c16;
+    color: white;
 }
