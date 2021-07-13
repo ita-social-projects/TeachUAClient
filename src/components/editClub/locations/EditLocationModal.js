@@ -55,18 +55,8 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
     };
 
     const onFinish = (values) => {
-        // console.log(coordinates)
-        // if (inputAddressProps.validateStatus === 'error') {
-        //     message.error("Некоректно вибрана адреса");
-        //     return;
-        // }
         console.log(values)
         values.key = Math.random();
-        // const coordinates = [{latitude: locationForm.latitude, longitude: locationForm.longitude,}]
-        // const newValues = coordinates.reduce(
-        //     (result, item) =>
-        //         Object.assign({}, result, item), values)
-        // delete newValues['longitudeAndLatitude']
         if (editedLocation) {
             const index = locations.findIndex((item) => editedLocation.key === item.key);
             locations[index] = values;

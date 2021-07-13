@@ -4,7 +4,7 @@ import "./css/EditMainInformationTab.less"
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
-import {getClubById} from "../../service/ClubService";
+import {getClubById, getClubProfileById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
 
 const EditClubModal = (club) => {
@@ -18,7 +18,9 @@ const EditClubModal = (club) => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
-        getClubById(club.clubId).then(response => setResult(response));
+        // getClubById(club.clubId).then(response => setResult(response));
+        getClubProfileById(club.clubId).then(response => setResult(response));
+        console.log(result);
     }, []);
     return (
         <div>

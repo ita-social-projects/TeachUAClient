@@ -5,14 +5,14 @@ import {addClub, updateClubBuId} from "../../../service/ClubService";
 
 const MainInformationTab = ({categories, setResult, result}) => {
     const onFinish = (values) => {
-        console.log(result);
+        console.log(values);
         setResult(Object.assign(result, values));
 
         console.log(result);
         updateClubBuId(result).then(response => console.log(response));
     };
-
-    const categoriesName = result.categories.map((category) => category.name)
+    console.log(result);
+    // const categoriesName = result.categories.map((category) => category.name)
 
     return (
         <Form name="basic"
@@ -30,7 +30,7 @@ const MainInformationTab = ({categories, setResult, result}) => {
             <Form.Item name="categories"
                        className="edit-club-row"
                        label="Категорія"
-                       initialValue={categoriesName}
+                       initialValue={result.categoriesName}
                        hasFeedback
                        rules={[
                            {

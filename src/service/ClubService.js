@@ -4,6 +4,22 @@ import {replaceCommaToSemicolon} from "../util/CategoryUtil";
 import {searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
+    console.log({
+        categoriesName: data.categories,
+        name: data.name,
+        ageFrom: data.ageFrom,
+        ageTo: data.ageTo,
+        isOnline: data.isOnline,
+        description: data.description,
+        userId: data.userId,
+        locations: data.locations,
+        urlLogo: data.urlLogo,
+        urlBackground: data.urlBackground,
+        urlGallery: data.urlGallery,
+        contacts: data.contacts,
+        isApproved: data.isApproved,
+        centerId: data.centerId,
+    });
     // data.locations.map(
     //     (location) =>
     //         (location.address =
@@ -43,7 +59,7 @@ export const updateClubBuId = async (data) => {
         ageTo: data.ageTo,
         isOnline: data.isOnline,
         description: data.description,
-        userId: data.user.id,
+        userId: data.userId,
         locations: data.locations,
         urlLogo: data.urlLogo,
         urlBackground: data.urlBackground,
@@ -102,17 +118,17 @@ export const getClubById = async (id) => {
         });
 };
 
-// export const getClubProfileById = async (id) => {
-//     return await fetchRequest
-//         .get(BASE_URL + "/api/club_profile/" + id)
-//         .then((response) => {
-//             console.log(response.data);
-//             return response.data;
-//         })
-//         .catch((error) => {
-//             return error.response.data;
-//         });
-// };
+export const getClubProfileById = async (id) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/clubProfile/" + id)
+        .then((response) => {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
 
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
