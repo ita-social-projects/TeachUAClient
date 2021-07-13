@@ -209,7 +209,7 @@
     border-radius: 8px;
 }
 
-@media(min-width: 375px) and (max-width: 824px) {
+@media(min-width: 319px) and (max-width: 824px) {
     .aboutProject .title .text {
         font-size: 36px;
         text-align: center;
@@ -231,7 +231,7 @@
 
     .aboutProject .content .title-content {
         padding-top: 15px;
-        width: 343px;
+        width: 90%;
         text-align: left;
     }
 
