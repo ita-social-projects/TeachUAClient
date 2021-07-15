@@ -17,7 +17,6 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates,setCoordinates] = useState();
-    console.log(editedLocation);
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: editedLocation != null ? (editedLocation.city !== undefined ? editedLocation.city.name : editedLocation.cityName) : "",
@@ -25,9 +24,7 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
         phoneNumber: "",
         inputAddress:""
     })
-    console.log(editedLocation);
     useEffect(() => {
-        console.log(cityName);
         getStationsByCity(editedLocation != null ? editedLocation.city.name : "").then(response => setStation(response))
         getDistrictsByCityName(editedLocation != null ? editedLocation.city.name : "").then(response => setDistricts(response));
     }, [cityName]);
@@ -64,7 +61,6 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
         } else {
             setLocations(addToTable(locations, values));
         }
-
         onClose();
     };
 

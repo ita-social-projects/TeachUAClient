@@ -12,7 +12,8 @@ import "../css/MainInformationTab.less"
 const DescriptionTab = ({setResult, result}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
-    const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+    // const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
+    const clubName = "";
 
     const onFinish = (values) => {
         console.log(result);

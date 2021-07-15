@@ -11,34 +11,24 @@ const {Option} = Select;
 const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
     const [locationForm] = Form.useForm();
-    // const [cityName, setCityName] = useState(result.locations[0] !== undefined ?
-    //     (result.locations[0].city !== undefined ? result.locations[0].city.name : result.locations[0].cityName) : null);
-    // const [cityName, setCityName] = useState(result.locations[0] !== undefined ? )
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
-    const [contacts_data, setContactsData] = useState({});
+    const [contacts_data, setContactsData] = useState(JSON.parse(result.contacts.replaceAll("::", ":")));
     const [checked, setChecked] = useState(result.isOnline !== undefined ? result.isOnline : false);
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
-    // const [locations, setLocations] = useState([]);
     const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
-    console.log(result.contacts);
-    const parsedContacts = JSON.parse(JSON.parse(JSON.stringify(result.contacts).replaceAll("::", ":")));
-    // useEffect(() => {
-    //     getDistrictsByCityName(cityName).then(response => setDistricts(response));
-    // }, [cityName]);
-    console.log(result);
 
     const onFinish = (values) => {
         console.log(result);
         values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
         console.log(values);
-        console.log(locations);
         if (locations !== undefined) {
             for (const loc in locations) {
                 console.log(locations[loc]);
                 values.locations[loc] = {
+                    id: locations[loc].id,
                     cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
                     address: locations[loc].address,
                     coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
@@ -50,10 +40,10 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 }
             }
         }
-
         setResult(Object.assign(result, values));
         console.log(result);
     };
+    console.log(result);
 
     const onOnlineChange = () => {
         if (checked) {
@@ -74,10 +64,21 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             ...contacts_data,
             [contact.id]: event.target.value
         });
-        setResult({
-            contacts: JSON.stringify(contacts_data).replaceAll(":", "::"),
-        })
+        console.log(contacts_data);
+
     };
+
+    const initialValue = (contactName) => {
+        let value = "";
+        if (result.contactsArray !== undefined) {
+            result.contactsArray.map(e => {
+                if (e.contactType.name === contactName.name) {
+                    value = e.contact_data;
+                }
+            })
+        }
+        return value;
+    }
 
     const onEdit = (item) => {
         console.log(item);
@@ -153,30 +154,29 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             <Form.Item
                 label="Контакти"
                 className="edit-club-row edit-club-contacts">
-
                 {contacts.map(contact =>
                     <Form.Item name={`clubContact${contact.name}`}
                                className="edit-club-contact"
-                               // initialValue={}
-                        // initialValue={result[`clubContact${contact.name}`]}
                                hasFeedback
+                               initialValue={initialValue(contact)}
                     >
                         <Input className="edit-club-input"
                                placeholder="Заповніть поле"
+                               // defaultValue={initialValue(contact)}
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}
                                onChange={(e) => changeContacts(e, contact)}
                         />
                     </Form.Item>)}
             </Form.Item>
-            {result.locations.length === 0 &&
-            <div className="add-club-inline">
-                <Form.Item name="isOnline"
-                           className="add-club-row"
-                           label="Доступний онлайн?"
-                >
-                    <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onOnlineChange} checked={checked}/>
-                </Form.Item>
-            </div>}
+            {/*{result.locations.length === 0 &&*/}
+            {/*<div className="add-club-inline">*/}
+            {/*    <Form.Item name="isOnline"*/}
+            {/*               className="add-club-row"*/}
+            {/*               label="Доступний онлайн?"*/}
+            {/*    >*/}
+            {/*        <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onOnlineChange} checked={checked}/>*/}
+            {/*    </Form.Item>*/}
+            {/*</div>}*/}
             <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
 
             <EditLocationModal
