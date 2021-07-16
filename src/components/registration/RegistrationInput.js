@@ -42,15 +42,13 @@ const RegistrationInput = () => {
     }
 
     return (
-        <div className="registration-input-box">
-            <Form onChange={onChange}>
+        <div className="registration-input-box" onChange={onChange}>
                 <div className="registration-or"><span className="label-or">або</span></div>
                 <div className="registration-column">
 
                     <Form.Item name="lastName"
                                className="registration-input"
                                label="Прізвище"
-                               onChange={onChange}
                                hasFeedback
                                rules={[{
                                    required: true,
@@ -359,7 +357,6 @@ const RegistrationInput = () => {
                     {/*    </div>*/}
 
                 </Form.Item>
-            </Form>
         </div>
                 )
                 };
