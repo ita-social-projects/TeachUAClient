@@ -1,11 +1,9 @@
 import {Button, Form, Input, List, Popconfirm, Select, Switch} from "antd";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import MaskIcon from "../../MaskIcon";
 import "../css/MainInformationTab.less"
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import EditLocationModal from "../locations/EditLocationModal";
-
-const {Option} = Select;
 
 const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
@@ -18,6 +16,30 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
 
     const onFinish = (values) => {
         console.log(result);
+        // values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
+        // console.log(values);
+        // if (locations !== undefined) {
+        //     for (const loc in locations) {
+        //         console.log(locations[loc]);
+        //         values.locations[loc] = {
+        //             id: locations[loc].id,
+        //             cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+        //             address: locations[loc].address,
+        //             coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+        //             districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+        //             key: locations[loc].key,
+        //             name: locations[loc].name,
+        //             phone: locations[loc].phone,
+        //             stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+        //         }
+        //     }
+        // }
+        setResult(Object.assign(result, values));
+        console.log(result);
+    };
+    console.log(result);
+
+    const onFinalChange = (values) => {
         values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
         console.log(values);
         if (locations !== undefined) {
@@ -36,13 +58,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 }
             }
         }
-        setResult(Object.assign(result, values));
-        console.log(result);
-    };
-    console.log(result);
-
-    const onFinalChange = (values) => {
-        console.log(values);
     }
 
     const onOnlineChange = () => {
@@ -60,12 +75,16 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     }
 
     const changeContacts = (event, contact) => {
+        console.log(result);
+        console.log(contact);
         setContactsData({
             ...contacts_data,
             [contact.id]: event.target.value
         });
         console.log(contacts_data);
-
+        const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
+        setResult({...result, contacts: parsedContact})
+        console.log(result);
     };
 
     const initialValue = (contactName) => {
