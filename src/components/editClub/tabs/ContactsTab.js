@@ -1,7 +1,6 @@
 import {Button, Form, Input, List, Popconfirm, Select, Switch} from "antd";
 import React, {useEffect, useState} from "react";
 import MaskIcon from "../../MaskIcon";
-import {getDistrictsByCityName} from "../../../service/DisctrictService";
 import "../css/MainInformationTab.less"
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import EditLocationModal from "../locations/EditLocationModal";
@@ -11,9 +10,6 @@ const {Option} = Select;
 const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
     const [locationForm] = Form.useForm();
-    const [cityOnInput, setCityOnInput] = useState(null);
-    const [inputAddressProps, setInputAddressProps] = useState({});
-    const [districts, setDistricts] = useState([]);
     const [contacts_data, setContactsData] = useState(JSON.parse(result.contacts.replaceAll("::", ":")));
     const [checked, setChecked] = useState(result.isOnline !== undefined ? result.isOnline : false);
     const [locationVisible, setLocationVisible] = useState(false);
@@ -45,16 +41,20 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     };
     console.log(result);
 
+    const onFinalChange = (values) => {
+        console.log(values);
+    }
+
     const onOnlineChange = () => {
         if (checked) {
             setChecked(false);
             setResult({
-                isOnline: false,
+                ...result, isOnline: false,
             });
         } else {
             setChecked(true);
             setResult({
-                isOnline: true,
+                ...result, isOnline: true,
             });
         }
     }
@@ -80,24 +80,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         return value;
     }
 
-    const onEdit = (item) => {
-        console.log(item);
-        locationForm.setFieldsValue({
-            ...item,
-        });
-        // setEditedLocation(item);
-        setEditedLocation({
-            address: item.address,
-            cityName: item.city !== undefined ? item.city.name : item.cityName,
-            coordinates: item.latitude + ", " + item.longitude,
-            districtName: item.district !== undefined ? item.district.name : item.districtName,
-            name: item.name,
-            stationName: item.station !== undefined ? item.station.name : item.stationName,
-        });
-        console.log(item);
-        setLocationVisible(true);
-    };
-
     const onRemove = (item) => {
         const newData = [...locations];
         const index = newData.findIndex((it) => item.key === it.key);
@@ -110,24 +92,20 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             name="basic"
             form={contactsForm}
             requiredMark={false}
+            // onChange={onFinalChange}
             onFinish={onFinish}>
             <Form.Item name="locations"
                        className="add-club-row"
-                // label="Локації"
-                //        initialValue={result.locations}>
                        initialValue={locations}
             >
                 <List
                     className="add-club-location-list"
                     itemLayout="horizontal"
-                    // dataSource={result.locations}
                     dataSource={locations}
                     renderItem={item => (
-                        // console.log(item),
                         <List.Item
                             actions={[
                                 <div>
-                                    {/*<EditOutlined key="edit" onClick={() => onEdit(item)} />*/}
                                     <Popconfirm key="delete"
                                                 title="Видалити локацію?"
                                                 cancelText="Ні"
@@ -142,8 +120,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                             <List.Item.Meta
                                 title={item?.name}
                                 description={item?.address}
-                                // description={`Адреса: ${item?.address}`}
-                                // description={`Адреса: ${item?.address.value?.structured_formatting.main_text}`}
                             />
                         </List.Item>
                     )}/>
@@ -151,6 +127,14 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     Додати локацію
                 </span>
             </Form.Item>
+            <div className="add-club-inline">
+                <Form.Item name="isOnline"
+                           className="add-club-row"
+                           label="Доступний онлайн?"
+                >
+                    <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onOnlineChange} checked={checked}/>
+                </Form.Item>
+            </div>
             <Form.Item
                 label="Контакти"
                 className="edit-club-row edit-club-contacts">
@@ -162,21 +146,11 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     >
                         <Input className="edit-club-input"
                                placeholder="Заповніть поле"
-                               // defaultValue={initialValue(contact)}
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}
                                onChange={(e) => changeContacts(e, contact)}
                         />
                     </Form.Item>)}
             </Form.Item>
-            {/*{result.locations.length === 0 &&*/}
-            {/*<div className="add-club-inline">*/}
-            {/*    <Form.Item name="isOnline"*/}
-            {/*               className="add-club-row"*/}
-            {/*               label="Доступний онлайн?"*/}
-            {/*    >*/}
-            {/*        <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onOnlineChange} checked={checked}/>*/}
-            {/*    </Form.Item>*/}
-            {/*</div>}*/}
             <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
 
             <EditLocationModal

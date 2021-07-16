@@ -50,7 +50,7 @@ export const addClub = async (data) => {
         });
 };
 
-export const updateClubBuId = async (data) => {
+export const updateClubById = async (data) => {
     console.log(data.locations);
     console.log({
         categoriesName: data.categories,
