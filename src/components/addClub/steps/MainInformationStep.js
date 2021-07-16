@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 
 const {Option} = Select;
 
-const MainInformationStep = ({categories, step, setStep, setResult, result, centers ,fromCenter}) => {
+const MainInformationStep = ({categories, step, setStep, setResult, result, centers ,fromCenter ,centerId}) => {
     const [mainForm] = Form.useForm();
     const [ageValidateStatus, setAgeValidateStatus] = useState("success")
 
@@ -135,6 +135,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             { fromCenter ? <div> </div> :
             <Form.Item name="centerId"
                        className="add-club-row"
+                       initialValue={centerId}
                        label="Приналежність до центру">
                 <Select
                     className="add-club-select"

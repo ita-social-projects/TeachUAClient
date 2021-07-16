@@ -1,0 +1,19 @@
+.edit-center-logo {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 21px;
+    display: flex;
+
+}
+.edit-center-urlWeb {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 21px;
+    display: flex;
+
+}
+.edit-center-photos {
+     display: flex;
+}

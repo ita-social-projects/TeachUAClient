@@ -80,6 +80,14 @@ export const getClubsByUserId = async (id, page) => {
         });
 };
 
+export const getClubsByCenterId = async (id) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/clubs/center/"+ id)
+        .then((response ) => {
+            return response.data;
+        });
+};
+
 export const getAllClubsByUserId = async (id) => {
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/user/" + id)

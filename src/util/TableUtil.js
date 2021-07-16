@@ -18,5 +18,6 @@ export const deleteFromTable = (data, id) => {
 };
 
 export const addToTable = (currentData, addingData) => {
+    console.log(currentData + " " + addingData)
     return currentData.concat(addingData);
 };

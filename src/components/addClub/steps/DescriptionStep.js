@@ -10,7 +10,7 @@ import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
 import {uploadImage} from "../../../service/UploadService";
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
+const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,reloadPage}) => {
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
 
@@ -70,7 +70,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 })
             }
         });
-        if(!fromCenter)
+        if(reloadPage)
         {
          window.location.reload();
         }

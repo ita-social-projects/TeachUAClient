@@ -1,7 +1,7 @@
 import {Button} from "antd";
 import React from "react";
 import "./css/EditCenterFooter.css"
-const EditCenterContentFooter = (result) => {
+const EditCenterContentFooter = ({result,setResult}) => {
 
     const onFinish = (values) =>{
 

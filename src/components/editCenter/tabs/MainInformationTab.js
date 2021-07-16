@@ -24,11 +24,12 @@ const MainInformationTab = ({center,form,cities}) =>{
             <Form.Item name="name"
                        className="edit-center-row edit-center-name"
                        label="Назва"
+                       initialValue={center.name}
             >
                 <Input className="edit-center-input"
                        value={center.name}
                        placeholder="Назва гуртка"
-                       defaultValue={center.name}
+
                 />
             </Form.Item>
 
@@ -56,6 +57,8 @@ const MainInformationTab = ({center,form,cities}) =>{
                 </span>
     <AddLocationModal
         form={locationForm}
+        locations={locations}
+        setLocations={setLocations}
         visible={locationVisible}
         setVisible={setLocationVisible}
         editedLocation={editedLocation}

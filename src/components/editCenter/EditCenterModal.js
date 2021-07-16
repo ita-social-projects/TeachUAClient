@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {getAllContacts} from "../../service/ContactService";
-import {Modal , Form} from "antd";
+import {Modal, Form} from "antd";
 import "./css/EditCenterModal.css"
 import {getCenterById} from "../../service/CenterService";
 import EditCenterTabs from "./EditCenterTabs";
 import {getAllCities} from "../../service/CityService";
 import {getAllStations} from "../../service/StationService";
 import {getAllCategories} from "../../service/CategoryService";
+import {getClubsByCenterId} from "../../service/ClubService";
 
 const EditCenterModal = ({centerId}) => {
     const [visible, setVisible] = useState(false);
@@ -14,9 +15,9 @@ const EditCenterModal = ({centerId}) => {
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
-    const [station,setStation] = useState([]);
-    const [center,setCenter]= useState([]);
-    const [mainForm,setMainFrom] = Form.useForm();
+    const [station, setStation] = useState([]);
+    const [center, setCenter] = useState([]);
+    const [clubs, setClubs] = useState([]);
 
 
     useEffect(() => {
@@ -44,12 +45,15 @@ const EditCenterModal = ({centerId}) => {
             >
                 <div className="header-edit-center">Редагувати гурток</div>
                 <EditCenterTabs
-                              from={mainForm}
-                              setResult={setResult}
-                              result={result}
-                              center={center}
-                              contacts={contacts}
-                              cities={cities}/>
+                    result={result}
+                    setResult={setResult}
+                    clubs={clubs}
+                    set={setClubs}
+                    setResult={setResult}
+                    result={result}
+                    center={center}
+                    contacts={contacts}
+                    cities={cities}/>
             </Modal>
         </div>
     );
