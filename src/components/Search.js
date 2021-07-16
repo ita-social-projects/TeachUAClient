@@ -39,6 +39,9 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
+        if(value.trim().length===0){
+            return;
+        }
         if (this.props.redirect && value.length > 2) {
             this.props.history.push("/clubs", {value});
         }

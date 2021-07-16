@@ -221,14 +221,17 @@
     }
     .serviceInUkr .ant-collapse > .ant-collapse-item {
         border-bottom: none;
-        width: 307px;
+        width: 100%;;
         padding-top: 16px;
         padding-bottom: 10px;
     }
 
     .serviceInUkr .ant-collapse {
-        width: 304px;
-        min-width: 280px;
+        width: 100%;
+        min-width: 20%;
     }
 
+    .serviceInUkr .ant-collapse .ant-collapse-item .ant-collapse-header {
+        margin-bottom: 4%;
+    }
 }
