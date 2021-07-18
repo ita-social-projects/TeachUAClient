@@ -36,7 +36,8 @@ const NavMenu = () => {
                   onClick={onMenuChange}
                   selectedKeys={[pageContent]}
                   expandIcon={<MenuOutlined />}
-                  mode="horizontal">
+                  mode="horizontal"
+                  triggerSubMenuAction ={"click"}>
                 <Menu.Item key="clubs">
                     <Link to="/clubs" onClick={() => setCurrentPage(0)}><ApartmentOutlined className="icon"/>Гуртки</Link>
                 </Menu.Item>
