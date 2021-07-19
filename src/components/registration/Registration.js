@@ -9,9 +9,10 @@ import {signUp} from "../../service/UserService";
 
 const Registration = () => {
     const [visible, setVisible] = useState(false);
+    const [disabledButton, setDisabledButton] = useState(true);
     // const [disabledButton, setDisabledButton] = useState(true);
     const [role, setRole] = useState(null);
-    const [isChecked, setIsChecked] = useState(false);
+    // const [isChecked, setIsChecked] = useState(false);
 
 
     const onFinish = (values) => {
@@ -22,7 +23,6 @@ const Registration = () => {
             duration: 5,
             className: "custom-class-confirmation",
         });
-
         console.log(values);
         signUp(values).then((response) => {
             if (response.status) {
@@ -32,8 +32,6 @@ const Registration = () => {
             }
         });
     };
-
-
     return (
         <div>
             <div onClick={() => setVisible(true)}>
@@ -56,16 +54,18 @@ const Registration = () => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
+                        <RegistrationRoles setDisabledButton={setDisabledButton}
+                                           disabledButton={disabledButton} setRole={setRole}/>
                         {/*<RegistrationRoles setDisabledButton={setDisabledButton}*/}
                         {/*                   disabledButton={disabledButton} setRole={setRole} />*/}
-                        <RegistrationRoles setRole={setRole} />
+                        {/*<RegistrationRoles setRole={setRole} />*/}
                         {/*<RegistrationSocial role={role}/>*/}
-                        <RegistrationInput />
+                        <RegistrationInput disabledButton={disabledButton===false}/>
+                        {/*<RegistrationInput />*/}
                     </Form>
                 </div>
             </Modal>
         </div>
     );
 };
-
 export default Registration;
