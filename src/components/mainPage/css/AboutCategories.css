@@ -27,6 +27,16 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    max-width: 100vw;
+    width: 100%;
+    overflow: hidden;
+}
+
+.categories-cards .ant-carousel {
+    margin: 0 27px 0 27px;
+    max-width: 100vw;
+    width: 100%;
+    overflow: hidden;
 }
 
 .about-categories .primitive-card {
@@ -55,6 +65,15 @@
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
+}
+.about-categories .ant-carousel .slick-slide {
+    justify-content: center;
+    display: flex;
+}
+
+.about-categories .ant-carousel .slick-slider {
+    text-align: center;
+    font-size: 24px;
 }
 
 .about-categories .primitive-card .content .name {
@@ -158,7 +177,7 @@
     }
 }
 
-@media (min-device-width : 320px) and (max-device-width : 868px) {
+@media (min-device-width: 320px) and (max-device-width: 868px) {
     .about-categories .categories-header .label {
         text-align: center;
     }

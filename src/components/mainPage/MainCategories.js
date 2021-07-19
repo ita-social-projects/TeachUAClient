@@ -1,13 +1,17 @@
 import "./css/AboutDescription.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getAllCategories } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/AboutCategories.css";
 import CategoryLogo from "../CategoryLogo";
-import { Button, Pagination } from "antd";
+import { Button, Pagination, Carousel } from "antd";
+// import { Grid } from "antd-mobile";
 import "./css/AboutCarousel.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 const MainCategories = () => {
     const [categories, setCategories] = useState([]);
@@ -19,84 +23,118 @@ const MainCategories = () => {
     const [cardWidth, setCardWidth] = useState(0);
     const [cardContainerWidth, setCardContainerWidth] = useState(0);
 
-    const getWidth = () =>
-        window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth;
-    const [width, setWidth] = useState(getWidth());
-    function useCurrentWidth() {
-        useEffect(() => {
-            let timeoutId = null;
-            const resizeListener = () => {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    setWidth(getWidth());
-                }, 150);
-            };
-            window.addEventListener("resize", resizeListener);
+    // const getWidth = () =>
+    //     window.innerWidth ||
+    //     document.documentElement.clientWidth ||
+    //     document.body.clientWidth;
+    // const [width, setWidth] = useState(getWidth());
+    // function useCurrentWidth() {
+    //     useEffect(() => {
+    //         let timeoutId = null;
+    //         const resizeListener = () => {
+    //             clearTimeout(timeoutId);
+    //             timeoutId = setTimeout(() => {
+    //                 setWidth(getWidth());
+    //             }, 150);
+    //         };
+    //         window.addEventListener("resize", resizeListener);
 
-            return () => {
-                window.removeEventListener("resize", resizeListener);
-            };
-        }, []);
+    //         return () => {
+    //             window.removeEventListener("resize", resizeListener);
+    //         };
+    //     }, []);
 
-        return width;
-    }
-    useCurrentWidth();
+    //     return width;
+    // }
+    // useCurrentWidth();
 
     useEffect(() => {
-        setPageSize(4);
+        // setPageSize(4);
         getAllCategories().then((response) => {
             setCategories(response);
             setTotalElements(response.length);
         });
+        //console.log(categories);
     }, []);
-    useEffect(() => {
-        setTotalPages(Math.ceil(totalElements / pageSize));
-    }, [totalElements, pageSize]);
-    useEffect(() => {
-        if (currentPage * pageSize <= categories.length) {
-            let startIndex = currentPage * pageSize;
-            let active = categories.slice(startIndex, startIndex + pageSize);
-            setActiveCategories(active);
-        } else {
-            setCurrentPage(currentPage - 1);
-        }
-    }, [categories, pageSize, currentPage]);
-    useEffect(() => {
-        if (cardWidth) {
-            let itemsToDisplay = Math.floor(
-                (cardContainerWidth - 20) / cardWidth
-            );
-            setPageSize(itemsToDisplay);
-        }
-    }, [cardWidth, cardContainerWidth, width]);
+    // useEffect(() => {
+    //     setTotalPages(Math.ceil(totalElements / pageSize));
+    // }, [totalElements, pageSize]);
+    // useEffect(() => {
+    //     if (currentPage * pageSize <= categories.length) {
+    //         let startIndex = currentPage * pageSize;
+    //         let active = categories.slice(startIndex, startIndex + pageSize);
+    //         setActiveCategories(active);
+    //     } else {
+    //         setCurrentPage(currentPage - 1);
+    //     }
+    // }, [categories, pageSize, currentPage]);
+    // useEffect(() => {
+    //     if (cardWidth) {
+    //         let itemsToDisplay = Math.floor(
+    //             (cardContainerWidth - 20) / cardWidth
+    //         );
+    //         setPageSize(itemsToDisplay);
+    //     }
+    // }, [cardWidth, cardContainerWidth, width]);
 
-    const ref = React.createRef();
-    useEffect(() => {
-        if (ref && ref.current) {
-            const { offsetWidth } = ref.current;
-            setCardWidth(offsetWidth);
-            setCardContainerWidth(ref.current.parentNode.offsetWidth);
-        }
-    }, [ref]);
+    // const ref = React.createRef();
+    // useEffect(() => {
+    //     if (ref && ref.current) {
+    //         const { offsetWidth } = ref.current;
+    //         setCardWidth(offsetWidth);
+    //         setCardContainerWidth(ref.current.parentNode.offsetWidth);
+    //     }
+    // }, [ref]);
 
-    const onPageChangePrev = (page) => {
-        if (page === 0) {
-            setCurrentPage(totalPages - 1);
-        } else {
-            setCurrentPage(page - 1);
-        }
-    };
-    const onPageChangeNext = (page) => {
-        if (page === totalPages - 1) {
-            setCurrentPage(0);
-        } else {
-            setCurrentPage(page + 1);
-        }
-    };
-    const onChange = (current) => {
-        setCurrentPage(current - 1);
+    // const onPageChangePrev = (page) => {
+    //     if (page === 0) {
+    //         setCurrentPage(totalPages - 1);
+    //     } else {
+    //         setCurrentPage(page - 1);
+    //     }
+    // };
+    // const onPageChangeNext = (page) => {
+    //     if (page === totalPages - 1) {
+    //         setCurrentPage(0);
+    //     } else {
+    //         setCurrentPage(page + 1);
+    //     }
+    // };
+    // const onChange = (current) => {
+    //     setCurrentPage(current - 1);
+    // };
+
+    const carousel = useRef(null);
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 1600,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 667,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     return (
@@ -112,37 +150,54 @@ const MainCategories = () => {
             <div className="categories-carousel-block">
                 <ArrowLeftOutlined
                     className="arrows-prev"
-                    onClick={() => onPageChangePrev(currentPage)}
+                    onClick={() => carousel.current.prev()}
+                    //onClick={() => onPageChangePrev(currentPage)}
                 />
                 <ArrowRightOutlined
                     className="arrows-next"
-                    onClick={() => onPageChangeNext(currentPage)}
+                    onClick={() => carousel.current.next()}
+                    //onClick={() => onPageChangeNext(currentPage)}
                 />
                 <div className="categories-cards">
-                    {activeCategories.map((category) => (
-                        <PrimitiveCard
-                            ref={ref}
-                            key={category.id}
-                            header={
-                                <div className="title">
-                                    <CategoryLogo category={category} />
-                                    <div className="name">{category.name}</div>
-                                </div>
-                            }
-                            description={category.description}
-                            link={{
-                                pathname: "/clubs",
-                                state: {
-                                    showAdvancedSearch: true,
-                                    showActiveCategory: category.name,
-                                },
-                            }}
-                            buttonText="Переглянути"
-                        />
-                    ))}
+                    {/* <Slider {...settings}> */}
+                    {/* {activeCategories.map((category) => ( */}
+                    <Carousel
+                        {...settings}
+                        ref={(node) => (carousel.current = node)}
+                        className="about-carousel"
+                        // infinite="true"
+                        // //autoplay
+                        // slidesToShow="4"
+                        // slidesToScroll="4"
+                    >
+                        {categories.map((category) => (
+                            <PrimitiveCard
+                                //ref={ref}
+                                key={category.id}
+                                header={
+                                    <div className="title">
+                                        <CategoryLogo category={category} />
+                                        <div className="name">
+                                            {category.name}
+                                        </div>
+                                    </div>
+                                }
+                                description={category.description}
+                                link={{
+                                    pathname: "/clubs",
+                                    state: {
+                                        showAdvancedSearch: true,
+                                        showActiveCategory: category.name,
+                                    },
+                                }}
+                                buttonText="Переглянути"
+                            />
+                        ))}
+                    </Carousel>
+                    {/* </Slider> */}
                 </div>
             </div>
-            <Pagination
+            {/* <Pagination
                 className="pagination"
                 //responsive="true"
                 hideOnSinglePage
@@ -152,7 +207,7 @@ const MainCategories = () => {
                 pageSize={pageSize}
                 total={totalElements}
                 onChange={onChange}
-            />
+            /> */}
             <div className="categories-footer">
                 <a href={process.env.PUBLIC_URL + "/clubs"}>
                     <Button className="flooded-button more-button">
