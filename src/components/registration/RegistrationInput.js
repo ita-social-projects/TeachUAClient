@@ -131,70 +131,13 @@ const RegistrationInput = () => {
                                        // message: 'Введіть прізвище',
                                    },
                                    {
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^0-9]*$/,
-                                       //     message: 'Прізвище не може містити цифри',
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
-                                       //     message: 'Прізвище повинно починатися і закінчуватися літерою',
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^`~!@₴£№#$%^&*()_+={}\[\]|/\\:;“"<,>.?๐฿]*$/,
-                                       //     message: 'Прізвище не може містити спеціальні символи',
-                                       // },
-                                       // {
-                                       //     max: 25,
-                                       //     message: 'Прізвище не може містити більше, ніж 25 символів',
-                                       // }]}>
-                                       // <Input className="registration-box"
-                                       // placeholder="Введіть ваше прізвище"/>
-                                       // </Form.Item>
-                                       // <Form.Item name="firstName"
-                                       // className="registration-input"
-                                       // label="Ім`я"
-                                       // hasFeedback
-                                       // rules={[{
                                        required: true,
                                        pattern: /^[^\s]*$/,
                                        message: 'Телефон не може містити пробіли',
-                                       // message: "Введіть ім`я",
                                    },
                                    {
                                        pattern: /^.{9}$/,
                                        message: "Телефон не відповідає вказаному формату",
-                                       // {
-                                       //     required: true,
-                                       //     pattern: /^[^0-9]*$/,
-                                       //     message: "Ім`я не може містити цифри",
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
-                                       //     message: "Ім`я повинно починатися і закінчуватися літерою",
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^`~!@₴£№#$%^&*()_+={}\[\]|/\\:;“"<,>.?๐฿]*$/,
-                                       //     message: "Ім`я не може містити спеціальні символи",
-                                       // },
-                                       // {
-                                       //     max: 25,
-                                       //     message: "Ім`я не може містити більше, ніж 25 символів",
-                                       // }]}>
-                                       //     <Input className="registration-box"
-                                       //     placeholder="Введіть ваше ім`я"/>
-                                       //     </Form.Item>
-                                       //     <Form.Item name="phone"
-                                       //     className="registration-input"
-                                       //     label="Телефон"
-                                       //     hasFeedback
-                                       //     rules={[{
-                                       //     required: true,
-                                       //     message: 'Введіть номер телефону'
                                    },
                                    {
                                        required: false,
@@ -233,37 +176,6 @@ const RegistrationInput = () => {
                                    {
                                        pattern: /^\S{8,20}$/,
                                        message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
-                                       //     message: 'Телефон не може містити літери',
-                                       // },
-                                       // {
-                                       //     required: true,
-                                       //     pattern: /^[^\s]*$/,
-                                       //     message: 'Телефон не може містити пробіли',
-                                       // },
-                                       // {
-                                       //     pattern: /^.{9}$/,
-                                       //     message: "Телефон не відповідає вказаному формату",
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
-                                       //     message: 'Телефон не може містити спеціальні символи',
-                                       // }]}>
-                                       //     <Input className="registration-box"
-                                       //     placeholder="__________"
-                                       //     prefix='+380'
-                                       //     suffix={<PhoneOutlined className="phone-icon"/>}/>
-                                       //     </Form.Item>
-                                       //     <Form.Item name="email"
-                                       //     className="registration-input"
-                                       //     label="Email"
-                                       //     hasFeedback
-                                       //     rules={[{
-                                       //     required: true,
-                                       //     message: 'Введіть email'
                                    },
                                ]}>
                         <Input.Password className="registration-box"
@@ -281,19 +193,6 @@ const RegistrationInput = () => {
                                hasFeedback
                                rules={[
                                    {
-                                       // {
-                                       //     type: 'email',
-                                       //     message: 'Некоректний формат email',
-                                       // }]}>
-                                       //     <Input className="registration-box"
-                                       //     placeholder="Введіть ваш емейл"
-                                       //     suffix={<MailOutlined className="mail-icon"/>}/>
-                                       //     </Form.Item>
-                                       //     <Form.Item name="password"
-                                       //     className="registration-input"
-                                       //     label="Пароль"
-                                       //     hasFeedback
-                                       //     rules={[{
                                        required: true,
                                        message: 'Підтвердіть пароль',
                                        // message: 'Введіть пароль'
@@ -305,9 +204,6 @@ const RegistrationInput = () => {
                                            }
 
                                            return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));
-                                           // {
-                                           //     pattern: /^\S{8,20}$/,
-                                           //     message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
                                        },
                                    }),
                                ]}
@@ -326,35 +222,7 @@ const RegistrationInput = () => {
                                 disabled={isDisabled}
                         >Зареєструватися
                         </Button>
-                        {/*    return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));*/}
-                        {/*},*/}
-                        {/*}),*/}
-                        {/*    ]}*/}
-                        {/*    >*/}
-                        {/*    <Input.Password className="registration-box"*/}
-                        {/*    placeholder="Підтвердіть ваш пароль"/>*/}
-                        {/*    </Form.Item>*/}
                     </div>
-                    {/*    Натискаючи кнопку "Зареєструватися", я даю згоду на обробку персональних даних*/}
-                    {/*    </div>*/}
-                    {/*    <Form.Item>*/}
-                    {/*    <div className="registration-footer">*/}
-                    {/*{*/}
-                    {/*    !isDisabled ?*/}
-                    {/*    <Button className="registration-button"*/}
-                    {/*    htmlType="submit"*/}
-                    {/*    >*/}
-
-                    {/*    Зареєструватися*/}
-                    {/*    </Button> :*/}
-                    {/*    <Button className="registration-button"*/}
-                    {/*    htmlType="submit"*/}
-                    {/*    disabled={isDisabled}*/}
-                    {/*    >*/}
-                    {/*    Зареєструватися*/}
-                    {/*    </Button>*/}
-                    {/*}*/}
-                    {/*    </div>*/}
 
                 </Form.Item>
         </div>
