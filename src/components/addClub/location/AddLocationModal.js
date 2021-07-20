@@ -252,7 +252,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        //         <InfoCircleOutlined className="info-icon"/>
                                        //     </Tooltip>
                                        // }
-                                       placeholder="Довгота та широта"/>
+                                       placeholder="Широта та довгота"/>
                             </Form.Item>
                         </div>
                         <Form.Item name="phone"
