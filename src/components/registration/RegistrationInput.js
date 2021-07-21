@@ -4,6 +4,7 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import './сss/Registration.less';
 
 
+// const RegistrationInput = ({disabledButton}) => {
 const RegistrationInput = () => {
 
     const [isDisabled, setDisabled] = useState(true)
@@ -41,12 +42,10 @@ const RegistrationInput = () => {
     }
 
     return (
-        <div className="registration-input-box">
-            <Form
-                requiredMark={false}
-                onChange={onChange}>
+        <div className="registration-input-box" onChange={onChange}>
                 <div className="registration-or"><span className="label-or">або</span></div>
                 <div className="registration-column">
+
                     <Form.Item name="lastName"
                                className="registration-input"
                                label="Прізвище"
@@ -86,6 +85,16 @@ const RegistrationInput = () => {
                                    message: "Введіть ім`я",
                                },
                                    {
+                                       // <Form
+                                       //     requiredMark={false}
+                                       //     onChange={onChange}>
+                                       //     <div className="registration-or"><span className="label-or">або</span></div>
+                                       //     <div className="registration-column">
+                                       //         <Form.Item name="lastName"
+                                       //                    className="registration-input"
+                                       //                    label="Прізвище"
+                                       //                    hasFeedback
+                                       //                    rules={[{
                                        required: true,
                                        pattern: /^[^0-9]*$/,
                                        message: "Ім`я не може містити цифри",
@@ -119,6 +128,7 @@ const RegistrationInput = () => {
                                        required: false,
                                        pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
                                        message: 'Телефон не може містити літери',
+                                       // message: 'Введіть прізвище',
                                    },
                                    {
                                        required: true,
@@ -185,6 +195,7 @@ const RegistrationInput = () => {
                                    {
                                        required: true,
                                        message: 'Підтвердіть пароль',
+                                       // message: 'Введіть пароль'
                                    },
                                    ({getFieldValue}) => ({
                                        validator(_, value) {
@@ -206,27 +217,15 @@ const RegistrationInput = () => {
                 </div>
                 <Form.Item>
                     <div className="registration-footer">
-                        {
-                            !isDisabled ?
-                                <Button className="registration-button"
-                                        htmlType="submit"
-                                >
-
-                                    Зареєструватися
-                                </Button> :
-                                <Button className="registration-button"
-                                        htmlType="submit"
-                                        disabled={isDisabled}
-                                >
-                                    Зареєструватися
-                                </Button>
-                        }
+                        <Button className="registration-button"
+                                htmlType="submit"
+                                disabled={isDisabled}
+                        >Зареєструватися
+                        </Button>
                     </div>
 
                 </Form.Item>
-            </Form>
         </div>
-    )
-};
-
-export default RegistrationInput;
+                )
+                };
+                export default RegistrationInput;

@@ -193,3 +193,9 @@
         text-align: center;
     }
 }
+@media (min-device-width : 320px) and (max-device-width : 336px) {
+    .about-categories .primitive-card {
+        width: 270px;
+        height: 300px;
+    }
+}

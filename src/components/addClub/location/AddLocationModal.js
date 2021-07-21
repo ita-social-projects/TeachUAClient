@@ -135,22 +135,18 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    rules={[
                                        {
                                            required: true,
-                                           message: "Це поле є обов'язковим"
-                                       },
-                                       {
-                                           required: true,
                                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
-                                           message: "Це поле може містити тільки українські та англійські літери",
-                                       },
-                                       {
-                                           required: true,
-                                           pattern: /^.*\S$/,
                                            message: "Некоректна назва локації",
                                        }]}
                         >
                             <Input className="add-club-input"
-                                   placeholder="Назва локації"
-                            />
+                                   suffix={
+                                       <Tooltip placement="bottomRight"
+                                           title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
+                                   placeholder="Назва локації" />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="cityName"
@@ -252,7 +248,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        //         <InfoCircleOutlined className="info-icon"/>
                                        //     </Tooltip>
                                        // }
-                                       placeholder="Довгота та широта"/>
+                                       placeholder="Широта та довгота"/>
                             </Form.Item>
                         </div>
                         <Form.Item name="phone"

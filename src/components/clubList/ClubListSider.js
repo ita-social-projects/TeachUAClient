@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
+import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
 import "./css/ClubListSider.css";
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
@@ -229,6 +229,18 @@ const ClubListSider = ({
                  </span>
                 </Form.Item>
                 ): <Form.Item/>}
+            <div className="use-clear-button">
+                <div className="mobile-clear-button">
+                        <Button className="mobile-button clear-button">
+                            Очистити
+                        </Button>
+                </div>
+                <div className="mobile-use-button">
+                        <Button className="mobile-button use-button" onClick={() => { window.location.reload() } }>
+                            Застосувати
+                        </Button>
+                </div>
+            </div>
             </Form>
         </Sider>
     );

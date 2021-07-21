@@ -68,6 +68,7 @@ const Description = ({ step, setStep, result, setResult }) => {
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
+                        accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
                         data={{ folder: `center/${centerName}/background` }}
                         headers={{ contentType: 'multipart/form-data' }}
