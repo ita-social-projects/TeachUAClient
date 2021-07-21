@@ -4,32 +4,47 @@ import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import './css/UserEditModal.less';
 import UserEditRoles from "./UserEditRoles";
 import UserEditInput from "./UserEditInput";
-import {updateUser} from "../../../service/UserService";
+import {signIn, updateUser, verify} from "../../../service/UserService";
+import {saveToken, saveUserId} from "../../../service/StorageService";
 
 
 const UserEditModal = ({user}) => {
 
     const [visible, setVisible] = useState(false);
 
-
     const onFinish = (values) => {
-        updateUser(values).then((response) => {
-            if(response.status) {
-                window.location.reload();
-            }
-            else {
-                message.success("Профіль змінено успішно");
-                setVisible(false);
-            }
-        });
-    };
+        const stat = [{status: true}]
+        const newValues = stat.reduce(
+            (result, item) =>
+                Object.assign({}, result, item), values)
 
+        verify(values).then((response) => {
+            if (response.status >= 500) {
+                message.error("Введено невірний пароль");
+            } else if (response.status < 500) {
+                message.error("Введено невірний пароль");
+            } else {
+                //message.success("Ви успішно залогувалися!");
+                updateUser(newValues).then((response) => {
+                    if (response.status > 400) {
+                        window.location.reload();
+                        setVisible(true);
+                        message.error("Профіль не було оновлено")
+                    } else {
+                        window.location.reload();
+                        setVisible(false);
+                        message.success("Профіль змінено успішно");
+                    }
+                });
+            }
+        })
+    }
 
     return (
         <>
             <Button type="text button" onClick={() => setVisible(true)}>
                 Редагувати профіль
-                <ArrowRightOutlined />
+                <ArrowRightOutlined/>
             </Button>
             <Modal
                 className="user-edit"
@@ -48,8 +63,8 @@ const UserEditModal = ({user}) => {
                     requiredMark={false}
                     onFinish={onFinish}
                 >
-                <UserEditRoles user={user} />
-                <UserEditInput user={user}/>
+                    <UserEditRoles user={user}/>
+                    <UserEditInput user={user}/>
                 </Form>
             </Modal>
         </>

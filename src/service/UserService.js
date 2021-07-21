@@ -1,6 +1,7 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 
+
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
@@ -45,8 +46,19 @@ export const signIn = async (data) => {
     });
 };
 
+export const verify = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/verify", {
+        id:data.id,
+        password:data.currentPassword
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
 export const updateUser = async (data) => {
-    console.log(data);
+    console.log('before response'+data);
     return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -57,7 +69,7 @@ export const updateUser = async (data) => {
         urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
         status: data.status
     }).then((response) => {
-        console.log(response.data)
+        console.log('after response'+response.data)
         return response.data
 
     }).catch((error) => {

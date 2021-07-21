@@ -5,6 +5,7 @@ import LoginInput from "./LoginInput";
 import { signIn } from "../../service/UserService";
 import './css/Login.less';
 import { saveUserId, saveToken } from '../../service/StorageService';
+import RestorePasswordModal from "../restorePassword/restorePasswordModal";
 
 const Login = ({verifyCode}) => {
     const [loginVisible, setLoginVisible] = useState(false);
@@ -64,6 +65,12 @@ const Login = ({verifyCode}) => {
                     >
                         <LoginSocial />
                         <LoginInput />
+                        <div className="edit-button">
+
+                        </div>
+                        <div>
+                            <RestorePasswordModal/>
+                        </div>
                     </Form>
                 </div>
             </Modal>
