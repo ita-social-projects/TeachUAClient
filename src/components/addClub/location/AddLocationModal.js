@@ -11,8 +11,6 @@ import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {getStationsByCity} from "../../../service/StationService";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 
-import './css/AddLocationModel.css';
-
 const {Option} = Select;
 
 const AddLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
@@ -142,15 +140,14 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            message: "Некоректна назва локації",
                                        }]}
                         >
-
-                            <div>
-                                <Tooltip placement="bottomRight"
-                                         title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
-                                    <Input className="add-club-input"
-                                           placeholder="Назва локації"
-                                    />
-                                </Tooltip>
-                            </div>
+                            <Input className="add-club-input"
+                                   suffix={
+                                       <Tooltip placement="bottomRight"
+                                           title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
+                                   placeholder="Назва локації" />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="cityName"
