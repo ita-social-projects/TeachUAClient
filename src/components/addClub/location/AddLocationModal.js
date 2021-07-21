@@ -9,9 +9,6 @@ import {addToTable} from "../../../util/TableUtil";
 import {Content} from "antd/es/layout/layout";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {getStationsByCity} from "../../../service/StationService";
-import {QuestionCircleOutlined} from "@ant-design/icons";
-
-import './css/AddLocationModel.css';
 
 const {Option} = Select;
 
@@ -138,19 +135,22 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    rules={[
                                        {
                                            required: true,
+                                           message: "Це поле є обов'язковим"
+                                       },
+                                       {
+                                           required: true,
                                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                                           message: "Це поле може містити тільки українські та англійські літери",
+                                       },
+                                       {
+                                           required: true,
+                                           pattern: /^.*\S$/,
                                            message: "Некоректна назва локації",
                                        }]}
                         >
-
-                            <div>
-                                <Tooltip placement="bottomRight"
-                                         title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
-                                    <Input className="add-club-input"
-                                           placeholder="Назва локації"
-                                    />
-                                </Tooltip>
-                            </div>
+                            <Input className="add-club-input"
+                                   placeholder="Назва локації"
+                            />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="cityName"
