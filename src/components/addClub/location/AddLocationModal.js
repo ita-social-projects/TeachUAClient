@@ -9,7 +9,6 @@ import {addToTable} from "../../../util/TableUtil";
 import {Content} from "antd/es/layout/layout";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {getStationsByCity} from "../../../service/StationService";
-import {QuestionCircleOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -136,7 +135,16 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    rules={[
                                        {
                                            required: true,
+                                           message: "Це поле є обов'язковим"
+                                       },
+                                       {
+                                           required: true,
                                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                                           message: "Це поле може містити тільки українські та англійські літери",
+                                       },
+                                       {
+                                           required: true,
+                                           pattern: /^.*\S$/,
                                            message: "Некоректна назва локації",
                                        }]}
                         >
@@ -249,7 +257,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        //         <InfoCircleOutlined className="info-icon"/>
                                        //     </Tooltip>
                                        // }
-                                       placeholder="Довгота та широта"/>
+                                       placeholder="Широта та довгота"/>
                             </Form.Item>
                         </div>
                         <Form.Item name="phone"

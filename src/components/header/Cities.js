@@ -47,7 +47,8 @@ class Cities extends React.Component {
                       className="city"
                       placement="bottomCenter"
                       disabled={searchParameters.isAdvancedSearch}
-                      arrow>
+                      arrow
+                      trigger = {'click'}>
                 <div style={{opacity: searchParameters.isAdvancedSearch ? 0.5 : 1}}>
                     <EnvironmentFilled
                         className="icon"/> {searchParameters.cityName}
