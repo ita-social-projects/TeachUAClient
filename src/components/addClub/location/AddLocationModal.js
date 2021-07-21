@@ -149,8 +149,13 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        }]}
                         >
                             <Input className="add-club-input"
-                                   placeholder="Назва локації"
-                            />
+                                   suffix={
+                                       <Tooltip placement="bottomRight"
+                                           title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
+                                   placeholder="Назва локації" />
                         </Form.Item>
                         <div className="add-club-inline">
                             <Form.Item name="cityName"
