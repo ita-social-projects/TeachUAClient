@@ -66,6 +66,9 @@
     height: 100%;
     justify-content: space-between;
 }
+.about-categories .primitive-card {
+    box-shadow: none;
+}
 .about-categories .ant-carousel .slick-slide {
     justify-content: center;
     display: flex;
@@ -76,13 +79,21 @@
     font-size: 24px;
 }
 
+.about-categories .ant-carousel .slick-dots {
+    margin: 30px auto 30px auto;
+    position: relative;
+    bottom: 0;
+}
+
+/* .ant-carousel .slick-dots */
+
 .about-categories .primitive-card .content .name {
     margin: 16px 0 0 0;
 }
 
-.about-categories .pagination {
+/* .about-categories .pagination {
     margin: 60px auto 0 auto;
-}
+} */
 
 .about-categories .pagination .ant-pagination-item {
     border-radius: 100%;
