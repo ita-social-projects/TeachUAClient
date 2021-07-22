@@ -16,33 +16,10 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
 
     const onFinish = (values) => {
         console.log(result);
-        // values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
-        // console.log(values);
-        // if (locations !== undefined) {
-        //     for (const loc in locations) {
-        //         console.log(locations[loc]);
-        //         values.locations[loc] = {
-        //             id: locations[loc].id,
-        //             cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
-        //             address: locations[loc].address,
-        //             coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
-        //             districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
-        //             key: locations[loc].key,
-        //             name: locations[loc].name,
-        //             phone: locations[loc].phone,
-        //             stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
-        //         }
-        //     }
-        // }
-        setResult(Object.assign(result, values));
-        console.log(result);
-    };
-    console.log(result);
-
-    const onFinalChange = (values) => {
         values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
         console.log(values);
-        if (locations !== undefined) {
+        console.log(locations);
+        if (locations !== []) {
             for (const loc in locations) {
                 console.log(locations[loc]);
                 values.locations[loc] = {
@@ -57,7 +34,17 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
                 }
             }
+        } else {
+            values.locations = locations;
         }
+        setResult(Object.assign(result, values));
+        console.log(result);
+    };
+    console.log(result);
+
+    const onLocationChange = (values) => {
+        //
+        // console.log(values);
     }
 
     const onOnlineChange = () => {
@@ -76,13 +63,14 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
 
     const changeContacts = (event, contact) => {
         console.log(result);
-        console.log(contact);
+        console.log(event.target.value);
         setContactsData({
             ...contacts_data,
             [contact.id]: event.target.value
         });
         console.log(contacts_data);
         const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
+        console.log(parsedContact);
         setResult({...result, contacts: parsedContact})
         console.log(result);
     };
@@ -100,7 +88,9 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     }
 
     const onRemove = (item) => {
+        console.log(item);
         const newData = [...locations];
+        console.log(newData);
         const index = newData.findIndex((it) => item.key === it.key);
         newData.splice(index, 1);
         setLocations(newData);
@@ -115,6 +105,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             onFinish={onFinish}>
             <Form.Item name="locations"
                        className="add-club-row"
+                       onChange={onLocationChange}
                        initialValue={locations}
             >
                 <List
@@ -174,6 +165,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
 
             <EditLocationModal
                 form={locationForm}
+                result={result}
+                setResult={setResult}
                 locations={locations}
                 setLocations={setLocations}
                 visible={locationVisible}

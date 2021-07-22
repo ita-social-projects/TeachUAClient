@@ -9,20 +9,20 @@ import {getStationsByCity} from "../../../service/StationService";
 
 const {Option} = Select;
 
-const EditLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
+const EditLocationModal = ({form, locations, result, setResult, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
-    const [coordinates,setCoordinates] = useState();
+    const [coordinates, setCoordinates] = useState();
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: editedLocation != null ? (editedLocation.city !== undefined ? editedLocation.city.name : editedLocation.cityName) : "",
-        latAndLng:"",
+        latAndLng: "",
         phoneNumber: "",
-        inputAddress:""
+        inputAddress: ""
     })
     useEffect(() => {
         getStationsByCity(editedLocation != null ? editedLocation.city.name : "").then(response => setStation(response))
@@ -32,13 +32,13 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
     const onChange = e => {
         if (e.target.id === "address")
             locationForm.inputAddress = e.target.value
-        if(e.target.id === "coordinates")
+        if (e.target.id === "coordinates")
             locationForm.latAndLng = e.target.value
         if (e.target.id === "name")
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length > 5) {
             setDisabled(false)
         } else setDisabled(true)
     }
@@ -52,33 +52,17 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
     };
 
     const onFinish = (values) => {
-        console.log(values)
-        values.key = Math.random();
-        if (editedLocation) {
-            const index = locations.findIndex((item) => editedLocation.key === item.key);
-            locations[index] = values;
-            setLocations(locations);
-        } else {
-            setLocations(addToTable(locations, values));
-        }
+        console.log(values);
+        // values.key = Math.random();
+        // if (editedLocation) {
+        //     const index = locations.findIndex((item) => editedLocation.key === item.key);
+        //     locations[index] = values;
+        //     setLocations(locations);
+        // } else {
+        console.log(locations);
+        setLocations(addToTable(locations, values));
+        // }
         onClose();
-    };
-
-    const handleSelect = (coordinates) => {
-            console.log(coordinates)
-    //     geocodeByAddress(address.label)
-    //         .then(results => getLatLng(results[0]))
-    //         .then(({lat, lng}) => {
-    //             locationForm.latitude = lat
-    //             locationForm.longitude = lng
-    //             form.setFieldsValue({
-    //                 coordinates: lat + "," + lng,
-    //
-    //             });
-    //         });
-    //
-    //     setInputAddressProps({validateStatus: 'success'});
-    //     setCityOnInput(cityName);
     };
 
     const changeCity = () => {
@@ -141,7 +125,7 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
                             <Form.Item name="cityName"
                                        className="add-club-row"
                                        label="Місто"
-                                       // initialValue={editedLocation && editedLocation.city.name}
+                                // initialValue={editedLocation && editedLocation.city.name}
                                        initialValue={editedLocation && editedLocation.cityName}
                                        hasFeedback
                                        rules={[{
@@ -169,7 +153,7 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
                             <Form.Item name="districtName"
                                        className="add-club-row"
                                        label="Район міста"
-                                       // initialValue={editedLocation && editedLocation.district.name}
+                                // initialValue={editedLocation && editedLocation.district.name}
                                        initialValue={editedLocation && editedLocation.districtName}
                                        hasFeedback
                                        rules={[{
@@ -186,7 +170,7 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
                             <Form.Item name="stationName"
                                        className="add-club-row"
                                        label="Метро/Місцевість"
-                                       // initialValue={editedLocation && editedLocation.station.name}
+                                // initialValue={editedLocation && editedLocation.station.name}
                                        initialValue={editedLocation && editedLocation.stationName}
                                        hasFeedback
                                        rules={[{
@@ -223,20 +207,20 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
                                            required: true,
                                            message: "Це поле є обов'язковим",
                                            pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
-                                       },{
-                                           message:"Координате не можуть містити букви",
-                                           pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
+                                       }, {
+                                           message: "Координате не можуть містити букви",
+                                           pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
                                        }
                                        ]}>
                                 <Input className="add-club-input add-club-select"
-                                     value={coordinates}
-                                       onInput={e => setCoordinates(e.target.value) }
+                                       value={coordinates}
+                                       onInput={e => setCoordinates(e.target.value)}
 
                                     // suffix={
-                                       //     <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                       //         <InfoCircleOutlined className="info-icon"/>
-                                       //     </Tooltip>
-                                       // }
+                                    //     <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                    //         <InfoCircleOutlined className="info-icon"/>
+                                    //     </Tooltip>
+                                    // }
                                        placeholder="Довгота та широта"/>
                             </Form.Item>
                         </div>
@@ -262,11 +246,11 @@ const EditLocationModal = ({form, locations, setLocations, cities, visible, setV
                         <div className="add-club-content-footer add-club-add-location-button">
                             {/*{*/}
                             {/*    !isDisabled ?*/}
-                                    <Button htmlType="submit"
-                                            className="flooded-button add-club-content-next">Додати</Button>
+                            <Button htmlType="submit"
+                                    className="flooded-button add-club-content-next">Додати</Button>
                             {/*:*/}
-                                     {/*<Button disabled={isDisabled} htmlType="submit"*/}
-                                     {/*        className="flooded-button add-club-content-next-disabled">Додати</Button>*/}
+                            {/*<Button disabled={isDisabled} htmlType="submit"*/}
+                            {/*        className="flooded-button add-club-content-next-disabled">Додати</Button>*/}
                             {/*}*/}
                         </div>
                     </Form>
