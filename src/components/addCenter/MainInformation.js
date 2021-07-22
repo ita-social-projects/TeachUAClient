@@ -1,8 +1,9 @@
-import { Form, Input, Checkbox, Button } from 'antd';
+import {Form, Input, Checkbox, Button, Tooltip} from 'antd';
 import React, { useEffect, useState } from 'react';
 import AddLocationModal from "../addClub/location/AddLocationModal";
 import "./css/MainInformation.css";
 import { PlusOutlined } from "@ant-design/icons";
+import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 
 const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations, result, setResult }) => {
@@ -43,15 +44,18 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                     rules={[
                         {
                             required: true,
-                            message: "Це поле є обов'язковим"
-                        },
-                        {
-                            required: true,
                             pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
-                            message: "Це поле може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                            message: "Некоректна назва центру",
                         },
                       ]}>
-                    <Input placeholder="Введіть назву центру" />
+                    <Input
+                        suffix={
+                            <Tooltip placement="bottomRight"
+                                     title="Це поле може містити тільки українські та англійські літери, довжиною 5-100 символів">
+                                <InfoCircleOutlined className="info-icon" />
+                            </Tooltip>
+                        }
+                        placeholder="Введіть назву центру" />
                 </Form.Item>
                 <Form.Item
                     name="locations"
