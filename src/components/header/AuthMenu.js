@@ -82,7 +82,7 @@ const AuthMenu = () => {
     };
 
     return (
-        <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow>
+        <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger = {'click'}>
             <div>
                 <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />
             </div>

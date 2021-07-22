@@ -39,6 +39,7 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
+        value=value.trim();
         if(value.trim().length===0){
             return;
         }

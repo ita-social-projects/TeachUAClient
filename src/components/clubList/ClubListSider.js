@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
+import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
 import "./css/ClubListSider.css";
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
@@ -24,7 +24,7 @@ const ClubListSider = ({
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
-
+    const [stateForClub , setStateForClub] = useState(true);
     const getData = () => {
         setCurrentPage(0);
         getAdvancedData(0);
@@ -60,6 +60,14 @@ const ClubListSider = ({
         if (values.hasOwnProperty("cityName")) {
             form.setFieldsValue({districtName: undefined});
             form.setFieldsValue({stationName: undefined});
+        }
+
+        if (values.hasOwnProperty("isCenter")){
+            if (values.isCenter !== true){
+                setStateForClub(true);
+            } else {
+                setStateForClub(false);
+            }
         }
 
         if (values.hasOwnProperty("age")) {
@@ -98,6 +106,7 @@ const ClubListSider = ({
             return false;
         }
     };
+
 
     return (
         <Sider className="club-list-sider">
@@ -169,6 +178,8 @@ const ClubListSider = ({
                         ))}
                     </Select>
                 </Form.Item>
+
+                {stateForClub === true ? (
                 <Form.Item
                     name="isOnline"
                     className="club-list-row"
@@ -183,6 +194,8 @@ const ClubListSider = ({
                         </Checkbox>
                     </Checkbox.Group>
                 </Form.Item>
+                ): <Form.Item/>}
+                {stateForClub === true ? (
                 <Form.Item
                     name="categoriesName"
                     className="club-list-row"
@@ -199,20 +212,35 @@ const ClubListSider = ({
                             ))}
                     </Checkbox.Group>
                 </Form.Item>
+                ): <Form.Item/>}
+                {stateForClub === true ? (
                 <Form.Item
-                    name="age"
-                    label="Вік дитини"
-                    className="club-list-row"
-                    inititalValue={0}>
-                    <span>
-                        <InputNumber
-                            className="age"
-                            value={age}
-                            onKeyPress={onKeyPress}
-                        />
-                        років
-                    </span>
+                     name="age"
+                     label="Вік дитини"
+                     className="club-list-row"
+                     inititalValue={0}>
+                 <span>
+                     <InputNumber
+                         className="age"
+                         value={age}
+                         onKeyPress={onKeyPress}
+                     />
+                     років
+                 </span>
                 </Form.Item>
+                ): <Form.Item/>}
+            <div className="use-clear-button">
+                <div className="mobile-clear-button">
+                        <Button className="mobile-button clear-button">
+                            Очистити
+                        </Button>
+                </div>
+                <div className="mobile-use-button">
+                        <Button className="mobile-button use-button" onClick={() => { window.location.reload() } }>
+                            Застосувати
+                        </Button>
+                </div>
+            </div>
             </Form>
         </Sider>
     );
