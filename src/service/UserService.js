@@ -2,12 +2,25 @@ import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 
 
+export const resetPassword = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/resetPassword", {
+        email: data.email,
+       // password: data.password
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
+
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
     }).catch((error) => {
     });
 };
+
 
 export const getUserByEmail = async (params) => {
     return await fetchRequest.get(BASE_URL + "/api/user", {params})
@@ -66,7 +79,7 @@ export const updateUser = async (data) => {
         phone: data.phone,
         password: data.password,
         roleName: data.role,
-        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
+        urlLogo: data.urlLogo.valueOf().toString(),// && data.urlLogo.file.response,
         status: data.status
     }).then((response) => {
         console.log('after response'+response.data)
