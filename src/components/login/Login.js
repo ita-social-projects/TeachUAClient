@@ -6,7 +6,7 @@ import { signIn } from "../../service/UserService";
 import './css/Login.less';
 import { saveUserId, saveToken } from '../../service/StorageService';
 
-const Login = ({verifyCode}) => {
+const Login = ({isShowing, setShowing, verifyCode}) => {
     const [loginVisible, setLoginVisible] = useState(false);
 
     const onFinish = (values) => {
@@ -20,7 +20,7 @@ const Login = ({verifyCode}) => {
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
                 saveToken(response.accessToken);
-                setLoginVisible(false);
+                setShowing(false);
                 if (verifyCode !== undefined) {
                     if(process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080"){
                         window.location = "http://localhost:3000/dev";
@@ -40,17 +40,14 @@ const Login = ({verifyCode}) => {
     };
 
     return (
-        <div>
-            <div onClick={() => setLoginVisible(true)}>
-                Увійти
-            </div>
+        
             <Modal
                 className="modal-login"
                 centered
                 width={520}
-                visible={loginVisible}
-                onOk={() => setLoginVisible(false)}
-                onCancel={() => setLoginVisible(false)}
+                visible={isShowing}
+                onOk={() => setShowing(false)}
+                onCancel={() => setShowing(false)}
                 footer={null}
             >
                 <div className="login-header">
@@ -70,7 +67,7 @@ const Login = ({verifyCode}) => {
                     </Form>
                 </div>
             </Modal>
-        </div>
+        
     );
 };
 
