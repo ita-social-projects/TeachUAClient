@@ -7,18 +7,22 @@ import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import {getToken} from "../../service/StorageService";
 import Layout from "antd/lib/layout/layout";
-
+import { Button } from "antd";
 
 const HeaderRight = () => {
     const {setClubs} = useContext(SearchContext);
     const location = useLocation();
+    const [showModal, setShowModal] = useState(false);
 
 
     return (
         <div className="right-side-menu">
+              <AddClubModal isShowing = {showModal} setShowing = {setShowModal}/>
             <Cities setClubs={setClubs}/>
             {location.pathname === "/" &&
-            <AddClubModal button/>}
+            <Button onClick={() => setShowModal(true)}
+            className="add-club-button">Додати гурток</Button>
+    }   
             {/*// getToken() ? <AddClubModal button/> :*/}
             {/*//     <Layout className="aboutProject global-padding">*/}
             {/*//     <div className="login-div">*/}

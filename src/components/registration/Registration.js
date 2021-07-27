@@ -7,8 +7,8 @@ import RegistrationInput from "./RegistrationInput";
 import {signUp} from "../../service/UserService";
 
 
-const Registration = () => {
-    const [visible, setVisible] = useState(false);
+const Registration = ({isShowing, setShowing}) => {
+
     const [disabledButton, setDisabledButton] = useState(true);
     // const [disabledButton, setDisabledButton] = useState(true);
     const [role, setRole] = useState(null);
@@ -16,7 +16,7 @@ const Registration = () => {
 
 
     const onFinish = (values) => {
-        setVisible(false);
+       setShowing(false)
         message.success({
             content: 'Ви успішно зареєструвалися! \n' +
                 'Вам на пошту відправлено лист з лінкою для підтвердження реєстрації',
@@ -28,22 +28,20 @@ const Registration = () => {
             if (response.status) {
                 message.error("Вказаний email вже зареєстрований на сайті");
             } else {
-                setVisible(false);
+                setShowing(false)
             }
         });
     };
     return (
-        <div>
-            <div onClick={() => setVisible(true)}>
-                Зареєструватися
-            </div>
+        
+           
             <Modal
                 className="modal-registration"
                 centered
                 width={520}
-                visible={visible}
-                onOk={() => setVisible(false)}
-                onCancel={() => setVisible(false)}
+                visible={isShowing}
+                onOk={() => setShowing(false)}
+                onCancel={() => setShowing(false)}
                 footer={null}
             >
                 <div className="registration-header">
@@ -65,7 +63,7 @@ const Registration = () => {
                     </Form>
                 </div>
             </Modal>
-        </div>
+       
     );
 };
 export default Registration;

@@ -16,6 +16,12 @@ import AddCenter from "../addCenter/AddCenter";
 const { SubMenu } = Menu;
 
 const AuthMenu = () => {
+    const [showAddClub, setShowAddClub] = useState(false);
+    const [showAddCenter, setShowAddCenter] = useState(false);
+
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
+
     const [user, setUser] = useState('');
     const [source, setSource] = useState('');
     const [styleClass, setStyleClass] = useState('');
@@ -28,7 +34,7 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        if(getUserId()) {
+        if (getUserId()) {
             getUserById(getUserId()).then(response => {
                 setUser(response);
                 if (response) {
@@ -49,44 +55,51 @@ const AuthMenu = () => {
         if (getToken()) {
             return (
                 <Menu>
-                    <Menu.Item><AddClubModal /></Menu.Item>
-                    <Menu.Item><AddCenter/></Menu.Item>
+                    <Menu.Item><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
+                    <Menu.Item><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-                { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
-                    <SubMenu title="Адміністрування" >
-                        <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
-                        <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
-                            Експортувати дані</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
-                    </SubMenu >
-                   :""}
+                    {user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN" ?
+                        <SubMenu title="Адміністрування" >
+                            <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
+                            <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
+                                Експортувати дані</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+                        </SubMenu >
+                        : ""}
                 </Menu >
+
             )
         } else {
             return (<Menu>
-                <Menu.Item> <Registration /></Menu.Item>
+                <Menu.Item><div onClick={() => setShowRegister(true)}>Зареєструватися</div></Menu.Item>
                 {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
-                <Menu.Item><Login/></Menu.Item>
+                <Menu.Item><div onClick={() => setShowLogin(true)}>Увійти</div></Menu.Item>
             </Menu>
             )
         }
     };
 
     return (
-        <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger = {'click'}>
-            <div>
-                <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />
-            </div>
-        </Dropdown>
+        <>
+            <Registration isShowing={showRegister} setShowing={setShowRegister} />
+            <Login isShowing={showLogin} setShowing={setShowLogin} />
+            <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
+            <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+            <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger={'click'}>
+                <div>
+                    <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />
+                </div>
+            </Dropdown>
+        </>
     )
 };
 
