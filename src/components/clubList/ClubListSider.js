@@ -15,6 +15,7 @@ const ClubListSider = ({
                            form,
                            getAdvancedData,
                            isCenterChecked,
+                           setShowHideMenu,
                            setIsCenterChecked,
                            activeCategory,
                        }) => {
@@ -236,7 +237,7 @@ const ClubListSider = ({
                         </Button>
                 </div>
                 <div className="mobile-use-button">
-                        <Button className="mobile-button use-button" onClick={() => { window.location.reload() } }>
+                        <Button className="mobile-button use-button" onClick={() => { setShowHideMenu(false) } }>
                             Застосувати
                         </Button>
                 </div>

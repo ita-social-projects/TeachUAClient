@@ -22,6 +22,8 @@ const ClubList = ({
                       loading,
                       load,
                       advancedSearch,
+                      showHideMenu,
+                      setShowHideMenu,
                       defaultSortBy,
                       defaultSortDir,
                       defaultSortView,
@@ -110,11 +112,12 @@ const ClubList = ({
     };
     return (
         <Layout className="club-list">
-            {advancedSearch && (
+            {advancedSearch && showHideMenu && (
                 <ClubListSider
                     setCurrentPage={setCurrentPage}
                     form={searchForm}
                     getAdvancedData={getData}
+                    setShowHideMenu={setShowHideMenu}
                     isCenterChecked={isCenterChecked}
                     setIsCenterChecked={setIsCenterChecked}
                     activeCategory={activeCategory}
