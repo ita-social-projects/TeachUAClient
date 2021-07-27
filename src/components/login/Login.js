@@ -64,6 +64,9 @@ const Login = ({verifyCode}) => {
                     >
                         <LoginSocial />
                         <LoginInput />
+                        <div className="edit-button">
+
+                        </div>
                     </Form>
                 </div>
             </Modal>
