@@ -41,22 +41,22 @@
         margin: 15px 0 -30px 0;
     }
 
+    .modal-add-club .add-club-container {
+        padding: 10px 10px 32px 10px;
+    }
+
     .modal-add-club .add-club-sider-mobile {
         display: flex;
         align-items: center;
-        justify-content: center;
-        background: #FFFFFF !important;
+        justify-content: flex-start;
+        background: #FAFAFA !important;
         padding: 6px 0 4px 4px;
         max-height: 40px;
         min-height: 40px;
-}
 
-    .ant-steps-item-title {
-        /*padding-right: 48px;*/
-        font-size: 12px;
-        white-space: pre-wrap;
-        line-height: 1.2em !important;
     }
+
+
 
     .add-club-sider-mobile .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
         background: #FA8C16;
