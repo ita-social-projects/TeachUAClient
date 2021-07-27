@@ -5,7 +5,6 @@ import './css/UserEditModal.less';
 import UserEditRoles from "./UserEditRoles";
 import UserEditInput from "./UserEditInput";
 import {updateUser, verify} from "../../../service/UserService";
-import {UserEditPasswordModal} from "./UserEditPasswordModal";
 
 const UserEditModal = ({user}) => {
 
@@ -18,18 +17,26 @@ const UserEditModal = ({user}) => {
         const newValues = stat.reduce(
             (result, item) =>
                 Object.assign({}, result, item), values)
-        updateUser(newValues).then((response) => {
-            if (response.status > 400) {
-                window.location.reload();
-                setVisible(true);
-                message.error("Профіль не було оновлено")
+        verify(values).then((response) => {
+            if (response.status >= 500) {
+                message.error("Введено невірний пароль");
+            } else if (response.status < 500) {
+                message.error("Введено невірний пароль");
             } else {
-                window.location.reload();
-                setVisible(false);
-                message.success("Профіль змінено успішно");
+                updateUser(newValues).then((response) => {
+                    if (response.status > 400) {
+                        window.location.reload();
+                        setVisible(true);
+                        message.error("Профіль не було оновлено")
+                    } else {
+                        window.location.reload();
+                        setVisible(false);
+                        message.success("Профіль змінено успішно");
+                    }
+                });
             }
-        });
-    }
+        })
+    };
 
 
     return (

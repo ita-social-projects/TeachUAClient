@@ -13,12 +13,13 @@ const EmailInput = () => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               type: 'email'
+                              // type: 'email'
                            }]}>
                     <Input className="login-box"
                            placeholder="Введіть ваш емейл"
                            suffix={<MailOutlined classname="mail-icon"/>}/>
                 </Form.Item>
+
             </div>
             <Form.Item>
                 <div className="login-footer">
