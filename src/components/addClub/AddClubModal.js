@@ -4,6 +4,7 @@ import './css/AddClubModal.css';
 import "./css/AddClubContent.css";
 import {Content} from "antd/es/layout/layout";
 import AddClubSider from "./AddClubSider";
+import AddClubSiderMobile from "./AddClubSiderMobile";
 import MainInformationStep from "./steps/MainInformationStep";
 import ContactsStep from "./steps/ContactsStep";
 import DescriptionStep from "./steps/DescriptionStep";
@@ -120,6 +121,7 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
                             <div className="add-club-header">
                                 Додати гурток
                             </div>
+                            <AddClubSiderMobile step={step}/>
                             <div className="add-club-content">
                                 {stepComponent(step)}
                             </div>
