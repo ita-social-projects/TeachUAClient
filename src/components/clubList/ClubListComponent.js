@@ -19,6 +19,7 @@ const ClubListComponent = () => {
     const [advancedSearch, setAdvancedSearch] = useState(false);
     const [activeCategory, setCategoryActive] = useState();
     const location = useLocation();
+    const [showHideMenu, setShowHideMenu] = useState(true);
 
     useEffect(() => {
         if (typeof location.state !== "undefined") {
@@ -31,13 +32,18 @@ const ClubListComponent = () => {
         <Loader />
     ) : (
         <Layout>
+            {console.log({showHideMenu})}
             <ClubListHeader
                 setAdvancedSearch={setAdvancedSearch}
                 advancedSearch={advancedSearch}
+                showHideMenu={showHideMenu}
+                setShowHideMenu={setShowHideMenu}
             />
             <ClubList
                 loading={loading}
                 load={setLoading}
+                showHideMenu={showHideMenu}
+                setShowHideMenu={setShowHideMenu}
                 advancedSearch={advancedSearch}
                 defaultSortBy={DEFAULT_SORT_BY}
                 defaultSortDir={DEFAULT_SORT_DIRECTION}
