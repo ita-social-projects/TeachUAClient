@@ -5,7 +5,11 @@ import {Button} from "antd";
 import MapComponent from "../map/MapComponent";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 
-const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
+const ClubListHeader = ({
+                            setAdvancedSearch,
+                            advancedSearch,
+                            setShowHideMenu,
+                            showHideMenu}) => {
 
     const [mapVisible, setMapVisible] = useState(false);
 
@@ -23,7 +27,7 @@ const ClubListHeader = ({setAdvancedSearch, advancedSearch}) => {
                 {mapSearchParameters.cityName !== 'online' && <Button className="flooded-button show-map-button"
                         onClick={() => setMapVisible(true)}>Показати на мапі</Button>}
             </div>
-            <Search setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+            <Search showHideMenu={showHideMenu} setShowHideMenu={setShowHideMenu} setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
             <MapComponent visible={mapVisible} setVisible={setMapVisible} cityName={searchParameters.cityName}/>
         </div>
     );

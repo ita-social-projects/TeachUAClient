@@ -120,6 +120,7 @@ class Search extends React.Component {
             this.setState({loading: false});
         }
         this.state.searchClicked = false;
+        this.props.setShowHideMenu(true);
     };
 
     onSearch = (val) => {
@@ -148,6 +149,7 @@ class Search extends React.Component {
                 searchParameters.isAdvancedSearch = true;
             }
         }
+        this.props.setShowHideMenu(true);
     };
 
     render() {
