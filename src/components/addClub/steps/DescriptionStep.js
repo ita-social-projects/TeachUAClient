@@ -126,8 +126,8 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback
                 rules={[{
                     required: true,
-                    pattern: /^[А-Яа-яёЁЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>—«»„”“–’‘?|@_`{}№~^\/[\]]{40,1500}$/,
-                    message: " Некоректний опис центру"
+                    pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){40,1500}$/,
+                    message: "Некоректний опис гуртка"
                 }]}
             >
                 <Input.TextArea className="editor-textarea" style={{ height: 200 }} placeholder="Додайте опис гуртка" />

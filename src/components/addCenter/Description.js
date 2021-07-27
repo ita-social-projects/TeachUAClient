@@ -68,6 +68,7 @@ const Description = ({ step, setStep, result, setResult }) => {
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
+                        accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
                         data={{ folder: `center/${centerName}/background` }}
                         headers={{ contentType: 'multipart/form-data' }}
@@ -82,7 +83,7 @@ const Description = ({ step, setStep, result, setResult }) => {
                            rules={[{
                                required: true,
                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){40,1500}$/,
-                               message: "Це поле може містити тільки українські та англійські літери, цифри та спеціальні символи"
+                               message: "Некоректний опис центру"
                            }
                            ]}
                 >

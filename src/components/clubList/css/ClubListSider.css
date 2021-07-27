@@ -120,6 +120,10 @@
     border-color: #d9d9d9;
 }
 
+.use-clear-button {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .club-list-sider {
         flex: 0 0 300px !important;
@@ -137,5 +141,43 @@
         max-width: 100% !important;
         min-width: 100% !important;
         width: 100% !important;
+    }
+}
+
+@media(min-width: 319px) and (max-width: 824px) {
+    .use-clear-button {
+        display: inline-block;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin-top: 12%;
+    }
+    .mobile-clear-button {
+        float: left;
+    }
+    .mobile-use-button {
+        float: left;
+    }
+    .use-button {
+        width: 120px;
+        background: #FA8C16;
+        color: white;
+        border-radius: 6px;
+        margin-left: 15px;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .clear-button {
+        width: 120px;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 6px;
+        color: #FA8C16;
+        border-color: #FA8C16;
     }
 }
