@@ -37,12 +37,6 @@
 
 }
 
-@media (min-width: 391px) and (max-width:459px)  {
-    .about-carousel .carousel-item-1 .details-button{
-        width: 290% ;
-    }
-}
-
 @media (min-width: 460px) and (max-width:500px) {
     .about-carousel .carousel-item-1 .details-button {
         width: 350% ;

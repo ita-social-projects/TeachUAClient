@@ -1,11 +1,21 @@
 .user-edit .ant-modal-body {
   padding: 0 !important;
 }
+ .ant-modal-content {
+  border-radius: 16px;
+  height: auto;
+}
 
 .user-edit .ant-modal-content {
   border-radius: 16px;
-  height: 820px;
+  height: fit-content;
 }
+
+.ant-modal-password-content {
+  border-radius: 16px;
+  height: 340px;
+}
+
  .short-text {
   display: none;
 }
@@ -104,6 +114,14 @@
   padding-left: 40px;
 }
 
+
+.user-edit .user-edit-password {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  border-radius: 50%;
+}
+
 .user-edit .user-edit-input {
   height: 100%;
   width: 436px;
@@ -142,4 +160,11 @@
 .user-edit .user-edit-footer {
   float: right;
   margin-right: 40px;
+}
+
+.checkbox{
+  border: 3px black;
+  color: #D46B08;
+  width: 17px;
+  height:17px;
 }
