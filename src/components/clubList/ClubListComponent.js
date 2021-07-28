@@ -8,6 +8,9 @@ import MapComponent from "../map/MapComponent";
 import ClubListHeader from "./ClubListHeader";
 import { getClubsByCategoryAndCity } from "../../service/ClubService";
 import Loader from "../Loader";
+import MainInformationStep from "../addClub/steps/MainInformationStep";
+import ContactsStep from "../addClub/steps/ContactsStep";
+import DescriptionStep from "../addClub/steps/DescriptionStep";
 
 const ClubListComponent = () => {
     const DEFAULT_SORT_BY = "name";
@@ -27,6 +30,7 @@ const ClubListComponent = () => {
             setCategoryActive(location.state.showActiveCategory);
         }
     }, [location]);
+
 
     return loading ? (
         <Loader />
