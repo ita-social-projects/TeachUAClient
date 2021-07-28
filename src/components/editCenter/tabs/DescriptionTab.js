@@ -7,13 +7,22 @@ import "../css/DescriptionTab.css"
 import EditCenterContentFooter from "../EditCenterFooter";
 
 
-const DescriptionTab = ({center}) => {
+const DescriptionTab = ({center,result,setResult}) => {
         const [descriptionFrom] = Form.useForm();
-    useEffect(() => {
-        console.log(descriptionFrom.getFieldsValue())
-    }, [])
+
+
+    const onChange = (values) => {
+        setResult(Object.assign(result,values))
+        console.log(result)
+    }
+
+        const onFinish = (values) => {
+            setResult(Object.assign(result,values))
+        }
     return (
         <Form
+            onFinish={onFinish}
+            onChange={onChange}
             form={descriptionFrom}
             name="basic">
             <Form.Item name="urlLogo"
@@ -74,7 +83,7 @@ const DescriptionTab = ({center}) => {
             >
                 <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
             </Form.Item>
-            <EditCenterContentFooter result={center}/>
+            <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 }

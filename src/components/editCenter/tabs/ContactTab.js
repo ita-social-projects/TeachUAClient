@@ -7,28 +7,38 @@ import EditCenterContentFooter from "../EditCenterFooter";
 
 const {Option} = Select;
 
-const ContactTab = ({contacts, cities, center}) => {
+const ContactTab = ({contacts, cities, center,setResult,result}) => {
     const [locations, setLocations] = useState([])
     const [city, setCity] = useState()
     const [contacts_data, setContactsData] = useState({});
     const [contactValue, setContactValue] = useState();
     const [someContact, setSome] = useState([]);
+
+
+    const onFinish = (values) => {
+        setResult(Object.assign(result,values))
+        console.log(result)
+    }
+
+    const onChange = (values) => {
+        setResult(Object.assign(result,values.target))
+        console.log(result)
+    }
     useEffect(() => {
-        console.log(center.contacts)
+        center.contacts.map(e => setContactsData(Object.assign({...contacts_data,[e.contactType.id]:e.contact_data})))
+        console.log(contacts_data)
     }, [])
-    const changeContacts = (event, contact) => {
-        setContactsData({
-            ...contacts_data,
-            [contact.id]: event.target.value
-        });
-    };
+
+    const changeContacts = (e, contact) => {
+         setContactsData(Object.assign({...contacts_data ,[contact.id]: e.target.value}))
+        setResult(Object.assign(result,contacts_data))
+        };
+
 
     const initialValue = (contactName) => {
         let value = "";
         center.contacts.map(e => {
-                console.log(contactName.name + " " + e.contact_data + " " + e.contactType.name);
                 if (e.contactType.name === contactName.name) {
-                    console.log(e)
                     value = e.contact_data;
                 }
             }
@@ -46,7 +56,9 @@ const ContactTab = ({contacts, cities, center}) => {
     }
 
     return (
-        <Form name="edit-center-contactForm">
+        <Form
+            onFinish={onFinish}
+            name="edit-center-contactForm">
             <Form.Item
                 label="Контакти"
                 className="add-club-row add-club-contacts"

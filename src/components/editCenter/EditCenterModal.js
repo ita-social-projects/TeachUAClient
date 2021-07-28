@@ -21,6 +21,7 @@ const EditCenterModal = ({centerId}) => {
 
 
     useEffect(() => {
+        getClubsByCenterId(centerId).then(response => setClubs(response))
         getAllCategories().then(response => setCategories(response))
         getAllContacts().then(response => setContacts(response))
         getCenterById(centerId).then(response => setCenter(response))
@@ -45,8 +46,6 @@ const EditCenterModal = ({centerId}) => {
             >
                 <div className="header-edit-center">Редагувати гурток</div>
                 <EditCenterTabs
-                    result={result}
-                    setResult={setResult}
                     clubs={clubs}
                     set={setClubs}
                     setResult={setResult}

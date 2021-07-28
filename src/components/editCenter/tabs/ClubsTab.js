@@ -8,14 +8,16 @@ import {useForm} from "antd/es/form/Form";
 
 
 const ClubsTab = ({center, setClubs, clubs}) => {
+
+
     const onChange = () => {
+        console.log(clubs)
         getClubsByCenterId(center.id).then(response => setClubs(response))
     }
     return (
         <Form
             className="clubsOfCenter"
             layout="horizontal"
-
         >
             <Form.Item
                 className="form-item"

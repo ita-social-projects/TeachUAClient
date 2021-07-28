@@ -1,44 +1,99 @@
-import {Button, Form, Input, message, Select} from "antd";
-import React, {useEffect, useState} from "react";
-import EditClubContentFooter from "../EditClubContentFooter";
-import EditClubInputAddress from "../EditClubInputAddress";
+import {Button, Form, Input, List, Popconfirm, Select, Switch} from "antd";
+import React, {useState} from "react";
 import MaskIcon from "../../MaskIcon";
-import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
-import {getDistrictsByCityName} from "../../../service/DisctrictService";
 import "../css/MainInformationTab.less"
-
-const {Option} = Select;
+import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
+import EditLocationModal from "../locations/EditLocationModal";
 
 const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
-    const [cityName, setCityName] = useState(null);
-    const [cityOnInput, setCityOnInput] = useState(null);
-    const [inputAddressProps, setInputAddressProps] = useState({});
-    const [districts, setDistricts] = useState([]);
-
-    useEffect(() => {
-        getDistrictsByCityName(cityName).then(response => setDistricts(response));
-    }, [cityName]);
+    const [locationForm] = Form.useForm();
+    const [contacts_data, setContactsData] = useState(JSON.parse(result.contacts.replaceAll("::", ":")));
+    const [checked, setChecked] = useState(result.isOnline !== undefined ? result.isOnline : false);
+    const [locationVisible, setLocationVisible] = useState(false);
+    const [editedLocation, setEditedLocation] = useState(null);
+    const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
 
     const onFinish = (values) => {
-        if (inputAddressProps.validateStatus === 'error') {
-            message.error("Некоректно вибрана адреса");
-            return;
+        console.log(result);
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
+        console.log(values);
+        console.log(locations);
+        if (locations !== []) {
+            for (const loc in locations) {
+                console.log(locations[loc]);
+                values.locations[loc] = {
+                    id: locations[loc].id,
+                    cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+                    address: locations[loc].address,
+                    coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+                    districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+                    key: locations[loc].key,
+                    name: locations[loc].name,
+                    phone: locations[loc].phone,
+                    stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                }
+            }
+        } else {
+            values.locations = locations;
         }
+        setResult(Object.assign(result, values));
+        console.log(result);
+    };
+    console.log(result);
 
-        geocodeByAddress(values.address.label)
-            .then(results => getLatLng(results[0]))
-            .then(({lat, lng}) => {
-                values.latitude = lat;
-                values.longitude = lng;
+    const onLocationChange = (values) => {
+        //
+        // console.log(values);
+    }
 
-                setResult(Object.assign(result, values));
+    const onOnlineChange = () => {
+        if (checked) {
+            setChecked(false);
+            setResult({
+                ...result, isOnline: false,
             });
+        } else {
+            setChecked(true);
+            setResult({
+                ...result, isOnline: true,
+            });
+        }
+    }
+
+    const changeContacts = (event, contact) => {
+        console.log(result);
+        console.log(event.target.value);
+        setContactsData({
+            ...contacts_data,
+            [contact.id]: event.target.value
+        });
+        console.log(contacts_data);
+        const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
+        console.log(parsedContact);
+        setResult({...result, contacts: parsedContact})
+        console.log(result);
     };
 
-    const handleSelect = address => {
-        setInputAddressProps({validateStatus: 'success'});
-        setCityOnInput(cityName);
+    const initialValue = (contactName) => {
+        let value = "";
+        if (result.contactsArray !== undefined) {
+            result.contactsArray.map(e => {
+                if (e.contactType.name === contactName.name) {
+                    value = e.contact_data;
+                }
+            })
+        }
+        return value;
+    }
+
+    const onRemove = (item) => {
+        console.log(item);
+        const newData = [...locations];
+        console.log(newData);
+        const index = newData.findIndex((it) => item.key === it.key);
+        newData.splice(index, 1);
+        setLocations(newData);
     };
 
     return (
@@ -46,71 +101,79 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             name="basic"
             form={contactsForm}
             requiredMark={false}
+            // onChange={onFinalChange}
             onFinish={onFinish}>
-
-            <div className="edit-club-inline">
-                <Form.Item name="cityName"
-                           className="edit-club-row"
-                           label="Місто"
-                           initialValue={result.city.name}>
-                    <Select
-                        className="edit-club-select"
-                        placeholder="Виберіть місто"
-                        onChange={(value) => {
-                            if (cityName) {
-                                cityOnInput === value ?
-                                    setInputAddressProps({validateStatus: 'success'}) :
-                                    setInputAddressProps({validateStatus: 'error'});
-                            }
-
-                            setCityName(value);
-                        }}
-                        optionFilterProp="children">
-                        {cities.map(city => <Option
-                            value={city.name}>{city.name}</Option>)}
-
-                    </Select>
-                </Form.Item>
-                <Form.Item name="districtName"
-                           className="edit-club-row"
-                           label="Район"
-                           initialValue={result.district.name}
-                           >
-                    <Select
-                        className="edit-club-select"
-                        placeholder="Виберіть район"
-                        optionFilterProp="children">
-                        {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
-                    </Select>
+            <Form.Item name="locations"
+                       className="add-club-row"
+                       onChange={onLocationChange}
+                       initialValue={locations}
+            >
+                <List
+                    className="add-club-location-list"
+                    itemLayout="horizontal"
+                    dataSource={locations}
+                    renderItem={item => (
+                        <List.Item
+                            actions={[
+                                <div>
+                                    <Popconfirm key="delete"
+                                                title="Видалити локацію?"
+                                                cancelText="Ні"
+                                                okText="Так"
+                                                cancelButtonProps={{className: "popConfirm-cancel-button"}}
+                                                okButtonProps={{className: "popConfirm-ok-button"}}
+                                                onConfirm={() => onRemove(item)}>
+                                        <DeleteOutlined/>
+                                    </Popconfirm>
+                                </div>]}
+                        >
+                            <List.Item.Meta
+                                title={item?.name}
+                                description={item?.address}
+                            />
+                        </List.Item>
+                    )}/>
+                <span className="add-club-location" onClick={() => setLocationVisible(true)}>
+                    Додати локацію
+                </span>
+            </Form.Item>
+            <div className="add-club-inline">
+                <Form.Item name="isOnline"
+                           className="add-club-row"
+                           label="Доступний онлайн?"
+                >
+                    <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onOnlineChange} checked={checked}/>
                 </Form.Item>
             </div>
-            <Form.Item name="address"
-                       className="edit-club-row"
-                       label="Адреса"
-                       validateTrigger={handleSelect}
-                       {...inputAddressProps}
-            >
-                <EditClubInputAddress
-                    placeholder={result.address}
-                    form={contactsForm}
-                    inputText={result.address && result.address.label}
-                    setCityName={setCityName}
-                    onChange={handleSelect}/>
-            </Form.Item>
             <Form.Item
                 label="Контакти"
                 className="edit-club-row edit-club-contacts">
                 {contacts.map(contact =>
                     <Form.Item name={`clubContact${contact.name}`}
                                className="edit-club-contact"
-                               initialValue={result[`clubContact${contact.name}`]}
-                               >
+                               hasFeedback
+                               initialValue={initialValue(contact)}
+                    >
                         <Input className="edit-club-input"
                                placeholder="Заповніть поле"
-                               suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
+                               suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}
+                               onChange={(e) => changeContacts(e, contact)}
+                        />
                     </Form.Item>)}
             </Form.Item>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+            <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
+
+            <EditLocationModal
+                form={locationForm}
+                result={result}
+                setResult={setResult}
+                locations={locations}
+                setLocations={setLocations}
+                visible={locationVisible}
+                setVisible={setLocationVisible}
+                editedLocation={editedLocation}
+                setEditedLocation={setEditedLocation}
+                cities={cities}/>
         </Form>
     )
 };

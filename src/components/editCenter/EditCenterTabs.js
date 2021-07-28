@@ -40,7 +40,9 @@ const EditClubTabs = ({
         </TabPane>
         <TabPane tab="Опис гуртка" key="3">
             <DescriptionTab center={center}
-                            result={result}/>
+                            result={result}
+                            setResult={setResult}
+             />
         </TabPane>
         <TabPane tab="Гуртки" key="4">
             <ClubsTab center={center}

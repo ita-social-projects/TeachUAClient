@@ -6,20 +6,26 @@ import {PlusOutlined} from "@ant-design/icons";
 import AddLocationModal from "../../addClub/location/AddLocationModal";
 
 
-const MainInformationTab = ({center,form,cities}) =>{
+const MainInformationTab = ({center,form,cities,result,setResult}) =>{
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
     const [locations,setLocations] = useState([]);
+
+    const onFinish = (values) => {
+        console.log(values)
+        setResult(Object.assign(result,values))
+
+    }
     useEffect(() => {
-        console.log(center)
         setLocations(center.locations)
-        console.log(locations)
     }, [])
 
     return (
         <div className="edit-center">
-        <Form name="edit-center-main"
+        <Form
+            onFinish={onFinish}
+            name="edit-center-main"
                 form={form}>
             <Form.Item name="name"
                        className="edit-center-row edit-center-name"
@@ -28,6 +34,7 @@ const MainInformationTab = ({center,form,cities}) =>{
             >
                 <Input className="edit-center-input"
                        value={center.name}
+                       onChange={event => setResult({...result, name: event.target.value})}
                        placeholder="Назва гуртка"
 
                 />
@@ -64,12 +71,12 @@ const MainInformationTab = ({center,form,cities}) =>{
         editedLocation={editedLocation}
         setEditedLocation={setEditedLocation}
         cities={cities}/>
-
+            <div className="edit-center-footer">
+                <Button htmlType="submit" className="edit-club-button" >Зберегти зміни</Button>
+            </div>
         </Form>
 
-            <div className="edit-center-footer">
-            <EditCenterContentFooter  result={center}/>
-                </div>
+
         </div>
     )
 }
