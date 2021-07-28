@@ -15,7 +15,7 @@ import { getAllContacts } from '../../service/ContactService';
 const { Step } = Steps;
 
 
-const AddCenter = () => {
+const AddCenter = ({isShowing, setShowing}) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [clubs, setClubs] = useState(null);
@@ -102,14 +102,11 @@ const AddCenter = () => {
     };
 
     return (
-        <div>
-            <div onClick={() => setVisible(true)}>
-                Додати центр
-             </div>
+      
             <Modal
                 centered
-                visible={visible}
-                onCancel={() => setVisible(false)}
+                visible={isShowing}
+                onCancel={() => setShowing(false)}
                 width={880}
                 footer={null}
                 className='addCenter'
@@ -134,7 +131,7 @@ const AddCenter = () => {
                     </div>
                 </div>
             </Modal>
-        </div>
+      
     )
 };
 
