@@ -138,6 +138,10 @@ const UserEditInput = (
                            required: true,
                            message: "Будь ласка введіть Ваше прізвище",
                            max: 15
+                       },{
+                           required: false,
+                           pattern: /^[^0-9]*$/,
+                           message: 'Прізвище не може містити цифри',
                        },
                            {
                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}\S$/,
@@ -154,6 +158,10 @@ const UserEditInput = (
                            required: true,
                            message: "Будь ласка введіть Ваше ім'я",
                            max: 15
+                       },{
+                           required: true,
+                           pattern: /^[^0-9]*$/,
+                           message: "Ім`я не може містити цифри",
                        },
                            {
                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}\S$/,
