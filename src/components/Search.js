@@ -146,10 +146,10 @@ class Search extends React.Component {
                 searchParameters.isAdvancedSearch = false;
             } else {
                 this.props.setAdvancedSearch(true);
+                this.props.setShowHideMenu(true);
                 searchParameters.isAdvancedSearch = true;
             }
         }
-        this.props.setShowHideMenu(true);
     };
 
     render() {
