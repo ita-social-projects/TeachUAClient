@@ -180,4 +180,10 @@
         color: #FA8C16;
         border-color: #FA8C16;
     }
+
+    .ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content.club-list-content {
+        width: 0;
+        display: none;
+    }
+
 }

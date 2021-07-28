@@ -1,8 +1,6 @@
 import {Checkbox, Form, Input, InputNumber, Steps} from "antd";
 import React from "react";
-import Sider from "antd/es/layout/Sider";
 import "./css/AddClubSider.css";
-import {onHidden} from "web-vitals/dist/lib/onHidden";
 
 const {Step} = Steps;
 
