@@ -87,7 +87,7 @@ export class PasswordUpdate extends React.Component {
                                     return Promise.resolve();
                                 }
 
-                                return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));
+                                return Promise.reject(new Error('\'Значення поля ‘Підтвердити новий пароль’ має бути еквівалентним значенню поля ‘Новий пароль’'));
                             },
                         }),
 
@@ -137,11 +137,26 @@ const UserEditInput = (
                        rules={[{
                            required: true,
                            message: "Будь ласка введіть Ваше прізвище",
-                           max: 15
+
                        },
                            {
-                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}\S$/,
-                               message: 'Невірний формат прізвища',
+                               required: false,
+                               pattern: /^[^0-9]*$/,
+                               message: 'Прізвище не може містити цифри',
+                           },
+                           {
+                               required: false,
+                               pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
+                               message: 'Прізвище повинно починатися і закінчуватися літерою',
+                           },
+                           {
+                               required: false,
+                               pattern: /^[^`~!@₴£№#$%^&*()_+={}\[\]|/\\:;“"<,>.?๐฿]*$/,
+                               message: 'Прізвище не може містити спеціальні символи',
+                           },
+                           {
+                               max: 25,
+                               message: 'Прізвище не може містити більше, ніж 25 символів',
                            }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
@@ -153,11 +168,25 @@ const UserEditInput = (
                        rules={[{
                            required: true,
                            message: "Будь ласка введіть Ваше ім'я",
-                           max: 15
                        },
                            {
-                               pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"?:*|><]){3,}\S$/,
-                               message: 'Невірний формат імені',
+                               required: false,
+                               pattern: /^[^0-9]*$/,
+                               message: 'Ім\'я не може містити цифри',
+                           },
+                           {
+                               required: false,
+                               pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
+                               message: 'Ім\'я повинно починатися і закінчуватися літерою',
+                           },
+                           {
+                               required: false,
+                               pattern: /^[^`~!@₴£№#$%^&*()_+={}\[\]|/\\:;“"<,>.?๐฿]*$/,
+                               message: 'Ім\'я не може містити спеціальні символи',
+                           },
+                           {
+                               max: 25,
+                               message: 'Ім\'я не може містити більше, ніж 25 символів',
                            }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
@@ -171,8 +200,23 @@ const UserEditInput = (
                            message: "Будь ласка введіть Ваш номер телефону"
                        },
                            {
-                               pattern: /^\d{9}$/,
-                               message: 'Телефон введено невірно'
+                               required: false,
+                               pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                               message: 'Телефон не може містити літери',
+                           },
+                           {
+                               required: true,
+                               pattern: /^[^\s]*$/,
+                               message: 'Телефон не може містити пробіли',
+                           },
+                           {
+                               pattern: /^.{9}$/,
+                               message: "Телефон не відповідає вказаному формату",
+                           },
+                           {
+                               required: false,
+                               pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                               message: 'Телефон не може містити спеціальні символи',
                            }]}>
                 <Input addonBefore={prefixSelector}/>
             </Form.Item>
@@ -236,7 +280,7 @@ const UserEditInput = (
 
             <div>
 
-                <div>
+                <div className={"align-checkbox"}>
                     <input name="checkbox"
                            type="checkbox"
                            className="checkbox"
@@ -244,24 +288,15 @@ const UserEditInput = (
                            onClick={() => {
                                setSelection(!isSelected);
                            }}/>
-                    <label htmlFor="checkbox">Змінити пароль</label>
+                    <text className="checkbox-label-interval">Змінити пароль</text>
                 </div>
-
-                {/*<Checkbox*/}
-                {/*    className="checkbox"*/}
-                {/*    checked={isSelected}*/}
-
-                {/*    onClick={() => {*/}
-                {/*        setSelection(!isSelected);*/}
-                {/*    }}/>*/}
-                {/*<text> Змінити пароль</text>*/}
             </div>
-
-
-            {isSelected ? <PasswordUpdate isSelected={isSelected}/> : ""}
             <div>
                 <p></p>
             </div>
+
+            {isSelected ? <PasswordUpdate isSelected={isSelected}/> : ""}
+
 
             <div className="user-edit-footer">
                 <Button className="submit-button"
