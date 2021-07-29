@@ -228,12 +228,12 @@ const UserEditInput = (
                        label="Email"
                        hasFeedback
                        rules={[{
-                           required: true,
-                           message: 'Будь ласка введіть Ваш емейл'
+                           required: false,
+                           message: 'Введіть email'
                        },
                            {
                                type: 'email',
-                               message: 'Введено не валідний емейл',
+                               message: 'Некоректний формат email',
                            }]}>
                 <Input className="user-edit-box"/>
             </Form.Item>
