@@ -277,7 +277,6 @@ const UserEditInput = (
             </Form.Item>
 
 
-
             <div>
 
                 <div className={"align-checkbox"}>
