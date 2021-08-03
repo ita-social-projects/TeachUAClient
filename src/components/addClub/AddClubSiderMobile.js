@@ -10,13 +10,13 @@ const AddClubSiderMobile = ({step}) => {
         <Steps className="add-club-sider-mobile"
                style={{background: "#FAFAFA"}}
                current={step}>
-            {step == 0 &&
+            {(step == 0 || step == 1) &&
                 <Step title="Основна інформація"/>
             }
-            {step == 1 &&
+            {(step == 0 || step == 1 || step == 2) &&
                 <Step title="Контакти"/>
             }
-            {step == 2 &&
+            { step == 2 &&
                 <Step title="Опис"/>
             }
         </Steps>
