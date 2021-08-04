@@ -74,8 +74,10 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             window.location.reload();
 
         }
+    }
 
         return (
+
             <Form
                 name="basic"
                 form={descriptionForm}
@@ -141,6 +143,5 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             </Form>
         )
     };
-}
 
 export default DescriptionStep;

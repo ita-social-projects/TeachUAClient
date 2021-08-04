@@ -104,6 +104,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             cityName: fields.cityName,
             phone: fields.phone
         });
+        form.validateFields();
+
     }
 
     return (
@@ -215,6 +217,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    rules={[{
                                        required: true,
                                        message: "Це поле є обов'язковим"
+                                   },{
+                                       required: true,
+                                       pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                                       message: "Некоректна адреса",
                                    }]}>
                             <Input className="add-club-input"
                                    placeholder="Адреса"
@@ -232,7 +238,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        hasFeedback
                                        rules={[{
                                            required: true,
-                                           message: "Це поле є обов'язковим",
+                                           message: "Некоректні координати",
                                            pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
                                        },{
                                            message:"Координате не можуть містити букви",

@@ -51,6 +51,7 @@ const EditCenterModal = ({centerId}) => {
                     setResult={setResult}
                     result={result}
                     center={center}
+                    setClubs={setClubs}
                     contacts={contacts}
                     cities={cities}/>
             </Modal>

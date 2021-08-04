@@ -1,4 +1,4 @@
-import { Form, Checkbox } from 'antd';
+import { Form, Checkbox , Button } from 'antd';
 import {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
@@ -73,7 +73,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                     </Checkbox.Group>
             </div>
             </Form.Item>
-            <span className="add-club-modal"> <AddClubModal clubs={clubs} setClubs={setClubs} fromCenter={fromCenter} /> </span>
+            <Button><AddClubModal clubs={clubs} setClubs={setClubs} fromCenter={fromCenter} /></Button>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
                 <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>

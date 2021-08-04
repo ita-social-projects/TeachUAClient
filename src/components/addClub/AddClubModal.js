@@ -18,9 +18,8 @@ import LoginSocial from "../login/LoginSocial";
 import {signIn} from "../../service/UserService";
 import Login from "../login/Login";
 
-
-const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) => {
-    const [visible, setVisible] = useState(false);
+const AddClubModal = ({isShowing, setShowing, clubs, setClubs,reloadPage}) => {
+    const [visible, setVisible] = useState(isShowing);
     const [step, setStep] = useState(0);
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
@@ -28,7 +27,7 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
     const [centers, setCenters] = useState([]);
-    const [loginVisible, setLoginVisible] = useState(false);
+    
 
     useEffect(() => {
         getAllCenters().then(response => setCenters(response))
@@ -56,7 +55,7 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
                 saveToken(response.accessToken);
-                setLoginVisible(false);
+                setShowing(false)
                 refreshPage();
             }
         });
@@ -72,8 +71,6 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
                     step={step}
                     setStep={setStep}
                     centers={centers}
-                    fromCenter={fromCenter}
-                    centerId={centerId}
                 />;
             case 1:
                 return <ContactsStep
@@ -101,19 +98,15 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
 
     if (getToken()) {
         return (
-            <div>
-                {button ?
-                    <Button onClick={() => setVisible(true)}
-                            className="add-club-button">Додати гурток</Button>
-                    : <div onClick={() => setVisible(true)}>Додати гурток</div>}
+          
 
                 <Modal
                     className="modal-add-club"
                     centered
                     width={880}
-                    visible={visible}
-                    onOk={() => setVisible(false)}
-                    onCancel={() => setVisible(false)}
+                    visible={isShowing}
+                    onOk={() => setShowing(false)}
+                    onCancel={() => setShowing(false)}
                     footer={null}>
                     <Layout>
                         <AddClubSider step={step}/>
@@ -128,22 +121,18 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
                         </Content>
                     </Layout>
                 </Modal>
-            </div>
+           
         )
     } else {
         return (
-            <div>
-                {button ?
-                    <Button onClick={() => setLoginVisible(true)}
-                            className="add-club-button">Додати гурток</Button>
-                    : <div onClick={() => setLoginVisible(true)}>Додати гурток</div>}
+            
                 <Modal
                     className="modal-login"
                     centered
                     width={520}
-                    visible={loginVisible}
-                    onOk={() => setLoginVisible(false)}
-                    onCancel={() => setLoginVisible(false)}
+                    visible={isShowing}
+                    onOk={() => setShowing(false)}
+                    onCancel={() => setShowing(false)}
                     footer={null}
                 >
                     <div className="login-header">
@@ -163,7 +152,7 @@ const AddClubModal = ({button, clubs, setClubs,fromCenter,centerId,reloadPage}) 
                 </Modal>
 
 
-            </div>
+          
         )
     }
 

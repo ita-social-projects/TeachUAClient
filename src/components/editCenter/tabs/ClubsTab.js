@@ -7,13 +7,13 @@ import {getUserId} from "../../../service/StorageService";
 import {useForm} from "antd/es/form/Form";
 
 
-const ClubsTab = ({center, setClubs, clubs}) => {
+const ClubsTab = ({center}) => {
+       const [centerId,setCenterId] = useState(center.id)
+       const [clubs,setClubs] = useState([])
+           useEffect(() => {
+          getClubsByCenterId(centerId).then(response => {setClubs(response)})
+    }, [])
 
-
-    const onChange = () => {
-        console.log(clubs)
-        getClubsByCenterId(center.id).then(response => setClubs(response))
-    }
     return (
         <Form
             className="clubsOfCenter"
@@ -23,7 +23,7 @@ const ClubsTab = ({center, setClubs, clubs}) => {
                 className="form-item"
                 label="Оберіть гурток"
                 name="clubs">
-                <div onChange={onChange} className="form-fields">
+                <div  className="form-fields">
                     {clubs.map(club => (
                         <div className="checkbox-item" value={club.id}>
 
