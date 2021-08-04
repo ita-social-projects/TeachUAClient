@@ -48,15 +48,17 @@ const NavMenu = () => {
                 triggerSubMenuAction={"click"}
                 forceSubMenuRender = {"true"}>
                   
-             
-                <SubMenu id = {"challenge_ONE"}  icon={<CrownOutlined />} title="Челендж" className="sub1" expandIcon={<CaretDownOutlined />} triggerSubMenuAction = {'click'} forceSubMenuRender = {true} >
-                    <Menu.Item ><Link to="/marathon">Мовомаратон</Link></Menu.Item>
-                    <Menu.Item><Link to="/challenge">Навчай українською</Link></Menu.Item>
-                </SubMenu >
+            
 
                 <Menu.Item key="clubs">
                     <Link to="/clubs" onClick={() => setCurrentPage(0)}><ApartmentOutlined className="icon" />Гуртки</Link>
                 </Menu.Item>
+
+                 
+                <SubMenu id = {"challenge_ONE"}  icon={<CrownOutlined />} title="Челендж" className="sub1" expandIcon={<CaretDownOutlined />} triggerSubMenuAction = {'click'} forceSubMenuRender = {true} >
+                    <Menu.Item ><Link to="/marathon">Мовомаратон</Link></Menu.Item>
+                    <Menu.Item><Link to="/challenge">Навчай українською</Link></Menu.Item>
+                </SubMenu >
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
                     <Link to="/about"><ContainerOutlined className="icon" />Про нас</Link>
