@@ -106,11 +106,23 @@
   border-bottom: none;
 }
 
-.header .nav-menu .ant-menu-submenu-title {
+
+.header .nav-menu  .ant-menu-submenu-title
+  {
   color: rgba(0, 0, 0, 0);
   background: url("images/menu.svg") no-repeat center / cover;
   font-size: 20px;
-  display: none;
+  display: inline-block;
+}
+
+.header .nav-menu .sub1 .ant-menu-submenu-title{
+  color: white;
+  background:transparent;
+  font-size: 1em;
+  display: inline-block !important;
+}
+.header .nav-menu .sub1 .ant-menu-item-icon{
+  font-size: 20px;
 }
 
 .header .nav-menu .ant-menu-submenu,
@@ -509,7 +521,7 @@ span.anticon.anticon-home.icon {
 }
 
 li.ant-menu-item.ant-menu-item-only-child.home {
-  display: none;
+  display: inline-block;
 }
 
 @media  screen and (max-width: 2500px) {
