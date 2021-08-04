@@ -162,6 +162,7 @@ class Search extends React.Component {
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
+                    autoFocus={this.state}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
                     style={{
