@@ -1,6 +1,6 @@
 .club-list .center-list-content .center-list-rectangle-item {
     width: 100%;
-    height: 95px;
+    height: 184px;
 }
 
 .center-list-content .center-list-rectangle-item .ant-card-body {
@@ -11,6 +11,7 @@
 }
 
 .center-list-content .center-list-rectangle-item .item-rectangle-row {
+    height: 67px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -22,17 +23,18 @@
     /*height: 50px;*/
 }
 
-.center-list-content .center-list-rectangle-item .center-details-button {
-    width: 130px;
-    height: 24px;
+.center-list-content .center-list-rectangle-item .details-button {
+    width: 248px;
 }
 .center-list-content .center-list-rectangle-item .center-address {
     width: 189px;
     height: 24px;
+    margin-left: 17px;
 }
-/*.center-list-content .list-rectangle-item .rating {*/
-/*    width: 170px;*/
-/*}*/
+.center-list-content .list-rectangle-item .rating {
+    width: 170px;
+    
+}
 
 .center-list-content .center-list-rectangle-item .item-rating-address {
     display: flex;
@@ -46,3 +48,9 @@
     width: 100%;
     height: 44px;
 }
+
+@media (max-width: 480px) {
+    .center-list-content .center-list-rectangle-item .details-button {
+      display: none;
+    }
+  }
