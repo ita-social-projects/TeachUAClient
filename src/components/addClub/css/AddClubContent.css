@@ -198,3 +198,9 @@
 .description-step .editor-space {
     color:#595959;
 }
+
+@media screen and (max-width:577px)  {
+    .add-club-content .add-club-input {
+        height: 100%;
+    }
+}
