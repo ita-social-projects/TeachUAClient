@@ -1,15 +1,17 @@
 import { Form, Checkbox , Button } from 'antd';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
 import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService';
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
+import Cities from "../header/Cities";
 
 const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
     const [clubsOfCenterForm] = Form.useForm();
     const [clubsId,setClubsIds] = useState([]);
+    const [isShowing,setShowing] = useState(false)
 
     const nextStep = () => {
         setStep(0);
@@ -73,7 +75,10 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                     </Checkbox.Group>
             </div>
             </Form.Item>
-            <Button><AddClubModal clubs={clubs} setClubs={setClubs} fromCenter={fromCenter} /></Button>
+            <AddClubModal isShowing = {isShowing} setShowing = {setShowing} fromCenter = {fromCenter}/>
+
+            <span onClick={() => setShowing(true)}
+                    className="add-club-modal">Додати гурток</span>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
                 <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>

@@ -2,8 +2,9 @@ import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
 import React from "react";
 import "../css/MainInformationTab.less"
 import {updateClubById} from "../../../service/ClubService";
+import {Option} from "antd/es/mentions";
 
-const MainInformationTab = ({categories, setResult, result}) => {
+const MainInformationTab = ({categories, setResult, result , centers}) => {
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
 
@@ -97,10 +98,12 @@ const MainInformationTab = ({categories, setResult, result}) => {
                        initialValue={result.center}
                        onChange={e => setResult({...result, center: e.target.value})}
             >
-                <Select
-                    className="edit-club-select"
-                    placeholder="Обрати центр"
-                />
+                    <Select
+                        className="add-club-select"
+                        placeholder="Назва центру"
+                        hasFeedback>
+                        {centers.map(c => <Option value={c.id}>{c.name}</Option>)}
+                    </Select>
             </Form.Item>
             <Button htmlType="submit" className="flooded-button edit-club-button">Зберегти зміни</Button>
         </Form>

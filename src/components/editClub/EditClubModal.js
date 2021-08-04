@@ -6,6 +6,7 @@ import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
 import {getClubById, getClubProfileById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
+import {getAllCenters} from "../../service/CenterService";
 
 const EditClubModal = (club) => {
     const [visible, setVisible] = useState(false);
@@ -13,6 +14,7 @@ const EditClubModal = (club) => {
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [centers,setCenters] = useState();
 
     useEffect(() => {
         getAllCategories().then(response => setCategories(response));
@@ -20,6 +22,7 @@ const EditClubModal = (club) => {
         getAllContacts().then(response => setContacts(response));
         // getClubById(club.clubId).then(response => setResult(response));
         getClubProfileById(club.clubId).then(response => setResult(response));
+        getAllCenters().then(response => setCenters(response))
         console.log("тут")
         console.log(result);
     }, []);
@@ -39,6 +42,7 @@ const EditClubModal = (club) => {
                 >
                 <div className="header-edit-club">Редагувати гурток</div>
                 <EditClubTabs categories={categories}
+                                  centers = {centers}
                                   setResult={setResult}
                                   result={result}
                                   contacts={contacts}

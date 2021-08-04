@@ -9,6 +9,7 @@ import "./css/Tabs.less"
 const {TabPane} = Tabs;
 
 const EditClubTabs = ({
+                          centers,
                           categories,
                           setResult,
                           result,
@@ -17,7 +18,9 @@ const EditClubTabs = ({
                       }) => (
     <Tabs defaultActiveKey="1">
         <TabPane tab="Основна інформація" key="1">
-            <MainInformationTab categories={categories}
+            <MainInformationTab
+                                centers={centers}
+                                categories={categories}
                                 setResult={setResult}
                                 result={result}
             />

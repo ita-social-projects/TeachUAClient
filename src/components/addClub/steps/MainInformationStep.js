@@ -135,7 +135,6 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             { fromCenter ? <div> </div> :
             <Form.Item name="centerId"
                        className="add-club-row"
-                       initialValue={centerId}
                        label="Приналежність до центру">
                 <Select
                     className="add-club-select"
