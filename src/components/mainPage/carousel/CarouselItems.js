@@ -17,12 +17,14 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/challenge.jpg`,
+        imageURL: `${uri}/static/images/about/slider/maraton.png`,
         body: (
             <div className="carousel-item-1">
-                <h2 className="label">Про Мовомаратон</h2>
+                <h2 className="label">Мовомаратон до 30-ї річниці <span></span>
+               Незалежності України</h2>
                 <span className="description description-2">
-                 
+                За 30 днів перейти на українську? Так, легко, комфортно, разом із однодумцями. 
+                Зроби Україні подарунок на день Незалежності - розмовляй українською!
                 </span>
                 <Link to="/marathon"><Button className="details-button">Детальніше</Button></Link>
             </div>)
