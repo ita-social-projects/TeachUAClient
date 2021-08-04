@@ -18,7 +18,7 @@ const MarathonDescription = () => {
                 <br />
                 <a style={{color: '#58a6ff' }} href="https://www.facebook.com/teach.in.ukrainian">  https://www.facebook.com/teach.in.ukrainian </a>
                 <br />
-                <a style={{color: '#58a6ff' }} href="teach.in.ukrainian@gmail.com"> teach.in.ukrainian@gmail.com </a>
+                <a style={{color: '#58a6ff' }} href="mailto:teach.in.ukrainian@gmail.com"> teach.in.ukrainian@gmail.com </a>
                 <br />
                 Українська гуманітарна платформа
                 <br />
