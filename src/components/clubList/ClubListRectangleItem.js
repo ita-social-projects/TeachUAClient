@@ -38,7 +38,7 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                         <div className="address">
                             <EnvironmentFilled
                                 className="address-icon"/>
-                            <span className="text"> {club.address}</span>
+                            <span className="text"> {club.locations.length === 0 ? "Онлайн" : club.locations[0].address}</span>
                         </div>
                     </div>
                     <Button className="outlined-button details-button">
