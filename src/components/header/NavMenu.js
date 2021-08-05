@@ -23,13 +23,13 @@ const NavMenu = () => {
         localStorage.setItem("head-component-page", elem.key);
     };
 
-    const [ifMobile, setIfMobile]  = useState(false);
+    const [isMobile, setIsMobile]  = useState(false);
 
     const handleResize = () => {
         if (window.innerWidth < 1215 && window.innerHeight < 1390) {
-            setIfMobile(true)
+            setIsMobile(true)
         } else {
-            setIfMobile(false)
+            setIsMobile(false)
         }
       }
       
@@ -78,7 +78,7 @@ const NavMenu = () => {
                     <Link to="/service"><FolderOpenOutlined className="icon" />Послуги українською</Link>
                 </Menu.Item>
                 {/*Замість лого лінка в бургері головної сторінки*/}
-                {ifMobile && 
+                {isMobile && 
                 <Menu.Item key="news" className="home">
                     <Link to="/"><span><HomeOutlined className="icon" /></span><span className="home-page">Головна сторінка</span></Link>
                 </Menu.Item>
