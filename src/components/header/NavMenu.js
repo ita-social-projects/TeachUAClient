@@ -22,18 +22,32 @@ const NavMenu = () => {
         setPageContent(elem.key);
         localStorage.setItem("head-component-page", elem.key);
     };
+
+    const [ifMobile, setIfMobile]  = useState(false);
+
+    const handleResize = () => {
+        if (window.innerWidth < 1215 && window.innerHeight < 1390) {
+            setIfMobile(true)
+        } else {
+            setIfMobile(false)
+        }
+      }
+      
    
     
     const {SubMenu} = Menu;
 
 
     useEffect(() => {
+
+     
         let slashPos = document.URL.lastIndexOf("/");
         let urlPage = document.URL.substr(slashPos + 1);
 
         if (urlPage !== pageContent) {
             setPageContent(-1);
         }
+         window.addEventListener("resize", handleResize)
     });
 
     return (
@@ -47,9 +61,6 @@ const NavMenu = () => {
                 key = {"nav_menu_id"}
                 triggerSubMenuAction={"click"}
                 forceSubMenuRender = {"true"}>
-                  
-            
-
                 <Menu.Item key="clubs">
                     <Link to="/clubs" onClick={() => setCurrentPage(0)}><ApartmentOutlined className="icon" />Гуртки</Link>
                 </Menu.Item>
@@ -67,9 +78,11 @@ const NavMenu = () => {
                     <Link to="/service"><FolderOpenOutlined className="icon" />Послуги українською</Link>
                 </Menu.Item>
                 {/*Замість лого лінка в бургері головної сторінки*/}
+                {ifMobile && 
                 <Menu.Item key="news" className="home">
                     <Link to="/"><span><HomeOutlined className="icon" /></span><span className="home-page">Головна сторінка</span></Link>
                 </Menu.Item>
+                }
             </Menu>
         </div>
     );
