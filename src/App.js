@@ -27,8 +27,9 @@ import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challengePage/ChallengePage";
-
+import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
+import MarathonPage from "./components/marathonPage/MarathonPage";
 
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 
@@ -57,6 +58,7 @@ function App() {
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
+                                    
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
@@ -75,6 +77,8 @@ function App() {
                                     <Route path="/verify" exact component={VerifyPage}/>
                                     <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
+                                    <Route path="/marathon" exact component={MarathonPage}/>
+                                    <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
                                     <Route path="/challenge" exact component={ChallengePage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
                                     <Route path="/about" exact component={AboutProject}/>

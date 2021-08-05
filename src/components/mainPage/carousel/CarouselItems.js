@@ -17,16 +17,16 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/challenge.jpg`,
+        imageURL: `${uri}/static/images/about/slider/maraton.png`,
         body: (
             <div className="carousel-item-1">
-                <h2 className="label">Про челендж "Навчай українською"</h2>
+                <h2 className="label">Мовомаратон до 30-ї річниці <span></span>
+               Незалежності України</h2>
                 <span className="description description-2">
-                    Ми допоможемо вам перейти на українську мову викладання.
-                    Тут ви можете знайти мотиваційні та практичні вебінари з експертами, корисні матеріали,
-                    які вдосконалять ваші знання та навички викладати українською.
+                За 30 днів перейти на українську? Так, легко, комфортно, разом із однодумцями. 
+                Зроби Україні подарунок на день Незалежності - розмовляй українською!
                 </span>
-                <Link to="/challenge"><Button className="details-button">Детальніше</Button></Link>
+                <Link to="/marathon"><Button className="details-button">Детальніше</Button></Link>
             </div>)
     },
     {
