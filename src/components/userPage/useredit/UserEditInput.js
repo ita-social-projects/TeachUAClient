@@ -138,10 +138,6 @@ const UserEditInput = (
                        rules={[{
                            required: true,
                            message: "Будь ласка введіть Ваше прізвище",
-                       },{
-                           required: false,
-                           pattern: /^[^0-9]*$/,
-                           message: 'Прізвище не може містити цифри',
                        },
                            {
                                required: false,
@@ -172,10 +168,6 @@ const UserEditInput = (
                        rules={[{
                            required: true,
                            message: "Будь ласка введіть Ваше ім'я"
-                       },{
-                           required: true,
-                           pattern: /^[^0-9]*$/,
-                           message: "Ім`я не може містити цифри"
                        },
                            {
                                required: false,

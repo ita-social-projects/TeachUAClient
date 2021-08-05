@@ -9,11 +9,11 @@ const EmailInput = () => {
             <div className="login-column">
                 <Form.Item name="email"
                            className="login-input"
-                           label="Емейл"
+                          // label="Емейл"
                            hasFeedback
                            rules={[{
                                required: true,
-                              // type: 'email'
+                               type: 'email'
                            }]}>
                     <Input className="login-box"
                            placeholder="Введіть ваш емейл"
