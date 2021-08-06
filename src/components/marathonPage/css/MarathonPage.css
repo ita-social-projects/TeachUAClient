@@ -27,12 +27,34 @@
     margin-left: 250px;
 }
 
+.marathon-page .marathon-button{
+    width: 185px;
+    height: 48px;
+    background: #FA8C16;
+    border: none;
+    color: white;
+    font-weight: 700;
+    border-radius: 6px;
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .marathon-page .google-form{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.marathon-page .google-form-button{
+    margin-top: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .marathon-page .marathon-description {
     display: flex;
