@@ -29,6 +29,7 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
     const [centers, setCenters] = useState([]);
+    const [isMobile, setIsMobile]  = useState(false);
 
 
     useEffect(() => {
@@ -36,10 +37,19 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
+        window.addEventListener("resize", handleResize)
         setResult({
             userId: getUserId()
         })
     }, [visible]);
+
+    const handleResize = () => {
+        if (window.innerWidth < 577) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
 
     const refreshPage = () => {
         window.location.reload();
@@ -75,7 +85,7 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
                     fromCenter={fromCenter}
                 />;
             case 1:
-                if (window.innerWidth > 577) {
+                if (!isMobile) {
                     return <ContactsStep
                         contacts={contacts}
                         cities={cities}
