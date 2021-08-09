@@ -3,9 +3,29 @@ import {Button, Form, Input, message, Modal, Upload} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 
-export class PasswordUpdate extends React.Component {
+/*export class PasswordUpdate extends React.Component {
 
-    render() {
+    render() */
+export const PasswordUpdate=()=>{
+
+    const [isEqual,setEqual] = useState(true);
+    const [passwordForm, setPasswordForm] = useState({
+        password: "",
+        newPassword:""
+    })
+
+    const onChange = e => {
+        if (e.target.name === "password")
+            passwordForm.password = e.target.value
+        console.log(e.target.value)
+        if(e.target.id === "confirmPassword")
+            passwordForm.newPassword = e.target.value
+        if (passwordForm.password!= passwordForm.newPassword) {
+            console.log(passwordForm.password + " "+ passwordForm.newPassword)
+            setEqual(false)
+        } else {console.log(passwordForm.password + " "+ passwordForm.newPassword);setEqual(true)}
+    }
+
         return (
             <div>
                 <Form.Item
@@ -28,6 +48,7 @@ export class PasswordUpdate extends React.Component {
                     <Input.Password
                         className="user-edit-box"
                         placeholder="Введіть діючий пароль"
+
                         //value={""}
                     />
                 </Form.Item>
@@ -65,6 +86,7 @@ export class PasswordUpdate extends React.Component {
                         className="user-edit-box"
                         placeholder="Введіть новий пароль"
                         value={""}
+                        onChange={onChange}
                     />
 
                 </Form.Item>
@@ -83,10 +105,11 @@ export class PasswordUpdate extends React.Component {
                         },
                         ({getFieldValue}) => ({
                             validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
+                                if ((!value || getFieldValue('password') === value) && isEqual) {
+                                    console.log(isEqual)
                                     return Promise.resolve();
                                 }
-
+console.log(isEqual)
                                 return Promise.reject(new Error('\'Значення поля ‘Підтвердити новий пароль’ має бути еквівалентним значенню поля ‘Новий пароль’'));
                             },
                         }),
@@ -94,12 +117,13 @@ export class PasswordUpdate extends React.Component {
                     ]}>
                     <Input.Password className="user-edit-box"
                                     placeholder="Підтвердіть новий пароль"
+                                    onChange={onChange}
                     />
                 </Form.Item>
             </div>)
     }
 
-}
+//}
 
 const UserEditInput = (
     {user}) => {
