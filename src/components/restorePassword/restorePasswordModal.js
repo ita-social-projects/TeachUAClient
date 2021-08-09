@@ -4,15 +4,12 @@ import EmailInput from "./emailConfirmation";
 import  "./../login/css/Login.less"
 import "./css/RestorePassword.less"
 import {getUserByEmail, resetPassword} from "../../service/UserService";
+import {Link} from "react-router-dom";
 export const RestorePasswordModal = () => {
 
     const [visible, setVisible] = useState(false);
 
-   const onFinish = (values) => { //get user by email
-       // const stat = [{status: true}]
-       // const newValues = stat.reduce(
-        //    (result, item) =>
-          //      Object.assign({}, result, item), values)
+   const onFinish = (values) => {
 
        resetPassword(values).then((response) => {
             if (response.status>400) {
@@ -40,18 +37,20 @@ export const RestorePasswordModal = () => {
 
     return (
         <>
-            <Button
+            <div className="reset-button"/>
+            <Link
                 className="restore-password-button"
                     onClick={() => setVisible(true)}>
                 Забули пароль?
-            </Button>
+            </Link>
+            <div/>
             <Modal
                 className="modal-login"
                 centered
                 width={540}
                 visible={visible}
-               // onOk={() => setVisible(false)}
-               // onCancel={() => setVisible(false)}
+                onOk={() => stepComponent(1)}
+                onCancel={() => setVisible(false)}
                 footer={null}
             >
                 <div className="login-header">

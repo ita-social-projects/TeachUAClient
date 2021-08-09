@@ -31,6 +31,8 @@ import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistr
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
 
+import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
+
 const {Content} = Layout;
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
                                     <Route path="/clubs" exact component={ClubListComponent}/>
                                     <Route path="/user/:id" exact component={UserPage}/>
                                     <Route path="/verify" exact component={VerifyPage}/>
+                                    <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                     <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
