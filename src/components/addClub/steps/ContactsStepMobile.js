@@ -4,11 +4,9 @@ import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
-import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 import {Button} from "antd";
-import {getStationsByCity} from "../../../service/StationService";
 import {getDistrictsByCityName} from "../../../service/DisctrictService";
 
 const {Option} = Select;

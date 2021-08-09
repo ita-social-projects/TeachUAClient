@@ -2,10 +2,10 @@ import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 
 
-export const resetPassword = async (data) => { //todo
-    return await fetchRequest.post(BASE_URL + "/api/resetPassword", {
+export const resetPassword = async (data) => {
+    console.log(data);
+    return await fetchRequest.post(BASE_URL + "/api/resetpassword", {
         email: data.email,
-        // password: data.password
     }).then((response) => {
         return response.data
     }).catch((error) => {
@@ -13,7 +13,27 @@ export const resetPassword = async (data) => { //todo
     });
 };
 
+export const verifyReset = async (verifyCode) => {
+    return await fetchRequest.get(BASE_URL + "/api/verifyreset?code=" + verifyCode)
+        .then((response) => {
+            return response;
+        }).catch((error) => {
+            return error.response;
+        });
+};
 
+export const changePassword = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/verifyreset", {
+        id: data.id,
+        email:data.email,
+        password: data.password,
+        verificationCode: data.verificationCode
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
 
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {

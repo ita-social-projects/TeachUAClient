@@ -6,7 +6,7 @@ const MarathonBanner = ({imageURL}) => {
                 background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), 
                                     url(${imageURL}) no-repeat 50% 28% / cover`
             }}>
-            <span className="title">Про Мовомаратон</span>
+            <span className="title">Мовомаратон до 30-ї річниці Незалежності України</span>
         </div>
     )
 }

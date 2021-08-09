@@ -1,7 +1,8 @@
 .user-edit .ant-modal-body {
   padding: 0 !important;
 }
- .ant-modal-content {
+
+.ant-modal-content {
   border-radius: 16px;
   height: auto;
 }
@@ -16,7 +17,7 @@
   height: 340px;
 }
 
- .short-text {
+.short-text {
   display: none;
 }
 
@@ -42,14 +43,27 @@
   font-size: 22px;
 }
 
-.user-edit .button-container {
-  padding-top: 24px;
-  display: flex;
-  height: 48px;
-  padding-left: 40px;
-  background: #FFFFFF;
+@media screen
+and (max-device-width: 320px) {
+  .user-edit .button-container {
+    padding-top: 28px;
+    display: flex;
+    height: 48px;
+    padding-left: 5px;
+    background: #FFFFFF;
+  }
 }
 
+@media screen
+and (min-device-width: 321px) {
+  .user-edit .button-container {
+    padding-top: 24px;
+    display: flex;
+    height: 48px;
+    padding-left: 40px;
+    background: #FFFFFF;
+  }
+}
 .user-edit .ant-radio-button-wrapper:not(:first-child)::before {
   display: none;
 }
@@ -87,6 +101,7 @@
   display: flex;
 }
 
+
 .user-edit .ellipse {
   display: flex;
   justify-content: center;
@@ -98,10 +113,12 @@
   margin-right: 8px;
 }
 
-.user-edit .user-icon {
-  color: #FFFFFF;
-  font-size: 21px;
-}
+
+  .user-edit .user-icon {
+    color: #FFFFFF;
+    font-size: 21px;
+  }
+
 
 .user-edit .ant-row {
   display: block;
@@ -122,12 +139,26 @@
   border-radius: 50%;
 }
 
-.user-edit .user-edit-input {
-  height: 100%;
-  width: 436px;
-  font-size: 16px;
-  line-height: 24px;
+@media screen
+and (max-device-width: 600px) {
+  .user-edit .user-edit-input {
+    height: 100%;
+    width: 90%;
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
+
+@media screen
+and (min-device-width: 601px) {
+  .user-edit .user-edit-input {
+    height: 100%;
+    width: 436px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
 
 //.user-edit .user-edit-box {
 //    height: 40px;
@@ -145,16 +176,32 @@
   text-align: left;
 }
 
+@media screen
+and (min-device-width: 401px) {
+  .user-edit .submit-button {
+    padding: 8px 24px;
+    width: 270px;
+    height: 40px;
+    background: #FA8C16 !important;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFFFFF !important;
+  }
+}
 
-.user-edit .submit-button {
-  padding: 8px 24px;
-  width: 270px;
-  height: 40px;
-  background: #FA8C16 !important;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 16px;
-  color: #FFFFFF !important;
+@media screen
+and (max-device-width: 400px) {
+  .user-edit .submit-button {
+    padding: 8px 24px;
+    width: 200px;
+    height: 40px;
+    background: #FA8C16 !important;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFFFFF !important;
+  }
 }
 
 
@@ -163,11 +210,11 @@
   margin-right: 40px;
 }
 
-.align-checkbox .checkbox{
+.align-checkbox .checkbox {
   border: 3px black;
   color: #D46B08;
   width: 17px;
-  height:17px;
+  height: 17px;
 }
 
 .align-checkbox .checkbox-label-interval {
@@ -175,6 +222,6 @@
   vertical-align: text-bottom;
 }
 
-.align-checkbox{
+.align-checkbox {
   align-content: baseline;
 }

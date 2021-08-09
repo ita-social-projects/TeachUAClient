@@ -14,7 +14,7 @@ const MarathonPage = () => {
     return (
         <Layout className="global-padding marathon-page">
             <AboutHeader />
-            <MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/challenge.jpg`} />
+            <MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.png`} />
             <MarathonDescription />
            
         </Layout>

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import CenterLogo from "./CenterLogo";
 import "./css/CenterListRectangleItem.css";
-
+import { Rate } from "antd";
 const CenterListRectangleItem = ({center, onCenterClick}) => {
 
     return (
@@ -16,12 +16,10 @@ const CenterListRectangleItem = ({center, onCenterClick}) => {
                         <CenterLogo urlLogo={center.urlLogo}/>
                         <div className="center-name">{center.name}</div>
                     </div>
-                    <div className="center-description">
-                        {center.description}
-                    </div>
                 </div>
                 <div className="item-rectangle-row">
                     <div className="item-rating-address">
+                    <Rate className="rating" disabled value={center.rating}/>
                         <div className="center-address">
                             <EnvironmentFilled
                                 className="address-icon"/>

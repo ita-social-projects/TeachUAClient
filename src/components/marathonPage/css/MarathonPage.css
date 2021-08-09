@@ -12,6 +12,7 @@
     line-height: 64px;
     display: inline-block;
     color: #ffffff;
+    text-align: center;
 }
 
 .marathon-page .details-button{
@@ -95,6 +96,7 @@
  .banner .title {
         font-size: 40px;
         width: 100%;
+        text-align: center;
     }
 
     .marathon-page
