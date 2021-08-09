@@ -6,15 +6,18 @@ module.exports = {
            
         },
         {
-            jobType: "Web developer",
+            id: 2,
+            name: "День 2. Знайомство українською"
            
         },
         {
-            jobType: "Web developer",
+            id: 3,
+            name: "День 3. Знайомство українською"
            
         },
         {
-            jobType: "Web developer",
+            id: 4,
+            name: "День 4. Знайомство українською"
            
         },
        
