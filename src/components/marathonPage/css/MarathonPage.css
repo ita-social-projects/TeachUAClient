@@ -201,3 +201,14 @@
     background: #FA8C16;
     color: #FFFFFF;
 }
+.marathon-page .details-back {
+    width: 33%;
+    height: 48px;
+    background: #FA8C16;
+    border: none;
+    color: white;
+    font-weight: 700;
+    border-radius: 6px;
+    font-size: 18px;
+    margin-left: 33%;
+}
