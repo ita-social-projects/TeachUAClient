@@ -42,7 +42,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+        if (locationForm.locationName.length > 4 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 4) {
             setDisabled(false)
         } else setDisabled(true)
     }
