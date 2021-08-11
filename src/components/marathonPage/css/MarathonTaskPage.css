@@ -1,0 +1,126 @@
+@media screen
+and (min-device-width: 401px) {
+    .return-button {
+        padding: 8px 24px;
+        width: 270px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
+    }
+}
+
+@media screen
+and (max-device-width: 400px) {
+    .return-button {
+        padding: 8px 24px;
+        width: 200px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
+    }
+
+}
+@media screen
+and (min-device-width: 700px) {
+    .task-image {
+        width: 60%;
+        border-radius: 2%;
+        /*margin-right: 400px;*/
+    }
+}
+
+@media screen
+and (max-device-width: 699px) {
+    .task-image {
+        width: 90%;
+        border-radius: 2%;
+    }
+}
+
+@media screen
+and (max-device-width: 1000px){
+.page-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    margin-right: 15px;
+    color: #2D4C68;
+    font-size: 18px;
+
+}}
+
+@media screen
+and (min-device-width: 1000px){
+    .page-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        margin-right: 15px;
+        color: #2D4C68;
+        font-size: 18px;
+        margin-left: 20%;
+        width: 60%;
+
+    }}
+
+
+
+
+.task-text {
+    text-align: justify;
+    margin-top: 2%;
+    text-indent: 3%;
+}
+
+@media screen
+and (min-device-width: 321px) {
+    .task-header {
+        margin-top: 3%;
+        font-size: xx-large;
+        color: #fa8c16;
+        margin-bottom: 2%;
+    }
+}
+
+@media screen
+and (max-device-width: 320px) {
+    .task-header {
+        margin-top: 3%;
+        font-size: xx-large;
+        color: #fa8c16;
+        margin-bottom: 2%;
+    }
+}
+
+
+
+.task-info {
+    margin-bottom: 5%;
+    text-align: justify;
+    margin-top: 1%;
+    text-indent: 3%;
+}
+
+.task-subheader {
+    font-style: italic;
+    text-align: center;
+    color: #022648;
+    font-size: 20px
+}
+
+.task-task-header{
+    text-align: center;
+    margin-bottom: 0%;
+    margin-top: 2%;
+    font-size: 20px;
+    color: #022648
+}
+
