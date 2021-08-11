@@ -8,6 +8,7 @@ import { Button, Carousel } from "antd";
 import   marathonDay from "./marathonDayData/DataObjects"
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
+import {Link} from "react-router-dom";
 
 const MarathonDayCarousel = () => {
     const data =  marathonDay.marathonDay;
@@ -90,13 +91,16 @@ const MarathonDayCarousel = () => {
                                         </div>
                                     </div>
                                 }
-                             
+
                                 link={{
-                                    pathname: "/registration",
+                                    pathname: "/marathon/task/"+day.id,
                                   
                                 }}
                                 buttonText="Переглянути"
+
                             />
+
+
                         ))}
                     </Carousel>
                 </div>
