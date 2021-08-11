@@ -78,6 +78,25 @@
     .challenge-page .challenge-description .title {
         text-align: center;
     }
+
+    .challenge-page .title .text {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .challenge-page .social-info {
+        height: 10px;
+        display: contents !important;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+    }
+
+    .challenge-page .help-button {
+        justify-content: space-around;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
 }
 
 

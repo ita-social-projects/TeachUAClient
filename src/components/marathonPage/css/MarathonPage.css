@@ -138,6 +138,24 @@
     .marathon-description .subtitle {
            text-align: center;
        }
+    .marathon-page .title .text {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .marathon-page .social-info {
+        height: 10px;
+        display: contents !important;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+    }
+
+    .marathon-page .help-button {
+        justify-content: space-around;
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+    }
 }
 
 .marathon-page .social-media {
