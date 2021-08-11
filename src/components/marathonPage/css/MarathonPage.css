@@ -202,7 +202,7 @@
     color: #FFFFFF;
 }
 .marathon-page .details-back {
-    width: 33%;
+    width:293px;
     height: 48px;
     background: #FA8C16;
     border: none;
@@ -210,5 +210,9 @@
     font-weight: 700;
     border-radius: 6px;
     font-size: 18px;
-    margin-left: 33%;
+    /*margin-left: 33%;*/
+}
+
+.marathon-page .button-alain{
+    text-align: center !important;
 }
