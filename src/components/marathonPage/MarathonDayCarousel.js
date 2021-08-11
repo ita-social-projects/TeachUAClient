@@ -14,10 +14,32 @@ const MarathonDayCarousel = () => {
     const data =  marathonDay.marathonDay;
  
 
-    useEffect(() => {
-   
-    }, []);
+    const checkDate = () =>{
+        const date = new Date();
+        const month = date.getUTCMonth() + 1;
+        const day = date.getUTCDate();
 
+        if (day < 19 && month === 8){
+         data.length = 0;
+        }else{
+            if (day >= 19 && month === 8){
+            data.length = day-19;
+            }else{
+                if (month === 9){
+                    data.length = day+13;
+            }
+        }
+    }
+}
+    
+
+
+useEffect(() => {
+  
+
+});
+
+   
     const carousel = useRef(null);
     const settings = {
         dots: true,
@@ -37,8 +59,8 @@ const MarathonDayCarousel = () => {
             {
                 breakpoint: 1440,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: data.length > 2 ? 2: data.length,
+                    slidesToScroll: data.length > 2 ? 2: data.length,
                 },
             },
             {
@@ -59,7 +81,9 @@ const MarathonDayCarousel = () => {
     };
 
     return (
+      
         <div className="challenge-day-carousel">
+           {checkDate()}
             <div className="challenge-day-header">
                 <h2 className="label">Завдання челенджу</h2>
             </div>
