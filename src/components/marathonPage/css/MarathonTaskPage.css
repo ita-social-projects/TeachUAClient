@@ -96,13 +96,9 @@ and (min-device-width: 1000px){
     font-style: normal;
     text-align: justify;
     margin-top: 2%;
-<<<<<<< HEAD
     text-indent: 3%;
     font-size: 18px;
 
-=======
-    
->>>>>>> 4147c579edaa25d955a5a0f44ff995d262046a5d
 }
 
 @media screen
