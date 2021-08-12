@@ -94,7 +94,7 @@ const ClubList = ({
     };
 
     useEffect(() => {
-        getData();
+        getData(currentPage);
     }, [advancedSearch, sortBy, sortDirection, isCenterChecked, view]);
 
     const onPageChange = (page) => {
