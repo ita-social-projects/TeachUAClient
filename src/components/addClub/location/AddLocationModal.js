@@ -20,6 +20,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates,setCoordinates] = useState();
+    const [isMobile, setIsMobile]  = useState(false);
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
@@ -31,7 +32,16 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     useEffect(() => {
         getStationsByCity(cityName).then(response => setStation(response))
         getDistrictsByCityName(cityName).then(response => setDistricts(response));
+        window.addEventListener("resize", handleResize)
     }, [cityName]);
+
+    const handleResize = () => {
+        if (window.innerWidth < 577) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
 
     const onChange = e => {
         if (e.target.id === "address")
@@ -210,6 +220,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 </Select>
                             </Form.Item>
                         </div>
+
                         <Form.Item name="address"
                                    className="add-club-row"
                                    label="Адреса"
