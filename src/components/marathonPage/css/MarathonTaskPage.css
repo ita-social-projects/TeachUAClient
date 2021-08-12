@@ -1,6 +1,9 @@
 @media screen
 and (min-device-width: 401px) {
     .return-button {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
         padding: 8px 24px;
         width: 270px;
         height: 40px;
@@ -15,6 +18,9 @@ and (min-device-width: 401px) {
 @media screen
 and (max-device-width: 400px) {
     .return-button {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
         padding: 8px 24px;
         width: 200px;
         height: 40px;
@@ -29,9 +35,9 @@ and (max-device-width: 400px) {
 @media screen
 and (min-device-width: 700px) {
     .task-image {
-        width: 60%;
-        border-radius: 2%;
-        /*margin-right: 400px;*/
+        width: 40%;
+        border-radius: 4%;
+        align-self: flex-end;
     }
 }
 
@@ -46,6 +52,7 @@ and (max-device-width: 699px) {
 @media screen
 and (max-device-width: 1000px){
 .page-content {
+
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -59,33 +66,52 @@ and (max-device-width: 1000px){
 @media screen
 and (min-device-width: 1000px){
     .page-content {
-        align-items: center;
+        align-content: center;
         display: flex;
         flex-direction: column;
-        align-content: space-between;
-        margin-right: 15px;
         color: #2D4C68;
         font-size: 18px;
-        margin-left: 20%;
         width: 60%;
+        width: fit-content;
 
     }}
 
 
+.header-content{
+    width: 620px;
+    position: absolute;
+    margin-top: 37vh;
+    /*margin-bottom: fill;*/
+}
 
+.task-content{
+    position: center;
+    width: 620px;
+    margin-top: 13%;
+    align-self: center
+}
 
 .task-text {
+    font-family: Open Sans;
+    font-style: normal;
     text-align: justify;
     margin-top: 2%;
     text-indent: 3%;
+    font-size: 18px;
+
 }
 
 @media screen
 and (min-device-width: 321px) {
     .task-header {
-        margin-top: 3%;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        margin-top: -35%;
+        /*margin-left: -80%;*/
         font-size: xx-large;
-        color: #fa8c16;
+        color: #2D4C68;
         margin-bottom: 2%;
     }
 }
@@ -93,9 +119,12 @@ and (min-device-width: 321px) {
 @media screen
 and (max-device-width: 320px) {
     .task-header {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
         margin-top: 3%;
         font-size: xx-large;
-        color: #fa8c16;
+        color: #2D4C68;
         margin-bottom: 2%;
     }
 }
@@ -103,6 +132,8 @@ and (max-device-width: 320px) {
 
 
 .task-info {
+    font-family: Open Sans;
+    font-style: normal;
     margin-bottom: 5%;
     text-align: justify;
     margin-top: 1%;
@@ -110,17 +141,20 @@ and (max-device-width: 320px) {
 }
 
 .task-subheader {
+    font-family: Open Sans;
     font-style: italic;
     text-align: center;
-    color: #022648;
+    color: #2D4C68;
     font-size: 20px
 }
 
 .task-task-header{
-    text-align: center;
-    margin-bottom: 0%;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    /*margin-bottom: 2%;*/
     margin-top: 2%;
-    font-size: 20px;
-    color: #022648
+    font-size: 32px;
+    color: #2D4C68
 }
 
