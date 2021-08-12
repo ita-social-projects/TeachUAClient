@@ -26,18 +26,194 @@ module.exports = {
         },
         {
             id: "3",
-            name: "День 3. Знайомство українською",
+            name: "День 3.",
             subheader: "",
             text: "",
             task: ""
         },
         {
             id: "4",
-            name: "День 4. Знайомство українською",
+            name: "День 4.",
             subheader: "",
             text: "",
             task: ""
         },
+        {
+            id: "5",
+            name: "День 5.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "6",
+            name: "День 6.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "7",
+            name: "День 7.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "8",
+            name: "День 8.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "9",
+            name: "День 9.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "10",
+            name: "День 10.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "11",
+            name: "День 11.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "12",
+            name: "День 12.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "13",
+            name: "День 13.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "14",
+            name: "День 14.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "15",
+            name: "День 15.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "16",
+            name: "День 16.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "17",
+            name: "День 17.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "18",
+            name: "День 18.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "19",
+            name: "День 19.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "20",
+            name: "День 20.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "21",
+            name: "День 21.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "22",
+            name: "День 22.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "23",
+            name: "День 23.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "24",
+            name: "День 24.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "25",
+            name: "День 25.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "26",
+            name: "День 26.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "27",
+            name: "День 27.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "28",
+            name: "День 28.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+        {
+            id: "29",
+            name: "День 29.",
+            subheader: "",
+            text: "",
+            task: ""
+        },
+
 
     ]
 };

@@ -23,8 +23,9 @@ const MarathonDescription = () => {
                 Українська гуманітарна платформа
                 <br />
                 <br />
-             
+                <div className="button-div">
                 <Link to="/marathon/registration"><Button className="details-button">Зареєструватись</Button></Link>
+                </div>
             </div>
 
         </div>

@@ -3,33 +3,26 @@ import React, { useState, useEffect, useRef } from "react";
 
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/DayCarousel.css";
-import CategoryLogo from "../CategoryLogo";
 import { Button, Carousel } from "antd";
 import   marathonDay from "./marathonDayData/DataObjects"
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
-import {Link} from "react-router-dom";
+
 
 const MarathonDayCarousel = () => {
     const data =  marathonDay.marathonDay;
  
 
     const checkDate = () =>{
-        const date = new Date();
-        const month = date.getUTCMonth() + 1;
-        const day = date.getUTCDate();
+     
+        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        const startOfChallenge = new Date(2021, 6, 10);
+        const today = new Date();
+        
+        const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));
 
-        if (day < 19 && month === 8){
-         data.length = 0;
-        }else{
-            if (day >= 19 && month === 8){
-            data.length = day-19;
-            }else{
-                if (month === 9){
-                    data.length = day+13;
-            }
-        }
-    }
+        data.length = diffDays;
+    
 }
     
 
@@ -115,16 +108,13 @@ useEffect(() => {
                                         </div>
                                     </div>
                                 }
-
+                             
                                 link={{
                                     pathname: "/marathon/task/"+day.id,
                                   
                                 }}
                                 buttonText="Переглянути"
-
                             />
-
-
                         ))}
                     </Carousel>
                 </div>

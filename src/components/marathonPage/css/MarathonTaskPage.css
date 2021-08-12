@@ -77,7 +77,7 @@ and (min-device-width: 1000px){
 .task-text {
     text-align: justify;
     margin-top: 2%;
-    text-indent: 3%;
+    
 }
 
 @media screen
@@ -106,7 +106,7 @@ and (max-device-width: 320px) {
     margin-bottom: 5%;
     text-align: justify;
     margin-top: 1%;
-    text-indent: 3%;
+   
 }
 
 .task-subheader {
