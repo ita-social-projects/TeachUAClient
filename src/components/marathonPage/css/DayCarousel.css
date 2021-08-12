@@ -1,7 +1,7 @@
 .challenge-day-carousel {
     display: flex;
     flex-direction: column;
-    margin-top: 120px;
+    margin-top: 40px;
 }
 
 .challenge-day-carousel .challenge-day-header {
@@ -99,7 +99,7 @@
 }
 
 .challenge-day-carousel .ant-carousel .slick-slider {
-    text-align: center;
+    /*text-align: center; */
     font-size: 24px;
 }
 
@@ -114,6 +114,7 @@
 .challenge-day-carousel .primitive-card .content .name {
     font-size: 22px;
     margin: 16px 0 0 0;
+
    
 }
 

@@ -3,21 +3,36 @@ import React, { useState, useEffect, useRef } from "react";
 
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/DayCarousel.css";
-import CategoryLogo from "../CategoryLogo";
 import { Button, Carousel } from "antd";
 import   marathonDay from "./marathonDayData/DataObjects"
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
-import {Link} from "react-router-dom";
+
 
 const MarathonDayCarousel = () => {
     const data =  marathonDay.marathonDay;
  
 
-    useEffect(() => {
-   
-    }, []);
+    const checkDate = () =>{
+     
+        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        const startOfChallenge = new Date(2021, 6, 10);
+        const today = new Date();
+        
+        const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));
 
+        data.length = diffDays;
+    
+}
+    
+
+
+useEffect(() => {
+  
+
+});
+
+   
     const carousel = useRef(null);
     const settings = {
         dots: true,
@@ -37,8 +52,8 @@ const MarathonDayCarousel = () => {
             {
                 breakpoint: 1440,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: data.length > 2 ? 2: data.length,
+                    slidesToScroll: data.length > 2 ? 2: data.length,
                 },
             },
             {
@@ -59,7 +74,9 @@ const MarathonDayCarousel = () => {
     };
 
     return (
+      
         <div className="challenge-day-carousel">
+           {checkDate()}
             <div className="challenge-day-header">
                 <h2 className="label">Завдання челенджу</h2>
             </div>
@@ -91,16 +108,13 @@ const MarathonDayCarousel = () => {
                                         </div>
                                     </div>
                                 }
-
+                             
                                 link={{
                                     pathname: "/marathon/task/"+day.id,
                                   
                                 }}
                                 buttonText="Переглянути"
-
                             />
-
-
                         ))}
                     </Carousel>
                 </div>
