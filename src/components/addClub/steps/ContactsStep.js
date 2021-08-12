@@ -165,7 +165,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                             isPhoneField(contact) &&
                             {
                                 required: false,
-                                pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\\s:;“’'<,>.?๐฿A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                                pattern: /^[^-/"`~!@#$%^&*()_+={}\[\]|\\\s:;“’'<,>.?๐฿A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
                                 message: "Телефон не може містити спеціальні символи, літери та пробіли"
                             },
                             isPhoneField(contact) && {
