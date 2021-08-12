@@ -99,6 +99,13 @@ const ClubListSider = ({
         form.setFieldsValue({stationName: undefined});
     };
 
+    const clearAllValues = () => {
+        onCityChange(undefined);
+        form.setFieldsValue({categoriesName: activeCategory});
+        setAge(undefined);
+        form.setFieldsValue({age: undefined});
+    }
+
     const onKeyPress = (event) => {
         const specialCharRegex = /^\d+$/;
         const pressedKey = String.fromCharCode(
@@ -234,7 +241,7 @@ const ClubListSider = ({
                 ): <Form.Item/>}
             <div className="use-clear-button">
                 <div className="mobile-clear-button">
-                        <Button className="mobile-button clear-button">
+                        <Button className="mobile-button clear-button" onClick={() => {clearAllValues()}}>
                             Очистити
                         </Button>
                 </div>
