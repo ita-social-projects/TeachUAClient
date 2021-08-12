@@ -110,7 +110,7 @@ useEffect(() => {
                                 }
                              
                                 link={{
-                                    pathname: "/marathon/task/"+day.id,
+                                    pathname: "/marathon/task/"+day.pathUrl,
                                   
                                 }}
                                 buttonText="Переглянути"

@@ -85,7 +85,7 @@ function App() {
                                     <Route path="/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
-                                    <Route path="/marathon/task/:id" component={MarathonTaskPage}/>
+                                    <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>

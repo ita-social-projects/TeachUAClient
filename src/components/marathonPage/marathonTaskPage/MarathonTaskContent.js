@@ -8,8 +8,8 @@ import './../css/MarathonTaskPage.css'
 
 const MarathonTaskContent = () => {
 
-    const id = window.location.pathname.split("/")[window.location.pathname.split("/").length-1];
-    const data = marathonDay.marathonDay.find(value => value.id === id);
+    const path = window.location.pathname.split("/")[window.location.pathname.split("/").length-1];
+    const data = marathonDay.marathonDay.find(value => value.pathUrl === path);
 
     return (
         <Content className="page-content">

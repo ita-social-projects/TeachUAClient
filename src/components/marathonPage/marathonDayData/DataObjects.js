@@ -2,6 +2,7 @@ module.exports = {
     marathonDay: [
         {
             id: "1",
+            pathUrl:"923209",
             name: "День 1. Знайомство українською",
             subheader: "Під час знайомства говоріть українською. Таким чином вам буде легше спілкуватися з цією людиною українською і надалі.\n",
             text: "Ми розпочали наш Мовомаратон до 30-річчя Незалежності України! Дякуємо усім, хто приєднався! Протягом 30 днів ми зробимо 30 кроків у напрямку до української мови.\n" +
@@ -13,6 +14,7 @@ module.exports = {
         },
         {
             id: "2",
+            pathUrl:"042586",
             name: "День 2. Мотивація",
             subheader: "",
             text: "Доброго ранку! Нині будемо говорити про мотивацію. Що вас мотивує рухатись вперед? Ваші цінності, бажання, винагорода чи тиск ззовні? Знайдіть свою внутрішню мотивацію, яка допоможе вам говорити українською.\n" +
@@ -26,6 +28,7 @@ module.exports = {
         },
         {
             id: "3",
+            pathUrl:"338874",
             name: "День 3.",
             subheader: "",
             text: "",
@@ -33,6 +36,7 @@ module.exports = {
         },
         {
             id: "4",
+            pathUrl:"357275",
             name: "День 4.",
             subheader: "",
             text: "",
@@ -40,6 +44,7 @@ module.exports = {
         },
         {
             id: "5",
+            pathUrl:"059513",
             name: "День 5.",
             subheader: "",
             text: "",
@@ -47,6 +52,7 @@ module.exports = {
         },
         {
             id: "6",
+            pathUrl:"990234",
             name: "День 6.",
             subheader: "",
             text: "",
@@ -54,6 +60,7 @@ module.exports = {
         },
         {
             id: "7",
+            pathUrl:"472818",
             name: "День 7.",
             subheader: "",
             text: "",
@@ -61,6 +68,7 @@ module.exports = {
         },
         {
             id: "8",
+            pathUrl:"111784",
             name: "День 8.",
             subheader: "",
             text: "",
@@ -68,6 +76,7 @@ module.exports = {
         },
         {
             id: "9",
+            pathUrl:"658688",
             name: "День 9.",
             subheader: "",
             text: "",
@@ -75,6 +84,7 @@ module.exports = {
         },
         {
             id: "10",
+            pathUrl:"064578",
             name: "День 10.",
             subheader: "",
             text: "",
@@ -82,6 +92,7 @@ module.exports = {
         },
         {
             id: "11",
+            pathUrl:"023406",
             name: "День 11.",
             subheader: "",
             text: "",
@@ -89,6 +100,7 @@ module.exports = {
         },
         {
             id: "12",
+            pathUrl:"421678",
             name: "День 12.",
             subheader: "",
             text: "",
@@ -96,6 +108,7 @@ module.exports = {
         },
         {
             id: "13",
+            pathUrl:"193478",
             name: "День 13.",
             subheader: "",
             text: "",
@@ -103,6 +116,7 @@ module.exports = {
         },
         {
             id: "14",
+            pathUrl:"794308",
             name: "День 14.",
             subheader: "",
             text: "",
@@ -110,6 +124,7 @@ module.exports = {
         },
         {
             id: "15",
+            pathUrl:"383397",
             name: "День 15.",
             subheader: "",
             text: "",
@@ -117,6 +132,7 @@ module.exports = {
         },
         {
             id: "16",
+            pathUrl:"052144",
             name: "День 16.",
             subheader: "",
             text: "",
@@ -124,6 +140,7 @@ module.exports = {
         },
         {
             id: "17",
+            pathUrl:"492590",
             name: "День 17.",
             subheader: "",
             text: "",
@@ -131,6 +148,7 @@ module.exports = {
         },
         {
             id: "18",
+            pathUrl:"530544",
             name: "День 18.",
             subheader: "",
             text: "",
@@ -138,6 +156,7 @@ module.exports = {
         },
         {
             id: "19",
+            pathUrl:"231847",
             name: "День 19.",
             subheader: "",
             text: "",
@@ -145,6 +164,7 @@ module.exports = {
         },
         {
             id: "20",
+            pathUrl:"117384",
             name: "День 20.",
             subheader: "",
             text: "",
@@ -152,6 +172,7 @@ module.exports = {
         },
         {
             id: "21",
+            pathUrl:"040037",
             name: "День 21.",
             subheader: "",
             text: "",
@@ -159,6 +180,7 @@ module.exports = {
         },
         {
             id: "22",
+            pathUrl:"250258",
             name: "День 22.",
             subheader: "",
             text: "",
@@ -166,6 +188,7 @@ module.exports = {
         },
         {
             id: "23",
+            pathUrl:"874457",
             name: "День 23.",
             subheader: "",
             text: "",
@@ -173,6 +196,7 @@ module.exports = {
         },
         {
             id: "24",
+            pathUrl:"277038",
             name: "День 24.",
             subheader: "",
             text: "",
@@ -180,6 +204,7 @@ module.exports = {
         },
         {
             id: "25",
+            pathUrl:"393279",
             name: "День 25.",
             subheader: "",
             text: "",
@@ -187,6 +212,7 @@ module.exports = {
         },
         {
             id: "26",
+            pathUrl:"610430",
             name: "День 26.",
             subheader: "",
             text: "",
@@ -194,6 +220,7 @@ module.exports = {
         },
         {
             id: "27",
+            pathUrl:"402802",
             name: "День 27.",
             subheader: "",
             text: "",
@@ -201,6 +228,7 @@ module.exports = {
         },
         {
             id: "28",
+            pathUrl:"522997",
             name: "День 28.",
             subheader: "",
             text: "",
@@ -208,6 +236,7 @@ module.exports = {
         },
         {
             id: "29",
+            pathUrl:"740501",
             name: "День 29.",
             subheader: "",
             text: "",
