@@ -1,3 +1,15 @@
+@media (max-width: 950px) {
+    .marathon-task-page {
+        flex-direction: column!important;
+    }
+}
+
+@media (max-width: 950px) {
+    .marathon-task-page {
+        flex-direction: column!important;
+    }
+}
+
 @media screen
 and (min-device-width: 401px) {
     .return-button {
@@ -97,17 +109,17 @@ and (max-device-width: 699px) {
 
 @media screen
 and (max-device-width: 1000px){
-.page-task-content {
+    .page-task-content {
 
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    margin-right: 15px;
-    color: #2D4C68;
-    font-size: 18px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        margin-right: 15px;
+        color: #2D4C68;
+        font-size: 18px;
 
-}}
+    }}
 
 @media screen
 and (min-device-width: 1000px){
@@ -120,10 +132,20 @@ and (min-device-width: 1000px){
         width: 60%;
         width: fit-content;
 
-    }}
+    }
 
-@media screen
-and (min-device-width: 700px) {
+    .task-header {
+        font-size: 32px;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        margin-top: -30%;
+        margin-left: 3%;
+        color: #2D4C68;
+        margin-bottom: 2%;
+        align-content: center;
+    }
+
     .task-image {
         width: 40%;
         border-radius: 4%;
@@ -131,16 +153,15 @@ and (min-device-width: 700px) {
     }
 
     .header-content {
-        width: 620px;
-        position: absolute;
-        margin-top: 37vh;
-        /*margin-bottom: fill;*/
+        width: 45vw;
+        position: relative;
+        margin-top: -13vh
     }
 
     .task-content {
         position: center;
-        width: 620px;
-        margin-top: 13%;
+        width: 45vw;
+        margin-top: 5%;
         align-self: center
     }
 
@@ -182,20 +203,18 @@ and (min-device-width: 700px) {
         color: #2D4C68
     }
 }
-@media screen
-and (min-device-width: 321px) {
-    .task-header {
-        font-size: 20px;
-        font-family: Open Sans;
-        font-style: normal;
-        font-weight: bold;
-        margin-top: -30%;
-        margin-left: 3%;
-        color: #2D4C68;
-        margin-bottom: 2%;
-        align-content: center;
-    }
+.task-header {
+    font-size: 32px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    margin-top: -20%;
+    margin-left: 3%;
+    color: #2D4C68;
+    margin-bottom: 2%;
+    align-content: center;
 }
+
 
 @media screen
 and (max-device-width: 320px) {

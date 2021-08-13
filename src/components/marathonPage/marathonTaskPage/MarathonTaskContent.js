@@ -12,7 +12,7 @@ const MarathonTaskContent = () => {
     const data = marathonDay.marathonDay.find(value => value.pathUrl === path);
 
     return (
-        <Content className="page-task-content">
+        <Content className="marathon-task-page">
             <img className="task-image"
                  src={process.env.PUBLIC_URL + "/static/images/marathon/marathon-logo.png"}/>
             <div className="header-content">
