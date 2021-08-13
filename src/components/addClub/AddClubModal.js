@@ -7,7 +7,6 @@ import AddClubSider from "./AddClubSider";
 import AddClubSiderMobile from "./AddClubSiderMobile";
 import MainInformationStep from "./steps/MainInformationStep";
 import ContactsStep from "./steps/ContactsStep";
-import ContactsStepMobile from "./steps/ContactsStepMobile";
 import DescriptionStep from "./steps/DescriptionStep";
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
@@ -29,7 +28,6 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
     const [centers, setCenters] = useState([]);
-    const [isMobile, setIsMobile]  = useState(false);
 
 
     useEffect(() => {
@@ -37,19 +35,11 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
-        window.addEventListener("resize", handleResize)
         setResult({
             userId: getUserId()
         })
     }, [visible]);
 
-    const handleResize = () => {
-        if (window.innerWidth < 577) {
-            setIsMobile(true)
-        } else {
-            setIsMobile(false)
-        }
-    }
 
     const refreshPage = () => {
         window.location.reload();
@@ -85,25 +75,15 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
                     fromCenter={fromCenter}
                 />;
             case 1:
-                if (!isMobile) {
-                    return <ContactsStep
-                        contacts={contacts}
-                        cities={cities}
-                        setResult={setResult}
-                        result={result}
-                        step={step}
-                        setStep={setStep}
-                        locations={locations}
-                        setLocations={setLocations}/>;
-                } else {
-                    return <ContactsStepMobile
-                        contacts={contacts}
-                        cities={cities}
-                        setResult={setResult}
-                        result={result}
-                        step={step}
-                        setStep={setStep}/>;
-                }
+                return <ContactsStep
+                    contacts={contacts}
+                    cities={cities}
+                    setResult={setResult}
+                    result={result}
+                    step={step}
+                    setStep={setStep}
+                    locations={locations}
+                    setLocations={setLocations}/>;
             case 2:
                 return <DescriptionStep
                     fromCenter={fromCenter}

@@ -1,6 +1,6 @@
 .addCenter .ant-modal-body {
     display: flex;
-    height: 600px;
+    min-height: 600px;
     padding: 0;
 }
 
@@ -25,11 +25,22 @@ and (max-device-width: 1080px) {
     }
 }
 
+.addCenter  .ant-modal-content {
+    border-radius: 16px;
+}
+
+.addCenter .add-center-container {
+    display: flex;
+    padding: 20px 40px 32px 24px;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+}
+
 .addCenter .ant-steps-item-title {
     padding: 0px;
     text-align: left;
 }
-
 
 .addCenter .layout {
     display: flex;
@@ -52,6 +63,11 @@ and (max-device-width: 1080px) {
     overflow: hidden;
 }
 
+.addCenter .ant-modal-close {
+    top: 15px;
+    right: 15px;
+}
+
 .addCenter .modal-title {
     font-family: Open Sans;
     font-style: normal;
@@ -61,6 +77,7 @@ and (max-device-width: 1080px) {
     color: #2D4C68;
     margin-bottom: 32px;
 }
+
 
 .addCenter .side {
     background-color: #FAFAFA;
@@ -72,6 +89,11 @@ and (max-device-width: 1080px) {
     font-size: 14px;
     line-height: 22px;
     padding: 20px;
+    background: #FAFAFA;
+}
+
+.ant-steps-item-container {
+    display: inline-flex;
 }
 
 .addCenter .ant-steps-item-icon {
@@ -117,8 +139,10 @@ and (max-device-width: 1080px) {
 }
 
 .addCenter .btn {
-    justify-content: space-between;
+    margin-top: 20px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .addCenter .next-btn {
@@ -152,7 +176,7 @@ and (max-device-width: 1080px) {
 .addCenter .finish-btn {
     text-align: center;
     padding: 8px 24px;
-    width: 280px;
+    width: 190px;
     height: 40px;
     background: #FA8C16;
     border-radius: 6px;
@@ -197,4 +221,33 @@ and (max-device-width: 1080px) {
 
 .addCenter .half {
     display: flex;
+}
+
+@media screen and (max-width: 577px) {
+    .addCenter .add-center-sider {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: #FAFAFA !important;
+        padding: 6px 0 4px 4px;
+        max-height: 40px !important;
+        min-height: 40px !important;
+    }
+
+    .addCenter .side {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: #FAFAFA !important;
+        padding: 6px 4px 4px 4px;
+        margin-top: -20px;
+        margin-left: -6%;
+        max-height: 40px;
+        min-height: 40px;
+        min-width: 116%;
+    }
+
+    .ant-steps-item-icon {
+        margin: 0 8px 0 0;
+    }
 }

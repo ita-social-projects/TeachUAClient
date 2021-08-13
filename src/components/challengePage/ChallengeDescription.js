@@ -1,9 +1,39 @@
 import React from 'react'
 import {items} from "./WebinarItems";
 import ChallengeVideo from "./ChallengeVideo";
+import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
+import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
+import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
+import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
+import {Button} from "antd";
 
 const ChallengeDescription = () => {
     return (
+        <div>
+        <div className="social-info">
+            <div className="social-media">
+                <span className="text">Наші контакти</span>
+                <div className="links">
+                    <a target="_blank" href=""></a>
+                    <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined
+                        className="icon"/></a>
+                    <a target="_blank"
+                       href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined
+                        className="icon"/></a>
+                    <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined
+                        className="icon"/></a>
+                    <a target="_blank" href="mailto:teach.in.ukrainian@gmail.com"><MailOutlined className="icon"/></a>
+                </div>
+            </div>
+            <div className="help-button">
+                <a target="blank"
+                   href="https://secure.wayforpay.com/payment/s0f2891d77061">
+                    <Button className="flooded-button donate-button">
+                        Допомогти проєкту
+                    </Button>
+                </a>
+            </div>
+        </div>
         <div className="challenge-description">
             <div className="title">Навчання українською у дитячих гуртках, студіях та секціях є важливим</div>
             <div className="text">
@@ -29,6 +59,7 @@ const ChallengeDescription = () => {
                 </div>
             </div>
 
+        </div>
         </div>
     )
 }

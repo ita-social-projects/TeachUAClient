@@ -199,8 +199,13 @@
     color:#595959;
 }
 
+
 @media screen and (max-width:577px)  {
-    .add-club-content .add-club-input {
-        height: 100%;
+    .add-club-content .add-club-select{
+        width: 100%;
+    }
+
+    .ant-form .ant-form-item .ant-form-item-label, .ant-form .ant-form-item .ant-form-item-control {
+        flex: none;
     }
 }
