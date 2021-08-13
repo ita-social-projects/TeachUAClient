@@ -10,25 +10,24 @@ import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
 
 const MarathonDayCarousel = () => {
-    const data =  marathonDay.marathonDay;
- 
-
-    const checkDate = () =>{
-     
-        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-        const startOfChallenge = new Date(2021, 7, 12);
-        const today = new Date();
-        
-        const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));
-
-        data.length = diffDays;
     
-}
+    
+   const data =  marathonDay.marathonDay;
+ 
+   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+   const startOfChallenge = new Date(2021, 7, 12);
+   const today = new Date();
+        
+   const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));
+
+   data.length = diffDays;
+    
+
     
 
 
 useEffect(() => {
-  
+
 
 });
 
@@ -76,7 +75,6 @@ useEffect(() => {
     return (
       
         <div className="challenge-day-carousel">
-           {checkDate()}
             <div className="challenge-day-header">
                 <h2 className="label">Завдання челенджу</h2>
             </div>
