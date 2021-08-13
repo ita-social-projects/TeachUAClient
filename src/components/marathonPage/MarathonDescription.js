@@ -8,7 +8,7 @@ import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 
 const MarathonDescription = () => {
     return (
-        <div>
+ <div>
             <div className="social-info">
                 <div className="social-media">
                     <span className="text">Наші контакти</span>

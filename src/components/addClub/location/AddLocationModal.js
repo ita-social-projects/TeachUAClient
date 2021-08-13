@@ -54,7 +54,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
         // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
-        if(cityName != null &&
+        if(locationForm.locationName.length > 4 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 4 && cityName != null &&
             locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&

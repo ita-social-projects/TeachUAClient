@@ -3,8 +3,22 @@
     min-height: 600px;
 }
 
-.modal-add-club .ant-modal-content {
-    border-radius: 16px;
+@media screen
+and (min-device-width: 1025px) {
+    .modal-add-club .ant-modal-content {
+        border-radius: 16px;
+    }
+}
+
+@media screen
+and (max-device-width: 1025px) {
+    .modal-add-club .ant-modal-content {
+        border-radius: 16px;
+        position: inherit;
+        width: 90%;
+        margin-left: -145vw;
+        margin-top: -150vh;
+    }
 }
 
 .modal-add-club .add-club-container {

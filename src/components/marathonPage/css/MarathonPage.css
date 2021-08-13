@@ -24,7 +24,16 @@
     font-weight: 700;
     border-radius: 6px;
     font-size: 18px;
-    margin-left: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+.marathon-page .button-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .marathon-page .google-form{
@@ -40,6 +49,7 @@
     align-items: center;
     justify-content: center;
     /*margin-top: 100px;*/
+
 }
 
 .marathon-page .marathon-description .title {

@@ -6,6 +6,7 @@ import { signIn } from "../../service/UserService";
 import './css/Login.less';
 import { saveUserId, saveToken } from '../../service/StorageService';
 import RestorePasswordModal from "../restorePassword/restorePasswordModal";
+import './../restorePassword/css/RestorePassword.less'
 
 const Login = ({isShowing, setShowing, verifyCode}) => {
     const [loginVisible, setLoginVisible] = useState(false);

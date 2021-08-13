@@ -32,6 +32,7 @@ import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
 
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
+import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 
 const {Content} = Layout;
 
@@ -84,6 +85,7 @@ function App() {
                                     <Route path="/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
+                                    <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>

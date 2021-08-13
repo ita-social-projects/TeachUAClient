@@ -60,6 +60,19 @@
   color: #FA8C16;
 }
 
+@media (max-width: 849px) {
+  .user-page .user-content .user-profile-page {
+    background-color: #ffffff;
+    height: 244px;
+    border-radius: 16px;
+    margin-top: 85px;
+    margin-left: 28px;
+    margin-right: 86px;
+    display: flex;
+    justify-content: space-between;
+  }}
+
+@media (min-width: 850px) {
 .user-page .user-content .user-profile-page {
   background-color: #ffffff;
   height: 244px;
@@ -69,7 +82,7 @@
   margin-right: 86px;
   display: flex;
   justify-content: space-between;
-}
+}}
 
 
 .user-page .user-content .user-info {
@@ -124,14 +137,14 @@
 .user-page .user-email-data {
   margin-left: 70px;
 }
-
+@media (min-width: 850px) {
 .edit-button {
-  //padding-top: 45px;
   display: flex;
   padding-right: 42px !important;
   padding-bottom:20px;
   font-size:medium;
-}
+  align-content: center;
+}}
 
 .user-profile-page .ant-btn-text {
   font-weight: 600;
@@ -164,6 +177,27 @@
 
 
   .user-profile-page {
+    display: block !important;
+    height: 280px !important;
+    width: 85%;
+  }
+
+  .edit-button {
+    padding-left: 36%;
+    padding-top: 5px;
+    padding-left: 45px;
+    margin-bottom: 2%;
+  }
+}
+
+
+@media (min-width: 851px) {
+  .content-title, .club-title {
+    padding-left: 100px !important;
+  }
+
+
+  .user-profile-page {
     margin-left: 100px !important;
     display: block !important;
     height: 280px !important;
@@ -173,7 +207,7 @@
 
   .edit-button {
     padding-top: 5px;
-    padding-left: 45px;
+   // padding-left: 45px;
   }
 }
 
@@ -209,8 +243,8 @@
   }
 
   .edit-button {
-    padding-top: 15px;
-    padding-left: 25px;
+    //padding-top: 15px;
+    //padding-left: 25px;
   }
 
   .user-page .add-club-dropdown .ant-btn {

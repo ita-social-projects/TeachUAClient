@@ -1,0 +1,215 @@
+@media screen
+and (min-device-width: 401px) {
+    .return-button {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        padding: 8px 24px;
+        width: 270px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
+    }
+}
+
+@media screen
+and (max-device-width: 400px) {
+    .return-button {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        padding: 8px 24px;
+        width: 200px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
+    }
+
+}
+
+
+@media screen
+and (max-device-width: 699px) {
+    .task-image {
+        margin-left: -15%;
+        width: 131%;
+        align-self: center;
+        border-radius: 4%;
+    }
+
+    .header-content{
+        width: 85%;
+        position: absolute;
+        margin-top: 45vh;
+    }
+
+    .task-content{
+        margin-top: 75vh;
+        width: 130%;
+    }
+
+    .task-text {
+        font-family: Open Sans;
+        font-style: normal;
+        text-align: justify;
+        margin-top: 2%;
+        text-indent: 3%;
+        font-size: 16px;
+
+    }
+
+
+    .task-info {
+        font-family: Open Sans;
+        font-style: normal;
+        margin-bottom: 5%;
+        text-align: justify;
+        margin-top: 1%;
+        font-size: 16px
+
+    }
+
+    .task-subheader {
+        font-family: Open Sans;
+        font-style: italic;
+        text-align: center;
+        color: #2D4C68;
+        font-size: 16px
+    }
+
+    .task-task-header{
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        /*margin-bottom: 2%;*/
+        margin-top: 2%;
+        font-size: 20px;
+        color: #2D4C68
+    }
+
+}
+
+@media screen
+and (max-device-width: 1000px){
+.page-task-content {
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    margin-right: 15px;
+    color: #2D4C68;
+    font-size: 18px;
+
+}}
+
+@media screen
+and (min-device-width: 1000px){
+    .page-task-content {
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        color: #2D4C68;
+        font-size: 18px;
+        width: 60%;
+        width: fit-content;
+
+    }}
+
+@media screen
+and (min-device-width: 700px) {
+    .task-image {
+        width: 40%;
+        border-radius: 4%;
+        align-self: flex-end;
+    }
+
+    .header-content {
+        width: 620px;
+        position: absolute;
+        margin-top: 37vh;
+        /*margin-bottom: fill;*/
+    }
+
+    .task-content {
+        position: center;
+        width: 620px;
+        margin-top: 13%;
+        align-self: center
+    }
+
+    .task-text {
+        font-family: Open Sans;
+        font-style: normal;
+        text-align: justify;
+        margin-top: 2%;
+        text-indent: 3%;
+        font-size: 18px;
+
+    }
+
+
+    .task-info {
+        font-family: Open Sans;
+        font-style: normal;
+        margin-bottom: 5%;
+        text-align: justify;
+        margin-top: 1%;
+
+    }
+
+    .task-subheader {
+        font-family: Open Sans;
+        font-style: italic;
+        text-align: center;
+        color: #2D4C68;
+        font-size: 20px
+    }
+
+    .task-task-header{
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        /*margin-bottom: 2%;*/
+        margin-top: 2%;
+        font-size: 32px;
+        color: #2D4C68
+    }
+}
+@media screen
+and (min-device-width: 321px) {
+    .task-header {
+        font-size: 20px;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        margin-top: -30%;
+        margin-left: 3%;
+        color: #2D4C68;
+        margin-bottom: 2%;
+        align-content: center;
+    }
+}
+
+@media screen
+and (max-device-width: 320px) {
+    .task-header {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        margin-top: 3%;
+        font-size: xx-large;
+        color: #2D4C68;
+        margin-bottom: 2%;
+    }
+}
+
+
+
+

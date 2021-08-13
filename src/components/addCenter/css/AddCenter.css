@@ -4,10 +4,25 @@
     padding: 0;
 }
 
-.addCenter {
-    padding-bottom: 0;
-    overflow: hidden;
-    border-radius: 16px;
+@media screen
+and (min-device-width: 1080px) {
+    .addCenter {
+        padding-bottom: 0;
+        overflow: hidden;
+        border-radius: 16px;
+    }
+}
+
+@media screen
+and (max-device-width: 1080px) {
+    .addCenter {
+        padding-bottom: 0;
+        overflow: hidden;
+        border-radius: 16px;
+        margin-left: -300vw;
+        margin-top: -250vh;
+        margin-block-end: auto;
+    }
 }
 
 .addCenter  .ant-modal-content {
@@ -23,15 +38,15 @@
 }
 
 .addCenter .ant-steps-item-title {
-    padding: 0;
+    padding: 0px;
     text-align: left;
 }
 
 .addCenter .layout {
     display: flex;
     flex-direction: row;
-    height:100%;
-    width:100%;
+    height: 100%;
+    width: 100%;
 }
 
 .addCenter .content {
@@ -65,8 +80,9 @@
 
 
 .addCenter .side {
-    max-width: 252px;
-    min-height: 600px;
+    background-color: #FAFAFA;
+    height: 100%;
+    width: 252px;
     font-family: Open Sans;
     font-style: normal;
     font-weight: 600;
