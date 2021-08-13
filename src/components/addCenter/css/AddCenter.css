@@ -19,8 +19,8 @@ and (max-device-width: 1080px) {
         padding-bottom: 0;
         overflow: hidden;
         border-radius: 16px;
-        margin-left: -304vw;
-        margin-top: -200vh;
+        margin-left: -300vw;
+        margin-top: -250vh;
         margin-block-end: auto;
     }
 }

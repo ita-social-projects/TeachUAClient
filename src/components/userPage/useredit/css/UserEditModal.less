@@ -2,9 +2,20 @@
   padding: 0 !important;
 }
 
+@media screen
+and (min-device-width: 1025px){
 .ant-modal-content {
   border-radius: 16px;
   height: auto;
+}
+}
+
+@media screen
+and (max-device-width: 1025px){
+  .ant-modal-content {
+    border-radius: 16px;
+    height: auto;
+  }
 }
 
 @media screen
@@ -64,8 +75,19 @@ and (max-device-width: 320px) {
     padding-top: 28px;
     display: flex;
     height: 48px;
-    padding-left: 5px;
+    padding-left: 50px;
     background: #FFFFFF;
+  }
+  .user-edit .ant-radio-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFF7E6;
+    height: 48px;
+    width: 40%;
+    font-size: 18px;
+    line-height: 32px;
+    border-radius: 4px;
   }
 }
 
@@ -83,7 +105,8 @@ and (min-device-width: 321px) {
 .user-edit .ant-radio-button-wrapper:not(:first-child)::before {
   display: none;
 }
-
+@media screen
+and (min-device-width: 321px){
 .user-edit .ant-radio-button-wrapper {
   display: flex;
   justify-content: center;
@@ -95,7 +118,7 @@ and (min-device-width: 321px) {
   font-size: 18px;
   line-height: 32px;
   border-radius: 4px;
-}
+}}
 
 .user-edit .ant-radio-button-wrapper:hover,
 .user-edit .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
