@@ -16,7 +16,7 @@ const MarathonDayCarousel = () => {
     const checkDate = () =>{
      
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-        const startOfChallenge = new Date(2021, 6, 10);
+        const startOfChallenge = new Date(2021, 7, 11);
         const today = new Date();
         
         const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));

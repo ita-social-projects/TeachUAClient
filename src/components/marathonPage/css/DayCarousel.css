@@ -179,6 +179,7 @@
     .arrows-next {
         display: none;
     }
+   
     .challenge-day-header a {
         display: block;
     }
@@ -199,6 +200,7 @@
     .arrows-next {
         display: block;
     }
+  
     .arrows-prev {
         left: 20px;
     }
@@ -214,6 +216,7 @@
     .challenge-day-carousel .challenge-day-header {
         padding: 0rem;
     }
+   
     .arrows-prev {
         left: 40px;
     }
@@ -230,6 +233,9 @@
         width: 290px;
         height: 300px;
     }
+    .challenge-day-carousel .primitive-card .content .name {
+        font-size: 14px;
+    }
     .challenge-day-carousel .challenge-day-header .label {
         text-align: center;
     }
@@ -241,6 +247,9 @@
     .challenge-day-carousel .primitive-card {
         width: 270px;
         height: 300px;
+    }
+    .challenge-day-carousel .primitive-card .content .name {
+        font-size: 14px;
     }
     .challenge-day-carousel .ant-carousel .slick-slide {
         z-index: -10;
