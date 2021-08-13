@@ -240,7 +240,7 @@ const UserEditInput = (
                            },
                            {
                                required: false,
-                               pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                               pattern: /^[^-/"`~!@#$%^&*()_+={}\[\]|\\\s:;“’'<,>.?๐฿]*$/,
                                message: 'Телефон не може містити спеціальні символи',
                            }]}>
                 <Input addonBefore={prefixSelector}/>

@@ -20,9 +20,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates,setCoordinates] = useState();
+    const [isMobile, setIsMobile]  = useState(false);
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
+        district:"",
         latAndLng:"",
         phoneNumber: "",
         inputAddress:""
@@ -31,7 +33,16 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     useEffect(() => {
         getStationsByCity(cityName).then(response => setStation(response))
         getDistrictsByCityName(cityName).then(response => setDistricts(response));
+        window.addEventListener("resize", handleResize)
     }, [cityName]);
+
+    const handleResize = () => {
+        if (window.innerWidth < 577) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
 
     const onChange = e => {
         if (e.target.id === "address")
@@ -42,7 +53,13 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        if (locationForm.locationName.length > 4 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 4) {
+        // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+        if(locationForm.locationName.length > 4 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 4 && cityName != null &&
+            locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
+            locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
+            locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
+            locationForm.phoneNumber.match(/^\d{9}$/))
+        {
             setDisabled(false)
         } else setDisabled(true)
     }
@@ -182,10 +199,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        className="add-club-row"
                                        label="Район міста"
                                        hasFeedback
-                                       rules={[{
-                                           required: true,
-                                           message: "Це поле є обов'язковим"
-                                       }]}>
+                                       // rules={[{
+                                       //     required: true,
+                                       //     message: "Це поле є обов'язковим"
+                                       // }]}
+                                >
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
@@ -210,6 +228,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 </Select>
                             </Form.Item>
                         </div>
+
                         <Form.Item name="address"
                                    className="add-club-row"
                                    label="Адреса"

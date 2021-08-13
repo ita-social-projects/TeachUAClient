@@ -203,6 +203,7 @@ and (min-device-width: 1000px){
         color: #2D4C68
     }
 }
+
 .task-header {
     font-size: 32px;
     font-family: Open Sans;
@@ -214,6 +215,7 @@ and (min-device-width: 1000px){
     margin-bottom: 2%;
     align-content: center;
 }
+
 
 
 @media screen
