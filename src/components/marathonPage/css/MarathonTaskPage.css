@@ -109,17 +109,17 @@ and (max-device-width: 699px) {
 
 @media screen
 and (max-device-width: 1000px){
-.page-task-content {
+    .page-task-content {
 
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    margin-right: 15px;
-    color: #2D4C68;
-    font-size: 18px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        margin-right: 15px;
+        color: #2D4C68;
+        font-size: 18px;
 
-}}
+    }}
 
 @media screen
 and (min-device-width: 1000px){
@@ -203,17 +203,19 @@ and (min-device-width: 1000px){
         color: #2D4C68
     }
 }
-    .task-header {
-        font-size: 32px;
-        font-family: Open Sans;
-        font-style: normal;
-        font-weight: bold;
-        margin-top: -20%;
-        margin-left: 3%;
-        color: #2D4C68;
-        margin-bottom: 2%;
-        align-content: center;
-    }
+
+.task-header {
+    font-size: 32px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    margin-top: -20%;
+    margin-left: 3%;
+    color: #2D4C68;
+    margin-bottom: 2%;
+    align-content: center;
+}
+
 
 
 @media screen
