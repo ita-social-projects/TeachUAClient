@@ -35,18 +35,6 @@ const AuthMenu = () => {
         window.location.assign(process.env.PUBLIC_URL);
     };
 
-    const checkToken = () => {
-        if (getToken())
-             {
-                 const token = getToken()
-                const decodedJwt  = JSON.parse(atob(token.split(".")[1]));
-                if (decodedJwt.exp * 1000 < Date.now()) {
-                    onExitClick();
-                    return false;
-                  }
-                  return true;
-             }
-    }
 
     useEffect(() => {
         if(getUserId()) {
@@ -68,7 +56,7 @@ const AuthMenu = () => {
 
     const profileDropdown = () => {
     
-        if (checkToken()) {
+        if (getToken()) {
             return (
                 <Menu>
                     <Menu.Item><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
