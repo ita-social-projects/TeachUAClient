@@ -10,20 +10,16 @@ import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import { PageContext } from "../../context/PageContext";
 import { CaretDownOutlined} from "@ant-design/icons";
 
-
-
-
 const NavMenu = () => {
     const pageKey = window.location.pathname !== process.env.PUBLIC_URL && localStorage.getItem("head-component-page");
     const [pageContent, setPageContent] = useState(pageKey);
     const { currentPage, setCurrentPage } = useContext(PageContext);
+    const [isMobile, setIsMobile]  = useState(window.innerWidth < 1215 && window.innerHeight < 1390);
 
     const onMenuChange = (elem) => {
         setPageContent(elem.key);
         localStorage.setItem("head-component-page", elem.key);
     };
-
-    const [isMobile, setIsMobile]  = useState(false);
 
     const handleResize = () => {
         if (window.innerWidth < 1215 && window.innerHeight < 1390) {
@@ -33,21 +29,18 @@ const NavMenu = () => {
         }
       }
       
-   
-    
     const {SubMenu} = Menu;
 
-
     useEffect(() => {
-
-     
+        
         let slashPos = document.URL.lastIndexOf("/");
         let urlPage = document.URL.substr(slashPos + 1);
 
         if (urlPage !== pageContent) {
             setPageContent(-1);
         }
-         window.addEventListener("resize", handleResize)
+        window.addEventListener("resize", handleResize)
+
     });
 
     return (
