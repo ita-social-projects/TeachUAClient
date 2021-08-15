@@ -1,4 +1,4 @@
-import {Button, Card, Rate} from "antd";
+import {Button, Card, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Tags from "../Tags";
 import ClubLogo from "../clubPage/header/ClubLogo";
 import "./css/ClubListRectangleItem.css"
+import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 
 
 const ClubListRectangleItem = ({club, onClubClick}) => {
@@ -35,11 +36,31 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                 <div className="item-rectangle-row">
                     <div className="item-rating-address">
                         <Rate className="rating" disabled value={club.rating}/>
-                        <div className="address">
-                            <EnvironmentFilled
-                                className="address-icon"/>
-                            <span className="text"> {club.locations.length === 0 ? "Онлайн" : club.locations[0].address}</span>
-                        </div>
+                        {
+                            club.locations.length > 0 &&
+                            <div className="address" >
+                                <EnvironmentFilled
+                                    className="address-icon" />
+                                {
+                                    club.locations.length === 1 ? <span className="oneAddress"> {club.locations[0].address}</span>
+                                        :
+                                        <Popover
+                                            className="popover"
+                                            title="Локації"
+                                            placement="topRight"
+                                            content={club.locations.map(location =>
+                                                <div>
+                                                    <EnvironmentFilled className="address-small-icon" />
+                                                    <span className="text"> {location.address}</span>
+                                                </div>
+                                            )}>
+                                            <span className="text"><span className="oneAddress"
+                                            >{club.locations[0].address}</span>, і ще {club.locations.length - 1}</span>
+                                            <EyeOutlined className="expand-icon" />
+                                        </Popover>
+                                }
+                            </div>
+                        }
                     </div>
                     <Button className="outlined-button details-button">
                         <Link to={`/club/${club.id}`}>Детальніше</Link>
