@@ -16,6 +16,7 @@ const Login = ({isShowing, setShowing, verifyCode}) => {
             if (response.status>=500) {
                 message.error("Ваш email не підтверджено. Будь ласка підтвердіть email");
             } else if(response.status<500){
+                message.destroy();
                 message.error("Введено невірний пароль або email");
             }
             else {
