@@ -4,73 +4,64 @@
     }
 }
 
-@media (max-width: 950px) {
+@media (min-width: 500px)
+and (max-width: 1000px){
     .marathon-task-page {
+        margin-top: 18%;
         flex-direction: column!important;
     }
 }
 
-@media screen
-and (min-device-width: 401px) {
-    .return-button {
-        font-family: Open Sans;
-        font-style: normal;
-        font-weight: bold;
-        padding: 8px 24px;
-        width: 270px;
-        height: 40px;
-        background: #FA8C16 !important;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 16px;
-        color: #FFFFFF !important;
+@media (min-device-width: 320px)
+and (max-device-width: 500px) {
+    .marathon-task-page {
+        margin-top: 28%;
+        flex-direction: column!important;
     }
 }
 
-@media screen
-and (max-device-width: 400px) {
-    .return-button {
+@media (min-device-width: 320px)
+and (max-device-width: 1000px){
+    .page-task-content {
+
+        align-items: center;
+        display: flex;
+        align-content: space-between;
+        color: #2D4C68;
+        font-size: 18px;
+        flex-direction: column;
+    }
+
+
+    .task-header {
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
-        padding: 8px 24px;
-        width: 200px;
-        height: 40px;
-        background: #FA8C16 !important;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 16px;
-        color: #FFFFFF !important;
+        font-size: inherit;
+        color: #2D4C68;
     }
 
-}
-
-
-@media screen
-and (max-device-width: 699px) {
     .task-image {
-        margin-left: -15%;
-        width: 131%;
-        align-self: center;
         border-radius: 4%;
+        width: 90%;
     }
 
     .header-content{
+        margin-bottom: 5%;
+        margin-top: 5%;
         width: 85%;
-        position: absolute;
-        margin-top: 45vh;
+        /*position: absolute;*/
     }
 
     .task-content{
-        margin-top: 75vh;
-        width: 130%;
+        /*position: absolute;*/
+        width: 85%;
     }
 
     .task-text {
         font-family: Open Sans;
         font-style: normal;
         text-align: justify;
-        margin-top: 2%;
         text-indent: 3%;
         font-size: 16px;
 
@@ -80,9 +71,7 @@ and (max-device-width: 699px) {
     .task-info {
         font-family: Open Sans;
         font-style: normal;
-        margin-bottom: 5%;
         text-align: justify;
-        margin-top: 1%;
         font-size: 16px
 
     }
@@ -99,38 +88,29 @@ and (max-device-width: 699px) {
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
-        /*margin-bottom: 2%;*/
-        margin-top: 2%;
-        font-size: 20px;
+        font-size: initial;
         color: #2D4C68
     }
+
 
 }
 
 @media screen
-and (max-device-width: 1000px){
-    .page-task-content {
-
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        align-content: space-between;
-        margin-right: 15px;
-        color: #2D4C68;
-        font-size: 18px;
-
-    }}
-
-@media screen
 and (min-device-width: 1000px){
+
+    .marathon-task-page{
+        align-items: center;
+        background: #f7e0d3
+    }
+
     .page-task-content {
         align-content: center;
         display: flex;
         flex-direction: column;
         color: #2D4C68;
         font-size: 18px;
-        width: 60%;
-        width: fit-content;
+        width: 90%;
+        margin-top: 3%;
 
     }
 
@@ -153,9 +133,9 @@ and (min-device-width: 1000px){
     }
 
     .header-content {
+        margin-top: -8%;
         width: 45vw;
         position: relative;
-        margin-top: -13vh
     }
 
     .task-content {
@@ -202,33 +182,52 @@ and (min-device-width: 1000px){
         font-size: 32px;
         color: #2D4C68
     }
+
+
 }
 
-.task-header {
-    font-size: 32px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    margin-top: -20%;
-    margin-left: 3%;
-    color: #2D4C68;
-    margin-bottom: 2%;
-    align-content: center;
-}
+
+
+
+
+
+
 
 
 
 @media screen
-and (max-device-width: 320px) {
-    .task-header {
+and (min-device-width: 401px) {
+    .return-button {
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
-        margin-top: 3%;
-        font-size: xx-large;
-        color: #2D4C68;
-        margin-bottom: 2%;
+        padding: 8px 24px;
+        width: 270px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
     }
+}
+
+@media screen
+and (max-device-width: 400px) {
+    .return-button {
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: bold;
+        padding: 8px 24px;
+        width: 200px;
+        height: 40px;
+        background: #FA8C16 !important;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF !important;
+    }
+
 }
 
 
