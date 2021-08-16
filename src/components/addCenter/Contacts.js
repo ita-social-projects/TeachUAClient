@@ -30,7 +30,7 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) =>
     }
 
     const isPhoneField = (contact) => {
-        return contact.name === "Телефон";
+        return contact.name === "Phone";
     }
     const changeContacts = (event, contact) => {
         setContactsData({

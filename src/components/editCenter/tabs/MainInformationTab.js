@@ -1,9 +1,10 @@
-import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
+import {Button, Checkbox, Form, Input, InputNumber, List, Popconfirm, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import EditCenterContentFooter from "../EditCenterFooter";
 import "../css/MainInformationTab.css"
 import {PlusOutlined} from "@ant-design/icons";
 import AddLocationModal from "../../addClub/location/AddLocationModal";
+import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 
 
 const MainInformationTab = ({center,form,cities,result,setResult}) =>{
@@ -13,11 +14,37 @@ const MainInformationTab = ({center,form,cities,result,setResult}) =>{
     const [locations,setLocations] = useState([]);
 
     const onFinish = (values) => {
-        console.log(values)
-        setResult(Object.assign(result,values))
+        if (locations !== []) {
+            for (const loc in locations) {
+                console.log(locations[loc]);
+                values.locations[loc] = {
+                    id: locations[loc].id,
+                    cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+                    address: locations[loc].address,
+                    coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+                    districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+                    key: locations[loc].key,
+                    name: locations[loc].name,
+                    phone: locations[loc].phone,
+                    stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                }
+            }
+        } else {
+            values.locations = locations;
+        }
+        setResult(Object.assign(result, values));;
 
     }
+    const onRemove = (item) => {
+        console.log(item);
+        const newData = [...locations];
+        console.log(newData);
+        const index = newData.findIndex((it) => item.key === it.key);
+        newData.splice(index, 1);
+        setLocations(newData);
+    };
     useEffect(() => {
+        setResult({...result,name:center.name })
         setLocations(center.locations)
     }, [])
 
@@ -40,28 +67,39 @@ const MainInformationTab = ({center,form,cities,result,setResult}) =>{
                 />
             </Form.Item>
 
-            <Form.Item
-                name="locations"
-                className="form-item locations"
-                label="Локації"
-                rules={[{
-                    required: true,
-                    message: "Додайте і виберіть локацію"
-                }]}>
-                <Checkbox.Group >
-                    {locations.map(location =>
-                        <div className="checkbox-item">
-                            <Checkbox value={location}>
-                                {location.name}
-                            </Checkbox>
-                        </div>
-                    )
-                    }
-                </Checkbox.Group>
-            </Form.Item>
-            <span className="add-club-location" onClick={() => setLocationVisible(true)}>
-                    <PlusOutlined />Додати локацію
+            <Form.Item name="locations"
+                       className="add-club-row"
+                       initialValue={locations}
+            >
+                <List
+                    className="add-club-location-list"
+                    itemLayout="horizontal"
+                    dataSource={locations}
+                    renderItem={item => (
+                        <List.Item
+                            actions={[
+                                <div>
+                                    <Popconfirm key="delete"
+                                                title="Видалити локацію?"
+                                                cancelText="Ні"
+                                                okText="Так"
+                                                cancelButtonProps={{className: "popConfirm-cancel-button"}}
+                                                okButtonProps={{className: "popConfirm-ok-button"}}
+                                                onConfirm={() => onRemove(item)}>
+                                        <DeleteOutlined/>
+                                    </Popconfirm>
+                                </div>]}
+                        >
+                            <List.Item.Meta
+                                title={item?.name}
+                                description={item?.address}
+                            />
+                        </List.Item>
+                    )}/>
+                <span className="add-club-location" onClick={() => setLocationVisible(true)}>
+                    Додати локацію
                 </span>
+            </Form.Item>
     <AddLocationModal
         form={locationForm}
         locations={locations}

@@ -4,6 +4,7 @@ import MaskIcon from "../../MaskIcon";
 import "../css/MainInformationTab.less"
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import EditLocationModal from "../locations/EditLocationModal";
+import {updateClubById} from "../../../service/ClubService";
 
 const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [contactsForm] = Form.useForm();
@@ -15,10 +16,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
 
     const onFinish = (values) => {
-        console.log(result);
         values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
-        console.log(values);
-        console.log(locations);
         if (locations !== []) {
             for (const loc in locations) {
                 console.log(locations[loc]);
@@ -38,9 +36,10 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             values.locations = locations;
         }
         setResult(Object.assign(result, values));
-        console.log(result);
+        console.log(result)
+        updateClubById(result).then(response => console.log(response));
     };
-    console.log(result);
+
 
     const onLocationChange = (values) => {
         //
@@ -62,17 +61,12 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     }
 
     const changeContacts = (event, contact) => {
-        console.log(result);
-        console.log(event.target.value);
         setContactsData({
             ...contacts_data,
             [contact.id]: event.target.value
         });
-        console.log(contacts_data);
         const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
-        console.log(parsedContact);
         setResult({...result, contacts: parsedContact})
-        console.log(result);
     };
 
     const initialValue = (contactName) => {
@@ -88,9 +82,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     }
 
     const onRemove = (item) => {
-        console.log(item);
         const newData = [...locations];
-        console.log(newData);
         const index = newData.findIndex((it) => item.key === it.key);
         newData.splice(index, 1);
         setLocations(newData);

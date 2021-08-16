@@ -6,7 +6,7 @@ import EditorComponent from "../../editor/EditorComponent";
 import {saveContent} from "../../editor/EditorConverter";
 import {transToEng} from "../../../util/Translit";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
-import {addClub} from "../../../service/ClubService";
+import {addClub, updateClubById} from "../../../service/ClubService";
 import "../css/MainInformationTab.less"
 import {uploadImage} from "../../../service/UploadService";
 import {v4 as uuidv4} from "uuid";
@@ -24,7 +24,6 @@ const DescriptionTab = ({setResult, result}) => {
     const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
 
     const onFinish = (values) => {
-        console.log(result);
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const text = result.description.replace(/(\r\n|\n|\r)/gm, "");
         const textEdit = text.replace(/"/gm, '\\"');
@@ -46,6 +45,7 @@ const DescriptionTab = ({setResult, result}) => {
                 result.urlGallery.push(uploadImage(el.originFileObj, galleryFolder));
             })
         }
+        updateClubById(result).then(response => console.log(response))
 
         // addClub(result).then(response => console.log(response));
     };

@@ -35,7 +35,6 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             setLocations([]);
             nextStep();
         })
-        window.location.reload()
     }
 
     useEffect(() => {

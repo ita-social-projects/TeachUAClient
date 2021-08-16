@@ -3,6 +3,8 @@ import EditClubInputAddress from "../../editClub/EditClubInputAddress";
 import MaskIcon from "../../MaskIcon";
 import React, {useEffect, useState} from "react";
 import EditCenterContentFooter from "../EditCenterFooter";
+import {updateCenterById} from "../../../service/CenterService";
+import {logDOM} from "@testing-library/react";
 
 
 const {Option} = Select;
@@ -16,8 +18,11 @@ const ContactTab = ({contacts, cities, center,setResult,result}) => {
 
 
     const onFinish = (values) => {
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
         setResult(Object.assign(result,values))
         console.log(result)
+        updateCenterById(result).then(response => console.log(response))
+
     }
 
     const onChange = (values) => {
@@ -31,7 +36,8 @@ const ContactTab = ({contacts, cities, center,setResult,result}) => {
 
     const changeContacts = (e, contact) => {
          setContactsData(Object.assign({...contacts_data ,[contact.id]: e.target.value}))
-        setResult(Object.assign(result,contacts_data))
+         const newContact = JSON.stringify(contacts_data).replaceAll(":", "::")
+        setResult(Object.assign(result,newContact))
         };
 
 
@@ -63,6 +69,7 @@ const ContactTab = ({contacts, cities, center,setResult,result}) => {
                 label="Контакти"
                 className="add-club-row add-club-contacts"
                 name="contacts"
+
             >
                 {contacts.map(contact =>
                     <Form.Item name={`contact${contact.name}`}
@@ -106,8 +113,7 @@ const ContactTab = ({contacts, cities, center,setResult,result}) => {
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo}/>}/>
                     </Form.Item>)}
             </Form.Item>
-
-            <EditCenterContentFooter/>
+            <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )
 }

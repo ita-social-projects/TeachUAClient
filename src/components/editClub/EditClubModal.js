@@ -23,8 +23,6 @@ const EditClubModal = (club) => {
         // getClubById(club.clubId).then(response => setResult(response));
         getClubProfileById(club.clubId).then(response => setResult(response));
         getAllCenters().then(response => setCenters(response))
-        console.log("тут")
-        console.log(result);
     }, []);
     return (
         <div>

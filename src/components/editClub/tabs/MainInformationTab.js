@@ -8,30 +8,25 @@ const MainInformationTab = ({categories, setResult, result , centers}) => {
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
 
-        console.log(result);
         updateClubById(result).then(response => console.log(response));
     };
 
     const onContactsChange = (values) => {
-        console.log(values);
         let categories = result.categoriesName;
         if (values.target.checked === true) {
             if (!categories.includes(values.target.value)) {
                 categories.push(values.target.value);
             }
             setResult({...result, categoriesName: categories})
-            console.log(categories);
         } else {
             const index = categories.indexOf(values.target.value);
             if (index !== -1) {
                 categories.splice(index, 1);
                 setResult({...result, categoriesName: categories})
             }
-            console.log(categories);
+
         }
-        console.log(result);
     }
-    console.log(result);
 
     return (
         <Form name="basic"

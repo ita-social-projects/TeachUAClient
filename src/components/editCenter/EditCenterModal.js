@@ -27,7 +27,6 @@ const EditCenterModal = ({centerId}) => {
         getCenterById(centerId).then(response => setCenter(response))
         getAllCities().then(response => setCities(response))
         getAllStations().then(response => setStation(response))
-
     }, []);
 
     return (

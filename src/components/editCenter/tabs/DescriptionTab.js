@@ -12,17 +12,20 @@ const DescriptionTab = ({center,result,setResult}) => {
 
 
     const onChange = (values) => {
-        setResult(Object.assign(result,values))
-        console.log(result)
+        console.log(values)
     }
 
         const onFinish = (values) => {
             setResult(Object.assign(result,values))
         }
+
+    useEffect(() => {
+        setResult({...result, urlLogo:center.urlLogo , description:center.description})
+    }, [])
+
     return (
         <Form
             onFinish={onFinish}
-            onChange={onChange}
             form={descriptionFrom}
             name="basic">
             <Form.Item name="urlLogo"
@@ -31,7 +34,7 @@ const DescriptionTab = ({center,result,setResult}) => {
             >
                 <div className="edit-center-photos">
                     {
-                        center.urlLogo === null ? <div> </div> :
+                        center.urlLogo === null || center.urlLogo === undefined ? <div> </div> :
                             <img src={BASE_URL + center.urlLogo} className="edit-center-logo"/>
                     }
 
@@ -41,6 +44,7 @@ const DescriptionTab = ({center,result,setResult}) => {
                         maxCount={1}
                         data={{folder: `center/${center.name}/logo`}}
                         headers={{contentType: 'multipart/form-data'}}
+                        onChange={event => setResult({...result, urlLogo:event.file.response})}
                     >
                         <span className="edit-center-upload"><UploadOutlined
                             className="icon" value={center.urlLogo}/>Завантажити нове лого</span>
@@ -53,8 +57,8 @@ const DescriptionTab = ({center,result,setResult}) => {
                        label="Фото">
                 <div className="edit-center-photos">
                     {
-                        center.urlWeb === null ? <div> </div> :
-                            <img src={BASE_URL + center.urlWeb} className="edit-center-urlWeb"/>
+                        center.urlBackground === null || center.urlBackground === undefined ? <div> </div> :
+                            <img src={BASE_URL + center.urlBackground} className="edit-center-urlWeb"/>
                     }
                     <Upload
                         name="image"
@@ -81,7 +85,9 @@ const DescriptionTab = ({center,result,setResult}) => {
                            message: " Некоректний опис гуртка"
                        }]}
             >
-                <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
+                <Input.TextArea
+                   onChange={event => setResult({...result, description: event.target.defaultValue})}
+                    className="editor-textarea" style={{height: 200}} placeholder="Додайте опис гуртка"/>
             </Form.Item>
             <Button htmlType="submit" className="edit-club-button">Зберегти зміни</Button>
         </Form>
