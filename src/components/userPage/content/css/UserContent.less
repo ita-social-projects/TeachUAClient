@@ -86,9 +86,10 @@
 
 
 .user-page .user-content .user-info {
+  width: 100%;
   display: flex;
-  padding-top: 40px;
-  margin-left: 40px;
+  padding-top: 4%;
+  margin-left: 5%;
 }
 
 
@@ -137,19 +138,35 @@
 .user-page .user-email-data {
   margin-left: 70px;
 }
+
 @media (min-width: 850px) {
-.edit-button {
-  display: flex;
-  padding-right: 42px !important;
-  padding-bottom:20px;
-  font-size:medium;
-  align-content: center;
-}}
+  .edit-button {
+    width: 80%;
+    display: flex;
+    margin-right: 4%;
+    justify-content: flex-end;
+    padding-right: 42px !important;
+    font-size:medium;
+    align-content: center;
+  }
+}
+
+@media (max-width: 849px) {
+  .edit-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: 11% !important;
+    margin-top: 5%;
+    font-size:medium;
+    align-content: center;
+  }
+}
 
 .user-profile-page .ant-btn-text {
   font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 100%;
+  line-height: 100%;
   color: #2E69C9;
   border: none;
   display: flex;
@@ -157,12 +174,10 @@
 }
 
 .user-profile-page .anticon-arrow-right {
-  padding-left: 11px;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 95%;
+  line-height: 50%;
   align-items: center;
 }
-
 
 @media (max-width: 1200px) {
   .content-title {
