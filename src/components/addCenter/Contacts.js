@@ -73,11 +73,15 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) =>
                                            required: true,
                                            message: "Введіть номер телефону"
                                        },
-                                       isPhoneField(contact) &&
-                                       {
+                                       isPhoneField(contact) && {
                                            required: false,
-                                           pattern: /^[^-`~!@#$%^&*()_+={}\[\]|\\:;“’'<,>.?๐฿]*$/,
+                                           pattern: /^[^-`~!@#$%^&*()/_+={}\[\]|\\:;“"’'<,>.?๐฿]*$/,
                                            message: "Телефон не може містити спеціальні символи"
+                                       },
+                                       isPhoneField(contact) && {
+                                           required: false,
+                                           pattern: /^[^\s]*$/,
+                                           message: "Телефон не може містити пробільні символи"
                                        },
                                        isPhoneField(contact) && {
                                            required: false,

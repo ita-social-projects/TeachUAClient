@@ -289,6 +289,21 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            required: false,
                                            pattern: /^\d{9}$/,
                                            message: "Телефон не відповідає вказаному формату"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                                           message: "Телефон не може містити літери"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^[^-`~!@#$%^&*()/_+={}\[\]|\\:;“"’'<,>.?๐฿]*$/,
+                                           message: "Телефон не може містити спеціальні символи"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^[^\s]*$/,
+                                           message: "Телефон не може містити пробільні символи"
                                        }]}>
                             <Input className="add-club-input"
                                    prefix='+380'
