@@ -4,14 +4,23 @@
     }
 }
 
-@media (max-width: 950px) {
+@media (min-width: 500px)
+and (max-width: 1000px){
     .marathon-task-page {
+        margin-top: 18%;
         flex-direction: column!important;
     }
 }
 
+@media (min-device-width: 320px)
+and (max-device-width: 500px) {
+    .marathon-task-page {
+        margin-top: 28%;
+        flex-direction: column!important;
+    }
+}
 
-@media screen
+@media (min-device-width: 320px)
 and (max-device-width: 1000px){
     .page-task-content {
 
@@ -28,26 +37,22 @@ and (max-device-width: 1000px){
         font-family: Open Sans;
         font-style: normal;
         font-weight: bold;
-        /*margin-top: 3%;*/
         font-size: inherit;
         color: #2D4C68;
-        /*margin-bottom: 2%;*/
     }
 
     .task-image {
-        margin-left: -15%;
-        width: 131%;
-        align-self: center;
         border-radius: 4%;
+        width: 90%;
     }
 
     .header-content{
         width: 85%;
-        position: absolute;
+        /*position: absolute;*/
     }
 
     .task-content{
-        position: absolute;
+        /*position: absolute;*/
         width: 85%;
     }
 
@@ -126,6 +131,7 @@ and (min-device-width: 1000px){
     }
 
     .header-content {
+        margin-top: -8%;
         width: 45vw;
         position: relative;
     }
