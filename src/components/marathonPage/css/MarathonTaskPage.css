@@ -47,6 +47,8 @@ and (max-device-width: 1000px){
     }
 
     .header-content{
+        margin-bottom: 5%;
+        margin-top: 5%;
         width: 85%;
         /*position: absolute;*/
     }
