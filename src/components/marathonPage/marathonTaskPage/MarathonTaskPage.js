@@ -1,18 +1,35 @@
 import {Button, Layout, Result} from "antd";
-import {Router, withRouter} from 'react-router';
+import {Router, useLocation, withRouter} from 'react-router';
 import React from "react";
+import {useEffect} from "react";
 import MarathonTaskContent from "./MarathonTaskContent";
+import {BrowserRouter} from "react-router-dom";
+
+const ScrollToTop =({children})=>{
+    const {pathname}=useLocation();
+    useEffect(()=>{
+        window.scrollTo(0,0);},[pathname]);
+    return children || null;
+};
+
 
 
 class MarathonTaskPage extends React.Component {
     state = {
         task: {}
     };
+
+
+
     render() {
         return (
 
-            <Layout className="marathon-task-page" style={{padding: 70, background: '#f7e0d3' }}>
+            <Layout className="marathon-task-page">
+                <BrowserRouter>
+                    <ScrollToTop>
                 <MarathonTaskContent task={this.state.task}/>
+                    </ScrollToTop>
+                </BrowserRouter>
             </Layout>
 
         )
