@@ -91,11 +91,8 @@ const MarathonDayCarousel = () => {
                     >
                       <img
                         className="day-image"
-                        src={
-                          process.env.PUBLIC_URL +
-                          "/static/images/marathon/marathon.PNG"
-                        }
-                      />
+                        src={`${process.env.PUBLIC_URL}/static/images/marathon/marathon_log.png`}
+                      ></img>
                     </div>
                     <div className="name">{day.name}</div>
                   </div>

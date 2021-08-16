@@ -14,7 +14,8 @@ const MarathonTaskContent = () => {
     return (
         <Content className="page-task-content">
             <img className="task-image"
-                 src={process.env.PUBLIC_URL + "/static/images/marathon/marathon-logo.png"}/>
+                 src={`${process.env.PUBLIC_URL}/static/images/marathon/marathon_log.png`}
+            ></img>
             <div className="header-content">
             <div className="task-header">
                 {data.name}
