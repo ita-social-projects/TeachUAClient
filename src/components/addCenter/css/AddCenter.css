@@ -19,8 +19,8 @@ and (max-device-width: 1080px) {
         padding-bottom: 0;
         overflow: hidden;
         border-radius: 16px;
-        margin-left: -300vw;
-        margin-top: -250vh;
+        /*margin-left: -300vw;*/
+        /*margin-top: -250vh;*/
         margin-block-end: auto;
     }
 }
@@ -45,7 +45,6 @@ and (max-device-width: 1080px) {
 .addCenter .layout {
     display: flex;
     flex-direction: row;
-    height: 100%;
     width: 100%;
 }
 
