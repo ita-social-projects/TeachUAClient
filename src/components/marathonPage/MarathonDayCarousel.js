@@ -99,7 +99,7 @@ useEffect(() => {
                                     <div className="title">
                                         <div className="day-image-box" style={{backgroundColor: "#FFFFFF"}}>
                     <img className="day-image"
-                         src={process.env.PUBLIC_URL + "/static/images/marathon/marathon.png"} />
+                         src={process.env.PUBLIC_URL + "/static/images/marathon/marathon_log.png"} />
                 </div>
                                         <div className="name">
                                             {day.name}
