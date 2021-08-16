@@ -54,7 +54,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
         // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
-        if(locationForm.locationName.length > 4 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 4 && cityName != null &&
+        if(cityName != null &&
             locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
@@ -260,7 +260,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            message: "Некоректні координати",
                                            pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
                                        },{
-                                           message:"Координате не можуть містити букви",
+                                           message:"Координати не можуть містити букви",
                                            pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
                                        }
                                        ]}>
@@ -292,6 +292,12 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        }]}>
                             <Input className="add-club-input"
                                    prefix='+380'
+                                   suffgit branchix={
+                                       <Tooltip placement="topRight"
+                                                title="Телефон не може містити літери та спеціальні символи">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
                                    placeholder="___________"/>
                         </Form.Item>
 
