@@ -39,15 +39,6 @@ const MarathonTaskContent = () => {
 
             </div>
 
-
-            {/*<Form.Item>*/}
-            {/*    <Button className="return-button"*/}
-            {/*            htmlType="submit"*/}
-            {/*            href={"/marathon"}>*/}
-            {/*        До Мовомаратону*/}
-            {/*    </Button>*/}
-            {/*</Form.Item>*/}
-
             <div className="full-width button-box">
             </div>
         </Content>

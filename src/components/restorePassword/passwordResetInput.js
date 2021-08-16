@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button, Form, Input} from "antd";
 import "../userPage/css/User.less"
-
+import "./css/RestorePassword.less"
 const PasswordResetInput = () => {
 
     const queryParams = new URLSearchParams(window.location.search);
     return (
 
-        <div className="user-edit-column">
+        <div className="user-reset-column">
 
             <Form.Item name="verificationCode"
                        initialValue={queryParams.get('code')}/>
@@ -18,15 +18,18 @@ const PasswordResetInput = () => {
                        hasFeedback
                        rules={[
                            {
+                               required:false,
                                pattern: /^\S{8,20}$/,
                                message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
 
                            },
                            {
-                               pattern: /[а-щА-ЩїюьяЇЮЯЄє0-9A-Za-z~`!@#$%^&()_=+{}[\]/|:;"<>?]/,
+                               pattern: /^.*(?=.)(?=.*[а-щА-ЩїюьяЇЮЯЄєa-zA-Z])(?=.*\d)(?=.*[~`!@#$%^&()_=+{}[\]/|:;"<>?])[а-щА-ЩїюьяЇЮЯЄєa-zA-Z0-9~`!@#$%^&()_=+{}[\]/|:;"<>?]+$/,
                                message: "Пароль повинен містити великі/маленькі літери, цифри та спеціальні символи"
                            },
-                       ]}>
+
+
+                      ] }>
                 <Input.Password className="login-box"
                                 placeholder="Введіть новий пароль"/>
 
@@ -35,15 +38,6 @@ const PasswordResetInput = () => {
                        className="user-edit-input"
                        hasFeedback
                        rules={[
-                           /*{
-                               pattern: /^\S{8,20}$/,
-                               message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
-
-                           },
-                           {
-                               pattern: /[а-щА-ЩїюьяЇЮЯЄє0-9A-Za-z~`!@#$%^&()_=+{}[\]/|:;"<>?]/,
-                               message: "Пароль повинен містити великі/маленькі літери, цифри та спеціальні символи"
-                           },*/
                            ({getFieldValue}) => ({
                                validator(_, value) {
                                    if (getFieldValue('password') === value) {
@@ -61,12 +55,11 @@ const PasswordResetInput = () => {
 
             <div><p></p></div>
             <Form.Item>
-                <div className="user-edit-footer">
+
                     <Button className="submit-button"
                             htmlType="submit">
                         Змінити пароль
                     </Button>
-                </div>
             </Form.Item>
         </div>
     )
