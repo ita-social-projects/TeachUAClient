@@ -64,7 +64,7 @@ const Login = ({isShowing, setShowing, verifyCode}) => {
                     >
                         <LoginSocial />
                         <LoginInput />
-                        <div className="edit-button">
+                        <div className="restore-password">
 <RestorePasswordModal/>
                         </div>
                     </Form>
