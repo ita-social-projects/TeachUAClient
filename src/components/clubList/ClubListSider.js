@@ -102,6 +102,7 @@ const ClubListSider = ({
     const clearAllValues = () => {
         onCityChange(undefined);
         form.setFieldsValue({categoriesName: activeCategory});
+        form.setFieldsValue({isOnline: undefined});
         setAge(undefined);
         form.setFieldsValue({age: undefined});
     }
