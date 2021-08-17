@@ -124,11 +124,18 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 className="add-club-row"
                 label="Опис"
                 hasFeedback
-                rules={[{
-                    required: true,
-                    pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@_`{}~^\/[\]]{40,1500}$/,
-                    message: "Некоректний опис гуртка"
-                }]}
+                rules={[
+                    {
+                        required: true,
+                        pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@_`{}~^\/[\]]{40,}$/,
+                        message: "Некоректний опис гуртка"
+                    },
+                    {
+                        required: false,
+                        pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@_`{}~^\/[\]]{0,1500}$/,
+                        message: "Опис гуртка задовгий"
+                    }
+                ]}
             >
                 <Input.TextArea className="editor-textarea" style={{ height: 200 }} placeholder="Додайте опис гуртка" />
             </Form.Item>
