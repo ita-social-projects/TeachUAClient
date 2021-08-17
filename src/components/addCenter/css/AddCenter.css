@@ -42,10 +42,8 @@ and (max-device-width: 1080px) {
     text-align: left;
 }
 
-.addCenter .layout {
-    display: flex;
+.addCenter .ant-layout {
     flex-direction: row;
-    width: 100%;
 }
 
 .addCenter .content {

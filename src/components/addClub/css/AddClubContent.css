@@ -200,12 +200,9 @@
 }
 
 
-@media screen and (max-width:577px)  {
-    .add-club-content .add-club-select{
-        width: 100%;
-    }
+@media screen and (max-width:578px)  {
 
-    .ant-form .ant-form-item .ant-form-item-label, .ant-form .ant-form-item .ant-form-item-control {
-        flex: none;
+    .add-club-content .add-club-inline {
+        display: block;
     }
 }

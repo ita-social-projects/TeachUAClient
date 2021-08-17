@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Layout, Modal } from 'antd';
 import { Steps } from 'antd';
 import "./css/AddCenter.css"
 import MainInformation from './MainInformation';
@@ -125,7 +125,7 @@ const AddCenter = ({isShowing, setShowing}) => {
                 width={880}
                 footer={null}
             >
-                <div className="layout">
+                <Layout>
                     {!isMobile &&
                     <AddCenterSider step={step}/>
                     }
@@ -140,7 +140,7 @@ const AddCenter = ({isShowing, setShowing}) => {
                             {currentComponnet(step)}
                         </div>
                     </Content>
-                </div>
+                </Layout>
             </Modal>
       
     )
