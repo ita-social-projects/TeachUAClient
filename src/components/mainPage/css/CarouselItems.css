@@ -67,6 +67,17 @@
     .about-carousel .carousel-item-1 .description-2{
         font-size: 24px;
     }
+  
+}
+@media (max-width:  1420px) and (min-width: 1120px) {
+    .about-carousel .carousel-item-1 .label{
+        font-size: 40px;
+    }
+
+    .about-carousel .carousel-item-1 .description-2{
+        font-size: 24px;
+    }
+  
 }
 
 @media (min-width: 320px) and (max-width: 824px) {
