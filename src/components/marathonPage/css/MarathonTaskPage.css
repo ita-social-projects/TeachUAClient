@@ -164,7 +164,13 @@ and (min-device-width: 1000px){
         margin-top: 1%;
 
     }
-
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+   
     .task-subheader {
         font-family: Open Sans;
         font-style: italic;
