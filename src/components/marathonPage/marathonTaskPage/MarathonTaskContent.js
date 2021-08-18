@@ -39,7 +39,7 @@ const MarathonTaskContent = () => {
             </div>
 
             <div className="task-info">
-                {data.task}
+            <div dangerouslySetInnerHTML={{__html: `${data.task}`}} />
             </div>
 
             </div>
