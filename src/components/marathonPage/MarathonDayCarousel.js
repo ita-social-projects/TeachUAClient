@@ -18,7 +18,7 @@ const MarathonDayCarousel = () => {
    const startOfChallenge = new Date(2021, 7, 12);
    const today = new Date();
         
-   const diffDays = Math.round(Math.abs((today - startOfChallenge) / oneDay));
+   const diffDays = Math.ceil(Math.abs((today - startOfChallenge) / oneDay)); //appear at 00:00
 
    data.length = diffDays;
     
