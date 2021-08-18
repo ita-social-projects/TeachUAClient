@@ -62,7 +62,7 @@ and (max-device-width: 1000px){
         font-family: Open Sans;
         font-style: normal;
         text-align: justify;
-        text-indent: 3%;
+        white-space: pre-line;
         font-size: 16px;
 
     }
@@ -141,7 +141,7 @@ and (min-device-width: 1000px){
     .task-content {
         position: center;
         width: 45vw;
-        margin-top: 5%;
+        margin-top: 10%;
         align-self: center
     }
 
@@ -150,7 +150,7 @@ and (min-device-width: 1000px){
         font-style: normal;
         text-align: justify;
         margin-top: 2%;
-        text-indent: 3%;
+        white-space: pre-line;
         font-size: 18px;
 
     }
