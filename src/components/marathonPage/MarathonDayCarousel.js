@@ -25,7 +25,6 @@ const MarathonDayCarousel = () => {
 
     
 
-
 useEffect(() => {
 
 
@@ -35,9 +34,9 @@ useEffect(() => {
     const carousel = useRef(null);
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
-    
+        
         slidesToShow: data.length > 4 ? 4 : data.length,
         slidesToScroll: data.length > 4 ? 4 : data.length,
         responsive: [
