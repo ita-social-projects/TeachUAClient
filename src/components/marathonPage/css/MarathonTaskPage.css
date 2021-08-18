@@ -170,6 +170,9 @@ and (min-device-width: 1000px){
     .task-text .innerHTML-from-js a{
         color: #58a6ff;
     }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
+    }
    
     .task-subheader {
         font-family: Open Sans;
