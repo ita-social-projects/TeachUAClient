@@ -10,8 +10,7 @@ const MarathonTaskContent = () => {
 
     const path = window.location.pathname.split("/")[window.location.pathname.split("/").length-1];
     const data = marathonDay.marathonDay.find(value => value.pathUrl === path);
-    const dataText = data.text;
-    const dataText2 = data.text2;
+  
     return (
         <Content className="page-task-content">
             <img className="task-image"
@@ -25,21 +24,21 @@ const MarathonTaskContent = () => {
             <div className="task-subheader">
                 {data.subheader}
             </div>
-            <div className="task-text ">
-                <div dangerouslySetInnerHTML={{__html: `${dataText}`}} />
+            <div className="task-text">
+                <div className="innerHTML-from-js" dangerouslySetInnerHTML={{__html: `${data.text}`}} />
             </div>
             </div>
 
             <div className="task-content">
-                <div className="task-text ">
-                    <div dangerouslySetInnerHTML={{__html: `${dataText2}`}} />
+                <div className="task-text">
+                    <div className="innerHTML-from-js" dangerouslySetInnerHTML={{__html: `${data.text2}`}} />
                 </div>
             <div className="task-task-header">
                 {data.taskTitle}
             </div>
 
             <div className="task-info">
-            <div dangerouslySetInnerHTML={{__html: `${data.task}`}} />
+            <div className="innerHTML-from-js" dangerouslySetInnerHTML={{__html: `${data.task}`}} />
             </div>
 
             </div>
