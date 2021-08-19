@@ -7,6 +7,10 @@ const FooterPartners = () => {
                 Наші партнери
             </div>
             <div className="sponsors">
+            <a target="blank" href="https://www.softserveinc.com/uk-ua">
+                    <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/soft_serve_logo.png`}
+                         className="logo_soft-serve" alt="soft_serve"/>
+                </a>
                 <a target="blank" href="https://www.facebook.com/zakonpromovu5670">
                     <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo1.png`}
                          className="logo" alt="Mova_obyednue"/> </a>
