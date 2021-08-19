@@ -2,6 +2,15 @@
     .marathon-task-page {
         flex-direction: column!important;
     }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
+    }
 }
 
 @media (min-width: 500px)
@@ -10,6 +19,15 @@ and (max-width: 1000px){
         margin-top: 18%;
         flex-direction: column!important;
     }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
+    }
 }
 
 @media (min-device-width: 320px)
@@ -17,6 +35,15 @@ and (max-device-width: 500px) {
     .marathon-task-page {
         margin-top: 28%;
         flex-direction: column!important;
+    }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
     }
 }
 
@@ -90,6 +117,15 @@ and (max-device-width: 1000px){
         font-weight: bold;
         font-size: initial;
         color: #2D4C68
+    }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
     }
 
 
@@ -219,6 +255,15 @@ and (min-device-width: 401px) {
         font-size: 16px;
         color: #FFFFFF !important;
     }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
+    }
 }
 
 @media screen
@@ -235,6 +280,15 @@ and (max-device-width: 400px) {
         font-weight: bold;
         font-size: 16px;
         color: #FFFFFF !important;
+    }
+    .task-content .innerHTML-from-js a  {
+        color: #58a6ff;
+      }
+    .task-text .innerHTML-from-js a{
+        color: #58a6ff;
+    }
+    .task-text .innerHTML-from-js #headline{
+        font-weight: bold;
     }
 
 }
