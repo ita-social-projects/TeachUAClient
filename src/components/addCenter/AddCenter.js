@@ -11,6 +11,7 @@ import { getUserId } from "../../service/StorageService";
 import { getAllCities } from '../../service/CityService';
 import { getAllContacts } from '../../service/ContactService';
 import AddCenterSider from "./AddCenterSider";
+import AddCenterSiderMobile from "./AddCenterSiderMobile";
 import {Content} from "antd/es/layout/layout";
 
 
@@ -126,16 +127,12 @@ const AddCenter = ({isShowing, setShowing}) => {
                 footer={null}
             >
                 <Layout>
-                    {!isMobile &&
                     <AddCenterSider step={step}/>
-                    }
                     <Content className="add-center-container">
                         <div className="modal-title">
                             Додати центр
                         </div>
-                        {isMobile &&
-                        <AddCenterSider step={step}/>
-                        }
+                        <AddCenterSiderMobile step={step}/>
                         <div className="input-data">
                             {currentComponnet(step)}
                         </div>
