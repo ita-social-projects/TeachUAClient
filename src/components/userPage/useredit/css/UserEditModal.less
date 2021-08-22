@@ -1,17 +1,56 @@
+@media (min-device-width: 400px) {
+  .role-name {
+    display: -webkit-inline-flex;
+  }
+}
+
+@media (max-device-width: 320px) {
+  .role-name {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    width: 40%;
+    margin-left: auto;
+  }
+
+  .user-edit .ellipse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    background: #FFC069;
+    border-radius: 50%;
+    margin: auto;
+  }
+}
+
+@media (min-device-width: 321px)
+and (max-device-width: 400px) {
+  .role-name {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    width: 60%;
+  }
+}
+
 .user-edit .ant-modal-body {
   padding: 0 !important;
 }
 
 @media screen
-and (min-device-width: 1025px){
-.ant-modal-content {
-  border-radius: 16px;
-  height: auto;
-}
+and (min-device-width: 1025px) {
+  .ant-modal-content {
+    border-radius: 16px;
+    height: auto;
+  }
 }
 
 @media screen
-and (max-device-width: 1025px){
+and (max-device-width: 1025px) {
   .ant-modal-content {
     border-radius: 16px;
     height: auto;
@@ -47,7 +86,8 @@ and (min-device-width: 1080px) {
 }
 
 .user-edit .edit-header {
-  width: 100%;
+  width: 85%;
+  //width: 100%;
   display: flex;
   align-items: center;
   font-size: 24px;
@@ -69,15 +109,17 @@ and (min-device-width: 1080px) {
   font-size: 22px;
 }
 
-/*@media screen
-and (max-device-width: 320px) {
+
+@media screen
+and (min-device-width: 320px) {
   .user-edit .button-container {
-    padding-top: 28px;
+    padding-top: 24px;
     display: flex;
     height: 48px;
-    padding-left: 50px;
+    padding-left: 40px;
     background: #FFFFFF;
   }
+
   .user-edit .ant-radio-button-wrapper {
     display: flex;
     justify-content: center;
@@ -89,36 +131,27 @@ and (max-device-width: 320px) {
     line-height: 32px;
     border-radius: 4px;
   }
-}*/
-
-@media screen
-and (min-device-width: 321px) {
-  .user-edit .button-container {
-    padding-top: 24px;
-    display: flex;
-    height: 48px;
-    padding-left: 40px;
-    background: #FFFFFF;
-  }
 }
 
 .user-edit .ant-radio-button-wrapper:not(:first-child)::before {
   display: none;
 }
+
 @media screen
-and (min-device-width: 321px){
-.user-edit .ant-radio-button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #FFF7E6;
-  height: 48px;
-  width: 40%;
-  border: 0;
-  font-size: 18px;
-  line-height: 32px;
-  border-radius: 4px;
-}}
+and (min-device-width: 320px) {
+  .user-edit .ant-radio-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFF7E6;
+    height: 48px;
+    width: 46%;
+    border: 0;
+    font-size: 18px;
+    line-height: 32px;
+    border-radius: 4px;
+  }
+}
 
 .user-edit .ant-radio-button-wrapper:hover,
 .user-edit .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
@@ -140,18 +173,18 @@ and (min-device-width: 321px){
   display: flex;
 }
 
-
-.user-edit .ellipse {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 32px;
-  width: 32px;
-  background: #FFC069;
-  border-radius: 50%;
-  margin-right: 8px;
+@media (min-width: 321px) {
+  .user-edit .ellipse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    background: #FFC069;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 }
-
 
 .user-edit .user-icon {
   color: #FFFFFF;
