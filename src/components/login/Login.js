@@ -64,10 +64,11 @@ const Login = ({isShowing, setShowing, verifyCode}) => {
                     >
                         <LoginSocial />
                         <LoginInput />
-                        <div className="restore-password">
-<RestorePasswordModal/>
-                        </div>
+
                     </Form>
+                </div>
+                <div className="restore-password">
+                    <RestorePasswordModal/>
                 </div>
             </Modal>
         
