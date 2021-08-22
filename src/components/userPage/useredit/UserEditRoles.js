@@ -3,7 +3,12 @@ import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import {Form, Radio} from "antd";
 
 const UserEditRoles =({user}) => {
-
+function disable(value){
+    if (value===user.roleName){
+        return false;
+    }
+    else return true;
+}
     return (
         <Form.Item name="role"  initialValue={user.roleName}>
             <Radio.Group className="button-container"
@@ -12,13 +17,13 @@ const UserEditRoles =({user}) => {
             >
 
                 <Radio.Button value="ROLE_USER"
-                disabled>
+                disabled={disable("ROLE_USER")}>
                     <div className="button-box">
                         <div className="ellipse"><UserOutlined className="user-icon"/></div>
                         Відвідувач
                     </div>
                 </Radio.Button>
-                <Radio.Button value="ROLE_ADMIN">
+                <Radio.Button value="ROLE_ADMIN" disabled={!disable("ROLE_USER")}>
                     <div className="button-box">
                         <div className="ellipse"><UserOutlined className="user-icon"/></div>
                         Керівник

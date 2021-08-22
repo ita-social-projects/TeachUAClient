@@ -1,3 +1,13 @@
+.task-content .innerHTML-from-js a  {
+    color: #58a6ff;
+}
+.task-text .innerHTML-from-js a{
+    color: #58a6ff;
+}
+.task-text .innerHTML-from-js #headline{
+    font-weight: bold;
+}
+
 .task-image-par{
 display: contents;
 }
@@ -98,8 +108,7 @@ and (max-device-width: 1000px){
 
 }
 
-@media screen
-and (min-device-width: 1000px){
+@media (min-device-width: 1000px){
 
     .marathon-task-page{
         align-items: center;
