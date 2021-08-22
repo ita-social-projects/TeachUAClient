@@ -7,17 +7,23 @@ const {Step} = Steps;
 const AddCenterSider = ({step}) => {
     return (
         <div
-            className="side">
+            className="side-mobile">
             <Steps
-                direction="vertical"
+                direction="horizontal"
                 current={step}>
+                {step == 0 &&
                 <Step title="Основна інформація"></Step>
+                }
+                {(step == 0 || step == 1 || step == 2) &&
                 <Step title="Контакти"></Step>
+                }
+                {(step == 1 || step == 2 || step == 3) &&
                 <Step title="Опис"></Step>
+                }
+                {step == 3 &&
                 <Step title="Гуртки"></Step>
+                }
             </Steps>
-
-            }
         </div>
     )
 
