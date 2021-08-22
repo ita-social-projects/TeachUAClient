@@ -6,122 +6,129 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 /*export class PasswordUpdate extends React.Component {
 
     render() */
-export const PasswordUpdate=()=>{
+export const PasswordUpdate = () => {
 
-    const [isEqual,setEqual] = useState(true);
+    const [isEqual, setEqual] = useState(true);
     const [passwordForm, setPasswordForm] = useState({
         password: "",
-        newPassword:""
+        newPassword: ""
     })
 
     const onChange = e => {
         if (e.target.name === "password")
             passwordForm.password = e.target.value
         console.log(e.target.value)
-        if(e.target.id === "confirmPassword")
+        if (e.target.id === "confirmPassword")
             passwordForm.newPassword = e.target.value
-        if (passwordForm.password!= passwordForm.newPassword) {
-            console.log(passwordForm.password + " "+ passwordForm.newPassword)
+        if (passwordForm.password != passwordForm.newPassword) {
+            console.log(passwordForm.password + " " + passwordForm.newPassword)
             setEqual(false)
-        } else {console.log(passwordForm.password + " "+ passwordForm.newPassword);setEqual(true)}
+        } else {
+            console.log(passwordForm.password + " " + passwordForm.newPassword);
+            setEqual(true)
+        }
     }
 
-        return (
-            <div>
-                <Form.Item
-                    name="currentPassword"
-                    className="user-edit-input"
-                    // initialValue=""
-                    hasFeedback
-                    alert="Необхідне поле"
-                    rules={[{
-                        required: true,
-                        message: "Введіть старий пароль",
-                        //type:"password"
+    return (
+        <div>
+            <Form.Item
+                name="currentPassword"
+                className="user-edit-input"
+                // initialValue=""
+                hasFeedback
+                alert="Необхідне поле"
+                rules={[{
+                    required: true,
+                    message: "Введіть старий пароль",
+                    //type:"password"
+                    pattern: /^\S{8,20}$/,
+
+                },
+                    {
+                        message: 'Невірний пароль',
+                    }]}>
+
+                <Input.Password
+                    className="user-edit-box"
+                    placeholder="Введіть діючий пароль"
+
+                    //value={""}
+                />
+            </Form.Item>
+
+            <Form.Item
+                id="password"
+                name="password"
+                className="user-edit-input"
+                //initialValue=""
+                hasFeedback
+                alert="Необхідне поле"
+                rules={[{
+                    required: true,
+                    message: 'Будь ласка, введіть новий пароль',
+                },
+                    {
                         pattern: /^\S{8,20}$/,
+                        message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
 
                     },
-                        {
-                            message: 'Невірний пароль',
-                        }]}>
+                    {
+                        pattern: /^.*(?=.)(?=.*[а-щА-ЩїюьяЇЮЯЄєa-zA-Z])(?=.*\d)(?=.*[~`!@#$%^&()_=+{}[\]/|:;"<>?])[а-щА-ЩїюьяЇЮЯЄєa-zA-Z0-9~`!@#$%^&()_=+{}[\]/|:;"<>?]+$/,
+                        message: "Пароль повинен містити великі/маленькі літери, цифри та спеціальні символи"
+                    },
+                    ({getFieldValue}) => ({
+                    validator(_, value) {
+                    if (getFieldValue('currentPassword') != value) {
+                    return Promise.resolve();
+                }
 
-                    <Input.Password
-                        className="user-edit-box"
-                        placeholder="Введіть діючий пароль"
+                    return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
+                },
 
-                        //value={""}
-                    />
-                </Form.Item>
+                }),
 
-                <Form.Item
-                    id="password"
-                    name="password"
-                    className="user-edit-input"
-                    //initialValue=""
-                    hasFeedback
-                    alert="Необхідне поле"
-                    rules={[{
+                    ]}>
+
+                <Input.Password
+                    className="user-edit-box"
+                    placeholder="Введіть новий пароль"
+                    value={""}
+                    onChange={onChange}
+                />
+
+            </Form.Item>
+
+            <Form.Item
+
+                name="confirmPassword"
+                // initialValue=" "
+                className="user-edit-input"
+                hasFeedback
+                alert="Необхідне поле"
+                rules={[
+                    {
                         required: true,
-                        message: 'Будь ласка, введіть новий пароль',
+                        message: 'Будь ласка, підтвердіть пароль',
                     },
-                        {
-                            pattern: /^\S{8,20}$/,
-                            message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
-
+                    ({getFieldValue}) => ({
+                        validator(_, value) {
+                            if ((!value || getFieldValue('password') === value) && isEqual) {
+                                console.log(isEqual)
+                                return Promise.resolve();
+                            }
+                            console.log(isEqual)
+                            return Promise.reject(new Error('\'Значення поля ‘Підтвердити новий пароль’ має бути еквівалентним значенню поля ‘Новий пароль’'));
                         },
-                        ({getFieldValue}) => ({
-                            validator(_, value) {
-                                if (getFieldValue('currentPassword') != value) {
-                                    return Promise.resolve();
-                                }
+                    }),
 
-                                return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
-                            },
-
-                        }),
-
-                    ]}>
-
-                    <Input.Password
-                        className="user-edit-box"
-                        placeholder="Введіть новий пароль"
-                        value={""}
-                        onChange={onChange}
-                    />
-
-                </Form.Item>
-
-                <Form.Item
-
-                    name="confirmPassword"
-                    // initialValue=" "
-                    className="user-edit-input"
-                    hasFeedback
-                    alert="Необхідне поле"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Будь ласка, підтвердіть пароль',
-                        },
-                        ({getFieldValue}) => ({
-                            validator(_, value) {
-                                if ((!value || getFieldValue('password') === value) && isEqual) {
-                                    console.log(isEqual)
-                                    return Promise.resolve();
-                                }
-console.log(isEqual)
-                                return Promise.reject(new Error('\'Значення поля ‘Підтвердити новий пароль’ має бути еквівалентним значенню поля ‘Новий пароль’'));
-                            },
-                        }),
-
-                    ]}>
-                    <Input.Password className="user-edit-box"
-                                    placeholder="Підтвердіть новий пароль"
-                                    onChange={onChange}
-                    />
-                </Form.Item>
-            </div>)
-    }
+                ]}>
+                <Input.Password className="user-edit-box"
+                                placeholder="Підтвердіть новий пароль"
+                                onChange={onChange}
+                />
+            </Form.Item>
+        </div>)
+}
 
 //}
 
