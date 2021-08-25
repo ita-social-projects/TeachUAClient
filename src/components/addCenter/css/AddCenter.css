@@ -259,7 +259,6 @@ and (max-device-width: 1080px) {
         margin-left: -6%;
         max-height: 40px;
         min-height: 40px;
-        min-width: 116%;
     }
 
     .ant-steps-item-icon {
