@@ -8,6 +8,10 @@
     border-radius: 16px;
 }
 
+.addCenter .side-mobile {
+    display: none;
+}
+
 .addCenter .add-center-container {
     padding: 20px 40px 32px 24px;
     flex-direction: column;
