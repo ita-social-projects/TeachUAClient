@@ -31,7 +31,7 @@ const UserInformationComponent = ({ user }) => {
         <div className="user-profile-page">
             <div className="user-information">
                 <div className="user-info">
-                    <Avatar size={68} src={userAvatar} icon={<UserOutlined />} />
+                    <Avatar className="user-avatar"  src={userAvatar} icon={<UserOutlined />} />
                     <div>
                         <div className="user-name">{user.firstName} {user.lastName}
                         </div>
