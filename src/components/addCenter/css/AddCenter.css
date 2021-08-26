@@ -264,4 +264,8 @@ and (max-device-width: 1080px) {
     .ant-steps-item-icon {
         margin: 0 8px 0 0;
     }
+
+    .ant-modal-close-x {
+        margin-top: -17%;
+    }
 }

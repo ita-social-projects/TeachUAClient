@@ -10,8 +10,7 @@ const AddCenterSider = ({step}) => {
             className="side">
             <Steps
                 direction="vertical"
-                current={step}
-                labelPlacement="horizontal">
+                current={step}>
                 <Step title="Основна інформація"></Step>
                 <Step title="Контакти"></Step>
                 <Step title="Опис"></Step>
