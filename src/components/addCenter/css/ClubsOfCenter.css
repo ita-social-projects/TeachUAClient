@@ -80,3 +80,9 @@
     max-height: 300px;
     /* overflow-y: scroll; */
 }
+
+@media (min-width: 320px) and (max-width: 577px) {
+    .clubsOfCenter .form-item{
+        flex-direction: row;
+    }
+}
