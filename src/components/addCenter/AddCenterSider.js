@@ -16,8 +16,6 @@ const AddCenterSider = ({step}) => {
                 <Step title="Опис"></Step>
                 <Step title="Гуртки"></Step>
             </Steps>
-
-            }
         </div>
     )
 

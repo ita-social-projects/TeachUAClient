@@ -124,6 +124,7 @@ class Search extends React.Component {
     };
 
     onSearch = (val) => {
+        val=val.trim();
         searchInputData.input = val;
 
         this.onSearchChange(val, "all");
@@ -171,7 +172,7 @@ class Search extends React.Component {
                     }}
                     placeholder="Який гурток шукаєте?"
                     defaultActiveFirstOption={false}
-                    defaultValue={searchInputData.input}>
+                    defaultValue={searchInputData.input.trim()}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
                             <Option
@@ -185,10 +186,10 @@ class Search extends React.Component {
                     <OptGroup label="Гуртки">
                         {this.state.possibleResults.clubs.map((result) => (
                             <Option
-                                value={result.name}
+                                value={result.name.trim()}
                                 type={"club"}
                                 key={"club" + "#" + result.id}>
-                                {result.name}
+                                {result.name.trim()}
                             </Option>
                         ))}
                     </OptGroup>

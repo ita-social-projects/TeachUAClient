@@ -1,5 +1,5 @@
 import {Form, Layout, Pagination} from "antd";
-import {SearchContext, searchParameters} from "../../context/SearchContext";
+import {mapSearchParameters, SearchContext, searchParameters} from "../../context/SearchContext";
 import React, {useContext, useEffect, useState} from "react";
 import {
     getClubsByAdvancedSearch,
@@ -48,47 +48,27 @@ const ClubList = ({
 
     const [activeCategory, setActiveCategory] = useState();
     const location = useLocation();
+    const [params, setParams] = useState(mapSearchParameters);
 
     const getData = (page) => {
         const checkUndefPage = page === undefined ? 0 : page;
-        const params = searchForm.getFieldsValue();
-        if (!advancedSearch) {
-            setIsCenterChecked(false);
-            if (centers.length > 0) {
-                setCenters([]);
-            }
+        if(advancedSearch && showHideMenu){
+            setParams(searchForm.getFieldsValue());
+        }
 
-            if (typeof location.state !== "undefined") {
-                setActiveCategory(location.state.showActiveCategory);
-                console.log(location.state.showActiveCategory);
-                searchParameters.categoryName = [
-                    location.state.showActiveCategory,
-                ];
-            }
-            getClubsByParameters(searchParameters, checkUndefPage).then(
-                (response) => {
-                    setClubs(response);
-                }
-            );
-
-            if (searchParameters.categoryName) {
-                searchParameters.categoryName = "";
-            }
+        if (isCenterChecked) {
+            getCentersByAdvancedSearch(params, page).then((response) => {
+                setCenters(response);
+            });
         } else {
-            if (isCenterChecked) {
-                getCentersByAdvancedSearch(params, page).then((response) => {
-                    setCenters(response);
-                });
-            } else {
-                getClubsByAdvancedSearch(
-                    params,
-                    checkUndefPage,
-                    sortBy,
-                    sortDirection
-                ).then((response) => {
-                    setClubs(response);
-                });
-            }
+            getClubsByAdvancedSearch(
+                params,
+                checkUndefPage,
+                sortBy,
+                sortDirection
+            ).then((response) => {
+                setClubs(response);
+            });
         }
         load(false);
     };
@@ -152,7 +132,8 @@ const ClubList = ({
                     sortBy={sortBy}
                     sortDirection={sortDirection}
                 />
-            )}
+             )}
+
         </Layout>
     );
 };

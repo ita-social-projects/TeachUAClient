@@ -8,6 +8,10 @@
     border-radius: 16px;
 }
 
+.addCenter .side-mobile {
+    display: none;
+}
+
 .addCenter .add-center-container {
     padding: 20px 40px 32px 24px;
     flex-direction: column;
@@ -255,10 +259,13 @@ and (max-device-width: 1080px) {
         margin-left: -6%;
         max-height: 40px;
         min-height: 40px;
-        min-width: 116%;
     }
 
     .ant-steps-item-icon {
         margin: 0 8px 0 0;
+    }
+
+    .ant-modal-close-x {
+        margin-top: -17%;
     }
 }

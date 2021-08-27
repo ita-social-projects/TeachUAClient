@@ -4,7 +4,7 @@ import "./css/AddCenter.css";
 
 const {Step} = Steps;
 
-const AddCenterSider = ({step}) => {
+const AddCenterSiderMobile = ({step}) => {
     return (
         <div
             className="side-mobile">
@@ -21,7 +21,7 @@ const AddCenterSider = ({step}) => {
                 <Step title="Опис"></Step>
                 }
                 {step == 3 &&
-                <Step title="Гуртки"></Step>
+                <Step  title="Гуртки"></Step>
                 }
             </Steps>
         </div>
@@ -29,4 +29,4 @@ const AddCenterSider = ({step}) => {
 
 };
 
-export default AddCenterSider;
+export default AddCenterSiderMobile;
