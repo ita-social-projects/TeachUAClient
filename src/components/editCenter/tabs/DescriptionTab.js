@@ -5,6 +5,7 @@ import EditorComponent from "../../editor/EditorComponent";
 import React, {useEffect} from "react";
 import "../css/DescriptionTab.css"
 import EditCenterContentFooter from "../EditCenterFooter";
+import {updateCenterById} from "../../../service/CenterService";
 
 
 const DescriptionTab = ({center,result,setResult}) => {
@@ -17,10 +18,13 @@ const DescriptionTab = ({center,result,setResult}) => {
 
         const onFinish = (values) => {
             setResult(Object.assign(result,values))
+            updateCenterById(result)
         }
 
     useEffect(() => {
+        console.log(result)
         setResult({...result, urlLogo:center.urlLogo , description:center.description})
+        console.log(result)
     }, [])
 
     return (

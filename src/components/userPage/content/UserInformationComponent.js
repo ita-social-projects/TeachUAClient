@@ -9,8 +9,15 @@ import PropTypes from "prop-types";
 
 const UserInformationComponent = ({ user }) => {
     const [userAvatar, setUserAvatart] = useState(null);
+    const [isMobile, setIsMobile]  = useState(false);
 
     useEffect(() => {
+        if (window.outerWidth <= 850) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+
         console.log(user);
         if (user?.urlLogo?.includes("https")) {
             setUserAvatart(user.urlLogo);
@@ -30,6 +37,11 @@ const UserInformationComponent = ({ user }) => {
                         </div>
                         <div className="user-role"> {user.roleName}</div>
                     </div>
+                    {!isMobile &&
+                        <div className="edit-button">
+                            <UserEditModal user={user}/>
+                        </div>
+                    }
                 </div>
                 <div className="user-contacts">
                     <div className="user-phone">
@@ -46,12 +58,15 @@ const UserInformationComponent = ({ user }) => {
                     </div>
                 </div>
             </div>
-             <div className="edit-button">
-                <UserEditModal user={user} />
-            </div>
+            {isMobile &&
+                <div className="edit-button">
+                    <UserEditModal user={user}/>
+                </div>
+            }
         </div>
     )
 };
+
 UserInformationComponent.propTypes = {
     user: PropTypes.object.isRequired
 };

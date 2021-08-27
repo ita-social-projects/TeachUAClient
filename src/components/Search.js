@@ -162,7 +162,7 @@ class Search extends React.Component {
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
-                    autoFocus={this.state}
+                    autoFocus={(document.URL.indexOf("/marathon") > -1 ) || (document.URL.charAt(document.URL.length-1) == '/') ? "" : this.state}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
                     style={{

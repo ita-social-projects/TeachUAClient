@@ -7,14 +7,16 @@ import {getUserId} from "../../../service/StorageService";
 import {useForm} from "antd/es/form/Form";
 
 
-const ClubsTab = ({center}) => {
+const ClubsTab = ({center,result,setResult}) => {
        const [centerId,setCenterId] = useState(center.id)
        const [isShowing,setShowing] = useState(false)
        const [clubs,setClubs] = useState([])
        const [fromCenter,setFromCenter] = useState(true)
            useEffect(() => {
-          getClubsByCenterId(centerId).then(response => {setClubs(response)})
-    }, [])
+                   getClubsByCenterId(centerId).then(response => setClubs(response))
+                  clubs.map(club => setResult(Object.assign({result,clubsIds:club.id})))
+               }, [])
+
 
     return (
         <Form

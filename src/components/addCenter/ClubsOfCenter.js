@@ -80,7 +80,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                     className="add-club-modal">Додати гурток</span>
             <div className="btn">
                 <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
-                <button className="finish-btn" htmlType="submit">Додати центр і завершити</button>
+                <button className="finish-btn" htmlType="submit">Завершити</button>
             </div>
         </Form>
     )

@@ -35,6 +35,7 @@ const AuthMenu = () => {
         window.location.assign(process.env.PUBLIC_URL);
     };
 
+
     useEffect(() => {
         if(getUserId()) {
             getUserById(getUserId()).then(response => {
@@ -54,6 +55,7 @@ const AuthMenu = () => {
     }, [isLogin])
 
     const profileDropdown = () => {
+    
         if (getToken()) {
             return (
                 <Menu>

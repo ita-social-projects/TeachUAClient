@@ -61,9 +61,8 @@ export const addCenter = async (data) => {
         userId: data.userId,
         contacts: data.contacts,
         locations: data.locations,
-        urlLogo: data.urlLogo,
-        urlBackground: data.urlBackground,
-        clubsId: data.clubs,
+        urlLogo: data.urlLogo && data.urlLogo.file.response ,
+        urlBackground: data.urlBackground && data.urlBackground.file.response,
     }).then((response) => {
         return response.data
     }).catch((error) => {
@@ -80,7 +79,6 @@ export const updateCenterById = async (data) => {
                 locations: data.locations,
                 urlLogo: data.urlLogo ,
                 urlBackground: data.urlBackground,
-                clubsId: data.clubs,
             })
             .then((response) => {
                 return response.data;

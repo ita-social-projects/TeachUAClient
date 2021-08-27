@@ -25,11 +25,13 @@ const ClubListSider = ({
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
-    const [stateForClub , setStateForClub] = useState(true);
+    const [stateForClub , setStateForClub] = useState(false);
     const getData = () => {
         setCurrentPage(0);
         getAdvancedData(0);
     };
+
+    setIsCenterChecked(stateForClub);
 
     useEffect(() => {
         if (activeCategory) {
@@ -65,9 +67,9 @@ const ClubListSider = ({
 
         if (values.hasOwnProperty("isCenter")){
             if (values.isCenter !== true){
-                setStateForClub(true);
-            } else {
                 setStateForClub(false);
+            } else {
+                setStateForClub(true);
             }
         }
 
@@ -96,6 +98,14 @@ const ClubListSider = ({
         form.setFieldsValue({districtName: undefined});
         form.setFieldsValue({stationName: undefined});
     };
+
+    const clearAllValues = () => {
+        onCityChange(undefined);
+        form.setFieldsValue({categoriesName: activeCategory});
+        form.setFieldsValue({isOnline: undefined});
+        setAge(undefined);
+        form.setFieldsValue({age: undefined});
+    }
 
     const onKeyPress = (event) => {
         const specialCharRegex = /^\d+$/;
@@ -180,7 +190,7 @@ const ClubListSider = ({
                     </Select>
                 </Form.Item>
 
-                {stateForClub === true ? (
+                {stateForClub === false ? (
                 <Form.Item
                     name="isOnline"
                     className="club-list-row"
@@ -196,7 +206,7 @@ const ClubListSider = ({
                     </Checkbox.Group>
                 </Form.Item>
                 ): <Form.Item/>}
-                {stateForClub === true ? (
+                {stateForClub === false ? (
                 <Form.Item
                     name="categoriesName"
                     className="club-list-row"
@@ -214,7 +224,7 @@ const ClubListSider = ({
                     </Checkbox.Group>
                 </Form.Item>
                 ): <Form.Item/>}
-                {stateForClub === true ? (
+                {stateForClub === false ? (
                 <Form.Item
                      name="age"
                      label="Вік дитини"
@@ -232,7 +242,7 @@ const ClubListSider = ({
                 ): <Form.Item/>}
             <div className="use-clear-button">
                 <div className="mobile-clear-button">
-                        <Button className="mobile-button clear-button">
+                        <Button className="mobile-button clear-button" onClick={() => {clearAllValues()}}>
                             Очистити
                         </Button>
                 </div>

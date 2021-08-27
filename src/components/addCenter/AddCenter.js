@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Rate } from 'antd';
+import { Layout, Modal } from 'antd';
 import { Steps } from 'antd';
 import "./css/AddCenter.css"
 import MainInformation from './MainInformation';
@@ -10,6 +10,9 @@ import { getAllClubsByUserId, getClubsByUserId } from "../../service/ClubService
 import { getUserId } from "../../service/StorageService";
 import { getAllCities } from '../../service/CityService';
 import { getAllContacts } from '../../service/ContactService';
+import AddCenterSider from "./AddCenterSider";
+import AddCenterSiderMobile from "./AddCenterSiderMobile";
+import {Content} from "antd/es/layout/layout";
 
 
 const { Step } = Steps;
@@ -24,6 +27,7 @@ const AddCenter = ({isShowing, setShowing}) => {
     const [contacts, setContacts] = useState([]);
     const [result, setResult] = useState({});
     const [fromCenter,setFromCenter] = useState(true);
+    const [isMobile, setIsMobile]  = useState(false);
 
     useEffect(() => {
         getAllClubsByUserId(getUserId()).then(response => {
@@ -52,7 +56,17 @@ const AddCenter = ({isShowing, setShowing}) => {
             userId: getUserId()
         })
         console.log("ADD CENTER USE EFFECT")
+        window.addEventListener("resize", handleResize)
     }, [visible])
+
+
+    const handleResize = () => {
+        if (window.innerWidth < 577) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
 
     const currentComponnet = (step) => {
         switch (step) {
@@ -104,32 +118,26 @@ const AddCenter = ({isShowing, setShowing}) => {
     return (
       
             <Modal
+                className="addCenter"
                 centered
                 visible={isShowing}
+                onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 width={880}
                 footer={null}
-                className='addCenter'
             >
-                <div class="layout">
-                    <div class="side">
-                        <Steps direction="vertical" current={step}>
-                            <Step title="Основна інформація"></Step>
-                            <Step title="Контакти"></Step>
-                            <Step title="Опис"></Step>
-                            <Step title="Гуртки"></Step>
-                        </Steps>
-
-                    </div>
-                    <div className="content">
+                <Layout>
+                    <AddCenterSider step={step}/>
+                    <Content className="add-center-container">
                         <div className="modal-title">
                             Додати центр
                         </div>
+                        <AddCenterSiderMobile step={step}/>
                         <div className="input-data">
                             {currentComponnet(step)}
                         </div>
-                    </div>
-                </div>
+                    </Content>
+                </Layout>
             </Modal>
       
     )

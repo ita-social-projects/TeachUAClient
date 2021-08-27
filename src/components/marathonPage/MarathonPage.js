@@ -4,7 +4,7 @@ import "./css/MarathonPage.css";
 import MarathonBanner from "./MarathonBanner";
 import MarathonDescription from "./MarathonDescription";
 import AboutHeader from "../mainPage/MainHeader";
-
+import MarathonDayCarousel from "./MarathonDayCarousel";
 const MarathonPage = () => {
 
     useEffect(() => {
@@ -14,9 +14,9 @@ const MarathonPage = () => {
     return (
         <Layout className="global-padding marathon-page">
             <AboutHeader />
-            <MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.png`} />
+            <MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.jpg`} />
             <MarathonDescription />
-           
+            <MarathonDayCarousel/>
         </Layout>
     );
 };

@@ -17,7 +17,7 @@ export const items = (uri) => [
             </div>)
     },
     {
-        imageURL: `${uri}/static/images/about/slider/maraton.png`,
+        imageURL: `${uri}/static/images/about/slider/maraton.jpg`,
         body: (
             <div className="carousel-item-1">
                 <h2 className="label">Мовомаратон до 30-ї річниці <span></span>

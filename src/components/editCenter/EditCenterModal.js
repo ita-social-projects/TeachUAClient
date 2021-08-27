@@ -12,21 +12,20 @@ import {getClubsByCenterId} from "../../service/ClubService";
 const EditCenterModal = ({centerId}) => {
     const [visible, setVisible] = useState(false);
     const [result, setResult] = useState({});
-    const [categories, setCategories] = useState([]);
-    const [cities, setCities] = useState([]);
     const [contacts, setContacts] = useState([]);
-    const [station, setStation] = useState([]);
     const [center, setCenter] = useState([]);
+    const [cities, setCities] = useState([]);
     const [clubs, setClubs] = useState([]);
+    const [contacts_data,setContactsData] = useState({})
+
 
 
     useEffect(() => {
         getClubsByCenterId(centerId).then(response => setClubs(response))
-        getAllCategories().then(response => setCategories(response))
         getAllContacts().then(response => setContacts(response))
-        getCenterById(centerId).then(response => setCenter(response))
+        getCenterById(centerId).then(response =>setCenter(response))
+        getCenterById(centerId).then(response =>setResult(response))
         getAllCities().then(response => setCities(response))
-        getAllStations().then(response => setStation(response))
     }, []);
 
     return (
@@ -43,7 +42,7 @@ const EditCenterModal = ({centerId}) => {
                 onCancel={() => setVisible(false)}
                 footer={false}
             >
-                <div className="header-edit-center">Редагувати гурток</div>
+                <div className="header-edit-center">Редагувати центр</div>
                 <EditCenterTabs
                     clubs={clubs}
                     set={setClubs}
@@ -52,7 +51,9 @@ const EditCenterModal = ({centerId}) => {
                     center={center}
                     setClubs={setClubs}
                     contacts={contacts}
-                    cities={cities}/>
+                    cities={cities}
+                    setContactsData={setContactsData}
+                    contacts_data={contacts_data}/>
             </Modal>
         </div>
     );

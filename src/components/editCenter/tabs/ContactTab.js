@@ -9,10 +9,9 @@ import {logDOM} from "@testing-library/react";
 
 const {Option} = Select;
 
-const ContactTab = ({contacts, cities, center,setResult,result}) => {
+const ContactTab = ({contacts, cities, center,setResult,result,contacts_data,setContactsData}) => {
     const [locations, setLocations] = useState([])
     const [city, setCity] = useState()
-    const [contacts_data, setContactsData] = useState({});
     const [contactValue, setContactValue] = useState();
     const [someContact, setSome] = useState([]);
 
@@ -25,19 +24,18 @@ const ContactTab = ({contacts, cities, center,setResult,result}) => {
 
     }
 
-    const onChange = (values) => {
-        setResult(Object.assign(result,values.target))
-        console.log(result)
-    }
     useEffect(() => {
-        center.contacts.map(e => setContactsData(Object.assign({...contacts_data,[e.contactType.id]:e.contact_data})))
         console.log(contacts_data)
     }, [])
 
     const changeContacts = (e, contact) => {
-         setContactsData(Object.assign({...contacts_data ,[contact.id]: e.target.value}))
-         const newContact = JSON.stringify(contacts_data).replaceAll(":", "::")
-        setResult(Object.assign(result,newContact))
+        setContactsData({
+            ...contacts_data,
+            [contact.id]: e.target.value
+        });
+        const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
+        setResult({...result, contacts: parsedContact})
+        console.log(result)
         };
 
 

@@ -5,47 +5,56 @@ import "../css/MainInformationTab.css"
 import {PlusOutlined} from "@ant-design/icons";
 import AddLocationModal from "../../addClub/location/AddLocationModal";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
+import {updateCenterById} from "../../../service/CenterService";
 
 
-const MainInformationTab = ({center,form,cities,result,setResult}) =>{
+const MainInformationTab = ({center,form,cities,result,setResult,contacts_data}) =>{
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
-    const [locations,setLocations] = useState([]);
+    const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
 
     const onFinish = (values) => {
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
+        ChangeLocation(values)
+        setResult(Object.assign(result, values));
+        updateCenterById(result)
+    }
+    const onRemove = (item) => {
+        const newData = [...locations];
+        const index = newData.findIndex((it) => item.key === it.key);
+        newData.splice(index, 1);
+        setLocations(newData);
+    };
+    const ChangeLocation = (values) => {
         if (locations !== []) {
+
             for (const loc in locations) {
                 console.log(locations[loc]);
-                values.locations[loc] = {
-                    id: locations[loc].id,
-                    cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
-                    address: locations[loc].address,
-                    coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
-                    districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
-                    key: locations[loc].key,
-                    name: locations[loc].name,
-                    phone: locations[loc].phone,
-                    stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                if (values.locations.name !== result.locations.name) {
+                    values.locations[loc] = {
+                        id: locations[loc].id,
+                        cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+                        address: locations[loc].address,
+                        coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+                        districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+                        key: locations[loc].key,
+                        name: locations[loc].name,
+                        phone: locations[loc].phone,
+                        stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                    }
                 }
             }
         } else {
             values.locations = locations;
         }
-        setResult(Object.assign(result, values));;
 
+        Object.assign(result,values)
     }
-    const onRemove = (item) => {
-        console.log(item);
-        const newData = [...locations];
-        console.log(newData);
-        const index = newData.findIndex((it) => item.key === it.key);
-        newData.splice(index, 1);
-        setLocations(newData);
-    };
     useEffect(() => {
-        setResult({...result,name:center.name })
         setLocations(center.locations)
+        setResult({...result,name:center.name })
+
     }, [])
 
     return (
