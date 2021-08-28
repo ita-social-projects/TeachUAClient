@@ -77,17 +77,17 @@ export const PasswordUpdate = () => {
                         message: "Пароль повинен містити великі/маленькі літери, цифри та спеціальні символи"
                     },
                     ({getFieldValue}) => ({
-                    validator(_, value) {
-                    if (getFieldValue('currentPassword') != value) {
-                    return Promise.resolve();
-                }
+                        validator(_, value) {
+                            if (getFieldValue('currentPassword') != value) {
+                                return Promise.resolve();
+                            }
 
-                    return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
-                },
+                            return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
+                        },
 
-                }),
+                    }),
 
-                    ]}>
+                ]}>
 
                 <Input.Password
                     className="user-edit-box"
@@ -293,9 +293,7 @@ const UserEditInput = (
                 </Upload>
             </Form.Item>
 
-
             <div>
-
                 <div className={"align-checkbox"}>
                     <input name="checkbox"
                            type="checkbox"

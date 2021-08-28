@@ -15,7 +15,7 @@ const FooterPartners = () => {
                     <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/logo1.png`}
                          className="logo" alt="Mova_obyednue"/> </a>
 
-                <a target="blank" href="https://www.ed-era.com">
+                <a target="_blank" href="https://www.ed-era.com">
                     <img src={`${process.env.PUBLIC_URL}/static/images/footer/sponsors/EDERA.svg`}
                          className="logo" alt="EDERA"/>
                 </a>
