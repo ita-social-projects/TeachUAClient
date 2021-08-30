@@ -33,8 +33,9 @@
 @media (min-width: 500px)
 and (max-width: 1000px) {
     .marathon-task-page {
+        background: #f7e0d3;
         color: #f7e0d3;
-        margin-top: 18%;
+        /* margin-top: 18%;*/
         flex-direction: column !important;
     }
 }
@@ -42,7 +43,8 @@ and (max-width: 1000px) {
 @media (min-device-width: 320px)
 and (max-device-width: 500px) {
     .marathon-task-page {
-        margin-top: 28%;
+        /* margin-top: 28%;*/
+        background: #f7e0d3;
         flex-direction: column !important;
     }
 }
@@ -50,7 +52,7 @@ and (max-device-width: 500px) {
 @media (min-device-width: 320px)
 and (max-device-width: 1000px) {
     .page-task-content {
-
+        margin-top: 5%;
         align-items: center;
         display: flex;
         align-content: space-between;
