@@ -68,22 +68,38 @@ and (min-device-width: 1080px) {
   display: none;
 }
 
-.user-edit .edit-header {
-  width: 85%;
-  //width: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  color: #002766;
-  font-weight: 700;
-  border-radius: 16px;
-  margin-top: 32px;
-  //margin-left: 40px;
-  margin-left: 20px;
+@media screen
+and (max-width: 370px){
+  .user-edit .edit-header {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #002766;
+    font-weight: 700;
+    border-radius: 16px;
+    margin-top: 32px;
+    //margin-left: 40px;
+    margin-left: 5%;
+  }
+}
+
+@media screen
+and (min-width: 371px){
+  .user-edit .edit-header {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #002766;
+    font-weight: 700;
+    border-radius: 16px;
+    margin-top: 32px;
+    margin-left: 40px;
+  }
 }
 
 .user-edit .ant-modal-close-x {
-  //padding-top: 17px;
   padding-right: 18px;
   margin-top: -5px;
 }
@@ -188,7 +204,6 @@ and (min-device-width: 320px) {
   padding-left: 40px;
 }
 
-
 .user-edit .user-edit-password {
   display: flex;
   flex-direction: column;
@@ -234,21 +249,7 @@ and (min-device-width: 601px) {
 }
 
 @media screen
-and (min-device-width: 401px) {
-  .user-edit .submit-button {
-    padding: 8px 24px;
-    width: 270px;
-    height: 40px;
-    background: #FA8C16 !important;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 16px;
-    color: #FFFFFF !important;
-  }
-}
-
-@media screen
-and (max-device-width: 400px) {
+and (max-device-width: 450px) {
   .user-edit .submit-button {
     margin-left: -10%;
     padding: 8px 24px;
@@ -262,17 +263,32 @@ and (max-device-width: 400px) {
   }
 }
 
-@media (min-width: 400px) {
-  .user-edit .user-edit-footer {
+@media screen
+and (min-device-width: 451px) {
+  .user-edit .submit-button {
     float: right;
-    margin-right: 40px;
+    padding: 8px 24px;
+    width: 270px;
+    height: 40px;
+    background: #FA8C16 !important;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFFFFF !important;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .user-edit .user-edit-footer {
     float: right;
     margin: auto;
+  }
+}
+
+@media (min-width: 451px) {
+  .user-edit .user-edit-footer {
+    float: right;
+    margin-right: 40px;
   }
 }
 
