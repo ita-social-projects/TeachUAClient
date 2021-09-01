@@ -39,10 +39,15 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
-        value=value.trim();
+
+        if(value==undefined){
+            return;
+        }
+
         if(value.trim().length===0){
             return;
         }
+        value=value.trim();
         if (this.props.redirect && value.length > 2) {
             this.props.history.push("/clubs", {value});
         }
@@ -107,8 +112,12 @@ class Search extends React.Component {
 
     onKeyDown = (event) => {
         if (event.key === "Enter") {
-            event.target.defaultValue &&
-            this.onSearchChange(event.target.defaultValue, {type: "all"});
+            //this.props.history.push("/clubs", event.target.input);
+            //event.target.defaultValue &&
+            //this.onSearchChange(event.target.defaultValue, {type: "all"});
+            this.setState({loading: true});
+            this.onSearchChange(event.target.input, {type: "all"});
+            this.setState({loading: false});
         }
     };
 
