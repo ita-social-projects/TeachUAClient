@@ -21,7 +21,7 @@ const MainCategories = () => {
     const carousel = useRef(null);
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 5,
