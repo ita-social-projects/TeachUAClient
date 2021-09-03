@@ -54,9 +54,31 @@ const AuthMenu = () => {
         }
     }, [isLogin])
 
+    const checkToken = () => {
+        if(getToken()){
+              const token = getToken();
+              const payload = JSON.parse(atob(token.split(".")[1]));
+              const expiration = new Date(payload.exp);
+              const now = new Date();
+              if( expiration.getTime() - now.getTime()/1000  < 0 ){
+               onExitClick();
+               return false;
+              }else{
+              return true;
+        }}
+    }
+    const [isTokenValid, setIsTokenValid] = useState(checkToken);
+
+
+    useEffect(() => {
+        setIsTokenValid(checkToken());
+    })
+    
+
+
     const profileDropdown = () => {
     
-        if (getToken()) {
+        if (isTokenValid) {
             return (
                 <Menu>
                     <Menu.Item><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>

@@ -30,19 +30,20 @@ const UserInformationComponent = ({ user }) => {
     return (
         <div className="user-profile-page">
             <div className="user-information">
+                {!isMobile &&
+                <div className="edit-button">
+                    <UserEditModal user={user}/>
+                </div>
+                }
                 <div className="user-info">
-                    <Avatar className="user-avatar"  src={userAvatar} icon={<UserOutlined />} />
+                    <Avatar className="user-avatar" size={68} src={userAvatar} icon={<UserOutlined />} />
                     <div>
                         <div className="user-name">{user.firstName} {user.lastName}
                         </div>
                         <div className="user-role"> {user.roleName}</div>
                     </div>
-                    {!isMobile &&
-                        <div className="edit-button">
-                            <UserEditModal user={user}/>
-                        </div>
-                    }
                 </div>
+
                 <div className="user-contacts">
                     <div className="user-phone">
                         Телефон

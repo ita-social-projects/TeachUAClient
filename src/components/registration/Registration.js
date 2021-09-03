@@ -16,17 +16,18 @@ const Registration = ({isShowing, setShowing}) => {
 
     const onFinish = (values) => {
         setShowing(false)
-        message.success({
-            content: 'Ви успішно зареєструвалися! \n' +
-                'Вам на пошту відправлено лист з лінкою для підтвердження реєстрації',
-            duration: 5,
-            className: "custom-class-confirmation",
-        });
+
         console.log(values);
         signUp(values).then((response) => {
             if (response.status) {
                 message.error("Вказаний email вже зареєстрований на сайті");
             } else {
+                message.success({
+                    content: 'Ви успішно зареєструвалися! \n' +
+                        'Вам на пошту відправлено лист з лінкою для підтвердження реєстрації',
+                    duration: 5,
+                    className: "custom-class-confirmation",
+                });
                 setShowing(false)
             }
         });

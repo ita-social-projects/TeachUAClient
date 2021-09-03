@@ -1,17 +1,14 @@
 @media (max-device-width: 1050px) {
 
-    .task-content .innerHTML-from-js a {
+    .innerHTML-from-js  a{
         color: #58a6ff;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
-        display: -webkit-box;
-        width: 60%;
+        text-align: unset;
+        white-space: nowrap;
     }
 }
 
 @media (min-device-width: 1050px) {
-    .task-text .innerHTML-from-js a {
+     .innerHTML-from-js a {
         color: #58a6ff;
     }
 }
@@ -33,8 +30,9 @@
 @media (min-width: 500px)
 and (max-width: 1000px) {
     .marathon-task-page {
+        background: #f7e0d3;
         color: #f7e0d3;
-        margin-top: 18%;
+        /* margin-top: 18%;*/
         flex-direction: column !important;
     }
 }
@@ -42,7 +40,8 @@ and (max-width: 1000px) {
 @media (min-device-width: 320px)
 and (max-device-width: 500px) {
     .marathon-task-page {
-        margin-top: 28%;
+        /* margin-top: 28%;*/
+        background: #f7e0d3;
         flex-direction: column !important;
     }
 }
@@ -50,7 +49,7 @@ and (max-device-width: 500px) {
 @media (min-device-width: 320px)
 and (max-device-width: 1000px) {
     .page-task-content {
-
+        margin-top: 5%;
         align-items: center;
         display: flex;
         align-content: space-between;
@@ -189,15 +188,15 @@ and (max-device-width: 1000px) {
 
     }
 
-    .task-content .innerHTML-from-js a {
+     .innerHTML-from-js a {
         color: #58a6ff;
     }
 
-    .task-text .innerHTML-from-js a {
+   .innerHTML-from-js a {
         color: #58a6ff;
     }
 
-    .task-text .innerHTML-from-js #headline {
+    .innerHTML-from-js #headline {
         font-weight: bold;
     }
 

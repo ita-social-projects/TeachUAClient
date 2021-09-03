@@ -73,21 +73,21 @@ export const PasswordUpdate = () => {
 
                     },
                     {
-                        pattern: /^.*(?=.)(?=.*[а-щА-ЩїюьяЇЮЯЄєa-zA-Z])(?=.*\d)(?=.*[~`!@#$%^&()_=+{}[\]/|:;"<>?])[а-щА-ЩїюьяЇЮЯЄєa-zA-Z0-9~`!@#$%^&()_=+{}[\]/|:;"<>?]+$/,
-                        message: "Пароль повинен містити великі/маленькі літери, цифри та спеціальні символи"
+                        pattern: /^(?=[a-zA-Z0-9~`!@#$%^&()_=+{}[\]|:;"<>?])(?=.*[a-zA-Z])(?=.*\d)(?=.*[~`!@#$%^&()_=+{}[\]|:;"<>?])[a-zA-Z0-9~`!@#$%^&()_=+{}[\]|:;"<>?]+$/,
+                        message: "Пароль повинен містити великі/маленькі літери латинського алфавіту, цифри та спеціальні символи"
                     },
                     ({getFieldValue}) => ({
-                    validator(_, value) {
-                    if (getFieldValue('currentPassword') != value) {
-                    return Promise.resolve();
-                }
+                        validator(_, value) {
+                            if (getFieldValue('currentPassword') != value) {
+                                return Promise.resolve();
+                            }
 
-                    return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
-                },
+                            return Promise.reject(new Error('Значення поля ‘Новий пароль’ має відрізнятися від значення поля ‘Старий пароль’'));
+                        },
 
-                }),
+                    }),
 
-                    ]}>
+                ]}>
 
                 <Input.Password
                     className="user-edit-box"
@@ -293,9 +293,7 @@ const UserEditInput = (
                 </Upload>
             </Form.Item>
 
-
             <div>
-
                 <div className={"align-checkbox"}>
                     <input name="checkbox"
                            type="checkbox"

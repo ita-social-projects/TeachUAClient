@@ -63,7 +63,7 @@
   color: #FA8C16;
 }
 
-@media (max-width: 849px) {
+@media (max-width: 850px) {
   .user-page .user-content .user-profile-page {
     background-color: #ffffff;
     height: 244px;
@@ -73,32 +73,43 @@
     margin-right: 86px;
     display: flex;
     justify-content: space-between;
-  }}
-
-@media (min-width: 850px) {
-.user-page .user-content .user-profile-page {
-  background-color: #ffffff;
-  height: 244px;
-  border-radius: 16px;
-  margin-top: 32px;
-  margin-left: 28px;
-  margin-right: 86px;
-  display: flex;
-  justify-content: space-between;
-}}
-
-
-.user-page .user-content .user-info {
-  width: 100%;
-  display: flex;
-  padding-top: 4%;
-  margin-left: 5%;
+  }
 }
 
-@media (min-width: 850px){
-  .user-avatar {
-    height: 80px;
-    width: 100px;
+@media (min-width: 851px) {
+  .user-page .user-content .user-profile-page {
+    background-color: #ffffff;
+    height: 244px;
+    border-radius: 16px;
+    margin-top: 32px;
+    margin-left: 28px;
+    margin-right: 86px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .user-page .user-content .user-info {
+    width: 60%;
+    display: flex;
+    padding-top: 4%;
+    margin-left: 5%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 850px) {
+  .user-page .user-content .user-info {
+    width: 95%;
+    display: flex;
+    padding-top: 4%;
+    margin-left: 5%;
+  }
+}
+
+@media (max-width: 319px) {
+  .user-page .user-content .user-info {
+    width: 49%;
+    display: flex;
+    padding-top: 4%;
+    margin-left: 5%;
   }
 }
 
@@ -148,30 +159,6 @@
   margin-left: 70px;
 }
 
-@media (min-width: 850px) {
-  .edit-button {
-    width: 80%;
-    display: flex;
-    margin-right: 4%;
-    justify-content: flex-end;
-    padding-right: 42px !important;
-    font-size:medium;
-    align-content: center;
-  }
-}
-
-@media (max-width: 849px) {
-  .edit-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-right: 11% !important;
-    margin-top: 5%;
-    font-size:medium;
-    align-content: center;
-  }
-}
-
 .user-profile-page .ant-btn-text {
   font-weight: 600;
   font-size: 100%;
@@ -199,7 +186,6 @@
     padding-left: 100px !important;
   }
 
-
   .user-profile-page {
     display: block !important;
     height: 280px !important;
@@ -207,18 +193,18 @@
   }
 
   .edit-button {
-    text-align: center;
-    padding-top: 5px;
-    margin-bottom: 2%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 3%;
+      font-size:medium;
   }
 }
-
 
 @media (min-width: 851px) {
   .content-title, .club-title {
     padding-left: 100px !important;
   }
-
 
   .user-profile-page {
     margin-left: 100px !important;
@@ -229,8 +215,10 @@
   }
 
   .edit-button {
-    padding-top: 5px;
-   // padding-left: 45px;
+    float: right;
+    margin-top: 3%;
+    margin-right: 1% !important;
+    font-size: medium;
   }
 }
 
@@ -242,11 +230,6 @@
   .user-contacts {
     padding-left: 40px !important;
     min-width: 250px;
-  }
-
-  .ant-avatar {
-    height: 50px !important;
-    width: 50px !important;
   }
 
   .user-page .user-phone-data, .user-email-data {
@@ -263,11 +246,6 @@
 
   .user-page .user-email {
     padding-top: 10px;
-  }
-
-  .edit-button {
-    //padding-top: 15px;
-    //padding-left: 25px;
   }
 
   .user-page .add-club-dropdown .ant-btn {
@@ -288,13 +266,5 @@
     font-size: 22px;
     margin-top: 4px;
     margin-left: 9px;
-  }
-
-}
-
-@media (min-width: 320px) and (max-width: 824px) {
-  .ant-avatar {
-    height: 42px !important;
-    width: 40px !important;
   }
 }
