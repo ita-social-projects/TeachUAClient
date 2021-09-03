@@ -7,8 +7,7 @@ module.exports = {
       subheader: ``,
       text: `Ми розпочали наш Мовомаратон до 30-річчя Незалежності України! Дякуємо усім, хто приєднався! Упродовж 30 днів ми зробимо 30 кроків  до української мови.
       
-      Що чекає на учасників? Щодня ми надсилатимемо вам у Telegram-чат невеликі навчальні матеріали та завдання, які допоможуть подолати мовний бар’єр і зробити так, щоб української мови навколо  стало більше. Упродовж  30 днів ми пройдемо шлях від розуміння мотивації, отримання психологічної підтримки для подолання мовного бар’єру – 
-      до практики і занурення в українську мову та культуру.`,
+      Що чекає на учасників? Щодня ми надсилатимемо вам у Telegram-чат невеликі навчальні матеріали та завдання, які допоможуть подолати мовний бар’єр і зробити так, щоб української мови навколо  стало більше. Упродовж  30 днів ми пройдемо шлях від розуміння мотивації, отримання психологічної підтримки для подолання мовного бар’єру – до практики і занурення в українську мову та культуру.`,
       text2: `Ви зможете поставити запитання спеціалістам під час вебінарів (про час ми повідомимо додатково, вебінари будуть доступні у запису):
 
       ●\t20 серпня о 10.00 – вебінар «Перейти на українську: виклики та можливості». Ольга Андрусенко, мовна тренерка, викладачка-волонтерка, співавторка програм курсів української мови.
@@ -136,7 +135,7 @@ module.exports = {
     <span id ="headline">Загін Кіноманів</span> <a  href= "https://bit.ly/2IDl6EF">https://bit.ly/2IDl6EF </a>
     Тут рецензії на українські та іноземні фільми, а також цікаві репортажі з фестивалів і прем'єр.
 
-    <span id ="headline">Geek Journal</span> <a  href= "https://www.youtube.com/c/GeekJournal">https://www.youtube.com/c/GeekJournal</a> 
+    <span id ="headline">Geek Journal</span> <a  href= "https://www.youtube.com/c/GeekJournal" style="-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 60%;">https://www.youtube.com/c/GeekJournal</a> 
     Тут можна знайти огляди українських та іноземних фільмів, актуальні новини зі всього світу та ще багато цікавого. 
 
     <span id ="headline">Корейці на човні</span> <a  href= "http://bit.ly/37iQKha">http://bit.ly/37iQKha</a> 
@@ -144,7 +143,7 @@ module.exports = {
 
     <span id ="headline">Про музику:</span>
 
-     <span id ="headline">З любов’ю до дітей - Дитячі пісні</span> <a  href= "https://www.youtube.com/user/SonechkoProject">https://www.youtube.com/user/SonechkoProject</a>
+     <span id ="headline">З любов’ю до дітей - Дитячі пісні</span> <a  href= "https://www.youtube.com/user/SonechkoProject" style="-webkit-box-orient: vertical;-webkit-line-clamp: 1; overflow: hidden;display: -webkit-box; width: 60%;">https://www.youtube.com/user/SonechkoProject</a>
     Тут ви знайдете веселі дитячі пісні, цікаві абетки, руханки, розвивальні відео та мультики для дітей українською мовою. 
     
     <span id ="headline"> Polyphonyproject.com</span>  <a  href= "http://bit.ly/36fIiP1">http://bit.ly/36fIiP1</a> 
@@ -225,7 +224,7 @@ module.exports = {
 
 2. у власних назвах — топонімах України: Ґорґа́ни (гірський масив), Ґоро́нда, У́ґля (села на Закарпатті), у прізвищах українців: Ґалаґа́н, Ґалято́вський, Ґе́ник, Ґерза́нич, Ґерда́н, Ґжи́цький, Ґи́ґа, Ґо́ґа, Ґо́йдич, Ґо́нта, Ґри́ґа, Ґудзь, Ґу́ла, Лома́ґа. 
 
- <span id="headline">Гете чи Ґете?</span> Про те, як позначаються звуки [g], [h] у словах іншомовного походження, ви можете прочитати у §122: <a href="https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf">https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf</a>    
+ <span id="headline">Гете чи Ґете?</span> Про те, як позначаються звуки [g], [h] у словах іншомовного походження, ви можете прочитати у §122: <a href="https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf" style=" -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 60%;" >https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf</a>    
 
 Варто пам'ятати про кличний відмінок. Тут ми знову зацитуємо професора Пономарева: 
 
@@ -233,7 +232,7 @@ module.exports = {
 
 Тому частіше використовуйте кличний відмінок! 
 
-Більше про кличний відмінок дивіться сторінку 95 Українського правопису <a href= "https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf">https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf</a>  
+Більше про кличний відмінок дивіться сторінку 95 Українського правопису <a href= "https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf" style=" -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 60%;">https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf</a>  
 
 Нас запитують, чому Мовомаратон, а не Мовомарафон. Розповідаємо :) 
 
@@ -409,18 +408,18 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
       text: `Жартуйте, створюйте і поширюйте меми українською мовою. Тут нам дуже хочеться додати, що жарти є різні - добрі і злі. Ми не підтримуємо поширення жартів і мемів, які роздмухують ворожнечу за ознаками раси, статі, віросповідання, кольору шкіри, громадянства, етнічної приналежності, мови тощо. `,
         text2:`Меми - це значно глибше поняття, ніж смішна картинка з написом. Більше ви можете прочитати тут: <a href="https://uacrisis.org/uk/kulturovirusy"> https://uacrisis.org/uk/kulturovirusy</a> Однак ми нині хочемо вас познайомити із ресурсами, де ви можете читати жарти і дивитись меми українською мовою.  
 
-<li>Гумор українською <a href="https://www.facebook.com/groups/mememeua/">https://www.facebook.com/groups/mememeua/</a>
-<li>ГУ <a href="https://www.facebook.com/nohumor.in.ua"> https://www.facebook.com/nohumor.in.ua </a>
+<li>Гумор українською <a href="https://www.facebook.com/groups/mememeua/" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://www.facebook.com/groups/mememeua/</a>
+<li>ГУ <a href="https://www.facebook.com/nohumor.in.ua" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;"> https://www.facebook.com/nohumor.in.ua </a>
 <li>Чумусь ("Файні та придуркуваті меми українською") <a href="https://www.facebook.com/Chumuss/"> https://www.facebook.com/Chumuss/</a>
-<li>I'm Not Even Sorry <a href="https://www.facebook.com/NotEvenSorryPage/">https://www.facebook.com/NotEvenSorryPage/</a>
-<li>kozak.memes <a href="https://www.instagram.com/kozak.memes/">https://www.instagram.com/kozak.memes/</a>
-<li>(Контент 18+) Безсоромники International <a href="https://www.facebook.com/groups/203209764937846">https://www.facebook.com/groups/203209764937846</a> 
+<li>I'm Not Even Sorry <a href="https://www.facebook.com/NotEvenSorryPage/" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://www.facebook.com/NotEvenSorryPage/</a>
+<li>kozak.memes <a href="https://www.instagram.com/kozak.memes/" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://www.instagram.com/kozak.memes/</a>
+<li>(Контент 18+) Безсоромники International <a href="https://www.facebook.com/groups/203209764937846" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://www.facebook.com/groups/203209764937846</a> 
 
 Перед тим, як поширити мем російською, подумайте, чому б не зробити це українською. А й справді, чому? Самому чи самій взяти і зробити мем можна на цьому сайті: <a href="https://nohumor.in.ua/">https://nohumor.in.ua/</a> або ж на інших ресурсах, як от, наприклад, canva.com абощо. 
 
-Як створювати наукові меми для уроків <a href="https://osvitoria.media/experience/yak-stvoryuvaty-naukovi-memy-dlya-urokiv/">https://osvitoria.media/experience/yak-stvoryuvaty-naukovi-memy-dlya-urokiv/</a> 
+Як створювати наукові меми для уроків <a href="https://osvitoria.media/experience/yak-stvoryuvaty-naukovi-memy-dlya-urokiv/" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://osvitoria.media/experience/yak-stvoryuvaty-naukovi-memy-dlya-urokiv/</a> 
 
-Як використовувати при підготовці до ЗНО меми <a href="https://osvitoria.media/experience/bombezno-8-krutyh-metodiv-dlya-pidgotovky-do-zno-z-ukrayinskoyi/">https://osvitoria.media/experience/bombezno-8-krutyh-metodiv-dlya-pidgotovky-do-zno-z-ukrayinskoyi/ </a>  `,
+Як використовувати при підготовці до ЗНО меми <a href="https://osvitoria.media/experience/bombezno-8-krutyh-metodiv-dlya-pidgotovky-do-zno-z-ukrayinskoyi/" style=" -webkit-box-orient: vertical;  overflow: hidden; display: -webkit-box; width: 90%;">https://osvitoria.media/experience/bombezno-8-krutyh-metodiv-dlya-pidgotovky-do-zno-z-ukrayinskoyi/ </a>  `,
         taskTitle: `Завдання`,
       task: `Поділіться вашими улюбленими мемами українською мовою або перекладіть їх на українську, якщо вони іншими мовами.  `,
     },
@@ -433,7 +432,7 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
       
 Вебінар “Запам'ятовувати легко: українська мова + ейдетика та мнемотехніка" проведе Мар'яна Лелик - письменниця, літературна редакторка, тренерка з ейдетики та мнемотехніки. Початок о 12.00.  
 
-Трансляція: <a hre="https://youtu.be/pBb9LqBGIgg" style="color:#58a6ff">https://youtu.be/pBb9LqBGIgg</a>   `,
+Трансляція: <a href="https://youtu.be/pBb9LqBGIgg" style="color:#58a6ff">https://youtu.be/pBb9LqBGIgg</a>   `,
         text2:`Ейдетика та мнемотехніка (мистецтво запам'ятовувати) - це сукупність прийомів та способів, які спрощують запам'ятовування, полегшують пригадування і покращують настрій.
 
 Для того, щоб  запам'ятати будь-який список, важливо поєднати між собою всі пункти за допомогою візуальних образів та історії. Щоб пам'ятати, що Берлін - столиця Німеччини, а не Германії, не плутати російську та українську географічні назви, використовуємо асоціації: Герман і я поїхали в Німеччину, а там зустріли Бера і Ліну. 
@@ -490,7 +489,7 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
  
 Але: <span style="font-style: italic">  два з половиною місяці, три з половиною роки </span> (під час узгодження іменник пов’язуємо із цілим числом).  
  
-Джерела: <a href="https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf" style="color:#58A6FFFF"> Український правопис </a>(2019), <a href="https://lcorp.ulif.org.ua/dictua/" style="color:#58A6FFFF"> Словники України</a>  `,
+Джерела: <a href='https://mon.gov.ua/storage/app/media/zagalna%20serednya/05062019-onovl-pravo.pdf' style="color:#58A6FFFF"> Український правопис </a>(2019), <a href="https://lcorp.ulif.org.ua/dictua/" style="color:#58A6FFFF"> Словники України</a>  `,
         taskTitle: `Завдання`,
       task: "Складіть список покупок українською мовою. І складайте його українською й надалі. ",
     },
@@ -565,7 +564,7 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
 Словники:  
 
 Тут зібрані майже два десятки словників, пошук працює одразу по всіх (збережіть собі у закладках!): <a href="https://r2u.org.ua" style="color:#58A6FFFF;">https://r2u.org.ua</a>
-Тут зручно шукати синоніми <a href="https://ukrainskamova.com/publ/slovnik_sinonimiv/21" style="color:#58A6FFFF;">https://ukrainskamova.com/publ/slovnik_sinonimiv/21</a>  
+Тут зручно шукати синоніми <a href="https://ukrainskamova.com/publ/slovnik_sinonimiv/21" style="-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;">https://ukrainskamova.com/publ/slovnik_sinonimiv/21</a>  
 
 Перевірити текст: 
 <a href="https://ukr-mova.in.ua/perevirka-tekstu" style="color:#58A6FFFF;">https://ukr-mova.in.ua/perevirka-tekstu </a>
@@ -595,11 +594,11 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
       text: `Сьогодні ми хочемо порадити вам встановити мобільний застосунок suspilne.radio, де є записи програм на різний смак, аудіокниги і радіоп’єси українською мовою. 
 
  `,
-        text2: `Завантажити можна тут: <a href="https://play.google.com/store/apps/details?id=suspilne.radio.ua" style="color:#58A6FFFF;">https://play.google.com/store/apps/details?id=suspilne.radio.ua</a>  
+        text2: `Завантажити можна тут: <a href="https://play.google.com/store/apps/details?id=suspilne.radio.ua" style="-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%;color:#58A6FFFF;">https://play.google.com/store/apps/details?id=suspilne.radio.ua</a>  
 або тут: 
-<a href="https://apps.apple.com/ua/app/suspilne-radio/id1437432109" style="color:#58A6FFFF;">https://apps.apple.com/ua/app/suspilne-radio/id1437432109</a>  
+<a href="https://apps.apple.com/ua/app/suspilne-radio/id1437432109" style="-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%;color:#58A6FFFF;">https://apps.apple.com/ua/app/suspilne-radio/id1437432109</a>  
 
-У застосунку ви можете обрати одну із трьох програм Суспільного радіою. На радіо Культура у вкладці “Програми” можна послухати аудіокнижки, радіоп’єси.`,
+У застосунку ви можете обрати одну із трьох програм Суспільного радіо. На радіо Культура у вкладці “Програми” можна послухати аудіокнижки, радіоп’єси.`,
         taskTitle: `Завдання`,
       task: `Поділіться у чаті або соцмережах вашою улюбленою радіо програмою чи подкастами українською мовою. Розкажіть, чому вона вам подобається. Не забудьте про хештеги #Мовомаратон і #МоваНезалежності. `,
     },

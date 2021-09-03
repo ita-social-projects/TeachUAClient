@@ -1,17 +1,14 @@
 @media (max-device-width: 1050px) {
 
-    .task-content .innerHTML-from-js a {
+    .innerHTML-from-js  a{
         color: #58a6ff;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
-        display: -webkit-box;
-        width: 60%;
+        text-align: unset;
+        white-space: nowrap;
     }
 }
 
 @media (min-device-width: 1050px) {
-    .task-text .innerHTML-from-js a {
+     .innerHTML-from-js a {
         color: #58a6ff;
     }
 }
@@ -191,15 +188,15 @@ and (max-device-width: 1000px) {
 
     }
 
-    .task-content .innerHTML-from-js a {
+     .innerHTML-from-js a {
         color: #58a6ff;
     }
 
-    .task-text .innerHTML-from-js a {
+   .innerHTML-from-js a {
         color: #58a6ff;
     }
 
-    .task-text .innerHTML-from-js #headline {
+    .innerHTML-from-js #headline {
         font-weight: bold;
     }
 
