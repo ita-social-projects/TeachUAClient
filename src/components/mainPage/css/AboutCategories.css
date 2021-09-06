@@ -192,6 +192,10 @@
     .about-categories .categories-header .label {
         text-align: center;
     }
+
+    .about-categories .categories-header {
+        margin-top: 3%;
+    }
 }
 @media (min-device-width : 320px) and (max-device-width : 336px) {
     .about-categories .primitive-card {

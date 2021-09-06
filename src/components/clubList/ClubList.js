@@ -50,8 +50,6 @@ const ClubList = ({
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
-        // console.log(location);
-        console.log(currentPage);
 
         if(advancedSearch && showHideMenu){
             setParams(searchForm.getFieldsValue());
