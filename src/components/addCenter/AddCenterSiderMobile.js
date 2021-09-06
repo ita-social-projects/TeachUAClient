@@ -11,18 +11,10 @@ const AddCenterSiderMobile = ({step}) => {
             <Steps
                 direction="horizontal"
                 current={step}>
-                {step == 0 &&
-                <Step title="Основна інформація"></Step>
-                }
-                {(step == 0 || step == 1 || step == 2) &&
-                <Step title="Контакти"></Step>
-                }
-                {(step == 1 || step == 2 || step == 3) &&
-                <Step title="Опис"></Step>
-                }
-                {step == 3 &&
-                <Step  title="Гуртки"></Step>
-                }
+                <Step style={{display: step == 0 ? "block" : "none"}} title="Основна інформація"></Step>
+                <Step style={{display: (step == 0 || step == 1)? "block" : "none"}}title="Контакти"></Step>
+                <Step style={{display: (step == 1 || step == 2 || step == 3) ? "block" : "none"}} title="Опис"></Step>
+                <Step style={{display: (step == 2 || step == 3)? "block" : "none"}}title="Гуртки"></Step>
             </Steps>
         </div>
     )
