@@ -268,4 +268,12 @@ and (max-device-width: 1080px) {
     .ant-modal-close-x {
         margin-top: -17%;
     }
+
+    .ant-steps-item {
+        flex: none;
+    }
+
+    .ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
+        justify-content: space-between;
+    }
 }
