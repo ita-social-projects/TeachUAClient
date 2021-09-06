@@ -161,14 +161,15 @@
     }
     .use-button {
         width: 120px;
-        background: #FA8C16;
-        color: white;
-        border-radius: 6px;
-        margin-left: 15px;
         font-family: Open Sans;
         font-style: normal;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 15px;
+        border-radius: 6px;
+        color: white;
+        background: #FA8C16;
+        border-color: #FA8C16;
+        margin-left: 10%;
     }
     .clear-button {
         width: 120px;
@@ -179,6 +180,7 @@
         border-radius: 6px;
         color: #FA8C16;
         border-color: #FA8C16;
+        margin-left: -10%;
     }
 
     .ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content.club-list-content {

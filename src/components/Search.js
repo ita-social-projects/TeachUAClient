@@ -39,8 +39,7 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
-
-        if(value==undefined){
+        if(value===undefined){
             return;
         }
 
