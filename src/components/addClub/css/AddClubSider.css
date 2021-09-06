@@ -74,12 +74,17 @@
         border: none;
     }
 
+    .ant-steps-item {
+        flex: none;
+    }
+
+    .ant-steps.ant-steps-horizontal.ant-steps-label-horizontal {
+        justify-content: space-between;
+    }
 
     .add-club-sider-mobile .ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
         color: #2D4C68;
     }
-
-
 }
 
 
