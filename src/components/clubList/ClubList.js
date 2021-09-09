@@ -46,7 +46,7 @@ const ClubList = ({
     const [activeCategory, setActiveCategory] = useState();
     const location = useLocation();
     const [params, setParams] = useState(mapSearchParameters);
-    const [searchParams, setSearchParams] = useState(mapSearchParameters);
+    const [searchParams, setSearchParams] = useState(searchParameters);
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
