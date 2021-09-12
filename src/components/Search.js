@@ -1,5 +1,5 @@
 import {AutoComplete, Select} from "antd";
-import React from "react";
+import React, {useState} from "react";
 import {withRouter} from "react-router-dom";
 import {
     clearSearchParameters,
@@ -36,9 +36,14 @@ class Search extends React.Component {
         getAllCategories().then((response) => {
             this.setState({allCategories: response});
         });
+        if(localStorage.getItem("isClearSearch")) {
+            searchInputData.input = "";
+        }
     }
 
     onSearchChange = (value, option) => {
+        localStorage.setItem("head-component-page", "clubs");
+
         if(value===undefined){
             return;
         }
@@ -48,7 +53,9 @@ class Search extends React.Component {
         }
         value=value.trim();
         if (this.props.redirect && value.length > 2) {
-            this.props.history.push("/clubs", {value});
+            this.props.history.push("/clubs", {value})
+            localStorage.setItem("isClearSearch", false);
+
         }
 
         if (!searchParameters.isAdvancedSearch) {
@@ -180,7 +187,8 @@ class Search extends React.Component {
                     }}
                     placeholder="Який гурток шукаєте?"
                     defaultActiveFirstOption={false}
-                    defaultValue={searchInputData.input.trim()}>
+                    defaultValue={searchInputData.input.trim()}
+                    value={searchInputData.input}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
                             <Option
