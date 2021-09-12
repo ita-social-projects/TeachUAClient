@@ -8,19 +8,24 @@ import {useLocation} from "react-router";
 
 const HeaderComponent = () => {
     const location = useLocation();
+    const page = window.location.pathname !== process.env.PUBLIC_URL && localStorage.getItem("head-component-page");
 
     searchParameters.isAdvancedSearch =
         (searchParameters.isAdvancedSearch && location.pathname === '/clubs') && true;
 
+    const onLogoClick = ()=> {
+        localStorage.setItem("head-component-page", null);
+    }
+
     return (
         <Header className="header">
             <div className="left-side-menu">
-                <Link to="/">
+                <Link to="/" onClick={onLogoClick}>
                     <div className="logo"/>
                 </Link>
             </div>
 
-            <NavMenu/>
+            <NavMenu page={page}/>
             <HeaderRight/>
         </Header>
     );
