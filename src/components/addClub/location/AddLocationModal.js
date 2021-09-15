@@ -54,14 +54,22 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
         // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+        if(e.target.id === "cityName" ||
+            !locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
+            !locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
+            !locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) ||
+            !locationForm.phoneNumber.match(/^\d{9}$/)) {
+            setDisabled(true)
+        }
+        console.log("Disabled: " + isDisabled)
         if(cityName != null &&
-            locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
-            locationForm.phoneNumber.match(/^\d{9}$/))
-        {
-            setDisabled(false)
-        } else setDisabled(true)
+            locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
+            locationForm.phoneNumber.match(/^\d{9}$/)) {
+                setDisabled(false)
+        }
+        console.log("Disabled: " + isDisabled)
     }
 
     const onClose = () => {
@@ -122,7 +130,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             phone: fields.phone
         });
         form.validateFields();
-
+        setDisabled(true);
     }
 
     return (
@@ -290,26 +298,27 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            pattern: /^\d{9}$/,
                                            message: "Телефон не відповідає вказаному формату"
                                        },
-                                       {
-                                           required: false,
-                                           pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
-                                           message: "Телефон не може містити літери"
-                                       },
-                                       {
-                                           required: false,
-                                           pattern: /^[^-`~!@#$%^&*()/_+={}\[\]|\\:;“"’'<,>.?๐฿]*$/,
-                                           message: "Телефон не може містити спеціальні символи"
-                                       },
-                                       {
-                                           required: false,
-                                           pattern: /^[^\s]*$/,
-                                           message: "Телефон не може містити пробільні символи"
-                                       }]}>
+                                       // {
+                                       //     required: false,
+                                       //     pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
+                                       //     message: "Телефон не може містити літери"
+                                       // },
+                                       // {
+                                       //     required: false,
+                                       //     pattern: /^[^-`~!@#$%^&*()/_+={}\[\]|\\:;“"’'<,>.?๐฿]*$/,
+                                       //     message: "Телефон не може містити спеціальні символи"
+                                       // },
+                                       // {
+                                       //     required: false,
+                                       //     pattern: /^[^\s]*$/,
+                                       //     message: "Телефон не може містити пробільні символи"
+                                       // }
+                                       ]}>
                             <Input className="add-club-input"
                                    prefix='+380'
-                                   suffgit branchix={
+                                   suffix={
                                        <Tooltip placement="topRight"
-                                                title="Телефон не може містити літери та спеціальні символи">
+                                                title="Телефон не може містити літери, спеціальні символи та пробіли">
                                            <InfoCircleOutlined className="info-icon" />
                                        </Tooltip>
                                    }

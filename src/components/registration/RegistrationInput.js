@@ -8,6 +8,7 @@ import './сss/Registration.less';
 const RegistrationInput = () => {
 
     const [isDisabled, setDisabled] = useState(true)
+    const [isValid, setValid] = useState(false)
     const [registerForm, setRegisterForm] = useState({
         lastName: "",
         firstName: "",
@@ -31,6 +32,13 @@ const RegistrationInput = () => {
             registerForm.password = e.target.value
         if (e.target.id === "confirm")
             registerForm.confirm = e.target.value
+
+        if(registerForm.password === registerForm.confirm){
+            setValid(true)
+        }else{
+            setValid(false)
+        }
+
         if (registerForm.lastName.length > 1
             && registerForm.firstName.length > 1
             && registerForm.phone.length === 9
@@ -198,11 +206,14 @@ const RegistrationInput = () => {
                                        // message: 'Введіть пароль'
                                    },
                                    ({getFieldValue}) => ({
-                                       validator(_, value) {
+                                       validator( value) {
                                            if (!value || getFieldValue('password') === value) {
                                                return Promise.resolve();
                                            }
-
+                                           if (!isValid) {
+                                               return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));
+                                           }
+                                           return Promise.resolve();
                                            return Promise.reject(new Error('Значення поля ‘Підтвердити пароль’ має бути еквівалентним значенню поля ‘Пароль’'));
                                        },
                                    }),

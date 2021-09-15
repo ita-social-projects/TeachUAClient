@@ -1,10 +1,7 @@
-import {Form, Layout, Pagination} from "antd";
-import {mapSearchParameters, SearchContext, searchParameters} from "../../context/SearchContext";
+import {Form, Layout} from "antd";
+import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../../context/SearchContext";
 import React, {useContext, useEffect, useState} from "react";
-import {
-    getClubsByAdvancedSearch,
-    getClubsByParameters,
-} from "../../service/ClubService";
+import {getClubsByAdvancedSearch, getClubsByParameters,} from "../../service/ClubService";
 import PropTypes from "prop-types";
 import "./css/ClubList.less";
 import "../centerList/css/CenterList.less";
@@ -49,20 +46,31 @@ const ClubList = ({
     const [activeCategory, setActiveCategory] = useState();
     const location = useLocation();
     const [params, setParams] = useState(mapSearchParameters);
+    const [searchParams, setSearchParams] = useState(searchParameters);
 
     const getData = (page) => {
-        const checkUndefPage = page === undefined ? 0 : page;
+        let checkUndefPage = page === undefined ? 0 : page;
+
         if(advancedSearch && showHideMenu){
             setParams(searchForm.getFieldsValue());
-        }
-
-        if (isCenterChecked) {
-            getCentersByAdvancedSearch(params, page).then((response) => {
-                setCenters(response);
-            });
-        } else {
-            getClubsByAdvancedSearch(
-                params,
+            if (isCenterChecked) {
+                getCentersByAdvancedSearch(params, page).then((response) => {
+                    setCenters(response);
+                });
+            } else {
+                getClubsByAdvancedSearch(
+                    params,
+                    checkUndefPage,
+                    sortBy,
+                    sortDirection
+                ).then((response) => {
+                    setClubs(response);
+                });
+            }
+        } else if (!advancedSearch){
+            setSearchParams(searchParameters);
+            getClubsByParameters(
+                searchParams,
                 checkUndefPage,
                 sortBy,
                 sortDirection
@@ -70,6 +78,24 @@ const ClubList = ({
                 setClubs(response);
             });
         }
+
+        if (advancedSearch && !showHideMenu) {
+            if (isCenterChecked) {
+                getCentersByAdvancedSearch(params, page).then((response) => {
+                    setCenters(response);
+                });
+            } else {
+                getClubsByAdvancedSearch(
+                    params,
+                    checkUndefPage,
+                    sortBy,
+                    sortDirection
+                ).then((response) => {
+                    setClubs(response);
+                });
+            }
+        }
+
         load(false);
     };
 
