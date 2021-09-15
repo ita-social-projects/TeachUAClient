@@ -759,12 +759,47 @@ TAKFLIX — онлайн-кінотеатр, де можна легально д
     {
       id: "29",
       pathUrl: "740501",
-      name: "День 29.",
+      name: "Крок 29. Надихайтесь українською!",
       subheader: "",
-      text: "",
-        text2: ``,
+      text: "НАДИХА́ТИСЯ - відчувати приплив сил, бадьорості, душевного піднесення під впливом чого-небудь." +
+        "<br><br>Відео для натхнення: <a href=\"https://youtu.be/TW9BQ-5KFV0\" style=\"color:#58A6FFFF;\">https://youtu.be/TW9BQ-5KFV0</a>" +
+        "<br>“Мені здається, час настав” <a href=\"https://youtu.be/zgSEdYwndMQ\" style=\"color:#58A6FFFF;\">https://youtu.be/zgSEdYwndMQ</a>",
+        text2: `Сьогодні - передостанній день Мовомаратону і ми вже трохи сумуємо. Однак в епоху соцмереж ми можемо не зникати з життя один одного, а продовжувати творити спільноту, яка зветься Україна, шукати натхнення в українській мові і культурі, творити українською.`
+        + '<br><br>А ще є нагода зустрітись наживо! У Києві на Володимирській гірці 19 вересня пройде перший <a href="https://www.facebook.com/events/2754499954695563" style="color:#58A6FFFF;">сімейний фестиваль української мови “Мовосфера”</a>. '
+        + 'Під час фестивалю о 18.00 відбудеться Всеукраїнський танцювальний флешмоб "Танцюй під українське" Київ (Володимирська гірка), Львів, Дніпро (Фестивальний причал), Запоріжжя (Хортиця) із прямою трансляцією між містами, а також форум з популяризації мови для батьків за участю зірок (Тараса Тополі, Марічки Падалко).',
         taskTitle: `Завдання`,
-      task: "",
+      task: "Пам’ятаєте, у другий день Мовомаратону було завдання написати мотиваційний лист самому собі і відповісти на питання: що вас мотивує говорити українською? хто може вас підтримати? якою чи яким ви хочете бути після 30 днів Мовомаратону? Знайдіть цей лист, поверніться до нього. Що змінилось за ці чотири тижні? Допишіть цей лист. Якою чи яким ви хочете бути через пів року чи рік? Що вас мотивує говорити українською?"
+        + "<br><br>Нам дуже важливий ваші відгук для того, щоб наступного разу ми зробили краще. Дуже просимо заповнити анкету та поділитись вашими враженнями:"
+        + "<a href=\"https://forms.gle/hAsZcZ3BGDwtifeYA\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://forms.gle/hAsZcZ3BGDwtifeYA</a>",
+    },
+    {
+      id: "30",
+      pathUrl: "851612",
+      name: "Крок 30. Відчуйте себе переможцями!",
+      subheader: "",
+      text: "Друзі, вітаємо! Відчуйте себе переможцями - ви подолали ці тридцять днів Мовомаратону до 30-річчя Незалежності України! Ви це змогли! Ми радіємо разом з вами! Сподіваємось, що ви отримали за ці тридцять днів цінне - досвід, практику і однодумців."
+        + "<br><br>Протягом місяця чати в телеграмі будуть відкриті, тож ви завжди можете звернутись із запитаннями до нас, ми радо допоможемо."
+        + "<br><br>Перемагайте, творіть і любіть українською!"
+        + "<br><br>Ми зібрали корисні посилання, щоб вам було зручно.",
+      text2: `<span id="headline">Вебінари:</span>`
+        + '<br><br>Перейти на українську: виклики і можливості. Ольга Андрусенко <a href="https://youtu.be/Chvx7nQtIbE" style="-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;">https://youtu.be/Chvx7nQtIbE</a>'
+        + "Голос і мовлення. Олександр Жуган <a href=\"https://youtu.be/keF34uPCHRk\" style=\"color:#58A6FFFF;\">https://youtu.be/keF34uPCHRk</a>"
+        + "<br>Запам'ятовувати легко: українська мова + ейдетика та мнемотехніка. Мар'яна Лелик <a href=\"https://youtu.be/pBb9LqBGIgg\" style=\"color:#58A6FFFF;\">https://youtu.be/pBb9LqBGIgg</a>"
+        + "<br>Фемінітиви, проєкт і маратон. Все, що ви хотіли спитати у викладачки української мови, але боялись. Наталя Вуйтік <a href=\"https://youtu.be/U0aE0cpeRao\" style=\"color:#58A6FFFF;\">https://youtu.be/U0aE0cpeRao</a>"
+        + "<br>Як говорити з дітьми про мистецтво. Оксана Садовенко <a href=\"https://youtu.be/AbTeCSbs_oc\" style=\"color:#58A6FFFF;\">https://youtu.be/AbTeCSbs_oc</a>"
+        + "<br><br> <span id=\"headline\">Мовні курси</span>"
+        + "<br><br> Освітня платформа “Є-мова”"
+        + "<a href=\"https://emova.language-ua.online/\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://emova.language-ua.online/</a>"
+        + "<a href=\"https://www.youtube.com/c/eMova/playlists\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://www.youtube.com/c/eMova/playlists</a>"
+        + "<br><span id=\"headline\">Словники</span>"
+        + "<br><br>Тут зібрані майже два десятки словників, пошук працює одразу по всіх: <a href=\"https://r2u.org.ua\" style=\"color:#58A6FFFF;\">https://r2u.org.ua</a>"
+        + "<br>Тут зручно шукати синоніми <a href=\"https://ukrainskamova.com/publ/slovnik_sinonimiv/21\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://ukrainskamova.com/publ/slovnik_sinonimiv/21</a>"
+        + "<br>Перевірити текст:"
+        + "<a href=\"https://ukr-mova.in.ua/perevirka-tekstu\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://ukr-mova.in.ua/perevirka-tekstu</a>"
+        + "<a href=\"https://onlinecorrector.com.ua/uk/\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://onlinecorrector.com.ua/uk/</a>"
+        + "<a href=\"https://r2u.org.ua/check\" style=\"-webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; display: -webkit-box; width: 90%; color:#58A6FFFF;\">https://r2u.org.ua/check</a>",
+      taskTitle: `Завдання`,
+      task: "Подякуйте собі!",
     },
   ],
 };
