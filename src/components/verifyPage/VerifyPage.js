@@ -21,6 +21,13 @@ const VerifyPage = () => {
         verifyUser(verifyCode).then((response) => {
             if (response.status===200) {
                 message.success(response.data.message);
+                if (verifyCode !== undefined) {
+                    if(process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080"){
+                        window.location = "http://localhost:3000/dev";
+                    }else{
+                        window.location = process.env.REACT_APP_ROOT_SERVER + process.env.PUBLIC_URL;
+                    }
+                }
             } else {
                 message.warning(response.data.message);
             }
