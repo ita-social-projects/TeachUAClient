@@ -43,7 +43,7 @@ class Search extends React.Component {
 
     onSearchChange = (value, option) => {
         localStorage.setItem("head-component-page", "clubs");
-
+        
         if(value===undefined){
             return;
         }
@@ -188,7 +188,8 @@ class Search extends React.Component {
                     placeholder="Який гурток шукаєте?"
                     defaultActiveFirstOption={false}
                     defaultValue={searchInputData.input.trim()}
-                    value={searchInputData.input}>
+                    value={searchInputData.input}
+                    maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
                             <Option
