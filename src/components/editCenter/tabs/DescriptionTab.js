@@ -8,23 +8,36 @@ import EditCenterContentFooter from "../EditCenterFooter";
 import {updateCenterById} from "../../../service/CenterService";
 
 
-const DescriptionTab = ({center,result,setResult}) => {
+const DescriptionTab = ({center,result,setResult,contacts_data,setContactsData,locations,setLocations}) => {
         const [descriptionFrom] = Form.useForm();
 
-
-    const onChange = (values) => {
-        console.log(values)
-    }
-
         const onFinish = (values) => {
+            if (locations !== []) {
+                for (const loc in locations) {
+                    values.locations[loc] = {
+                        id: locations[loc].id,
+                        cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+                        address: locations[loc].address,
+                        coordinates: locations[loc].coordinates === null || locations[loc].coordinates === undefined ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+                        districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+                        key: locations[loc].key,
+                        name: locations[loc].name,
+                        phone: locations[loc].phone,
+                        stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                    }
+                }
+            }
+            else {
+                values.locations = locations;
+            }
+            values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
             setResult(Object.assign(result,values))
+            console.log(result)
             updateCenterById(result)
         }
 
     useEffect(() => {
-        console.log(result)
         setResult({...result, urlLogo:center.urlLogo , description:center.description})
-        console.log(result)
     }, [])
 
     return (

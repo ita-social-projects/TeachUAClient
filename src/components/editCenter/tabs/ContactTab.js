@@ -9,23 +9,38 @@ import {logDOM} from "@testing-library/react";
 
 const {Option} = Select;
 
-const ContactTab = ({contacts, cities, center,setResult,result,contacts_data,setContactsData}) => {
-    const [locations, setLocations] = useState([])
-    const [city, setCity] = useState()
-    const [contactValue, setContactValue] = useState();
-    const [someContact, setSome] = useState([]);
+const ContactTab = ({contacts, cities, center,setResult,result,contacts_data,setContactsData,locations}) => {
+
 
 
     const onFinish = (values) => {
+        if (locations !== []) {
+            for (const loc in locations) {
+                result.locations[loc] = {
+                    id: locations[loc].id,
+                    cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
+                    address: locations[loc].address,
+                    coordinates: locations[loc].coordinates !== null ? locations[loc].coordinates : locations[loc].latitude + ", " + locations[loc].longitude,
+                    districtName: locations[loc].districtName !== undefined ? locations[loc].districtName : locations[loc].district.name,
+                    key: locations[loc].key,
+                    name: locations[loc].name,
+                    phone: locations[loc].phone,
+                    stationName: locations[loc].stationName !== undefined ? locations[loc].stationName : locations[loc].station.name,
+                }
+            }
+        }
+        else {
+            values.locations = locations;
+        }
         values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
-        setResult(Object.assign(result,values))
         console.log(result)
+        setResult(Object.assign(result,values))
+
         updateCenterById(result).then(response => console.log(response))
 
     }
 
     useEffect(() => {
-        console.log(contacts_data)
     }, [])
 
     const changeContacts = (e, contact) => {
@@ -35,7 +50,6 @@ const ContactTab = ({contacts, cities, center,setResult,result,contacts_data,set
         });
         const parsedContact = JSON.stringify(contacts_data).replaceAll(":", "::");
         setResult({...result, contacts: parsedContact})
-        console.log(result)
         };
 
 

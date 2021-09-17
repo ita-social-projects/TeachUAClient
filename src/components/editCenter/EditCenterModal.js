@@ -17,15 +17,19 @@ const EditCenterModal = ({centerId}) => {
     const [cities, setCities] = useState([]);
     const [clubs, setClubs] = useState([]);
     const [contacts_data,setContactsData] = useState({})
+    const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
+
 
 
 
     useEffect(() => {
         getClubsByCenterId(centerId).then(response => setClubs(response))
         getAllContacts().then(response => setContacts(response))
-        getCenterById(centerId).then(response =>setCenter(response))
-        getCenterById(centerId).then(response =>setResult(response))
+        getCenterById(centerId).then(response =>{setCenter(response);
+                                                setResult(response)})
+        // getCenterById(centerId).then(response =>setResult(response))
         getAllCities().then(response => setCities(response))
+        console.log(center)
     }, []);
 
     return (
@@ -52,6 +56,8 @@ const EditCenterModal = ({centerId}) => {
                     setClubs={setClubs}
                     contacts={contacts}
                     cities={cities}
+                    locations={locations}
+                    setLocations={setLocations}
                     setContactsData={setContactsData}
                     contacts_data={contacts_data}/>
             </Modal>

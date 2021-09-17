@@ -17,6 +17,8 @@ const EditCenterTabs = ({
                           categories,
                           clubs,
                           setClubs,
+                          locations,
+                          setLocations,
                             setContactsData,
                             contacts_data,
                           setResult,
@@ -27,8 +29,11 @@ const EditCenterTabs = ({
                       }) => {
     useEffect(() => {
         const contacts = center.contacts;
-        contacts.map(e => setContactsData(Object.assign({...contacts_data,[e.contactType.id]:e.contact_data})))
+        let newContacts = Object.assign({...contacts_data})
+        contacts.forEach(e =>newContacts[e.contactType.id] = e.contact_data)
+        console.log(newContacts)
         console.log("--------------")
+        setContactsData(newContacts)
         console.log(contacts_data)
     }, []);
     return (
@@ -38,6 +43,8 @@ const EditCenterTabs = ({
                                 result={result}
                                 setResult={setResult}
                                 center={center}
+                                locations={locations}
+                                setLocations={setLocations}
                                 categories={categories}
                                 setContactsData={setContactsData}
                                 contacts_data={contacts_data}
@@ -50,6 +57,8 @@ const EditCenterTabs = ({
                         setResult={setResult}
                         contacts={contacts}
                         cities={cities}
+                        locations={locations}
+                        setLocations={setLocations}
                         categories={categories}
                         form={form}
                         setContactsData={setContactsData}
@@ -59,6 +68,8 @@ const EditCenterTabs = ({
         <TabPane tab="Опис центру" key="3">
             <DescriptionTab center={center}
                             result={result}
+                            locations={locations}
+                            setLocations={setLocations}
                             setResult={setResult}
                             setContactsData={setContactsData}
                             contacts_data={contacts_data}

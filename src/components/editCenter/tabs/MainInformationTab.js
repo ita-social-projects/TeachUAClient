@@ -6,33 +6,22 @@ import {PlusOutlined} from "@ant-design/icons";
 import AddLocationModal from "../../addClub/location/AddLocationModal";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import {updateCenterById} from "../../../service/CenterService";
+import {deleteLocationById} from "../../../service/LocationService";
 
 
-const MainInformationTab = ({center,form,cities,result,setResult,contacts_data}) =>{
+const MainInformationTab = ({center,form,cities,result,setResult,contacts_data,setContactsData,locations,setLocations}) =>{
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
-    const [locations, setLocations] = useState(result.locations !== undefined ? result.locations : []);
+    const [contacts,setContacts] = useState([]);
+
+
+
 
     const onFinish = (values) => {
-        values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
-        ChangeLocation(values)
-        setResult(Object.assign(result, values));
-        updateCenterById(result)
-    }
-    const onRemove = (item) => {
-        const newData = [...locations];
-        const index = newData.findIndex((it) => item.key === it.key);
-        newData.splice(index, 1);
-        setLocations(newData);
-    };
-    const ChangeLocation = (values) => {
         if (locations !== []) {
-
             for (const loc in locations) {
-                console.log(locations[loc]);
-                if (values.locations.name !== result.locations.name) {
-                    values.locations[loc] = {
+                    result.locations[loc] = {
                         id: locations[loc].id,
                         cityName: locations[loc].cityName !== undefined ? locations[loc].cityName : locations[loc].city.name,
                         address: locations[loc].address,
@@ -45,13 +34,30 @@ const MainInformationTab = ({center,form,cities,result,setResult,contacts_data})
                     }
                 }
             }
-        } else {
-            values.locations = locations;
+         else {
+            result.locations = locations;
         }
 
-        Object.assign(result,values)
+        result.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
+        setResult(Object.assign(result, values));
+        console.log(result)
+        updateCenterById(result).then(response => console.log(response))
+
+    }
+    const onRemove = (item) => {
+        deleteLocationById(item.id)
+        const newData = [...locations];
+        const index = newData.findIndex((it) => item.key === it.key);
+        newData.splice(index, 1);
+        setResult(Object.assign(result,{locations:newData}));
+        setLocations(newData);
+
     }
     useEffect(() => {
+        console.log(center)
+        setContacts(center.contacts)
+        contacts.map(e => setContactsData(...contacts_data,{[e.contactType.id]:e.contact_data}))
+        console.log(contacts_data)
         setLocations(center.locations)
         setResult({...result,name:center.name })
 
