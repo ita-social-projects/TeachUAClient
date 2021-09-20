@@ -111,9 +111,9 @@ class Search extends React.Component {
 
     onKeyDown = (event) => {
         if (event.key === "Enter") {
-            //this.props.history.push("/clubs", event.target.input);
-            //event.target.defaultValue &&
-            //this.onSearchChange(event.target.defaultValue, {type: "all"});
+            // this.props.history.push("/clubs", event.target.input);
+            // event.target.defaultValue &&
+            // this.onSearchChange(event.target.defaultValue, {type: "all"});
             this.setState({loading: true});
             this.onSearchChange(event.target.input, {type: "all"});
             this.setState({loading: false});
@@ -128,7 +128,7 @@ class Search extends React.Component {
             this.setState({loading: false});
         }
         this.state.searchClicked = false;
-        this.props.setShowHideMenu(true);
+        // this.props.setShowHideMenu(true);
     };
 
     onSearch = (val) => {
