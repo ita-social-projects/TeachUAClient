@@ -10,15 +10,15 @@ import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import { PageContext } from "../../context/PageContext";
 import { CaretDownOutlined} from "@ant-design/icons";
 
-const NavMenu = ({page}) => {
-    const [pageContent, setPageContent] = useState(page);
+const NavMenu = () => {
+    const pageKey = window.location.pathname !== process.env.PUBLIC_URL && localStorage.getItem("head-component-page");
+    const [pageContent, setPageContent] = useState(pageKey);
     const { currentPage, setCurrentPage } = useContext(PageContext);
     const [isMobile, setIsMobile]  = useState(window.innerWidth < 1215 && window.innerHeight < 1390);
 
     const onMenuChange = (elem) => {
         setPageContent(elem.key);
         localStorage.setItem("head-component-page", elem.key);
-        localStorage.setItem("isClearSearch", true);
     };
 
     const handleResize = () => {
@@ -40,8 +40,6 @@ const NavMenu = ({page}) => {
             setPageContent(-1);
         }
         window.addEventListener("resize", handleResize)
-        onMenuChange({key: page});
-
     });
 
     return (
