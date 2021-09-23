@@ -171,7 +171,6 @@ class Search extends React.Component {
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onFocus={this.onFocus}
-                    autoFocus={(document.URL.indexOf("/clubs") > -1 ) ? this.state : ""}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
                     style={{
