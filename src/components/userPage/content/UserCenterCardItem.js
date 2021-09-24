@@ -39,11 +39,11 @@ const UserCenterCardItem = ({center}) => {
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
-                    <div className="address">
-                        <EnvironmentFilled className="address-icon"/>
-                        <span className="text">{center.locations[0].address}</span>
-                    </div>
                 </div>
+            </div>
+            <div className="center-address">
+                <EnvironmentFilled className="address-icon"/>
+                <span className="text">{center.locations[0].address}</span>
             </div>
         </Card>
     )
