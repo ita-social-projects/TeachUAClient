@@ -78,18 +78,17 @@
   align-items: center;
 }
 
-.center-card .address {
+.center-address {
   color: #2D4C68;
+  margin-left: 15px;
   width: 100%;
   height: 24px;
-  margin: 0;
   display: flex;
   font-weight: 600;
-  padding-top: 36px;
   opacity: 80%;
 }
 
-.center-card .address-icon {
+.center-address .address-icon {
   font-size: 1.5em;
   color: #FFA62C;
   margin-right: 11px;
@@ -97,31 +96,13 @@
 }
 
 @media (max-width: 550px) {
-
-
-  .center-card .center-information {
+  .center-card .center-right {
     display: block;
-    justify-content: center;
   }
 
   .center-card {
-    height: 200px !important;
-    min-width: 350px !important;
-    padding-right: 60px;
-  }
-
-  .user-centers .centers-cards {
-    padding-right: 100px;
-  }
-
-  .user-centers {
-    margin-left: 70px;
-    margin-right: 50px;
-  }
-
-  .center-card .ant-btn-text {
-    padding-top: 90px;
-    position: absolute;
+    display: flex;
+    width: 95% !important;
   }
 
 }
