@@ -6,7 +6,7 @@ const {Option} = Select;
 
 const MainInformationStep = ({categories, step, setStep, setResult, result, centers ,fromCenter}) => {
     const [mainForm] = Form.useForm();
-    const [ageValidateStatus, setAgeValidateStatus] = useState("success")
+    const [ageValidateStatus, setAgeValidateStatus] = useState("")
 
     useEffect(() => {
         if (result) {
