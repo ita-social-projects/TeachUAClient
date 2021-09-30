@@ -28,8 +28,10 @@ const RegistrationInput = () => {
             registerForm.phone = e.target.value
         if (e.target.id === "email")
             registerForm.email = e.target.value
-        if (e.target.id === "password")
-            registerForm.password = e.target.value
+
+        if (e.target.id === "password"){
+            registerForm.password = e.target.value;
+        }
         if (e.target.id === "confirm")
             registerForm.confirm = e.target.value
 
