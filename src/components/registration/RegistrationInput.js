@@ -30,7 +30,6 @@ const RegistrationInput = () => {
             registerForm.email = e.target.value
         if (e.target.id === "password"){
             registerForm.password = e.target.value;
-            registerForm.validateFields();
         }
         if (e.target.id === "confirm")
             registerForm.confirm = e.target.value
