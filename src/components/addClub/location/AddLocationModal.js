@@ -169,7 +169,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Input className="add-club-input"
                                    suffix={
                                        <Tooltip placement="bottomRight"
-                                           title="Це поле може містити українські та англійські символи довжиною від 5-100. також цифри і спец.символи (!#$%&'()*+,-./:;<=>?@[]^_`{}~)">
+                                           title="Це поле може містити тільки українські та англійські літери, довжиною від 5 символів">
                                            <InfoCircleOutlined className="info-icon" />
                                        </Tooltip>
                                    }
