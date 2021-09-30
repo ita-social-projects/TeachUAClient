@@ -25,7 +25,7 @@ export const verifyReset = async (verifyCode) => {
 export const changePassword = async (data) => {
     return await fetchRequest.post(BASE_URL + "/api/verifyreset", {
         id: data.id,
-        email:data.email,
+        email: data.email,
         password: data.password,
         verificationCode: data.verificationCode
     }).then((response) => {
@@ -93,72 +93,68 @@ export const verify = async (data) => {
 
 export const updateUser = async (data) => {
     console.log('before response' + data);
-    try {
-        return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            password: data.password,
-            roleName: data.role,
-            urlLogo: data.urlLogo.file.response,
-            status: data.status
-    })}catch (error){};
-        return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            phone: data.phone,
-            password: data.password,
-            roleName: data.role,
-            urlLogo: data.urlLogo, //&& data.urlLogo.file.response,
-            status: data.status
-        }).then((response) => {
-            console.log('after response' + response.data)
-            return response.data
 
-        }).catch((error) => {
-            console.log(error.response.data)
-            return error.response.data
-        });
+    return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        roleName: data.role,
+        urlLogo: data.urlLogo, //&& data.urlLogo.file.response,
+        status: data.status
+    }).then((response) => {
+        console.log('after response' + response.data)
+        return response.data
+    }).catch((error) => {
+        console.log(error.response.data)
+        return error.response.data
+    });
+};
 
-    }
+export const updateUserByAdmin = async (data) => {
+    return await fetchRequest.put(BASE_URL + "/api/user/update", {
+        id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        roleName: data.roleName,
+        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
+        status: data.status
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
 
-    ;
+export const updatePassword = async (data) => {
+    return await fetchRequest.patch(BASE_URL + "/api/user/"+data.id, {
+        oldPassword: data.currentPassword,
+        newPassword: data.password,
+        newPasswordVerify: data.password
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
 
-    export const updateUserByAdmin = async (data) => {
-        return await fetchRequest.put(BASE_URL + "/api/user/update", {
-            id: data.id,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            password: data.password,
-            phone: data.phone,
-            roleName: data.roleName,
-            urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
-            status: data.status
-        }).then((response) => {
-            return response.data
-        }).catch((error) => {
-            return error.response.data
-        });
-    };
-
-    export const getAllUsers = async () => {
-        return await fetchRequest.get(BASE_URL + "/api/users")
-            .then((response) => {
-                return response.data
-            }).catch((error) => {
-                return error.response.data
-            })
-    };
-
-    export const deleteUserById = async (id) => {
-        return await fetchRequest.delete(BASE_URL + "/api/user/" + id, {
-            id: id
-        }).then((response) => {
+export const getAllUsers = async () => {
+    return await fetchRequest.get(BASE_URL + "/api/users")
+        .then((response) => {
             return response.data
         }).catch((error) => {
             return error.response.data
-        });
-    };
+        })
+};
+
+export const deleteUserById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/user/" + id, {
+        id: id
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};

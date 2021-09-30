@@ -4,7 +4,7 @@ import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import './css/UserEditModal.less';
 import UserEditRoles from "./UserEditRoles";
 import UserEditInput from "./UserEditInput";
-import {updateUser, verify} from "../../../service/UserService";
+import {updateUser, verify, updatePassword} from "../../../service/UserService";
 
 
 const UserEditModal = ({user}) => {
@@ -35,6 +35,19 @@ const UserEditModal = ({user}) => {
                         message.success("Профіль змінено успішно");
                     }
                 });
+                if(newValues.password) {
+                    updatePassword(newValues).then((response) => {
+                        if (response.status > 400) {
+                            window.location.reload();
+                            setVisible(true);
+                            message.error("Пароль не було змінено")
+                        } else {
+                            window.location.reload();
+                            setVisible(false);
+                            message.success("Пароль змінено успішно");
+                        }
+                    })
+                }
             }
         })
     };
