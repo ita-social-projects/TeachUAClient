@@ -229,12 +229,16 @@ const ClubListSider = ({
                      name="age"
                      label="Вік дитини"
                      className="club-list-row"
-                     inititalValue={0}>
+                     inititalValue={0}
+                >
+
                  <span>
                      <InputNumber
                          className="age"
                          value={age}
                          onKeyPress={onKeyPress}
+                         max={18}
+                         min={2}
                      />
                      років
                  </span>
