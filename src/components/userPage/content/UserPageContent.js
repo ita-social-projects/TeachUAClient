@@ -1,24 +1,31 @@
 import React from "react";
-import { Content } from "antd/es/layout/layout";
+import {Content} from "antd/es/layout/layout";
 import './css/UserContent.less';
 import UserInformationComponent from "./UserInformationComponent";
-import { Button, Dropdown } from "antd";
+import {Button, Dropdown, Select} from "antd";
 import menu from "./AddMenu";
-import { PlusOutlined } from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import UserCenterContent from "./UserCenterContent";
 import UserClubContent from "./UserClubContent";
 import PropTypes from "prop-types";
 import PageContent from "../../clubPage/content/PageContent";
-import { Menu } from "antd";
+import {Menu} from "antd";
 import AddCenter from "../../addCenter/AddCenter";
 import AddClubModal from "../../addClub/AddClubModal";
-import { useState } from "react";
-const UserPageContent = ({ user, id }) => {
+import {useState} from "react";
 
-
+const UserPageContent = ({user, id}) => {
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
+    const [isCenterChecked, setIsCenterChecked] = useState(false);
 
+    const onClubChange = (value) => {
+        if (value === "center") {
+            setIsCenterChecked(true);
+        } else {
+            setIsCenterChecked(false);
+        }
+    };
 
     const menu = () => {
 
@@ -40,21 +47,34 @@ const UserPageContent = ({ user, id }) => {
     return (
         <Content className="user-content">
             <div className="content-title">Мій профіль</div>
-            <UserInformationComponent user={user} />
+            <UserInformationComponent user={user}/>
             <div>
-                <div className="club-title">Мої гуртки та центри
+                <div className="club-title">Мої &nbsp;
+                    <Select onChange={onClubChange}
+                            className="club-center-select"
+                            defaultValue="club">
+                        <option selected="selected" value="club">
+                            <span>гуртки</span>
+                        </option>
+                        <option value="center">
+                            <span>центри</span>
+                        </option>
+                    </Select>
                     <div className="add-club-dropdown">
-                        <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
-                        <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+                        <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub}/>
+                        <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter}/>
                         <Dropdown сlassname overlay={menu} placement="bottomRight">
                             <Button classname="add-button">
-                                <PlusOutlined />
+                                <PlusOutlined/>
                                 Додати</Button>
                         </Dropdown>
                     </div>
                 </div>
-                <UserCenterContent id={id} />
-                <UserClubContent id={id} />
+                {isCenterChecked === true ? (
+                    <UserCenterContent id={id}/>
+                    ) :
+                    <UserClubContent id={id}/>
+                }
             </div>
         </Content>
     )

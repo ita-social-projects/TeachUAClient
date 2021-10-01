@@ -16,26 +16,26 @@ const UserCenterList = ({load, setLoad, match}) => {
 
     const [page, setPage] = useState(0);
 
-    const getData = () => {
+    const getData = (currPage) => {
 
         setLoad(true);
         let userId = match.params.id;
 
-        getCentersByUserId(userId).then(response => {
-            console.log(response)
+        getCentersByUserId(userId, currPage).then(response => {
             setCenters(response);
             setLoad(false)
         });
     };
 
     useEffect(() => {
-            getData()
+            getData(page)
         }, []
     )
 
     const onPageChange = (page) => {
         setPage(page - 1)
-        getData();
+        // getData();
+        getData(page - 1);
     };
 
     return load ? <Loader/> : (
@@ -43,7 +43,7 @@ const UserCenterList = ({load, setLoad, match}) => {
             <Space wrap className="centers-cards" size={[0, 0]}>
                 {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index}/>)}
             </Space>
-            <Pagination className="user-clubs-pagination"
+            <Pagination className="user-centers-pagination"
                         hideOnSinglePage
                         showSizeChanger={false}
                         onChange={onPageChange}

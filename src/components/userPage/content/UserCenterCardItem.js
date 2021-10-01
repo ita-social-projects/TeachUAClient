@@ -43,7 +43,7 @@ const UserCenterCardItem = ({center}) => {
             </div>
             <div className="center-address">
                 <EnvironmentFilled className="address-icon"/>
-                <span className="text">{center.locations[0].address}</span>
+                <span className="text"> {center.locations.length === 0 ? "Онлайн" : center.locations[0].address}</span>
             </div>
         </Card>
     )
