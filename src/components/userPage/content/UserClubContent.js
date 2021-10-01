@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import UserClubList from "./UserClubList";
 
-
 const UserClubContent = () => {
     const [clubs, setClubs] = useState({
         content: [],
