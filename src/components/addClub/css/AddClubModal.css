@@ -15,7 +15,6 @@ and (max-device-width: 1025px) {
     .modal-add-club .ant-modal-content {
         border-radius: 16px;
         position: inherit;
-        width: 90%;
         /*margin-left: -145vw;*/
         /*margin-top: -150vh;*/
     }
