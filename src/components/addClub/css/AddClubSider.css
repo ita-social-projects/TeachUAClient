@@ -39,6 +39,7 @@
 
     .ant-steps.ant-steps-horizontal.add-club-sider-mobile.ant-steps-label-horizontal {
         margin: 15px 0 -30px 0;
+        overflow: hidden;
     }
 
     .modal-add-club .add-club-container {
