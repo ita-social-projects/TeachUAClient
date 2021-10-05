@@ -33,6 +33,7 @@ import MarathonPage from "./components/marathonPage/MarathonPage";
 
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const {Content} = Layout;
 
@@ -53,6 +54,7 @@ function App() {
         <Layout className="layout">
             <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
+                <ScrollToTop />
                 <PageContext.Provider value={pageProvider}>
                     <SearchContext.Provider value={clubProvider}>
                         <HeaderComponent/>
