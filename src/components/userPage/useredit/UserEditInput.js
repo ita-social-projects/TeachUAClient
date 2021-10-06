@@ -257,17 +257,8 @@ const UserEditInput = (
             <Form.Item name="email"
                        initialValue={user.email}
                        className="user-edit-input"
-                       label="Email"
-                       hasFeedback
-                       rules={[{
-                           required: false,
-                           message: 'Введіть email'
-                       },
-                           {
-                               type: 'email',
-                               message: 'Некоректний формат email',
-                           }]}>
-                <Input className="user-edit-box"/>
+                       label="Email">
+                <Input className="user-edit-box" disabled={true}/>
             </Form.Item>
 
             <Form.Item name="urlLogo"
