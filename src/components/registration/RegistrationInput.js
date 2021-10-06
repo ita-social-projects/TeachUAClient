@@ -71,6 +71,11 @@ const RegistrationInput = () => {
                                    },
                                    {
                                        required: false,
+                                       pattern: /^[^-ЁёЪъЫыЭэ]/,
+                                       message: 'Прізвище не може містити російські букви'
+                                   },
+                                   {
+                                       required: false,
                                        pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
                                        message: 'Прізвище повинно починатися і закінчуватися літерою',
                                    },
@@ -105,7 +110,7 @@ const RegistrationInput = () => {
                                        //                    label="Прізвище"
                                        //                    hasFeedback
                                        //                    rules={[{
-                                       required: true,
+                                       required: false,
                                        pattern: /^[^0-9]*$/,
                                        message: "Ім`я не може містити цифри",
                                    },
@@ -113,6 +118,11 @@ const RegistrationInput = () => {
                                        required: false,
                                        pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
                                        message: "Ім`я повинно починатися і закінчуватися літерою",
+                                   },
+                                   {
+                                       required: false,
+                                       pattern: /^[^-ЁёЪъЫыЭэ]/,
+                                       message: "Ім`я не може містити російські букви"
                                    },
                                    {
                                        required: false,
