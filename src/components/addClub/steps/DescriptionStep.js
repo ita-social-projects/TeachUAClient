@@ -83,6 +83,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             form={descriptionForm}
             requiredMark={false}
             onFinish={onFinish}
+            onSubmit={e => e.preventDefault()}
             className="description-step">
             <Form.Item name="urlLogo"
                 className="add-club-row"
