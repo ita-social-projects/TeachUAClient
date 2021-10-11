@@ -1,4 +1,4 @@
-import {AutoComplete, Select} from "antd";
+import {AutoComplete, Input, Select} from "antd";
 import React from "react";
 import {withRouter} from "react-router-dom";
 import {
@@ -22,15 +22,29 @@ const {Option, OptGroup} = Select;
 class Search extends React.Component {
     static contextType = SearchContext;
 
-    state = {
-        possibleResults: {
-            categories: [],
-            clubs: [],
-        },
-        allCategories: [],
-        loading: false,
-        searchClicked: false,
-    };
+    constructor(props) {
+        super(props);
+        this.timer = null;
+
+        this.state = {
+            possibleResults: {
+                categories: [],
+                clubs: [],
+            },
+            allCategories: [],
+            loading: false,
+            searchClicked: false,
+        };
+    }
+
+    componentWillUnmount() {
+        if (this.props.location.pathname !== '/') {
+            //console.log(this.props.location.pathname); // prev
+            //console.log(this.props.history.location.pathname); // curr
+            clearSearchParameters();
+            searchInputData.input = "";
+        }
+    }
 
     componentDidMount() {
         getAllCategories().then((response) => {
@@ -39,6 +53,8 @@ class Search extends React.Component {
     }
 
     onSearchChange = (value, option) => {
+        clearTimeout(this.timer);
+
         if(value===undefined){
             return;
         }
@@ -46,9 +62,11 @@ class Search extends React.Component {
         if(value.trim().length===0){
             return;
         }
-        value=value.trim();
+        //value=value.trim();
         if (this.props.redirect && value.length > 2) {
+            this.timer = setTimeout(() => {
             this.props.history.push("/clubs", {value});
+            }, 1000);
         }
 
         if (!searchParameters.isAdvancedSearch) {
@@ -80,11 +98,21 @@ class Search extends React.Component {
                 }
             }
 
-            // console.log(searchParameters);
+             // console.log(searchParameters);
             getClubsByParameters(searchParameters).then((response) => {
                 this.context.setClubs(response);
             });
         }
+    };
+
+    onSearch = (val) => {
+        searchInputData.input = val;
+        val = val.trim();
+        this.onSearchChange(val, "all");
+        this.setState({loading: true});
+        getPossibleResultsByText(val, searchParameters).then((response) => {
+            this.setState({possibleResults: response, loading: false});
+        });
     };
 
     onSelect = (value, option) => {
@@ -131,17 +159,6 @@ class Search extends React.Component {
         // this.props.setShowHideMenu(true);
     };
 
-    onSearch = (val) => {
-        val=val.trim();
-        searchInputData.input = val;
-
-        this.onSearchChange(val, "all");
-        this.setState({loading: true});
-        getPossibleResultsByText(val, searchParameters).then((response) => {
-            this.setState({possibleResults: response, loading: false});
-        });
-    };
-
     handleAdvancedSearch = () => {
         if (this.props.redirect) {
             //redirect with props value for component
@@ -170,16 +187,17 @@ class Search extends React.Component {
                     disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
-                    onFocus={this.onFocus}
+                    onChange={this.onSearchChange}
+                    //onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
+                    onBlur={this.onKeyDown}
                     style={{
                         width: 230,
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
                     placeholder="Який гурток шукаєте?"
-                    defaultActiveFirstOption={false}
-                    defaultValue={searchInputData.input.trim()}
+                    value={searchInputData.input.trim()}
                     maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
