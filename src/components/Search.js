@@ -184,11 +184,11 @@ class Search extends React.Component {
                 <AutoComplete
                     allowClear={true}
                     loading={this.state.loading}
-                    disabled={searchParameters.isAdvancedSearch}
+                    // disabled={searchParameters.isAdvancedSearch} // Block search field when clicked AdvanceSearch
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onChange={this.onSearchChange}
-                    //onFocus={this.onFocus}
+                    onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
                     onBlur={this.onKeyDown}

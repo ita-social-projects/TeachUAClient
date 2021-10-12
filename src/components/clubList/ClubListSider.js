@@ -42,10 +42,11 @@ const ClubListSider = ({
         getAllCities().then((response) => setCities(response));
 
         getData();
-    }, []);
+    }, [cityName]);
 
     useEffect(() => {
         const city = !cityName ? searchParameters.cityName : cityName;
+
         getDistrictsByCityName(city).then((response) => {
             setDistricts(response);
         });
@@ -100,7 +101,7 @@ const ClubListSider = ({
     };
 
     const clearAllValues = () => {
-        onCityChange(undefined);
+        onCityChange(undefined);//---------------------
         form.setFieldsValue({categoriesName: activeCategory});
         form.setFieldsValue({isOnline: undefined});
         setAge(undefined);

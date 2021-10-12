@@ -1,7 +1,7 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 import {replaceCommaToSemicolon} from "../util/CategoryUtil";
-import {searchParameters} from "../context/SearchContext";
+import {clearSearchParameters, searchParameters} from "../context/SearchContext";
 
 export const addClub = async (data) => {
     // data.locations.map(
