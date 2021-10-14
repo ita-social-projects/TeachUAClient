@@ -59,8 +59,12 @@ const NavMenu = () => {
 
                  
                 <SubMenu id = {"challenge_ONE"}  icon={<CrownOutlined />} title="Челендж" className="sub1" expandIcon={<CaretDownOutlined />} triggerSubMenuAction = {'click'} forceSubMenuRender = {true} >
-                    <Menu.Item ><Link to="/marathon">Мовомаратон</Link></Menu.Item>
-                    <Menu.Item><Link to="/challenge">Навчай українською</Link></Menu.Item>
+                    <Menu.Item key="marathon">
+                        <Link to="/marathon" onClick ={() => setCurrentPage(0)}>Мовомаратон</Link>
+                    </Menu.Item>
+                    <Menu.Item key ="challenge">
+                        <Link to="/challenge" onClick ={() => setCurrentPage(0)}>Навчай українською</Link>
+                    </Menu.Item>
                 </SubMenu >
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
