@@ -33,6 +33,9 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             setLocations([]);
             nextStep();
         })
+        if(result.clubs.length===0){
+            alert("Ви не вибрали жодного клубу")
+        }
         window.location.reload()
     }
 
