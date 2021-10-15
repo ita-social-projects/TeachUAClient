@@ -1,5 +1,5 @@
 import {AutoComplete, Input, Select} from "antd";
-import React from "react";
+import React, {useContext} from "react";
 import {withRouter} from "react-router-dom";
 import {
     clearSearchParameters,
@@ -16,11 +16,14 @@ import {
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import {getAllCategories} from "../service/CategoryService";
+import {PageContext} from "../context/PageContext";
+
 
 const {Option, OptGroup} = Select;
 
 class Search extends React.Component {
     static contextType = SearchContext;
+    // static contextType = PageContext;
 
     constructor(props) {
         super(props);
@@ -62,7 +65,6 @@ class Search extends React.Component {
         if(value.trim().length===0){
             return;
         }
-        //value=value.trim();
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
             this.props.history.push("/clubs", {value});
@@ -76,14 +78,14 @@ class Search extends React.Component {
                 case "category":
                     searchParameters.categoryName = value;
                     mapSearchParameters.categoryName = value;
-                    // console.log("category section ");
+
                     break;
                 case "club":
                     searchParameters.clubName = value;
-                    // console.log("club  section ");
+
                     break;
                 default: {
-                    // console.log("default section while search");
+
                     if (
                         this.state.allCategories.find((category) =>
                             category.name
@@ -98,8 +100,9 @@ class Search extends React.Component {
                 }
             }
 
-             // console.log(searchParameters);
+
             getClubsByParameters(searchParameters).then((response) => {
+                console.log('111: ', this.context)
                 this.context.setClubs(response);
             });
         }
@@ -152,6 +155,7 @@ class Search extends React.Component {
         this.state.searchClicked = true;
         if (this.state.searchClicked) {
             this.setState({loading: true});
+
             this.onSearchChange(searchInputData.input, {type: "all"});
             this.setState({loading: false});
         }
@@ -184,7 +188,7 @@ class Search extends React.Component {
                 <AutoComplete
                     allowClear={true}
                     loading={this.state.loading}
-                    // disabled={searchParameters.isAdvancedSearch} // Block search field when clicked AdvanceSearch
+                    disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onChange={this.onSearchChange}
