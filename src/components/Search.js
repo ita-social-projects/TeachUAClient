@@ -197,7 +197,7 @@ class Search extends React.Component {
                         opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
                     placeholder="Який гурток шукаєте?"
-                    value={searchInputData.input.trim()}
+                    value={searchInputData.input}
                     maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
