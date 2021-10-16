@@ -23,7 +23,6 @@ const {Option, OptGroup} = Select;
 
 class Search extends React.Component {
     static contextType = SearchContext;
-    // static contextType = PageContext;
 
     constructor(props) {
         super(props);
@@ -170,6 +169,7 @@ class Search extends React.Component {
                 pathname: "/clubs",
                 state: {showAdvancedSearch: true},
             });
+            searchParameters.isAdvancedSearch = true;
         } else {
             if (this.props.advancedSearch) {
                 this.props.setAdvancedSearch(false);
