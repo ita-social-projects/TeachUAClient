@@ -41,7 +41,7 @@ export const PasswordUpdate = () => {
                     required: true,
                     message: "Введіть старий пароль",
                     //type:"password"
-                    pattern: /^\S{8,20}$/,
+                    //pattern: /^\S{8,20}$/,
 
                 },
                     {
