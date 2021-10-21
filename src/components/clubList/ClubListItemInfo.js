@@ -11,6 +11,7 @@ import ImageCarousel from "../ImageCarousel";
 import { getShortContent } from "../editor/EditorConverter";
 import { deleteClubById } from "../../service/ClubService";
 import EditClubModal from "../editClub/EditClubModal";
+import {getUserId} from "../../service/StorageService";
 
 const ClubListItemInfo = ({ visible, setVisible, club }) => {
     const images = [
