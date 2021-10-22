@@ -11,6 +11,7 @@ import ImageCarousel from "../ImageCarousel";
 import { getShortContent } from "../editor/EditorConverter";
 import { deleteClubById } from "../../service/ClubService";
 import EditClubModal from "../editClub/EditClubModal";
+import {getUserId} from "../../service/StorageService";
 
 const ClubListItemInfo = ({ visible, setVisible, club }) => {
     const images = [
@@ -33,6 +34,12 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
     function confirmPopup(e) {
         deleteClubById(club.id).then(window.location.reload());
     }
+
+
+    function showDropdown() {
+        return (club.center != null && (club.center.user != null && Number(club.center.user.id) == getUserId())) ||
+            (club.center == null && club.user != null && getUserId() == Number(club.user.id));
+    };
 
     // function closeModal() {
     //     setVisible(false);
@@ -70,14 +77,16 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
             footer={null}
             className="clubInfo">
             <div className="container">
-                <Dropdown
-                    // trigger="click"
-                    overlay={menu}
-                    placement="bottomRight">
-                    <Button className="modal-settings-btn">
-                        <SettingOutlined style={{ fontSize: "1em" }} />
-                    </Button>
-                </Dropdown>
+                {showDropdown() && (
+                    <Dropdown
+                        // trigger="click"
+                        overlay={menu}
+                        placement="bottomRight">
+                        <Button className="modal-settings-btn">
+                            <SettingOutlined style={{fontSize: "1em"}}/>
+                        </Button>
+                    </Dropdown>
+                )}
                 <div className="title">
                     <ClubLogo
                         logo={club.urlLogo}
