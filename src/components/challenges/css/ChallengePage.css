@@ -1,4 +1,4 @@
-.marathon-page .banner {
+.challenge-page .banner {
     height: 400px;
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     border-radius: 8px;
 }
 
-.marathon-page .banner .title {
+.challenge-page .banner .title {
     font-weight: bold;
     font-size: 54px;
     line-height: 64px;
@@ -15,7 +15,7 @@
     text-align: center;
 }
 
-.marathon-page .details-button {
+.challenge-page .details-button {
     width: 185px;
     height: 48px;
     background: #FA8C16;
@@ -29,19 +29,19 @@
     justify-content: center;
 }
 
-.marathon-page .button-div {
+.challenge-page .button-div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.marathon-page .google-form {
+.challenge-page .google-form {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.marathon-page .marathon-description {
+.challenge-page .challenge-description {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@
     /*margin-top: 100px;*/
 }
 
-.marathon-page .marathon-description .title {
+.challenge-page .challenge-description .title {
     width: 620px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -58,7 +58,7 @@
     color: #2D4C68;
 }
 
-.marathon-page .marathon-description .subtitle {
+.challenge-page .challenge-description .subtitle {
     width: 620px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -68,7 +68,7 @@
     color: #2D4C68;
 }
 
-.marathon-page .marathon-description .text {
+.challenge-page .challenge-description .text {
     width: 620px;
     font-size: 18px;
     line-height: 28px;
@@ -76,66 +76,66 @@
     opacity: 0.9;
 }
 
-.marathon-page .marathon-description .webinar-items {
+.challenge-page .challenge-description .webinar-items {
     margin-top: 8px;
 }
 
-.marathon-page .marathon-description .webinar-items .text span {
+.challenge-page .challenge-description .webinar-items .text span {
     color: #2D4C68;
     text-decoration: underline;
 }
 
 @media (max-width: 1200px) {
-    .marathon-page .details-button {
+    .challenge-page .details-button {
         margin-left: 0px;
     }
-    .marathon-page .marathon-description .text {
+    .challenge-page .challenge-description .text {
         font-size: 14px;
         width: 100%;
     }
-    .marathon-page .banner .title {
+    .challenge-page .banner .title {
         font-size: 40px;
         width: 100%;
         text-align: center;
     }
-    .marathon-page .marathon-description .title {
+    .challenge-page .challenge-description .title {
         font-size: 20px;
         width: 100%;
     }
-    .marathon-page .marathon-description .subtitle {
+    .challenge-page .challenge-description .subtitle {
         font-size: 20px;
         width: 100%;
     }
 }
 
 @media (min-width: 320px) and (max-width: 824px) {
-    .marathon-page .details-button {
+    .challenge-page .details-button {
         margin-left: 0px;
     }
-    .marathon-page .banner .title {
+    .challenge-page .banner .title {
         font-size: 36px!important;
         text-align: center;
     }
-    .marathon-page .marathon-description {
+    .challenge-page .challenge-description {
         margin-top: 21px !important;
     }
-    .marathon-page .marathon-description .title {
+    .challenge-page .challenge-description .title {
         text-align: center;
     }
-    .marathon-page .marathon-description .subtitle {
+    .challenge-page .challenge-description .subtitle {
         text-align: center;
     }
-    .marathon-page .title .text {
+    .challenge-page .title .text {
         font-size: 36px;
         text-align: center;
     }
-    .marathon-page .social-info {
+    .challenge-page .social-info {
         height: 10px;
         display: contents !important;
         justify-content: space-evenly;
         margin-bottom: 5px;
     }
-    .marathon-page .help-button {
+    .challenge-page .help-button {
         justify-content: space-around;
         display: flex;
         align-items: center;
@@ -143,14 +143,14 @@
     }
 }
 
-.marathon-page .social-media {
+.challenge-page .social-media {
     display: flex;
     height: 30px;
     width: 300px;
     align-self: center;
 }
 
-.marathon-page .social-media .links {
+.challenge-page .social-media .links {
     padding-top: 5px;
     display: flex;
     justify-content: space-between;
@@ -159,12 +159,12 @@
     margin-left: 5px;
 }
 
-.marathon-page .social-media .icon {
+.challenge-page .social-media .icon {
     color: #2D4C68;
     font-size: 1.3em;
 }
 
-.marathon-page .social-media .text {
+.challenge-page .social-media .text {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -173,7 +173,7 @@
     vertical-align: center;
 }
 
-.marathon-page .social-info {
+.challenge-page .social-info {
     height: 50px;
     display: flex;
     justify-content: space-evenly;
@@ -181,12 +181,12 @@
     margin-top: 2%;
 }
 
-.marathon-page .help-button {
+.challenge-page .help-button {
     display: flex;
     align-items: center;
 }
 
-.marathon-page .content-text {
+.challenge-page .content-text {
     width: 620px;
     font-family: Open Sans;
     font-style: normal;
@@ -198,7 +198,7 @@
     margin-bottom: 25px;
 }
 
-.marathon-page .donate-button {
+.challenge-page .donate-button {
     width: 220px;
     height: 40px;
     font-size: 16px;
@@ -207,7 +207,7 @@
     color: #FFFFFF;
 }
 
-.marathon-page .details-back {
+.challenge-page .details-back {
     width: 293px;
     height: 48px;
     background: #FA8C16;
@@ -219,6 +219,6 @@
     /*margin-left: 33%;*/
 }
 
-.marathon-page .button-alain {
+.challenge-page .button-alain {
     text-align: center !important;
 }

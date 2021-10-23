@@ -21,14 +21,14 @@
 }
 
 @media (max-width: 950px) {
-    .marathon-task-page {
+    .challenge-task-page {
         flex-direction: column !important;
     }
 }
 
 @media (min-width: 500px)
 and (max-width: 1000px) {
-    .marathon-task-page {
+    .challenge-task-page {
         background: #f7e0d3;
         color: #f7e0d3;
         /* margin-top: 18%;*/
@@ -38,7 +38,7 @@ and (max-width: 1000px) {
 
 @media (min-device-width: 320px)
 and (max-device-width: 500px) {
-    .marathon-task-page {
+    .challenge-task-page {
         /* margin-top: 28%;*/
         background: #f7e0d3;
         flex-direction: column !important;
@@ -120,7 +120,7 @@ and (max-device-width: 1000px) {
 
 @media (min-device-width: 1000px) {
 
-    .marathon-task-page {
+    .challenge-task-page {
         align-items: center;
         background: #f7e0d3
     }
