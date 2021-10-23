@@ -130,7 +130,10 @@ const AboutProject = () => {
                             інформацію про товари і послуги державною мовою. Громадяни мають право отримати освітні послуги
                             українською мовою у закладах позашкільної освіти.
                         </div>
-
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col">
                         <div className="video">
                             <iframe width="100%" height="378" style={{borderRadius: '16px'}}
                                     src="https://www.youtube.com/embed/i3umBFqDznQ" frameborder="0"

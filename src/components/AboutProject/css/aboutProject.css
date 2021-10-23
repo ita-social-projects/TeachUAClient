@@ -209,23 +209,6 @@
         margin-top: 15px;
     }
 
-    .aboutProject .content .title-content {
-        padding-top: 15px;
-        width: 90%;
-        text-align: left;
-    }
-
-    .aboutProject .content-text {
-        width: 100%;
-        font-size: 14px;
-    }
-
-    img {
-        vertical-align: middle;
-        der-style: none;
-        margin: 0 auto;
-    }
-
     .aboutProject .row .col .text {
         width: 90vw;
         font-size: 14px;
@@ -249,7 +232,53 @@
 
 
     .image {
-        margin-left: 30px;
-        margin-right: 30px;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
+
+    .aboutProject .row .col {
+        box-sizing: border-box;
+        width:90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 5%;
+    }
+
+    /*.aboutProject .content-text {*/
+    /*    width: 75%;*/
+    /*    font-family: Open Sans;*/
+    /*    font-style: normal;*/
+    /*    font-weight: normal;*/
+    /*    font-size: 18px;*/
+    /*    line-height: 28px;*/
+    /*    color: #2D4C68;*/
+    /*    opacity: 0.9;*/
+    /*    margin-bottom: 25px;*/
+    /*    margin-right: 10px;*/
+    /*    margin-left: 10px;*/
+    /*}*/
+
+    .aboutProject .content-text {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 14px;
+    }
+
+    .aboutProject .col .content-text {
+        width: 100%;
+        margin-left: 0%;
+        margin-right: 0%;
+        font-size: 14px;
+    }
+
+    .aboutProject .content .title-content {
+        padding-top: 15px;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1%;
+    }
+
+
 }
