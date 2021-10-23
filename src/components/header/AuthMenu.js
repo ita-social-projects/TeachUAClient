@@ -12,7 +12,6 @@ import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
 import AddCenter from "../addCenter/AddCenter";
-import ChallengeTable from "../admin/challenge/ChallengeTable";
 
 const { SubMenu } = Menu;
 
@@ -89,7 +88,7 @@ const AuthMenu = () => {
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
                 { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
                     <SubMenu title="Адміністрування" >
-                        <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/addChallenge">Челенджі</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
                         <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
