@@ -30,10 +30,12 @@ import ChallengePage from "./components/challengePage/ChallengePage";
 import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
+import ChallengeTable from "./components/admin/challenge/ChallengeTable";
 
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
+import AddChallenge from "./components/admin/challenge/AddChallenge";
 
 const {Content} = Layout;
 
@@ -62,6 +64,7 @@ function App() {
                             <Content className="global-content">
                                 <Switch>
                                     
+                                    <Route path="/addChallenge" exact component={AddChallenge} />
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
@@ -73,6 +76,7 @@ function App() {
                                     <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
                                     <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                     <Route path="/admin/stations" exact component={StationTable}/>
+                                    <Route path="/admin/challenges" exact component={ChallengeTable}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
