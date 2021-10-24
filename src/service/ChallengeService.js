@@ -15,11 +15,12 @@ export const createChallenge = async (data) => {
             name: data.name,
             description: data.description,
             title: data.title,
-            picture: data.picture,
+            picture: data.picture && data.picture.file.response,
             sortNumber: data.sortNumber
         })
         .then((response) => {
             return response.data;
+            console.log(response.data);
         })
         .catch((error) => {
             return error.response.data;

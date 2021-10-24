@@ -1,39 +1,49 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './css/AddChallenge.css';
-import {Layout, Typography, Form, Input, Button, message} from 'antd';
+import {Layout, Typography, Form, Input, Button, message, Upload} from 'antd';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {ReactHtmlParser}  from 'react-html-parser';
 import {createChallenge} from "../../../service/ChallengeService";
-import {addToTable} from "../../../util/TableUtil";
 import {useForm} from "antd/es/form/Form";
+import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
+import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const AddChallenge = () => {
     const [challengeForm] = useForm();
-    const [addData, setData] = useState("");
-    const [val, setVal] = useState('');
-    const [addedData, showData] = useState(0);
+    const [name, setName] = useState();
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [sortNumber, setSortNumber] = useState();
+    const [picture, setPicture] = useState();
 
-    const handleChange = (event, editor) => {
-        const data = editor.getData();
-        console.log( { event, editor, data } );
+    const handleNameChange = (value) => {
+        setName(value);
+    }
+    const handleTitleChange = (value) => {
+        setTitle(value);
+    }
+    const handleSortNumberChange = (value) => {
+        setSortNumber(value);
+    }
+    const handlePictureChange = (value) => {
+        setPicture(value);
     }
 
     const onFinish = (values) => {
+        values.description = description;
         createChallenge(values)
             .then((response) => {
                 if (response.status) {
                     message.warning(response.message);
                     return;
                 }
-                message.success("Категорія '" + response.name + "' успішно додана!");
+                message.success("Челендж '" + response.name + "' успішно доданий!");
 
             });
         console.log('Success:', values);
-        challengeForm.resetFields();
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -52,26 +62,62 @@ const AddChallenge = () => {
                 wrapperCol={{ span: 14 }}
             >
                 <Form.Item
+                    name="sortNumber"
+                    label="sortNumber"
+                    value={sortNumber}
+                    onChange={handleSortNumberChange}
+                    >
+                    <Input/>
+                </Form.Item>
+                <Form.Item
                     label="name"
+                    name="name"
+                    value={name}
+                    onChange={handleNameChange}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="title"
+                    name="title"
+                    value={title}
+                    onChange={handleTitleChange}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="description"
+                    name="description"
+                    value={description}
                 >
                     <CKEditor
+                        data={description}
                         editor={ ClassicEditor }
-                        data={addData}
                         onInit={ editor => {
                             console.log( 'Editor is ready to use!', editor );
                         } }
-                        onChange={handleChange}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setDescription(data);
+                        }}
                     />
+                </Form.Item>
+                <Form.Item
+                    name="picture"
+                    label="picture"
+                    value={picture}
+                    onChange={handlePictureChange}
+                           >
+                    <Upload
+                        name="image"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        action={UPLOAD_IMAGE_URL}
+                        maxCount={1}
+                        data={{folder:`challenges`}}
+                        headers={{contentType: 'multipart/form-data'}}>
+                        <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
+                    </Upload>
                 </Form.Item>
                 <Form.Item
                 >
@@ -79,7 +125,6 @@ const AddChallenge = () => {
                         type="primary"
                         htmlType="submit"
                         className="flooded-button add-contact-type-button"
-                        onClick={() => console.log(addedData)}
                     >
                         Зберегти
                     </Button>
