@@ -8,3 +8,20 @@ export const getAllItems = async () => {
             return response.data;
         });
 }
+
+export const updateItemById = async (data) => {
+    return await fetchRequest
+        .put(BASE_URL + "/api/about_us_item/" + data.id, {
+            picture: data.picture,
+            text: data.text,
+            video: data.video,
+            type: data.type,
+            number: 0
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};

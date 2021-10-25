@@ -36,6 +36,7 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 
 import AboutProject from "./components/AboutProject/AboutProject"
+import AboutUsEdit from "./components/AboutProject/AboutUsEdit"
 
 const {Content} = Layout;
 
@@ -88,6 +89,7 @@ function App() {
                                     <Route path="/service" exact component={ServiceInUkr}/>
                                     <Route path="/about_us_items" exact component={AboutProject}/>
                                     <Route path="/about" exact component={AboutProject}/>
+                                    <Route path="/about_us_items/edit" exact component={AboutUsEdit}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>

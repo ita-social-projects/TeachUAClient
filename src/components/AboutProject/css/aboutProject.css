@@ -80,6 +80,12 @@
     align-items: center;
 }
 
+.aboutProject .add-item-button {
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
 
 .aboutProject .content {
     display: flex;
