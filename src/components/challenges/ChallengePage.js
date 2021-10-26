@@ -8,20 +8,37 @@ import ChallengeDescription from "./ChallengeDescription";
 import ChallengeBanner from "./ChallengeBanner";
 
 const ChallengePage = () => {
-    const [challenge, setChallenge] = useState();
+    const [challenge, setChallenge] = useState({
+        id: 0,
+        name: "",
+        title: "",
+        description: "",
+        picture: "",
+        sortNumber: 0,
+        isActive: true,
+        tasks: {},
+        user: {
+            id: 0,
+            firstName: "",
+            lastName: ""
+        }
+    });
+
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
         getChallengeProfile(9).then(response => {
             setChallenge(response)
-            // console.log(response)
+
         });
-    }, []);
+        // console.log(challenge)
+    }, [challenge]);
 
     return (
         <Layout className="global-padding marathon-page">
             <AboutHeader/>
-            <ChallengeBanner challenge={challenge}/>
+            {/*<ChallengeBanner challenge={challenge}/>*/}
             <SocialInfo/>
             {/*<MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.jpg`} />*/}
             {/*<MarathonDescription />*/}
