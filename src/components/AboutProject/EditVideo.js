@@ -31,17 +31,25 @@ const EditVideo = ({visible, setVisible, item}) => {
         closePopup();
     }
 
+    const isVisible = () => {
+        descriptionForm.setFieldsValue({
+            video: item.video
+        });
+        return visible;
+    }
+
     return (
 
         <Modal
                 centered
-                visible={visible}
+                visible={isVisible()}
                  onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 width={1200}
                 footer={null}
-                className='map-modal'
+                // modalRender={() => rerender()}
             >
+            <br></br>
             <Form
                 name="basic"
                 form={descriptionForm}
@@ -51,7 +59,7 @@ const EditVideo = ({visible, setVisible, item}) => {
                 <div>
                     <Form.Item
                         name="video"
-                        label="Текст заголовка"
+                        label="Посилання на відео"
                         rules={[
                             {
                                 required: true,
@@ -60,7 +68,7 @@ const EditVideo = ({visible, setVisible, item}) => {
                         ]}
                     >
                         <Input
-                            defaultValue={item.video}
+                            // defaultValue={item.video}
                             placeholder="Введіть посилання на відео" />
                     </Form.Item>
                 </div>

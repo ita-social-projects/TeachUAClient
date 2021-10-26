@@ -7,6 +7,8 @@ import {deleteFromTable} from "../../util/TableUtil";
 import {updateItemById} from "../../service/AboutUsService";
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
+import {uploadImage} from "../../service/UploadService";
+import {deleteFile} from "../../service/UploadService";
 
 const EditPicture = ({visible, setVisible, item}) => {
     const [descriptionForm] = Form.useForm();
@@ -20,9 +22,11 @@ const EditPicture = ({visible, setVisible, item}) => {
 
 
     const onFinish = (values) => {
-        console.log(values);
-        item.picture = values.picture.path;
-        console.log(item);
+        if (values.picture && values.picture.file) {
+            console.log(deleteFile(item.picture));
+            item.picture = uploadImage(values.picture.file, `about_us`);
+        }
+        item.text = values.text;
         updateItemById(item).then(response => {
             if (response.status) {
                 message.warning(response.message);
@@ -33,17 +37,25 @@ const EditPicture = ({visible, setVisible, item}) => {
         closePopup();
     }
 
+    const isVisible = () => {
+        descriptionForm.setFieldsValue({
+            picture: item.picture,
+            text: item.text
+        });
+        return visible;
+    }
+
     return (
 
         <Modal
                 centered
-                visible={visible}
-                 onOk={() => closePopup()}
+                visible={isVisible()}
+                onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 width={1200}
                 footer={null}
-                className='map-modal'
             >
+            <br></br>
             <Form
                 name="basic"
                 form={descriptionForm}
@@ -57,11 +69,11 @@ const EditPicture = ({visible, setVisible, item}) => {
                                hasFeedback>
                         <Upload
                             name="image"
-                            action={UPLOAD_IMAGE_URL}
                             accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                             maxCount={1}
-                            data={{ folder: `/static/images/service/` }}
                             headers={{ contentType: 'multipart/form-data' }}
+                            showUploadList={false}
+                            beforeUpload={() => false}
                         >
                             <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити фото</span>
                         </Upload>
@@ -78,7 +90,7 @@ const EditPicture = ({visible, setVisible, item}) => {
                         ]}
                     >
                         <Input.TextArea
-                            defaultValue={item.text}
+                            style={{height: 400}}
                             placeholder="Введіть текст" />
                     </Form.Item>
                 </div>

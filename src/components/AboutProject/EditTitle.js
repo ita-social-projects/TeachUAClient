@@ -18,6 +18,7 @@ const EditTitle = ({visible, setVisible, item}) => {
 
 
     const onFinish = (values) => {
+
         console.log(values);
         item.text = values.title;
         console.log(item);
@@ -31,17 +32,24 @@ const EditTitle = ({visible, setVisible, item}) => {
         closePopup();
     }
 
+    const isVisible = () => {
+        descriptionForm.setFieldsValue({
+            title: item.text
+        });
+        return visible;
+    }
+
     return (
 
         <Modal
                 centered
-                visible={visible}
-                 onOk={() => closePopup()}
+                visible={isVisible()}
+                onOk={() => closePopup()}
                 onCancel={() => closePopup()}
-                width={1200}
                 footer={null}
-                className='map-modal'
+                // className="modal"
             >
+            <br></br>
             <Form
                 name="basic"
                 form={descriptionForm}
@@ -55,13 +63,14 @@ const EditTitle = ({visible, setVisible, item}) => {
                         rules={[
                             {
                                 required: true,
-                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
-                                message: "Некоректний заголовок",
+                                max: 100,
+                                message: "Поле довжиною 0-100 символів",
                             },
                         ]}
                     >
                         <Input
-                            defaultValue={item.text}
+                            className="input"
+                            // defaultValue={item.text}
                             suffix={
                                 <Tooltip placement="bottomRight"
                                          title="Це поле може містити тільки українські та англійські літери, довжиною 5-100 символів">
@@ -73,7 +82,7 @@ const EditTitle = ({visible, setVisible, item}) => {
                     </Form.Item>
                 </div>
                 <div>
-                    <Button className="next-btn" htmlType="submit">Підтвердити</Button>
+                    <Button className="add-item-button" htmlType="submit">Підтвердити</Button>
                 </div>
             </Form>
         </Modal>

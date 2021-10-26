@@ -5,6 +5,7 @@ import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {updateClubBuId} from "../../service/ClubService";
 import {deleteFromTable} from "../../util/TableUtil";
 import {updateItemById} from "../../service/AboutUsService";
+import "./css/aboutProject.css";
 
 const EditTitle = ({visible, setVisible, item}) => {
     const [descriptionForm] = Form.useForm();
@@ -31,17 +32,24 @@ const EditTitle = ({visible, setVisible, item}) => {
         closePopup();
     }
 
+    const isVisible = () => {
+        descriptionForm.setFieldsValue({
+            text: item.text
+        });
+        return visible;
+    }
+
     return (
 
         <Modal
                 centered
-                visible={visible}
+                visible={isVisible()}
                  onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 width={1200}
                 footer={null}
-                className='map-modal'
             >
+            <br></br>
             <Form
                 name="basic"
                 form={descriptionForm}
@@ -61,12 +69,12 @@ const EditTitle = ({visible, setVisible, item}) => {
                         ]}
                     >
                         <Input.TextArea
-                            defaultValue={item.text}
+                            style={{height: 400}}
                             placeholder="Введіть текст" />
                     </Form.Item>
                 </div>
-                <div>
-                    <Button className="next-btn" htmlType="submit">Підтвердити</Button>
+                <div className="help-button">
+                    <Button className="flooded-button donate-button" htmlType="submit">Підтвердити</Button>
                 </div>
             </Form>
         </Modal>

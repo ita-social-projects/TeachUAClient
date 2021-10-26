@@ -1,4 +1,5 @@
 import React from "react";
+import {BASE_URL} from "../../service/config/ApiConfig";
 
 const ItemView = ({item}) => {
 
@@ -15,10 +16,10 @@ const ItemView = ({item}) => {
                     </div>
                 </div>;
             case 3:
-                console.log(`${process.env.PUBLIC_URL}${item.picture}`);
+                console.log(`${BASE_URL}${item.picture}`);
                 return <div className="row">
                     <img className="image"
-                         src={`${process.env.PUBLIC_URL}${item.picture}`}
+                         src={`${BASE_URL}${item.picture}`}
                     ></img>
                     <div className="content-text" dangerouslySetInnerHTML={{__html: `${item.text}`}}/>
                 </div>
@@ -26,7 +27,7 @@ const ItemView = ({item}) => {
                 return <div className="row">
                     <div className="content-text" dangerouslySetInnerHTML={{__html: `${item.text}`}}/>
                     <img className="image"
-                         src={`${process.env.PUBLIC_URL}${item.picture}`}
+                         src={`${BASE_URL}${item.picture}`}
                     ></img>
                 </div>
             case 5:
