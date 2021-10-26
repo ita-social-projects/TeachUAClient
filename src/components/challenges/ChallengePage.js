@@ -27,13 +27,10 @@ const ChallengePage = () => {
 
 
     useEffect(() => {
-        window.scrollTo(0, 0)
         getChallengeProfile(9).then(response => {
             setChallenge(response)
-
         });
-        // console.log(challenge)
-    }, [challenge]);
+    }, []);
 
     return (
         <Layout className="global-padding marathon-page">

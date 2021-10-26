@@ -1,12 +1,7 @@
-import {useEffect} from "react";
 import React from "react";
+import "./css/ChallengePage.css";
 
 const ChallengeDescription = ({challenge}) => {
-
-    useEffect(() => {
-        console.log(challenge);
-    })
-    // return <div>asdasd</div>
-    return <div className="challenge-description" dangerouslySetInnerHTML={{__html: challenge.description}}></div>
+    return <div className="challenge-description" dangerouslySetInnerHTML={{__html: `${challenge.description}`}}/>
 }
 export default ChallengeDescription;
