@@ -35,7 +35,7 @@ const ChallengePage = () => {
     return (
         <Layout className="global-padding marathon-page">
             <AboutHeader/>
-            {/*<ChallengeBanner challenge={challenge}/>*/}
+            <ChallengeBanner challenge={challenge}/>
             <SocialInfo/>
             {/*<MarathonBanner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.jpg`} />*/}
             {/*<MarathonDescription />*/}

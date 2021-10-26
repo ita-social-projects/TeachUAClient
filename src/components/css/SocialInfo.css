@@ -1,0 +1,59 @@
+.social-media {
+    display: flex;
+    height: 30px;
+    width: 300px;
+    align-self: center;
+}
+
+.social-info {
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.social-media .links {
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin-left: 5px;
+}
+
+.social-media .icon {
+    color: #2D4C68;
+    font-size: 1.3em;
+}
+
+.social-media .text {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #2D4C68;
+    vertical-align: center;
+}
+
+.help-button {
+    display: flex;
+    align-items: center;
+}
+
+.help-button {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+@media (min-width: 320px) and (max-width: 824px) {
+    .social-info {
+        height: 10px;
+        display: contents !important;
+        justify-content: space-evenly;
+        margin-bottom: 5px;
+    }
+}
+

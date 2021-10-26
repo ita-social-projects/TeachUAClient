@@ -15,7 +15,7 @@
     text-align: center;
 }
 
-.challenge-page .details-button {
+.details-button {
     width: 185px;
     height: 48px;
     background: #FA8C16;
@@ -29,19 +29,19 @@
     justify-content: center;
 }
 
-.challenge-page .button-div {
+.button-div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.challenge-page .google-form {
+.google-form {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.challenge-page .challenge-description {
+.challenge-description {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@
     /*margin-top: 100px;*/
 }
 
-.challenge-page .challenge-description .title {
+.title {
     width: 620px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -58,7 +58,7 @@
     color: #2D4C68;
 }
 
-.challenge-page .challenge-description .subtitle {
+.subtitle {
     width: 620px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -76,115 +76,72 @@
     opacity: 0.9;
 }
 
-.challenge-page .challenge-description .webinar-items {
+.webinar-items {
     margin-top: 8px;
 }
 
-.challenge-page .challenge-description .webinar-items .text span {
+.webinar-items .text span {
     color: #2D4C68;
     text-decoration: underline;
 }
 
 @media (max-width: 1200px) {
-    .challenge-page .details-button {
+    .details-button {
         margin-left: 0px;
     }
-    .challenge-page .challenge-description .text {
+
+    .challenge-description .text {
         font-size: 14px;
         width: 100%;
     }
-    .challenge-page .banner .title {
+
+    .banner .title {
         font-size: 40px;
         width: 100%;
         text-align: center;
     }
-    .challenge-page .challenge-description .title {
+
+    .title {
         font-size: 20px;
         width: 100%;
     }
-    .challenge-page .challenge-description .subtitle {
+
+    .subtitle {
         font-size: 20px;
         width: 100%;
     }
 }
 
 @media (min-width: 320px) and (max-width: 824px) {
-    .challenge-page .details-button {
+    .details-button {
         margin-left: 0px;
     }
-    .challenge-page .banner .title {
-        font-size: 36px!important;
+
+    .banner .title {
+        font-size: 36px !important;
         text-align: center;
     }
-    .challenge-page .challenge-description {
+
+    .challenge-description {
         margin-top: 21px !important;
     }
-    .challenge-page .challenge-description .title {
+
+    .challenge-description .title {
         text-align: center;
     }
-    .challenge-page .challenge-description .subtitle {
+
+    .challenge-description .subtitle {
         text-align: center;
     }
-    .challenge-page .title .text {
+
+    .text {
         font-size: 36px;
         text-align: center;
     }
-    .challenge-page .social-info {
-        height: 10px;
-        display: contents !important;
-        justify-content: space-evenly;
-        margin-bottom: 5px;
-    }
-    .challenge-page .help-button {
-        justify-content: space-around;
-        display: flex;
-        align-items: center;
-        margin-top: 15px;
-    }
+
+
 }
 
-.challenge-page .social-media {
-    display: flex;
-    height: 30px;
-    width: 300px;
-    align-self: center;
-}
-
-.challenge-page .social-media .links {
-    padding-top: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 150px;
-    margin-left: 5px;
-}
-
-.challenge-page .social-media .icon {
-    color: #2D4C68;
-    font-size: 1.3em;
-}
-
-.challenge-page .social-media .text {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-    color: #2D4C68;
-    vertical-align: center;
-}
-
-.challenge-page .social-info {
-    height: 50px;
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 2%;
-    margin-top: 2%;
-}
-
-.challenge-page .help-button {
-    display: flex;
-    align-items: center;
-}
 
 .challenge-page .content-text {
     width: 620px;
