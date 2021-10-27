@@ -3,20 +3,24 @@ import {getAllItems} from "../../service/AboutUsService";
 import {Button, Form, Input, Layout, Tooltip} from "antd";
 import Search from "../Search";
 import "./css/aboutProject.css";
-import AddItemComponent from "./AddItemComponent";
+import AddItemComponent from "./item_popups/AddItemComponent";
 import ItemView from "./ItemView";
-import EditTitle from "./EditTitle";
-import EditText from "./EditText";
-import EditVideo from "./EditVideo";
-import EditPicture from "./EditPicture";
+import EditTitle from "./item_popups/EditTitle";
+import EditText from "./item_popups/EditText";
+import EditVideo from "./item_popups/EditVideo";
+import EditPicture from "./item_popups/EditPicture";
+import DeleteWarning from "./item_popups/DeleteItemWarning";
+import ChangeItemOrder from "./item_popups/ChangeItemOrder";
 
 
 const AboutUsEdit = () => {
     const [addItemVisible, setAddItemVisible] = useState(false);
+    const [deleteVisible, setDeleteVisible] = useState(false);
     const [titleVisible, setTitleVisible] = useState(false);
     const [textVisible, setTextVisible] = useState(false);
     const [videoVisible, setVideoVisible] = useState(false);
     const [pictureVisible, setPictureVisible] = useState(false);
+    const [changeOrder, setChangeOrder] = useState(false);
     const [editItem, setEditItem] = useState(null);
     const [items, setItems] = useState([]);
     const getData = () => {
@@ -46,10 +50,9 @@ const AboutUsEdit = () => {
                 break;
         }
         setEditItem(item);
-
-        console.log(item);
-        console.log(editItem)
     }
+
+
 
     return (
         <Layout className="aboutProject global-padding">
@@ -66,8 +69,16 @@ const AboutUsEdit = () => {
 
                 return <div>
                     <hr></hr>
-                    <div className="btn">
+                    <div className="help-button">
                         <Button htmlType="submit" onClick={() => {onClickEdit(item)}}>Редагувати</Button>
+                        <Button htmlType="submit" onClick={() => {
+                            setEditItem(item);
+                            setDeleteVisible(true);
+                        }}>Видалити</Button>
+                        <Button htmlType="submit" onClick={() => {
+                            setEditItem(item);
+                            setChangeOrder(true);
+                        }}>Змінити порядок</Button>
                     </div>
                     <ItemView item={item}/>
                 </div>
@@ -79,13 +90,15 @@ const AboutUsEdit = () => {
                     Додати компонент
                 </Button>
             </div>
-            <AddItemComponent visible={addItemVisible} setVisible={setAddItemVisible}/>
+            <AddItemComponent visible={addItemVisible} setVisible={setAddItemVisible} upd={getData}/>
+            <DeleteWarning visible={deleteVisible} setVisible={setDeleteVisible} item={editItem} upd={getData}/>
             {editItem &&
             <div>
-                <EditTitle visible={titleVisible} setVisible={setTitleVisible} item={editItem}/>
-                <EditText visible={textVisible} setVisible={setTextVisible} item={editItem}/>
-                <EditVideo visible={videoVisible} setVisible={setVideoVisible} item={editItem}/>
-                <EditPicture visible={pictureVisible} setVisible={setPictureVisible} item={editItem}/>
+                <ChangeItemOrder visible={changeOrder} setVisible={setChangeOrder} id={editItem.id} size={items.length + 1} upd={getData}/>
+                <EditTitle visible={titleVisible} setVisible={setTitleVisible} item={editItem} upd={getData}/>
+                <EditText visible={textVisible} setVisible={setTextVisible} item={editItem} upd={getData}/>
+                <EditVideo visible={videoVisible} setVisible={setVideoVisible} item={editItem} upd={getData}/>
+                <EditPicture visible={pictureVisible} setVisible={setPictureVisible} item={editItem} upd={getData}/>
             </div>
             }
         </Layout>

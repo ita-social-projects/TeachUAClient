@@ -81,9 +81,16 @@
 }
 
 .aboutProject .add-item-button {
-    display: flex;
     align-items: center;
     align-self: center;
+    text-align: center;
+    margin: 2px;
+}
+
+.aboutProject .inputNum{
+    align-self: center;
+    align-content: center;
+    text-align: center;
 }
 
 
@@ -153,8 +160,18 @@
     color: #2D4C68;
     margin-top:20px;
     margin-bottom: 6px;
-
 }
+
+.aboutProject .delete-text {
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 28px;
+    color: #8f0a00;
+    text-align: center;
+}
+
 .aboutProject .highlight {
     font-family: Open Sans;
     font-style: normal;
