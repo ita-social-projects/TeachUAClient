@@ -9,10 +9,8 @@ import "../css/aboutProject.css";
 
 const EditTitle = ({visible, setVisible, item, upd}) => {
     const [descriptionForm] = Form.useForm();
-    const [editTitle, setEditTitle] = useState("");
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
 
@@ -26,7 +24,7 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
                 message.warning(response.message);
                 return;
             }
-            message.success(`Компонент ${item.id} успішно підтверджений`);
+            message.success(`Компонент "текс" успішно відредаговано`);
         });
         closePopup();
     }

@@ -8,10 +8,8 @@ import {updateItemById} from "../../../service/AboutUsService";
 
 const EditVideo = ({visible, setVisible, item, upd}) => {
     const [descriptionForm] = Form.useForm();
-    const [editTitle, setEditTitle] = useState("");
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
 
@@ -25,7 +23,7 @@ const EditVideo = ({visible, setVisible, item, upd}) => {
                 message.warning(response.message);
                 return;
             }
-            message.success(`Компонент ${item.id} успішно підтверджений`);
+            message.success(`Компонент "відео" успішно відредаговано`);
         });
         closePopup();
     }

@@ -3,12 +3,9 @@ import {Button, Layout, message, Modal, Tooltip} from 'antd';
 import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
 import {createItem} from "../../../service/AboutUsService";
 
-const AddItemComponent = ({ visible, setVisible, upd}) => {
-
-    // const [type, setType] = useState(1);
+const AddItemComponent = ({ visible, setVisible}) => {
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
 
@@ -18,7 +15,7 @@ const AddItemComponent = ({ visible, setVisible, upd}) => {
                 message.warning(response.message);
                 return;
             }
-            message.success(`Пустий компонент успішно підтверджений`);
+            message.success(`Компонент успішно створено`);
         });
     }
 

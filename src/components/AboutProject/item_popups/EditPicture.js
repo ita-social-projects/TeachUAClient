@@ -10,15 +10,12 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {uploadImage} from "../../../service/UploadService";
 import {deleteFile} from "../../../service/UploadService";
 
-const EditPicture = ({visible, setVisible, item, upd}) => {
+const EditPicture = ({visible, setVisible, item}) => {
     const [descriptionForm] = Form.useForm();
-    const [editTitle, setEditTitle] = useState("");
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
-
 
     const onFinish = (values) => {
         if (values.picture && values.picture.file) {
@@ -31,7 +28,7 @@ const EditPicture = ({visible, setVisible, item, upd}) => {
                 message.warning(response.message);
                 return;
             }
-            message.success(`Компонент ${item.id} успішно підтверджений`);
+            message.success(`Компонент "текст з зображенням" успішно відредаговано`);
         });
         closePopup();
     }

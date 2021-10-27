@@ -188,6 +188,15 @@
     opacity: 0.6;
 }
 
+.aboutProject a{
+    text-decoration-color: #2f54eb;
+    text-decoration-line: underline;
+}
+
+.aboutProject a:visited{
+    text-decoration-color: #2f54eb;
+    text-decoration-line: underline;
+}
 
 /*.aboutProject .addit-information{*/
 /*    margin-top:100px;*/

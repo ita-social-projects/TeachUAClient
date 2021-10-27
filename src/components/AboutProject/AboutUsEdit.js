@@ -69,6 +69,20 @@ const AboutUsEdit = () => {
                 <Search redirect/>
             </div>
 
+            <div className="content-text">
+                <span className="chapter">В тестові поля можна вставляти теги:</span>
+                <br></br>
+                    &lt;span className="chapter"&gt;ТекстТекстТекст&lt;/span&gt; - <span className="chapter">Підзаголовок</span>
+                <br></br>
+                    &lt;span className="highlight"&gt;ТекстТекстТекст&lt;/span&gt; - <span className="highlight">Виділений текст</span>
+                <br></br>
+                    &lt;p&gt;ТекстТекстТекст&lt;/p&gt; - Абзац
+                <br></br>
+                    &lt;br&gt;&lt;/br&gt; - Пустий рядок
+                <br></br>
+                    &lt;a&gt;&lt;/a&gt; - Посилання
+            </div>
+
             {items.map(item => {
                 return <div>
                     <hr></hr>
@@ -94,21 +108,29 @@ const AboutUsEdit = () => {
                 </div>
             })}
 
+            <div className="row">
             <div className="add-item-button">
                 <Button className="flooded-button donate-button"
                         onClick={() => setAddItemVisible(true)}>
                     Додати компонент
                 </Button>
             </div>
-            <AddItemComponent visible={addItemVisible} setVisible={setAddItemVisible} upd={getData}/>
-            <DeleteWarning visible={deleteVisible} setVisible={setDeleteVisible} item={editItem} upd={getData}/>
+            <div className="add-item-button">
+            <Button className="edit-button flooded-button donate-button" htmlType="submit"
+                    onClick={() => {
+                        getData();
+                    }}>Оновити</Button>
+            </div>
+            </div>
+            <AddItemComponent visible={addItemVisible} setVisible={setAddItemVisible}/>
+            <DeleteWarning visible={deleteVisible} setVisible={setDeleteVisible} item={editItem}/>
             {editItem &&
             <div>
-                <ChangeItemOrder visible={changeOrder} setVisible={setChangeOrder} id={editItem.id} size={items.length + 1} upd={getData}/>
-                <EditTitle visible={titleVisible} setVisible={setTitleVisible} item={editItem} upd={getData}/>
-                <EditText visible={textVisible} setVisible={setTextVisible} item={editItem} upd={getData}/>
-                <EditVideo visible={videoVisible} setVisible={setVideoVisible} item={editItem} upd={getData}/>
-                <EditPicture visible={pictureVisible} setVisible={setPictureVisible} item={editItem} upd={getData}/>
+                <ChangeItemOrder visible={changeOrder} setVisible={setChangeOrder} id={editItem.id} size={items.length + 1}/>
+                <EditTitle visible={titleVisible} setVisible={setTitleVisible} item={editItem}/>
+                <EditText visible={textVisible} setVisible={setTextVisible} item={editItem}/>
+                <EditVideo visible={videoVisible} setVisible={setVideoVisible} item={editItem}/>
+                <EditPicture visible={pictureVisible} setVisible={setPictureVisible} item={editItem}/>
             </div>
             }
         </Layout>

@@ -8,12 +8,8 @@ import {updateItemById} from "../../../service/AboutUsService";
 
 const EditTitle = ({visible, setVisible, item, upd}) => {
     const [descriptionForm] = Form.useForm();
-    const [editTitle, setEditTitle] = useState("");
 
     const closePopup = () => {
-        //upd();
-        console.log("item back");
-        console.log(item);
         setVisible(false);
     };
 
@@ -27,7 +23,7 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
                 message.warning(response.message);
                 return;
             }
-            message.success(`Компонент ${item.id} успішно підтверджений`);
+            message.success(`Компонент "заголовок" успішно відредаговано`);
         });
         closePopup();
     }

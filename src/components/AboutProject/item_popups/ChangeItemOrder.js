@@ -5,10 +5,9 @@ import {changeOrder, deleteItem, updateItemById} from "../../../service/AboutUsS
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 import {deleteFile, uploadImage} from "../../../service/UploadService";
 
-const ChangeItemOrder = ({ visible, setVisible, size, id, upd}) => {
+const ChangeItemOrder = ({ visible, setVisible, size, id}) => {
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
 
@@ -45,12 +44,6 @@ const ChangeItemOrder = ({ visible, setVisible, size, id, upd}) => {
                     <Form.Item
                         name="number"
                         rules={[
-                            // {
-                            //     // required: true,
-                            //     type:'string',
-                            //     pattern: "^\\d*$",
-                            //     message: "Це поле може містити тільки цифри",
-                            // },
                             {
                                 required: true,
                                 type:'number',
@@ -62,8 +55,6 @@ const ChangeItemOrder = ({ visible, setVisible, size, id, upd}) => {
                     >
                         <InputNumber
                             className="inputNum"
-                            // min="1"
-                            // max={size}
                             suffix={
                                 <Tooltip placement="bottomRight"
                                          title="Це поле може містити тільки цифри">

@@ -3,10 +3,9 @@ import {Button, Layout, message, Modal, Tooltip} from 'antd';
 import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
 import {deleteItem} from "../../../service/AboutUsService";
 
-const AddItemComponent = ({ visible, setVisible, item, upd}) => {
+const AddItemComponent = ({ visible, setVisible, item}) => {
 
     const closePopup = () => {
-        upd();
         setVisible(false);
     };
 
@@ -34,7 +33,7 @@ const AddItemComponent = ({ visible, setVisible, item, upd}) => {
                                         message.warning(response.message);
                                         return;
                                     }
-                                    message.success(`Компонент видалено`);
+                                    message.success(`Компонент успішно видалено`);
                                 });
                                 closePopup();
                             }}>

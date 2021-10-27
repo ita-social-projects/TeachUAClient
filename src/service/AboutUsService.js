@@ -24,7 +24,7 @@ export const updateItemById = async (data) => {
             return response.data;
         })
         .catch((error) => {
-            return error.response.data;
+            return "Відредагувати компонент не вдалося: " + error.response.data;
         });
 };
 
@@ -41,7 +41,7 @@ export const createItem = async (type) => {
             return response.data;
         })
         .catch((error) => {
-            return error.response.data;
+            return "Створити компонент не вдалося: " + error.response.data;
         });
 }
 
@@ -50,7 +50,7 @@ export const deleteItem = async(id) => {
         .then((response) => {
             return response.data
         }).catch((error) => {
-            return error.response.data
+            return "Видалити компонент не вдалося: " + error.response.data
         });
 }
 
@@ -63,6 +63,6 @@ export const changeOrder = async (id, number) => {
             return response.data;
         })
         .catch((error) => {
-            return error.response.data;
+            return "Змінити порядок компонентів не вдалося: " + error.response.data;
         });
 }
