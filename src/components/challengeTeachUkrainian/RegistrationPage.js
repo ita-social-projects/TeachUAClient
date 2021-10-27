@@ -17,7 +17,7 @@ const MarathonPage = () => {
         <Layout className="global-padding marathon-page">
             <AboutHeader />
             <div className="button-alain">
-            <Link to="/marathon"><Button className="details-back"><ArrowLeftOutlined />Назад до челенджу</Button></Link>
+            <Link to="/challengeUA"><Button className="details-back"><ArrowLeftOutlined />Назад до челенджу</Button></Link>
             </div>
           <div className = "google-form">
            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScleEh1yGaJ3ZkgDfM7hAqgc2w2NP_znchFKmq_qp-6iv7IeQ/viewform?embedded=true" width="700" height="2000" frameborder="0" marginheight="0" marginwidth="0">Завантаження…</iframe>
