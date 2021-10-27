@@ -87,6 +87,12 @@
     margin: 2px;
 }
 
+.aboutProject .edit-button {
+    text-align: center;
+    margin: 2px;
+}
+
+
 .aboutProject .inputNum{
     align-self: center;
     align-content: center;
@@ -182,12 +188,6 @@
     opacity: 0.6;
 }
 
-
-.aboutProject .sport-clubs .video {
-    width:100%;
-    margin-top: 20px;
-    margin-bottom: 70px;
-}
 
 /*.aboutProject .addit-information{*/
 /*    margin-top:100px;*/

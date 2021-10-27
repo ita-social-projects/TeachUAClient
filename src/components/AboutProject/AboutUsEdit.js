@@ -49,7 +49,11 @@ const AboutUsEdit = () => {
                 setPictureVisible(true);
                 break;
         }
-        setEditItem(item);
+        assignItemToEdit(item);
+    }
+
+    const assignItemToEdit = (item) => {
+        setEditItem(Object.assign({}, item));
     }
 
 
@@ -66,19 +70,25 @@ const AboutUsEdit = () => {
             </div>
 
             {items.map(item => {
-
                 return <div>
                     <hr></hr>
                     <div className="help-button">
-                        <Button htmlType="submit" onClick={() => {onClickEdit(item)}}>Редагувати</Button>
-                        <Button htmlType="submit" onClick={() => {
-                            setEditItem(item);
-                            setDeleteVisible(true);
-                        }}>Видалити</Button>
-                        <Button htmlType="submit" onClick={() => {
-                            setEditItem(item);
-                            setChangeOrder(true);
-                        }}>Змінити порядок</Button>
+                        <Button className="edit-button flooded-button donate-button" htmlType="submit"
+                                onClick={() => {onClickEdit(item)}}>Редагувати</Button>
+                        <Button className="edit-button flooded-button donate-button" htmlType="submit"
+                                    onClick={() => {
+                                    assignItemToEdit(item);
+                                    setDeleteVisible(true);
+                            }}>Видалити</Button>
+                        <Button className="edit-button flooded-button donate-button" htmlType="submit"
+                                onClick={() => {
+                                    assignItemToEdit(item);
+                                    setChangeOrder(true);
+                            }}>Змінити порядок</Button>
+                        <Button className="edit-button flooded-button donate-button" htmlType="submit"
+                                onClick={() => {
+                                    getData();
+                                }}>Оновити</Button>
                     </div>
                     <ItemView item={item}/>
                 </div>

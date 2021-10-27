@@ -11,7 +11,7 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
     const [editTitle, setEditTitle] = useState("");
 
     const closePopup = () => {
-        upd();
+        //upd();
         console.log("item back");
         console.log(item);
         setVisible(false);
@@ -19,7 +19,6 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
 
 
     const onFinish = (values) => {
-
         console.log(values);
         item.text = values.title;
         console.log(item);

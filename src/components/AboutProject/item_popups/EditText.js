@@ -13,8 +13,6 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
 
     const closePopup = () => {
         upd();
-        console.log("item back");
-        console.log(item);
         setVisible(false);
     };
 
