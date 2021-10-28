@@ -15,9 +15,7 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
 
 
     const onFinish = (values) => {
-        console.log(values);
         item.text = values.title;
-        console.log(item);
         updateItemById(item).then(response => {
             if (response.status) {
                 message.warning(response.message);

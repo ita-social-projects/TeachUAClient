@@ -68,6 +68,7 @@ const ClubList = ({
                 });
             }
         } else if (!advancedSearch){
+            console.log(searchParameters);
             setSearchParams(searchParameters);
             getClubsByParameters(
                 searchParams,

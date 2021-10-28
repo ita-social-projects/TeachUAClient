@@ -8,9 +8,7 @@ import ItemView from "./ItemView";
 
 const AboutProject = () => {
     const [items, setItems] = useState([]);
-    const parse = require("html-react-parser");
     const getData = () => {
-        console.log("ABOUT US TEST");
         getAllItems().then(response => {
             setItems(response);
         });

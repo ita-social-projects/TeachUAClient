@@ -15,9 +15,7 @@ const EditVideo = ({visible, setVisible, item, upd}) => {
 
 
     const onFinish = (values) => {
-        console.log(values);
         item.video = values.video;
-        console.log(item);
         updateItemById(item).then(response => {
             if (response.status) {
                 message.warning(response.message);
