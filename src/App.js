@@ -61,7 +61,6 @@ function App() {
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
-                                    
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>

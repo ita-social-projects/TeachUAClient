@@ -1,6 +1,6 @@
 import {Form, Layout} from "antd";
 import {clearSearchParameters, mapSearchParameters, SearchContext, searchParameters} from "../../context/SearchContext";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState, memo, useMemo} from "react";
 import {getClubsByAdvancedSearch, getClubsByParameters,} from "../../service/ClubService";
 import PropTypes from "prop-types";
 import "./css/ClubList.less";
@@ -50,14 +50,21 @@ const ClubList = ({
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
-
         if(advancedSearch && showHideMenu){
+
+            console.log("6+1");
             setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page).then((response) => {
                     setCenters(response);
                 });
-            } else {
+            } else if (isCenterChecked!=undefined){
+                console.log("Params:");
+                console.log("Field Params:");
+                console.log(params);
+                console.log("CheckUndef:"+checkUndefPage);
+                console.log("SortBy: "+sortBy);
+                console.log("SortDirection: "+sortDirection);
                 getClubsByAdvancedSearch(
                     params,
                     checkUndefPage,
@@ -65,6 +72,8 @@ const ClubList = ({
                     sortDirection
                 ).then((response) => {
                     setClubs(response);
+                    console.log("Response");
+                    console.log(response);
                 });
             }
         } else if (!advancedSearch){
@@ -99,11 +108,14 @@ const ClubList = ({
         load(false);
     };
 
+
     useEffect(() => {
+        console.log("6+3");
         getData(currentPage);
-    }, [advancedSearch, sortBy, sortDirection, isCenterChecked, view]);
+    }, [advancedSearch, sortBy, sortDirection, isCenterChecked]);
 
     const onPageChange = (page) => {
+        console.log("OnPageChange");
         setCurrentPage(page - 1);
         getData(page - 1);
     };
@@ -164,12 +176,12 @@ const ClubList = ({
     );
 };
 
-ClubList.propTypes = {
+ClubList.propTypes = React.memo({
     defaultSortBy: PropTypes.string.isRequired,
     defaultSortDir: PropTypes.string.isRequired,
     defaultSortView: PropTypes.string.isRequired,
     loading: PropTypes.bool.isRequired,
     load: PropTypes.func.isRequired,
-};
+});
 
 export default ClubList;
