@@ -10,7 +10,12 @@
 .about-carousel .carousel-item-1 .label{
     font-size: 54px;
     color: white;
+    text-align: center;
 }
+.about-carousel .carousel-item-1 .challenge-title{
+
+}
+
 
 .about-carousel .carousel-item-1 .description{
     text-align: center;
