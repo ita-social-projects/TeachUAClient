@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 
 const ChallengeBanner = ({challenge}) => {
-    useEffect(() => {console.log(challenge)}, []);
     return (
         <div className="banner" style={{
             background: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), 

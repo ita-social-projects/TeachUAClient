@@ -1,11 +1,11 @@
-.social-media {
+.challenge-page .social-media {
     display: flex;
     height: 30px;
     width: 300px;
     align-self: center;
 }
 
-.social-info {
+.challenge-page .social-info {
     height: 50px;
     display: flex;
     justify-content: space-evenly;
@@ -13,7 +13,7 @@
     margin-top: 2%;
 }
 
-.social-media .links {
+.challenge-page .social-media .links {
     padding-top: 5px;
     display: flex;
     justify-content: space-between;
@@ -22,12 +22,12 @@
     margin-left: 5px;
 }
 
-.social-media .icon {
+.challenge-page .social-media .icon {
     color: #2D4C68;
     font-size: 1.3em;
 }
 
-.social-media .text {
+.challenge-page .social-media .text {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -36,20 +36,29 @@
     vertical-align: center;
 }
 
-.help-button {
+.challenge-page .help-button {
     display: flex;
     align-items: center;
 }
 
-.help-button {
+.challenge-page .help-button {
     justify-content: space-around;
     display: flex;
     align-items: center;
     margin-top: 15px;
 }
 
+.challenge-page .donate-button {
+    width: 220px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    background: #FA8C16;
+    color: #FFFFFF;
+}
+
 @media (min-width: 320px) and (max-width: 824px) {
-    .social-info {
+    .challenge-page .social-info {
         height: 10px;
         display: contents !important;
         justify-content: space-evenly;

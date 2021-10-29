@@ -4,7 +4,7 @@ import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import React from "react";
 import {Button} from "antd";
-import "./challenges/css/ChallengePage.css"
+import "./css/SocialInfo.css"
 
 const SocialInfo = () => {
     return (
