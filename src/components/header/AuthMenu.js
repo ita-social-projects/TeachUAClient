@@ -56,16 +56,16 @@ const AuthMenu = () => {
 
     const checkToken = () => {
         if(getToken()){
-              const token = getToken();
-              const payload = JSON.parse(atob(token.split(".")[1]));
-              const expiration = new Date(payload.exp);
-              const now = new Date();
-              if( expiration.getTime() - now.getTime()/1000  < 0 ){
-               onExitClick();
-               return false;
-              }else{
-              return true;
-        }}
+            const token = getToken();
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            const expiration = new Date(payload.exp);
+            const now = new Date();
+            if( expiration.getTime() - now.getTime()/1000  < 0 ){
+                onExitClick();
+                return false;
+            }else{
+                return true;
+            }}
     }
     const [isTokenValid, setIsTokenValid] = useState(checkToken);
 
@@ -73,11 +73,11 @@ const AuthMenu = () => {
     useEffect(() => {
         setIsTokenValid(checkToken());
     })
-    
+
 
 
     const profileDropdown = () => {
-    
+
         if (isTokenValid) {
             return (
                 <Menu>
@@ -85,30 +85,30 @@ const AuthMenu = () => {
                     <Menu.Item><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-                { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
-                    <SubMenu title="Адміністрування" >
-                        <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
-                        <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
-                            Експортувати дані</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
-                        <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
-                    </SubMenu >
-                   :""}
+                    { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
+                        <SubMenu title="Адміністрування" >
+                            <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
+                            <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
+                                Експортувати дані</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+                        </SubMenu >
+                        :""}
                 </Menu >
             )
         } else {
             return (<Menu>
-           <Menu.Item><div onClick={() => setShowRegister(true)}>Зареєструватися</div></Menu.Item>
-                {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
-                <Menu.Item><div onClick={() => setShowLogin(true)}>Увійти</div></Menu.Item>
-            </Menu>
+                    <Menu.Item><div onClick={() => setShowRegister(true)}>Зареєструватися</div></Menu.Item>
+                    {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
+                    <Menu.Item><div onClick={() => setShowLogin(true)}>Увійти</div></Menu.Item>
+                </Menu>
             )
         }
     };
@@ -117,8 +117,12 @@ const AuthMenu = () => {
         <>
             <Registration isShowing={showRegister} setShowing={setShowRegister} />
             <Login isShowing={showLogin} setShowing={setShowLogin} />
-            <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
-            <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+            {showAddClub &&
+                <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
+            }
+            {showAddCenter &&
+                <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+            }
             <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger={'click'}>
                 <div>
                     <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />
