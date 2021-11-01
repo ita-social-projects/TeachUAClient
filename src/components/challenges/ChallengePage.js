@@ -8,6 +8,7 @@ import ChallengeDescription from "./ChallengeDescription";
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import ChallengeBanner from "./ChallengeBanner";
+import ChallengeCarousel from "./ChallengeCarousel";
 
 const ChallengePage = () => {
     const [challenge, setChallenge] = useState({
@@ -18,7 +19,7 @@ const ChallengePage = () => {
         picture: "",
         sortNumber: 0,
         isActive: true,
-        tasks: {},
+        tasks: [],
         user: {
             id: 0,
             firstName: "",
@@ -36,7 +37,7 @@ const ChallengePage = () => {
                 setChallenge(response)
             }
         });
-    }, []);
+    }, [challengeId]);
 
     return (
         <Layout className="global-padding challenge-page">
@@ -52,6 +53,10 @@ const ChallengePage = () => {
                             <Button className="details-button">Зареєструватись</Button>
                         </Link>
                     </div>}
+                    {
+                        (challenge.tasks.length !== 0 && challenge.tasks)  &&
+                        <ChallengeCarousel challenge={challenge}/>
+                    }
                 </div>)
                 : <Result
                     className="challenge-not-found"

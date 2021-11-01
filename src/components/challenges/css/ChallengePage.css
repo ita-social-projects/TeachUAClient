@@ -24,6 +24,8 @@
 }
 /* Button to reg form */
 .challenge-page .button-div {
+    margin-top: 2%;
+    margin-bottom: 2%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +33,7 @@
 
 /* Full desc in middle */
 
-.challenge-page .challenge-description a{
+.challenge-page .challenge-description a {
     color: rgb(88, 166, 255);
 }
 
@@ -45,8 +47,6 @@
     font-size: 18px;
     line-height: 28px;
     color: #2D4C68;
-    opacity: 0.9;
-    /*margin-top: 100px;*/
 }
 
 .challenge-page .challenge-description h1 {
@@ -87,13 +87,6 @@
     color: #2D4C68;
 }
 
-.challenge-page .challenge-description .text {
-    width: 620px;
-    font-size: 18px;
-    line-height: 28px;
-    color: #2D4C68;
-    opacity: 0.9;
-}
 /* Для конкретного відео в Навчай українською */
 .challenge-page .challenge-description .webinar-items {
     margin-top: 8px;
@@ -104,14 +97,55 @@
     text-decoration: underline;
 }
 
+.challenge-page .content-text {
+    width: 620px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: #2D4C68;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
 @media (max-width: 1200px) {
-    .challenge-page .details-button {
-        margin-left: 0px;
+    .challenge-page .challenge-description {
+        font-size: 16px;
+        width: 100%;
     }
 
-    .challenge-page .challenge-description .text {
+    .challenge-page .button-div {
+        margin-top: 5%;
+        margin-bottom: 3%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .challenge-page .challenge-description h1 {
+        text-align: center;
+        font-size: 22px;
+    }
+    .challenge-page .challenge-description h2 {
+        text-align: center;
+        font-size: 18px;
+    }
+    .challenge-page .challenge-description h3 {
+        text-align: center;
+        font-size: 16px;
+    }
+    .challenge-page .challenge-description h4 {
+        text-align: center;
+        font-size: 15px;
+    }
+    .challenge-page .challenge-description h5 {
+        text-align: center;
         font-size: 14px;
-        width: 100%;
+    }
+
+    .challenge-page .challenge-description h6 {
+        text-align: center;
+        font-size: 13px;
     }
 
     .challenge-page .banner .title {
@@ -119,22 +153,9 @@
         width: 100%;
         text-align: center;
     }
-
-    .challenge-page .challenge-description .title {
-        font-size: 20px;
-        width: 100%;
-    }
-
-    .challenge-page .challenge-description .subtitle {
-        font-size: 20px;
-        width: 100%;
-    }
 }
 
 @media (min-width: 320px) and (max-width: 824px) {
-    .challenge-page .details-button {
-        margin-left: 0px;
-    }
 
     .challenge-page .banner .title {
         font-size: 36px !important;
@@ -147,12 +168,29 @@
         margin-top: 21px !important;
     }
 
-    .challenge-page .challenge-description .title {
+    .challenge-page .challenge-description h1 {
         text-align: center;
+        font-size: 20px;
     }
-
-    .challenge-page .challenge-description .subtitle {
+    .challenge-page .challenge-description h2 {
         text-align: center;
+        font-size: 18px;
+    }
+    .challenge-page .challenge-description h3 {
+        text-align: center;
+        font-size: 16px;
+    }
+    .challenge-page .challenge-description h4 {
+        text-align: center;
+        font-size: 15px;
+    }
+    .challenge-page .challenge-description h5 {
+        text-align: center;
+        font-size: 14px;
+    }
+    .challenge-page .challenge-description h6 {
+        text-align: center;
+        font-size: 13px;
     }
 
     .challenge-page .title .text {
@@ -160,17 +198,4 @@
         text-align: center;
     }
 
-}
-
-/* Для конкретних блоків в Навчай українською */
-.challenge-page .content-text {
-    width: 620px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 28px;
-    color: #2D4C68;
-    opacity: 0.9;
-    margin-bottom: 25px;
 }

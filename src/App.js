@@ -36,6 +36,7 @@ import ResetPasswordModal from "./components/restorePassword/passwordResetModal"
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
 import RegistrationPage from "./components/challenges/RegistrationPage";
+import TaskPage from "./components/challenges/tasks/TaskPage";
 
 const {Content} = Layout;
 
@@ -91,6 +92,7 @@ function App() {
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
                                     <Route path="/challenge/registration/:challengeId" exact component={RegistrationPage}/>
                                     <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
+                                    <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>
