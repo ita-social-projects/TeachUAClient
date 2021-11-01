@@ -26,7 +26,8 @@ import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
-import ChallengePage from "./components/challengePage/ChallengePage";
+// import ChallengePage from "./components/challengePage/ChallengePage";
+import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
@@ -34,6 +35,8 @@ import MarathonPage from "./components/marathonPage/MarathonPage";
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
+import RegistrationPage from "./components/challenges/RegistrationPage";
+import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
 
 const {Content} = Layout;
@@ -84,12 +87,14 @@ function App() {
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                     <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
-                                    <Route path="/challenge" exact component={ChallengePage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
                                     <Route path="/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
+                                    <Route path="/challenge/registration/:challengeId" exact component={RegistrationPage}/>
+                                    <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
+                                    <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>

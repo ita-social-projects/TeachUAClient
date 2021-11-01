@@ -13,6 +13,7 @@ const MarathonDescription = () => {
                 <div className="social-media">
                     <span className="text">Наші контакти</span>
                     <div className="links">
+                        <a target="_blank" href=""></a>
                         <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined
                             className="icon"/></a>
                         <a target="_blank"
