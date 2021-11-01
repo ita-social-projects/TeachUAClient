@@ -4,6 +4,7 @@ import { Avatar } from "antd";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import UserEditModal from "../useredit/UserEditModal";
 import PropTypes from "prop-types";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 
 
 
@@ -23,7 +24,7 @@ const UserInformationComponent = ({ user }) => {
             setUserAvatart(user.urlLogo);
         }
         else {
-            setUserAvatart(process.env.PUBLIC_URL + user.urlLogo)
+            setUserAvatart(BASE_URL + user.urlLogo)
         }
     }, [user])
 
