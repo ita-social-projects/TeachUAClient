@@ -37,6 +37,7 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
+import AddChallenge from "./components/admin/challenge/AddChallenge";
 
 const {Content} = Layout;
 
@@ -65,6 +66,7 @@ function App() {
                             <Content className="global-content">
                                 <Switch>
                                     
+                                    <Route path="/admin/addChallenge" exact component={AddChallenge} />
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
