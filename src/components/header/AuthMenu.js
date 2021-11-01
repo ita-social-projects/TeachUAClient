@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import { deleteToken, deleteUserId, getToken, getUserId } from "../../service/StorageService";
-import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
+import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
 import AddCenter from "../addCenter/AddCenter";
@@ -44,7 +44,7 @@ const AuthMenu = () => {
                     if (response.urlLogo?.includes("https")) {
                         setSource(response.urlLogo);
                     } else {
-                        setSource(process.env.PUBLIC_URL + response.urlLogo)
+                        setSource(BASE_URL + response.urlLogo)
                     }
                     setStyleClass("avatarIfLogin");
                 } else {
