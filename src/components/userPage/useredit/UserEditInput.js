@@ -265,7 +265,10 @@ const UserEditInput = (
                        initialValue={user.urlLogo}
                        className="user-edit-input"
                        label="Фото"
-                       hasFeedback
+                       tooltip="Приймас зображення формату JPG / PNG із
+                                мінімальною роздільною здатністю 200x200 пікселів та
+                                максимальним розміром файлу 5МВ"
+                       hasFeedback={false}
                        rules={[{
                            required: false,
                            message: "Будь ласка завантажте Логотип"
