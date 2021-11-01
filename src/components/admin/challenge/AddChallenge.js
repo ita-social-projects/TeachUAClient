@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './css/AddChallenge.css';
 import {Layout, Typography, Form, Input, Button, message, Upload} from 'antd';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import CustomUploadAdapterPlugin from "../../../service/CustomImageUpload";
+import CustomUploadAdapterPlugin from "./CustomImageUpload";
+import Editor from "./Editor";
 
-
-const { Content } = Layout;
 const { Title } = Typography;
 
 const AddChallenge = () => {
@@ -22,31 +19,6 @@ const AddChallenge = () => {
     const [description, setDescription] = useState();
     const [sortNumber, setSortNumber] = useState();
     const [picture, setPicture] = useState();
-
-    const custom_config = {
-        extraPlugins: [ CustomUploadAdapterPlugin ],
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'bold',
-                'italic',
-                'link',
-                'bulletedList',
-                'numberedList',
-                '|',
-                'blockQuote',
-                'insertTable',
-                '|',
-                'imageUpload',
-                'undo',
-                'redo'
-            ]
-        },
-        table: {
-            contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-        }
-    }
 
     const handleNameChange = (value) => {
         setName(value);
@@ -81,6 +53,7 @@ const AddChallenge = () => {
 
     return (
         <div className="add-form">
+            <Title>Додайте челендж</Title>
             <Form
                 form={challengeForm}
                 onFinish={onFinish}
@@ -92,14 +65,14 @@ const AddChallenge = () => {
             >
                 <Form.Item
                     name="sortNumber"
-                    label="sortNumber"
+                    label="Порядковий номер"
                     value={sortNumber}
                     onChange={handleSortNumberChange}
                     >
                     <Input/>
                 </Form.Item>
                 <Form.Item
-                    label="name"
+                    label="Назва"
                     name="name"
                     value={name}
                     onChange={handleNameChange}
@@ -107,7 +80,7 @@ const AddChallenge = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="title"
+                    label="Назва"
                     name="title"
                     value={title}
                     onChange={handleTitleChange}
@@ -115,23 +88,15 @@ const AddChallenge = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="description"
+                    label="Опис"
                     name="description"
                     value={description}
                 >
-                    <CKEditor
-                        data={description}
-                        editor={ ClassicEditor }
-                        onChange={(event, editor) => {
-                            const data = editor.getData();
-                            setDescription(data);
-                        }}
-                        config={custom_config} // not finished image upload
-                    />
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     name="picture"
-                    label="picture"
+                    label="Фото"
                     value={picture}
                     onChange={handlePictureChange}
                            >
