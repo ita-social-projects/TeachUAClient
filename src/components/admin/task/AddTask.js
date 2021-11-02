@@ -109,7 +109,6 @@ const AddTask = () => {
                     name="startDate"
                 >
                         <DatePicker
-                            //defaultPickerValue={moment(new Date(), 'YYYY-MM-DD')}
                             onChange={onDateChange}
                             format={dateFormat}
                             value={startDate}

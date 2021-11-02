@@ -57,7 +57,6 @@ export const getAllChallenges = async () => {
 export const getChallengeById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/challenge/" + id).then((response) => {
         return response.data
-        console.log(response.data);
     }).catch((error) => {
         console.log(error);
         return error.response.data

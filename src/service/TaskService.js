@@ -52,7 +52,7 @@ export const updateTask = async (data, id) => {
             title: data.title,
             description: data.description,
             startDate: data.startDate,
-            picture: data.picture && data.picture.file.response,
+            picture: data.picture,
             challengeId: data.challengeId
         })
         .then((response) => {
@@ -64,14 +64,11 @@ export const updateTask = async (data, id) => {
 };
 
 export const getTask = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/challenge/task/" + id)
+    return await fetchRequest.get(BASE_URL + "/api/challenge/task/" + id)
         .then((response) => {
-            return response.data;
+            return response.data
         }).catch((error) => {
-            return error.response;
+            console.log(error);
+            return error.response.data
         });
 };
-
-// export const updateTask = async () => {
-//
-// }
