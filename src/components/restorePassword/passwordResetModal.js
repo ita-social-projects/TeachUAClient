@@ -22,7 +22,7 @@ const ResetPasswordModal = () => {
                 message.error(response.message)
             } else {
                 message.success("Пароль змінено успішно");
-                let a = setTimeout(function () {
+                setTimeout(function () {
                     if (process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080") {
                         window.location = "http://localhost:3000/dev";
                     } else {
