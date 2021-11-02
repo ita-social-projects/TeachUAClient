@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from "react";
+import {useParams} from "react-router";
+import {Link} from "react-router-dom";
+
+import {Button, DatePicker, Form, Image, Input, message, Select, Upload} from "antd";
+import moment from "moment";
+
 import {useForm} from "antd/es/form/Form";
 import {getTask, updateTask} from "../../../service/TaskService";
-import {useParams} from "react-router";
-import {Button, DatePicker, Form, Image, Input, message, Select, Upload} from "antd";
+import {getAllChallenges} from "../../../service/ChallengeService";
+
 import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "../challenge/Editor";
 import Title from "antd/es/typography/Title";
-import {Link} from "react-router-dom";
-import moment from "moment";
-import ChallengeSelect from "./ChallengeSelect";
+
 const { Option } = Select;
+
 
 const EditTask = () => {
     const [taskEditForm] = useForm();
@@ -39,8 +44,6 @@ const EditTask = () => {
     const dateFormat = 'YYYY-MM-DD';
     const [startDate, setStartDate] = useState();
 
-
-
     const getData = () => {
         getTask(taskId.id).then(response =>
             setTask(response)
@@ -50,12 +53,20 @@ const EditTask = () => {
             }
         });
         setLoading(false);
-        console.log(startDate);
+    };
+
+    const getChallengeData = () => {
+        getAllChallenges().then(response => {
+            setChallengeList(response);
+        });
+        setLoading(false);
     };
 
     const onFill = () => {
         taskEditForm.setFieldsValue(task);
+        console.log(task.challengeId);
     };
+
     const onDateChange = (date, dateString) => {
         setStartDate(dateString);
     }
@@ -72,8 +83,13 @@ const EditTask = () => {
         setTask(values);
     }
 
+    const onChange = (value) => {
+        setSelectedChallenges(value);
+    }
+
     useEffect(() => {
         getData();
+        getChallengeData();
     }, []);
 
     return (
@@ -96,7 +112,6 @@ const EditTask = () => {
             </Link>
 
             <Title>Оновити завдання</Title>
-            <Title level={5}>Щоб оновити дату початку і челендж, потрібно обрати нові значення та зберегти. Нові значення появляться після оновлення.</Title>
             <Form
                 form={taskEditForm}
                 onFinish={saveForm}
@@ -107,17 +122,15 @@ const EditTask = () => {
                 wrapperCol={{ span: 14 }}>
                 <Form.Item
                     label="Дата початку"
-                    name="startDate"
-                    value={startDate}
+                    //name="startDate"
+                    //value={moment(startDate).toDate()}
                 >
-                    <Input
-                        value={task.startDate}
-                        disabled
-                    />
                     <DatePicker
                         //defaultPickerValue={moment(new Date(task.startDate), 'YYYY,MM,DD')}
                         onChange={onDateChange}
                         format={dateFormat}
+                        name="startDate"
+                        value={moment(startDate)}
                     />
                 </Form.Item>
                 <Form.Item
@@ -157,9 +170,23 @@ const EditTask = () => {
                 <Form.Item
                     label="Челендж"
                     name="challengeId"
+                    value={task.challengeId}
                 >
-                    <Input value={task.challengeId} disabled />
-                    <ChallengeSelect selectedChallenges={selectedChallenges} setSelectedChallenges={setSelectedChallenges}/>
+                    <Select
+                        placeholder="Оберіть челендж"
+                        allowClear
+                        //name="challengeId"
+                        onChange={onChange}
+                    >
+                        {challengeList.map((option, index) => (
+                            <Option
+                                value={option.id}
+                                key={option.id}
+                            >
+                                {option.name}
+                            </Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item>
                     <Button
