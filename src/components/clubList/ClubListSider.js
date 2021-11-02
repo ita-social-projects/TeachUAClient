@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {StrictMode, useEffect, useLayoutEffect, useState} from "react";
 import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
 import "./css/ClubListSider.css";
-import {getAllCategories} from "../../service/CategoryService";
+import {getAllCategories, getPageableCategory} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getDistrictsByCityName} from "../../service/DisctrictService";
 import {getStationsByCity} from "../../service/StationService";
@@ -26,21 +26,20 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub , setStateForClub] = useState(false);
+
     const getData = () => {
         setCurrentPage(0);
         getAdvancedData(0);
     };
-
     setIsCenterChecked(stateForClub);
 
     useEffect(() => {
         if (activeCategory) {
             form.setFieldsValue({categoriesName: [activeCategory]});
         }
-
         getAllCategories().then((response) => setCategories(response));
         getAllCities().then((response) => setCities(response));
-
+        console.log("FromCategoryUseEffect");
         getData();
     }, [cityName]);
 
@@ -61,6 +60,7 @@ const ClubListSider = ({
 
     const onValuesChange = (values) => {
         setIsCenterChecked(values.isCenter);
+
         if (values.hasOwnProperty("cityName")) {
             form.setFieldsValue({districtName: undefined});
             form.setFieldsValue({stationName: undefined});
@@ -89,7 +89,7 @@ const ClubListSider = ({
                 form.setFieldsValue({age: values.age});
             }
         }
-        getData();
+        // getData();   //Test(maybe redundant request)
     };
 
     const onCityChange = (value) => {
@@ -101,7 +101,7 @@ const ClubListSider = ({
     };
 
     const clearAllValues = () => {
-        onCityChange(undefined);//---------------------
+        onCityChange(undefined);
         form.setFieldsValue({categoriesName: activeCategory});
         form.setFieldsValue({isOnline: undefined});
         setAge(undefined);

@@ -34,6 +34,8 @@ import MarathonPage from "./components/marathonPage/MarathonPage";
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
+import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
+import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
 
 import AboutProject from "./components/AboutProject/AboutProject"
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit"
@@ -65,7 +67,6 @@ function App() {
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
-                                    
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
@@ -94,6 +95,8 @@ function App() {
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
+                                    <Route path="/challengeUA" exact component={TeachUAChallenge}/>
+                                    <Route path="/challengeUA/registration" exact component={RegistrationPage}/>
                                     <Route path="/" component={MainComponent}/>
 
                                 </Switch>

@@ -36,7 +36,7 @@ class CommentEditComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.state.user && this.props.visible) {
+        if (Object.keys(this.state.user).length == 0 && this.props.visible) {
             this.getData();
         }
     };

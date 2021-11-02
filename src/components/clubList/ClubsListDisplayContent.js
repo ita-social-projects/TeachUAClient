@@ -37,7 +37,8 @@ const ClubsListDisplayContent = ({
                              sortBy={sortBy}
                              view={view}
                              sortDirection={sortDirection}
-                             setView={setView}/>}
+                             setView={setView}
+                             centerIsChecked={false}/>}
 
             {!loading && clubs.content.length === 0 ? <ClubListEmptySearch/> :
                 !advancedSearch ?
