@@ -100,7 +100,7 @@ export const updateUser = async (data) => {
         email: data.email,
         phone: data.phone,
         roleName: data.role,
-        urlLogo: data.urlLogo, //&& data.urlLogo.file.response,
+        urlLogo: data.urlLogo.file.response,
         status: data.status
     }).then((response) => {
         console.log('after response' + response.data)

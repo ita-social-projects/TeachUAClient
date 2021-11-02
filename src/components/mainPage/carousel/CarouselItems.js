@@ -20,13 +20,13 @@ export const items = (uri) => [
         imageURL: `${uri}/static/images/about/slider/maraton.jpg`,
         body: (
             <div className="carousel-item-1">
-                <h2 className="label">Мовомаратон до 30-ї річниці <span></span>
-               Незалежності України</h2>
+                <h2 className="label"><span className="challenge-title">Челендж "Навчай українською" <br/>
+                    для викладачів позашкільних закладів освіти</span></h2>
                 <span className="description description-2">
-                За 30 днів перейти на українську? Так, легко, комфортно, разом із однодумцями. 
-                Зроби Україні подарунок на день Незалежності - розмовляй українською!
+                21 день української мови для тренерів спортивних секцій та викладачів гуртків.
+                    Початок 5 листопада 2021 року.
                 </span>
-                <Link to="/marathon"><Button className="details-button">Детальніше</Button></Link>
+                <Link to="/challengeUA"><Button className="details-button">Детальніше</Button></Link>
             </div>)
     },
     {
