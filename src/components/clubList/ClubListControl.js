@@ -6,7 +6,7 @@ import {Form, Radio, Select} from "antd";
 import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
 import Sider from "antd/es/layout/Sider";
 
-const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirection, setView}) => {
+const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirection, setView, centerIsChecked}) => {
     const [isMobile, setIsMobile] = useState(false);
 
     const onSortChange = (value) => {
@@ -30,9 +30,11 @@ const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirecti
                     <span className="control-sort-option"
                           onClick={() => setSortBy('name')}
                           style={{color: sortBy === 'name' && '#FA8C16'}}>за алфавітом</span>
-                    <span className="control-sort-option"
-                          onClick={() => setSortBy('rating')}
-                          style={{color: sortBy === 'rating' && '#FA8C16'}}>за рейтингом</span>
+                    {!centerIsChecked &&
+                        <span className="control-sort-option"
+                              onClick={() => setSortBy('rating')}
+                              style={{color: sortBy === 'rating' && '#FA8C16'}}>за рейтингом</span>
+                    }
                     <div className="control-sort-arrows">
                         <ArrowUpOutlined className="control-sort-arrow"
                                          style={{color: sortDirection === 'desc' && '#FFC069'}}

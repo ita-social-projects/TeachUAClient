@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
+import { useMediaQuery } from 'react-responsive';
 import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import './сss/Registration.less';
 
@@ -17,6 +18,7 @@ const RegistrationInput = () => {
         password: "",
         confirm: ""
     })
+    const isMobile = useMediaQuery({ query: `(max-width: 824px)` });
 
     const onChange = e => {
         console.log(e.target.id);
@@ -203,13 +205,15 @@ const RegistrationInput = () => {
                     </Form.Item>
                     <Form.Item name="confirm"
                                className="registration-input"
-                               label={<label className="confirm-password">
-                                   <p className="dead">Підтвердження</p>
-                                   <p className="dead">паролю</p>
-                                   <div className="small-media">
-                                       Підтвердження паролю
-                                   </div>
-                               </label>}
+                               label={!isMobile ? <label className="confirm-password">
+                                       <div>
+                                           <p className="dead">Підтвердження</p>
+                                           <p className="dead">паролю</p>
+                                       </div>
+                               </label>
+                               :
+                                   "Підтвердження паролю"
+                               }
                                hasFeedback
                                rules={[
                                    {
