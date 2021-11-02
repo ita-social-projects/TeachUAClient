@@ -138,7 +138,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                     },
                     {
                         required: false,
-                        pattern: /^[^-ЁёЪъЫыЭэ]/,
+                        pattern: /^[^ЁёЪъЫыЭэ]+$/,
                         message: 'Опис гуртка не може містити російські літери'
                     }
                 ]}
