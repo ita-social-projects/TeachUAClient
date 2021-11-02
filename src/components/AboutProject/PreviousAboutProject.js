@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Layout from "antd/lib/layout/layout";
-import "./css/aboutProject.css";
+import "./css/previousAboutProject.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
@@ -10,7 +10,7 @@ import {getClubsByCategoryAndCity} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";
 import Search from "../Search";
 
-const AboutProject = () => {
+const PreviousAboutProject = () => {
     const [clubs, setClubs] = useState([]);
     useEffect(() => {
         getClubsByCategoryAndCity(mapSearchParameters).then((responce) => {
@@ -19,7 +19,7 @@ const AboutProject = () => {
     }, []);
 
     return (
-        <Layout className="aboutProject global-padding">
+        <Layout className="previousAboutProject global-padding">
             <div className="lower-header-box about-header">
                 <div className="city-name-box">
                     <h2 className="city-name">
@@ -199,7 +199,7 @@ const AboutProject = () => {
                                 свою країну в світі українською мовою, бо це майбутні чемпіони».
                         </div>
                         <img className="image"
-                            src={`${process.env.PUBLIC_URL}с`}
+                            src={`${process.env.PUBLIC_URL}/static/images/service/about_img_3.png`}
                             alt="Sergey Stakhovsky"></img>
                 </div>
 
@@ -238,4 +238,4 @@ const AboutProject = () => {
         </Layout>
     );
 };
-export default AboutProject;
+export default PreviousAboutProject;
