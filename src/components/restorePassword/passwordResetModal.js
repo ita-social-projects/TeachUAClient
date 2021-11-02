@@ -18,7 +18,8 @@ const ResetPasswordModal = () => {
 
         changePassword(values).then((response) => {
             if (response.status > 400) {
-                message.error("[" + response.error + "] " + response.message)
+                message.destroy()
+                message.error(response.message)
             } else {
                 message.success("Пароль змінено успішно");
                 setTimeout(function () {
