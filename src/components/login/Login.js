@@ -33,7 +33,7 @@ const Login = ({isShowing, setShowing, verifyCode}) => {
                     //window.location = "https://speak-ukrainian.org.ua/dev/";
                     // window.location = "http://localhost:3000/dev";
                 }
-                let a = setTimeout(() => {
+                setTimeout(() => {
                     console.log("before reload ");
                     window.location.reload();
                     clearTimeout(a);
