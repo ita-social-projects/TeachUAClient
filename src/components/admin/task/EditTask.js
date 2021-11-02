@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {Form, Input, message, Typography, Upload, DatePicker, Space, Button, Select} from "antd";
+import React, {useEffect, useState} from "react";
+import {useForm} from "antd/es/form/Form";
+import {getTask} from "../../../service/TaskService";
+import {useParams} from "react-router";
+import {Button, DatePicker, Form, Input, Select, Upload} from "antd";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import {useForm} from "antd/es/form/Form";
-import {createTask} from "../../../service/TaskService";
 import Editor from "../challenge/Editor";
-import {getAllChallenges} from "../../../service/ChallengeService";
-import moment from "moment";
+import Title from "antd/es/typography/Title";
 import {Link} from "react-router-dom";
 const { Option } = Select;
 
-const { Title } = Typography;
-
-const AddTask = () => {
+const EditTask = () => {
     const [taskForm] = useForm();
-    const [name, setName] = useState();
-    const [picture, setPicture] = useState();
-    const [startDate, setStartDate] = useState();
+    const taskId  = useParams();
+    const [taskNotFound, setTaskNotFound] = useState(false);
     const [task, setTask] = useState({
         id: 0,
         name: '',
@@ -34,48 +31,21 @@ const AddTask = () => {
         }
     ]);
     const [loading, setLoading] = useState(true);
-    const [id, setId] = useState();
-    const dateFormat = 'YYYY-MM-DD';
 
     const getData = () => {
-        getAllChallenges().then(response => {
-            setChallengeList(response);
+        getTask(taskId.id).then(response =>
+            setTask(response)
+        ).catch(response => {
+            if(response.status === 404){
+                setTaskNotFound(true);
+            }
         });
         setLoading(false);
     };
 
-    const handleChange = (id) => {
-        setId(id);
-    }
-
-    const getChallenges = () => {
-        taskForm.setFieldsValue({})
-    }
-
     useEffect(() => {
         getData();
     }, []);
-
-    const onDateChange = (date, dateString) => {
-        setStartDate(dateString);
-    }
-
-    const onFinish = (values) => {
-        const formValues = {...values, startDate: startDate}
-        createTask(formValues, values.challengeId)
-            .then((response) => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
-                message.success("Завдання" + response.name + "' успішно додане!");
-
-            });
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
 
     return (
         <div className="add-form">
@@ -95,11 +65,12 @@ const AddTask = () => {
                     Переглянути завдання
                 </Button>
             </Link>
-            <Title>Додайте завдання</Title>
+
+            <Title>Оновити завдання</Title>
             <Form
                 form={taskForm}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                //onFinish={onFinish}
+                //onFinishFailed={onFinishFailed}
                 initialValues={{ remember: true }}
                 autoComplete="off"
                 labelCol={{ span: 4 }}
@@ -108,17 +79,17 @@ const AddTask = () => {
                     label="Дата початку"
                     name="startDate"
                 >
-                        <DatePicker
-                            //defaultPickerValue={moment(new Date(), 'YYYY-MM-DD')}
-                            onChange={onDateChange}
-                            format={dateFormat}
-                            value={startDate}
-                        />
+                    <DatePicker
+                        //defaultPickerValue={moment(new Date(), 'YYYY-MM-DD')}
+                        // onChange={onDateChange}
+                        // format={dateFormat}
+                        // value={startDate}
+                    />
                 </Form.Item>
                 <Form.Item
                     name="picture"
                     label="Фото"
-                    value={picture}
+                    //value={picture}
                 >
                     <Upload
                         name="image"
@@ -133,7 +104,7 @@ const AddTask = () => {
                 <Form.Item
                     label="Назва"
                     name="name"
-                    value={name}
+                    //value={name}
                 >
                     <Input/>
                 </Form.Item>
@@ -151,9 +122,9 @@ const AddTask = () => {
                         placeholder="Оберіть челендж"
                         allowClear
                         name="id"
-                        value={id}
-                        onChange={handleChange}
-                        onSelect={getChallenges}
+                        //value={id}
+                        // onChange={handleChange}
+                        // onSelect={getChallenges}
                     >
                         {challengeList.map((option, index) => (
                             <Option
@@ -179,4 +150,4 @@ const AddTask = () => {
     )
 }
 
-export default AddTask;
+export default EditTask;

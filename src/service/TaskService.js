@@ -62,3 +62,16 @@ export const updateTask = async (data, id) => {
             return error.response.data;
         });
 };
+
+export const getTask = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/challenge/task/" + id)
+        .then((response) => {
+            return response.data;
+        }).catch((error) => {
+            return error.response;
+        });
+};
+
+// export const updateTask = async () => {
+//
+// }

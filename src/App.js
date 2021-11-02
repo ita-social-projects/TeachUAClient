@@ -38,6 +38,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
+import EditChallenge from "./components/admin/challenge/EditChallenge";
+import AddTask from "./components/admin/task/AddTask";
+import TasksTable from "./components/admin/task/TasksTable";
+import ChallengesTable from "./components/admin/challenge/ChallengesTable";
+import EditTask from "./components/admin/task/EditTask";
 
 const {Content} = Layout;
 
@@ -65,8 +70,12 @@ function App() {
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
-                                    
+                                    <Route path="/admin/challenge/task/:id" exact component={EditTask} />
+                                    <Route path="/admin/challenge/:id" exact component={EditChallenge} />
+                                    <Route path="/admin/addTask" exact component={AddTask} />
+                                    <Route path="/admin/tasks" exact component={TasksTable} />
                                     <Route path="/admin/addChallenge" exact component={AddChallenge} />
+                                    <Route path="/admin/challenges" exact component={ChallengesTable} />
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>

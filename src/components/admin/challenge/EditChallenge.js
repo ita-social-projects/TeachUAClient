@@ -39,11 +39,11 @@ const EditChallenge = (props) => {
     const [sortNumber, setSortNumber] = useState();
     const [isChecked, setIsChecked] = useState(challenge.isActive);
     const [selectedTasks, setSelectedTasks] = useState ([]);
-    const [tasks, setTasks] = useState( [{
-        id: 0,
-        name: "",
-        startDate: ""
-    }])
+    // const [tasks, setTasks] = useState( [{ // to activate when tasks select is ready
+    //     id: 0,
+    //     name: "",
+    //     startDate: ""
+    // }])
 
     const handleNameChange = (value) => {
         setName(value);
@@ -65,13 +65,13 @@ const EditChallenge = (props) => {
     };
 
     const saveForm = (values) => {
-        const formValues = {...values, tasks: selectedTasks}
-        updateChallenge(formValues, challengeId.id).then(response => {
+        //const formValues = {...values, tasks: selectedTasks}, to activate tasks select, paste formValues instead of values
+        updateChallenge(values, challengeId.id).then(response => {
             console.log(response);
-            // if (response.status) {
-            //     message.warning(response.message);
-            //     return;
-            // } message.success(`Челендж ${challenge.name} успішно оновлено`);
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            } message.success(`Челендж ${challenge.name} успішно оновлено`);
         });
         setChallenge(values);
     };
@@ -169,12 +169,13 @@ const EditChallenge = (props) => {
                         <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
                     </Upload>
                 </Form.Item>
-                <Form.Item
-                    label="Завдання"
-                    name="tasks"
-                >
-                    <TasksSelect selectedTasks={selectedTasks} setSelectedTasks={setSelectedTasks}/>
-                </Form.Item>
+                {/* working solution for tasks select, which doesn't have the back-end yet */}
+                {/*<Form.Item*/}
+                {/*    label="Завдання"*/}
+                {/*    name="tasks"*/}
+                {/*>*/}
+                {/*    <TasksSelect selectedTasks={selectedTasks} setSelectedTasks={setSelectedTasks}/>*/}
+                {/*</Form.Item>*/}
                 <Form.Item>
                     <Button
                         type="primary"

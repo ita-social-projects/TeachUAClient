@@ -5,8 +5,8 @@ import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import CustomUploadAdapterPlugin from "./CustomImageUpload";
 import Editor from "./Editor";
+import {Link} from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -34,7 +34,6 @@ const AddChallenge = () => {
     }
 
     const onFinish = (values) => {
-        values.description = description;
         createChallenge(values)
             .then((response) => {
                 if (response.status) {
@@ -53,6 +52,22 @@ const AddChallenge = () => {
 
     return (
         <div className="add-form">
+            <Link
+                to="/admin/challenges"
+                className="back-btn"
+            >
+                <Button  className="flooded-button">
+                    До списку челенджів
+                </Button>
+            </Link>
+            <Link
+                to="/admin/challenge/:id/view"
+                className="back-btn"
+            >
+                <Button  className="flooded-button">
+                    Переглянути челендж
+                </Button>
+            </Link>
             <Title>Додайте челендж</Title>
             <Form
                 form={challengeForm}
@@ -80,7 +95,7 @@ const AddChallenge = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="Назва"
+                    label="Заголовок"
                     name="title"
                     value={title}
                     onChange={handleTitleChange}
@@ -90,7 +105,6 @@ const AddChallenge = () => {
                 <Form.Item
                     label="Опис"
                     name="description"
-                    value={description}
                 >
                     <Editor />
                 </Form.Item>

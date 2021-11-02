@@ -78,7 +78,7 @@ class Editor extends React.Component {
                         {indent: '-1'},
                         {indent: '+1'},
                     ],
-                    ['link', 'video',  'clean'],
+                    ['link', 'video', 'image', 'clean'],
                 ],
             },
         };
@@ -86,7 +86,7 @@ class Editor extends React.Component {
         return (
             <div>
             <ReactQuill
-                value={value}
+                value={value || ''}
                 onChange={this.handleOnChange}
                 //onBlur={this.handleOnBlur}
                 modules={modules}

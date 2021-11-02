@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Form, message, Popconfirm} from "antd";
 import {Link} from "react-router-dom";
 import EditableTable from "../../EditableTable";
-import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
+import {deleteTask, getTasks, updateTask} from "../../../service/TaskService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 
 const TasksTable = () => {
@@ -75,21 +75,21 @@ const TasksTable = () => {
             dataIndex: 'id',
             width: '5%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/tasks/' + record.id}>{record.id}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>
         },
         {
             title: 'Назва',
             dataIndex: 'name',
             width: '35%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/task/' + record.id}>{record.name}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
         },
         {
             title: 'startDate',
             dataIndex: 'startDate',
             width: '35%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/task/' + record.id}>{record.startDate}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.startDate}</Link>
         },
     ];
 

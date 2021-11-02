@@ -9,6 +9,7 @@ const TasksSelect = ({selectedTasks, setSelectedTasks}) => {
     const [tasks, setTasks] = useState( [{
         id: 0,
         name: "",
+        picture: "",
         startDate: ""
     }]);
 
@@ -39,10 +40,14 @@ const TasksSelect = ({selectedTasks, setSelectedTasks}) => {
         >
             {tasks.map((option, index) => (
                 <Option
-                    value={option.id}
+                    //value={JSON.stringify(option)}
                     key={option.id}
+                    id={option.id}
+                    name={option.name}
+                    picture={option.picture}
+                    startDate={option.startDate}
                 >
-                    {option.name + option.id}
+                    {option.name}
                 </Option>
             ))}
         </Select>
