@@ -6,7 +6,6 @@ import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined"
 import {Button} from "antd";
-import ClubCarousel from "./ClubCarousel";
 import {getClubsByCategoryAndCity} from "../../service/ClubService";
 import {mapSearchParameters} from "../../context/SearchContext";
 import Search from "../Search";

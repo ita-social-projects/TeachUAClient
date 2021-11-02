@@ -37,6 +37,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import AboutProject from "./components/AboutProject/AboutProject"
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit"
+import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject"
 
 const {Content} = Layout;
 
@@ -88,7 +89,8 @@ function App() {
                                     <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
                                     <Route path="/challenge" exact component={ChallengePage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
-                                    <Route path="/about" exact component={AboutProject}/>
+                                    <Route path="/about" exact component={PreviousAboutProject}/>
+                                    <Route path="/test/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
