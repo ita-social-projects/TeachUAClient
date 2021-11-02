@@ -60,6 +60,7 @@ const ClubListSider = ({
 
     const onValuesChange = (values) => {
         setIsCenterChecked(values.isCenter);
+
         if (values.hasOwnProperty("cityName")) {
             form.setFieldsValue({districtName: undefined});
             form.setFieldsValue({stationName: undefined});

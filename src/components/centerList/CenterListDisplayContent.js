@@ -49,7 +49,8 @@ const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearc
                              sortBy={sortBy}
                              view={view}
                              sortDirection={sortDirection}
-                             setView={setView} />}
+                             setView={setView}
+                             centerIsChecked={true}/>}
 
             {!loading && centers.content?.length === 0 ? <ClubListEmptySearch /> :
 

@@ -55,7 +55,7 @@ const ClubList = ({
             console.log("6+1");
             setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
-                getCentersByAdvancedSearch(params, page).then((response) => {
+                getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
             } else if (isCenterChecked!=undefined){
@@ -90,7 +90,7 @@ const ClubList = ({
 
         if (advancedSearch && !showHideMenu) {
             if (isCenterChecked) {
-                getCentersByAdvancedSearch(params, page).then((response) => {
+                getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
             } else {
@@ -108,6 +108,12 @@ const ClubList = ({
         load(false);
     };
 
+    const setIsCenterCheckedAndSort = (value) => {
+        if(!isCenterChecked && value) {
+            setSortBy('id');
+        }
+        setIsCenterChecked(value);
+    }
 
     useEffect(() => {
         console.log("6+3");
@@ -137,7 +143,7 @@ const ClubList = ({
                     getAdvancedData={getData}
                     setShowHideMenu={setShowHideMenu}
                     isCenterChecked={isCenterChecked}
-                    setIsCenterChecked={setIsCenterChecked}
+                    setIsCenterChecked={setIsCenterCheckedAndSort}
                     activeCategory={activeCategory}
                 />
             )}
