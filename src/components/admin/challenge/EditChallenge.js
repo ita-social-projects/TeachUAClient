@@ -126,7 +126,7 @@ const EditChallenge = (props) => {
                     label="Статус"
                     value={challenge.isActive}
                 >
-                    <Switch className="ant-switch-checked" checked={isChecked} onChange={handleToggleSwitch}/>
+                    <Switch checked={isChecked} onChange={handleToggleSwitch}/>
                 </Form.Item>
                 <Form.Item
                     label="Назва"
