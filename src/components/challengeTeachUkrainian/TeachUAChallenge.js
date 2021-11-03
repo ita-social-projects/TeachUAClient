@@ -16,7 +16,7 @@ const TeachUAChallenge = () => {
             <AboutHeader />
             <Banner imageURL={`${process.env.PUBLIC_URL}/static/images/about/slider/maraton.jpg`} />
             <Description />
-            {/*<DayCarousel/>*/}
+            <DayCarousel/>
         </Layout>
     );
 };

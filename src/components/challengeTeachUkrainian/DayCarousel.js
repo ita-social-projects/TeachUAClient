@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/DayCarousel.css";
 import { Button, Carousel } from "antd";
-import   marathonDay from "./marathonDayData/DataObjects"
+import   marathonDay from "./DayData/DataObjects"
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 
@@ -21,14 +21,6 @@ const DayCarousel = () => {
    const diffDays = Math.ceil(Math.abs((today - startOfChallenge) / oneDay)); //appear at 00:00
 
    data.length = diffDays;
-    
-
-    
-
-useEffect(() => {
-
-
-});
 
    
     const carousel = useRef(null);
@@ -98,7 +90,7 @@ useEffect(() => {
                                     <div className="title">
                                         <div className="day-image-box" style={{backgroundColor: "#FFFFFF"}}>
                     <img className="day-image"
-                         src={process.env.PUBLIC_URL + "/static/images/marathon/marathon_log.png"} />
+                         src={process.env.PUBLIC_URL + "/static/images/marathon/challengeUA.jpg"} />
                 </div>
                                         <div className="name">
                                             {day.name}
@@ -107,7 +99,7 @@ useEffect(() => {
                                 }
                              
                                 link={{
-                                    pathname: "/marathon/task/"+day.pathUrl,
+                                    pathname: "/challengeUA/task/"+day.pathUrl,
                                   
                                 }}
                                 buttonText="Переглянути"

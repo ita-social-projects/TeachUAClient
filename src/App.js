@@ -36,6 +36,7 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
 import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
+import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
 
 const {Content} = Layout;
 
@@ -91,6 +92,7 @@ function App() {
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
                                     <Route path="/challengeUA" exact component={TeachUAChallenge}/>
                                     <Route path="/challengeUA/registration" exact component={RegistrationPage}/>
+                                    <Route path="/challengeUA/task/:pathUrl" exact component={TaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>
