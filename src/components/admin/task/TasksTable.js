@@ -106,8 +106,8 @@ const TasksTable = () => {
                 columns={columns}
                 data={tasks}
                 form={form}
-                 onSave={save}
-                 actions={actions}
+                onSave={save}
+                actions={actions}
             />
         </div>
     )

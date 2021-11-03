@@ -21,6 +21,7 @@ export const createTask = async (data, id) => {
     return await fetchRequest
         .post(BASE_URL + "/api/challenge/" + id + "/task", {
             name: data.name,
+            headerText: data.headerText,
             description: data.description,
             startDate: data.startDate,
             picture: data.picture && data.picture.file.response,
@@ -49,7 +50,7 @@ export const updateTask = async (data, id) => {
     return await fetchRequest
         .put(BASE_URL + "/api/challenge/task/" + id, {
             name: data.name,
-            title: data.title,
+            headerText: data.headerText,
             description: data.description,
             startDate: data.startDate,
             picture: data.picture,

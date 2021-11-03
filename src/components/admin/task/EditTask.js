@@ -13,6 +13,7 @@ import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "../challenge/Editor";
 import Title from "antd/es/typography/Title";
+import ChallengesInTasks from "./ChallengesInTasks";
 
 const { Option } = Select;
 
@@ -24,6 +25,7 @@ const EditTask = () => {
     const [task, setTask] = useState({
         id: 0,
         name: '',
+        headerText: '',
         description: '',
         picture: '',
         startDate: '',
@@ -64,7 +66,6 @@ const EditTask = () => {
 
     const onFill = () => {
         taskEditForm.setFieldsValue(task);
-        console.log(task.challengeId);
     };
 
     const onDateChange = (date, dateString) => {
@@ -72,7 +73,7 @@ const EditTask = () => {
     }
 
     const saveForm = (values) => {
-        const formValues = {...values, challengeId: selectedChallenges, startDate: startDate}
+        const formValues = {...values, challengeId: task.challengeId, startDate: startDate}
         updateTask(formValues, taskId.id).then(response => {
             console.log(response);
             if (response.status) {
@@ -162,6 +163,13 @@ const EditTask = () => {
                     <Input/>
                 </Form.Item>
                 <Form.Item
+                    label="Заголовок"
+                    name="headerText"
+                    //value={headerText}
+                >
+                    <Editor />
+                </Form.Item>
+                <Form.Item
                     label="Опис"
                     name="description"
                 >
@@ -198,6 +206,10 @@ const EditTask = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            <div>
+                <Title level={3}>Усі челенджі</Title>
+                <ChallengesInTasks />
+            </div>
         </div>
     )
 }

@@ -10,9 +10,9 @@ import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from './Editor';
-import {getTasks} from "../../../service/TaskService";
 import TasksSelect from "./TasksSelect";
-const { Option } = Select;
+import TasksInChallenge from "./TasksInChallenge";
+//const { Option } = Select;
 
 const { Title } = Typography;
 
@@ -186,6 +186,10 @@ const EditChallenge = (props) => {
                     </Button>
                 </Form.Item>
             </Form>
+            <div>
+                <Title level={3}>Усі завдання</Title>
+                <TasksInChallenge />
+            </div>
         </div>
     )
 

@@ -8,6 +8,7 @@ import Editor from "../challenge/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import moment from "moment";
 import {Link} from "react-router-dom";
+import ChallengesInTasks from "./ChallengesInTasks";
 const { Option } = Select;
 
 const { Title } = Typography;
@@ -15,11 +16,13 @@ const { Title } = Typography;
 const AddTask = () => {
     const [taskForm] = useForm();
     const [name, setName] = useState();
+    const [headerText, setHeaderText] = useState();
     const [picture, setPicture] = useState();
     const [startDate, setStartDate] = useState();
     const [task, setTask] = useState({
         id: 0,
         name: '',
+        headerText: '',
         description: '',
         picture: '',
         startDate: '',
@@ -137,6 +140,13 @@ const AddTask = () => {
                     <Input/>
                 </Form.Item>
                 <Form.Item
+                    label="Заголовок"
+                    name="headerText"
+                    //value={headerText}
+                >
+                    <Editor />
+                </Form.Item>
+                <Form.Item
                     label="Опис"
                     name="description"
                 >
@@ -174,6 +184,10 @@ const AddTask = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            <div>
+                <Title level={3}>Усі челенджі</Title>
+                <ChallengesInTasks />
+            </div>
         </div>
     )
 }
