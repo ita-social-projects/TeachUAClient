@@ -90,7 +90,7 @@ const DayCarousel = () => {
                                     <div className="title">
                                         <div className="day-image-box" style={{backgroundColor: "#FFFFFF"}}>
                     <img className="day-image"
-                         src={process.env.PUBLIC_URL + "/static/images/marathon/challengeUa.jpg"} />
+                         src={process.env.PUBLIC_URL + "/static/images/marathon/challengeUA.jpg"} />
                 </div>
                                         <div className="name">
                                             {day.name}

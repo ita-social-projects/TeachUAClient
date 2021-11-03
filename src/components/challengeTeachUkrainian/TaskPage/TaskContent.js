@@ -15,7 +15,7 @@ const TaskContent = () => {
         <Content className="page-task-content">
             <div className="task-image-par">
                 <img className="task-image"
-                     src={`${process.env.PUBLIC_URL}`+`/static/images/marathon/challengeUa.jpg`}
+                     src={`${process.env.PUBLIC_URL}`+`/static/images/marathon/challengeUA.jpg`}
                 />
                 <div className="header-content">
                     <div className="task-header">
