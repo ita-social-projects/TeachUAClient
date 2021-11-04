@@ -45,7 +45,7 @@ and (max-device-width: 500px) {
     }
 }
 
-@media (min-device-width: 320px)
+@media (min-device-width: 200px)
 and (max-device-width: 1000px) {
     .page-task-content {
         margin-top: 5%;
