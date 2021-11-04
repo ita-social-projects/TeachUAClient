@@ -13,16 +13,17 @@ const DayCarousel = () => {
     
     
    const data =  marathonDay.marathonDay;
- 
-   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-   const startOfChallenge = new Date(2021, 7, 19);
-   const today = new Date();
-        
-   const diffDays = Math.ceil(Math.abs((today - startOfChallenge) / oneDay)); //appear at 00:00
 
+   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+   const startOfChallenge = new Date(2021, 10, 5);
+   const today = new Date();
+   let dayCount = today - startOfChallenge;
+   if(dayCount < 0) {
+       dayCount = 0;
+   }
+   const diffDays = Math.ceil(Math.abs(dayCount / oneDay)); //appear at 00:00
    data.length = diffDays;
 
-   
     const carousel = useRef(null);
     const settings = {
         dots: true,
@@ -66,9 +67,10 @@ const DayCarousel = () => {
     return (
       
         <div className="challenge-day-carousel">
-            <div className="challenge-day-header">
+            {dayCount > 0 && <div className="challenge-day-header">
                 <h2 className="label">Завдання челенджу</h2>
-            </div>
+            </div>}
+
             <div className="challenge-day-block">
                 <ArrowLeftOutlined
                     className="arrows-prev"
