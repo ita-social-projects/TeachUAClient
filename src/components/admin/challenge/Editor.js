@@ -1,6 +1,7 @@
 import React from "react";
 import ReactQuill, {Quill} from 'react-quill';
-import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
+import {BASE_URL} from "../../../service/config/ApiConfig";
+import {uploadImage} from "../../../service/UploadService";
 
 
 class Editor extends React.Component {
@@ -11,48 +12,29 @@ class Editor extends React.Component {
         this.handleOnBlur = this.handleOnBlur.bind(this);
     }
 
-    //
-    // imageHandler = () => {
-    //     const input = document.createElement('input');
-    //
-    //     input.setAttribute('type', 'file');
-    //     input.setAttribute('accept', 'image/*');
-    //     input.click();
-    //
-    //     input.onchange = async () => {
-    //         const file = input.files[0];
-    //         const formData = new FormData();
-    //
-    //         formData.append('image', file);
-    //
-    //         // Save current cursor state
-    //         const range = this.quill.getEditor().getSelection(true);
-    //
-    //         // Insert temporary loading placeholder image
-    //         //this.quill.getEditor().insertEmbed(range.index, 'image', `${ window.location.origin }/images/loaders/placeholder.gif`);
-    //
-    //         // Move cursor to right side of image (easier to continue typing)
-    //         this.quill.getEditor().setSelection(range.index + 1);
-    //
-    //         const res = new XMLHttpRequest();
-    //         res.open("POST", UPLOAD_IMAGE_URL, false);
-    //         res.send(formData);
-    //
-    //         // Remove placeholder image
-    //         this.quill.getEditor().deleteText(range.index, 1);
-    //
-    //         // Insert uploaded image
-    //         this.quill.getEditor().insertEmbed(range.index, 'image', res.body.image);
-    //     }
-    // }
 
+    imageHandler = () => {
+        const input = document.createElement('input');
+
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = async () => {
+            const file = input.files[0];
+            const folder = 'challenges';
+            console.log('User trying to uplaod this:', file);
+
+            const id = await uploadImage(file, folder);
+            const range = this.quill.getEditor().getSelection();
+            const link = `${id}`;
+            this.quill.getEditor().insertEmbed(range.index, 'image', `${BASE_URL}` + link);
+        }
+    }
 
     handleOnChange(html, delta, source) {
         const { onChange } = this.props;
-
-        if (source === 'user') {
-            onChange(html);
-        }
+        onChange(html);
     }
 
     handleOnBlur(range, source, quill) {
@@ -80,6 +62,9 @@ class Editor extends React.Component {
                     ],
                     ['link', 'video', 'image', 'clean'],
                 ],
+                handlers: {
+                    image: this.imageHandler
+                },
             },
         };
 

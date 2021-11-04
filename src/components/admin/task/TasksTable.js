@@ -19,14 +19,12 @@ const TasksTable = () => {
 
     const getData = () => {
         getTasks().then(response => {
-            console.log(response);
             setTasks(response);
         });
         setLoading(false);
     };
 
     const remove = (record) => {
-        console.log(record);
         deleteTask(record.id).then((response) => {
             if (response.status) {
                 message.warning(response.message)

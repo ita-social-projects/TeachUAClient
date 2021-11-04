@@ -16,7 +16,7 @@ import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
 
 const { Option } = Select;
-
+const { TextArea } = Input;
 
 const EditTask = () => {
     const [taskEditForm] = useForm();
@@ -44,7 +44,6 @@ const EditTask = () => {
     const [selectedChallenges, setSelectedChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
     const dateFormat = 'YYYY-MM-DD';
-    const [startDate, setStartDate] = useState();
 
     const getData = () => {
         getTask(taskId.id).then(response =>
@@ -69,11 +68,11 @@ const EditTask = () => {
     };
 
     const onDateChange = (date, dateString) => {
-        setStartDate(dateString);
+        setTask({...task, startDate: dateString});
     }
 
     const saveForm = (values) => {
-        const formValues = {...values, challengeId: task.challengeId, startDate: startDate}
+        const formValues = {...values, challengeId: task.challengeId, startDate: task.startDate}
         updateTask(formValues, taskId.id).then(response => {
             console.log(response);
             if (response.status) {
@@ -81,7 +80,7 @@ const EditTask = () => {
                 return;
             } message.success(`Завдання ${task.name} успішно оновлено`);
         });
-        setTask(values);
+        setTask(formValues);
     }
 
     const onChange = (value) => {
@@ -116,22 +115,19 @@ const EditTask = () => {
             <Form
                 form={taskEditForm}
                 onFinish={saveForm}
-                //onFinishFailed={onFinishFailed}
                 initialValues={onFill()}
                 autoComplete="off"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}>
                 <Form.Item
                     label="Дата початку"
-                    //name="startDate"
-                    //value={moment(startDate).toDate()}
                 >
                     <DatePicker
-                        //defaultPickerValue={moment(new Date(task.startDate), 'YYYY,MM,DD')}
                         onChange={onDateChange}
                         format={dateFormat}
                         name="startDate"
-                        value={moment(startDate)}
+                        allowClear={false}
+                        value={moment(task.startDate,"YYYY-MM-DD")}
                     />
                 </Form.Item>
                 <Form.Item
@@ -165,9 +161,9 @@ const EditTask = () => {
                 <Form.Item
                     label="Заголовок"
                     name="headerText"
-                    //value={headerText}
+                    value={task.headerText}
                 >
-                    <Editor />
+                    <TextArea />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -183,7 +179,6 @@ const EditTask = () => {
                     <Select
                         placeholder="Оберіть челендж"
                         allowClear
-                        //name="challengeId"
                         onChange={onChange}
                     >
                         {challengeList.map((option, index) => (

@@ -6,12 +6,12 @@ import {useForm} from "antd/es/form/Form";
 import {createTask} from "../../../service/TaskService";
 import Editor from "../challenge/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
-import moment from "moment";
 import {Link} from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 const { Option } = Select;
 
 const { Title } = Typography;
+const { TextArea } = Input;
 
 const AddTask = () => {
     const [taskForm] = useForm();
@@ -142,9 +142,8 @@ const AddTask = () => {
                 <Form.Item
                     label="Заголовок"
                     name="headerText"
-                    //value={headerText}
                 >
-                    <Editor />
+                    <TextArea />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -185,7 +184,7 @@ const AddTask = () => {
                 </Form.Item>
             </Form>
             <div>
-                <Title level={3}>Усі челенджі</Title>
+                <Title level={3}>Доступні челенджі</Title>
                 <ChallengesInTasks />
             </div>
         </div>
