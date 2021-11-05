@@ -1,5 +1,5 @@
 import {Button, Layout, Result} from "antd";
-import {withRouter} from 'react-router';
+import {withRouter} from 'react-router-dom';
 import React from "react";
 import PageHeader from "./header/PageHeader";
 import PageContent from "./content/PageContent";
