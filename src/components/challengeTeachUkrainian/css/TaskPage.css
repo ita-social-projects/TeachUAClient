@@ -48,7 +48,7 @@ and (max-device-width: 500px) {
 @media (min-device-width: 200px)
 and (max-device-width: 1000px) {
     .page-task-content {
-        margin-top: 5%;
+        margin-top: 10%;
         align-items: center;
         display: flex;
         align-content: space-between;
@@ -117,6 +117,7 @@ and (max-device-width: 1000px) {
 
 
 }
+
 
 @media (min-device-width: 1000px) {
 
