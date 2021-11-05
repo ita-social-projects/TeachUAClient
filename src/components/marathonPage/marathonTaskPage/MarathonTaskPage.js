@@ -1,5 +1,5 @@
 import {Button, Layout, Result} from "antd";
-import {Router, useLocation, withRouter} from 'react-router';
+import {Router, useLocation, withRouter} from 'react-router-dom';
 import React from "react";
 import {useEffect} from "react";
 import MarathonTaskContent from "./MarathonTaskContent";

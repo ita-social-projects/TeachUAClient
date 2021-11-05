@@ -2,7 +2,7 @@ import {Layout, Pagination, Space} from "antd";
 import React, {useEffect, useState} from "react";
 import {getClubsByUserId} from "../../../service/ClubService";
 import Loader from "../../Loader";
-import {withRouter} from "react-router";
+import {withRouter} from "react-router-dom";
 import UserClubCardItem from "./UserClubCardItem";
 import './css/UserClub.less';
 

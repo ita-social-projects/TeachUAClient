@@ -4,7 +4,7 @@ import HeaderRight from "./HeaderRight";
 import NavMenu from "./NavMenu";
 import {Link} from "react-router-dom";
 import {searchParameters} from "../../context/SearchContext";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 
 const HeaderComponent = () => {
     const location = useLocation();
