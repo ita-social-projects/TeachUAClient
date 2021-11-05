@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, withRouter } from "react-router-dom"
+import { Redirect, withRouter } from "react-router-dom";
 import SiderComponent from "./sider/UserSider";
 import UserPageContent from "./content/UserPageContent";
 import '../userPage/css/User.less'
