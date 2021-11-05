@@ -103,7 +103,7 @@ const EditTask = () => {
                 </Button>
             </Link>
             <Link
-                to="/admin/challenge/task/:id/view"
+                to={"/challenge/task/"+taskId.id}
                 className="back-btn"
             >
                 <Button  className="flooded-button">

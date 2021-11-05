@@ -1,5 +1,6 @@
 import React from "react";
 import {Content} from "antd/es/layout/layout";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 
 const TaskContent = ({task}) => {
 
@@ -7,7 +8,7 @@ const TaskContent = ({task}) => {
         <Content className="page-task-content">
             <div className="task-image-par">
                 <img className="task-image"
-                     src={`${process.env.PUBLIC_URL}` + task.picture}
+                     src={BASE_URL + task.picture}
                 />
                 <div className="header-content">
                     <div className="task-header">

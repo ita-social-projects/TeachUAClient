@@ -19,6 +19,7 @@ const AddChallenge = () => {
     const [description, setDescription] = useState();
     const [sortNumber, setSortNumber] = useState();
     const [picture, setPicture] = useState();
+    const [challengeId, setChallengeId] = useState();
 
     const handleNameChange = (value) => {
         setName(value);
@@ -41,7 +42,7 @@ const AddChallenge = () => {
                     return;
                 }
                 message.success("Челендж '" + response.name + "' успішно доданий!");
-
+                setChallengeId(response.id)
             });
         console.log('Success:', values);
     };
@@ -61,10 +62,10 @@ const AddChallenge = () => {
                 </Button>
             </Link>
             <Link
-                to="/admin/challenge/:id/view"
+                to={"/challenge/" + challengeId}
                 className="back-btn"
             >
-                <Button  className="flooded-button">
+                <Button className="flooded-button" disabled={!challengeId}>
                     Переглянути челендж
                 </Button>
             </Link>

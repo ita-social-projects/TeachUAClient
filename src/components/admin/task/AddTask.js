@@ -38,6 +38,7 @@ const AddTask = () => {
     ]);
     const [loading, setLoading] = useState(true);
     const [id, setId] = useState();
+    const [taskId, setTaskId] = useState();
     const dateFormat = 'YYYY-MM-DD';
 
     const getData = () => {
@@ -71,8 +72,8 @@ const AddTask = () => {
                     message.warning(response.message);
                     return;
                 }
+                setTaskId(response.id)
                 message.success("Завдання" + response.name + "' успішно додане!");
-
             });
     };
 
@@ -91,10 +92,10 @@ const AddTask = () => {
                 </Button>
             </Link>
             <Link
-                to="/admin/challenge/task/:id/view"
+                to={"/challenge/task/" + taskId}
                 className="back-btn"
             >
-                <Button  className="flooded-button">
+                <Button disabled={!taskId} className="flooded-button">
                     Переглянути завдання
                 </Button>
             </Link>

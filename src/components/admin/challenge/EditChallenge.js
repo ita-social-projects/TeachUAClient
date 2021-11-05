@@ -96,7 +96,7 @@ const EditChallenge = (props) => {
                 </Button>
             </Link>
             <Link
-                to="/admin/challenge/:id/view"
+                to={"/challenge/"+challengeId.id}
                 className="back-btn"
             >
                 <Button  className="flooded-button">
