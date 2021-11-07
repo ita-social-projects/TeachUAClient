@@ -295,7 +295,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        },
                                        {
                                            required: false,
-                                           pattern: /^\d{9}$/,
+                                           pattern: /^\d{10}$/,
                                            message: "Телефон не відповідає вказаному формату"
                                        },
                                        // {
@@ -315,7 +315,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        // }
                                        ]}>
                             <Input className="add-club-input"
-                                   prefix='+380'
+                                   prefix='+38'
                                    suffix={
                                        <Tooltip placement="topRight"
                                                 title="Телефон не може містити літери, спеціальні символи та пробіли">

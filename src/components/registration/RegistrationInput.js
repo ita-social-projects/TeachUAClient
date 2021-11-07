@@ -43,7 +43,7 @@ const RegistrationInput = () => {
 
         if (registerForm.lastName.length > 1
             && registerForm.firstName.length > 1
-            && registerForm.phone.length === 9
+            && registerForm.phone.length === 10
             && registerForm.email.length > 5
             && registerForm.password.length > 7
             && registerForm.confirm.length > 7) {
@@ -156,7 +156,8 @@ const RegistrationInput = () => {
                                        message: 'Телефон не може містити пробіли',
                                    },
                                    {
-                                       pattern: /^.{9}$/,
+                                       required : false,
+                                       pattern: /^.{10}$/,
                                        message: "Телефон не відповідає вказаному формату",
                                    },
                                    {
@@ -165,8 +166,8 @@ const RegistrationInput = () => {
                                        message: 'Телефон не може містити спеціальні символи',
                                    }]}>
                         <Input className="registration-box"
-                               placeholder="__________"
-                               prefix='+380'
+                               placeholder="(___) ___ __ __"
+                               prefix='+38'
                                suffix={<PhoneOutlined className="phone-icon"/>}/>
                     </Form.Item>
                     <Form.Item name="email"

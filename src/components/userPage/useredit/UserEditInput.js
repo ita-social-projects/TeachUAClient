@@ -153,7 +153,7 @@ const UserEditInput = (
         },
     };
 
-    let prefixSelector = '+380';
+    let prefixSelector = '+38';
     return (
         <div className="user-edit-column">
             <Form.Item name="id"
@@ -189,7 +189,9 @@ const UserEditInput = (
                                max: 25,
                                message: 'Прізвище не може містити більше, ніж 25 символів',
                            }]}>
+
                 <Input className="user-edit-box"/>
+
             </Form.Item>
             <Form.Item name="firstName"
                        initialValue={user.firstName}
@@ -237,12 +239,12 @@ const UserEditInput = (
                                message: 'Телефон не може містити літери',
                            },
                            {
-                               required: true,
+                               required: false,
                                pattern: /^[^\s]*$/,
                                message: 'Телефон не може містити пробіли',
                            },
                            {
-                               pattern: /^.{9}$/,
+                               pattern: /^.{10}$/,
                                message: "Телефон не відповідає вказаному формату",
                            },
                            {
