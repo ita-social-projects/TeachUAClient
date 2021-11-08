@@ -4,7 +4,6 @@ import MainCarousel from "./MainCarousel";
 import {Layout} from "antd";
 import MainChallenge from "./MainChallenge";
 
-import {items} from "./carousel/CarouselItems";
 import MainCategories from "./MainCategories";
 import MainBanner from "./MainBanner";
 
@@ -12,7 +11,7 @@ const MainComponent = () => {
     return (
         <Layout className="global-padding">
             <AboutHeader/>
-            <MainCarousel items={items(process.env.PUBLIC_URL)}/>
+            <MainCarousel/>
             {/* <MainDescription/>
             <MainChallenge
                 label='Про челендж "Навчай українською"'
