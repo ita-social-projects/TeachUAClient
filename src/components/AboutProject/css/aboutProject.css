@@ -124,7 +124,7 @@
 }
 
 .aboutProject .content-text {
-    width: 75%;
+    width: 70%;
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;
@@ -135,6 +135,7 @@
     margin-bottom: 25px;
     margin-right: 10px;
     margin-left: 10px;
+    word-wrap: break-word;
 }
 
 .aboutProject .col .content-text {
@@ -225,6 +226,7 @@
     .aboutProject .title .text {
         font-size: 36px;
         text-align: center;
+        word-wrap: break-word;
     }
 
     .aboutProject .social-info {
@@ -245,6 +247,7 @@
         width: 90vw;
         font-size: 14px;
         margin-top: 20px;
+        word-wrap: break-word;
     }
 
     .aboutProject .row {
@@ -263,7 +266,7 @@
     }
 
 
-    .image {
+    .aboutProject .image {
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
@@ -296,6 +299,7 @@
         margin-left: 5%;
         margin-right: 5%;
         font-size: 14px;
+        word-wrap: break-word;
     }
 
     .aboutProject .col .content-text {
@@ -303,6 +307,7 @@
         margin-left: 0%;
         margin-right: 0%;
         font-size: 14px;
+        word-wrap: break-word;
     }
 
     .aboutProject .content .title-content {
@@ -310,6 +315,7 @@
         width: 100%;
         text-align: center;
         margin-bottom: 1%;
+        word-wrap: break-word;
     }
 
 

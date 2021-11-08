@@ -199,12 +199,9 @@
     max-width:100%;
     margin-top: 10px;
     margin-bottom: 30px;
-}
-
-.image {
     position: static;
     /* width: 431px;*/
-    height: 360px;
+    /*height: 360px;*/
     left: 0px;
     top: 0px;
     border-radius: 8px;
