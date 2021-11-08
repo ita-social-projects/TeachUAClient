@@ -37,8 +37,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
 import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
 import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
-import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
-import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 
 const {Content} = Layout;
 
@@ -77,7 +75,6 @@ function App() {
                                     <Route path="/admin/club-approve" exact component={ApproveClubTable}/>
                                     <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                     <Route path="/admin/stations" exact component={StationTable}/>
-                                    <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
@@ -89,8 +86,7 @@ function App() {
                                     <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
                                     <Route path="/challenge" exact component={ChallengePage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
-                                    <Route path="/about" exact component={PreviousAboutProject}/>
-                                    <Route path="/test/about" exact component={AboutProject}/>
+                                    <Route path="/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
