@@ -27,7 +27,7 @@ import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challengePage/ChallengePage";
-import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
+import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
 
@@ -37,6 +37,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
 import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
 import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
+import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 
 const {Content} = Layout;
 
@@ -57,13 +58,14 @@ function App() {
         <Layout className="layout">
             <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
-                <ScrollToTop />
+                <ScrollToTop/>
                 <PageContext.Provider value={pageProvider}>
                     <SearchContext.Provider value={clubProvider}>
                         <HeaderComponent/>
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
+                                    <Route path="/admin/banners" exact component={BannerItemsTable}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
