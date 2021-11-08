@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import { deleteToken, deleteUserId, getToken, getUserId } from "../../service/StorageService";
-import { DOWNLOAD_DATABASE_SQL } from "../../service/config/ApiConfig";
+import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
 import AddCenter from "../addCenter/AddCenter";
@@ -45,7 +45,7 @@ const AuthMenu = () => {
                     if (response.urlLogo?.includes("https")) {
                         setSource(response.urlLogo);
                     } else {
-                        setSource(process.env.PUBLIC_URL + response.urlLogo)
+                        setSource(BASE_URL + response.urlLogo)
                     }
                     setStyleClass("avatarIfLogin");
                 } else {
@@ -57,16 +57,16 @@ const AuthMenu = () => {
 
     const checkToken = () => {
         if(getToken()){
-              const token = getToken();
-              const payload = JSON.parse(atob(token.split(".")[1]));
-              const expiration = new Date(payload.exp);
-              const now = new Date();
-              if( expiration.getTime() - now.getTime()/1000  < 0 ){
-               onExitClick();
-               return false;
-              }else{
-              return true;
-        }}
+            const token = getToken();
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            const expiration = new Date(payload.exp);
+            const now = new Date();
+            if( expiration.getTime() - now.getTime()/1000  < 0 ){
+                onExitClick();
+                return false;
+            }else{
+                return true;
+            }}
     }
     const [isTokenValid, setIsTokenValid] = useState(checkToken);
 
@@ -74,11 +74,11 @@ const AuthMenu = () => {
     useEffect(() => {
         setIsTokenValid(checkToken());
     })
-    
+
 
 
     const profileDropdown = () => {
-    
+
         if (isTokenValid) {
             return (
                 <Menu>
@@ -108,10 +108,10 @@ const AuthMenu = () => {
             )
         } else {
             return (<Menu>
-           <Menu.Item><div onClick={() => setShowRegister(true)}>Зареєструватися</div></Menu.Item>
-                {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
-                <Menu.Item><div onClick={() => setShowLogin(true)}>Увійти</div></Menu.Item>
-            </Menu>
+                    <Menu.Item><div onClick={() => setShowRegister(true)}>Зареєструватися</div></Menu.Item>
+                    {/*<Menu.Item> <Login isLogin={setIsLogin} /></Menu.Item>*/}
+                    <Menu.Item><div onClick={() => setShowLogin(true)}>Увійти</div></Menu.Item>
+                </Menu>
             )
         }
     };
@@ -120,8 +120,12 @@ const AuthMenu = () => {
         <>
             <Registration isShowing={showRegister} setShowing={setShowRegister} />
             <Login isShowing={showLogin} setShowing={setShowLogin} />
-            <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
-            <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+            {showAddClub &&
+                <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
+            }
+            {showAddCenter &&
+                <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
+            }
             <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger={'click'}>
                 <div>
                     <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />

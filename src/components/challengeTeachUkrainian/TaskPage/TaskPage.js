@@ -2,7 +2,7 @@ import {Button, Layout, Result} from "antd";
 import {Router, useLocation, withRouter} from 'react-router-dom';
 import React from "react";
 import {useEffect} from "react";
-import MarathonTaskContent from "./MarathonTaskContent";
+import TaskContent from "./TaskContent";
 import {BrowserRouter} from "react-router-dom";
 
 const ScrollToTop =({children})=>{
@@ -14,7 +14,7 @@ const ScrollToTop =({children})=>{
 
 
 
-class MarathonTaskPage extends React.Component {
+class TaskPage extends React.Component {
     state = {
         task: {}
     };
@@ -27,7 +27,7 @@ class MarathonTaskPage extends React.Component {
             <Layout className="marathon-task-page">
                 <BrowserRouter>
                     <ScrollToTop>
-                <MarathonTaskContent task={this.state.task}/>
+                <TaskContent task={this.state.task}/>
                     </ScrollToTop>
                 </BrowserRouter>
             </Layout>
@@ -36,4 +36,4 @@ class MarathonTaskPage extends React.Component {
     }
 }
 
-export default withRouter(MarathonTaskPage);
+export default withRouter(TaskPage);

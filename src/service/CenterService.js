@@ -26,12 +26,18 @@ export const getAllCenters = async () => {
     });
 };
 
-export const getCentersByAdvancedSearch = async (parameters, page) => {
+export const getCentersByAdvancedSearch = async (
+    parameters,
+    page,
+    sortBy,
+    sortPath
+) => {
     return await fetchRequest.get(BASE_URL + "/api/centers/search/advanced", {
         params: {
             cityName: parameters.cityName ? parameters.cityName : searchParameters.cityName,
             districtName: parameters.districtName,
             stationName: parameters.stationName,
+            sort: `${sortBy},${sortPath}`,
             page: page,
         },
     }).then((response) => {

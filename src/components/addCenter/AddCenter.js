@@ -22,7 +22,7 @@ const AddCenter = ({isShowing, setShowing}) => {
     const [visible, setVisible] = useState(false);
     const [step, setStep] = useState(0);
     const [clubs, setClubs] = useState(null);
-    const [cities, setCities] = useState(null);
+    const [cities, setCities] = useState([]);
     const [locations, setLocations] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [result, setResult] = useState({});

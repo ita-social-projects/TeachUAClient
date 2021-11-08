@@ -30,7 +30,6 @@ import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
-
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
@@ -42,6 +41,7 @@ import AddTask from "./components/admin/task/AddTask";
 import TasksTable from "./components/admin/task/TasksTable";
 import ChallengesTable from "./components/admin/challenge/ChallengesTable";
 import EditTask from "./components/admin/task/EditTask";
+
 
 const {Content} = Layout;
 
