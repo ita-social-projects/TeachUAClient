@@ -31,7 +31,7 @@ const ChallengePage = () => {
 
     useEffect(() => {
         getChallengeProfile(challengeId).then(response => {
-            if (response.status === 404) {
+            if (response.status > 400) {
                 setChallenge(undefined);
             } else {
                 setChallenge(response)

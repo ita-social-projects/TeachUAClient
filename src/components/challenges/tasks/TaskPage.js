@@ -18,7 +18,7 @@ const TaskPage = () => {
 
     useEffect(() => {
         getTaskProfile(taskId).then((response) => {
-            if (response.status === 404) {
+            if (response.status > 400) {
                 setTask(undefined);
             } else {
                 setTask(response)

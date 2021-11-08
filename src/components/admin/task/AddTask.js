@@ -144,7 +144,7 @@ const AddTask = () => {
                     label="Заголовок"
                     name="headerText"
                 >
-                    <TextArea />
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Опис"

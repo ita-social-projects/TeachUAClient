@@ -4,6 +4,53 @@
     border-top: 2px solid #F1F1F1;
     border-bottom: 1px solid #F1F1F1;
 }
+/*CSS for text editor*/
+.challenge-task-page .ql-align-center {
+    text-align: center;
+}
+.challenge-task-page .ql-align-right {
+    text-align: right;
+}
+.challenge-task-page .ql-align-justify {
+    text-align: justify;
+}
+.challenge-task-page .ql-video {
+    width: 30%;
+    border-radius: 13px;
+}
+.challenge-task-page .desc-img {
+    width: 100%;
+    border-radius: 13px;
+}
+.challenge-task-page .ql-indent-1 {
+    margin-left: 25px;
+}
+
+.challenge-task-page .ql-indent-2 {
+    margin-left: 50px;
+}
+
+.challenge-task-page .ql-indent-3 {
+    margin-left: 75px;
+}
+
+.challenge-task-page .ql-indent-4 {
+    margin-left: 100px;
+}
+
+.challenge-task-page .ql-indent-5 {
+    margin-left: 125px;
+}
+
+.challenge-task-page .ql-indent-6 {
+    margin-left: 150px;
+}
+.challenge-task-page .ql-indent-7 {
+    margin-left: 175px;
+}
+.challenge-task-page .ql-indent-8 {
+    margin-left: 200px;
+}
 
 .challenge-task-page {
     align-items: center;
@@ -95,7 +142,7 @@
     color: #2D4C68;
 }
 
-@media (min-device-width: 320px) and (max-device-width: 1000px) {
+@media (min-device-width: 200px) and (max-device-width: 1000px) {
     .challenge-task-page {
         align-items: normal;
     }

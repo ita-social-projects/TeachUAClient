@@ -163,7 +163,7 @@ const EditTask = () => {
                     name="headerText"
                     value={task.headerText}
                 >
-                    <TextArea />
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
