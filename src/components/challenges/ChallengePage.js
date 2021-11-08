@@ -62,7 +62,7 @@ const ChallengePage = () => {
                     className="challenge-not-found"
                     status="404"
                     title="404"
-                    subTitle="Челендж який ви намагаєтесь відкрити не існує"
+                    subTitle="Челендж який ви намагаєтесь відкрити не існує або у вас немає до нього доступу"
                 />}
         </Layout>
     );

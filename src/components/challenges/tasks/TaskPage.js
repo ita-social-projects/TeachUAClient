@@ -40,7 +40,7 @@ const TaskPage = () => {
                     className="task-not-found"
                     status="404"
                     title="404"
-                    subTitle="Завдання яке ви намагаєтесь відкрити не існує"
+                    subTitle="Завдання яке ви намагаєтесь відкрити не існує або у вас немає до нього доступу"
                 />}
 
         </Layout>
