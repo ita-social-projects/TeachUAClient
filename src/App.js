@@ -26,7 +26,7 @@ import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
-import ChallengePage from "./components/challengePage/ChallengePage";
+import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
@@ -34,10 +34,12 @@ import MarathonPage from "./components/marathonPage/MarathonPage";
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
-import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
-import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
-import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
+// import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
+// import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
+// import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
+import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
+import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 
 const {Content} = Layout;
 
@@ -66,6 +68,12 @@ function App() {
                             <Content className="global-content">
                                 <Switch>
                                     <Route path="/admin/banners" exact component={BannerItemsTable}/>
+                                    <Route path="/admin/challenge/task/:id" exact component={EditTask}/>
+                                    <Route path="/admin/challenge/:id" exact component={EditChallenge}/>
+                                    <Route path="/admin/addTask" exact component={AddTask}/>
+                                    <Route path="/admin/tasks" exact component={TasksTable}/>
+                                    <Route path="/admin/addChallenge" exact component={AddChallenge}/>
+                                    <Route path="/admin/challenges" exact component={ChallengesTable}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
