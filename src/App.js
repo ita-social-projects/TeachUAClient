@@ -26,17 +26,21 @@ import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
-import ChallengePage from "./components/challengePage/ChallengePage";
-import MarathonRegistrationPage  from "./components/marathonPage/MarathonRegistrationPage";
+import ChallengePage from "./components/challenges/ChallengePage";
+import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import {PageContext} from "./context/PageContext";
 import MarathonPage from "./components/marathonPage/MarathonPage";
-
+import RegistrationPage from "./components/challenges/RegistrationPage";
+import TaskPage from "./components/challenges/tasks/TaskPage";
+import AddChallenge from "./components/admin/challenge/AddChallenge";
+import EditChallenge from "./components/admin/challenge/EditChallenge";
+import AddTask from "./components/admin/task/AddTask";
+import TasksTable from "./components/admin/task/TasksTable";
+import ChallengesTable from "./components/admin/challenge/ChallengesTable";
+import EditTask from "./components/admin/task/EditTask";
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
-import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
-import RegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
-import TaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 
@@ -59,13 +63,19 @@ function App() {
         <Layout className="layout">
             <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
-                <ScrollToTop />
+                <ScrollToTop/>
                 <PageContext.Provider value={pageProvider}>
                     <SearchContext.Provider value={clubProvider}>
                         <HeaderComponent/>
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
+                                    <Route path="/admin/challenge/task/:id" exact component={EditTask}/>
+                                    <Route path="/admin/challenge/:id" exact component={EditChallenge}/>
+                                    <Route path="/admin/addTask" exact component={AddTask}/>
+                                    <Route path="/admin/tasks" exact component={TasksTable}/>
+                                    <Route path="/admin/addChallenge" exact component={AddChallenge}/>
+                                    <Route path="/admin/challenges" exact component={ChallengesTable}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
@@ -94,9 +104,10 @@ function App() {
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
-                                    <Route path="/challengeUA" exact component={TeachUAChallenge}/>
-                                    <Route path="/challengeUA/registration" exact component={RegistrationPage}/>
-                                    <Route path="/challengeUA/task/:pathUrl" exact component={TaskPage}/>
+                                    <Route path="/challenge/registration/:challengeId" exact
+                                           component={RegistrationPage}/>
+                                    <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
+                                    <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>
