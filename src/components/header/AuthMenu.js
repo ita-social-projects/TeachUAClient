@@ -88,6 +88,8 @@ const AuthMenu = () => {
                     { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
                         <SubMenu title="Адміністрування" >
                             <Menu.Item><Link to="/admin/banners">Банер</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/tasks">Завдання</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
