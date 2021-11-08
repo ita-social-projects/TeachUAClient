@@ -41,6 +41,7 @@ import EditTask from "./components/admin/task/EditTask";
 import ResetPasswordModal from "./components/restorePassword/passwordResetModal";
 import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/MarathonTaskPage";
 import ScrollToTop from "./components/ScrollToTop";
+import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 
@@ -70,6 +71,7 @@ function App() {
                         <Layout>
                             <Content className="global-content">
                                 <Switch>
+                                    <Route path="/admin/banners" exact component={BannerItemsTable}/>
                                     <Route path="/admin/challenge/task/:id" exact component={EditTask}/>
                                     <Route path="/admin/challenge/:id" exact component={EditChallenge}/>
                                     <Route path="/admin/addTask" exact component={AddTask}/>
