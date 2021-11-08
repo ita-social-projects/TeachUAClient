@@ -19,6 +19,7 @@ const AuthMenu = () => {
 
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
+    const [showAddChallenge, setShowAddChallenge] = useState(false);
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
@@ -85,22 +86,24 @@ const AuthMenu = () => {
                     <Menu.Item><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
                     <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
-                    { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
-                        <SubMenu title="Адміністрування" >
-                            <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
-                            <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
-                                Експортувати дані</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
-                        </SubMenu >
-                        :""}
+                { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
+                    <SubMenu title="Адміністрування" >
+                        <Menu.Item><Link to="/admin/tasks">Завдання</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
+                        <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
+                            Експортувати дані</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
+                        <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+                    </SubMenu >
+                   :""}
                 </Menu >
             )
         } else {
