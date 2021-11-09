@@ -252,7 +252,9 @@ const UserEditInput = (
                                pattern: /^[^-/"`~!@#$%^&*()_+={}\[\]|\\\s:;“’'<,>.?๐฿]*$/,
                                message: 'Телефон не може містити спеціальні символи',
                            }]}>
-                <Input addonBefore={prefixSelector}/>
+                <Input
+                    placeholder="(---) --- -- --"
+                    addonBefore={prefixSelector}/>
             </Form.Item>
 
 

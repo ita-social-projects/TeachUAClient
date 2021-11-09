@@ -4,6 +4,7 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import './сss/Registration.less';
 
 
+
 // const RegistrationInput = ({disabledButton}) => {
 const RegistrationInput = () => {
 
@@ -139,6 +140,7 @@ const RegistrationInput = () => {
                     <Form.Item name="phone"
                                className="registration-input"
                                label="Телефон"
+                               placeholder="(___) ___ __ __"
                                hasFeedback
                                rules={[{
                                    required: true,
@@ -166,7 +168,8 @@ const RegistrationInput = () => {
                                        message: 'Телефон не може містити спеціальні символи',
                                    }]}>
                         <Input className="registration-box"
-                               placeholder="(___) ___ __ __"
+                               data-mask="999-999-99-99"
+                               placeholder="(---) --- -- --"
                                prefix='+38'
                                suffix={<PhoneOutlined className="phone-icon"/>}/>
                     </Form.Item>
