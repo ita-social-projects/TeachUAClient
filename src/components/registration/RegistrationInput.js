@@ -5,6 +5,7 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import './сss/Registration.less';
 
 
+
 // const RegistrationInput = ({disabledButton}) => {
 const RegistrationInput = () => {
 
@@ -45,7 +46,7 @@ const RegistrationInput = () => {
 
         if (registerForm.lastName.length > 1
             && registerForm.firstName.length > 1
-            && registerForm.phone.length === 9
+            && registerForm.phone.length === 10
             && registerForm.email.length > 5
             && registerForm.password.length > 7
             && registerForm.confirm.length > 7) {
@@ -141,6 +142,7 @@ const RegistrationInput = () => {
                     <Form.Item name="phone"
                                className="registration-input"
                                label="Телефон"
+                               placeholder="(___) ___ __ __"
                                hasFeedback
                                rules={[{
                                    required: true,
@@ -158,7 +160,8 @@ const RegistrationInput = () => {
                                        message: 'Телефон не може містити пробіли',
                                    },
                                    {
-                                       pattern: /^.{9}$/,
+                                       required : false,
+                                       pattern: /^.{10}$/,
                                        message: "Телефон не відповідає вказаному формату",
                                    },
                                    {
@@ -167,8 +170,9 @@ const RegistrationInput = () => {
                                        message: 'Телефон не може містити спеціальні символи',
                                    }]}>
                         <Input className="registration-box"
-                               placeholder="__________"
-                               prefix='+380'
+                               data-mask="999-999-99-99"
+                               placeholder="(---) --- -- --"
+                               prefix='+38'
                                suffix={<PhoneOutlined className="phone-icon"/>}/>
                     </Form.Item>
                     <Form.Item name="email"
