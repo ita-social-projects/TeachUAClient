@@ -99,7 +99,6 @@ function App() {
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                     <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
-                                    <Route path="/challenge" exact component={ChallengePage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
                                     <Route path="/about" exact component={PreviousAboutProject}/>
                                     <Route path="/test/about" exact component={AboutProject}/>
