@@ -12,7 +12,6 @@ export const createFeedback = async (text, rate, userId, clubId) => {
         text: text,
         rate: rate,
         userId: userId,
-        userName: "name",
         clubId: clubId
     }).then((response) => {
         return response.data

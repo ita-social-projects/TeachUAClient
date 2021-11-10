@@ -1,6 +1,6 @@
 import { Layout, Result} from "antd";
 import React, {useEffect, useState} from "react";
-import {useParams} from 'react-router';
+import {useParams} from 'react-router-dom';
 import CenterPageHeader from "./header/CenterPageHeader";
 import CenterPageSider from "./sider/CenterPageSider";
 import {searchParameters} from "../../context/SearchContext";
