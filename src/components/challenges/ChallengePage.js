@@ -54,7 +54,7 @@ const ChallengePage = () => {
                         </Link>
                     </div>}
                     {
-                        (challenge.tasks.length !== 0 && challenge.tasks)  &&
+                        (challenge.tasks && challenge.tasks.length !== 0)  &&
                         <ChallengeCarousel challenge={challenge}/>
                     }
                 </div>)
