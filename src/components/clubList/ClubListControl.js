@@ -30,11 +30,9 @@ const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirecti
                     <span className="control-sort-option"
                           onClick={() => setSortBy('name')}
                           style={{color: sortBy === 'name' && '#FA8C16'}}>за алфавітом</span>
-                    {!centerIsChecked &&
-                        <span className="control-sort-option"
-                              onClick={() => setSortBy('rating')}
-                              style={{color: sortBy === 'rating' && '#FA8C16'}}>за рейтингом</span>
-                    }
+                    <span className="control-sort-option"
+                          onClick={() => setSortBy('rating')}
+                          style={{color: sortBy === 'rating' && '#FA8C16'}}>за рейтингом</span>
                     <div className="control-sort-arrows">
                         <ArrowUpOutlined className="control-sort-arrow"
                                          style={{color: sortDirection === 'desc' && '#FFC069'}}
