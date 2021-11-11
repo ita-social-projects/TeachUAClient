@@ -58,8 +58,8 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
                             rules={[
                                 {
                                     required: true,
-                                    max: 100,
-                                    message: "Поле довжиною 0-100 символів",
+                                    max: 300,
+                                    message: "Поле довжиною 0-300 символів",
                                 },
                             ]}
                         >
