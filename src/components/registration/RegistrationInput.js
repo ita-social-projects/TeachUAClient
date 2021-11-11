@@ -73,7 +73,7 @@ const RegistrationInput = () => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^-ЁёЪъЫыЭэ]/,
+                                   pattern: /^[^ЁёЪъЫыЭэ]/,
                                    message: 'Прізвище не може містити російські літери'
                                },
                                {
@@ -113,7 +113,7 @@ const RegistrationInput = () => {
                                },
                                {
                                    required: false,
-                                   pattern: /^[^-ЁёЪъЫыЭэ]/,
+                                   pattern: /^[^ЁёЪъЫыЭэ]/,
                                    message: "Ім`я не може містити російські літери"
                                },
                                {
