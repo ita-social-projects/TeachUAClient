@@ -35,16 +35,15 @@ const AddCenter = ({isShowing, setShowing}) => {
             setClubs(response)
             response.map(club => (
                 club.locations.map(location => {
-                    console.log(location)
                     locations.push({
                         id: location.id,
                         name: location.name,
-                        cityName: location.city.name,
+                        cityName: location.city?.name,
                         districtName: location.district?.name,
                         stationName: location.station?.name,
                         address: location.address,
-                        latitude: location.latitude,
-                        longitude: location.longitude,
+                        latitude: location?.latitude,
+                        longitude: location?.longitude,
                         phone: location.phone
                     });
                 })
