@@ -116,14 +116,13 @@ const ClubList = ({
     }
 
     useEffect(() => {
-        console.log("6+3");
         getData(currentPage);
     }, [advancedSearch, sortBy, sortDirection, isCenterChecked]);
 
     const onPageChange = (page) => {
-        console.log("OnPageChange");
         setCurrentPage(page - 1);
         getData(page - 1);
+        window.scrollTo(0, 0);
     };
 
     const onClubClick = (club) => {
