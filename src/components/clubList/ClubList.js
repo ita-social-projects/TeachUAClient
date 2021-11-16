@@ -52,19 +52,12 @@ const ClubList = ({
         let checkUndefPage = page === undefined ? 0 : page;
         if(advancedSearch && showHideMenu){
 
-            console.log("6+1");
             setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
             } else if (isCenterChecked!=undefined){
-                console.log("Params:");
-                console.log("Field Params:");
-                console.log(params);
-                console.log("CheckUndef:"+checkUndefPage);
-                console.log("SortBy: "+sortBy);
-                console.log("SortDirection: "+sortDirection);
                 getClubsByAdvancedSearch(
                     params,
                     checkUndefPage,
@@ -72,8 +65,6 @@ const ClubList = ({
                     sortDirection
                 ).then((response) => {
                     setClubs(response);
-                    console.log("Response");
-                    console.log(response);
                 });
             }
         } else if (!advancedSearch){
@@ -116,12 +107,10 @@ const ClubList = ({
     }
 
     useEffect(() => {
-        console.log("6+3");
         getData(currentPage);
     }, [advancedSearch, sortBy, sortDirection, isCenterChecked]);
 
     const onPageChange = (page) => {
-        console.log("OnPageChange");
         setCurrentPage(page - 1);
         getData(page - 1);
     };

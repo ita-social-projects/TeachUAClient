@@ -39,7 +39,6 @@ const ClubListSider = ({
         }
         getAllCategories().then((response) => setCategories(response));
         getAllCities().then((response) => setCities(response));
-        console.log("FromCategoryUseEffect");
         getData();
     }, [cityName]);
 

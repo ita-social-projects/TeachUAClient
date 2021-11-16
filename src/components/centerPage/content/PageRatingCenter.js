@@ -5,10 +5,7 @@ import {Rate} from "antd";
 
 const PageRatingCenter = ({rating, count}) => {
     let feedback;
-    switch (count) {
-        case 0 :
-            feedback = "відгуків"
-            break;
+    switch (count%10) {
         case 1 :
             feedback = "відгук"
             break;
