@@ -27,17 +27,17 @@ const ChallengePage = () => {
         }
     });
 
-    const {challengeId} = useParams();
+    const params = useParams();
 
     useEffect(() => {
-        getChallengeProfile(challengeId).then(response => {
+        getChallengeProfile(params.challengeId).then(response => {
             if (response.status > 400) {
                 setChallenge(undefined);
             } else {
                 setChallenge(response)
             }
         });
-    }, [challengeId]);
+    }, [params.challengeId]);
 
     return (
         <Layout className="global-padding challenge-page">
@@ -49,7 +49,7 @@ const ChallengePage = () => {
                     <ChallengeDescription challenge={challenge}/>
                     {challenge.registrationLink &&
                     <div className="button-div">
-                        <Link to={"/challenge/registration/" + challengeId}>
+                        <Link to={"/challenge/registration/" + params.challengeId}>
                             <Button className="details-button">Зареєструватись</Button>
                         </Link>
                     </div>}
