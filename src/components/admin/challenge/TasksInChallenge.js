@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
 import {Link} from "react-router-dom";
-import {Table} from "antd";
+import {Table, Tooltip} from "antd";
 import {useParams} from "react-router";
+import moment from "moment";
 
 const TasksInChallenge = () => {
     const [taskPreview, setTaskPreview] = useState();
@@ -40,11 +41,25 @@ const TasksInChallenge = () => {
             title: 'Заголовок',
             dataIndex: 'headerText',
             width: '35%',
+            onCell: () => {
+                return {
+                    style: {
+                        whiteSpace: 'nowrap',
+                        maxWidth: 150,
+                    }
+                }
+            },
+            render: (text) => (
+                <Tooltip title={text}>
+                    <div style={{textOverflow: 'ellipsis', overflow: 'hidden'}}>{text}</div>
+                </Tooltip>
+            )
         },
         {
-            title: 'startDate',
+            title: 'Дата початку',
             dataIndex: 'startDate',
             width: '35%',
+            render: (text)=>moment(text).format('YYYY-MM-DD')
         }
     ];
 
