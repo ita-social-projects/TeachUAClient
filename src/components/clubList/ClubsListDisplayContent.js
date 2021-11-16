@@ -20,7 +20,6 @@ const ClubsListDisplayContent = ({
     const [clickedClub, setClickedClub] = useState(null);
 
     const onClubClick = (club) => {
-        console.log(club);
         setClickedClub(club);
         setClubInfoVisible(true);
     };
