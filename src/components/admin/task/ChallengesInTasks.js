@@ -24,9 +24,9 @@ const ChallengesInTasks = () => {
             width: '5%',
         },
         {
-            title: 'sortNumber',
+            title: 'Порядковий номер',
             dataIndex: 'sortNumber',
-            width: '5%',
+            width: '15%',
         },
         {
             title: 'Назва',

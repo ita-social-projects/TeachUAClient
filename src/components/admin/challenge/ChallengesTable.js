@@ -1,22 +1,28 @@
 import React, {useEffect, useState} from "react";
-import {Button, Form, Space, Popconfirm, Table, message} from "antd";
-import EditableTable from "../../EditableTable";
+import {Link} from "react-router-dom";
+
+import {
+    Button,
+    Form,
+    Popconfirm,
+    message,
+    Typography
+} from "antd";
+
 import {
     deleteChallenge,
     getAllChallenges,
-    getChallengeById,
-    updateChallenge,
     updateChallengePreview
 } from "../../../service/ChallengeService";
-import {Link} from "react-router-dom";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
+import EditableTable from "../../EditableTable";
+const { Title } = Typography;
 
 
 const ChallengesTable = () => {
     const [form] = Form.useForm();
     const [challenges, setChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [challengeNotFound, setChallengeNotFound] = useState(false);
 
     const getData = () => {
         getAllChallenges().then(response => {
@@ -77,15 +83,15 @@ const ChallengesTable = () => {
             render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>
         },
         {
-            title: 'sortNumber',
+            title: 'Порядковий номер',
             dataIndex: 'sortNumber',
-            width: '5%',
+            width: '10%',
             editable: false,
         },
         {
             title: 'Назва',
             dataIndex: 'name',
-            width: '35%',
+            width: '30%',
             editable: true,
             render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.name}</Link>
         },
@@ -105,6 +111,15 @@ const ChallengesTable = () => {
                     Додати челендж
                 </Link>
             </Button>
+            <Link
+                to="/admin/tasks"
+                className="back-btn"
+            >
+                <Button className="flooded-button">
+                    До списку завдань
+                </Button>
+            </Link>
+            <Title level={3}>Челенджі</Title>
             <EditableTable
                 bordered
                 className="city-table"

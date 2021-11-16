@@ -39,7 +39,6 @@ export const createChallenge = async (data) => {
         })
         .then((response) => {
             return response.data;
-            console.log(response.data);
         })
         .catch((error) => {
             return error.response.data;
@@ -64,7 +63,6 @@ export const getChallengeById = async (id) => {
 };
 
 export const updateChallenge = async (data, id) => {
-    console.log(data);
     return await fetchRequest
         .put(BASE_URL + "/api/challenge/" + id, {
             name: data.name,
@@ -73,7 +71,6 @@ export const updateChallenge = async (data, id) => {
             picture: data.picture,
             sortNumber: data.sortNumber,
             isActive: data.isActive,
-            tasks: data.tasks
         })
         .then((response) => {
             return response.data;
@@ -84,7 +81,6 @@ export const updateChallenge = async (data, id) => {
 };
 
 export const updateChallengePreview = async (data, id) => {
-    console.log(data, id);
     return await fetchRequest
         .patch(BASE_URL + "/api/challenge/" + id, {
             name: data.name,
