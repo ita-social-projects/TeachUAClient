@@ -37,7 +37,7 @@ const ChallengePage = () => {
                 setChallenge(response)
             }
         });
-    }, [params.challengeId]);
+    }, []);
 
     return (
         <Layout className="global-padding challenge-page">

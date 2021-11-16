@@ -7,7 +7,7 @@ import {Layout, Result} from "antd";
 import "../css/ChallengeTaskPage.css"
 
 const TaskPage = () => {
-    const {taskId} = useParams();
+    const params = useParams();
     const [task, setTask] = useState({
         id: 0,
         name: "",
@@ -17,7 +17,7 @@ const TaskPage = () => {
     });
 
     useEffect(() => {
-        getTaskProfile(taskId).then((response) => {
+        getTaskProfile(params.taskId).then((response) => {
             if (response.status > 400) {
                 setTask(undefined);
             } else {

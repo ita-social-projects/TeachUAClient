@@ -25,10 +25,10 @@ const RegistrationPage = () => {
         }
     });
 
-    const {challengeId} = useParams();
+    const params = useParams();
 
     useEffect(() => {
-        getChallengeProfile(challengeId).then(response => {
+        getChallengeProfile(params.challengeId).then(response => {
             if (response.status === 404) {
                 setChallenge(undefined);
             } else {
@@ -42,7 +42,7 @@ const RegistrationPage = () => {
             {challenge && challenge.registrationLink  ?
                 <div><AboutHeader/>
                     <div className="button-alain">
-                        <Link to={"/challenge/" + challengeId}><Button className="details-back"><ArrowLeftOutlined/>Назад
+                        <Link to={"/challenge/" + params.challengeId}><Button className="details-back"><ArrowLeftOutlined/>Назад
                             до
                             челенджу</Button></Link>
                     </div>
