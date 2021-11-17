@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router";
+import {useLocation, useParams} from "react-router-dom";
 import {getTaskProfile} from "../../../service/ChallengeService";
 import {BrowserRouter} from "react-router-dom";
 import TaskContent from "./TaskContent";
