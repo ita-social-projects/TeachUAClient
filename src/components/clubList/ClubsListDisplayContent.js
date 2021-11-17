@@ -7,7 +7,6 @@ import ClubListControl from "./ClubListControl";
 import ClubListEmptySearch from "./ClubListEmptySearch";
 import {Layout, Pagination} from "antd";
 
-import {PageContext} from "../../context/PageContext";
 
 const {Content} = Layout;
 
@@ -20,7 +19,6 @@ const ClubsListDisplayContent = ({
     const [clickedClub, setClickedClub] = useState(null);
 
     const onClubClick = (club) => {
-        console.log(club);
         setClickedClub(club);
         setClubInfoVisible(true);
     };
