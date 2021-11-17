@@ -5,7 +5,7 @@ import SocialInfo from "../SocialInfo";
 import {getChallengeProfile} from "../../service/ChallengeService";
 import "./css/ChallengePage.css";
 import ChallengeDescription from "./ChallengeDescription";
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 import ChallengeBanner from "./ChallengeBanner";
 import ChallengeCarousel from "./ChallengeCarousel";
@@ -37,7 +37,7 @@ const ChallengePage = () => {
                 setChallenge(response)
             }
         });
-    }, [params]);
+    }, []);
 
     return (
         <Layout className="global-padding challenge-page">

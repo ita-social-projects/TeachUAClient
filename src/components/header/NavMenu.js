@@ -64,8 +64,6 @@ const NavMenu = () => {
                 <Menu.Item key="clubs">
                     <Link to="/clubs" onClick={() => setCurrentPage(0)}><ApartmentOutlined className="icon" />Гуртки</Link>
                 </Menu.Item>
-
-                 
                 <SubMenu id = {"challenge_ONE"}  icon={<CrownOutlined />} title="Челендж" className="sub1" expandIcon={<CaretDownOutlined />} triggerSubMenuAction = {'click'} forceSubMenuRender = {true} >
                     {challenges.map((challenge) =>
                         <Menu.Item key={challenge.id}>
