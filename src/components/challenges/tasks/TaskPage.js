@@ -21,7 +21,8 @@ const TaskPage = () => {
             if (response.status > 400) {
                 setTask(undefined);
             } else {
-                setTask(response)
+                window.scrollTo(0, 0);
+                setTask(response);
             }
         });
     }, []);
@@ -31,9 +32,7 @@ const TaskPage = () => {
         <Layout className="challenge-task-page">
             {task ?
                 <BrowserRouter>
-                    <ScrollToTop>
-                        <TaskContent task={task}/>
-                    </ScrollToTop>
+                    <TaskContent task={task}/>
                 </BrowserRouter>
                 :
                 <Result
@@ -46,13 +45,5 @@ const TaskPage = () => {
         </Layout>
     );
 }
-
-const ScrollToTop = ({children}) => {
-    const {pathname} = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-    return children || null;
-};
 
 export default TaskPage;
