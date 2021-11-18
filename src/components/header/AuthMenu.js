@@ -12,6 +12,7 @@ import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 import { getUserById } from "../../service/UserService";
 import './css/authMenu.css';
 import AddCenter from "../addCenter/AddCenter";
+import {updateCentersRating, updateClubsRating} from "../../service/RatingService";
 
 const { SubMenu } = Menu;
 
@@ -104,6 +105,10 @@ const AuthMenu = () => {
                                 Експортувати дані</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+                            <Menu.Item onClick={() => {
+                                updateClubsRating().then();
+                                updateCentersRating().then();
+                            }}>Перерахувати рейтинги</Menu.Item>
                         </SubMenu >
                         :""}
                 </Menu >
