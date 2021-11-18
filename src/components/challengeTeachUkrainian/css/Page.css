@@ -85,6 +85,19 @@
     text-decoration: underline;
 }
 
+table, th, td {
+    border: 1px solid black;
+    border-color: #2D4C68;
+    border-collapse: collapse;
+    padding: 7px;
+    vertical-align: top;
+}
+
+a {
+    word-wrap: break-word;
+    color: #58a6ff;
+}
+
 @media (max-width: 1200px) {
     .marathon-page .details-button {
         margin-left: 0px;
@@ -107,6 +120,7 @@
         width: 100%;
     }
 }
+
 
 @media (min-width: 320px) and (max-width: 824px) {
     .marathon-page .details-button {
