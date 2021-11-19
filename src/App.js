@@ -44,6 +44,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
+import NotFoundPage from "./components/NotFoundPage"
 
 const {Content} = Layout;
 
@@ -109,6 +110,7 @@ function App() {
                                            component={RegistrationPage}/>
                                     <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
                                     <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
+                                    <Route path="*" component={NotFoundPage}/>
                                     <Route path="/" component={MainComponent}/>
                                 </Switch>
                             </Content>
