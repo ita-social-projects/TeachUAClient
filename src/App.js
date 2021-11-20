@@ -110,8 +110,8 @@ function App() {
                                            component={RegistrationPage}/>
                                     <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
                                     <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
-                                    <Route path="*" component={NotFoundPage}/>
-                                    <Route path="/" component={MainComponent}/>
+                                    <Route path="/" exact component={MainComponent}/>
+                                    <Route path="*" exact component={NotFoundPage}/>
                                 </Switch>
                             </Content>
                         </Layout>
