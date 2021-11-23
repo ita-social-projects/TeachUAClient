@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useLocation } from 'react-router-dom';
 import {Button, Layout, Result} from "antd";
 import AboutHeader from "../mainPage/MainHeader";
 import SocialInfo from "../SocialInfo";
@@ -26,18 +27,22 @@ const ChallengePage = () => {
             lastName: ""
         }
     });
-
+    const location = useLocation();
     const params = useParams();
 
-    useEffect(() => {
+    const getData = () => {
         getChallengeProfile(params.challengeId).then(response => {
             if (response.status > 400) {
                 setChallenge(undefined);
             } else {
-                setChallenge(response)
+                setChallenge(response);
             }
         });
-    }, []);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [location]);
 
     return (
         <Layout className="global-padding challenge-page">
