@@ -64,7 +64,7 @@ function App() {
     return (
         <Layout className="layout">
             <div className="behind-header"/>
-            <Router basename={process.env.PUBLIC_URL} forceRefresh={true}>
+            <Router basename={process.env.PUBLIC_URL}>
                 <ScrollToTop/>
                 <PageContext.Provider value={pageProvider}>
                     <SearchContext.Provider value={clubProvider}>
