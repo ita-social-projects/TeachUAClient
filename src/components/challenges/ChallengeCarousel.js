@@ -84,7 +84,7 @@ const ChallengeCarousel = ({challenge}) => {
                                     </div>
                                 </div>
                             }
-                            link={{pathname: "/challenge/task/" + task.id}}
+                            link={{pathname: "/challenges/task/" + task.id}}
                             buttonText="Переглянути"
                         />
                     ))}

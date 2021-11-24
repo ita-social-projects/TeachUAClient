@@ -92,7 +92,7 @@ const AddTask = () => {
                 </Button>
             </Link>
             <Link
-                to={"/challenge/task/" + taskId}
+                to={"/challenges/task/" + taskId}
                 className="back-btn"
             >
                 <Button disabled={!taskId} className="flooded-button">

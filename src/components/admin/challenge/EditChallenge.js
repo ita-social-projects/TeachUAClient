@@ -88,7 +88,7 @@ const EditChallenge = (props) => {
                 </Button>
             </Link>
             <Link
-                to={"/challenge/" + challengeId.id}
+                to={"/challenges/" + challengeId.id}
                 className="back-btn"
             >
                 <Button className="flooded-button">

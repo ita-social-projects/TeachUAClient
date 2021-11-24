@@ -44,7 +44,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
-import NotFoundPage from "./components/NotFoundPage"
+import NotFoundPage from "./components/NotFoundPage";
+import HardChallengePage from "./components/challengePage/ChallengePage";
+import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
+import HardRegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
+import HardTaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
+
 
 const {Content} = Layout;
 
@@ -98,18 +103,22 @@ function App() {
                                     <Route path="/verify" exact component={VerifyPage}/>
                                     <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
-                                    <Route path="/marathon" exact component={MarathonPage}/>
-                                    <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
-                                    <Route path="/about" exact component={PreviousAboutProject}/>
-                                    <Route path="/test/about" exact component={AboutProject}/>
+                                    {/*<Route path="/about" exact component={PreviousAboutProject}/>*/}
+                                    <Route path="/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
-                                    <Route path="/marathon/task/:pathUrl" component={MarathonTaskPage}/>
-                                    <Route path="/challenge/registration/:challengeId" exact
+                                    <Route path="/challenges/registration/:challengeId" exact
                                            component={RegistrationPage}/>
-                                    <Route path="/challenge/:challengeId" exact component={ChallengePage}/>
-                                    <Route path="/challenge/task/:taskId" exact component={TaskPage}/>
+                                    <Route path="/challenges/:challengeId" exact component={ChallengePage}/>
+                                    <Route path="/challenges/task/:taskId" exact component={TaskPage}/>
+                                    <Route path="/marathon" exact component={MarathonPage}/>
+                                    <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
+                                    <Route path="/marathon/task/:pathUrl" exact component={MarathonTaskPage}/>
+                                    <Route path="/challenge" exact component={HardChallengePage}/>
+                                    <Route path="/challengeUA" exact component={TeachUAChallenge}/>
+                                    <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
+                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
                                 </Switch>

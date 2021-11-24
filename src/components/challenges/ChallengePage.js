@@ -54,7 +54,7 @@ const ChallengePage = () => {
                     <ChallengeDescription challenge={challenge}/>
                     {challenge.registrationLink &&
                     <div className="button-div">
-                        <Link to={"/challenge/registration/" + params.challengeId}>
+                        <Link to={"/challenges/registration/" + params.challengeId}>
                             <Button className="details-button">Зареєструватись</Button>
                         </Link>
                     </div>}

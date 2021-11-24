@@ -62,7 +62,7 @@ const AddChallenge = () => {
                 </Button>
             </Link>
             <Link
-                to={"/challenge/" + challengeId}
+                to={"/challenges/" + challengeId}
                 className="back-btn"
             >
                 <Button className="flooded-button" disabled={!challengeId}>

@@ -42,7 +42,7 @@ const RegistrationPage = () => {
             {challenge && challenge.registrationLink  ?
                 <div><AboutHeader/>
                     <div className="button-alain">
-                        <Link to={"/challenge/" + params.challengeId}><Button className="details-back"><ArrowLeftOutlined/>Назад
+                        <Link to={"/challenges/" + params.challengeId}><Button className="details-back"><ArrowLeftOutlined/>Назад
                             до
                             челенджу</Button></Link>
                     </div>
