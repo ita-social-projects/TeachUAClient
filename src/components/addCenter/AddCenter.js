@@ -31,11 +31,9 @@ const AddCenter = ({isShowing, setShowing}) => {
 
     useEffect(() => {
         getAllClubsByUserId(getUserId()).then(response => {
-            console.log(response);
             setClubs(response)
             response.map(club => (
                 club.locations.map(location => {
-                    console.log(location)
                     locations.push({
                         id: location.id,
                         name: location.name,

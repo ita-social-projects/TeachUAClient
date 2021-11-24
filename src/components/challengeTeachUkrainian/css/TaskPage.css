@@ -2,12 +2,14 @@
 
     .innerHTML-from-js  a{
         color: #58a6ff;
+        word-wrap: break-word;
         text-align: unset;
     }
 }
 
 @media (min-device-width: 1050px) {
      .innerHTML-from-js a {
+         word-wrap: break-word;
         color: #58a6ff;
     }
 }
@@ -189,10 +191,12 @@ and (max-device-width: 1000px) {
     }
 
      .innerHTML-from-js a {
+         word-wrap: break-word;
         color: #58a6ff;
     }
 
    .innerHTML-from-js a {
+        word-wrap: break-word;
         color: #58a6ff;
     }
 

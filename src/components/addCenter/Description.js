@@ -1,13 +1,13 @@
-import {Form, Input, Upload,Button} from 'antd';
+import {Form, Input, Upload, Button} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import EditorComponent from "../editor/EditorComponent";
-import { UPLOAD_IMAGE_URL } from "../../service/config/ApiConfig";
-import { saveContent } from "../editor/EditorConverter";
-import React, { useEffect, useRef } from 'react';
+import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
+import {saveContent} from "../editor/EditorConverter";
+import React, {useEffect, useRef} from 'react';
 import "./css/Description.css";
-import { transToEng } from '../../util/Translit';
+import {transToEng} from '../../util/Translit';
 
-const Description = ({ step, setStep, result, setResult }) => {
+const Description = ({step, setStep, result, setResult}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
@@ -27,7 +27,7 @@ const Description = ({ step, setStep, result, setResult }) => {
     useEffect(() => {
         if (result) {
             console.log(result)
-            descriptionForm.setFieldsValue({ ...result });
+            descriptionForm.setFieldsValue({...result});
         }
     }, [])
 
@@ -47,33 +47,33 @@ const Description = ({ step, setStep, result, setResult }) => {
             className="description">
             <div className="form-fields">
                 <Form.Item name="urlLogo"
-                    className="add-club-row"
-                    label="Логотип"
-                    hasFeedback>
+                           className="add-club-row"
+                           label="Логотип"
+                           hasFeedback>
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
                         accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
-                        data={{ folder: `center/${centerName}/logo` }}
-                        headers={{ contentType: 'multipart/form-data' }}
+                        data={{folder: `center/${centerName}/logo`}}
+                        headers={{contentType: 'multipart/form-data'}}
                     >
-                        <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити лого</span>
+                        <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                     </Upload>
                 </Form.Item>
                 <Form.Item name="urlBackground"
-                    className="add-club-row"
-                    label="Фото"
-                    hasFeedback>
+                           className="add-club-row"
+                           label="Фото"
+                           hasFeedback>
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
                         accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
-                        data={{ folder: `center/${centerName}/background` }}
-                        headers={{ contentType: 'multipart/form-data' }}
+                        data={{folder: `center/${centerName}/background`}}
+                        headers={{contentType: 'multipart/form-data'}}
                     >
-                        <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити фото</span>
+                        <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                     </Upload>
                 </Form.Item>
                 <Form.Item name="description"
@@ -82,12 +82,23 @@ const Description = ({ step, setStep, result, setResult }) => {
                            hasFeedback
                            rules={[{
                                required: true,
-                               pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@_`{}~^\/[\]]{40,1500}$/,
+                               pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@№_`{}~^\/[\]\\]*$/,
                                message: "Некоректний опис центру"
-                           }
+                           },
+                               {
+                                   min: 40,
+                                   max: 1500,
+                                   message: "Опис центру може містити від 40 до 1500 символів."
+                               },
+                               {
+                                   required: false,
+                                   pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                                   message: 'Опис гуртка не може містити російські літери'
+                               }
                            ]}
                 >
-                    <Input.TextArea className="editor-textarea" style={{height: 200}} placeholder="Додайте опис центру"/>
+                    <Input.TextArea className="editor-textarea" style={{height: 200}}
+                                    placeholder="Додайте опис центру"/>
                 </Form.Item>
             </div>
             <div className="btn">

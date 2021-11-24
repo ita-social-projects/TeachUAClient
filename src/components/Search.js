@@ -101,7 +101,6 @@ class Search extends React.Component {
 
 
             getClubsByParameters(searchParameters).then((response) => {
-                console.log('111: ', this.context)
                 this.context.setClubs(response);
             });
         }

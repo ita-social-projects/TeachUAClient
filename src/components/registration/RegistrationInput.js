@@ -45,7 +45,7 @@ const RegistrationInput = () => {
 
         if (registerForm.lastName.length > 1
             && registerForm.firstName.length > 1
-            && registerForm.phone.length === 9
+            && registerForm.phone.length === 10
             && registerForm.email.length > 5
             && registerForm.password.length > 7
             && registerForm.confirm.length > 7) {

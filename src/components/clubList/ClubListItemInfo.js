@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Menu, Dropdown, Button, Modal, Rate, Popconfirm } from "antd";
 import "./css/ClubInfo.css";
 import { Link } from "react-router-dom";
@@ -12,8 +12,13 @@ import { getShortContent } from "../editor/EditorConverter";
 import { deleteClubById } from "../../service/ClubService";
 import EditClubModal from "../editClub/EditClubModal";
 import {getUserId} from "../../service/StorageService";
+import {getFeedbackListByClubId} from "../../service/FeedbackService";
+import PageRating from "../clubPage/content/PageRating";
 
 const ClubListItemInfo = ({ visible, setVisible, club }) => {
+    const [rating,setRating] = useState(0);
+    const[count,setCount] =useState(0);
+    const  feedback = getFeedbackListByClubId(club.id);
     const images = [
         process.env.PUBLIC_URL +
             "/static/images/clubs_carousel_tmp/kids_jump.png",
@@ -23,6 +28,16 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
         process.env.PUBLIC_URL +
             "/static/images/clubs_carousel_tmp/pencils.jpg",
     ];
+
+    feedback.then((value)=>{
+        var clubRate =0;
+        for (let i = 0; i < value.length; i++) {
+            clubRate += value[i].rate;
+        }
+
+        setRating(clubRate/value.length);
+        setCount(value.length);
+    })
 
     const popupHeaderText = (
         <div>
@@ -96,8 +111,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                 </div>
                 <Tags className="categories" categories={club.categories} />
                 <div className="rating">
-                    <Rate allowHalf disabled value={club.rating} />
-                    <span className="feedback">{3} відгуків</span>
+                    <PageRating rating={rating}count={count}/>
                 </div>
                 <div className="address">
                     <EnvironmentFilled className="address-icon" />

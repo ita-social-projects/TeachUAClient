@@ -36,7 +36,6 @@ const ClubListComponent = () => {
         <Loader />
     ) : (
         <Layout>
-            {console.log({showHideMenu})}
             <ClubListHeader
                 setAdvancedSearch={setAdvancedSearch}
                 advancedSearch={advancedSearch}

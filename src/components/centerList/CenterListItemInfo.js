@@ -7,6 +7,7 @@ import ContactsInfoUtil from '../../util/ContactsInfoUtil';
 import ImageCarousel from '../ImageCarousel';
 import CenterLogo from "./CenterLogo";
 import "./css/CenterInfo.css"
+import PageRatingCenter from "../centerPage/content/PageRatingCenter";
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
@@ -32,6 +33,7 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                 </div>
                 <div className="rating">
                     <span className="feedback">{3} відгуків</span>
+                    {/*<PageRatingCenter rating={rating} count={count}*/}
                 </div>
                 <div className="address">
                     <EnvironmentFilled className="address-icon" />

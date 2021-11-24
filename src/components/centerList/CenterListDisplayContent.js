@@ -15,14 +15,9 @@ const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearc
 
     const [centerInfoVisible, setCenterInfoVisible] = useState(false);
     const [clickedCenter, setClickedCenter] = useState(null);
-
     const [localCenters, setLocalCenters ] = useState(null);
 
     useEffect(() => {
-        console.log("centers in centerList : ");
-        console.log(centers);
-        console.log("current page is: ");
-        console.log(currentPage);
         if(centers === undefined || centers === null){
             setLocalCenters([]);
         }else{
@@ -31,7 +26,6 @@ const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearc
     },[]);
 
     const onCenterClick = (center) =>{
-        console.log(center);
         setClickedCenter(center);
         setCenterInfoVisible(true);
     }
