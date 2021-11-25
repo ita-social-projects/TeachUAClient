@@ -50,11 +50,22 @@ class PageSider extends React.Component {
     render() {
         return (
             <Sider className="page-sider" width={364}>
-                <div className="address">
-                    <EnvironmentFilled
-                        className="address-icon"/>
-                    <p className="text"> {this.props.club.locations.length === 0 ? "Онлайн" : this.props.club.locations[0].address}</p>
-                </div>
+                {this.props.club.locations.length === 0 ?
+                    <div className="address">
+                        <EnvironmentFilled
+                            className="address-icon"/>
+                        <span className="text">Онлайн</span>
+                    </div>
+                    :
+                    this.props.club.locations.map(location =>
+                            <div className="address">
+                                <EnvironmentFilled className="address-icon"/>
+                                <span className="text"> {location.address}</span>
+                                <br></br>
+                            </div>
+                        )
+                }
+
                 { this.checkLocation(this.props.club.locations) &&
                     <div className="map"> 
                         <ClubLocation locations={this.props.club.locations}/>
