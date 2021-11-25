@@ -15,11 +15,13 @@ const CenterPageSider = ({center}) => {
 
         return (
             <Sider className="page-sider" width={364}>
-                <div className="address">
-                    <EnvironmentFilled
-                        className="address-icon"/>
-                    <p className="text"> {center.locations[0].address}</p>
-                </div>
+                    {center.locations.map(location =>
+                        <div className="address">
+                            <EnvironmentFilled className="address-icon" />
+                            <span className="text"> {location.address}</span>
+                            <br></br>
+                        </div>
+                    )}
                 <div className="map">
                     <MapContainer locations={center.locations}/>
                 </div>
