@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Form, Input, message, Modal, Upload} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
+import {uploadImage} from "../../../service/UploadService";
 
 /*export class PasswordUpdate extends React.Component {
 
@@ -131,6 +132,9 @@ export const PasswordUpdate = () => {
 }
 
 //}
+
+const getToken = () => localStorage.getItem("accessToken") || false;
+const token = getToken();
 
 const UserEditInput = (
     {user}) => {
@@ -280,9 +284,11 @@ const UserEditInput = (
                 <Upload
                     name="image"
                     action={UPLOAD_IMAGE_URL}
+                    // customRequest={uploadImage}
                     maxCount={1}
                     data={{folder: `user/logo/${user.id}`}}
-                    headers={{contentType: 'multipart/form-data'}}
+                    headers={{contentType: 'multipart/form-data',
+                            Authorization: "Bearer " + token}}
                     accept="image/png,image/jpeg,image/jpg,image/svg"
                     //showUploadList={false}
                     //beforeUpload={() => false}
