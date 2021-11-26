@@ -5,7 +5,7 @@ const ContactsInfoUtil = ({ label, contacts }) => {
     const contactsArray = Array.from(contacts);
 
     function validatePhone(phone) {
-        let numbers = phone.replace(/\D/g, "");
+        let numbers = (phone + "").replace(/\D/g, "");
         let result;
         switch (numbers.length) {
             case 9:
