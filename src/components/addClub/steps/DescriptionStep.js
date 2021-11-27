@@ -8,7 +8,7 @@ import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
 import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
-import {uploadImage} from "../../../service/UploadService";
+import {tokenToHeader, uploadImage} from "../../../service/UploadService";
 
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
     const [descriptionForm] = Form.useForm();
@@ -93,7 +93,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                     name="image"
                     accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
-                    headers={{ contentType: 'multipart/form-data' }}
+                    headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     showUploadList={false}
                     beforeUpload={() => false}
                 >
@@ -108,7 +108,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                     name="image"
                     accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
-                    headers={{ contentType: 'multipart/form-data' }}
+                    headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     showUploadList={false}
                     beforeUpload={() => false}
                 >

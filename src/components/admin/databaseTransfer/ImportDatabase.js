@@ -8,6 +8,7 @@ import Text from "antd/lib/typography/Text";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
 import {loadExcelToDatabase} from "../../../service/DataTransferService";
+import {tokenToHeader} from "../../../service/UploadService";
 
 
 const ImportDatabase = () => {
@@ -139,7 +140,7 @@ const ImportDatabase = () => {
                                 action={UPLOAD_EXCEL}
                                 maxCount={1}
                                 icon={<UploadOutlined/>}
-                                headers={{contentType: 'multipart/form-data'}}
+                                headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
 
                                 onChange={uploadExcel}
                             >

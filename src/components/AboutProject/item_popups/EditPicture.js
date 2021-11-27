@@ -7,7 +7,7 @@ import {deleteFromTable} from "../../../util/TableUtil";
 import {updateItemById} from "../../../service/AboutUsService";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import {uploadImage} from "../../../service/UploadService";
+import {tokenToHeader, uploadImage} from "../../../service/UploadService";
 import {deleteFile} from "../../../service/UploadService";
 
 const EditPicture = ({visible, setVisible, item}) => {
@@ -70,7 +70,7 @@ const EditPicture = ({visible, setVisible, item}) => {
                                 data={{folder: `about_us/images`}}
                                 accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                                 maxCount={1}
-                                headers={{ contentType: 'multipart/form-data' }}
+                                headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                             >
                                 <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити фото</span>
                             </Upload>

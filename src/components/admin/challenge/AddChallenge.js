@@ -7,6 +7,7 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "./Editor";
 import {Link} from "react-router-dom";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const { Title } = Typography;
 
@@ -121,7 +122,7 @@ const AddChallenge = () => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder:`challenges`}}
-                        headers={{contentType: 'multipart/form-data'}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
                     </Upload>
                 </Form.Item>

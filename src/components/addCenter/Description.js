@@ -6,6 +6,7 @@ import {saveContent} from "../editor/EditorConverter";
 import React, {useEffect, useRef} from 'react';
 import "./css/Description.css";
 import {transToEng} from '../../util/Translit';
+import {tokenToHeader} from "../../service/UploadService";
 
 const Description = ({step, setStep, result, setResult}) => {
     const [descriptionForm] = Form.useForm();
@@ -56,7 +57,7 @@ const Description = ({step, setStep, result, setResult}) => {
                         accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
                         data={{folder: `center/${centerName}/logo`}}
-                        headers={{contentType: 'multipart/form-data'}}
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                     </Upload>
@@ -71,7 +72,7 @@ const Description = ({step, setStep, result, setResult}) => {
                         accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
                         data={{folder: `center/${centerName}/background`}}
-                        headers={{contentType: 'multipart/form-data'}}
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                     </Upload>

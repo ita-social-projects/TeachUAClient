@@ -22,3 +22,8 @@ export const deleteFile = async (filePath) => {
             return error.response.data
         });
 };
+
+export const tokenToHeader = () => {
+    const token = localStorage.getItem("accessToken");
+    return "Bearer " + token;
+}
