@@ -21,10 +21,11 @@ export const updateItemById = async (data) => {
             number: null
         })
         .then((response) => {
-            return response.data;
+            return response;
         })
         .catch((error) => {
-            return "Відредагувати компонент не вдалося: " + error.response.data;
+            return error.response.data;
+            // return "Відредагувати компонент не вдалося: " + error.response.data;
         });
 };
 
