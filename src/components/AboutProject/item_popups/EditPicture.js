@@ -23,12 +23,13 @@ const EditPicture = ({visible, setVisible, item}) => {
             item.picture = values.picture.file.response;
         }
         item.text = values.text;
-        updateItemById(item).then(response => {
-            if (response.status) {
+        updateItemById(item).then((response) => {
+            if (response.status > 200) {
                 message.warning(response.message);
                 return;
+            }else {
+                message.success(`Компонент "текст з зображенням" успішно відредаговано`);
             }
-            message.success(`Компонент "текст з зображенням" успішно відредаговано`);
         });
         closePopup();
     }

@@ -17,11 +17,12 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
     const onFinish = (values) => {
         item.text = values.title;
         updateItemById(item).then(response => {
-            if (response.status) {
+            if (response.status > 200) {
                 message.warning(response.message);
                 return;
+            }else {
+                message.success(`Компонент "текст з зображенням" успішно відредаговано`);
             }
-            message.success(`Компонент "заголовок" успішно відредаговано`);
         });
         closePopup();
     }
