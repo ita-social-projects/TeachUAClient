@@ -9,6 +9,7 @@ import { getUserId } from "../../../service/StorageService";
 import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
 import {tokenToHeader, uploadImage} from "../../../service/UploadService";
+import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
     const [descriptionForm] = Form.useForm();
@@ -38,6 +39,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
     }
 
     const onFinish = (values) => {
+        console.log("ON FINISH");
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const text = result.description.replace(/(\r\n|\n|\r)/gm, "");
         const textEdit = text.replace(/"/gm, '\\"');
@@ -46,17 +48,20 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
         setResult(Object.assign(result, values));
 
         if (values.urlLogo && values.urlLogo.file) {
-            result.urlLogo = uploadImage(values.urlLogo.file, logoFolder);
+            result.urlLogo = values.urlLogo.file.response;
         }
 
         if (values.urlBackground && values.urlBackground.file) {
-            result.urlBackground = uploadImage(values.urlBackground.file, coverFolder);
+            result.urlBackground = values.urlBackground.file.response;
         }
 
         if (values.urlGallery) {
             result.urlGallery = [];
+            console.log("GALLERY: " + values.urlGallery)
             values.urlGallery.forEach((el) => {
-                result.urlGallery.push(uploadImage(el.originFileObj, galleryFolder));
+                console.log("EL: " + el.response + " " + el.file + " " + el.url)
+                console.log(el.uid + " " + el.name);
+                result.urlGallery.push(el.response);
             })
         }
         addClub(result).then(response => {
@@ -72,7 +77,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
         });
         if(!fromCenter)
         {
-         window.location.reload();
+         // window.location.reload();
         }
 
     };
@@ -91,11 +96,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback>
                 <Upload
                     name="image"
+                    action={UPLOAD_IMAGE_URL}
+                    data={{folder: `club/logos`}}
                     accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
                     headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
-                    showUploadList={false}
-                    beforeUpload={() => false}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити лого</span>
                 </Upload>
@@ -106,11 +111,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 hasFeedback>
                 <Upload
                     name="image"
+                    action={UPLOAD_IMAGE_URL}
+                    data={{folder: `club/backgrounds`}}
                     accept="image/png,image/jpeg,image/jpg,image/svg"
                     maxCount={1}
                     headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
-                    showUploadList={false}
-                    beforeUpload={() => false}
                 >
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити обкладинку</span>
                 </Upload>
