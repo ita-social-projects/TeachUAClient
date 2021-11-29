@@ -11,6 +11,7 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from './Editor';
 import TasksInChallenge from "./TasksInChallenge";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const {Title} = Typography;
 
@@ -156,7 +157,7 @@ const EditChallenge = (props) => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder: `challenges`}}
-                        headers={{contentType: 'multipart/form-data'}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>

@@ -1,6 +1,8 @@
 import { Upload, Modal } from "antd";
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
+import {tokenToHeader} from "../../service/UploadService";
+import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
 
 
 const AddClubGalery = ({ onChange }) => {
@@ -46,12 +48,16 @@ const AddClubGalery = ({ onChange }) => {
     return (
         <>
             <Upload
+                name="image"
+                action={UPLOAD_IMAGE_URL}
+                data={{folder: `club/galleries`}}
                 accept="image/png,image/jpeg,image/jpg,image/svg"
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                beforeUpload={() => false}>
+                headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
+            >
                 {fileList.length >= 5 ? null : uploadButton}
             </Upload>
 

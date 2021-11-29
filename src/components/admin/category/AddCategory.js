@@ -5,6 +5,7 @@ import {Button, Form, Input, message, Upload} from "antd";
 import {addToTable} from "../../../util/TableUtil";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const AddCategory = ({categories, setCategories, setAddCategory}) => {
 
@@ -70,7 +71,7 @@ const AddCategory = ({categories, setCategories, setAddCategory}) => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder: `categories`}}
-                        headers={{contentType: 'multipart/form-data'}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="add-category-upload"><UploadOutlined className="icon" />Завантажити</span>
                     </Upload>
                 </Form.Item>
