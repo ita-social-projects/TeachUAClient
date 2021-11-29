@@ -5,6 +5,7 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {UploadOutlined} from "@ant-design/icons";
 import "./css/AddBannerItem.css";
 import TextArea from "antd/es/input/TextArea";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const AddBannerItem = ({bannerItems, setBannerItems}) => {
     const [bannerItemForm] = Form.useForm();
@@ -114,7 +115,7 @@ const AddBannerItem = ({bannerItems, setBannerItems}) => {
                                 action={UPLOAD_IMAGE_URL}
                                 maxCount={1}
                                 data={{folder: `banners`}}
-                                headers={{contentType: 'multipart/form-data'}}>
+                                headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                             <span className="add-banner-item-upload"><UploadOutlined
                                 className="icon"/>Завантажити</span>
                         </Upload>

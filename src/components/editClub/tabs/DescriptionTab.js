@@ -8,6 +8,7 @@ import {transToEng} from "../../../util/Translit";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {addClub} from "../../../service/ClubService";
 import "../css/MainInformationTab.less"
+import {tokenToHeader} from "../../../service/UploadService";
 
 const DescriptionTab = ({setResult, result}) => {
     const [descriptionForm] = Form.useForm();
@@ -38,7 +39,7 @@ const DescriptionTab = ({setResult, result}) => {
                     action={UPLOAD_IMAGE_URL}
                     maxCount={1}
                     data={{folder: `clubs/${clubName}/logo`}}
-                    headers={{contentType: 'multipart/form-data'}}
+                    headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                 >
                     <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                 </Upload>
@@ -51,7 +52,7 @@ const DescriptionTab = ({setResult, result}) => {
                     action={UPLOAD_IMAGE_URL}
                     maxCount={1}
                     data={{folder: `clubs/${clubName}/background`}}
-                    headers={{contentType: 'multipart/form-data'}}
+                    headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                 >
                     <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                 </Upload>

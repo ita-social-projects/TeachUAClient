@@ -5,6 +5,7 @@ import {addContactType} from "../../../service/ContactTypeService";
 import "./css/AddContactType.css";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const AddContactType = ({contactTypes, setContactTypes}) => {
     const onFinish = (values) => {
@@ -46,7 +47,7 @@ const AddContactType = ({contactTypes, setContactTypes}) => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder: `contact-types`}}
-                        headers={{contentType: 'multipart/form-data'}}
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                     </Upload>

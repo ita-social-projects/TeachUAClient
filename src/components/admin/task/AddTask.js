@@ -8,6 +8,7 @@ import Editor from "../challenge/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link} from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
+import {tokenToHeader} from "../../../service/UploadService";
 const { Option } = Select;
 
 const { Title } = Typography;
@@ -129,7 +130,7 @@ const AddTask = () => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder:`tasks`}}
-                        headers={{contentType: 'multipart/form-data'}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>

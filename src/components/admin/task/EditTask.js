@@ -14,6 +14,7 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "../challenge/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -147,7 +148,7 @@ const EditTask = () => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder:`tasks`}}
-                        headers={{contentType: 'multipart/form-data'}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>
