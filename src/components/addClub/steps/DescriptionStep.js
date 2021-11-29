@@ -77,7 +77,7 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
         });
         if(!fromCenter)
         {
-         // window.location.reload();
+         window.location.reload();
         }
 
     };
