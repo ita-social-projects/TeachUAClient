@@ -66,7 +66,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
             locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
-            locationForm.phoneNumber.match(/^\d{9}$/)) {
+            locationForm.phoneNumber.match(/^\d{10}$/)) {
                 setDisabled(false)
         }
         console.log("Disabled: " + isDisabled)
