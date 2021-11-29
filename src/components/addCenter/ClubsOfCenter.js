@@ -36,7 +36,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         if(result.clubs.length===0){
             alert("Ви не вибрали жодного клубу")
         }
-        // window.location.reload()
+        window.location.reload()
     }
 
     useEffect(() => {
