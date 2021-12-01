@@ -88,7 +88,7 @@ const ClubListSider = ({
                 form.setFieldsValue({age: values.age});
             }
         }
-        // getData();   //Test(maybe redundant request)
+
     };
 
     const onCityChange = (value) => {

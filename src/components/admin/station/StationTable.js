@@ -5,11 +5,15 @@ import EditableTable from "../../EditableTable";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import {getAllStations, updateStationById, deleteStationById} from "../../../service/StationService";
 import AddStation from "../station/AddStation";
+import {getAllDistrict, getDistrictsByCityName} from "../../../service/DisctrictService";
 
 const StationTable = () => {
     const [form] = Form.useForm();
     const [cities, setCities] = useState([]);
     const [stations, setStations] = useState([]);
+    const [district,setDistrict] =useState([]);
+    const [cityName,setCityName] = useState(null);
+
 
     const columns = [
         {
@@ -39,6 +43,16 @@ const StationTable = () => {
             filters: cities.map(city => ({text: city.name, value: city.name})),
             onFilter: (value, record) => record.cityName.indexOf(value) === 0,
             sorter: (a, b) => a.cityName.length - b.cityName.length,
+        },
+        {
+            title: 'Район',
+            dataIndex: 'districtName',
+            width: '15%',
+            editable: true,
+            inputType: 'select',
+            selectData: district.map(district => district.name),
+            defaultSortOrder: 'ascend',
+            sorter: (a,b) => a.districtName.length - b.districtName.length,
         }
     ];
 
@@ -58,13 +72,24 @@ const StationTable = () => {
     ];
 
     const getData = () => {
-        getAllCities().then(response => setCities(response));
+        getAllCities().then(response =>setCities(response));
+        getDistrictsByCityName(district).then(response => setDistrict(response));
         getAllStations().then(response => setStations(response));
     };
 
     useEffect(() => {
         getData();
     }, []);
+
+    useEffect(()=>{
+        getDistrictsByCityName(cityName).then((response)=>{
+            setDistrict(response);
+        })
+    },[cityName]);
+
+    const onCityChange = (value) =>{
+        setCityName(value.cityName);
+    }
 
     const remove = (record) => {
         deleteStationById(record.id)
@@ -102,7 +127,7 @@ const StationTable = () => {
             onSave={save}
             form={form}
             actions={actions}
-            footer={<AddStation cities={cities} stations={stations} setStations={setStations}/>}
+            footer={<AddStation cities={cities} stations={stations} setStations={setStations} district={district} setDistrict={setDistrict}/>}
         />);
 }
 
