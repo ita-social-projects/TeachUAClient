@@ -153,7 +153,7 @@ const Description = () => {
                     <br></br>
                     <br></br>
 
-                    <table>
+                    <table className="hardcoded-table">
                         <tbody>
                         <tr>
                             <td colSpan={2} >

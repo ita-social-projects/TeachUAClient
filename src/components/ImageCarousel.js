@@ -4,6 +4,7 @@ import './css/ImageCarousel.css';
 import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 import PropTypes from "prop-types";
+import {BASE_URL} from "../service/config/ApiConfig";
 
 const ImageCarousel = ({urls}) => {
     const [carouselWidth, setCarouselWidth] = useState(0);

@@ -131,7 +131,6 @@ const RegistrationInput = () => {
                 <Form.Item name="phone"
                            className="registration-input"
                            label="Телефон"
-                           placeholder="(___) ___ __ __"
                            hasFeedback
                            rules={[{
                                required: true,
@@ -148,8 +147,7 @@ const RegistrationInput = () => {
                                    message: 'Телефон не може містити пробіли',
                                },
                                {
-                                   required: false,
-                                   pattern: /^.{10}$/,
+                                   pattern: /^.{9}$/,
                                    message: "Телефон не відповідає вказаному формату",
                                },
                                {
@@ -158,9 +156,8 @@ const RegistrationInput = () => {
                                    message: 'Телефон не може містити спеціальні символи',
                                }]}>
                     <Input className="registration-box"
-                           data-mask="999-999-99-99"
-                           placeholder="(---) --- -- --"
-                           prefix='+38'
+                           placeholder="__________"
+                           prefix='+380'
                            suffix={<PhoneOutlined className="phone-icon"/>}/>
                 </Form.Item>
                 <Form.Item name="email"
@@ -186,7 +183,7 @@ const RegistrationInput = () => {
                            rules={[{
                                required: true,
                                message: 'Введіть пароль'
-                           },{
+                           }, {
                                min: 8,
                                max: 20,
                                message: 'Пароль не може бути коротшим, ніж 8 та довшим, ніж 20 символів'
@@ -226,7 +223,6 @@ const RegistrationInput = () => {
                                {
                                    required: true,
                                    message: 'Підтвердіть пароль',
-                                   // message: 'Введіть пароль'
                                },
                                ({getFieldValue}) => ({
                                    validator(value) {
@@ -257,7 +253,6 @@ const RegistrationInput = () => {
                     >Зареєструватися
                     </Button>
                 </div>
-
             </Form.Item>
         </div>
     )

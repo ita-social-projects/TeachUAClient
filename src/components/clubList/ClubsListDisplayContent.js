@@ -7,7 +7,6 @@ import ClubListControl from "./ClubListControl";
 import ClubListEmptySearch from "./ClubListEmptySearch";
 import {Layout, Pagination} from "antd";
 
-import {PageContext} from "../../context/PageContext";
 
 const {Content} = Layout;
 

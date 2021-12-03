@@ -113,6 +113,7 @@ const ClubList = ({
     const onPageChange = (page) => {
         setCurrentPage(page - 1);
         getData(page - 1);
+        window.scrollTo(0, 0);
     };
 
     const onClubClick = (club) => {
