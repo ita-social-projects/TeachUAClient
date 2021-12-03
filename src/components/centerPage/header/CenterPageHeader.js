@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import './css/PageHeader.css';
 import {Button} from "antd";
 import CenterLogo from "../../centerList/CenterLogo";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 
 const CenterPageHeader = ({center}) => {
     return (
         !center ? <div className="empty-block"/> :
-        <Header className="page-header" style={{background: `url(${process.env.PUBLIC_URL + center.urlBackgroundPicture}) 50% 50% / cover no-repeat`}}>
+        <Header className="page-header" style={{background: `url(${BASE_URL}${center.urlBackgroundPicture}) 50% 50% / cover no-repeat`}}>
             <div className="blur">
                 <div className="row">
                     <div className="tags-name-box">

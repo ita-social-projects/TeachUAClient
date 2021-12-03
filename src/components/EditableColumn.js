@@ -2,6 +2,7 @@ import {Form, Input, InputNumber, Select, Upload} from "antd";
 import React from "react";
 import {UPLOAD_IMAGE_URL} from "../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
+import {tokenToHeader} from "../service/UploadService";
 
 const { TextArea } = Input;
 
@@ -15,7 +16,7 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
                 action={UPLOAD_IMAGE_URL}
                 maxCount={1}
                 data={{folder: uploadFolder}}
-                headers={{contentType: 'multipart/form-data'}}
+                headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
             >
                 <span className="upload"><UploadOutlined className="icon"/>Завантажити</span>
             </Upload>;

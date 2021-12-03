@@ -67,8 +67,8 @@ export const addCenter = async (data) => {
         userId: data.userId,
         contacts: data.contacts,
         locations: data.locations,
-        urlLogo: data.urlLogo && data.urlLogo.file.response,
-        urlBackground: data.urlBackground && data.urlBackground.file.response,
+        urlLogo: data.urlLogo.file.response,
+        urlBackgroundPicture: data.urlBackground.file.response,
         clubsId: data.clubs,
     }).then((response) => {
         return response.data

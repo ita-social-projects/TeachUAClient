@@ -4,14 +4,15 @@ import MainCarousel from "./MainCarousel";
 import {Layout} from "antd";
 import MainChallenge from "./MainChallenge";
 
-import {items} from "./carousel/CarouselItems";
 import MainCategories from "./MainCategories";
 import MainBanner from "./MainBanner";
+import {items} from "./carousel/CarouselItems";
 
 const MainComponent = () => {
     return (
         <Layout className="global-padding">
             <AboutHeader/>
+            {/*<MainCarousel/>*/}
             <MainCarousel items={items(process.env.PUBLIC_URL)}/>
             {/* <MainDescription/>
             <MainChallenge
