@@ -104,8 +104,8 @@ function App() {
                                     <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                     <Route path="/service" exact component={ServiceInUkr}/>
-                                    {/*<Route path="/about" exact component={PreviousAboutProject}/>*/}
-                                    <Route path="/about" exact component={AboutProject}/>
+                                    <Route path="/about" exact component={PreviousAboutProject}/>
+                                    <Route path="/admin/test/about" exact component={AboutProject}/>
                                     <Route path="/logs" exact component={LogComponent}/>
                                     <Route path="/log/:id" exact component={LogByNameComponent}/>
                                     <Route path="/challenges/registration/:challengeId" exact
