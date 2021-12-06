@@ -30,6 +30,21 @@ export const updateStationById = async (data) => {
             return error.response.data;
         });
 };
+export  const  getStationsByDistrictNameAndCityName  = async (data) =>{
+    return await  fetchRequest
+        .post(BASE_URL + "/api/district/stations",
+            {
+                name: data.name,
+                cityName: data.cityName,
+                districtName: data.districtName
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                return error.response.data;
+            });
+}
 
 export const deleteStationById = async (id) => {
     return await fetchRequest

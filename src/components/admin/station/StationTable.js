@@ -11,9 +11,8 @@ const StationTable = () => {
     const [form] = Form.useForm();
     const [cities, setCities] = useState([]);
     const [stations, setStations] = useState([]);
-    const [district,setDistrict] =useState([]);
-    const [cityName,setCityName] = useState(null);
-
+    const [district, setDistrict] = useState([]);
+    const [cityName, setCityName] = useState(null);
 
     const columns = [
         {
@@ -52,10 +51,9 @@ const StationTable = () => {
             inputType: 'select',
             selectData: district.map(district => district.name),
             defaultSortOrder: 'ascend',
-            sorter: (a,b) => a.districtName.length - b.districtName.length,
+            sorter: (a, b) => a.districtName - b.districtName,
         }
     ];
-
     const actions = (record) => [
         <Popconfirm title="Видалити станцію?"
                     cancelText="Ні"
@@ -72,7 +70,7 @@ const StationTable = () => {
     ];
 
     const getData = () => {
-        getAllCities().then(response =>setCities(response));
+        getAllCities().then(response => setCities(response));
         getDistrictsByCityName(district).then(response => setDistrict(response));
         getAllStations().then(response => setStations(response));
     };
@@ -81,42 +79,42 @@ const StationTable = () => {
         getData();
     }, []);
 
-    useEffect(()=>{
-        getDistrictsByCityName(cityName).then((response)=>{
-            setDistrict(response);
+    useEffect(() => {
+        getDistrictsByCityName(cityName).then((response) => {
+
+            getAllDistrict().then((response) => {
+                setDistrict(response);
+            })
         })
-    },[cityName]);
+        }, [cityName]);
 
-    const onCityChange = (value) =>{
-        setCityName(value.cityName);
-    }
 
-    const remove = (record) => {
-        deleteStationById(record.id)
-            .then((response) => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
+        const remove = (record) => {
+            deleteStationById(record.id)
+                .then((response) => {
+                    if (response.status) {
+                        message.warning(response.message);
+                        return;
+                    }
 
-                message.success(`Станція ${record.name} успішно видалена`);
+                    message.success(`Станція ${record.name} успішно видалена`);
 
-                setStations(deleteFromTable(stations, record.id));
+                    setStations(deleteFromTable(stations, record.id));
+                });
+        };
+
+        const save = async (record) => {
+            editCellValue(form, stations, record.id).then((editedData) => {
+                updateStationById(editedData.item).then(response => {
+                    if (response.status) {
+                        message.warning(response.message);
+                        return;
+                    }
+
+                    setStations(editedData.data);
+                });
             });
-    };
-
-    const save = async (record) => {
-        editCellValue(form, stations, record.id).then((editedData) => {
-            updateStationById(editedData.item).then(response => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
-
-                setStations(editedData.data);
-            });
-        });
-    };
+        };
 
     return (
         <EditableTable
