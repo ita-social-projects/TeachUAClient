@@ -5,11 +5,14 @@ import EditableTable from "../../EditableTable";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import {getAllStations, updateStationById, deleteStationById} from "../../../service/StationService";
 import AddStation from "../station/AddStation";
+import {getAllDistrict, getDistrictsByCityName} from "../../../service/DisctrictService";
 
 const StationTable = () => {
     const [form] = Form.useForm();
     const [cities, setCities] = useState([]);
     const [stations, setStations] = useState([]);
+    const [district, setDistrict] = useState([]);
+    const [cityName, setCityName] = useState(null);
 
     const columns = [
         {
@@ -39,9 +42,18 @@ const StationTable = () => {
             filters: cities.map(city => ({text: city.name, value: city.name})),
             onFilter: (value, record) => record.cityName.indexOf(value) === 0,
             sorter: (a, b) => a.cityName.length - b.cityName.length,
+        },
+        {
+            title: 'Район',
+            dataIndex: 'districtName',
+            width: '15%',
+            editable: true,
+            inputType: 'select',
+            selectData: district.map(district => district.name),
+            defaultSortOrder: 'ascend',
+            sorter: (a, b) => a.districtName - b.districtName,
         }
     ];
-
     const actions = (record) => [
         <Popconfirm title="Видалити станцію?"
                     cancelText="Ні"
@@ -59,6 +71,7 @@ const StationTable = () => {
 
     const getData = () => {
         getAllCities().then(response => setCities(response));
+        getDistrictsByCityName(district).then(response => setDistrict(response));
         getAllStations().then(response => setStations(response));
     };
 
@@ -66,32 +79,42 @@ const StationTable = () => {
         getData();
     }, []);
 
-    const remove = (record) => {
-        deleteStationById(record.id)
-            .then((response) => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
+    useEffect(() => {
+        getDistrictsByCityName(cityName).then((response) => {
 
-                message.success(`Станція ${record.name} успішно видалена`);
+            getAllDistrict().then((response) => {
+                setDistrict(response);
+            })
+        })
+        }, [cityName]);
 
-                setStations(deleteFromTable(stations, record.id));
+
+        const remove = (record) => {
+            deleteStationById(record.id)
+                .then((response) => {
+                    if (response.status) {
+                        message.warning(response.message);
+                        return;
+                    }
+
+                    message.success(`Станція ${record.name} успішно видалена`);
+
+                    setStations(deleteFromTable(stations, record.id));
+                });
+        };
+
+        const save = async (record) => {
+            editCellValue(form, stations, record.id).then((editedData) => {
+                updateStationById(editedData.item).then(response => {
+                    if (response.status) {
+                        message.warning(response.message);
+                        return;
+                    }
+
+                    setStations(editedData.data);
+                });
             });
-    };
-
-    const save = async (record) => {
-        editCellValue(form, stations, record.id).then((editedData) => {
-            updateStationById(editedData.item).then(response => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
-
-                setStations(editedData.data);
-            });
-        });
-    };
+        };
 
     return (
         <EditableTable
@@ -102,7 +125,7 @@ const StationTable = () => {
             onSave={save}
             form={form}
             actions={actions}
-            footer={<AddStation cities={cities} stations={stations} setStations={setStations}/>}
+            footer={<AddStation cities={cities} stations={stations} setStations={setStations} district={district} setDistrict={setDistrict}/>}
         />);
 }
 

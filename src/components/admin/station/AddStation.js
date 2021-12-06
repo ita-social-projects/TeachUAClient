@@ -1,12 +1,21 @@
 import {Button, Form, Input, message, Select} from "antd";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./css/AddStation.css";
 import {addToTable} from "../../../util/TableUtil";
 import {addStation} from "../../../service/StationService";
+import {getDistrictsByCityName} from "../../../service/DisctrictService";
 
 const {Option} = Select;
 
-const AddStation = ({cities, stations, setStations}) => {
+const AddStation = ({cities, stations, setStations,district,setDistrict}) => {
+    const [cityName, setCityName] = useState(null);
+
+    useEffect(()=>{
+        getDistrictsByCityName(cityName).then((response)=>{
+            setDistrict(response);
+        })
+    },[cityName])
+
     const onFinish = (values) => {
         addStation(values).then((response) => {
             if (response.status) {
@@ -19,6 +28,12 @@ const AddStation = ({cities, stations, setStations}) => {
             setStations(addToTable(stations, response));
         });
     };
+
+    const onCityChange = (value) =>{
+        setCityName(value);
+    }
+
+
 
     return (
         <Form className="add-station"
@@ -41,8 +56,20 @@ const AddStation = ({cities, stations, setStations}) => {
                        }]}>
                 <Select className="add-station-input"
                         placeholder="Місто"
-                        allowSearch>
+                        allowSearch
+                        onChange={onCityChange}>
                     {cities.map((city) => <Option value={city.name}>{city.name}</Option>)}
+                </Select>
+            </Form.Item>
+            <Form.Item name="districtName"
+                       rules={[{
+                           required: true,
+                           message: "Виберіть район"
+                       }]}>
+                <Select className="add-station-input"
+                        placeholder="Район"
+                        allowSearch>
+                    {district.map((district) => <Option value={district.name}>{district.name}</Option>)}
                 </Select>
             </Form.Item>
             <Form.Item>

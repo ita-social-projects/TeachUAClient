@@ -2,13 +2,11 @@ import {Button, Form, Input, message, Modal, Select, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
 import '../css/AddClubModal.css';
 import "../css/AddClubContent.css";
-import AddClubInputAddress from "../AddClubInputAddress";
 import {getDistrictsByCityName} from "../../../service/DisctrictService";
-import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
 import {addToTable} from "../../../util/TableUtil";
 import {Content} from "antd/es/layout/layout";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {getStationsByCity} from "../../../service/StationService";
+import {getStationsByCity, getStationsByDistrictNameAndCityName} from "../../../service/StationService";
 
 const {Option} = Select;
 
@@ -19,15 +17,15 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [cityName, setCityName] = useState(null);
     const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
-    const [coordinates,setCoordinates] = useState();
-    const [isMobile, setIsMobile]  = useState(false);
+    const [coordinates, setCoordinates] = useState();
+    const [isMobile, setIsMobile] = useState(false);
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
         district:"",
         latAndLng:"",
         phoneNumber: "",
-        inputAddress:""
+        inputAddress: ""
     })
 
     useEffect(() => {
@@ -47,29 +45,26 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const onChange = e => {
         if (e.target.id === "address")
             locationForm.inputAddress = e.target.value
-        if(e.target.id === "coordinates")
+        if (e.target.id === "coordinates")
             locationForm.latAndLng = e.target.value
         if (e.target.id === "name")
             locationForm.locationName = e.target.value
         if (e.target.id === "phone")
             locationForm.phoneNumber = e.target.value
-        // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
-        if(e.target.id === "cityName" ||
+        if (e.target.id === "cityName" ||
             !locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
             !locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
             !locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) ||
             !locationForm.phoneNumber.match(/^\d{9}$/)) {
             setDisabled(true)
         }
-        console.log("Disabled: " + isDisabled)
-        if(cityName != null &&
+        if (cityName != null &&
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
             locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.phoneNumber.match(/^\d{10}$/)) {
-                setDisabled(false)
+            setDisabled(false)
         }
-        console.log("Disabled: " + isDisabled)
     }
 
     const onClose = () => {
@@ -104,22 +99,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         onClose();
     };
 
-    const handleSelect = (coordinates) => {
-            console.log(coordinates)
-    //     geocodeByAddress(address.label)
-    //         .then(results => getLatLng(results[0]))
-    //         .then(({lat, lng}) => {
-    //             locationForm.latitude = lat
-    //             locationForm.longitude = lng
-    //             form.setFieldsValue({
-    //                 coordinates: lat + "," + lng,
-    //
-    //             });
-    //         });
-    //
-    //     setInputAddressProps({validateStatus: 'success'});
-    //     setCityOnInput(cityName);
-    };
 
     const changeCity = () => {
         const fields = form.getFieldValue();
@@ -131,6 +110,13 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         });
         form.validateFields();
         setDisabled(true);
+    }
+    const  changeStation = (value) =>{
+        const fields = form.getFieldValue();
+       locationForm.cityName = cityName;
+       locationForm.districtName = value;
+        getStationsByDistrictNameAndCityName(locationForm).then(response=> setStation(response));
+
     }
 
     return (
@@ -215,6 +201,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть район"
+                                    onChange={changeStation}
                                     optionFilterProp="children">
                                     {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
                                 </Select>
@@ -223,11 +210,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        className="add-club-row"
                                        label="Метро/Місцевість"
                                        hasFeedback
-                                       // rules={[{
-                                       //     required: true,
-                                       //     message: "Це поле є обов'язковим"
-                                       // }]}
-                                >
+                                // rules={[{
+                                //     required: true,
+                                //     message: "Це поле є обов'язковим"
+                                // }]}
+                            >
                                 <Select
                                     className="add-club-select"
                                     placeholder="Виберіть місцевість"
@@ -244,7 +231,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    rules={[{
                                        required: true,
                                        message: "Це поле є обов'язковим"
-                                   },{
+                                   }, {
                                        required: true,
                                        pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
                                        message: "Некоректна адреса",
@@ -267,20 +254,20 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            required: true,
                                            message: "Некоректні координати",
                                            pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
-                                       },{
-                                           message:"Координати не можуть містити букви",
-                                           pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
+                                       }, {
+                                           message: "Координати не можуть містити букви",
+                                           pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
                                        }
                                        ]}>
                                 <Input className="add-club-input add-club-select"
-                                     value={coordinates}
-                                       onInput={e => setCoordinates(e.target.value) }
+                                       value={coordinates}
+                                       onInput={e => setCoordinates(e.target.value)}
 
                                     // suffix={
-                                       //     <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                       //         <InfoCircleOutlined className="info-icon"/>
-                                       //     </Tooltip>
-                                       // }
+                                    //     <Tooltip title="Буде автоматично заповнено при введені адреси">
+                                    //         <InfoCircleOutlined className="info-icon"/>
+                                    //     </Tooltip>
+                                    // }
                                        placeholder="Широта та довгота"/>
                             </Form.Item>
                         </div>
@@ -313,13 +300,13 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        //     pattern: /^[^\s]*$/,
                                        //     message: "Телефон не може містити пробільні символи"
                                        // }
-                                       ]}>
+                                   ]}>
                             <Input className="add-club-input"
                                    prefix='+38'
                                    suffix={
                                        <Tooltip placement="topRight"
                                                 title="Телефон не може містити літери, спеціальні символи та пробіли">
-                                           <InfoCircleOutlined className="info-icon" />
+                                           <InfoCircleOutlined className="info-icon"/>
                                        </Tooltip>
                                    }
                                    placeholder="___________"/>
@@ -339,6 +326,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             </Content>
         </Modal>
     );
-};
+}
 
 export default AddLocationModal;
