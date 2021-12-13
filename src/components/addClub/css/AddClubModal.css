@@ -38,4 +38,9 @@ and (max-device-width: 1025px) {
     right: 15px;
 }
 
+.location-btns {
+    display: flex;
+    flex-direction: column;
+}
+
 

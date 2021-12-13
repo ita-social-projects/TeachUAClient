@@ -46,7 +46,7 @@ import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
 import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 import NotFoundPage from "./components/NotFoundPage"
 import AddressForm from "./components/addClub/geocodedLocation/AddressForm";
-import AddressFormHooks from "./components/addClub/geocodedLocation/AddressFormHooks";
+import AddressAutocomplete from "./components/addClub/geocodedLocation/AddressAutocomplete";
 
 const {Content} = Layout;
 
@@ -75,7 +75,7 @@ function App() {
                             <Content className="global-content">
                                 <Switch>
                                     <Route path="/admin/location" exact component={AddressForm}/>
-                                    <Route path="/admin/location/hooks" exact component={AddressFormHooks}/>
+                                    <Route path="/admin/location/hooks" exact component={AddressAutocomplete}/>
                                     <Route path="/admin/banners" exact component={BannerItemsTable}/>
                                     <Route path="/admin/challenge/task/:id" exact component={EditTask}/>
                                     <Route path="/admin/challenge/:id" exact component={EditChallenge}/>

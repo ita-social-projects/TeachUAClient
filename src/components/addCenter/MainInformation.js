@@ -77,7 +77,7 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                     </Checkbox.Group>
                 </Form.Item>
                 <span className="add-club-location" onClick={() => setLocationVisible(true)}>
-                    <Button className="add-location-btn" htmlType="submit"><PlusOutlined/>Додати локацію</Button>
+                    <Button className="add-location-btn" htmlType="submit"><PlusOutlined/>Додати локацію вручну</Button>
                 </span>
             </div>
             <div className="btn">

@@ -1,38 +1,37 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {AutoComplete, Input} from "antd";
-import {log} from "@craco/craco/lib/logger";
 
 
-const AddressFormHooks = () => {
+const AddressAutocomplete = ({setGeoLocation}) => {
     const API_KEY = 't5QQKqG_fWl0ojlXd8xQUgjthd-J4zIoFu6QTnEF2lo';
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [selectedValue, setSelectedValue] = useState({
-        'address' : {},
+        'address' : {
+            "street": "",
+            "houseNumber" : "",
+            "county": "",
+            "city": "",
+            "district": "",
+            "postalCode": "",
+            "country": "",
+        },
         'countryCode' : "",
         'label' : "",
         'language' : "",
         'locationId' : "",
         'matchLevel' : ""
     });
-    const [geoLocation, setGeoLocation] = useState({
-        'Latitude' : "",
-        'Longitude' : "",
-    });
 
 
     const onChange = (value) => {
-        console.log(value);
         setInputValue(value);
-        console.log('onChange', value);
     }
 
     const onSelect = value => {
-        console.log('onSelect', value);
         const selectedItem = options.find(item => item.value === value).source;
         setSelectedValue(selectedItem);
-        getGeoLocation();
     }
 
     const getData = () => {
@@ -52,15 +51,14 @@ const AddressFormHooks = () => {
     }
 
     const getGeoLocation = () => {
+        inputValue !== "" ?
         axios.get('https://geocoder.ls.hereapi.com/6.2/geocode.json',
             {'params': {
                     'apiKey' : API_KEY,
                     'locationid': selectedValue.locationId,
                 }}).then((response) => {
-            console.log(response.data.Response.View[0].Result[0].Location.DisplayPosition);
             setGeoLocation(response.data.Response.View[0].Result[0].Location.DisplayPosition);
-            console.log(geoLocation);
-        });
+        }) : setGeoLocation({'Latitude' : "", 'Longitude' : "",});
     }
 
     useEffect(() => {
@@ -68,23 +66,20 @@ const AddressFormHooks = () => {
     }, [inputValue]);
 
     return (
-        <div className="add-form">
+        <div>
             <AutoComplete
-                style={{ width: 400 }}
                 onSearch={onChange}
                 options={options}
                 onSelect={onSelect}
+                onMouseLeave={getGeoLocation}
+                autoComplete={"no"}
+                allowClear={true}
             >
-                <Input placeholder="Search..." />
+                <Input placeholder="Адреса"/>
             </AutoComplete>
-            <br/>
-            <Input
-                style={{ width: 400 }}
-                value={geoLocation.Latitude + ", " + geoLocation.Longitude}
-            />
         </div>
     )
 
 }
 
-export default AddressFormHooks;
+export default AddressAutocomplete;

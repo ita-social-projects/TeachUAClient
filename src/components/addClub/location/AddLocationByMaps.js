@@ -1,0 +1,310 @@
+import {Button, Form, Input, message, Modal, Select, Tooltip, Switch} from "antd";
+import React, {useEffect, useState} from "react";
+import '../css/AddClubModal.css';
+import "../css/AddClubContent.css";
+import AddClubInputAddress from "../AddClubInputAddress";
+import {getDistrictsByCityName} from "../../../service/DisctrictService";
+import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
+import {addToTable} from "../../../util/TableUtil";
+import {Content} from "antd/es/layout/layout";
+import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
+import {getStationsByCity} from "../../../service/StationService";
+import AddressAutocomplete from "../geocodedLocation/AddressAutocomplete";
+
+const {Option} = Select;
+
+const AddLocationByMaps = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
+    const [cityOnInput, setCityOnInput] = useState(null);
+    const [inputAddressProps, setInputAddressProps] = useState({});
+    const [districts, setDistricts] = useState([]);
+    const [cityName, setCityName] = useState(null);
+    const [isDisabled, setDisabled] = useState(true)
+    const [station, setStation] = useState([])
+    const [isMobile, setIsMobile]  = useState(false);
+    const [locationByCardForm, setLocationByCardForm] = useState({
+        locationName: "",
+        cityName: "",
+        district:"",
+        latAndLng:"",
+        phoneNumber: "",
+        inputAddress:"",
+        geoLocation: ""
+    });
+    const [geoLocation, setGeoLocation] = useState({
+        'Latitude' : "",
+        'Longitude' : "",
+    });
+    const [selectedValue, setSelectedValue] = useState({
+        'address' : {
+            "city": "",
+            "district": "",
+            "postalCode": "",
+            "country": "",
+        },
+    });
+
+    useEffect(() => {
+        getStationsByCity(cityName).then(response => setStation(response))
+        getDistrictsByCityName(cityName).then(response => setDistricts(response));
+        window.addEventListener("resize", handleResize)
+    }, [cityName]);
+
+    const handleResize = () => {
+        if (window.innerWidth < 577) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+    }
+
+    const onChange = e => {
+        if (e.target.id === "address")
+            locationByCardForm.inputAddress = e.target.value
+        if(e.target.id === "geoLocation")
+            locationByCardForm.geoLocation = e.target.value
+        if (e.target.id === "name")
+            locationByCardForm.locationName = e.target.value
+        if (e.target.id === "phone")
+            locationByCardForm.phoneNumber = e.target.value
+        // if (locationForm.locationName.length > 3 && locationForm.phoneNumber.length === 9 && locationForm.latAndLng.length > 5 && locationForm.inputAddress.length  > 5) {
+        if(e.target.id === "cityName" ||
+            !locationByCardForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
+            !locationByCardForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
+            !locationByCardForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) ||
+            !locationByCardForm.phoneNumber.match(/^\d{9}$/)) {
+            setDisabled(true)
+        }
+        if(cityName != null &&
+            locationByCardForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
+            locationByCardForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
+            locationByCardForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
+            locationByCardForm.phoneNumber.match(/^\d{9}$/)) {
+            setDisabled(false)
+        }
+    }
+
+    const onClose = () => {
+        if (editedLocation) {
+            setEditedLocation(null);
+        }
+        setVisible(false);
+        form.resetFields();
+    };
+
+    const onFinish = (values) => {
+
+        values.key = Math.random();
+
+        if (editedLocation) {
+            const index = locations.findIndex((item) => editedLocation.key === item.key);
+            locations[index] = values;
+            setLocations(locations);
+        } else {
+            setLocations(addToTable(locations, values));
+        }
+
+        onClose();
+    };
+
+    const changeCity = () => {
+        const fields = form.getFieldValue();
+        form.resetFields();
+        form.setFieldsValue({
+            name: fields.name,
+            cityName: fields.cityName,
+            phone: fields.phone,
+            address: fields.address,
+            geoLocation: fields.geoLocation
+        });
+        form.validateFields();
+        setDisabled(true);
+    }
+
+    return (
+        <Modal
+            className="modal-add-club"
+            centered
+            visible={visible}
+            width={650}
+            onOk={onClose}
+            onCancel={onClose}
+            footer={null}
+        >
+            <Content className="add-club-container">
+                <div className="add-club-header">
+                    Додати локацію
+                </div>
+                <div className="add-club-content add-club-locations">
+                    <Form
+                        requiredMark={false}
+                        className="add-club-content"
+                        form={form}
+                        onFinish={onFinish}
+                        onChange={onChange}
+                    >
+                        <Form.Item name="name"
+                                   className="add-club-row"
+                                   label="Назва"
+                                   hasFeedback
+                                   rules={[
+                                       {
+                                           required: true,
+                                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                                           message: "Некоректна назва локації",
+                                       }]}
+                        >
+                            <Input className="add-club-input"
+                                   suffix={
+                                       <Tooltip placement="bottomRight"
+                                                title="Це поле може містити українські та англійські символи довжиною від 5-100. також цифри і спец.символи (!#$%&'()*+,-./:;<=>?@[]^_`{}~)">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
+                                   placeholder="Назва локації" />
+                        </Form.Item>
+                        <div className="add-club-inline">
+                            <Form.Item name="cityName"
+                                       className="add-club-row"
+                                       label="Місто"
+                                       initialValue={editedLocation && editedLocation.cityName}
+                                       hasFeedback
+                                       rules={[{
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       }]}>
+                                <Select
+                                    onClick={onChange}
+                                    className="add-club-select"
+                                    placeholder="Виберіть місто"
+                                    onChange={(value) => {
+                                        if (cityName) {
+                                            cityOnInput === value ?
+                                                setInputAddressProps({validateStatus: 'success'}) :
+                                                setInputAddressProps({validateStatus: 'error'});
+                                        }
+                                        changeCity();
+                                        setCityName(value);
+                                    }}
+                                    optionFilterProp="children">
+                                    {cities.map(city => <Option
+                                        value={city.name}>{city.name}</Option>)}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="districtName"
+                                       className="add-club-row"
+                                       label="Район міста"
+                                       hasFeedback
+                                // rules={[{
+                                //     required: true,
+                                //     message: "Це поле є обов'язковим"
+                                // }]}
+                            >
+                                <Select
+                                    className="add-club-select"
+                                    placeholder="Виберіть район"
+                                    optionFilterProp="children">
+                                    {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="stationName"
+                                       className="add-club-row"
+                                       label="Метро/Місцевість"
+                                       hasFeedback
+                                // rules={[{
+                                //     required: true,
+                                //     message: "Це поле є обов'язковим"
+                                // }]}
+                            >
+                                <Select
+                                    className="add-club-select"
+                                    placeholder="Виберіть місцевість"
+                                    optionFilterProp="children">
+                                    {station.map(station => <Option value={station.name}>{station.name}</Option>)}
+                                </Select>
+                            </Form.Item>
+                        </div>
+
+                        <Form.Item name="address"
+                                   className="add-club-row"
+                                   label="Адреса"
+                                   hasFeedback
+                                   // rules={[{
+                                   //     required: true,
+                                   //     message: "Це поле є обов'язковим"
+                                   // },{
+                                   //     required: true,
+                                   //     pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,10000}$/,
+                                   //     message: "Некоректна адреса",
+                                   // }]}
+                        >
+                            <AddressAutocomplete
+                                className="add-club-input"
+                                placeholder="Адреса"
+                                setGeoLocation={setGeoLocation}
+                            />
+                        </Form.Item>
+                        <div className="add-club-inline">
+                            <Form.Item //name="geoLocation"
+                                       className="add-club-row"
+                                       label="Географічні координати"
+                                       hasFeedback
+                                       rules={[{
+                                           required: true,
+                                           message: "Некоректні координати",
+                                           pattern: /([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/
+                                       },{
+                                           message:"Координати не можуть містити букви",
+                                           pattern:/^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/
+                                       }
+                                       ]}>
+                                <Input
+                                    disabled={true}
+                                    placeholder="Широта та довгота"
+                                    className="add-club-input add-club-select"
+                                    value={`${geoLocation.Latitude}`+ '  ' + `${geoLocation.Longitude}`}
+                                />
+                            </Form.Item>
+                        </div>
+                        <Form.Item name="phone"
+                                   className="add-club-row"
+                                   label="Номер телефону"
+                                   hasFeedback
+                                   rules={[
+                                       {
+                                           required: true,
+                                           message: "Це поле є обов'язковим"
+                                       },
+                                       {
+                                           required: false,
+                                           pattern: /^\d{9}$/,
+                                           message: "Телефон не відповідає вказаному формату"
+                                       },
+                                   ]}>
+                            <Input className="add-club-input"
+                                   prefix='+380'
+                                   suffix={
+                                       <Tooltip placement="topRight"
+                                                title="Телефон не може містити літери, спеціальні символи та пробіли">
+                                           <InfoCircleOutlined className="info-icon" />
+                                       </Tooltip>
+                                   }
+                                   placeholder="___________"/>
+                        </Form.Item>
+
+                        <div className="add-club-content-footer add-club-add-location-button">
+                            {
+                                !isDisabled ?
+                                    <Button htmlType="submit"
+                                            className="flooded-button add-club-content-next">Додати</Button> :
+                                    <Button disabled={isDisabled} htmlType="submit"
+                                            className="flooded-button add-club-content-next-disabled">Додати</Button>
+                            }
+                        </div>
+                    </Form>
+                </div>
+            </Content>
+        </Modal>
+    );
+};
+
+export default AddLocationByMaps;

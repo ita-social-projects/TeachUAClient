@@ -8,12 +8,16 @@ import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 import {Button} from "antd";
+import AddLocationByMaps from "../location/AddLocationByMaps";
 
 const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
     const [contacts_data, setContactsData] = useState({});
     const [locationVisible, setLocationVisible] = useState(false);
+    const [locationAutoVisible, setAutoLocationVisible] = useState(false);
+
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
+    const [locationByCardForm] = Form.useForm();
     const [contactsForm] = Form.useForm();
     const [checked, setChecked] = useState(result.isOnline);
 
@@ -126,9 +130,14 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                             />
                         </List.Item>
                     )} />
-                <span className="add-club-location" onClick={() => setLocationVisible(true)}>
-                    Додати локацію
-                </span>
+                <div className="location-btns">
+                    <span className="add-club-location" onClick={() => setLocationVisible(true)}>
+                        Додати локацію вручну
+                    </span>
+                    <span className="add-club-location" onClick={() => setAutoLocationVisible(true)}>
+                        Додати локацію за допомогою карт
+                    </span>
+                </div>
             </Form.Item>
             <div className="add-club-inline">
                 <Form.Item name="isOnline"
@@ -198,6 +207,16 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 editedLocation={editedLocation}
                 setEditedLocation={setEditedLocation}
                 cities={cities} />
+            <AddLocationByMaps
+                form={locationByCardForm}
+                locations={locations}
+                setLocations={setLocations}
+                visible={locationAutoVisible}
+                setVisible={setAutoLocationVisible}
+                editedLocation={editedLocation}
+                setEditedLocation={setEditedLocation}
+                cities={cities}
+            />
         </Form>
     )
 };
