@@ -1,4 +1,8 @@
 /*CSS for text editor*/
+.challenge-page .challenge-description p {
+    width: 100%;
+}
+
 .challenge-page .challenge-description .ql-align-center {
     text-align: center;
 }
