@@ -1,5 +1,5 @@
 /*CSS for text editor*/
-.challenge-page .challenge-description p {
+.challenge-page .challenge-description ol, p {
     width: 100%;
 }
 
@@ -54,6 +54,36 @@
 }
 .challenge-page .challenge-description .ql-indent-8 {
     margin-left: 200px;
+}
+
+/* table */
+.challenge-page .challenge-description .hardcoded-table {
+    border: 1px solid black;
+    border-color: #2D4C68;
+    border-collapse: collapse;
+    padding: 7px;
+    vertical-align: top;
+}
+
+.challenge-page .challenge-description .hardcoded-table tr {
+    border: 1px solid black;
+    border-color: #2D4C68;
+    border-collapse: collapse;
+    padding: 7px;
+    vertical-align: top;
+}
+
+.challenge-page .challenge-description .hardcoded-table td {
+    border: 1px solid black;
+    border-color: #2D4C68;
+    border-collapse: collapse;
+    padding: 7px;
+    vertical-align: top;
+}
+
+.challenge-page .challenge-description .hardcoded-table a {
+    word-wrap: break-word;
+    color: #58a6ff;
 }
 
 /* 404 */
