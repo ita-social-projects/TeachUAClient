@@ -53,23 +53,32 @@ const NavMenu = () => {
     return (
         <div className="center-side">
             <Menu className="nav-menu"
-                onClick={onMenuChange}
-                selectedKeys={[pageContent]}
-                expandIcon={<MenuOutlined />}
-                defaultOpenKeys={['challenge_ONE']}
-                mode="horizontal"
-                key = {"nav_menu_id"}
-                triggerSubMenuAction={"click"}
-                forceSubMenuRender = {"true"}>
+                  onClick={onMenuChange}
+                  selectedKeys={[pageContent]}
+                  expandIcon={<MenuOutlined />}
+                  defaultOpenKeys={['challenge_ONE']}
+                  mode="horizontal"
+                  key = {"nav_menu_id"}
+                  triggerSubMenuAction={"click"}
+                  forceSubMenuRender = {"true"}>
                 <Menu.Item key="clubs">
                     <Link to="/clubs" onClick={() => setCurrentPage(0)}><ApartmentOutlined className="icon" />Гуртки</Link>
                 </Menu.Item>
                 <SubMenu id = {"challenge_ONE"}  icon={<CrownOutlined />} title="Челендж" className="sub1" expandIcon={<CaretDownOutlined />} triggerSubMenuAction = {'click'} forceSubMenuRender = {true} >
-                    {challenges.map((challenge) =>
-                        <Menu.Item key={challenge.id}>
-                            <Link to={"/challenges/"+challenge.id} onClick ={() => setCurrentPage(0)}>{challenge.name}</Link>
-                        </Menu.Item>)
-                    }
+                    <Menu.Item key="challengeUA">
+                        <Link to="/challengeUA" onClick ={() => setCurrentPage(0)}>Навчай українською Челендж</Link>
+                    </Menu.Item>
+                    <Menu.Item key="marathon">
+                        <Link to="/marathon" onClick ={() => setCurrentPage(0)}>Мовомаратон</Link>
+                    </Menu.Item>
+                    <Menu.Item key ="challenge">
+                        <Link to="/challenge" onClick ={() => setCurrentPage(0)}>Навчай українською</Link>
+                    </Menu.Item>
+                    {/*{challenges.map((challenge) =>*/}
+                    {/*    <Menu.Item key={challenge.id}>*/}
+                    {/*        <Link to={"/challenges/"+challenge.id} onClick ={() => setCurrentPage(0)}>{challenge.name}</Link>*/}
+                    {/*    </Menu.Item>)*/}
+                    {/*}*/}
                 </SubMenu >
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
@@ -79,7 +88,7 @@ const NavMenu = () => {
                     <Link to="/service"><FolderOpenOutlined className="icon" />Послуги українською</Link>
                 </Menu.Item>
                 {/*Замість лого лінка в бургері головної сторінки*/}
-                {isMobile && 
+                {isMobile &&
                 <Menu.Item key="news" className="home">
                     <Link to="/"><span><HomeOutlined className="icon" /></span><span className="home-page">Головна сторінка</span></Link>
                 </Menu.Item>
