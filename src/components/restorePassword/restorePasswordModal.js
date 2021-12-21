@@ -3,7 +3,7 @@ import {Button, Form, message, Modal} from "antd";
 import EmailInput from "./emailConfirmation";
 import  "./../login/css/Login.less"
 import "./css/RestorePassword.less"
-import {getUserByEmail, resetPassword} from "../../service/UserService";
+import {resetPassword} from "../../service/UserService";
 import {Link} from "react-router-dom";
 export const RestorePasswordModal = () => {
 

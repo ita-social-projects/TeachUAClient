@@ -42,17 +42,6 @@ export const getUserById = async (id) => {
     });
 };
 
-
-export const getUserByEmail = async (params) => {
-    return await fetchRequest.get(BASE_URL + "/api/user", {params})
-        .then((response) => {
-            return response.data
-        })
-        .catch((error) => {
-            return error.response.data
-        });
-};
-
 export const signUp = async (data) => {
     return await fetchRequest.post(BASE_URL + "/api/signup", {
         firstName: data.firstName,
