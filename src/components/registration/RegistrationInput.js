@@ -148,7 +148,7 @@ const RegistrationInput = () => {
                                },
                                {
                                    pattern: /^.{10}$/,
-                                   message: "Телефон не відповідає вказаному формату",
+                                   message: "Телефон не відповідає вказаному формату ",
                                },
                                {
                                    required: false,
