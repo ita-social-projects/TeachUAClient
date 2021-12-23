@@ -28,9 +28,9 @@ const ContactsInfoUtil = ({ label, contacts }) => {
     }
 
     let validatedContactData = (contact) => {
-        let result = contact.contact_data;
+        let result = contact.contactData;
         if (contact.contactType.name === "Телефон")
-            result = validatePhone(contact.contact_data);
+            result = validatePhone(contact.contactData);
 
         return result;
     };
@@ -40,7 +40,7 @@ const ContactsInfoUtil = ({ label, contacts }) => {
             <span className="label">{label}</span>
             <div className="links">
                 {contactsArray.map((contact) => (
-                    <div className="contact" key={contact.contact_data}>
+                    <div className="contact" key={contact}>
                         <MaskIcon
                             maskColor="#0D2C95"
                             iconUrl={contact.contactType.urlLogo}
