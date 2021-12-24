@@ -4,7 +4,7 @@ import "./css/RegistrationPage.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined"
 import AboutHeader from "../mainPage/MainHeader";
 import {Link} from "react-router-dom";
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import {getChallengeProfile} from "../../service/ChallengeService";
 
 const RegistrationPage = () => {

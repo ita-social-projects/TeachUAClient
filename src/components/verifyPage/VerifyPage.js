@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import Layout from "antd/lib/layout/layout";
 import './css/VerifyPage.less';
 import Login from "../login/Login";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 import {verifyUser} from "../../service/VerifyService";
 import {message} from "antd";
 
@@ -37,12 +37,11 @@ const VerifyPage = () => {
     return (
         <Layout className="aboutProject global-padding">
             <div className="login-div">
-           <button className="flooded-button donate-button">
-                <Login verifyCode={getUrlParameter("code")}/>
-            </button>
-
+                <button className="flooded-button donate-button">
+                    <Login verifyCode={getUrlParameter("code")}/>
+                </button>
             </div>
-        </Layout >
+        </Layout>
     )
 }
 export default VerifyPage;
