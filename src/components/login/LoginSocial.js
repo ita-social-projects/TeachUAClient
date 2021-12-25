@@ -8,8 +8,8 @@ const LoginSocial = () => {
             <div className="items">
                 <a href={GOOGLE_AUTH_URL}> <img src={`${process.env.PUBLIC_URL}/static/images/user/google.png`} className="logo" alt="Logo" />
                 </a>
-                {/*<a href={FACEBOOK_AUTH_URL}> <img src={`${process.env.PUBLIC_URL}/static/images/user/facebook.png`} className="logo" alt="Logo" />*/}
-                {/*</a>*/}
+                <a href={FACEBOOK_AUTH_URL}> <img src={`${process.env.PUBLIC_URL}/static/images/user/facebook.png`} className="logo" alt="Logo" />
+                </a>
             </div>
         </div>
     )

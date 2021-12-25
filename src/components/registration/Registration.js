@@ -51,6 +51,7 @@ const Registration = ({isShowing, setShowing}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
+                        <RegistrationSocial role="ROLE_MANGER"/>
                         <RegistrationRoles setDisabledButton={setDisabledButton} 
                                           disabledButton={disabledButton} setRole={setRole}/>
                         {/*<RegistrationRoles setDisabledButton={setDisabledButton}*/}
