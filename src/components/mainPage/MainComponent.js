@@ -32,6 +32,7 @@ const MainComponent = () => {
                 які вдосконалять ваші знання та навички викладати українською.'
                 imageUrl={`${process.env.PUBLIC_URL}/static/images/about/challenge_2.png`}
                 buttonLabel="Дізнатись більше"
+                challengeLabel = 'Клуб української мови "Розмовляй"'
             />
             <MainBanner
                 imageUrl={`${process.env.PUBLIC_URL}/static/images/about/banner.png`}

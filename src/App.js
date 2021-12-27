@@ -49,7 +49,8 @@ import HardChallengePage from "./components/challengePage/ChallengePage";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
 import HardRegistrationPage from "./components/challengeTeachUkrainian/RegistrationPage";
 import HardTaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
-
+import SpeakingClubPage from "./components/speakingClubPage/SpeakingClubPage";
+import SpeakingClubRegistrationPage from "./components/speakingClubPage/SpeakingClubRegistrationPage";
 
 const {Content} = Layout;
 
@@ -118,7 +119,9 @@ function App() {
                                     <Route path="/challenge" exact component={HardChallengePage}/>
                                     <Route path="/challengeUA" exact component={TeachUAChallenge}/>
                                     <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
-                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
+                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>                                    <Route path="/marathon" exact component={MarathonPage}/>
+                                    <Route path="/speakingclub" exact component={SpeakingClubPage}/>
+                                    <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
                                 </Switch>
