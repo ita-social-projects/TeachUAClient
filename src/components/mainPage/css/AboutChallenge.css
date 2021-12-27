@@ -19,6 +19,18 @@
     font-weight: 700;
 }
 
+.about-challenge .speakingclub-description {
+    width: 100%;
+}
+
+.about-challenge .speakingclub-description .label {
+    display: flex;
+    justify-content: center;
+    color: #2D4C68;
+    font-size: 32px;
+    font-weight: 700;
+}
+
 .about-challenge .challenge-description .text {
     font-size: 18px;
     line-height: 28px;
