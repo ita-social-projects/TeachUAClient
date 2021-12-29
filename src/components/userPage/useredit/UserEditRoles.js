@@ -10,20 +10,19 @@ function disable(value){
     else return true;
 }
     return (
-        <Form.Item name="role"  initialValue={user.roleName}>
+        <Form.Item name="roleName"  initialValue={user.roleName}>
             <Radio.Group className="button-container"
                          optionType="button"
                          buttonStyle="solid"
             >
 
-                <Radio.Button value="ROLE_USER"
-                disabled={disable("ROLE_USER")}>
+                <Radio.Button value="ROLE_USER">
                     <div className="button-box">
                         <div className="ellipse"><UserOutlined className="user-icon"/></div>
                         <div className="role-name"> Відвідувач</div>
                     </div>
                 </Radio.Button>
-                <Radio.Button value={user.roleName} disabled={!disable("ROLE_USER")}>
+                <Radio.Button value="ROLE_MANAGER">
                     <div className="button-box">
                         <div className="ellipse"><UserOutlined className="user-icon"/></div>
                         <div className="role-name"> Керівник</div>

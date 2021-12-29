@@ -12,8 +12,9 @@ const UserEditModal = ({user}) => {
     const [visible, setVisible] = useState(false);
 
     const onFinish = (values) => {
-        console.log(values.password);
-
+        if(typeof values.urlLogo !== "undefined" && typeof values.urlLogo !== "string") {
+            values.urlLogo = values.urlLogo.file.response
+        }
         const stat = [{status: true}]
         const newValues = stat.reduce(
             (result, item) =>
@@ -25,12 +26,15 @@ const UserEditModal = ({user}) => {
                 message.error("Введено невірний пароль");
             } else {
                 updateUser(newValues).then((response) => {
-                    if (response.status > 400) {
-                        window.location.reload();
+                    if (response.status >= 400) {
+                        // window.location.reload();
                         setVisible(true);
                         message.error("Профіль не було оновлено")
                     } else {
-                        window.location.reload();
+                        console.log(response)
+                        console.log(user)
+                        user = response
+                        console.log(user)
                         setVisible(false);
                         message.success("Профіль змінено успішно");
                     }
