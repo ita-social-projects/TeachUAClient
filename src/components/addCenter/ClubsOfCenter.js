@@ -73,7 +73,12 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                         {clubs.map(club => (
                             <div className="checkbox-item">
                                 <Checkbox value={club.id}>
-                                        <ClubLogo logo={club.urlLogo} category={club.categories[0]} /><span className="club-name">{club.name}</span>
+                                        <ClubLogo logo={club.urlLogo} category={club.categories[0]} />
+                                        <span className="club-name">
+                                            {club.name.length > 30 ?
+                                                club.name.substr(0, 30) + "..." :
+                                                club.name}
+                                        </span>
                                 </Checkbox>
                             </div>
                         ))}
