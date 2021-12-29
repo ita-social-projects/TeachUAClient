@@ -64,21 +64,25 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                 result.urlGallery.push(el.response);
             })
         }
-        addClub(result).then(response => {
-            setVisible(false);
-            setResult(null);
-            setLocations([]);
-            setStep(0);
-            if (clubs) {
-                getAllClubsByUserId(getUserId()).then(response => {
-                    setClubs(response);
-                })
-            }
+        addClub(result).then(() => {
+            window.location.reload();
+            /*
+            Temporary solution, page shouldn't reload every time
+             */
+            // setVisible(false);
+            // setResult(null);
+            // setLocations([]);
+            // setStep(0);
+            // if (clubs) {
+            //     getAllClubsByUserId(getUserId()).then(response => {
+            //         setClubs(response);
+            //     })
+            // }
         });
-        if(!fromCenter)
-        {
-         window.location.reload();
-        }
+        // if(!fromCenter)
+        // {
+        //  window.location.reload();
+        // }
 
     };
 

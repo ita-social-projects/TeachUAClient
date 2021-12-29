@@ -28,15 +28,19 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         result.clubs = clubsId;
         console.log(result);
         addCenter(result).then(response => {
-            console.log(response);
-            setResult(null)
-            setLocations([]);
-            nextStep();
+            window.location.reload();
+            /*
+            Temporary solution, page shouldn't reload every time
+             */
+            // console.log(response);
+            // setResult(null)
+            // setLocations([]);
+            // nextStep();
         })
         if(result.clubs.length===0){
             alert("Ви не вибрали жодного клубу")
         }
-        window.location.reload()
+        // window.location.reload()
     }
 
     useEffect(() => {
