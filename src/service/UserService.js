@@ -88,8 +88,8 @@ export const updateUser = async (data) => {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        roleName: data.role,
-        urlLogo: data.urlLogo.file.response,
+        roleName: data.roleName,
+        urlLogo: data.urlLogo,
         status: data.status
     }).then((response) => {
         console.log('after response' + response.data)
