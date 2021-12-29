@@ -27,14 +27,11 @@ const UserEditModal = ({user}) => {
             } else {
                 updateUser(newValues).then((response) => {
                     if (response.status >= 400) {
-                        // window.location.reload();
+                        window.location.reload();
                         setVisible(true);
                         message.error("Профіль не було оновлено")
                     } else {
-                        console.log(response)
-                        console.log(user)
-                        user = response
-                        console.log(user)
+                        window.location.reload();
                         setVisible(false);
                         message.success("Профіль змінено успішно");
                     }
