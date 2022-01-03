@@ -77,11 +77,11 @@ const NavMenu = () => {
                     <Menu.Item key="speakingclub">
                         <Link to="/speakingclub" onClick ={() => setCurrentPage(0)}>Клуб української мови "Розмовляй"</Link>
                     </Menu.Item>
-                    {challenges.map((challenge) =>
-                        <Menu.Item key={challenge.id}>
-                            <Link to={"/challenges/"+challenge.id} onClick ={() => setCurrentPage(0)}>{challenge.name}</Link>
-                        </Menu.Item>)
-                    }
+                    {/*{challenges.map((challenge) =>*/}
+                    {/*    <Menu.Item key={challenge.id}>*/}
+                    {/*        <Link to={"/challenges/"+challenge.id} onClick ={() => setCurrentPage(0)}>{challenge.name}</Link>*/}
+                    {/*    </Menu.Item>)*/}
+                    {/*}*/}
                 </SubMenu >
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
