@@ -12,7 +12,6 @@ const UserEditModal = ({user}) => {
     const [visible, setVisible] = useState(false);
 
     const onFinish = (values) => {
-        console.log("onFinish()")
         if(values.urlLogo != null && typeof values.urlLogo !== "undefined" && typeof values.urlLogo !== "string") {
             values.urlLogo = values.urlLogo.file.response
         }
