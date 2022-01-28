@@ -14,20 +14,13 @@ import EditClubModal from "../editClub/EditClubModal";
 import {getUserId} from "../../service/StorageService";
 import {getFeedbackListByClubId} from "../../service/FeedbackService";
 import PageRating from "../clubPage/content/PageRating";
+import {BASE_URL} from "../../service/config/ApiConfig";
 
 const ClubListItemInfo = ({ visible, setVisible, club }) => {
     const [rating,setRating] = useState(0);
     const[count,setCount] =useState(0);
     const  feedback = getFeedbackListByClubId(club.id);
-    const images = [
-        process.env.PUBLIC_URL +
-            "/static/images/clubs_carousel_tmp/kids_jump.png",
-        process.env.PUBLIC_URL + "/static/images/clubs_carousel_tmp/balls.jpg",
-        process.env.PUBLIC_URL +
-            "/static/images/clubs_carousel_tmp/exercise.jpg",
-        process.env.PUBLIC_URL +
-            "/static/images/clubs_carousel_tmp/pencils.jpg",
-    ];
+    const images = club.urlGallery.map(image => BASE_URL + image.url);
 
     feedback.then((value)=>{
         var clubRate =0;
