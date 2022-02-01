@@ -1,7 +1,8 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 import {replaceCommaToSemicolon} from "../util/CategoryUtil";
-import {clearSearchParameters, searchParameters} from "../context/SearchContext";
+import {searchParameters} from "../context/SearchContext";
+import {handleDownloadFile} from "../util/FileUtil";
 
 export const addClub = async (data) => {
     // data.locations.map(
@@ -173,6 +174,16 @@ export const getAllClubs = async () => {
         return response.data;
     });
 };
+
+export const getClubReport = async (id, fileName) => {
+    const response = await fetchRequest.get(BASE_URL + `/api/pdf/club/${id}`,
+        {
+            method: "get",
+            responseType: "blob"
+        }
+    )
+    handleDownloadFile(response.data, fileName, "pdf")
+}
 
 export const changeClubOwner = async (params, id) => {
     return await fetchRequest

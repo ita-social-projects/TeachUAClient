@@ -8,6 +8,8 @@ import ImageCarousel from '../ImageCarousel';
 import CenterLogo from "./CenterLogo";
 import "./css/CenterInfo.css"
 import PageRatingCenter from "../centerPage/content/PageRatingCenter";
+import {getClubReport} from "../../service/ClubService";
+import {getCenterReport} from "../../service/CenterService";
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
@@ -47,6 +49,11 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                     <span className="title">Про центр</span>
                     <ImageCarousel className="carousel" urls={images} />
                     <div className="description">{center.description}</div>
+                </div>
+                <div>
+                    <Button onClick={() => getCenterReport(center.id, center.name)} className="outlined-button details-button">
+                        Завантажити Pdf
+                    </Button>
                 </div>
             </div>
         </Modal>

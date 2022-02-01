@@ -1,34 +1,35 @@
 import React, {useState} from "react";
-import { Menu, Dropdown, Button, Modal, Rate, Popconfirm } from "antd";
+import {Menu, Dropdown, Button, Modal, Rate, Popconfirm} from "antd";
 import "./css/ClubInfo.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Tags from "../Tags";
 import ClubLogo from "../clubPage/header/ClubLogo";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined";
 import ContactsInfoUtil from "../../util/ContactsInfoUtil";
 import ImageCarousel from "../ImageCarousel";
-import { getShortContent } from "../editor/EditorConverter";
-import { deleteClubById } from "../../service/ClubService";
-import EditClubModal from "../editClub/EditClubModal";
+import {getShortContent} from "../editor/EditorConverter";
+import {deleteClubById, getClubReport} from "../../service/ClubService";
 import {getUserId} from "../../service/StorageService";
 import {getFeedbackListByClubId} from "../../service/FeedbackService";
 import PageRating from "../clubPage/content/PageRating";
 import {BASE_URL} from "../../service/config/ApiConfig";
 
-const ClubListItemInfo = ({ visible, setVisible, club }) => {
-    const [rating,setRating] = useState(0);
-    const[count,setCount] =useState(0);
-    const  feedback = getFeedbackListByClubId(club.id);
+
+const ClubListItemInfo = ({visible, setVisible, club}) => {
+    const [rating, setRating] = useState(0);
+    const [count, setCount] = useState(0);
+    const feedback = getFeedbackListByClubId(club.id);
     const images = club.urlGallery.map(image => BASE_URL + image.url);
 
-    feedback.then((value)=>{
-        var clubRate =0;
+    feedback.then((value) => {
+
+        var clubRate = 0;
         for (let i = 0; i < value.length; i++) {
             clubRate += value[i].rate;
         }
 
-        setRating(clubRate/value.length);
+        setRating(clubRate / value.length);
         setCount(value.length);
     })
 
@@ -62,9 +63,9 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                     title={popupHeaderText}
                     placement="bottom"
                     onConfirm={confirmPopup}
-                    okButtonProps={{ className: "clubModal popConfirm" }}
+                    okButtonProps={{className: "clubModal popConfirm"}}
                     // onCancel={cancelPopup}
-                    cancelButtonProps={{ className: "clubModal popCancel" }}
+                    cancelButtonProps={{className: "clubModal popCancel"}}
                     okText="Видалити гурток"
                     cancelText="Відмінити">
                     <a href="!#">Видалити</a>
@@ -75,6 +76,7 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
             </Menu.Item> */}
         </Menu>
     );
+
 
     return (
         <Modal
@@ -102,12 +104,12 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                     />
                     <div className="club-name">{club.name}</div>
                 </div>
-                <Tags className="categories" categories={club.categories} />
+                <Tags className="categories" categories={club.categories}/>
                 <div className="rating">
-                    <PageRating rating={rating}count={count}/>
+                    <PageRating rating={rating} count={count}/>
                 </div>
                 <div className="address">
-                    <EnvironmentFilled className="address-icon" />
+                    <EnvironmentFilled className="address-icon"/>
                     <span className="text">
                         {club.locations.length === 0
                             ? "Онлайн"
@@ -130,10 +132,15 @@ const ClubListItemInfo = ({ visible, setVisible, club }) => {
                 </Button>
                 <div className="about-club">
                     <span className="title">Про гурток</span>
-                    <ImageCarousel className="carousel" urls={images} />
+                    <ImageCarousel className="carousel" urls={images}/>
                     <div className="description">
                         {getShortContent(club.description)}
                     </div>
+                </div>
+                <div>
+                    <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
+                        Завантажити Pdf
+                    </Button>
                 </div>
             </div>
         </Modal>
