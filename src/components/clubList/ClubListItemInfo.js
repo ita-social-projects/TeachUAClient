@@ -14,6 +14,7 @@ import {getUserId} from "../../service/StorageService";
 import {getFeedbackListByClubId} from "../../service/FeedbackService";
 import PageRating from "../clubPage/content/PageRating";
 import {BASE_URL} from "../../service/config/ApiConfig";
+import {FilePdfOutlined} from "@ant-design/icons";
 
 
 const ClubListItemInfo = ({visible, setVisible, club}) => {
@@ -139,7 +140,8 @@ const ClubListItemInfo = ({visible, setVisible, club}) => {
                 </div>
                 <div>
                     <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
-                        Завантажити Pdf
+                        Завантажити
+                        <FilePdfOutlined/>
                     </Button>
                 </div>
             </div>

@@ -4,6 +4,9 @@ import {Content} from "antd/es/layout/layout";
 import './css/PageContentCenter.css';
 import {Button} from "antd";
 import {convertToHtml} from "../../editor/EditorConverter";
+import {getClubReport} from "../../../service/ClubService";
+import {FilePdfOutlined} from "@ant-design/icons";
+import {getCenterReport} from "../../../service/CenterService";
 
 const CenterPageContent = ({ center, loading }) => {
 
@@ -16,7 +19,14 @@ const CenterPageContent = ({ center, loading }) => {
                     <div className="content" >
                         {center.description}
                     </div>}
+            <div className="full-width button-box">
+                <Button onClick={() => getCenterReport(center.id, center.name)} className="outlined-button details-button">
+                    Завантажити
+                    <FilePdfOutlined/>
+                </Button>
+            </div>
         </Content>
+
     )
 };
 

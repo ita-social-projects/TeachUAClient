@@ -10,6 +10,7 @@ import "./css/CenterInfo.css"
 import PageRatingCenter from "../centerPage/content/PageRatingCenter";
 import {getClubReport} from "../../service/ClubService";
 import {getCenterReport} from "../../service/CenterService";
+import {FilePdfOutlined} from "@ant-design/icons";
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
@@ -52,7 +53,8 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                 </div>
                 <div>
                     <Button onClick={() => getCenterReport(center.id, center.name)} className="outlined-button details-button">
-                        Завантажити Pdf
+                        Завантажити
+                        <FilePdfOutlined/>
                     </Button>
                 </div>
             </div>
