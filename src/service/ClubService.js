@@ -1,7 +1,8 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 import {replaceCommaToSemicolon} from "../util/CategoryUtil";
-import {searchParameters} from "../context/SearchContext";
+
+import {clearSearchParameters, searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
 
 export const addClub = async (data) => {
@@ -129,6 +130,9 @@ export const getClubsByAdvancedSearch = async (
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/search/advanced", {
             params: {
+                name: parameters.name
+                    ? parameters.name
+                    : searchInputData.input,
                 age: parameters.age,
                 cityName: parameters.cityName
                     ? parameters.cityName
