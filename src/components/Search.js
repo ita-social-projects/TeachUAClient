@@ -1,5 +1,5 @@
-import {AutoComplete, Input, Select} from "antd";
-import React, {useContext} from "react";
+import {AutoComplete, Select} from "antd";
+import React from "react";
 import {withRouter} from "react-router-dom";
 import {
     clearSearchParameters,
@@ -8,15 +8,13 @@ import {
     searchInputData,
     searchParameters,
 } from "../context/SearchContext";
+
 import {getClubsByAdvancedSearch, getClubsByParameters} from "../service/ClubService";
-import {
-    getPossibleResults,
-    getPossibleResultsByText,
-} from "../service/SearchService";
+import {getPossibleResults, getPossibleResultsByText, getResultSearchReport,} from "../service/SearchService";
 import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import {getAllCategories} from "../service/CategoryService";
-import {PageContext} from "../context/PageContext";
+import {FilePdfOutlined} from "@ant-design/icons";
 
 
 const {Option, OptGroup} = Select;
@@ -239,6 +237,7 @@ class Search extends React.Component {
                     </OptGroup>
                 </AutoComplete>
 
+
                 <div className="search-icon-group">
                     <SearchOutlined
                         className="advanced-icon"
@@ -258,6 +257,13 @@ class Search extends React.Component {
                                      style={{color: "orange", backgroundColor: "white"}}
                                      onClick={this.handleAdvancedSearch}
                     />
+
+                </div>
+                <div className="search-icon-group">
+                    <FilePdfOutlined className="advanced-icon" title={"Завантажити результат пошуку"}
+                                     style={{color: "orange", backgroundColor: "white"}}
+                                     onClick={() => getResultSearchReport(searchParameters, "Result for " + searchParameters.clubName)}>
+                    </FilePdfOutlined>
                 </div>
             </div>
         );
