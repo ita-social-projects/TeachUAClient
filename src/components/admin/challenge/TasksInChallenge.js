@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
 import {Link} from "react-router-dom";
 import {Table, Tooltip} from "antd";
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import moment from "moment";
 
 const TasksInChallenge = () => {
