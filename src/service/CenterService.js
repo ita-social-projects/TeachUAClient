@@ -2,6 +2,7 @@
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 import {searchParameters} from "../context/SearchContext";
+import {handleDownloadFile} from "../util/FileUtil";
 
 
 
@@ -25,6 +26,16 @@ export const getAllCenters = async () => {
         return response.data
     });
 };
+
+export const getCenterReport = async (id, fileName) => {
+    const response = await fetchRequest.get(BASE_URL + `/api/pdf/center/${id}`,
+        {
+            method: "get",
+            responseType: "blob"
+        }
+    )
+    handleDownloadFile(response.data, fileName, "pdf")
+}
 
 export const getCentersByAdvancedSearch = async (
     parameters,

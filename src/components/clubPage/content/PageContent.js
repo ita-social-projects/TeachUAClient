@@ -8,19 +8,21 @@ import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
 import {BASE_URL} from "../../../service/config/ApiConfig";
 import {getFeedbackListByClubId} from "../../../service/FeedbackService";
+import {getClubReport} from "../../../service/ClubService";
+import {FilePdfOutlined} from "@ant-design/icons";
 
 const PageContent = ({club, feedbackCount}) => {
-    const [rate,setRate] = useState(0);
+    const [rate, setRate] = useState(0);
     const images = club.urlGallery.map(image => BASE_URL + image.url);
 
-    const  feedback = getFeedbackListByClubId(club.id);
+    const feedback = getFeedbackListByClubId(club.id);
 
-    feedback.then((value)=>{
-        var clubRate =0;
+    feedback.then((value) => {
+        var clubRate = 0;
         for (let i = 0; i < value.length; i++) {
             clubRate += value[i].rate;
         }
-        setRate(clubRate/value.length);
+        setRate(clubRate / value.length);
     })
 
     return (
@@ -36,6 +38,12 @@ const PageContent = ({club, feedbackCount}) => {
                 </div>}
             <div className="full-width button-box">
                 <Button className="flooded-button apply-button">Записатись на гурток</Button>
+            </div>
+            <div className="full-width button-box">
+                <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
+                    Завантажити
+                   <FilePdfOutlined/>
+                </Button>
             </div>
         </Content>
     )
