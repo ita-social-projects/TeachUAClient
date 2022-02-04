@@ -8,7 +8,7 @@ import {
     searchInputData,
     searchParameters,
 } from "../context/SearchContext";
-import {getClubsByParameters} from "../service/ClubService";
+import {getClubsByAdvancedSearch, getClubsByParameters} from "../service/ClubService";
 import {
     getPossibleResults,
     getPossibleResultsByText,
@@ -54,19 +54,19 @@ class Search extends React.Component {
         });
     }
 
-    onSearchChange = (value, option) => {
+    onSearchChange = (value, option, page) => {
         clearTimeout(this.timer);
 
-        if(value===undefined){
+        if (value === undefined) {
             return;
         }
 
-        if(value.trim().length===0){
+        if (value.trim().length === 0) {
             return;
         }
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
-            this.props.history.push("/clubs", {value});
+                this.props.history.push("/clubs", {value});
             }, 1000);
         }
 
@@ -77,32 +77,47 @@ class Search extends React.Component {
                 case "category":
                     searchParameters.categoryName = value;
                     mapSearchParameters.categoryName = value;
-
                     break;
                 case "club":
                     searchParameters.clubName = value;
-
                     break;
                 default: {
-
-                    if (
-                        this.state.allCategories.find((category) =>
+                    if (this.state.allCategories.find((category) =>
                             category.name
                                 .toLowerCase()
-                                .includes(value.toLowerCase())
-                        )
-                    ) {
+                                .includes(value.toLowerCase()))) {
                         searchParameters.categoryName = value;
                     } else {
                         searchParameters.clubName = value;
                     }
                 }
             }
-
-
             getClubsByParameters(searchParameters).then((response) => {
                 this.context.setClubs(response);
             });
+        } else {
+            switch (option.type) {
+                case "category":
+                    searchParameters.categoryName = value;
+                    mapSearchParameters.categoryName = value;
+                    break;
+                case "club":
+                    searchParameters.clubName = value;
+                    break;
+                default: {
+                    if (this.state.allCategories.find((category) =>
+                        category.name.toLowerCase()
+                            .includes(value.toLowerCase()))) {
+                        searchParameters.categoryName = value;
+                    }
+                }
+            }
+            const DEFAULT_SORT_BY = "name";
+            const DEFAULT_SORT_DIRECTION = "asc";
+            let checkUndefPage = page === undefined ? 0 : page;
+            getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
+                this.context.setClubs(response);
+            })
         }
     };
 
@@ -187,7 +202,7 @@ class Search extends React.Component {
                 <AutoComplete
                     allowClear={true}
                     loading={this.state.loading}
-                    disabled={searchParameters.isAdvancedSearch}
+                    //disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
                     onChange={this.onSearchChange}
@@ -197,7 +212,7 @@ class Search extends React.Component {
                     onBlur={this.onKeyDown}
                     style={{
                         width: 230,
-                        opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
+                        //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
                     placeholder="Який гурток шукаєте?"
                     value={searchInputData.input}
@@ -231,9 +246,9 @@ class Search extends React.Component {
                             borderRadius: 0,
                             backgroundColor: "transparent",
                             color: "white",
-                            opacity: searchParameters.isAdvancedSearch
-                                ? 0.5
-                                : 1,
+                            //opacity: searchParameters.isAdvancedSearch
+                            //    ? 0.5
+                            //    : 1,
                             marginLeft: 0,
                             marginRight: 12,
                         }}
