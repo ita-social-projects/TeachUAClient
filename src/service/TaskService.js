@@ -1,9 +1,8 @@
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
-export const getTasksByChallenge = async (id) => {
-    return await fetchRequest
-        .get(BASE_URL + "/api/challenge/" + id + "/tasks")
+export const getTasksByChallenge = (id) => {
+    return fetchRequest.get(BASE_URL + "/api/challenge/" + id + "/tasks")
         .then((response) => {
             return response.data;
         });
