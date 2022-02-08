@@ -108,7 +108,7 @@ const UsersTable = () => {
     const save = async (record) => {
         console.log("before users update ")
         editCellValue(form, users, record.id).then((editedData) => {
-            updateUserByAdmin(editedData.item).then(response => {
+            updateUser(editedData.item).then(response => {
                 const st = response.status;
                 if (!(st === "true" || st === "false")) {
                     console.log(response.status)

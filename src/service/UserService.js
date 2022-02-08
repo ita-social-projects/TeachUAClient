@@ -88,7 +88,7 @@ export const updateUser = async (data) => {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        roleName: data.roleName,
+        role: data.roleName,
         urlLogo: data.urlLogo,
         status: data.status
     }).then((response) => {
@@ -96,23 +96,6 @@ export const updateUser = async (data) => {
         return response.data
     }).catch((error) => {
         console.log(error.response.data)
-        return error.response.data
-    });
-};
-
-export const updateUserByAdmin = async (data) => {
-    return await fetchRequest.put(BASE_URL + "/api/user/update", {
-        id: data.id,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        roleName: data.roleName,
-        urlLogo: data.urlLogo/* && data.urlLogo.file.response*/,
-        status: data.status
-    }).then((response) => {
-        return response.data
-    }).catch((error) => {
         return error.response.data
     });
 };
