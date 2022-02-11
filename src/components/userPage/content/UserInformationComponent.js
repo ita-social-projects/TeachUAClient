@@ -28,6 +28,16 @@ const UserInformationComponent = ({ user }) => {
         }
     }, [user])
 
+    const handleRoleName = (value) => {
+        if(value === "ROLE_ADMIN"){
+            return "АДМІНІСТРАТОР"
+        }else if(value === "ROLE_MANAGER"){
+            return "КЕРІВНИК"
+        }else if(value === "ROLE_USER"){
+            return "ВІДВІДУВАЧ"
+        }
+    }
+
     return (
         <div className="user-profile-page">
             <div className="user-information">
@@ -41,7 +51,7 @@ const UserInformationComponent = ({ user }) => {
                     <div>
                         <div className="user-name">{user.firstName} {user.lastName}
                         </div>
-                        <div className="user-role"> {user.roleName}</div>
+                        <div className="user-role"> {handleRoleName(user.roleName)}</div>
                     </div>
                 </div>
 
