@@ -1,29 +1,46 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Select, Typography} from "antd";
 
 import EditableTable from "../../EditableTable";
-import {deleteTask, getTasks, updateTask} from "../../../service/TaskService";
+import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
+import {getAllChallenges} from "../../../service/ChallengeService";
+import {Option} from "antd/es/mentions";
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 const TasksTable = () => {
 
     const [form] = Form.useForm();
+    const [selectedChallenges, setSelectedChallenges] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
         picture: '',
         startDate: ''
     }]);
-    const [loading, setLoading] = useState(true);
+    const [challengeList, setChallengeList] = useState([
+        {
+            id: 0,
+            name: '',
+            title: '',
+            sortNumber: 0
+        }
+    ]);
 
-    const getData = () => {
+    const getTaskData = () => {
         getTasks().then(response => {
             setTasks(response);
+        });
+        setLoading(false);
+    };
+    const getChallengeData = () => {
+        getAllChallenges().then(response => {
+            setChallengeList(response);
         });
         setLoading(false);
     };
@@ -39,7 +56,6 @@ const TasksTable = () => {
             setTasks(deleteFromTable(tasks, record.id));
         });
     };
-
     const save = async (record) => {
         form.setFieldsValue({
             ...form.getFieldsValue()
@@ -51,11 +67,10 @@ const TasksTable = () => {
                     message.warning(response.message)
                     return;
                 }
-                getData();
+                getTaskData();
             });
         });
     }
-
     const actions = (record) => [
         <Popconfirm title="Видалити челендж?"
                     cancelText="Ні"
@@ -66,9 +81,18 @@ const TasksTable = () => {
             <span className="table-action">Видалити</span>
         </Popconfirm>
     ];
+    const onChange = (challengeId) => {
+        if (challengeId === undefined) {
+            getTasks().then(response => setTasks(response))
+        } else {
+            setSelectedChallenges(challengeId);
+            getTasksByChallenge(challengeId).then(response => setTasks(response))
+        }
+    }
 
     useEffect(() => {
-        getData();
+        getTaskData();
+        getChallengeData();
     }, []);
 
     const columns = [
@@ -91,25 +115,36 @@ const TasksTable = () => {
             dataIndex: 'startDate',
             width: '35%',
             editable: false,
-            render: (text)=>moment(text).format('YYYY-MM-DD')
+            render: (text) => moment(text).format('YYYY-MM-DD')
         },
     ];
 
     return (
         <div className="push-down">
-            <Button className="flooded-button add-btn" >
+            <Button className="flooded-button add-btn">
                 <Link to="/admin/addTask">
                     Додати завдання
                 </Link>
             </Button>
             <Link
                 to="/admin/challenges"
-                className="back-btn"
-            >
+                className="back-btn">
                 <Button className="flooded-button">
                     До списку челенджів
                 </Button>
             </Link>
+            <div className="add-club-row">
+                <Select className="add-club-select"
+                        placeholder="Оберіть челендж"
+                        allowClear
+                        onChange={onChange}>
+                    {challengeList.map((option, index) => (
+                        <Option value={option.id} key={option.id}>
+                            {option.name}
+                        </Option>
+                    ))}
+                </Select>
+            </div>
             <Title level={3}>Завдання</Title>
             <EditableTable
                 bordered
