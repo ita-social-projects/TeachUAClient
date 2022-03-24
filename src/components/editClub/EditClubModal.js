@@ -7,7 +7,7 @@ import {getAllContacts} from "../../service/ContactService";
 import {getClubById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
 
-const EditClubModal = () => {
+const EditClubModal = ({clubId}) => {
     const [visible, setVisible] = useState(false);
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
@@ -18,7 +18,7 @@ const EditClubModal = () => {
         getAllCategories().then(response => setCategories(response));
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
-        getClubById(1).then(response => setResult(response));
+        getClubById(clubId).then(response => setResult(response));
     }, []);
 
     return (

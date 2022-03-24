@@ -41,6 +41,14 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         setCityOnInput(cityName);
     };
 
+    console.log(result);
+    console.log(result.locations[0].cityName);
+    console.log(result.locations[0].districtName);
+    console.log(result.contacts[0].contactType.name);
+    console.log(result.contacts[0].contactData);
+    console.log(contacts[0].name);
+
+
     return (
         <Form
             name="basic"
@@ -52,7 +60,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="cityName"
                            className="edit-club-row"
                            label="Місто"
-                           initialValue={result.city.name}>
+                           initialValue={result.locations[0].cityName}
+                >
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть місто"
@@ -74,7 +83,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="districtName"
                            className="edit-club-row"
                            label="Район"
-                           initialValue={result.district.name}
+                           initialValue={result.locations[0].districtName}
                            >
                     <Select
                         className="edit-club-select"
@@ -93,7 +102,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <EditClubInputAddress
                     placeholder={result.address}
                     form={contactsForm}
-                    inputText={result.address && result.address.label}
+                    //inputText={result.address && result.address.label}
+                    inputText={result.locations[0].address}
                     setCityName={setCityName}
                     onChange={handleSelect}/>
             </Form.Item>
@@ -101,9 +111,11 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 label="Контакти"
                 className="edit-club-row edit-club-contacts">
                 {contacts.map(contact =>
-                    <Form.Item name={`clubContact${contact.name}`}
+                    <Form.Item //name={`clubContact${contact.contactType.name}`}
+                               name={contact.name}
                                className="edit-club-contact"
-                               initialValue={result[`clubContact${contact.name}`]}
+                               //initialValue={result[`clubContact${contact.contactData}`]}
+                               initialValue={result.contacts[0].contactData}
                                >
                         <Input className="edit-club-input"
                                placeholder="Заповніть поле"
