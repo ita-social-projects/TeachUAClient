@@ -29,7 +29,7 @@ const EditChallenge = (props) => {
     }]);
     const [challengeNotFound, setChallengeNotFound] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [picture, setPicture] = useState(challenge.picture);
+    const [picture, setPicture] = useState();
     const [challengeEditForm, form] = useForm();
     const challengeId = useParams();
     const [name, setName] = useState();
@@ -73,6 +73,12 @@ const EditChallenge = (props) => {
         challenge.isActive = state;
         setIsChecked(state)
     };
+
+    const handlePictureChange = (value) => {
+        console.log(value)
+        setPicture("/upload/challenges/" + value);
+        challenge.picture = picture;
+    }
 
     useEffect(() => {
         getData();
@@ -157,7 +163,9 @@ const EditChallenge = (props) => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         data={{folder: `challenges`}}
-                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
+                        onChange={(uploaded) => handlePictureChange(uploaded.file.name)}
+                    >
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>
@@ -166,6 +174,7 @@ const EditChallenge = (props) => {
                         type="primary"
                         htmlType="submit"
                         className="flooded-button add-contact-type-button"
+                        onClick={(savedPicture) => handlePictureChange(savedPicture)}
                     >
                         Зберегти
                     </Button>
