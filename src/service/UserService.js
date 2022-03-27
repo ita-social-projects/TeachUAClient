@@ -121,6 +121,15 @@ export const getAllUsers = async () => {
         })
 };
 
+export const getUsersByRole = async (role) => {
+    return await fetchRequest.get(BASE_URL + "/api/users/" + role)
+        .then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
 export const deleteUserById = async (id) => {
     return await fetchRequest.delete(BASE_URL + "/api/user/" + id, {
         id: id
