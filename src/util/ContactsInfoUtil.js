@@ -1,5 +1,4 @@
 import "../components/clubPage/sider/css/SocialMedia.css";
-// import classes from "./css/SocialMedia.module.css";
 import MaskIcon from "../components/MaskIcon";
 
 const ContactsInfoUtil = ({ label, contacts }) => {
@@ -29,28 +28,22 @@ const ContactsInfoUtil = ({ label, contacts }) => {
     }
 
     let validatedContactData = (contact) => {
-        let result = contact.contactData;
         if (contact.contactType.name === "Телефон")
-            result = validatePhone(contact.contactData);
-
-        return result;
+            return validatePhone(contact.contactData);
+        else
+            return <a href={contact.contactData} target={"blank"}>{contact.contactData}</a>
     };
 
     return (
-        // <div className={classes.socialMedia}>
-        //     <span className={classes.label}>{label}</span>
-        //     <div className={classes.links}>
         <div className="social-media">
             <span className="label">{label}</span>
             <div className="links">
                 {contactsArray.map((contact) => (
-                    // <div className={classes.contact} key={contact}>
                     <div className="contact" key={contact}>
                         <MaskIcon
                             maskColor="#0D2C95"
                             iconUrl={contact.contactType.urlLogo}
                         />
-                        {/*<span className={classes.contactName}>*/}
                         <span className="contact-name">
                             {validatedContactData(contact)}
                         </span>

@@ -1,12 +1,12 @@
 import React from 'react';
 import "../comments/css/CommentEditComponent.less";
+import classes from "./css/ModalHint.module.css";
 import Modal from "antd/es/modal/Modal";
 
 const ModalHint = ({children, visible, setVisible}) => {
     return (
-        <div className="comment-edit">
             <Modal
-                className="comment-modal"
+                className={classes.modalHint}
                 centered
                 width={521}
                 visible={visible}
@@ -14,9 +14,8 @@ const ModalHint = ({children, visible, setVisible}) => {
                 onCancel={() => setVisible(false)}
                 footer={null}
             >
-                <span className="comment-edit-title">{children}</span>
+                <span className={classes.title}>{children}</span>
             </Modal>
-        </div>
     );
 };
 

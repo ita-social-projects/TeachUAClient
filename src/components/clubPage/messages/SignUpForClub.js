@@ -7,7 +7,6 @@ import TextArea from "antd/lib/input/TextArea";
 import {Button, Form, Modal} from "antd";
 import {createMessage} from "../../../service/MessageService";
 import {getUsersByRole} from "../../../service/UserService";
-import MaskIcon from "../../MaskIcon";
 import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 
 const SignUpForClub = ({isShowing, setShowing, club}) => {
