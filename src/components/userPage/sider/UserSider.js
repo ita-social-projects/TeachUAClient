@@ -1,9 +1,9 @@
 import MenuSiderComponent from "./MenuSider";
 
-const SiderComponent = () => {
+const SiderComponent = ({url}) => {
     return (
         <div className="sider">
-            <MenuSiderComponent/>
+            <MenuSiderComponent url={url} />
         </div>
     );
 };

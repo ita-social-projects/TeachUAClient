@@ -33,10 +33,6 @@ const PageHeader = ({club}) => {
                         >
                             Записатись на гурток
                         </Button>
-                        {/*<WriteEditMessage isShowing={signUpForClubVisible}*/}
-                        {/*                  setShowing={setSignUpForClubVisible}*/}
-                        {/*                  club={club}*/}
-                        {/*/>*/}
                         <SignUpForClub isShowing={signUpForClubVisible}
                                        setShowing={setSignUpForClubVisible}
                                        club={club}

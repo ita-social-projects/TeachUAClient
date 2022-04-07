@@ -14,21 +14,16 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
     const [messageForm] = Form.useForm();
     const [admin, setAdmin] = useState(0);
 
-    const contactsArray = Array.from(club.contacts);
-
     useEffect(() => {
         getUsersByRole("ROLE_ADMIN").then((response) => setAdmin(response[0]));
     }, [isShowing]);
 
     const getRecipientId = () => {
         if (club.user) {
-            // console.log(`In club with id ${club.id} - user_id = null`);
             return club.user.id;
         } else if (club.center && club.center.user) {
-            // console.log(`In club with id ${club.id} - center_id = null or in this center user_id = null`);
             return club.center.user.id;
         } else {
-            // console.log(`In club with id ${club.id} - user_id = null and center_id = null`);
             return admin.id;
         }
     }
@@ -40,9 +35,8 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
             recipientId: getRecipientId(),
             text: values.text,
         };
-        messageForm.resetFields();
         setShowing(false);
-        createMessage(data).then(() => window.location.reload())
+        createMessage(data).then(() => messageForm.resetFields())
     };
 
     return (
