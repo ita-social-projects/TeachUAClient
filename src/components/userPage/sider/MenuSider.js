@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../sider/css/Sider.less'
 import {MailOutlined, UserOutlined} from "@ant-design/icons";
 import {Menu} from "antd";
-import {Link} from "react-router-dom";
-
+import {Link, useHistory} from "react-router-dom";
 
 const MenuSiderComponent = ({url}) => {
+
+    const router = useHistory();
+    const [currentKey, setCurrentKey] = useState(router.location.pathname);
+
+    const handleClick = e => {
+        setCurrentKey(e.key);
+    };
 
     return (
         <div className="menu-component">
 
             <div className="menu-title">Особистий кабінет</div>
 
-            <Menu className="sider-profile"
+            <Menu onClick={handleClick}
+                  className="sider-profile"
                   mode="inline"
-                  defaultSelectedKeys={[`${url}/page`]}
-                  onSelect={info => {}}
+                  selectedKeys={[currentKey]}
             >
                 <Menu.Item className="menu-item"
                            style={{paddingLeft: 15}}

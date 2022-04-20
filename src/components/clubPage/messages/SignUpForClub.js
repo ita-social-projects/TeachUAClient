@@ -101,12 +101,13 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                         </Form.Item>
 
                         <Form.Item>
-
                             <Button
                                 className={classes.formButton}
                                 type="primary"
                                 htmlType="submit"
-                            >Надіслати</Button>
+                            >
+                                Надіслати
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>

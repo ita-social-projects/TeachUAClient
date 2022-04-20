@@ -4,7 +4,7 @@ import SiderComponent from "./sider/UserSider";
 import UserPageContent from "./content/UserPageContent";
 import '../userPage/css/User.less'
 import {getUserById} from "../../service/UserService";
-import Layout, {Content} from "antd/es/layout/layout";
+import Layout from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import {deleteToken, deleteUserId, getToken, getUserId} from "../../service/StorageService";
 import UserMessagesPage from "./content/messages/UserMessagesPage";
@@ -12,15 +12,12 @@ import UserMessagesPage from "./content/messages/UserMessagesPage";
 const UserPage = () => {
 
     const [user, setUser] = useState({});
-    const [userPageActive, setUserPageActive] = useState(true);
-    const [messagePageActive, setMessagePageActive] = useState(false);
-
     const routeMatch = useRouteMatch();
 
     useEffect(() => {
             getData();
         },
-        [userPageActive, messagePageActive]
+        []
     );
 
     const getData = () => {
@@ -40,16 +37,18 @@ const UserPage = () => {
     }
 
     return (
-        <Layout className="user-page">
+        <Layout className="user-page" >
             <Sider>
                 <SiderComponent url={routeMatch.url} />
             </Sider>
 
             <Route exact path={`${routeMatch.path}/page`} >
-                <UserPageContent user={user} id={user.id}/>
+                <UserPageContent user={user} id={user.id} />
             </Route>
 
-            <Route exact path={`${routeMatch.path}/messages`} component={UserMessagesPage} />
+            <Route exact path={`${routeMatch.path}/messages`} >
+                <UserMessagesPage />
+            </Route>
         </Layout>
     )
 }

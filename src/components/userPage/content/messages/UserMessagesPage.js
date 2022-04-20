@@ -1,10 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {Content} from "antd/es/layout/layout";
-import {getToken} from "../../../../service/StorageService";
+import {getToken, getUserId} from "../../../../service/StorageService";
 import {Redirect} from "react-router-dom";
-import classes from "./css/UserMessagesPage.module.css";
+import "./css/UserMessagesPage.less";
+import {getMessagesByRecipientId} from "../../../../service/MessageService";
+import Message from "./Message";
+import {sortMessages} from "./MessageUtil";
 
 const UserMessagesPage = () => {
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+            getMessagesByRecipientId(getUserId()).then(response => setMessages(sortMessages(response)));
+        },
+        []
+    );
 
     if (!getToken()) {
         return (
@@ -12,24 +23,24 @@ const UserMessagesPage = () => {
         );
     }
     return (
-        <Content className={classes.messagesContent}>
+        <Content className="messagesContent">
 
-            <div className={classes.contentBox}>
+            <div className="contentBox">
 
-                <div className={classes.contentTitle}>
+                <div className="contentTitle">
                     Мої повідомлення
                 </div>
 
-                <div className={classes.messages}>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
+                <div className="messages">
+
+                    {messages.length === 0
+                        ?
+                        <div className="noMessages">
+                            Повідомлень немає
+                        </div>
+                        :
+                        messages.map(message => <Message message={message} key={message.id}/>)
+                    }
                 </div>
             </div>
         </Content>

@@ -12,10 +12,19 @@ export const createMessage = async (data) => {
     }).catch((error) => {
         return error.response.data;
     });
-};
+}
 
-export const getMessageById = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/message/" + id).then((response) => {
+export const getMessagesByRecipientId = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/api/messages/recipient/" + id)
+        .then((response) => {
+            return response.data
+        });
+}
+
+export const updateMessageIsActiveById = async (id, data) => {
+    return await fetchRequest.put(BASE_URL + "/api/message/active/" + id, {
+        isActive: data.isActive
+    }).then((response) => {
         return response.data
     });
-};
+}
