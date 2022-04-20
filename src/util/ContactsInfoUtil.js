@@ -28,11 +28,10 @@ const ContactsInfoUtil = ({ label, contacts }) => {
     }
 
     let validatedContactData = (contact) => {
-        let result = contact.contactData;
         if (contact.contactType.name === "Телефон")
-            result = validatePhone(contact.contactData);
-
-        return result;
+            return validatePhone(contact.contactData);
+        else
+            return <a href={contact.contactData} target={"blank"}>{contact.contactData}</a>
     };
 
     return (

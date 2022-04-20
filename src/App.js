@@ -100,7 +100,9 @@ function App() {
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
-                                    <Route path="/user/:id" exact component={UserPage}/>
+                                    {/*The previous version of this route*/}
+                                    {/*<Route path="/user/:id" exact component={UserPage}/>*/}
+                                    <Route path="/user/:id" component={UserPage} />
                                     <Route path="/verify" exact component={VerifyPage}/>
                                     <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>

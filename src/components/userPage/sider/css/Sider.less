@@ -37,6 +37,11 @@
   font-size: 15px;
 }
 
+.menu-item {
+  color: #2D4C68;
+  border-radius: 4px;
+}
+
 .icon-user {
   padding-right: 7px;
   font-size: 20px;
@@ -82,7 +87,8 @@
     padding-top: 10px !important;
     display: inline-flex;
     justify-content: space-between;
-    margin-top: 10px;
+    //Commented this for MenuSider.js when narrow screen
+    //margin-top: 10px;
   }
 
   .sider-message {
@@ -102,6 +108,7 @@
 @media (max-width: 700px) {
   .user-page .ant-layout-sider-dark {
     position: absolute;
-    padding-left: 20%;
+    //Commented this for MenuSider.js when narrow screen
+    //padding-left: 20%;
   }
 }

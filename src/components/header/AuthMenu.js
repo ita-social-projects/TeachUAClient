@@ -85,7 +85,9 @@ const AuthMenu = () => {
                 <Menu>
                     <Menu.Item><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
                     <Menu.Item><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
-                    <Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>
+                    {/*Previous version of this <Menu.Item>*/}
+                    {/*<Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>*/}
+                        <Menu.Item><Link to={`/user/${localStorage.getItem('id')}/page`}>Мій Профіль </Link></Menu.Item>
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
                     { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
                         <SubMenu title="Адміністрування" >
