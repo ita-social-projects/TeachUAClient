@@ -1,22 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {
-    Button,
-    Form,
-    Popconfirm,
-    message,
-    Typography
-} from "antd";
+import {Button, Form, message, Popconfirm, Typography} from "antd";
 
-import {
-    deleteChallenge,
-    getAllChallenges,
-    updateChallengePreview
-} from "../../../service/ChallengeService";
+import {deleteChallenge, getAllChallenges, updateChallengePreview} from "../../../service/ChallengeService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import EditableTable from "../../EditableTable";
-const { Title } = Typography;
+
+const {Title} = Typography;
 
 
 const ChallengesTable = () => {
@@ -85,8 +76,10 @@ const ChallengesTable = () => {
         {
             title: 'Порядковий номер',
             dataIndex: 'sortNumber',
+            inputType: 'number',
             width: '10%',
-            editable: false,
+            editable: true,
+            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{text}</Link>
         },
         {
             title: 'Назва',
@@ -106,7 +99,7 @@ const ChallengesTable = () => {
 
     return (
         <div className="push-down">
-            <Button className="flooded-button add-btn" >
+            <Button className="flooded-button add-btn">
                 <Link to="/admin/addChallenge">
                     Додати челендж
                 </Link>
