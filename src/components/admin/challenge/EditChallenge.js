@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 
-import {Button, Form, Image, Input, message, Switch, Typography, Upload} from 'antd';
+import {Button, Form, Image, Input, InputNumber, message, Switch, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
 
 import {getChallengeById, updateChallenge} from "../../../service/ChallengeService";
@@ -115,9 +115,8 @@ const EditChallenge = (props) => {
                     name="sortNumber"
                     label="Порядковий номер"
                     value={challenge.sortNumber}
-                    onChange={handleNameChange}
                 >
-                    <Input disabled/>
+                    <InputNumber/>
                 </Form.Item>
                 <Form.Item
                     name="isActive"
