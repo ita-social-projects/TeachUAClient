@@ -4,6 +4,7 @@ import {replaceCommaToSemicolon} from "../util/CategoryUtil";
 
 import {clearSearchParameters, searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
+import {getCenterById} from "./CenterService";
 
 export const addClub = async (data) => {
     // data.locations.map(
@@ -39,6 +40,7 @@ export const addClub = async (data) => {
 export const updateClubBuId = async (data) => {
     return await fetchRequest
         .put(BASE_URL + "/api/club/" + data.id, {
+            id: data.id,
             ageFrom: data.ageFrom,
             ageTo: data.ageTo,
             name: data.name,
@@ -46,6 +48,7 @@ export const updateClubBuId = async (data) => {
             urlWeb: data.urlWeb,
             urlLogo: data.urlLogo,
             urlBackground: data.urlBackground,
+            urlGallery: data.urlGallery,
             workTime: data.workTime,
             categories: data.categories,
             user: data.user,
@@ -54,6 +57,8 @@ export const updateClubBuId = async (data) => {
             locations: data.locations,
             isApproved: data.isApproved,
             isOnline: data.isOnline,
+            feedbackCount: data.feedbackCount,
+            contacts: data.contacts
         })
         .then((response) => {
             return response.data;
