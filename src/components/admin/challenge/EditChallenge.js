@@ -58,7 +58,6 @@ const EditChallenge = (props) => {
                 url: BASE_URL + response.picture
             }];
             setCurrentPicture(baseImage);
-
         }).catch(response => {
             if (response.status === 404) {
                 setChallengeNotFound(true);
@@ -90,10 +89,13 @@ const EditChallenge = (props) => {
     };
 
     const handlePictureChange = (value) => {
-        console.log(value)
-        setPicture("/upload/challenges/" + value.file.name);
+        if (value.file.status == "removed") {
+            challenge.picture = null;
+        } else {
+            setPicture("/upload/challenges/" + value.file.name);
+            challenge.picture = picture;
+        }
         setCurrentPicture(value.fileList);
-        challenge.picture = picture;
     }
 
     useEffect(() => {
