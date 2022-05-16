@@ -13,6 +13,7 @@ const {Option} = Select;
 
 const ContactsTab = ({contacts, cities, setResult, result}) => {
 
+    //TODO Add to UI ability to choose which location is being updated as club can possess several locations
     const FIRST_LOCATION = 0;//test mode work only with first location
 
     const [contacts_data, setContactsData] = useState({});
@@ -33,34 +34,25 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     const commitTab = (values) => {
         Object.assign(values, contactsForm.getFieldValue());
 
-        console.log("cities: ");
-        console.log(cities);
-
         let city = cities.find(e => e.name === values.cityName);
         if(city){
             result.locations[FIRST_LOCATION].city = city;
             result.locations[FIRST_LOCATION].cityId = city.id;
             result.locations[FIRST_LOCATION].cityName = city.name;
-
-            console.log("city: ");
-            console.log(city);
         }
+
         let district = districts.find(e => e.name === values.districtName);
         if(district){
             result.locations[FIRST_LOCATION].districtId = district.id;
             result.locations[FIRST_LOCATION].districtName = district.name;
-
-            console.log("district: ");
-            console.log(district);
         }
+
         let station = stations.find(e => e.name === values.stationName);
         if(station){
             result.locations[FIRST_LOCATION].stationId = station.id;
             result.locations[FIRST_LOCATION].stationName = station.name;
-
-            console.log("station: ");
-            console.log(station);
         }
+
         if(values.address){
             result.locations[FIRST_LOCATION].address = values.address;
         }
@@ -72,15 +64,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         currentContacts[4].contactData = values.clubContactSkype;
         currentContacts[5].contactData = values.clubContactSite;
         result.contacts = currentContacts;
-
-        console.log("result: ");
-        console.log(result);
-        console.log("values: ");
-        console.log(values);
-        console.log("contacts: ");
-        console.log(contacts);
-        console.log("res: ");
-        console.log(currentContacts);
     }
 
     const onFinish = (values) => {
@@ -121,33 +104,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             })
         return currentContacts;
     }
-
-    // console.log("contactsForm: ");
-    // console.log(contactsForm);
-    // console.log("cityName: ");
-    // console.log(cityName);
-    // console.log("cityOnInput: ");
-    // console.log(cityOnInput);
-    // console.log("inputAddressProps: ");
-    // console.log(inputAddressProps);
-    // console.log("districts: ");
-    // console.log(districts);
-    // console.log("stations: ");
-    // console.log(stations);
-    // console.log("contacts: ");
-    // console.log(contacts);
-    // console.log("cities: ");
-    // console.log(cities);
-    // console.log("result: ");
-    // console.log(result);
-
-    // console.log(result.locations[FIRST_LOCATION].cityName);
-    // console.log(result.locations[FIRST_LOCATION].districtName);
-    // console.log(result.contacts[0].contactType.name);
-    // console.log(result.contacts[0].contactData);
-    // console.log(contacts[0].name);
-    //console.log(setCurrentContacts(contacts, result));
-
 
     return (
         <Form

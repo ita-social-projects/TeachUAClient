@@ -21,7 +21,8 @@ const EditClubTabs = ({
             <MainInformationTab categories={categories}
                                 centers={centers}
                                 setResult={setResult}
-                                result={result}/>
+                                result={result}
+            />
         </TabPane>
         <TabPane tab="Адреса і контакти" key="2">
             <ContactsTab contacts={contacts}
