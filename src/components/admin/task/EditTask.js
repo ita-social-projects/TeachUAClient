@@ -14,12 +14,13 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "../challenge/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
-import {tokenToHeader} from "../../../service/UploadService";
+import {tokenToHeader, uploadImage} from "../../../service/UploadService";
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const EditTask = () => {
+
     const [taskEditForm] = useForm();
     const taskId  = useParams();
     const [taskNotFound, setTaskNotFound] = useState(false);
@@ -32,6 +33,14 @@ const EditTask = () => {
         startDate: '',
         challengeId: 0,
     });
+
+    const [currentPicture, setCurrentPicture] = useState([{
+        uid: "",
+        name: "",
+        status: "",
+        url: ""
+    }]);
+
     const [challengeId, setChallengeId] = useState(task.challengeId);
     const [picture, setPicture] = useState(task.picture);
     const [challengeList, setChallengeList] = useState([
@@ -47,8 +56,17 @@ const EditTask = () => {
     const dateFormat = 'YYYY-MM-DD';
 
     const getData = () => {
-        getTask(taskId.id).then(response =>
-            setTask(response)
+        getTask(taskId.id).then(response => {
+                console.log(response);
+                setTask(response);
+                let img = [{
+                    uid: "1",
+                    name: response.name,
+                    status: "uploaded",
+                    url: BASE_URL + response.picture
+                }]
+                setCurrentPicture(img);
+            }
         ).catch(response => {
             if(response.status === 404){
                 setTaskNotFound(true);
@@ -86,6 +104,16 @@ const EditTask = () => {
 
     const onChange = (value) => {
         setSelectedChallenges(value);
+    }
+
+    const handlePictureChange = (value) => {
+        if(value.file.status == "removed"){
+            task.picture = null;
+        } else {
+            setPicture("/upload/tasks/" + value.file.name)
+            task.picture = picture;
+        }
+        setCurrentPicture(value.fileList);
     }
 
     useEffect(() => {
@@ -136,19 +164,15 @@ const EditTask = () => {
                     label="Фото"
                     value={picture}
                 >
-                    <Image
-                        width={100}
-                        height={100}
-                        alt="picture"
-                        src={BASE_URL + task.picture}
-                    />
                     <Upload
                         name="image"
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
+                        fileList={currentPicture}
                         data={{folder:`tasks`}}
-                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
+                        onChange={(uploaded) => handlePictureChange(uploaded)}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>
