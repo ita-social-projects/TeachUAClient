@@ -36,7 +36,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
 
         let city = cities.find(e => e.name === values.cityName);
         if(city){
-            result.locations[FIRST_LOCATION].city = city;
+            result.locations[FIRST_LOCATION].locationCity = city;
             result.locations[FIRST_LOCATION].cityId = city.id;
             result.locations[FIRST_LOCATION].cityName = city.name;
         }
