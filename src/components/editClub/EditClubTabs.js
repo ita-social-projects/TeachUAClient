@@ -10,6 +10,7 @@ const {TabPane} = Tabs;
 
 const EditClubTabs = ({
                           categories,
+                          centers,
                           setResult,
                           result,
                           contacts,
@@ -18,6 +19,7 @@ const EditClubTabs = ({
     <Tabs defaultActiveKey="1">
         <TabPane tab="Основна інформація" key="1">
             <MainInformationTab categories={categories}
+                                centers={centers}
                                 setResult={setResult}
                                 result={result}
             />

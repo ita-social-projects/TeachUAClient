@@ -2,19 +2,31 @@ import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
 import React from "react";
 import "../css/MainInformationTab.less"
 import {updateClubBuId} from "../../../service/ClubService";
+import {Option} from "antd/es/mentions";
 
-const MainInformationTab = ({categories, setResult, result}) => {
+const MainInformationTab = ({categories, centers, setResult, result}) => {
+
+    const [mainInfoForm] = Form.useForm();
+
+    const commitTab = () => {
+
+        Object.assign(result, mainInfoForm.getFieldValue());
+        result.categories = categories.filter(e => result.categoryNames.includes(e.name));
+        result.center = centers.find(e => e.name === result.centerName);
+    }
+
     const onFinish = (values) => {
 
-        setResult(Object.assign(result, values));
+        //setResult(Object.assign(result, values));
 
-        updateClubBuId(result).then(response => console.log(response));
+        updateClubBuId(result).then(window.location.reload());
     };
 
-    const categoriesName = result.categories.map((category) => category.name)
+    const categoriesName = result.categories.map((category) => category.name);
 
     return (
         <Form name="basic"
+              form={mainInfoForm}
               onFinish={onFinish}>
             <Form.Item name="name"
                        className="edit-club-row edit-club-name"
@@ -26,7 +38,7 @@ const MainInformationTab = ({categories, setResult, result}) => {
                        defaultValue={result.name}
                 />
             </Form.Item>
-            <Form.Item name="categories"
+            <Form.Item name="categoryNames"
                        className="edit-club-row"
                        label="Категорія"
                        initialValue={categoriesName}
@@ -64,15 +76,18 @@ const MainInformationTab = ({categories, setResult, result}) => {
                     років
                 </span>
             </Form.Item>
-            <Form.Item name="center"
+            <Form.Item name="centerName"
                        className="edit-club-row"
-                        label="Приналежність до центру"
+                       label="Приналежність до центру"
                        initialValue={result.center.name}>
                 <Select
                     className="edit-club-select"
                     placeholder="Обрати центр"
-                    />
+                    hasFeedback>
+                    {centers.map(center => <Option value={center.name}>{center.name}</Option>)}
+                </Select>
             </Form.Item>
+            <Button htmlType="button" onClick={commitTab} className="edit-club-page-button">Зберегти зміни вікна</Button>
             <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
         </Form>
     )

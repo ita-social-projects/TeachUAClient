@@ -6,7 +6,7 @@
     "@ant-design/icons": "^4.6.2",
     "@ckeditor/ckeditor5-build-classic": "^30.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
-    "@craco/craco": "^6.1.2",
+    "@craco/craco": "^6.4.3",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@react-google-maps/api": "^2.1.1",
     "@testing-library/jest-dom": "^5.12.0",

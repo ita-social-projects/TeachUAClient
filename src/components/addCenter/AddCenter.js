@@ -37,7 +37,7 @@ const AddCenter = ({isShowing, setShowing}) => {
                     locations.push({
                         id: location.id,
                         name: location.name,
-                        cityName: location.city.name,
+                        cityName: location.locationCity.name,
                         districtName: location.district?.name,
                         stationName: location.station?.name,
                         address: location.address,
