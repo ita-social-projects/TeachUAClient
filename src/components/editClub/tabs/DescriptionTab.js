@@ -117,7 +117,7 @@ const DescriptionTab = ({setResult, result}) => {
                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
                        }]}>
                 {/*<EditorComponent ref={editorRef}/>*/}
-                <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description).substring(5)} style={{ height: 200 }} />
+                <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description)} style={{ height: 200 }} />
             </Form.Item>
             <Button htmlType="button" onClick={commitTab} className="edit-club-page-button">Зберегти зміни вікна</Button>
             <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
