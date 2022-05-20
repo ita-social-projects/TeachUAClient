@@ -53,7 +53,7 @@ const EditTask = () => {
     ]);
     const [selectedChallenges, setSelectedChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
-    const dateFormat = 'YYYY-MM-DD';
+    const dateFormat = 'DD-MM-YYYY';
 
     const getData = () => {
         getTask(taskId.id).then(response => {
@@ -87,7 +87,9 @@ const EditTask = () => {
     };
 
     const onDateChange = (date, dateString) => {
-        setTask({...task, startDate: dateString});
+        console.log(dateString);
+        setTask({...task, startDate: moment(date).format("YYYY-MM-DD")});
+        console.log(task);
     }
 
     const saveForm = (values) => {
