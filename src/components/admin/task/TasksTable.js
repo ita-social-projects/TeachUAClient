@@ -34,6 +34,7 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
+            console.log(response);
             setTasks(response);
         });
         setLoading(false);
@@ -115,7 +116,7 @@ const TasksTable = () => {
             dataIndex: 'startDate',
             width: '35%',
             editable: false,
-            render: (text) => moment(text).format('YYYY-MM-DD')
+            render: (text) => moment(text.toString()).format('DD-MM-YYYY')
         },
     ];
 
@@ -155,6 +156,7 @@ const TasksTable = () => {
                 onSave={save}
                 actions={actions}
             />
+            <div onClick={() => console.log(tasks)}>BUTTTTTTTON</div>
         </div>
     )
 }
