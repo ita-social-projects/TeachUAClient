@@ -79,7 +79,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
             <Form.Item name="centerName"
                        className="edit-club-row"
                        label="Приналежність до центру"
-                       initialValue={result.center.name}>
+                       initialValue={result.center ? result.center.name : ""}>
                 <Select
                     className="edit-club-select"
                     placeholder="Обрати центр"
