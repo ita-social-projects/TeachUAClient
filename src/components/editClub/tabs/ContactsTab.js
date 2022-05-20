@@ -116,7 +116,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="cityName"
                            className="edit-club-row"
                            label="Місто"
-                           initialValue={result.locations[FIRST_LOCATION].cityName}
+                           initialValue={result.locations.length ? result.locations[FIRST_LOCATION].cityName : ""}
                 >
                     <Select
                         className="edit-club-select"
@@ -139,7 +139,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="districtName"
                            className="edit-club-row"
                            label="Район"
-                           initialValue={result.locations[FIRST_LOCATION].districtName}
+                           initialValue={result.locations.length ? result.locations[FIRST_LOCATION].districtName : ""}
                            >
                     <Select
                         className="edit-club-select"
@@ -151,7 +151,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                 <Form.Item name="stationName"
                            className="edit-club-row"
                            label="Станція/зупинка"
-                           initialValue={result.locations[FIRST_LOCATION].stationName}
+                           initialValue={result.locations.length ? result.locations[FIRST_LOCATION].stationName : ""}
                 >
                     <Select
                         className="edit-club-select"
@@ -164,14 +164,14 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
             <Form.Item name="address"
                        className="edit-club-row"
                        label="Адреса"
-                       initialValue={result.locations[FIRST_LOCATION].address}
+                       initialValue={result.locations.length ? result.locations[FIRST_LOCATION].address : ""}
                        // validateTrigger={handleSelect}
                        // {...inputAddressProps}
             >
                 <Input className="edit-club-input"
-                       value={result.locations[FIRST_LOCATION].address}
+                       value={result.locations.length ? result.locations[FIRST_LOCATION].address : ""}
                        placeholder="Адреса"
-                       defaultValue={result.locations[FIRST_LOCATION].address}
+                       defaultValue={result.locations.length ? result.locations[FIRST_LOCATION].address : ""}
                 />
                 {/*<EditClubInputAddress*/}
                 {/*    placeholder={result.address}*/}
