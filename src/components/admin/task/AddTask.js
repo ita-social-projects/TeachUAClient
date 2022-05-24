@@ -75,8 +75,8 @@ const AddTask = () => {
                     return;
                 }
                 setTaskId(response.id)
-                history.push("/challenges/task/" + response.id);
                 message.success("Завдання" + response.name + "' успішно додане!");
+                history.push("/challenges/task/" + response.id)
             });
     };
 
