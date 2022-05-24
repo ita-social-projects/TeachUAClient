@@ -6,7 +6,7 @@ import {useForm} from "antd/es/form/Form";
 import {createTask} from "../../../service/TaskService";
 import Editor from "../challenge/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
-import {Link} from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
 const { Option } = Select;
@@ -20,6 +20,7 @@ const AddTask = () => {
     const [headerText, setHeaderText] = useState();
     const [picture, setPicture] = useState();
     const [startDate, setStartDate] = useState();
+    const history = useHistory();
     const [task, setTask] = useState({
         id: 0,
         name: '',
@@ -74,6 +75,7 @@ const AddTask = () => {
                     return;
                 }
                 setTaskId(response.id)
+                history.push("/challenges/task/" + response.id);
                 message.success("Завдання" + response.name + "' успішно додане!");
             });
     };
