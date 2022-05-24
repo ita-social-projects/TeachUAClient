@@ -30,7 +30,12 @@ export const createTask = async (data, id) => {
             return response.data;
         })
         .catch((error) => {
-            return error.response.data;
+            if (!id) {
+                error.response.message = "Please, select challenge";
+            } else {
+                error.response.message = "Unexpected error";
+            }
+            return error.response;
         });
 };
 
