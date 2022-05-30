@@ -29,12 +29,12 @@ const NavMenu = () => {
         } else {
             setIsMobile(false)
         }
-      }
-      
+    }
+
     const {SubMenu} = Menu;
 
     useEffect(() => {
-        
+
         let slashPos = document.URL.lastIndexOf("/");
         let urlPage = document.URL.substr(slashPos + 1);
 
@@ -71,6 +71,9 @@ const NavMenu = () => {
                         </Menu.Item>)
                     }
                 </SubMenu >
+                <Menu.Item key="news">
+                    <Link to="/news"><FolderOpenOutlined className="icon" />Новини</Link>
+                </Menu.Item>
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
                     <Link to="/about"><ContainerOutlined className="icon" />Про нас</Link>
