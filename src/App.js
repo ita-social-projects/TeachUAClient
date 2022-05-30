@@ -51,6 +51,8 @@ import HardRegistrationPage from "./components/challengeTeachUkrainian/Registrat
 import HardTaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
 import SpeakingClubPage from "./components/speakingClubPage/SpeakingClubPage";
 import SpeakingClubRegistrationPage from "./components/speakingClubPage/SpeakingClubRegistrationPage";
+import NewsListComponent from "./components/news/NewsListComponent";
+import NewsPage from "./components/newsPage/NewsPage";
 
 const {Content} = Layout;
 
@@ -100,6 +102,8 @@ function App() {
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
+                                    <Route path="/news" exact component={NewsListComponent}/>
+                                    <Route path="/news/:id" exact component={NewsPage}/>
                                     {/*The previous version of this route*/}
                                     {/*<Route path="/user/:id" exact component={UserPage}/>*/}
                                     <Route path="/user/:id" component={UserPage} />
@@ -121,7 +125,8 @@ function App() {
                                     <Route path="/challenge" exact component={HardChallengePage}/>
                                     <Route path="/challengeUA" exact component={TeachUAChallenge}/>
                                     <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
-                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>                                    <Route path="/marathon" exact component={MarathonPage}/>
+                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
+                                    <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/speakingclub" exact component={SpeakingClubPage}/>
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/" exact component={MainComponent}/>
