@@ -58,7 +58,7 @@ const NewsPage = () => {
                 <div className="content">
                     <div className="content-title">
                         <div id="title">{news.title}</div>
-                        <div id="date">{moment(news.date).format(DATE_FORMAT)}</div>
+                        <div id="date">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
                     </div>
                     <div className="content-text">
                         <div id="description">{news.description}</div>
