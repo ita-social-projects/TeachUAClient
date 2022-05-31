@@ -156,7 +156,6 @@ const TasksTable = () => {
                 onSave={save}
                 actions={actions}
             />
-            <div onClick={() => console.log(tasks)}>BUTTTTTTTON</div>
         </div>
     )
 }
