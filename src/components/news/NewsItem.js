@@ -18,7 +18,7 @@ const NewsItem = ({news}) => {
     return (
         <div id="newsContainer" onClick={handleClick}>
             <div id="newsImage" style={{
-                background: `url(${BASE_URL + news.urlTitleLogo})`
+                background: `url(${BASE_URL + news.urlTitleLogo}) center / cover`
             }}></div>
             <div id="newsData">
                 <div id="newsDate">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
