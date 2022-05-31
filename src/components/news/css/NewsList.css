@@ -1,5 +1,5 @@
 .pagination {
-    max-width: 1200px;
+    width: 940px;
     display:flex;
     align-items: center;
     justify-content: center;
