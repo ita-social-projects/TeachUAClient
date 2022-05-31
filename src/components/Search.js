@@ -15,6 +15,8 @@ import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import {getAllCategories} from "../service/CategoryService";
 import {FilePdfOutlined} from "@ant-design/icons";
+import {getUserId} from "../service/StorageService";
+import {getUserById} from "../service/UserService";
 
 
 const {Option, OptGroup} = Select;
@@ -34,6 +36,7 @@ class Search extends React.Component {
             allCategories: [],
             loading: false,
             searchClicked: false,
+            user:''
         };
     }
 
@@ -50,6 +53,11 @@ class Search extends React.Component {
         getAllCategories().then((response) => {
             this.setState({allCategories: response});
         });
+        if(getUserId()) {
+            getUserById(getUserId()).then(response => {
+                this.setState({user:response});
+            })
+        }
     }
 
     onSearchChange = (value, option, page) => {
@@ -259,12 +267,13 @@ class Search extends React.Component {
                     />
 
                 </div>
+                {this.state.user !== null && this.state.user !== undefined && this.state.user !== '' && this.state.user.roleName === "ROLE_ADMIN" ?
                 <div className="search-icon-group">
                     <FilePdfOutlined className="advanced-icon" title={"Завантажити результат пошуку"}
                                      style={{color: "orange", backgroundColor: "white"}}
                                      onClick={() => getResultSearchReport(searchParameters, "Result for " + searchParameters.clubName)}>
                     </FilePdfOutlined>
-                </div>
+                </div>:""}
             </div>
         );
     }
