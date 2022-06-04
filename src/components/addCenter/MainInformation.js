@@ -29,7 +29,6 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
         result.locations.map(
             location => {
                 location.coordinates = location.coordinates || location.latitude + ", " + location.longitude;
-                location.phone = location.phone || "0000000000";
             }
         );
         console.log(result.locations);
