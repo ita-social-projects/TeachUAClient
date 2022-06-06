@@ -25,6 +25,13 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
     const onFinish = (values) => {
         console.log('Success: ', values);
         setResult(Object.assign(result, values));
+        result.locations = [JSON.parse(result.locations)];
+        result.locations.map(
+            location => {
+                location.coordinates = location.coordinates || location.latitude + ", " + location.longitude;
+            }
+        );
+        console.log(result.locations);
         mainInformationFrom.resetFields();
         nextStep();
     };
@@ -69,7 +76,7 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                         <Checkbox.Group>
                             {locations.map(location =>
                                 <div className="checkbox-item">
-                                    <Checkbox value={location}>
+                                    <Checkbox value={JSON.stringify(location)}>
                                         {location.name}
                                     </Checkbox>
                                 </div>
