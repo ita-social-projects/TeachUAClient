@@ -71,9 +71,10 @@ const NavMenu = () => {
                         </Menu.Item>)
                     }
                 </SubMenu >
-                {/*<Menu.Item key="news">*/}
-                {/*    <Link to="/news"><FolderOpenOutlined className="icon" />Новини</Link>*/}
-                {/*</Menu.Item>*/}
+                {/* Comment next 3 lines for prod version */}
+                <Menu.Item key="news">
+                    <Link to="/news"><FolderOpenOutlined className="icon" />Новини</Link>
+                </Menu.Item>
                 {/*Замість  новин - про нас(проєкт)*/}
                 <Menu.Item key="about">
                     <Link to="/about"><ContainerOutlined className="icon" />Про нас</Link>
