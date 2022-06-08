@@ -24,14 +24,12 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
 
     const onFinish = (values) => {
         console.log('Success: ', values);
-        setResult(Object.assign(result, values));
-        result.locations = [JSON.parse(result.locations)];
-        result.locations.map(
-            location => {
-                location.coordinates = location.coordinates || location.latitude + ", " + location.longitude;
+        values.locations.map(location =>{
+            if(!location.coordinates){
+                location.coordinates = location.latitude + ", " + location.longitude;
             }
-        );
-        console.log(result.locations);
+        })
+        setResult(Object.assign(result, values));
         mainInformationFrom.resetFields();
         nextStep();
     };
@@ -72,18 +70,16 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                         required: true,
                         message: "Додайте і виберіть локацію"
                     }]}>
-                    <div className="location-list">
-                        <Checkbox.Group>
+                        <Checkbox.Group className="location-list">
                             {locations.map(location =>
                                 <div className="checkbox-item">
-                                    <Checkbox value={JSON.stringify(location)}>
+                                    <Checkbox value={location}>
                                         {location.name}
                                     </Checkbox>
                                 </div>
                             )
                             }
                         </Checkbox.Group>
-                    </div>
                 </Form.Item>
                 <span className="add-club-location" onClick={() => setLocationVisible(true)}>
                     <Button className="add-location-btn" htmlType="submit"><PlusOutlined/>Додати локацію</Button>
