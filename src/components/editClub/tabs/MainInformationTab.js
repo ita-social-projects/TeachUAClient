@@ -27,7 +27,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
     return (
         <Form name="basic"
               form={mainInfoForm}
-              onFinish={onFinish}>
+              onFinish={commitTab}>
             <Form.Item name="name"
                        className="edit-club-row edit-club-name"
                        label="Назва"
@@ -84,6 +84,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                     className="edit-club-select"
                     placeholder="Обрати центр"
                     hasFeedback>
+                    <Option value={null}>{"-"}</Option>
                     {centers.map(center => <Option value={center.name}>{center.name}</Option>)}
                 </Select>
             </Form.Item>
