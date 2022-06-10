@@ -1,5 +1,5 @@
 import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
-import React from "react";
+import React, {useState} from "react";
 import "../css/MainInformationTab.less"
 import {updateClubBuId} from "../../../service/ClubService";
 import {Option} from "antd/es/mentions";
@@ -7,12 +7,15 @@ import {Option} from "antd/es/mentions";
 const MainInformationTab = ({categories, centers, setResult, result}) => {
 
     const [mainInfoForm] = Form.useForm();
+    const [hideButton, setHideButton] = useState();
 
     const commitTab = () => {
 
         Object.assign(result, mainInfoForm.getFieldValue());
         result.categories = categories.filter(e => result.categoryNames.includes(e.name));
         result.center = centers.find(e => e.name === result.centerName);
+
+        setHideButton({display:"none"});
     }
 
     const onFinish = (values) => {
@@ -88,8 +91,8 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                     {centers.map(center => <Option value={center.name}>{center.name}</Option>)}
                 </Select>
             </Form.Item>
-            <Button htmlType="button" onClick={commitTab} className="edit-club-page-button">Зберегти зміни вікна</Button>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+            <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
+            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
         </Form>
     )
 };
