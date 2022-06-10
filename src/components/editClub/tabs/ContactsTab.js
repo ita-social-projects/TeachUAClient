@@ -24,6 +24,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
+    const [hideButton, setHideButton] = useState();
+
     const currentContacts = [];
 
     useEffect(() => {
@@ -64,6 +66,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         currentContacts[4].contactData = values.clubContactSkype;
         currentContacts[5].contactData = values.clubContactSite;
         result.contacts = currentContacts;
+
+        setHideButton({display:"none"});
     }
 
     const onFinish = (values) => {
@@ -195,8 +199,8 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                                suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.contactType.urlLogo}/>}/>
                     </Form.Item>)}
             </Form.Item>
-            <Button htmlType="button" onClick={commitTab} className="edit-club-page-button">Зберегти зміни вікна</Button>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти усі зміни</Button>
+            <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
+            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
         </Form>
     )
 };
