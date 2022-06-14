@@ -84,7 +84,7 @@ const NewsTable = () => {
             dataIndex: 'date',
             width: '15%',
             editable: true,
-            render: (date) => moment(date).format('DD.MM.YYYY')
+            render: (date) => moment(date.toString()).format('DD.MM.YYYY')
         },
     ];
 
