@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./css/NewsTable.less";
 import {Button, Form, Input, message, Popconfirm, Typography} from "antd";
 import EditableTable from "../../EditableTable";
-import {createNews, deleteNewsById, getAllNews, updateNewsById} from "../../../service/NewsService";
+import {deleteNewsById, getAllNews, updateNewsById} from "../../../service/NewsService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import CreateNewsModal from "./CreateNewsModal";
