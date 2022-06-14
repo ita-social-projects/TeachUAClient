@@ -23,7 +23,6 @@ export const getFormattedDate = (messageDate) => {
     let day = new Intl.DateTimeFormat('uk', {day: 'numeric'}).format(date);
     let hour = new Intl.DateTimeFormat('uk', {hour: '2-digit'}).format(date);
     let minute = new Intl.DateTimeFormat('uk', {minute: '2-digit'}).format(date);
-
     let second = new Intl.DateTimeFormat('uk', {second: '2-digit'}).format(date);
     return `${day} ${month} ${year} ${hour}:${minute}:${second}`;
 }
