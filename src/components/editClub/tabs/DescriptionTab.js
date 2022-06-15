@@ -15,6 +15,8 @@ const DescriptionTab = ({setResult, result}) => {
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
     const editorRef = useRef(null);
+    const [hideButton, setHideButton] = useState();
+
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
     const leftDesc = "{\"blocks\":[{\"key\":\"etag9\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"8lltb\",\"text\":\" \",\"type\":\"atomic\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[{\"offset\":0,\"length\":1,\"key\":0}],\"data\":{}},{\"key\":\"98dtl\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"9q9dc\",\"text\":\"";
@@ -48,6 +50,8 @@ const DescriptionTab = ({setResult, result}) => {
                 result.urlGallery.push({"url":el.response});
             })
         }
+
+        setHideButton({display:"none"});
 
         console.log("result: ");
         console.log(result);
@@ -117,10 +121,12 @@ const DescriptionTab = ({setResult, result}) => {
                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
                        }]}>
                 {/*<EditorComponent ref={editorRef}/>*/}
-                <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description)} style={{ height: 200 }} />
+                <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description).trim()} style={{ height: 200 }} />
             </Form.Item>
-            <Button htmlType="button" onClick={commitTab} className="edit-club-page-button">Зберегти зміни вікна</Button>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти зміни</Button>
+            <div style={{height: 70}}>
+                <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
+                <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
+            </div>
         </Form>
     )
 };
