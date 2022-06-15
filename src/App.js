@@ -51,6 +51,9 @@ import HardRegistrationPage from "./components/challengeTeachUkrainian/Registrat
 import HardTaskPage from "./components/challengeTeachUkrainian/TaskPage/TaskPage";
 import SpeakingClubPage from "./components/speakingClubPage/SpeakingClubPage";
 import SpeakingClubRegistrationPage from "./components/speakingClubPage/SpeakingClubRegistrationPage";
+import NewsListComponent from "./components/news/NewsListComponent";
+import NewsPage from "./components/newsPage/NewsPage";
+import NewsTable from "./components/admin/news/NewsTable";
 
 const {Content} = Layout;
 
@@ -85,6 +88,7 @@ function App() {
                                     <Route path="/admin/tasks" exact component={TasksTable}/>
                                     <Route path="/admin/addChallenge" exact component={AddChallenge}/>
                                     <Route path="/admin/challenges" exact component={ChallengesTable}/>
+                                    <Route path="/admin/news" exact component={NewsTable}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
@@ -100,7 +104,12 @@ function App() {
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
-                                    <Route path="/user/:id" exact component={UserPage}/>
+                                    {/* Comment next 2 lines for prod version */}
+                                    <Route path="/news" exact component={NewsListComponent}/>
+                                    <Route path="/news/:id" exact component={NewsPage}/>
+                                    {/*The previous version of this route*/}
+                                    {/*<Route path="/user/:id" exact component={UserPage}/>*/}
+                                    <Route path="/user/:id" component={UserPage} />
                                     <Route path="/verify" exact component={VerifyPage}/>
                                     <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                     <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
@@ -119,7 +128,8 @@ function App() {
                                     <Route path="/challenge" exact component={HardChallengePage}/>
                                     <Route path="/challengeUA" exact component={TeachUAChallenge}/>
                                     <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
-                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>                                    <Route path="/marathon" exact component={MarathonPage}/>
+                                    <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
+                                    <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/speakingclub" exact component={SpeakingClubPage}/>
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/" exact component={MainComponent}/>

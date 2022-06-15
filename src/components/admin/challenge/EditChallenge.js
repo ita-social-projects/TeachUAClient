@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {Button, Form, Image, Input, message, Switch, Typography, Upload} from 'antd';
-import {useForm} from "antd/es/form/Form";
+import { Button, Form, Image, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
+import { useForm } from "antd/es/form/Form";
 
-import {getChallengeById, updateChallenge} from "../../../service/ChallengeService";
-import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
+import { getChallengeById, updateChallenge } from "../../../service/ChallengeService";
+import { BASE_URL, UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from './Editor';
 import TasksInChallenge from "./TasksInChallenge";
-import {tokenToHeader} from "../../../service/UploadService";
+import { tokenToHeader } from "../../../service/UploadService";
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 const EditChallenge = (props) => {
 
@@ -27,9 +27,16 @@ const EditChallenge = (props) => {
         isActive: "",
         tasks: []
     }]);
+
+    const [currentPicture, setCurrentPicture] = useState([{
+        uid: "",
+        name: "",
+        status: "",
+        url: ""
+    }])
     const [challengeNotFound, setChallengeNotFound] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [picture, setPicture] = useState(challenge.picture);
+    const [picture, setPicture] = useState();
     const [challengeEditForm, form] = useForm();
     const challengeId = useParams();
     const [name, setName] = useState();
@@ -44,6 +51,13 @@ const EditChallenge = (props) => {
         getChallengeById(challengeId.id).then(response => {
             setChallenge(response);
             setIsChecked(response.isActive);
+            let baseImage = [{
+                uid: "1",
+                name: response.name,
+                status: "upload",
+                url: BASE_URL + response.picture
+            }];
+            setCurrentPicture(baseImage);
         }).catch(response => {
             if (response.status === 404) {
                 setChallengeNotFound(true);
@@ -74,6 +88,16 @@ const EditChallenge = (props) => {
         setIsChecked(state)
     };
 
+    const handlePictureChange = (value) => {
+        if (value.file.status == "removed") {
+            challenge.picture = null;
+        } else {
+            setPicture("/upload/challenges/" + value.file.name);
+            challenge.picture = picture;
+        }
+        setCurrentPicture(value.fileList);
+    }
+
     useEffect(() => {
         getData();
     }, []);
@@ -102,63 +126,59 @@ const EditChallenge = (props) => {
                 onFinish={saveForm}
                 form={challengeEditForm}
                 autoComplete="off"
-                labelCol={{span: 4}}
-                wrapperCol={{span: 14}}
+                labelCol={{ span: 4 }}
+                wrapperCol={{ span: 14 }}
             >
                 <Form.Item
                     name="sortNumber"
                     label="Порядковий номер"
                     value={challenge.sortNumber}
-                    onChange={handleNameChange}
                 >
-                    <Input disabled/>
+                    <InputNumber />
                 </Form.Item>
                 <Form.Item
                     name="isActive"
                     label="Статус"
                     initialValue={isChecked}
                 >
-                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch}/>
+                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch} />
                 </Form.Item>
                 <Form.Item
                     label="Назва"
                     name="name"
                     value={challenge.name}
                 >
-                    <Input/>
+                    <Input />
                 </Form.Item>
                 <Form.Item
                     label="Заголовок"
                     name="title"
                     value={challenge.title}
                 >
-                    <Input/>
+                    <Input />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
                     name="description"
                 >
-                    <Editor/>
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     name="picture"
                     label="Фото"
                     value={picture}
                 >
-                    <Image
-                        width={100}
-                        height={100}
-                        alt="picture"
-                        src={BASE_URL + challenge.picture}
-                    />
                     <Upload
                         name="image"
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
-                        data={{folder: `challenges`}}
-                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
-                        <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
+                        fileList={currentPicture}
+                        data={{ folder: `challenges` }}
+                        headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader() }}
+                        onChange={(uploaded) => handlePictureChange(uploaded)}
+                    >
+                        <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
                     </Upload>
                 </Form.Item>
                 <Form.Item>
@@ -173,7 +193,7 @@ const EditChallenge = (props) => {
             </Form>
             <div>
                 <Title level={3}>Усі завдання</Title>
-                <TasksInChallenge/>
+                <TasksInChallenge />
             </div>
         </div>
     )

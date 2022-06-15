@@ -16,8 +16,10 @@ export const getCenterById = async (id) => {
 };
 
 export const getCentersByUserId = async (id, page) => {
-    return await fetchRequest.get(BASE_URL + "/api/centers/" + id + "?page" + page).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/centers/" + id + "?page=" + page).then((response) => {
         return response.data
+    }).catch((error) => {
+        return error.data;
     });
 };
 

@@ -13,7 +13,6 @@
     overflow: hidden;
 }
 
-
 .mainInfo .ant-checkbox-wrapper span {
     display:flex;
     justify-content: left;
@@ -52,4 +51,18 @@
     box-sizing: border-box;
     height: 250px;
     /* overflow-y: scroll; */
+}
+
+.mainInfo .location-list {
+    max-height: 270px;
+    overflow-y: scroll;
+}
+
+.mainInfo ::-webkit-scrollbar {
+    width: 3px;
+}
+
+.mainInfo ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
 }

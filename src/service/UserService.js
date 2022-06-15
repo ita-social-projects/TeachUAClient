@@ -88,7 +88,7 @@ export const updateUser = async (data) => {
         lastName: data.lastName,
         email: data.email,
         phone: data.phone,
-        role: data.roleName,
+        roleName: data.roleName,
         urlLogo: data.urlLogo,
         status: data.status
     }).then((response) => {
@@ -119,6 +119,15 @@ export const getAllUsers = async () => {
         }).catch((error) => {
             return error.response.data
         })
+};
+
+export const getUsersByRole = async (role) => {
+    return await fetchRequest.get(BASE_URL + "/api/users/" + role)
+        .then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
 };
 
 export const deleteUserById = async (id) => {

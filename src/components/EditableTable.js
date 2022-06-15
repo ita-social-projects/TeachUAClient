@@ -18,7 +18,7 @@ const EditableTable = ({bordered, className, columns, data, onSave, form, action
     };
 
     const actionColumns = {
-        title: 'Дія',
+        title: 'Управління',
         render: (_, record) => {
             const editable = record.id === editingKey;
             return editable ? (
