@@ -4,12 +4,13 @@ import NewsItem from "./NewsItem";
 import EmptySearch from "../EmptySearch";
 import {Pagination} from "antd";
 import "./css/NewsList.css";
+import Loader from "../Loader";
 
 const NewsList = () => {
     const [currentPage, setCurrentPage] = useState(0);
 
     const [newsList, setNewsList] = useState([]);
-
+    const[load, setLoad] = useState(true);
 
     useEffect(() => {
         getData(currentPage);
@@ -19,6 +20,7 @@ const NewsList = () => {
         getNewsList(page).then(response => {
             console.log(response);
             setNewsList(response);
+            setLoad(false);
         })
     }
 
@@ -28,8 +30,8 @@ const NewsList = () => {
         window.scrollTo(0, 0);
     };
 
-    return newsList.length === 0 ? <EmptySearch/> : (
-        <div className="global-padding">
+    return load ? <Loader/> : newsList.length === 0 ? <EmptySearch/> : (
+        <div>
             {newsList.content.map((news, index) => <NewsItem key={index} news={news}/>)}
             <Pagination className="pagination"
                         hideOnSinglePage
