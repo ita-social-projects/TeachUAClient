@@ -9,15 +9,18 @@ import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import moment from "moment";
+import Loader from "../Loader";
 
 const NewsPage = () => {
 
     const [news, setNews] = useState();
     const {id} = useParams();
+    const [load, setLoad] = useState(true);
 
     const DATE_FORMAT = "DD.MM.YYYY";
 
     useEffect(() => {
+        setLoad(true);
         getData();
     }, []);
 
@@ -29,10 +32,11 @@ const NewsPage = () => {
             } else {
                 setNews(response);
             }
+            setLoad(false)
         })
     }
 
-    return <Layout className="global-padding">{
+    return load ? <Loader /> : <Layout className="global-padding">{
         news ? (
             <div className="news-page">
                 <div className="image"

@@ -4,3 +4,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.news-content{
+    display: flex;
+    justify-content: center;
+}
+
+.news-content .newslist {
+    margin-right:50px;
+}

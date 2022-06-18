@@ -233,3 +233,19 @@ export const deleteClubById = async (id) => {
             return error.data;
         });
 };
+
+export const getTopClubsByCity = async (city, amount) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/clubs/top/search",{
+            params:{
+                cityName: city,
+                amount: amount
+            }
+        })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
