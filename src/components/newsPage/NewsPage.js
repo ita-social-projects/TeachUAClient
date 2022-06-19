@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getNewsById} from "../../service/NewsService";
+import {getAllNews, getNewsById} from "../../service/NewsService";
 import {Button, Layout, Result} from "antd";
 import {BASE_URL} from "../../service/config/ApiConfig";
 import {useParams} from "react-router-dom";
@@ -10,10 +10,12 @@ import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import moment from "moment";
 import Loader from "../Loader";
+import NewsCarousel from "./NewsCarousel";
 
 const NewsPage = () => {
 
     const [news, setNews] = useState();
+    const [newsList, setNewsList] = useState([]);
     const {id} = useParams();
     const [load, setLoad] = useState(true);
 
@@ -22,7 +24,7 @@ const NewsPage = () => {
     useEffect(() => {
         setLoad(true);
         getData();
-    }, []);
+    }, [id]);
 
     const getData = () => {
         getNewsById(id).then(response => {
@@ -33,6 +35,10 @@ const NewsPage = () => {
                 setNews(response);
             }
             setLoad(false)
+        })
+        // exlude current news from another news list
+        getAllNews().then(response => {
+            setNewsList(response.filter(news => news.id != id));
         })
     }
 
@@ -67,6 +73,10 @@ const NewsPage = () => {
                     <div className="content-text">
                         <div id="description">{news.description}</div>
                     </div>
+                </div>
+                <div className="other-news">
+                    <div className="title">Інші новини</div>
+                    <NewsCarousel newsList={newsList}/>
                 </div>
             </div>
         ) : <Result
