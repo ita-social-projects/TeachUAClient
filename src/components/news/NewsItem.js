@@ -24,7 +24,8 @@ const NewsItem = ({news}) => {
                 <div id="newsDate">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
                 <div id="newsTitle">{news.title}</div>
                 <div id="detailButton">
-                    <Link to={`/news/${news.id}`}>Детальніше <ArrowRightOutlined /></Link></div>
+                    <Link to={`/news/${news.id}`}>Детальніше <ArrowRightOutlined /></Link>
+                </div>
             </div>
 
         </div>
