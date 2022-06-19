@@ -7,10 +7,9 @@ import {mapSearchParameters, searchParameters} from "../../context/SearchContext
 import ClubListItemInfo from "../clubList/ClubListItemInfo";
 import Loader from "../Loader";
 
-const ClubSider = () => {
+const ClubSider = ({load,setLoad}) => {
     const [clubs, setClubs] = useState([]);
 
-    const [load, setLoad] = useState(true);
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
 
@@ -25,6 +24,7 @@ const ClubSider = () => {
 
     const getData = () =>{
         getTopClubsByCity(searchParameters.cityName, 3).then(response => {
+            setLoad(true);
             console.log(response);
             setClubs(response);
             setLoad(false)

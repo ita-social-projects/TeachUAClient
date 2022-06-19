@@ -6,11 +6,10 @@ import {Pagination} from "antd";
 import "./css/NewsList.css";
 import Loader from "../Loader";
 
-const NewsList = () => {
+const NewsList = ({load,setLoad}) => {
     const [currentPage, setCurrentPage] = useState(0);
 
     const [newsList, setNewsList] = useState([]);
-    const[load, setLoad] = useState(true);
 
     useEffect(() => {
         getData(currentPage);
@@ -18,6 +17,7 @@ const NewsList = () => {
 
     const getData = (page) =>{
         getNewsList(page).then(response => {
+            setLoad(true);
             console.log(response);
             setNewsList(response);
             setLoad(false);
