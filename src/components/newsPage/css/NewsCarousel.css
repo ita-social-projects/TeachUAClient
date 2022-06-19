@@ -27,7 +27,7 @@
 
 .news-carousel .carousel-item {
     height: 530px;
-    max-width: 420px;
+    width: 420px;
     background: white;
     border-radius: 8px;
     margin:10px;
