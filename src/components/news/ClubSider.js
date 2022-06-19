@@ -7,8 +7,7 @@ import {mapSearchParameters, searchParameters} from "../../context/SearchContext
 import ClubListItemInfo from "../clubList/ClubListItemInfo";
 import Loader from "../Loader";
 
-const ClubSider = ({load,setLoad}) => {
-    const [clubs, setClubs] = useState([]);
+const ClubSider = ({clubs}) => {
 
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
@@ -18,21 +17,7 @@ const ClubSider = ({load,setLoad}) => {
         setClubInfoVisible(true);
     };
 
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = () =>{
-        getTopClubsByCity(searchParameters.cityName, 3).then(response => {
-            setLoad(true);
-            console.log(response);
-            setClubs(response);
-            setLoad(false)
-        })
-    }
-
-
-    return load ? <Loader/> :clubs.length === 0 ? <EmptySearch/> : (
+    return clubs.length === 0 ? <EmptySearch/> : (
         <div className="club-sider">
             <div class="sider-header">
                 {mapSearchParameters.cityName !== 'online' ?
