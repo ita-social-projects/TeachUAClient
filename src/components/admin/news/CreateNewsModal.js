@@ -1,6 +1,6 @@
 import React from 'react';
 import "./css/CreateNewsModal.less";
-import {Button, ConfigProvider, DatePicker, Form, Input, message, Modal, Upload} from "antd";
+import {Button, ConfigProvider, DatePicker, Form, Input, message, Modal, Switch, Upload} from "antd";
 import {createNews} from "../../../service/NewsService";
 import Editor from "../challenge/Editor";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
@@ -21,6 +21,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
             date: values.date.toJSON(),
             urlTitleLogo: values.urlTitleLogo.file.response
         };
+        console.log(data);
         createNews(data)
             .then((response) => {
                 form.resetFields();
@@ -81,6 +82,15 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                             />
                         </Form.Item>
                     </ConfigProvider>
+
+                    <Form.Item
+                        label="Активна"
+                        name="isActive"
+                        valuePropName="checked"
+                        initialValue={true}
+                        >
+                            <Switch />
+                    </Form.Item>
 
                     <Form.Item
                         // className={classes.formItem}

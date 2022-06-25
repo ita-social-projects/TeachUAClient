@@ -12,15 +12,11 @@ const {Title} = Typography;
 const NewsTable = () => {
 
     const [form] = Form.useForm();
-    const [news, setNews] = useState([{
-        id: 1,
-        title: '',
-        date: ''
-    }]);
+    const [news, setNews] = useState([]);
     const [showModalCreateNews, setShowModalCreateNews] = useState(false);
 
     const getData = () => {
-        getAllNews().then((response) => {
+        getAllNews().then((response) =>{
             setNews(response);
         });
     };
@@ -38,6 +34,7 @@ const NewsTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, news, record.id).then((editedData) => {
+            editedData.item.date = moment(editedData.item.date).format("YYYY-MM-DD");
             updateNewsById(record.id, editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message)
@@ -74,18 +71,45 @@ const NewsTable = () => {
 
     const columns = [
         {
+            title: 'Id',
+            dataIndex: 'id',
+            width: '5%',
+            editable: false,
+        },
+        {
             title: 'Заголовок',
             dataIndex: 'title',
-            width: '60%',
+            width: '20%',
+            editable: true,
+        },
+        {
+            title: 'Опис',
+            dataIndex: 'description',
+            width: '35%',
             editable: true,
         },
         {
             title: 'Дата новини',
             dataIndex: 'date',
-            width: '15%',
+            width: '5%',
             editable: true,
             render: (date) => moment(date.toString()).format('DD.MM.YYYY')
         },
+        {
+            title: 'Активна/неактивна',
+            dataIndex: 'isActive',
+            inputType: 'select',
+            selectData: ["true", "false"],
+            width: '5%',
+            editable: true,
+            render: (isActive) => isActive.toString()
+        },
+        {
+            title: 'Зображення',
+            dataIndex: 'urlTitleLogo',
+            width: '15%',
+            editable: true,
+        }
     ];
 
     return (
