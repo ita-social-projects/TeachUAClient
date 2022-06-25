@@ -2,8 +2,18 @@ import fetchRequest from "./FetchRequest";
 import { BASE_URL } from "./config/ApiConfig";
 
 export const createNews = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/news", data)
-        .then((response) => {return response.data})
+    return await fetchRequest.post(BASE_URL + "/api/news", {
+        title: data.title,
+        date: data.date,
+        isActive: data.isActive,
+        description: data.description,
+        urlTitleLogo: data.urlTitleLogo
+    }).then((response) => {
+        return response.data
+    })
+        .catch((error) => {
+            return error.response.data;
+        })
 };
 
 export const getPageableNews = async (size) => {
@@ -17,8 +27,17 @@ export const getAllNews = async () => {
 };
 
 export const updateNewsById = async (id, data) => {
-    return await fetchRequest.put(BASE_URL + "/news/" + id, {title: data.title,})
-        .then((response) => {return response.data});
+    return await fetchRequest.put(BASE_URL + "/api/news/" + id, {
+        title: data.title,
+        date: data.date,
+        isActive: data.isActive,
+        description: data.description,
+        urlTitleLogo: data.urlTitleLogo})
+        .then((response) => {
+            return response.data})
+        .catch((error) => {
+            return error.response.data;
+        });
 };
 
 export const deleteNewsById = async (id) => {
