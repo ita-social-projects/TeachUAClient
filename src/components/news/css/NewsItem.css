@@ -75,12 +75,22 @@
     #newsContainer {
         width: 840px;
         height: 292px;
+        padding:15px;
     }
 }
 
 @media screen and (max-width: 1215px) {
     #newsContainer {
-        width: 700px;
-        height: 210px;
+        width: 650px;
+        height: 200px;
+        padding:10px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #newsContainer {
+        max-width: 7000px;
+        max-height: 220px;
+        padding:10px;
     }
 }

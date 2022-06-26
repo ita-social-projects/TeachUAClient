@@ -76,3 +76,9 @@
     line-height: 32px;
     color: #2D4C68;
 }
+
+@media screen and (max-width: 1000px) {
+    .club-sider{
+        display:none;
+    }
+}
