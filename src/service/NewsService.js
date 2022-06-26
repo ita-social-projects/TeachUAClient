@@ -10,10 +10,9 @@ export const createNews = async (data) => {
         urlTitleLogo: data.urlTitleLogo
     }).then((response) => {
         return response.data
-    })
-        .catch((error) => {
+    }).catch((error) => {
             return error.response.data;
-        })
+    })
 };
 
 export const getPageableNews = async (size) => {
