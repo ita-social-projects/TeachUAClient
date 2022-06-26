@@ -30,7 +30,9 @@
         align-items: center;
         justify-content: center;
     }
+}
 
+@media screen and (min-width: 1186px) and (max-width: 1215px) {
     .news-content{
         margin-top:20px;
     }
@@ -42,7 +44,6 @@
     }
 
     .news-content{
-        display: flex;
-        justify-content: center;
+        justify-content: flex-start;
     }
 }

@@ -9,11 +9,14 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import moment from "moment";
 import locale from 'antd/lib/locale/uk_UA';
 import 'moment/locale/uk';
+import {useHistory} from "react-router-dom";
 
 const CreateNewsModal = ({visible, setVisible, getData}) => {
 
     const [form] = Form.useForm();
     const dateFormat = "DD.MM.YYYY";
+    const history = useHistory();
+
 
     const onFinish = (values) => {
         const data = {
@@ -31,6 +34,8 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                 form.resetFields();
                 getData();
                 message.success(`Новину ${response.title} успішно додано`);
+                history.push("/news/" + response.id)
+
             })
             .catch(reason => message.warning(reason.response.data.message));
         setVisible(false);
