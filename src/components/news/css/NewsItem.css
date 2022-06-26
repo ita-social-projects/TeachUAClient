@@ -43,6 +43,7 @@
     color: #2D4C68;
     margin-top: 10px;
     height: 135px;
+    word-wrap: break-word;
 }
 
 #detailButton a{
@@ -56,6 +57,7 @@
     line-height: 24px;
     color: #2E69C9;
 }
+
 #detailButton a:hover{
     position: absolute;
     bottom: 0;
@@ -67,4 +69,18 @@
     line-height: 24px;
     color: #2E69C9;
     opacity: 0.7;
+}
+
+@media screen and (max-width: 1310px) {
+    #newsContainer {
+        width: 840px;
+        height: 292px;
+    }
+}
+
+@media screen and (max-width: 1215px) {
+    #newsContainer {
+        width: 700px;
+        height: 210px;
+    }
 }
