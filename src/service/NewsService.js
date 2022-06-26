@@ -70,3 +70,15 @@ export const getNewsById = async (id) => {
             return error.response.data;
         });
 };
+
+export const getSimilarNewsByTitle = async (data) => {
+    return await fetchRequest.get(BASE_URL + "/api/newslist/search/similar", {
+            params: {
+                title: data.title
+            }
+         })
+        .then((response) => {return response.data})
+        .catch((error) => {
+            return error.response.data;
+        });
+}

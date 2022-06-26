@@ -2,7 +2,13 @@ import React, {useEffect, useState} from 'react';
 import "./css/NewsTable.less";
 import {Button, Form, Input, message, Popconfirm, Typography} from "antd";
 import EditableTable from "../../EditableTable";
-import {deleteNewsById, getAllNews, updateNewsById} from "../../../service/NewsService";
+import {
+    deleteNewsById,
+    getAllNews,
+    getSimilarNewsByTitle,
+    getSimmilarNewsByTitle,
+    updateNewsById
+} from "../../../service/NewsService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import CreateNewsModal from "./CreateNewsModal";
@@ -15,6 +21,8 @@ const NewsTable = () => {
     const [news, setNews] = useState([]);
     const [showModalCreateNews, setShowModalCreateNews] = useState(false);
 
+    const { Search } = Input;
+
     const getData = () => {
         getAllNews().then((response) =>{
             setNews(response);
@@ -25,9 +33,21 @@ const NewsTable = () => {
         getData();
     }, []);
 
-    const onFinish = (value) => {
-        console.log(value);
+    const onSearch = (value) => {
+        if(!value){
+            getData();
+            return;
+        }
+        getSimilarNewsByTitle({title:value}).then((response) => {
+            setNews(response);
+        })
     };
+
+    const change = (value) => {
+        if(!value.target.defaultValue){
+            getData();
+        }
+    }
 
     const save = async (record) => {
         form.setFieldsValue({
@@ -116,18 +136,15 @@ const NewsTable = () => {
         <div className="newsContent">
             <Title level={3}>Новини</Title>
             <div className="search-and-add-news">
-                <Form
-                    name="news-table-from"
-                    form={form}
-                    onFinish={onFinish}
-                >
-                    <Form.Item
-                        label="Новина"
-                        name="title"
-                    >
-                        <Input />
-                    </Form.Item>
-                </Form>
+                    <Search
+                        placeholder="Введіть заголовок новини"
+                        onSearch={onSearch}
+                        onChange={change}
+                        allowClear
+                        style={{
+                            width: 250,
+                        }}
+                    />
                 <Button className="flooded-button add-btn"
                         onClick={() => setShowModalCreateNews(true)}
                 >
