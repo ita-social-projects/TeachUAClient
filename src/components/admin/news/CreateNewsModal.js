@@ -24,6 +24,10 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
         console.log(data);
         createNews(data)
             .then((response) => {
+                if (response.status) {
+                    message.warning(response.message);
+                    return;
+                }
                 form.resetFields();
                 getData();
                 message.success(`Новину ${response.title} успішно додано`);

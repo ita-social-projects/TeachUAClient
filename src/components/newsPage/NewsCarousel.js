@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import {Button, Carousel} from "antd";
+import {Carousel} from "antd";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import {Link} from "react-router-dom";
@@ -13,12 +13,13 @@ const NewsCarousel = ({newsList}) => {
 
     const carousel = useRef(null);
     const settings = {
+        infinite: false,
         slidesToShow: 3,
         slidesToScroll: 3
     }
 
     return (<div className="news-carousel-block">
-        <ArrowLeftOutlined className="arrow" onClick={() => carousel.current.prev()}/>
+        <ArrowLeftOutlined className="arrow" onClick={() => {carousel.current.prev(); console.log(newsList)}}/>
         <Carousel {...settings} ref={node => carousel.current = node} className="news-carousel" >
             {newsList.map((news) =>
                 <div className="carousel-container">

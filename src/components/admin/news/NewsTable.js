@@ -34,7 +34,7 @@ const NewsTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, news, record.id).then((editedData) => {
-            editedData.item.date = moment(editedData.item.date).format("YYYY-MM-DD");
+            editedData.item.date = moment(editedData.item.date.toString()).format("YYYY-MM-DD");
             updateNewsById(record.id, editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message)
@@ -73,25 +73,25 @@ const NewsTable = () => {
         {
             title: 'Id',
             dataIndex: 'id',
-            width: '5%',
+            width: '3%',
             editable: false,
         },
         {
             title: 'Заголовок',
             dataIndex: 'title',
-            width: '20%',
+            width: '15%',
             editable: true,
         },
         {
             title: 'Опис',
             dataIndex: 'description',
-            width: '35%',
+            width: '30%',
             editable: true,
         },
         {
             title: 'Дата новини',
             dataIndex: 'date',
-            width: '5%',
+            width: '12%',
             editable: true,
             render: (date) => moment(date.toString()).format('DD.MM.YYYY')
         },
@@ -100,7 +100,7 @@ const NewsTable = () => {
             dataIndex: 'isActive',
             inputType: 'select',
             selectData: ["true", "false"],
-            width: '5%',
+            width: '7%',
             editable: true,
             render: (isActive) => isActive.toString()
         },

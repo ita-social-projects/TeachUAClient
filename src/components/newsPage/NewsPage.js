@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getAllNews, getNewsById} from "../../service/NewsService";
+import {getAllCurrentNews, getNewsById} from "../../service/NewsService";
 import {Button, Layout, Result} from "antd";
 import {BASE_URL} from "../../service/config/ApiConfig";
 import {useParams} from "react-router-dom";
@@ -37,7 +37,7 @@ const NewsPage = () => {
             setLoad(false)
         })
         // exlude current news from another news list
-        getAllNews().then(response => {
+        getAllCurrentNews().then(response => {
             setNewsList(response.filter(news => news.id != id));
         })
     }

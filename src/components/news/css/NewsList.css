@@ -13,3 +13,21 @@
 .news-content .newslist {
     margin-right:50px;
 }
+
+@media screen and (max-width: 1310px) {
+    .pagination {
+        width: 840px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 1215px) {
+    .pagination {
+        width: 840px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

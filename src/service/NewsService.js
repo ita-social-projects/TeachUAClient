@@ -23,7 +23,18 @@ export const getPageableNews = async (size) => {
 
 export const getAllNews = async () => {
     return await fetchRequest.get(BASE_URL + "/api/newslist")
-        .then((response) => {return response.data});
+        .then((response) => {return response.data})
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const getAllCurrentNews = async () => {
+    return await fetchRequest.get(BASE_URL + "/api/newslist/current")
+        .then((response) => {return response.data})
+        .catch((error) => {
+            return error.response.data;
+        });
 };
 
 export const updateNewsById = async (id, data) => {
