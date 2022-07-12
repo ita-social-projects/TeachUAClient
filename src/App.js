@@ -54,6 +54,7 @@ import SpeakingClubRegistrationPage from "./components/speakingClubPage/Speaking
 import NewsListComponent from "./components/news/NewsListComponent";
 import NewsPage from "./components/newsPage/NewsPage";
 import NewsTable from "./components/admin/news/NewsTable";
+import EditNews from "./components/admin/news/EditNews";
 
 const {Content} = Layout;
 
@@ -89,6 +90,7 @@ function App() {
                                     <Route path="/admin/addChallenge" exact component={AddChallenge}/>
                                     <Route path="/admin/challenges" exact component={ChallengesTable}/>
                                     <Route path="/admin/news" exact component={NewsTable}/>
+                                    <Route path="/admin/news/:id" exact component={EditNews}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>

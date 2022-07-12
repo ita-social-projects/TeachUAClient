@@ -12,6 +12,7 @@ import {
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import CreateNewsModal from "./CreateNewsModal";
+import {Link} from "react-router-dom";
 
 const {Title} = Typography;
 
@@ -26,6 +27,7 @@ const NewsTable = () => {
     const getData = () => {
         getAllNews().then((response) =>{
             setNews(response);
+            
         });
     };
 
@@ -79,7 +81,7 @@ const NewsTable = () => {
     };
 
     const actions = (record) => [
-        <Popconfirm title="Видалити челендж?"
+        <Popconfirm title="Видалити новину?"
                     cancelText="Ні"
                     okText="Так"
                     cancelButtonProps={{className: "popConfirm-cancel-button"}}
@@ -95,18 +97,21 @@ const NewsTable = () => {
             dataIndex: 'id',
             width: '3%',
             editable: false,
+            render: (text, record) => <Link to={'/admin/news/' + record.id}>{record.id}</Link>
         },
         {
             title: 'Заголовок',
             dataIndex: 'title',
             width: '15%',
             editable: true,
+            render: (text, record) => <Link to={'/admin/news/' + record.id}>{record.title}</Link>
         },
         {
             title: 'Опис',
             dataIndex: 'description',
             width: '30%',
             editable: true,
+            render: (text, record) => <Link to={'/admin/news/' + record.id}>{record.description}</Link>
         },
         {
             title: 'Дата новини',
@@ -129,6 +134,7 @@ const NewsTable = () => {
             dataIndex: 'urlTitleLogo',
             width: '15%',
             editable: true,
+            render: (text, record) => <Link to={'/admin/news/' + record.id}>{record.urlTitleLogo}</Link>
         }
     ];
 

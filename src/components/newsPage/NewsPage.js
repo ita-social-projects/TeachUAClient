@@ -71,7 +71,7 @@ const NewsPage = () => {
                         <div id="date">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
                     </div>
                     <div className="content-text">
-                        <div id="description">{news.description}</div>
+                        <div id="description" dangerouslySetInnerHTML={{__html: `${news.description}`}}></div>
                     </div>
                 </div>
                 <div className="other-news">

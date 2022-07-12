@@ -1,5 +1,5 @@
 import fetchRequest from "./FetchRequest";
-import { UPLOAD_IMAGE_URL } from "./config/ApiConfig";
+import { BASE_URL, UPLOAD_IMAGE_URL } from "./config/ApiConfig";
 import { DELETE_FILE_URL } from "./config/ApiConfig";
 
 export const uploadImage = (image, folder) => {
@@ -9,6 +9,8 @@ export const uploadImage = (image, folder) => {
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", UPLOAD_IMAGE_URL, false);
+    xhr.setRequestHeader("contentType", "multipart/form-data");
+    xhr.setRequestHeader("Authorization", tokenToHeader());
     xhr.send(data);
     
     return xhr.response;
