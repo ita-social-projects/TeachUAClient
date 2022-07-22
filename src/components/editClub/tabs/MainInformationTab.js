@@ -91,8 +91,10 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                     {centers.map(center => <Option value={center.name}>{center.name}</Option>)}
                 </Select>
             </Form.Item>
-            <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
+            <div style={{height: 70}}>
+                <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
+                <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
+            </div>
         </Form>
     )
 };

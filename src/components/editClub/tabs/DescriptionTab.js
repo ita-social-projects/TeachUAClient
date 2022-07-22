@@ -123,8 +123,10 @@ const DescriptionTab = ({setResult, result}) => {
                 {/*<EditorComponent ref={editorRef}/>*/}
                 <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description).trim()} style={{ height: 200 }} />
             </Form.Item>
-            <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
-            <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
+            <div style={{height: 70}}>
+                <Button htmlType="button" style={hideButton} onClick={commitTab} className="edit-club-tab-button">Зберегти зміни вікна</Button>
+                <Button htmlType="submit" onClick={onFinish} className="edit-club-button">Зберегти гурток</Button>
+            </div>
         </Form>
     )
 };
