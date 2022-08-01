@@ -120,6 +120,16 @@ const EditChallenge = (props) => {
                     Переглянути челендж
                 </Button>
             </Link>
+
+            <Link
+                to={"/admin/challenge/" + challengeId.id + "/clone"}
+                className="back-btn"
+            >
+                <Button className="flooded-button">
+                    Змінити дату старту
+                </Button>
+            </Link>
+
             <Title>Редагування челенджа</Title>
             <Form
                 initialValues={onFill()}
