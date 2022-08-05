@@ -12,9 +12,10 @@ const TasksInChallenge = () => {
     const challengeId  = useParams();
 
     const getTasksInChallenge = () => {
-        getTasksByChallenge(challengeId.id).then(response =>
-            setTaskPreview(response)
-        ).catch(response => {
+        getTasksByChallenge(challengeId.id).then(response => {
+            console.log(response);
+            setTaskPreview(response);
+        }).catch(response => {
             if(response.status === 404){
                 setChallengeNotFound(true);
             }
@@ -59,7 +60,7 @@ const TasksInChallenge = () => {
             title: 'Дата початку',
             dataIndex: 'startDate',
             width: '35%',
-            render: (text)=>moment(text).format('YYYY-MM-DD')
+            render: (text)=>moment(text.toString()).format('YYYY-MM-DD')
         }
     ];
 
