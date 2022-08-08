@@ -1,0 +1,76 @@
+.certificate-page {
+    margin: 0 10% 10% 10%;
+    display: flex;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+}
+
+.ant-list-item {
+    padding: 0 !important;
+}
+.import-report {
+    margin-top: 30px;
+    margin-right: 10%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.radio-group {
+    flex-direction: column;
+}
+
+.load-excel-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.warn-icon {
+    color: #ec9700;
+}
+
+.error-icon {
+    color: #ff4d4f;
+}
+
+.ok-icon {
+    color: #4dffa3;
+}
+.import-excel {
+    width: 45%;
+    flex-direction: column !important;
+}
+.send-to-db {
+    width: 45%;
+    flex-direction: column !important;
+}
+
+.import-db-list-item {
+    padding: 0;
+    margin: 0;
+}
+
+.button {
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+}
+.text-hint {
+    color: #002766;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ant-form-item{
+    margin-bottom: 10px;
+}
+
+.send-data-button {
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
