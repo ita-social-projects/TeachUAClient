@@ -6,7 +6,7 @@ import Paragraph from "antd/lib/typography/Paragraph";
 import Text from "antd/lib/typography/Text";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
-import {BASE_URL, UPLOAD_EXCEL} from "../../../service/config/ApiConfig";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 
 const ImportCertificateData = () => {
@@ -61,6 +61,7 @@ const ImportCertificateData = () => {
                     <List.Item className="import-db-list-item">
                         {renderIcon(ICON_ERROR)}
                         {`
+                            Рядок ${item.rowIndex}. 
                             ${item.errorDetails}: 
                             ${item.cellValue.length !== 0 ? `зі значенням "${item.cellValue} "` : " немає даних"}  
                         `}
