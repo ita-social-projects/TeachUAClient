@@ -1,8 +1,8 @@
 .certificate-page {
     margin: 0 10% 10% 10%;
     display: flex;
-    justify-content: space-between;
-    /*flex-wrap: wrap;*/
+    justify-content: center;
+    /*justify-content: space-between;*/
 }
 
 .ant-list-item {
@@ -38,7 +38,7 @@
     color: #4dffa3;
 }
 .import-excel {
-    width: 45%;
+    /*width: 45%;*/
     flex-direction: column !important;
 }
 .send-to-db {
@@ -51,13 +51,14 @@
     margin: 0;
 }
 
-.button {
-    margin-top: 2em;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
 
-}
+/*.button {*/
+/*    margin-top: 2em;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    display: flex;*/
+
+/*}*/
 .text-hint {
     color: #002766;
     font-size: 16px;
@@ -73,4 +74,12 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.buttons {
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
 }

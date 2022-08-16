@@ -1,4 +1,4 @@
-import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload} from "antd";
+import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message} from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportData.css';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -7,6 +7,7 @@ import Text from "antd/lib/typography/Text";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
 import {BASE_URL} from "../../../service/config/ApiConfig";
+import {getNumberOfUnsentCertificates, loadDataToDatabase} from "../../../service/CertificateService";
 import {tokenToHeader} from "../../../service/UploadService";
 
 const ImportCertificateData = () => {
@@ -14,13 +15,43 @@ const ImportCertificateData = () => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [dataToLoad, setDataToLoad] = useState({});
     const [mistakes, setMistakes] = useState([]);
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [hours, setHours] = useState();
-    const [type, setType] = useState();
+    const [databaseResponse, setDatabaseResponse] = useState([]);
+    const [unsentCertificates, setUnsentCertificates] = useState();
+
+
+    // commented code will be used in the future
+
+    // const [startDate, setStartDate] = useState();
+    // const [endDate, setEndDate] = useState();
+    // const [hours, setHours] = useState();
+    // const [type, setType] = useState();
+    // const [challengeNumber, setChallengeNumber] = useState();
+
+    // const onTypeChange = (value) => {
+    //     setType(value);
+    // }
+    //
+    // const onStartDateChange = (value) => {
+    //     setStartDate(value);
+    // }
+    //
+    // const onEndDateChange = (value) => {
+    //     setEndDate(value);
+    // }
+    //
+    // const onHoursChange = (value) => {
+    //     setHours(value);
+    // }
+
+
+    const getData = () => {
+        getNumberOfUnsentCertificates().then(response => {
+           setUnsentCertificates(response);
+        });
+    }
 
     useEffect(() => {
-
+        getData();
     }, []);
 
     const onFinish = () => {
@@ -70,6 +101,46 @@ const ImportCertificateData = () => {
         )
     }
 
+    const databaseResponseList = () => {
+        return (
+            <List
+                size="small"
+                dataSource={databaseResponse}
+                renderItem={item =>
+                    <List.Item className="import-db-list-item">
+                        {renderIcon(ICON_WARNING)}
+                        {`
+                            ${item.message}  
+                        `}
+                    </List.Item>}
+            />
+        )
+    }
+
+    const loadToDatabase = () => {
+        if (dataLoaded) {
+            let dataToDB = {
+                type: 3,
+                hours: 40,
+                startDate: "2022-08-01",
+                endDate: "2022-08-28",
+                courseNumber: "4",
+                excelList: dataToLoad
+            };
+            console.log(dataToDB);
+            loadDataToDatabase(dataToDB).then(response => {
+                if (response.status) {
+                    message.warning(response.message);
+                    return;
+                }
+                console.log(response);
+                setDatabaseResponse(response);
+                message.success('Дані успішно додані');
+                getData();
+            })
+        }
+    }
+
     return (
         <Layout className="" style={{paddingTop: 40, background: 'white'}}>
             <Content className="certificate-page">
@@ -94,7 +165,9 @@ const ImportCertificateData = () => {
                         </span>
                         </div>
 
-                        <span className="button">
+
+                        {/*<span className="button">*/}
+                        <span className="buttons">
                         <Form.Item
                             name="excel-file"
                             rules={[{
@@ -103,7 +176,7 @@ const ImportCertificateData = () => {
                             }]}>
                             <Upload
                                 name="excel-file"
-                                action={BASE_URL + "/api/certificate/upload-excel"}
+                                action={BASE_URL + "/api/certificate/excel"}
                                 maxCount={1}
                                 icon={<UploadOutlined/>}
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
@@ -112,7 +185,23 @@ const ImportCertificateData = () => {
                                 <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
-                    </span>
+                        {/*</span>*/}
+                        {/*<span className="button">*/}
+                        <Button
+                            className="flooded-button send-data-button"
+                            disabled={!dataLoaded}
+                            onClick={() => loadToDatabase()}>
+                            Відправити всі дані у БД
+                        </Button>
+                        <Button
+                                className="flooded-button send-data-button"
+                                disabled={unsentCertificates === 0}
+                                // onClick={() => loadToDatabase()}
+                        >
+                            Надіслати сертифікати
+                        </Button>
+
+                        </span>
                         <div style={mistakes.length !== 0 ? {} : {display: 'none'}}>
                             <Paragraph>
                                 <Text
@@ -122,82 +211,99 @@ const ImportCertificateData = () => {
                             </Paragraph>
                             {mistakesList()}
                         </div>
-
-                    </Form>
-                </div>
-                <div className="send-to-db">
-                    <Form>
-                        {/*<Text*/}
-                        {/*    className="text-hint">*/}
-                        {/*    Згенерувати сертифікати для:*/}
-                        {/*</Text>*/}
-
-                        {/*<div className="radio-group">*/}
-                        {/*    <input type="radio" value="trainer" id="trainer"*/}
-                        {/*           // onChange={handleChange}*/}
-                        {/*           name="type"/>*/}
-                        {/*    <label htmlFor="trainer">тренера</label>*/}
-
-                        {/*    <input type="radio" value="moderator" id="moderator"*/}
-                        {/*           // onChange={handleChange}*/}
-                        {/*           name="type"/>*/}
-                        {/*    <label htmlFor="moderator">модератора</label>*/}
-
-                        {/*    <input type="radio" value="participant" id="participant"*/}
-                        {/*        // onChange={handleChange}*/}
-                        {/*           name="type"/>*/}
-                        {/*    <label htmlFor="participant">учасника</label>*/}
-                        {/*</div>*/}
-
-                        <Text
-                            className="text-hint">
-                            Інформація про челендж:
-                        </Text>
-
-                        <div style={{display: "flex", marginTop: 10}}>
-                            <Form.Item
-                                style={{marginRight: 5}}
-                                name="startDate"
-                                label="Період навчання з"
-                            >
-                                <DatePicker
-                                    // onChange={onDateChange}
-                                    // format={dateFormat}
-                                    value={startDate}
-                                />
-                            </Form.Item>
-
-                            <Form.Item
-                                name="endDate"
-                                label="по"
-                            >
-                                <DatePicker
-                                    // onChange={onDateChange}
-                                    // format={dateFormat}
-                                    value={endDate}
-                                />
-                            </Form.Item>
+                        <div style={databaseResponse.length !== 0 ? {} : {display: 'none'}}>
+                            <Paragraph>
+                                <Text
+                                    className="text-hint">
+                                    Під час збереження даних відбулись такі зміни:
+                                </Text>
+                            </Paragraph>
+                            {databaseResponseList()}
                         </div>
 
-
-                        <Form.Item
-                            name="hours"
-                            label="Тривалість навчання "
-                            value={hours}
-                            // onChange={handleSortNumberChange}
-                        >
-                            <InputNumber min={1}/>
-                        </Form.Item>
-
                     </Form>
-                    <span className="button">
-                        <Button
-                            className="flooded-button send-data-button"
-                            disabled={!dataLoaded}>
-                            Відправити всі дані у БД
-                        </Button>
-                    </span>
                 </div>
+
+                {/*commented code will be used in the future*/}
+
+                {/*<div className="send-to-db">*/}
+                    {/*<Form*/}
+                    {/*    className="load-excel-form"*/}
+                    {/*    name="basic"*/}
+                    {/*    requiredMark={false}*/}
+                    {/*    onFinish={loadToDatabase}>*/}
+                    {/*    <Text*/}
+                    {/*        className="text-hint">*/}
+                    {/*        Згенерувати сертифікати для:*/}
+                    {/*    </Text>*/}
+
+                    {/*    <div className="radio-group">*/}
+                    {/*        <input type="radio" value="trainer" id="trainer"*/}
+                    {/*               onChange={onTypeChange}*/}
+                    {/*               name="type"/>*/}
+                    {/*        <label for="trainer">тренера</label>*/}
+
+                    {/*        <input type="radio" value="moderator" id="moderator"*/}
+                    {/*               onChange={onTypeChange}*/}
+                    {/*               name="type"/>*/}
+                    {/*        <label for="moderator">модератора</label>*/}
+
+                    {/*        <input type="radio" value="participant" id="participant"*/}
+                    {/*               onChange={onTypeChange}*/}
+                    {/*               name="type"/>*/}
+                    {/*        <label for="participant">учасника</label>*/}
+                    {/*    </div>*/}
+
+                    {/*    <Text*/}
+                    {/*        className="text-hint">*/}
+                    {/*        Інформація про челендж:*/}
+                    {/*    </Text>*/}
+
+                    {/*    <div style={{display: "flex", marginTop: 10}}>*/}
+                    {/*        <Form.Item*/}
+                    {/*            style={{marginRight: 5}}*/}
+                    {/*            name="startDate"*/}
+                    {/*            label="Період навчання з"*/}
+                    {/*        >*/}
+                    {/*            <DatePicker*/}
+                    {/*                onChange={onStartDateChange}*/}
+                    {/*                format={dateFormat}*/}
+                    {/*                value={startDate}*/}
+                    {/*            />*/}
+                    {/*        </Form.Item>*/}
+
+                    {/*        <Form.Item*/}
+                    {/*            name="endDate"*/}
+                    {/*            label="по"*/}
+                    {/*        >*/}
+                    {/*            <DatePicker*/}
+                    {/*                onChange={onEndDateChange}*/}
+                    {/*                format={dateFormat}*/}
+                    {/*                value={endDate}*/}
+                    {/*            />*/}
+                    {/*        </Form.Item>*/}
+                    {/*    </div>*/}
+
+
+                    {/*    <Form.Item*/}
+                    {/*        name="hours"*/}
+                    {/*        label="Тривалість навчання "*/}
+                    {/*        value={hours}*/}
+                    {/*        onChange={onHoursChange}*/}
+                    {/*    >*/}
+                    {/*        <InputNumber min={1}/>*/}
+                    {/*    </Form.Item>*/}
+
+                    {/*</Form>*/}
+                    {/*<span className="button">*/}
+                    {/*    <Button*/}
+                    {/*        className="flooded-button send-data-button"*/}
+                    {/*        disabled={!dataLoaded}*/}
+                    {/*        onClick={() => loadToDatabase()}>*/}
+                    {/*        Відправити всі дані у БД*/}
+                    {/*    </Button>*/}
+                    {/*</span>*/}
+                {/*</div>*/}
             </Content>
         </Layout>
     );
