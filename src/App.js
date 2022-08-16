@@ -57,6 +57,8 @@ import NewsPage from "./components/newsPage/NewsPage";
 import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
 
+import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
+
 const {Content} = Layout;
 
 function App() {
@@ -105,6 +107,7 @@ function App() {
                                     <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                     <Route path="/admin/stations" exact component={StationTable}/>
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
+                                    <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
@@ -138,6 +141,8 @@ function App() {
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
+
+
                                 </Switch>
                             </Content>
                         </Layout>

@@ -94,6 +94,7 @@ const AuthMenu = () => {
                             <Menu.Item><Link to="/admin/banners">Банер</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/tasks">Завдання</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/certificate/generate">Сертифікати</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/news">Новини</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/about">Про нас</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
@@ -108,6 +109,7 @@ const AuthMenu = () => {
                                 Експортувати дані</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+
                             <Menu.Item onClick={() => {
                                 updateRating().then();
                             }}>Перерахувати рейтинги</Menu.Item>
