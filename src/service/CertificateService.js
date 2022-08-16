@@ -20,3 +20,11 @@ export const loadDataToDatabase = async (data) => {
             return error.response.data
         });
 };
+
+export const sendCertificatesScheduler = async () => {
+    return await fetchRequest
+        .post(BASE_URL + "/api/scheduler")
+        .then((response) => {
+            return response.data;
+        });
+};
