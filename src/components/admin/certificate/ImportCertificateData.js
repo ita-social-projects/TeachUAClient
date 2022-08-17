@@ -148,7 +148,7 @@ const ImportCertificateData = () => {
                 return;
             }
             console.log(response);
-            message.success('Сертифікати успішно надіслані');
+            message.success('Процес надсилання сертифікатів розпочато');
         })
     }
 
@@ -176,8 +176,6 @@ const ImportCertificateData = () => {
                         </span>
                         </div>
 
-
-                        {/*<span className="button">*/}
                         <span className="buttons">
                         <Form.Item
                             name="excel-file"
@@ -196,17 +194,17 @@ const ImportCertificateData = () => {
                                 <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
-                        {/*</span>*/}
-                        {/*<span className="button">*/}
                         <Button
                             className="flooded-button send-data-button"
                             disabled={!dataLoaded}
+                            headers={{Authorization: tokenToHeader()}}
                             onClick={() => loadToDatabase()}>
                             Відправити всі дані у БД
                         </Button>
                         <Button
                             className="flooded-button send-data-button"
                             disabled={unsentCertificates === 0}
+                            headers={{Authorization: tokenToHeader()}}
                             onClick={() => sendCertificates()}
                         >
                             Надіслати сертифікати
