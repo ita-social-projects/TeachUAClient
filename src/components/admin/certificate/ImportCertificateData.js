@@ -7,7 +7,7 @@ import Text from "antd/lib/typography/Text";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import {getNumberOfUnsentCertificates, loadDataToDatabase} from "../../../service/CertificateService";
+import {getNumberOfUnsentCertificates, loadDataToDatabase, sendCertificatesScheduler} from "../../../service/CertificateService";
 import {tokenToHeader} from "../../../service/UploadService";
 
 const ImportCertificateData = () => {
@@ -141,6 +141,17 @@ const ImportCertificateData = () => {
         }
     }
 
+    const sendCertificates = () => {
+        sendCertificatesScheduler().then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            console.log(response);
+            message.success('Сертифікати успішно надіслані');
+        })
+    }
+
     return (
         <Layout className="" style={{paddingTop: 40, background: 'white'}}>
             <Content className="certificate-page">
@@ -194,9 +205,9 @@ const ImportCertificateData = () => {
                             Відправити всі дані у БД
                         </Button>
                         <Button
-                                className="flooded-button send-data-button"
-                                disabled={unsentCertificates === 0}
-                                // onClick={() => loadToDatabase()}
+                            className="flooded-button send-data-button"
+                            disabled={unsentCertificates === 0}
+                            onClick={() => sendCertificates()}
                         >
                             Надіслати сертифікати
                         </Button>
