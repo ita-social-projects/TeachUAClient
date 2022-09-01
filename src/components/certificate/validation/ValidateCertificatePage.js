@@ -1,13 +1,14 @@
 import React from "react";
 import { Layout, Result } from "antd";
 import { useEffect, useState } from "react";
-import { useParams, BrowserRouter } from "react-router-dom";
+import { useParams, BrowserRouter, Redirect, useHistory } from "react-router-dom";
 import { getValidationResponse } from "../../../service/CertificateService";
 import "../css/CertificateValidation.css";
 
 const ValidateCertificatePage = () => {
 
     const params = useParams();
+    const history = useHistory();
     const[certificate, setCertificate] = useState({
         serialNumber: 0,
         certificateType: "",
@@ -18,6 +19,9 @@ const ValidateCertificatePage = () => {
     });
 
     useEffect(() => {
+        if (params.serialNumber === 'null'){
+            history.push("/")
+        }
         getValidationResponse(params.serialNumber).then((response) => {
             if (response.status > 400){
                 setCertificate(undefined);
@@ -28,6 +32,7 @@ const ValidateCertificatePage = () => {
         });
     }, []);
 
+    
     return (  
         <Layout className="certificate-validate-page">
             {certificate ? 
