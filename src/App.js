@@ -57,7 +57,7 @@ import NewsPage from "./components/newsPage/NewsPage";
 import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
 import ValidateCertificatePage from "./components/certificate/validation/ValidateCertificatePage";
-
+import CertificateSearch from "./components/admin/certificate/CertificateSearch";
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 
 const {Content} = Layout;
@@ -109,6 +109,7 @@ function App() {
                                     <Route path="/admin/stations" exact component={StationTable}/>
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
+                                    <Route path="/admin/certificate" exact component={CertificateSearch}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>

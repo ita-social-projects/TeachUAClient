@@ -178,7 +178,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                         <Input className="add-club-input"
                             name={contact.name}
                             prefix={isPhoneField(contact) ?"+38" :undefined}
-                            placeholder={isPhoneField(contact) ?"__________" :"Заповніть поле"}
+                            placeholder={isPhoneField(contact) ?"(___) ___ __ __" :"Заповніть поле"}
                             onChange={(e) => changeContacts(e, contact)}
                             suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
                     </Form.Item>)}

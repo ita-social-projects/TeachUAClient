@@ -37,3 +37,32 @@ export const getValidationResponse = (serialNumber) => {
         return error.response;
     })
 };
+
+export const getCertificatesByUserName = async (data) => {
+    return await fetchRequest.get(BASE_URL + "/api/certificate", {
+        params: {
+            userName: data.userName
+        }
+    })
+    .then((response) => {return response.data})
+    .catch((error) => {
+        return error.response.data;
+    });
+}
+export const convertCertificateType = (type) => {
+    switch(type){
+        case 1:
+            return "Тренер";
+            break;
+        
+        case 2:
+            return "Модератор";
+            break;
+        
+        case 3: 
+            return "Учасник";
+            break;
+        default:
+            return "Учасник";
+    }
+}
