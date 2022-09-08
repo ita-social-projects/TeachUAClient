@@ -69,15 +69,16 @@ const EditableTable = ({bordered, className, columns, data, onSave, form, action
 
     return (
         <Form form={form} component={false}>
-            <div className="table-header">
+            {/* <div className="table-header">
                 {header}
-            </div>
+            </div> */}
             <Table
                 components={{
                     body: {
                         cell: EditableColumn,
                     },
                 }}
+                header={() => header}
                 bordered={bordered}
                 dataSource={data}
                 columns={editableColumns}

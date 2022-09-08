@@ -1,4 +1,5 @@
-import {deleteCityById, getAllCities, updateCityById} from "../../../service/CityService";
+
+import { deleteCityById, getAllCities, updateCityById } from "../../../service/CityService";
 import {Form, message, Popconfirm} from "antd";
 import React, {useEffect, useState} from "react";
 import "./css/AddCity.css";

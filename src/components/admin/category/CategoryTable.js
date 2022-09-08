@@ -171,7 +171,8 @@ const CategoryTable = () => {
             onSave={save}
             form={form}
             actions={actions}
-            footer={<AddCategory categories={categories} setCategories={setCategories} setAddCategory={setAddCategory}/>}
+            footer={<AddCategory categories={categories} 
+            setCategories={setCategories} setAddCategory={setAddCategory}/>}
         />
     )
 }

@@ -91,6 +91,7 @@ const AuthMenu = () => {
                     <Menu.Item onClick={onExitClick} danger>Вийти</Menu.Item>
                     { user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN"?
                         <SubMenu title="Адміністрування" >
+                            <Menu.Item><Link to="/forms">Форми</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/banners">Банер</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/tasks">Завдання</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
@@ -108,6 +109,7 @@ const AuthMenu = () => {
                                 Експортувати дані</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
+
                             <Menu.Item onClick={() => {
                                 updateRating().then();
                             }}>Перерахувати рейтинги</Menu.Item>

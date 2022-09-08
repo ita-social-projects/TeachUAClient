@@ -1,0 +1,23 @@
+.superbutt{
+	position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+text-align: center;
+}
+.upper-class-result{
+	display: flex;
+	margin: auto;
+	margin-bottom: 3.78%;
+}
+.container-archive-button{
+	display: flex;
+	/* align-self: start; */
+	justify-content: space-around;
+	margin: auto;
+	margin-bottom: 3.78%;
+}
+/* .add-form{
+	margin-right: 1000px;
+} */

@@ -57,6 +57,14 @@ import NewsPage from "./components/newsPage/NewsPage";
 import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
 
+
+import FormTable from "./components/GoogleForms/FormTable";
+import AddForm from "./components/GoogleForms/AddForm";
+import ResultTable from "./components/GoogleForms/ResultTable";
+import ArchiveTable from "./components/GoogleForms/ArchivedResults";
+import QuestionFormTable from "./components/GoogleForms/QuestionsFormTable";
+import OptionFormTable from "./components/GoogleForms/OptionFormTable";
+
 const {Content} = Layout;
 
 function App() {
@@ -107,7 +115,17 @@ function App() {
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
+                                    
+                                    <Route path="/addForm" exact component={AddForm}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
+                                    <Route path="/forms" exact component={FormTable}/>
+                                    <Route path="/result/:id" exact component={ResultTable}/>
+                                    <Route path="/result_archived" exact component={ArchiveTable}/>
+                                    <Route path="/question/:id" exact component={QuestionFormTable}/>
+                                    <Route path="/option/:id" exact component={OptionFormTable}/>
+                                    
+
+
                                     {/* Comment next 2 lines for prod version */}
                                     <Route path="/news" exact component={NewsListComponent}/>
                                     <Route path="/news/:id" exact component={NewsPage}/>
@@ -138,6 +156,7 @@ function App() {
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
+                                    
                                 </Switch>
                             </Content>
                         </Layout>
