@@ -58,6 +58,7 @@ import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
 
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
+import CertificatesTable from "./components/admin/certificate/CertificatesTable";
 
 const {Content} = Layout;
 
@@ -108,6 +109,7 @@ function App() {
                                     <Route path="/admin/stations" exact component={StationTable}/>
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
+                                    <Route path="/admin/certificates" exact component={CertificatesTable}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>

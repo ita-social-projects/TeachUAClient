@@ -1,8 +1,7 @@
 .certificate-page {
     margin: 0 10% 10% 10%;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
-    /*justify-content: space-between;*/
 }
 
 .ant-list-item {
@@ -18,7 +17,11 @@
 }
 
 .radio-group {
-    flex-direction: column;
+    margin: 0 0 10px 10px;
+}
+
+.radio-button {
+    margin-right: 5px;
 }
 
 .load-excel-form {
@@ -37,12 +40,14 @@
 .ok-icon {
     color: #4dffa3;
 }
+
 .import-excel {
     /*width: 45%;*/
-    flex-direction: column !important;
+    margin: 0 10% 0 10%;
 }
 .send-to-db {
-    width: 45%;
+    /*width: 45%;*/
+    margin: 0 10% 0 10%;
     flex-direction: column !important;
 }
 
@@ -69,15 +74,15 @@
     margin-bottom: 10px;
 }
 
-.send-data-button {
-    width: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+/*.send-data-button {*/
+/*    width: auto;*/
+/*    display: block;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*}*/
 
 .buttons {
-    margin-top: 2em;
+    margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
     display: flex;
