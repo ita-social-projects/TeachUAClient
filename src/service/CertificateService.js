@@ -29,6 +29,28 @@ export const sendCertificatesScheduler = async () => {
         });
 };
 
+export const getSentCertificates = async () => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/certificates")
+        .then((response) => {
+            return response.data;
+        });
+};
+
+export const updateCertificateProfile = async (id, data) => {
+    return await fetchRequest.put(BASE_URL + "/api/certificates/" + id, {
+        userName: data.userName,
+        sendToEmail: data.sendToEmail,
+        sendStatus: data.sendStatus,
+        serialNumber: data.serialNumber,
+        updateStatus: data.updateStatus
+    }).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data;
+    });
+}
+
 export const getValidationResponse = (serialNumber) => {
     return fetchRequest.get(BASE_URL + "/api/certificate/" + serialNumber)
     .then((response) => {

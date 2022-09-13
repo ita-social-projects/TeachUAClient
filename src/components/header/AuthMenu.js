@@ -94,7 +94,10 @@ const AuthMenu = () => {
                             <Menu.Item><Link to="/admin/banners">Банер</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/tasks">Завдання</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/certificate/generate">Сертифікати</Link></Menu.Item>
+                            <SubMenu title="Сертифікати">
+                                <Menu.Item><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
+                                <Menu.Item><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
+                            </SubMenu>
                             <Menu.Item><Link to="/admin/news">Новини</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/about">Про нас</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/cities">Міста</Link></Menu.Item>
