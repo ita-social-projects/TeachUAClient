@@ -68,6 +68,15 @@ const EditNews = (props) => {
     };
 
     const saveForm = (values) => {
+        // console.log("PRE Update, values = " + values.date);
+        if (typeof values.date === 'string') {
+            // console.log('Variable   values.date   is a string');
+            values.date = values.date.split(",").map(Number);
+        }
+        // if (values.date instanceof Array) {
+        //     console.log('Value values.date  is Array!');
+        // }
+        //
         updateNewsById(newsId.id, values).then(response => {
             console.log(response);
             console.log(newsId.id)

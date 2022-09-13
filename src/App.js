@@ -56,6 +56,7 @@ import NewsListComponent from "./components/news/NewsListComponent";
 import NewsPage from "./components/newsPage/NewsPage";
 import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
+import ValidateCertificatePage from "./components/certificate/validation/ValidateCertificatePage";
 
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
@@ -141,6 +142,7 @@ function App() {
                                     <Route path="/marathon" exact component={MarathonPage}/>
                                     <Route path="/speakingclub" exact component={SpeakingClubPage}/>
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
+                                    <Route path="/certificate/:serialNumber" exact component={ValidateCertificatePage}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
 

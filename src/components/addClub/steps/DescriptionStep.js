@@ -1,4 +1,4 @@
-import { Form, Input, Upload } from "antd";
+import {Form, Input, Typography, Upload} from "antd";
 import React, { useEffect, useState } from "react";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import { saveContent } from "../../editor/EditorConverter";
@@ -14,6 +14,7 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
+    const {Text} = Typography;
 
     const folderName = uuidv4();
     const logoFolder = `clubs/${folderName}/logo`;
@@ -94,9 +95,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             onFinish={onFinish}
             onSubmit={e => e.preventDefault()}
             className="description-step">
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
             <Form.Item name="urlLogo"
                 className="add-club-row"
-                label="Логотип"
+                // label="Логотип"
                 hasFeedback>
                 <Upload
                     name="image"
@@ -109,9 +112,11 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити лого</span>
                 </Upload>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Обкладинка</Text>
             <Form.Item name="urlBackground"
                 className="add-club-row"
-                label="Обкладинка"
+                // label="Обкладинка"
                 hasFeedback>
                 <Upload
                     name="image"
@@ -124,15 +129,19 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
                     <span className="add-club-upload"><UploadOutlined className="icon" />Завантажити обкладинку</span>
                 </Upload>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Галерея</Text>
             <Form.Item name="urlGallery"
                 className="add-club-row"
-                label="Галерея"
+                // label="Галерея"
                 hasFeedback>
                 <AddClubGalery onChange={onChangeHandler}/>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
             <Form.Item name="description"
                 className="add-club-row"
-                label="Опис"
+                // label="Опис"
                 hasFeedback
                 rules={[
                     {

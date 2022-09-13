@@ -50,3 +50,12 @@ export const updateCertificateProfile = async (id, data) => {
         return error.response.data;
     });
 }
+
+export const getValidationResponse = (serialNumber) => {
+    return fetchRequest.get(BASE_URL + "/api/certificate/" + serialNumber)
+    .then((response) => {
+        return response.data;
+    }).catch((error) =>{
+        return error.response;
+    })
+};

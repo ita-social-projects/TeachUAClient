@@ -1,5 +1,5 @@
 import React, {StrictMode, useEffect, useLayoutEffect, useState} from "react";
-import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select} from "antd";
+import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select, Typography} from "antd";
 import "./css/ClubListSider.css";
 import {getAllCategories, getPageableCategory} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
@@ -9,6 +9,7 @@ import {searchParameters, mapSearchParameters} from "../../context/SearchContext
 
 const {Sider} = Layout;
 const {Option} = Select;
+const {Text} = Typography;
 
 const ClubListSider = ({
                            setCurrentPage,
@@ -127,10 +128,11 @@ const ClubListSider = ({
                 requiredMark={false}
                 form={form}
                 onValuesChange={onValuesChange}>
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Гурток/Центр</Text>
                 <Form.Item
                     name="isCenter"
                     className="club-list-row"
-                    label="Гурток/Центр"
+                    // label="Гурток/Центр"
                     initialValue={false}>
                     <Radio.Group className="club-list-kind">
                         <Radio value={false}>Гурток</Radio>
@@ -138,10 +140,11 @@ const ClubListSider = ({
                     </Radio.Group>
                 </Form.Item>
 
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Місто</Text>
                 <Form.Item
                     name="cityName"
                     className="club-list-row"
-                    label="Місто"
+                    // label="Місто"
                     initialValue={
                         searchParameters.cityName === "Без локації"
                             ? "online"
@@ -159,10 +162,13 @@ const ClubListSider = ({
                         <Option value="online">Без локації</Option>
                     </Select>
                 </Form.Item>
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Район міста</Text>
                 <Form.Item
                     name="districtName"
                     className="club-list-row"
-                    label="Район міста">
+                    // label="Район міста"
+                >
                     <Select
                         allowClear
                         className="club-list-select"
@@ -175,10 +181,13 @@ const ClubListSider = ({
                         ))}
                     </Select>
                 </Form.Item>
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Найближча станція метро</Text>
                 <Form.Item
                     name="stationName"
                     className="club-list-row"
-                    label="Найближча станція метро">
+                    // label="Найближча станція метро"
+                >
                     <Select
                         allowClear
                         className="club-list-select"
@@ -191,10 +200,13 @@ const ClubListSider = ({
                 </Form.Item>
 
                 {stateForClub === false ? (
-                <Form.Item
+                    <>
+                    <Text style={{fontSize :'19px', color:'GrayText'}}>Ремоут</Text>
+                    <Form.Item
                     name="isOnline"
                     className="club-list-row"
-                    label="Ремоут">
+                    // label="Ремоут"
+                    >
                     <Checkbox.Group className="club-list-categories">
                         <Checkbox
                             style={{display: "flex"}}
@@ -205,12 +217,16 @@ const ClubListSider = ({
                         </Checkbox>
                     </Checkbox.Group>
                 </Form.Item>
+                </>
                 ): <Form.Item/>}
                 {stateForClub === false ? (
+                <>
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Категорії</Text>
                 <Form.Item
                     name="categoriesName"
                     className="club-list-row"
-                    label="Категорії">
+                    // label="Категорії"
+                >
                     <Checkbox.Group className="club-list-categories">
                         {categories
                             .sort((a, b) => a.sortby - b.sortby)
@@ -223,15 +239,17 @@ const ClubListSider = ({
                             ))}
                     </Checkbox.Group>
                 </Form.Item>
+                </>
                 ): <Form.Item/>}
                 {stateForClub === false ? (
+                <>
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Вік дитини</Text>
                 <Form.Item
                      name="age"
-                     label="Вік дитини"
+                     // label="Вік дитини"
                      className="club-list-row"
                      inititalValue={0}
                 >
-
                  <span>
                      <InputNumber
                          className="age"
@@ -243,6 +261,7 @@ const ClubListSider = ({
                      років
                  </span>
                 </Form.Item>
+                </>
                 ): <Form.Item/>}
             <div className="use-clear-button">
                 <div className="mobile-clear-button">

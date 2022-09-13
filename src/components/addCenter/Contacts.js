@@ -1,4 +1,4 @@
-import {Button, Form, Input} from 'antd';
+import {Button, Form, Input, Typography} from 'antd';
 import React, {useEffect, useState} from 'react';
 import MaskIcon from '../MaskIcon';
 import "./css/Contacts.css";
@@ -6,6 +6,7 @@ import "./css/Contacts.css";
 const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) => {
     const [contactsForm] = Form.useForm();
     const [contacts_data, setContactsData] = useState({});
+    const {Text} = Typography;
 
 
     useEffect(() => {
@@ -54,8 +55,10 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) =>
             form={contactsForm}
         >
             <div className="form-fields">
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
                 <Form.Item
-                    label="Контакти"
+                    // label="Контакти"
                     className="add-club-row add-club-contacts">
                     {contacts.map(contact =>
                         <Form.Item name={`contact${contact.name}`}

@@ -1,4 +1,4 @@
-import {Button, Form, Input, Upload} from "antd";
+import {Button, Form, Input, Typography, Upload} from "antd";
 import React, {useRef, useState} from "react";
 import EditClubContentFooter from "../EditClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -16,6 +16,7 @@ const DescriptionTab = ({setResult, result}) => {
     const [fileList, setFileList] = useState([]);
     const editorRef = useRef(null);
     const [hideButton, setHideButton] = useState();
+    const {Text} = Typography;
 
     const clubName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
 
@@ -75,9 +76,11 @@ const DescriptionTab = ({setResult, result}) => {
             name="basic"
             form={descriptionForm}
             onFinish={onFinish}>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
             <Form.Item name="urlLogo"
                        className="edit-club-row"
-                       label="Логотип"
+                       // label="Логотип"
                        hasFeedback>
                 <Upload
                     name="image"
@@ -90,9 +93,11 @@ const DescriptionTab = ({setResult, result}) => {
                     <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                 </Upload>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Обкладинка</Text>
             <Form.Item name="urlBackground"
                        className="edit-club-row"
-                       label="Обкладинка"
+                       // label="Обкладинка"
                        hasFeedback>
                 <Upload
                     name="image"
@@ -105,15 +110,19 @@ const DescriptionTab = ({setResult, result}) => {
                     <span className="edit-club-upload"><UploadOutlined className="icon"/>Завантажити обкладинку</span>
                 </Upload>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Галерея</Text>
             <Form.Item name="urlGallery"
                        className="add-club-row"
-                       label="Галерея"
+                       // label="Галерея"
                        hasFeedback>
                 <AddClubGalery onChange={onChangeHandler}/>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
             <Form.Item name="descriptionText"
                        className="edit-club-row"
-                       label="Опис"
+                       // label="Опис"
                        hasFeedback
                        rules={[{
                            required: true,

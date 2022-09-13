@@ -1,16 +1,18 @@
-import {Form, Input, Checkbox, Button, Tooltip} from 'antd';
-import React, { useEffect, useState } from 'react';
+import {Form, Input, Checkbox, Button, Tooltip, Typography} from 'antd';
+import React, {useEffect, useState} from 'react';
 import AddLocationModal from "../addClub/location/AddLocationModal";
 import "./css/MainInformation.css";
-import { PlusOutlined } from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 
-const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations, result, setResult }) => {
+const MainInformation = ({step, setStep, clubs, cities, locations, setLocations, result, setResult}) => {
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
     const [mainInformationFrom] = Form.useForm();
+    const {Text} = Typography;
+
 
     const nextStep = () => {
         setStep(step + 1);
@@ -18,14 +20,14 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
 
     useEffect(() => {
         if (result) {
-            mainInformationFrom.setFieldsValue({ ...result })
+            mainInformationFrom.setFieldsValue({...result})
         }
     }, [])
 
     const onFinish = (values) => {
         console.log('Success: ', values);
-        values.locations.map(location =>{
-            if(!location.coordinates){
+        values.locations.map(location => {
+            if (!location.coordinates) {
                 location.coordinates = location.latitude + ", " + location.longitude;
             }
         })
@@ -42,48 +44,53 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
             form={mainInformationFrom}
             onFinish={onFinish}>
             <div className="form-fields">
+                <Text style={{fontSize: '19px', color: 'GrayText'}}>Назва центру</Text>
                 <Form.Item
                     name="name"
                     className="form-item"
-                    label="Назва центру"
+                    // label="Назва центру"
                     rules={[
                         {
                             required: true,
                             pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
                             message: "Некоректна назва центру",
                         },
-                      ]}>
+                    ]}>
                     <Input
                         suffix={
                             <Tooltip placement="bottomRight"
                                      title="Це поле може містити тільки українські та англійські літери, довжиною 5-100 символів">
-                                <InfoCircleOutlined className="info-icon" />
+                                <InfoCircleOutlined className="info-icon"/>
                             </Tooltip>
                         }
-                        placeholder="Введіть назву центру" />
+                        placeholder="Введіть назву центру"/>
                 </Form.Item>
+
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Локації</Text>
+                    <div>
+                    <Button className="add-location-btn" htmlType="submit" onClick={() => setLocationVisible(true)}><PlusOutlined/>Додати локацію</Button>
+                    </div>
                 <Form.Item
                     name="locations"
                     className="form-item locations"
-                    label="Локації"
+                    // label="Локації"
                     rules={[{
                         required: true,
                         message: "Додайте і виберіть локацію"
                     }]}>
                         <Checkbox.Group className="location-list">
-                            {locations.map(location =>
-                                <div className="checkbox-item">
-                                    <Checkbox value={location}>
-                                        {location.name}
-                                    </Checkbox>
-                                </div>
-                            )
-                            }
-                        </Checkbox.Group>
+                        {locations.map(location =>
+                            <div className="checkbox-item">
+                                <Checkbox value={location}>
+                                    {location.name}
+                                </Checkbox>
+                            </div>
+                        )
+                        }
+                    </Checkbox.Group>
                 </Form.Item>
-                <span className="add-club-location" onClick={() => setLocationVisible(true)}>
-                    <Button className="add-location-btn" htmlType="submit"><PlusOutlined/>Додати локацію</Button>
-                </span>
+
+
             </div>
             <div className="btn">
                 <Button className="next-btn" htmlType="submit">Наступний крок</Button>
@@ -96,9 +103,9 @@ const MainInformation = ({ step, setStep, clubs, cities, locations, setLocations
                 setVisible={setLocationVisible}
                 editedLocation={editedLocation}
                 setEditedLocation={setEditedLocation}
-                cities={cities} />
+                cities={cities}/>
 
-        </Form >
+        </Form>
     )
 }
 
