@@ -1,8 +1,9 @@
-import {Checkbox, Form, Input, InputNumber, Select} from "antd";
+import {Checkbox, Form, Input, InputNumber, Select, Typography} from "antd";
 import {Button} from "antd";
 import React, {useEffect, useState} from "react";
 
 const {Option} = Select;
+const {Text} = Typography;
 
 const MainInformationStep = ({categories, step, setStep, setResult, result, centers ,fromCenter}) => {
     const [mainForm] = Form.useForm();
@@ -65,9 +66,10 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             requiredMark={true}
             onFinish={onFinish}
             noValidate>
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Назва</Text>
             <Form.Item name="name"
                        className="add-club-row"
-                       label="Назва"
+                       // label="Назва"
                        hasFeedback
                        rules={[
                            {
@@ -88,9 +90,11 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
             </Form.Item>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Категорія</Text>
             <Form.Item name="categories"
                        className="add-club-row"
-                       label="Категорія"
+                       // label="Категорія"
                        hasFeedback
                        rules={[
                            {
@@ -102,10 +106,13 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                         value={category.name}>{category.name}</Checkbox>)}
                 </Checkbox.Group>
             </Form.Item>
-            <Form.Item label="Вік дитини"
-                       className="add-club-row"
-                       hasFeedback
-                       validateStatus={ageValidateStatus}>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Вік дитини</Text>
+            <Form.Item
+                // label="Вік дитини"
+                className="add-club-row"
+                hasFeedback
+                validateStatus={ageValidateStatus}>
                 <span className="add-club-age">
                     Від
                     <Form.Item name="ageFrom"
@@ -133,9 +140,12 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                 </span>
             </Form.Item>
             { fromCenter ? <div> </div> :
-            <Form.Item name="centerId"
+                <>
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Приналежність до центру</Text>
+                <Form.Item name="centerId"
                        className="add-club-row"
-                       label="Приналежність до центру">
+                       // label="Приналежність до центру"
+                >
                 <Select
                     className="add-club-select"
                     placeholder="Назва центру"
@@ -143,6 +153,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                     {centers.map(c => <Option value={c.id}>{c.name}</Option>)}
                 </Select>
             </Form.Item>
+            </>
             }
             <div className="add-club-content-footer">
                 <Button htmlType="submit"

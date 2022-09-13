@@ -1,5 +1,5 @@
-import { Form, Checkbox } from 'antd';
-import {useEffect, useState} from 'react';
+import {Form, Checkbox, Typography} from 'antd';
+import React, {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
@@ -10,6 +10,7 @@ import { addCenter } from '../../service/CenterService';
 const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
     const [clubsOfCenterForm] = Form.useForm();
     const [clubsId,setClubsIds] = useState([]);
+    const {Text} = Typography;
 
     const nextStep = () => {
         setStep(0);
@@ -59,9 +60,10 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             onFinish={onFinish}
             form={clubsOfCenterForm}
         >
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Оберіть гурток</Text>
             <Form.Item
             className="form-item"
-            label="Оберіть гурток"
+            // label="Оберіть гурток"
             name="clubs"
             rules={[{
                 required: true,

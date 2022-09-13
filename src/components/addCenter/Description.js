@@ -1,4 +1,4 @@
-import {Form, Input, Upload, Button} from 'antd';
+import {Form, Input, Upload, Button, Typography} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import EditorComponent from "../editor/EditorComponent";
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
@@ -14,6 +14,7 @@ const Description = ({step, setStep, result, setResult}) => {
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
     const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
     const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
+    const {Text} = Typography;
 
 
     const nextStep = () => {
@@ -47,9 +48,11 @@ const Description = ({step, setStep, result, setResult}) => {
             onFinish={onFinish}
             className="description">
             <div className="form-fields">
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
                 <Form.Item name="urlLogo"
                            className="add-club-row"
-                           label="Логотип"
+                           // label="Логотип"
                            hasFeedback>
                     <Upload
                         name="image"
@@ -62,9 +65,11 @@ const Description = ({step, setStep, result, setResult}) => {
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                     </Upload>
                 </Form.Item>
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Фото</Text>
                 <Form.Item name="urlBackground"
                            className="add-club-row"
-                           label="Фото"
+                           // label="Фото"
                            hasFeedback>
                     <Upload
                         name="image"
@@ -77,9 +82,11 @@ const Description = ({step, setStep, result, setResult}) => {
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити фото</span>
                     </Upload>
                 </Form.Item>
+
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
                 <Form.Item name="description"
                            className="add-center-row"
-                           label="Опис"
+                           // label="Опис"
                            hasFeedback
                            rules={[{
                                required: true,

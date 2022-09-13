@@ -1,4 +1,4 @@
-import { Form, Input, List, message, Popconfirm, Select, Switch, Tooltip } from "antd";
+import {Form, Input, List, message, Popconfirm, Select, Switch, Tooltip, Typography} from "antd";
 import React, { useState, useEffect } from "react";
 import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
@@ -16,6 +16,8 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     const [locationForm] = Form.useForm();
     const [contactsForm] = Form.useForm();
     const [checked, setChecked] = useState(result.isOnline);
+    const {Text} = Typography;
+
 
     useEffect(() => {
         if (result) {
@@ -96,9 +98,10 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             form={contactsForm}
             onFinish={onFinish}
         >
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Локації</Text>
             <Form.Item name="locations"
                 className="add-club-row"
-                label="Локації"
+                // label="Локації"
                 initialValue={result.locations}>
                 <List
                     className="add-club-location-list"
@@ -130,19 +133,23 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                     Додати локацію
                 </span>
             </Form.Item>
-            <div className="add-club-inline">
+            <div className="add-club-inline" style={{display:'grid'}}>
+                <Text style={{fontSize :'19px', color:'GrayText'}}>Доступний онлайн</Text>
                 <Form.Item name="isOnline"
                     className="add-club-row"
-                    label="Доступний онлайн?"
+                    // label="Доступний онлайн?"
                 >
-                    <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onChange} checked={checked}/>
+                <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onChange} checked={checked}/>
+                    <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн" >
+                        <InfoCircleOutlined className="info-icon" style={{margin:'10px'}}/>
+                    </Tooltip>
                 </Form.Item>
-                <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн">
-                    <InfoCircleOutlined className="info-icon" />
-                </Tooltip>
+
             </div>
+
+            <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
             <Form.Item
-                label="Контакти"
+                // label="Контакти"
                 className="add-club-row add-club-contacts"
                 name="contacts"
             >
