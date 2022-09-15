@@ -106,6 +106,10 @@ const AuthMenu = () => {
                             <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
+
+                            {/*test*/}
+                            <Menu.Item><Link to="/groups">Групи</Link></Menu.Item>
+
                             <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
                             <Menu.Item><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>
