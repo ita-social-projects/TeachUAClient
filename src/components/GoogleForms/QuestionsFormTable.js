@@ -19,6 +19,7 @@ import {
   addToTable,
 } from "../../util/TableUtil";
 import QuestionFooter from "./QuestionFooter";
+import SearchInput from "./SearchInput";
 const QuestionFormTable = () => {
   const [form] = Form.useForm();
   const [questions, setQuestions] = useState([]);
@@ -36,39 +37,13 @@ const QuestionFormTable = () => {
         clearFilters,
       }) => {
         return (
-          <>
-            <Input
-              autoFocus
-              placeholder="Введіть назву питання"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Reset
-            </Button>
-          </>
+          <SearchInput
+            setSelectedKeys={setSelectedKeys}
+            selectedKeys={selectedKeys}
+            confirm={confirm}
+            clearFilters={clearFilters}
+            placeholderValue={"Введіть назву питання"}
+          />
         );
       },
       filterIcon: () => {

@@ -97,7 +97,8 @@ export const exportQuizToExcel = async (id) => {
 export const getFilteredExcelResults = async (id, data) => {
   return await fetchRequest
     .post(BASE_URL + "/api/excel_result/" + id, {
-      responseDate: data.date,
+      responseDateStart: data.dateStart,
+      responseDateEnd: data.dateEnd,
       totalScore: data.score,
     })
     .then((response) => {

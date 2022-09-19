@@ -64,6 +64,7 @@ import ResultTable from "./components/GoogleForms/ResultTable";
 import ArchiveTable from "./components/GoogleForms/ArchivedResults";
 import QuestionFormTable from "./components/GoogleForms/QuestionsFormTable";
 import OptionFormTable from "./components/GoogleForms/OptionFormTable";
+import DontPush from "./components/GoogleForms/DontPush";
 
 const {Content} = Layout;
 
@@ -123,6 +124,7 @@ function App() {
                                     <Route path="/result_archived" exact component={ArchiveTable}/>
                                     <Route path="/question/:id" exact component={QuestionFormTable}/>
                                     <Route path="/option/:id" exact component={OptionFormTable}/>
+                                    <Route path="/dont_push" exact component={DontPush}/>
                                     
 
 

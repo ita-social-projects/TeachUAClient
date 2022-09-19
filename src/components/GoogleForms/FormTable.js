@@ -2,9 +2,9 @@ import {
   getAllFormsResponse,
   updateFormById,
   deleteFormById,
-  updateFormGoogleById
+  updateFormGoogleById,
 } from "../../service/GoogleFormService";
-import './css/formstyle.css';
+import "./css/formstyle.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, message, Popconfirm, Button, Layout, List, Upload } from "antd";
@@ -78,20 +78,20 @@ const FormTable = () => {
     >
       <span className="table-action">Видалити</span>
     </Popconfirm>,
-     <Popconfirm
-     title="Оновити форму??"
-     cancelText="Ні"
-     okText="Так"
-     cancelButtonProps={{
-       className: "popConfirm-cancel-button",
-     }}
-     okButtonProps={{
-       className: "popConfirm-ok-button",
-     }}
-     onConfirm={() => update(record)}
-   >
-     <span className="table-action">Оновити</span>
-   </Popconfirm>,
+    <Popconfirm
+      title="Оновити форму??"
+      cancelText="Ні"
+      okText="Так"
+      cancelButtonProps={{
+        className: "popConfirm-cancel-button",
+      }}
+      okButtonProps={{
+        className: "popConfirm-ok-button",
+      }}
+      onConfirm={() => update(record)}
+    >
+      <span className="table-action">Оновити</span>
+    </Popconfirm>,
   ];
   const getData = () => {
     getAllFormsResponse().then((response) => {
@@ -147,11 +147,9 @@ const FormTable = () => {
     });
   };
 
-
   return (
     <div>
-      <span className="import-db-buttons">
-      </span>
+      <span className="import-db-buttons"></span>
       <EditableTable
         className="city-table"
         bordered

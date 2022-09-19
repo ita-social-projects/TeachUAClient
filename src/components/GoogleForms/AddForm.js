@@ -51,6 +51,8 @@ const AddForm = ({googleForms, setGoogleForms}) => {
             </Form>
             <Link to={"/result_archived"}> <Button className="flooded-button add-contact-type-button"
             >Архівовані Результати</Button></Link>
+            <Link to={"/dont_push"}> <Button className="flooded-button add-contact-type-button"
+            >Dont push this button</Button></Link>
         </div>
     );
 };

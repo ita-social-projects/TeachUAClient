@@ -9,7 +9,7 @@ import { deleteFromTable, addToTable } from "../../util/TableUtil";
 import { SearchOutlined } from "@ant-design/icons";
 import './css/formstyle.css';
 import EditableTable from "../EditableTable";
-
+import SearchInput from "./SearchInput";
 const ArchiveTable = () => {
   const [form] = Form.useForm();
   const [archivedResults, setArchivedResults] = useState([]);
@@ -32,39 +32,14 @@ const ArchiveTable = () => {
         clearFilters,
       }) => {
         return (
-          <>
-            <Input
-              autoFocus
-              placeholder="Введіть пошту виконавця"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Reset
-            </Button>
-          </>
+          <SearchInput
+            setSelectedKeys={setSelectedKeys}
+            selectedKeys={selectedKeys}
+            confirm={confirm}
+            clearFilters={clearFilters}
+            placeholderValue={"Введіть пошту виконавця"}
+           
+          />
         );
       },
       filterIcon: () => {
@@ -88,39 +63,14 @@ const ArchiveTable = () => {
         clearFilters,
       }) => {
         return (
-          <>
-            <Input
-              autoFocus
-              placeholder="Введіть дату виконання"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Reset
-            </Button>
-          </>
+          <SearchInput
+          setSelectedKeys={setSelectedKeys}
+          selectedKeys={selectedKeys}
+          confirm={confirm}
+          clearFilters={clearFilters}
+          placeholderValue={"Введіть дату виконання"}
+         
+        />
         );
       },
       filterIcon: () => {
@@ -142,39 +92,13 @@ const ArchiveTable = () => {
         clearFilters,
       }) => {
         return (
-          <>
-            <Input
-              autoFocus
-              placeholder="Введіть мінімальний рахунок виконавця"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              Search
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Reset
-            </Button>
-          </>
+          <SearchInput
+            setSelectedKeys={setSelectedKeys}
+            selectedKeys={selectedKeys}
+            confirm={confirm}
+            clearFilters={clearFilters}
+            placeholderValue={"Введіть мінімальний рахунок виконавця"}
+          />
         );
       },
       filterIcon: () => {
@@ -244,13 +168,6 @@ const ArchiveTable = () => {
           Відновити результати
         </Button>
       </div>
-      {/* <Table
-        bordered
-        form={form}
-        columns={archColumns}
-        dataSource={archivedResults}
-        actions={actions}
-      /> */}
       <EditableTable
         className="city-table"
         bordered

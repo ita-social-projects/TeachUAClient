@@ -18,6 +18,16 @@ text-align: center;
 	margin: auto;
 	margin-bottom: 3.78%;
 }
+.excel-format{
+	display: flex;
+	flex-direction: column;
+}
+.excel-attribute{
+	color: white;
+	font-size: medium;
+	font-weight: 500;
+	margin-left: 8px;
+}
 /* .add-form{
 	margin-right: 1000px;
 } */
