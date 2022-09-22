@@ -53,7 +53,7 @@ export const updateCertificateProfile = async (id, data) => {
     return await fetchRequest.put(BASE_URL + "/api/certificates/" + id, {
         userName: data.userName,
         sendToEmail: data.sendToEmail,
-        sendStatus: data.sendStatus,
+        sendStatus: null,
         serialNumber: data.serialNumber,
         updateStatus: data.updateStatus
     }).then((response) => {
