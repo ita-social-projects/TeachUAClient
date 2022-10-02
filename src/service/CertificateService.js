@@ -37,6 +37,18 @@ export const getSentCertificates = async () => {
         });
 };
 
+export const getCertificatesByUserName = async (data) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/certificate", {
+            params: {
+                userName: data.userName
+            }
+        })
+        .then((response) => {
+            return response.data;
+        })
+}
+
 export const updateCertificateProfile = async (id, data) => {
     return await fetchRequest.put(BASE_URL + "/api/certificates/" + id, {
         userName: data.userName,

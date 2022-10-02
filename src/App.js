@@ -60,6 +60,7 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
+import CertificatesSearch from "./components/certificate/CertificatesSearch";
 
 const {Content} = Layout;
 
@@ -143,6 +144,7 @@ function App() {
                                     <Route path="/speakingclub" exact component={SpeakingClubPage}/>
                                     <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
                                     <Route path="/certificate/:serialNumber" exact component={ValidateCertificatePage}/>
+                                    <Route path="/certificate" exact component={CertificatesSearch}/>
                                     <Route path="/" exact component={MainComponent}/>
                                     <Route path="*" exact component={NotFoundPage}/>
 

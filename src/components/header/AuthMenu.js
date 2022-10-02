@@ -20,6 +20,7 @@ const AuthMenu = () => {
 
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
+    const [showSearchCertificate, setShowSearchCertificate] = useState(false);
     const [showAddChallenge, setShowAddChallenge] = useState(false);
 
     const [showLogin, setShowLogin] = useState(false);
@@ -85,6 +86,8 @@ const AuthMenu = () => {
                 <Menu>
                     <Menu.Item><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
                     <Menu.Item><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
+                    <Menu.Item><Link to="/certificate"><div onClick={() => setShowSearchCertificate(true)}>Пошук сертифікатів</div></Link></Menu.Item>
+                    
                     {/*Previous version of this <Menu.Item>*/}
                     {/*<Menu.Item><Link to={`/user/${localStorage.getItem('id')}`}>Мій Профіль </Link></Menu.Item>*/}
                         <Menu.Item><Link to={`/user/${localStorage.getItem('id')}/page`}>Мій Профіль </Link></Menu.Item>
