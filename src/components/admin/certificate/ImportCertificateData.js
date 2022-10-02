@@ -42,7 +42,7 @@ const ImportCertificateData = () => {
     // });
 
     const [dataToDB, setDataToDB] = useState({
-        type: null,
+        type: "",
         startDate: "",
         endDate: "",
         hours: null,
@@ -81,9 +81,9 @@ const ImportCertificateData = () => {
     }
 
     const isFilled = () => {
-        if (dataToDB.type != null &&
-            dataToDB.startDate !== "" &&
-            dataToDB.endDate !== "" &&
+        if (dataToDB.type !== "" &&
+            dataToDB.startDate !== "" && dataToDB.startDate !== "Invalid date" &&
+            dataToDB.endDate !== "" && dataToDB.endDate !== "Invalid date" &&
             dataToDB.hours != null &&
             dataToDB.courseNumber != null) {
             setFormFilled(true)
@@ -272,15 +272,6 @@ const ImportCertificateData = () => {
                             className="text-hint">
                             Згенерувати сертифікати для:
                         </Text>
-
-                        {/*<Radio.Group onChange={onTypeChange} value={dataToDB.type}>*/}
-                        {/*    <Space direction="vertical">*/}
-                        {/*        <Radio value={1}>тренера</Radio>*/}
-                        {/*        <Radio value={2}>модератора</Radio>*/}
-                        {/*        <Radio value={3}>учасника</Radio>*/}
-                        {/*    </Space>*/}
-                        {/*</Radio.Group>*/}
-
                         <Form.Item
                             name="type"
                             value={dataToDB.type}>
