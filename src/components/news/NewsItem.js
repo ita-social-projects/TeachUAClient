@@ -14,7 +14,7 @@ const NewsItem = ({news}) => {
     const handleClick = () => {
         history.push("/news/" + news.id)
     }
-//console.log("**********news.urlTitleLogo = " + news.urlTitleLogo );
+    //console.log("**********news.urlTitleLogo = " + news.urlTitleLogo );
     return (
         <div id="newsContainer" onClick={handleClick}>
             <div id="newsImage" style={{

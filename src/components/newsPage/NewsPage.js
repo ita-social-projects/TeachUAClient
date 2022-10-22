@@ -46,7 +46,7 @@ const NewsPage = () => {
         news ? (
             <div className="news-page">
                 <div className="image"
-                     style={{background: `url(${BASE_URL + news.urlTitleLogo}) center / cover`}}>
+                     style={{background: `url("${BASE_URL + news.urlTitleLogo}") center / cover`}}>
                 </div>
                 <p/><p/>
                 <div className="social-info">

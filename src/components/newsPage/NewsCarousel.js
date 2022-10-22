@@ -25,7 +25,7 @@ const NewsCarousel = ({newsList}) => {
                 <div className="carousel-container">
                         <div className="carousel-item">
                             <div id="newsImage" style={{
-                                background: `url(${BASE_URL + news.urlTitleLogo}) center / cover`
+                                background: `url("${BASE_URL + news.urlTitleLogo}") center / cover`
                             }}></div>
                             <div id="newsData">
                                 <div>
