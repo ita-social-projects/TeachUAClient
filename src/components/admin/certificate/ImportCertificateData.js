@@ -1,4 +1,4 @@
-import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space} from "antd";
+import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportData.css';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -32,6 +32,12 @@ const ImportCertificateData = () => {
     const dateFormat = 'YYYY-MM-DD';
     const [formFilled, setFormFilled] = useState(false);
 
+    const studyTypes = [
+        {label: "очна", value: "очна"},
+        {label: "дистанційна", value: "дистанційна"},
+        {label: "змішана", value: "змішана"}
+    ];
+
     // const [dataToDB, setDataToDB] = useState({
     //     type: 3,
     //     hours: 40,
@@ -42,52 +48,64 @@ const ImportCertificateData = () => {
     // });
 
     const [dataToDB, setDataToDB] = useState({
-        type: "",
-        startDate: "",
-        endDate: "",
-        hours: null,
+        type: null,
+        startDate: '',
+        endDate: '',
+        hours: 40,
         courseNumber: null,
+        studyType: "дистанційна",
         excelList: {}
     });
 
     const onTypeChange = (value) => {
-        console.log(formFilled);
         dataToDB.type = value.target.value;
+        isFilled();
         console.log(dataToDB)
     }
 
     const onStartDateChange = (value) => {
-        console.log(formFilled)
         dataToDB.startDate = moment(value).format(dateFormat)
+        isFilled()
         console.log(dataToDB)
     }
 
     const onEndDateChange = (value) => {
-        console.log(formFilled)
         dataToDB.endDate = moment(value).format(dateFormat)
+        isFilled()
         console.log(dataToDB)
     }
 
     const onHoursChange = (value) => {
-        console.log(formFilled)
         dataToDB.hours = value
+        isFilled()
         console.log(dataToDB)
     }
 
     const onCourseNumberChange = (value) => {
-        console.log(formFilled)
         dataToDB.courseNumber = value
+        isFilled()
         console.log(dataToDB)
     }
 
     const isFilled = () => {
-        if (dataToDB.type !== "" &&
-            dataToDB.startDate !== "" && dataToDB.startDate !== "Invalid date" &&
-            dataToDB.endDate !== "" && dataToDB.endDate !== "Invalid date" &&
-            dataToDB.hours != null &&
-            dataToDB.courseNumber != null) {
-            setFormFilled(true)
+        setFormFilled(false);
+        if (dataToDB.type === '3') {
+            if (dataToDB.type !== null &&
+                dataToDB.startDate !== '' && dataToDB.startDate !== 'Invalid date' &&
+                dataToDB.endDate !== '' && dataToDB.endDate !== 'Invalid date' &&
+                dataToDB.hours != null &&
+                dataToDB.courseNumber != null) {
+                setFormFilled(true)
+            }
+        } else if (dataToDB.type === '1' || dataToDB.type === '2') {
+            if (dataToDB.type !== null &&
+                dataToDB.hours != null &&
+                dataToDB.courseNumber != null &&
+                dataToDB.studyType !== null) {
+                setFormFilled(true)
+            }
         }
+        console.log(formFilled)
     }
 
     const getData = () => {
@@ -321,7 +339,9 @@ const ImportCertificateData = () => {
                                     onChange={onStartDateChange}
                                     format={dateFormat}
                                     name="startDate"
+                                    id = "startDate"
                                     value={dataToDB.startDate}
+                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2")}
                                     // value={moment(dataToDB.startDate,"YYYY-MM-DD")}
                                 />
                             </Form.Item>
@@ -335,9 +355,24 @@ const ImportCertificateData = () => {
                                     format={dateFormat}
                                     name="endDate"
                                     value={dataToDB.endDate}
+                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2")}
                                 />
                             </Form.Item>
                         </div>
+
+
+                        <Form.Item
+                            name="studyType"
+                            label="Форма навчання"
+                            initialValue="дистанційна"
+                        >
+                            <Select
+                                options={studyTypes}
+                                disabled={(dataToDB.type === "3")}
+                                name="studyType"
+                                className="dropdown"
+                            />
+                        </Form.Item>
 
 
                         <Form.Item
@@ -368,7 +403,7 @@ const ImportCertificateData = () => {
                                     <Button
                                         htmlType="submit"
                                         className="flooded-button send-data-button"
-                                        disabled={!formFilled || !dataLoaded}
+                                        disabled={!(formFilled && dataLoaded)}
                                         headers={{Authorization: tokenToHeader()}}
                                         onClick={() => loadToDatabase()}
                                     >
