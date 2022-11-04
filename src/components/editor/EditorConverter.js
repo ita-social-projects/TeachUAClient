@@ -22,8 +22,12 @@ export const convertFromJson = (json) => {
 };
 
 export const getShortContent = (content) => {
-    const contentObject = JSON.parse(content);
-
+    var contentObject;
+    try{
+        contentObject = JSON.parse(content);
+    } catch(e){
+        return "У цього гуртка немає опису...";
+    }
     let shortDescription = "";
 
     contentObject.blocks
