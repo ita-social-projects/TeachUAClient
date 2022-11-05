@@ -11,6 +11,7 @@ import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
 import moment from "moment";
 import Loader from "../Loader";
 import NewsCarousel from "./NewsCarousel";
+import {Helmet} from "react-helmet";
 
 const NewsPage = () => {
 
@@ -46,8 +47,9 @@ const NewsPage = () => {
         news ? (
             <div className="news-page">
                 <div className="image"
-                     style={{background: `url("${BASE_URL + news.urlTitleLogo}") center / cover`}}>
-                </div>
+					style={{ background: `url("${BASE_URL + news.urlTitleLogo}") center / cover` }}>
+					<div id="major-title">{news.title}</div>
+				</div>
                 <p/><p/>
                 <div className="social-info">
                     <div className="social-media">
@@ -56,7 +58,7 @@ const NewsPage = () => {
                             <a target="_blank" href=""></a>
                             <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon"/></a>
                             <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined className="icon"/></a>
-                            <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined className="icon"/></a>
+							<a target="_blank" href="https://www.instagram.com/yedyni.ruh/"><InstagramOutlined className="icon"/></a>
                             <a target="_blank" href="mailto:teach.in.ukrainian@gmail.com"><MailOutlined className="icon"/></a>
                         </div>
                     </div>
@@ -77,7 +79,22 @@ const NewsPage = () => {
                 <div className="other-news">
                     <div className="title">Інші новини</div>
                     <NewsCarousel newsList={newsList}/>
-                </div>
+				</div>
+				<Helmet>
+					<script type="text/javascript" >
+						{`
+						let lastKnownScrollPosition = 0;
+						let image = document.getElementsByClassName('image')[0];
+						window.addEventListener('scroll',(event) => {
+							lastKnownScrollPosition = window.scrollY;
+							bgPositionY = 50 + lastKnownScrollPosition/15;
+							if (bgPositionY < 100) {
+								image.style.backgroundPosition =  "50% " + bgPositionY + "%";
+							}
+						});
+						`}
+					</script>
+            	</Helmet>
             </div>
         ) : <Result
             className="news-not-found"

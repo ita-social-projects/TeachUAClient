@@ -55,7 +55,7 @@
 
 @media (min-width: 320px) and (max-width: 824px) {
     .about-header {
-        margin-bottom: 25px;
+        margin-bottom: 45px;
     }
 
     span.ant-avatar.ant-avatar-lg.ant-avatar-circle.ant-avatar-icon.avatarIfNotLogin {
