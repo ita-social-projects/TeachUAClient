@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, List, Button } from "antd";
 import { Content } from "antd/es/layout/layout";
-import {DownloadOutlined} from "@ant-design/icons";
 import { getToken } from "../../../../service/StorageService";
 import { Redirect } from "react-router-dom";
 import { getCertificatesOfAuthenticatedUser, downloadCertificate } from "../../../../service/CertificateService";
@@ -45,12 +44,12 @@ const UserCertificatesPage = () => {
                             actions={[
                                 <Button htmlType="submit" onClick={() => { 
                                     downloadCertificate(certificate.serialNumber) 
-                                }}><DownloadOutlined />Завантажити</Button>
+                                }}>Завантажити</Button>
                             ]}
                         >
                             <List.Item.Meta
                                 title={<h3>{certificate.courseDescription}</h3>}
-                                description={certificate.serialNumber}
+                                description={certificate.date}
                             />
                             <Text italic>{certificate.certificateType}</Text>
                         </List.Item>
