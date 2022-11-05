@@ -8,6 +8,7 @@ import Layout from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import {deleteToken, deleteUserId, getToken, getUserId} from "../../service/StorageService";
 import UserMessagesPage from "./content/messages/UserMessagesPage";
+import UserCertificatesPage from "./content/certificates/UserCertificatesPage";
 
 const UserPage = () => {
 
@@ -48,6 +49,10 @@ const UserPage = () => {
 
             <Route exact path={`${routeMatch.path}/messages`} >
                 <UserMessagesPage />
+            </Route>
+
+            <Route exact path={`${routeMatch.path}/certificates`} >
+                <UserCertificatesPage />
             </Route>
         </Layout>
     )
