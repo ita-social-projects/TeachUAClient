@@ -46,7 +46,7 @@ const PreviousAboutProject = () => {
                         <a target="_blank"
                            href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined
                             className="icon"/></a>
-                        <a target="_blank" href="https://www.instagram.com/teach.in.ukrainian/"><InstagramOutlined
+                        <a target="_blank" href="https://www.instagram.com/yedyni.ruh/"><InstagramOutlined
                             className="icon"/></a>
                         <a target="_blank" href="mailto:teach.in.ukrainian@gmail.com"><MailOutlined className="icon"/></a>
                     </div>
