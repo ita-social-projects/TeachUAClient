@@ -4,6 +4,7 @@ import { Content } from "antd/es/layout/layout";
 import { getToken } from "../../../../service/StorageService";
 import { Redirect } from "react-router-dom";
 import { getCertificatesOfAuthenticatedUser, downloadCertificate } from "../../../../service/CertificateService";
+import { getCertificateTypeBySerialNumber } from "../../../../util/CertificateUtil";
 import "../messages/css/UserMessagesPage.less";
 import "./css/UserCertificatesPage.less";
 
@@ -51,7 +52,7 @@ const UserCertificatesPage = () => {
                                 title={<h3>{certificate.courseDescription}</h3>}
                                 description={certificate.date}
                             />
-                            <Text italic>{certificate.certificateType}</Text>
+                            <Text italic>{getCertificateTypeBySerialNumber(certificate.serialNumber)}</Text>
                         </List.Item>
                     )}
                 />
