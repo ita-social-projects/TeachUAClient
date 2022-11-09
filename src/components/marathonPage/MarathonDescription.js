@@ -19,7 +19,7 @@ const MarathonDescription = () => {
                         <a target="_blank"
                            href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined
                             className="icon"/></a>
-						<a target="_blank" href="https://www.instagram.com/yedyni.ruh/"><InstagramOutlined
+                        <a target="_blank" href="https://www.instagram.com/yedyni.ruhn/"><InstagramOutlined
                             className="icon"/></a>
                         <a target="_blank" href="mailto:teach.in.ukrainian@gmail.com"><MailOutlined className="icon"/></a>
                     </div>

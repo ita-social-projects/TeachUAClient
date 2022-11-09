@@ -20,7 +20,7 @@ const FooterSocials = () => {
                 <div className="links">
                     <a target="_blank" href="https://www.facebook.com/teach.in.ukrainian"><FacebookOutlined className="icon" /></a>
                     <a target="_blank" href="https://www.youtube.com/channel/UCP38C0jxC8aNbW34eBoQKJw"><YoutubeOutlined className="icon"/></a>
-					<a target="_blank" href="https://www.instagram.com/yedyni.ruh/"><InstagramOutlined className="icon"/></a>
+                    <a target="_blank" href="https://www.instagram.com/yedyni.ruh/"><InstagramOutlined className="icon"/></a>
                     <a target="_blank" href=""></a>
                 </div>
             </div>

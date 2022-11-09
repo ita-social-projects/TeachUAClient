@@ -49,6 +49,33 @@ export const getCertificatesByUserName = async (data) => {
         })
 }
 
+export const getCertificatesOfAuthenticatedUser = async () => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/certificates/my")
+        .then((response) => {
+            return response.data;
+        })
+}
+
+export const downloadCertificate = async (serialNumber) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/certificates/download/" + serialNumber, {
+            headers: {"content-type": "application/pdf"},
+            responseType: "blob"
+        })
+        .then(response => {
+            let url = URL.createObjectURL(response.data);
+            let anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = "certificate.pdf";
+            document.body.append(anchor);
+            anchor.style = "dislay: none";
+            anchor.click();
+            anchor.remove();
+            URL.revokeObjectURL(url);
+        })
+}
+
 export const updateCertificateProfile = async (id, data) => {
     return await fetchRequest.put(BASE_URL + "/api/certificates/" + id, {
         userName: data.userName,
