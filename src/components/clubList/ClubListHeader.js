@@ -26,8 +26,10 @@ const ClubListHeader = ({
                 </div>
                 {mapSearchParameters.cityName !== 'online' && <Button className="flooded-button show-map-button"
                         onClick={() => setMapVisible(true)}>Показати на мапі</Button>}
-            </div>
-            <Search showHideMenu={showHideMenu} setShowHideMenu={setShowHideMenu} setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+			</div>
+			<div className="search-container">
+	            <Search showHideMenu={showHideMenu} setShowHideMenu={setShowHideMenu} setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+			</div>
             <MapComponent visible={mapVisible} setVisible={setMapVisible} cityName={searchParameters.cityName}/>
         </div>
     );

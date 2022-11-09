@@ -234,7 +234,7 @@
   font-size: 20px;
   line-height: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .city-name-box-small-screen {
@@ -708,14 +708,13 @@ span.anticon.anticon-home.icon {
   }
 
   .lower-header-box {
+	margin-top: 10px;
     display: flow-root;
     align-items: flex-end;
   }
 
   .lower-header-box .city-name {
     font-size: 24px;
-    line-height: 32px;
-    margin-top: -10px;
     padding-left: 40px;
   }
 
@@ -725,16 +724,9 @@ span.anticon.anticon-home.icon {
     padding-left: 40px;
   }
 
-  .lower-header-box .show-map-button {
-    display: none;
-  }
 
   .lower-header-box .city-name-box-small-screen .icon {
-    display: block;
-  }
-
-  .city-name-box-small-screen {
-    margin-top: -20px;
+    display: none;
   }
 
   .header .nav-menu .ant-menu-submenu-title {
@@ -781,14 +773,8 @@ span.anticon.anticon-home.icon {
     align-items: flex-end;
   }
 
-  .city-name-box-small-screen {
-    margin-top: -20px;
-  }
-
   .lower-header-box .city-name {
     font-size: 24px;
-    line-height: 32px;
-    margin-top: -20px;
     padding-left: 40px;
   }
 
@@ -835,8 +821,6 @@ span.anticon.anticon-home.icon {
 
   .lower-header-box .city-name {
     font-size: 21px;
-    line-height: 22px;
-    margin-top: 10px;
     margin-left: -24px;
   }
 }
@@ -856,8 +840,6 @@ span.anticon.anticon-home.icon {
 
   .lower-header-box .city-name {
     font-size: 21px;
-    line-height: 22px;
-    margin-top: 10px;
     margin-left: -24px;
   }
 
@@ -895,8 +877,6 @@ span.anticon.anticon-home.icon {
 
   .lower-header-box .city-name {
     font-size: 18px;
-    line-height: 22px;
-    margin-top: 10px;
     margin-left: -24px;
   }
 }
@@ -948,7 +928,22 @@ span.anticon.anticon-home.icon {
 
 }
 
-@media (min-device-width: 319px) and (max-device-width: 790px) {
+@media (max-width: 500px) {
+  .lower-header-box .show-map-button{
+   margin: 10px 0 5px 40px;
+  }
+  .search-container{
+    width: 95vw;
+  }
+  .search-container .search{
+   width: 100vw;
+   background-color: #ffc230;
+   margin-left: -10px;
+   padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 319px) and (max-width: 790px) {
   .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
     margin-left: 10px;
   }
@@ -958,13 +953,13 @@ span.anticon.anticon-home.icon {
   }
 
   .lower-header-box .show-map-button {
-    display: block;
     margin-top: -6%;
     margin-left: 4%;
+    margin: 10px 0 5px 10px;
   }
 
   .city-name-box {
-    display: inherit;
+	margin-top: -20px;
   }
 
   .header .nav-menu {
@@ -977,8 +972,6 @@ span.anticon.anticon-home.icon {
 
   .lower-header-box .city-name {
     font-size: 21px;
-    line-height: 22px;
-    margin-top: 10px;
     margin-left: -31px;
   }
 
@@ -990,7 +983,6 @@ span.anticon.anticon-home.icon {
   .search {
     font-size: 14px;
     line-height: 24px;
-    //margin-left: 7%;
     padding-left: 11px;
   }
 
@@ -998,6 +990,16 @@ span.anticon.anticon-home.icon {
     margin-left: 1% !important;
   }
 
+  .search{
+    margin-left: -10px;
+    padding-left: 20px;
+  }
 }
 
-
+@media (max-width: 500px) {
+  .city-name-box {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+  }
+}
