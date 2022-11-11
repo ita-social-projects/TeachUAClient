@@ -44,7 +44,7 @@ const UserCertificatesPage = () => {
                         <List.Item
                             actions={[
                                 <Button htmlType="submit" onClick={() => { 
-                                    downloadCertificate(certificate.serialNumber) 
+                                    downloadCertificate(certificate.id) 
                                 }}>Завантажити</Button>
                             ]}
                         >

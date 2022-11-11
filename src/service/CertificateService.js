@@ -57,9 +57,9 @@ export const getCertificatesOfAuthenticatedUser = async () => {
         })
 }
 
-export const downloadCertificate = async (serialNumber) => {
+export const downloadCertificate = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates/download/" + serialNumber, {
+        .get(BASE_URL + "/api/certificates/download/" + id, {
             headers: {"content-type": "application/pdf"},
             responseType: "blob"
         })
