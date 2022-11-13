@@ -1,41 +1,90 @@
-import React, {useEffect, useState} from "react";
-import {deleteAllLogs, getAllLogs} from "../../service/LogService";
-import {Divider, List, Button} from "antd";
+import React, { useEffect, useState } from "react";
+import { getAllLogs, getLogByName, deleteLogByName } from "../../service/LogService";
+import { Button, Divider, List, Modal, Space, Table } from "antd";
 import "./css/LogComponent.css"
 
 const LogComponent = () => {
 
     const [logs, setLogs] = useState([]);
-    const [deleteLogs, setDeleteLogs] = useState([]);
+    const [log, setLog] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getData = () => {
         getAllLogs().then(response => setLogs(response.data));
     };
 
-    const deleteLog = () => {
-        deleteAllLogs().then(response => setDeleteLogs(response.data));
+    const deleteLog = (fileName) => {
+        deleteLogByName(fileName).then(() => getData());
     }
+
+    const showModal = (fileName) => {
+        setIsModalOpen(true);
+        getLogByName(fileName).then(response => setLog(response.data));
+    };
+
+    const setShowing = () => {
+        setIsModalOpen(false);
+    };
+
+    const dataSource = logs.map((log, index) => ({ number: index + 1, fileName: log }));
+
+    const columns = [
+        {
+            title: '#',
+            dataIndex: 'number',
+            key: 'number',
+        },
+        {
+            title: 'File name',
+            dataIndex: 'fileName',
+            key: 'fileName',
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button onClick={() => showModal(record.fileName)}>
+                        View
+                    </Button>
+                    <Button onClick={() => deleteLog(record.fileName)}>
+                        Delete
+                    </Button>
+                </Space>
+            ),
+        },
+    ]
 
     useEffect(() => {
         getData();
-    }, [deleteLogs])
+    }, [])
 
     return (
-        <div>
-            <Divider>List of Logs</Divider>
-            {/*<div className="delete-button">*/}
-            {/*    <Button onClick={deleteLog}>Delete All Logs</Button>*/}
-            {/*</div>*/}
-            <List className="box"
-                  bordered
-                  dataSource={logs}
-                  renderItem={item => (
-                      <List.Item onClick={() => {window.location.assign(process.env.PUBLIC_URL+`/log/${item}`)}}>
-                          <Button>{item}</Button>
-                      </List.Item>
-                  )}
-            />
-        </div>
+        <>
+            <Divider />
+            <Space direction="horizontal" style={{ width: '100%', justifyContent: 'center' }}>
+                <Table
+                    dataSource={dataSource}
+                    columns={columns}
+                    pagination={{ hideOnSinglePage: true }}
+                    title={() => 'List of logs'}
+                />
+                <Modal
+                    open={isModalOpen}
+                    title="Log"
+                    onOk={() => setShowing(false)}
+                    onCancel={() => setShowing(false)}
+                    width={1100}
+                >
+                    <List
+                        size="small"
+                        bordered
+                        dataSource={log}
+                        renderItem={(item) => <List.Item>{item}</List.Item>}
+                    />
+                </Modal>
+            </Space>
+        </>
     )
 };
 

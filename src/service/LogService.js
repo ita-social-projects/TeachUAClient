@@ -1,4 +1,4 @@
-import {BASE_URL} from "./config/ApiConfig";
+import { BASE_URL } from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 
@@ -9,14 +9,14 @@ export const getAllLogs = async () => {
 };
 
 export const getLogByName = async (params) => {
-    return await fetchRequest.get(BASE_URL + "/api/log/" + params)
+    return await fetchRequest.get(BASE_URL + "/api/logs/" + params)
         .then((response) => {
             return response;
         });
 };
 
-export const deleteAllLogs = async () => {
-    return await fetchRequest.delete(BASE_URL + "/api/logs")
+export const deleteLogByName = async (params) => {
+    return await fetchRequest.delete(BASE_URL + "/api/logs/" + params)
         .then((response) => {
             return response;
         });
