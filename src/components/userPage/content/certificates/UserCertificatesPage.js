@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, List, Button } from "antd";
+import { Typography, List, Button, Modal, Spin } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { getToken } from "../../../../service/StorageService";
 import { Redirect } from "react-router-dom";
@@ -12,11 +12,17 @@ const UserCertificatesPage = () => {
 
     const { Text } = Typography;
     const [certificates, setCertificates] = useState([]);
+    const [isModalShown, setIsModalShown] = useState(false);
 
     useEffect(() => {
         getCertificatesOfAuthenticatedUser()
             .then(response => setCertificates(response));
     }, []);
+
+    const startDownload = (certificate) => {
+        setIsModalShown(true);
+        downloadCertificate(certificate.id, () => setIsModalShown(false));
+    }
 
     if (!getToken()) {
         return (
@@ -31,7 +37,10 @@ const UserCertificatesPage = () => {
                 <div className="contentTitle">
                     Мої сертифікати
                 </div>
-
+                <Modal title="Завантаження..." centered={true} 
+                        closable={false} footer={null} open={isModalShown}>
+                    <Spin size="large"/>
+                </Modal>
                 <List
                     className="certificates"
                     itemLayout="horizontal"
@@ -41,13 +50,11 @@ const UserCertificatesPage = () => {
                     }} 
                     dataSource={certificates}
                     renderItem={(certificate) => (
-                        <List.Item
-                            actions={[
-                                <Button htmlType="submit" onClick={() => { 
-                                    downloadCertificate(certificate.id) 
-                                }}>Завантажити</Button>
-                            ]}
-                        >
+                        <List.Item actions={[
+                                <Button onClick={() => startDownload(certificate)}>
+                                    Завантажити
+                                </Button>
+                        ]}>
                             <List.Item.Meta
                                 title={<h3>{certificate.courseDescription}</h3>}
                                 description={certificate.date}
