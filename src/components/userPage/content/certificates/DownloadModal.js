@@ -8,6 +8,7 @@ const DownloadModal = ({isModalShown}) => {
             closable={false} 
             footer={null} 
             open={isModalShown}
+            className="download-modal"
         >
             <Spin size="large"/>
         </Modal>
