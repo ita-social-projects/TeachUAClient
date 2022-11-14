@@ -57,9 +57,15 @@ export const getCertificatesOfAuthenticatedUser = async () => {
         })
 }
 
-export const downloadCertificate = async (serialNumber) => {
+export const downloadCertificate = async (id, closeModal) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates/download/" + serialNumber, {
+        .get(BASE_URL + "/api/certificates/download/" + id, {
+            onDownloadProgress: (progress) => {
+                let percentCompleted = (progress.loaded * 100) / progress.total;
+                if (percentCompleted === 100) {
+                    closeModal();
+                }
+            },
             headers: {"content-type": "application/pdf"},
             responseType: "blob"
         })
