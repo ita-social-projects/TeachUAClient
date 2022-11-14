@@ -79,6 +79,17 @@ export const getClubById = async (id) => {
         });
 };
 
+export const getBrokenClubs = async (page) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/club/broken-clubs" + "?page=" + page)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/" + id + "?page=" + page)
