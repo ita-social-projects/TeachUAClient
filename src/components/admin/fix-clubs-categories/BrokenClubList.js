@@ -4,7 +4,7 @@ import {getBrokenClubs} from "../../../service/ClubService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
 import UserClubCardItem from "../../userPage/content/UserClubCardItem";
-import '../../userPage/content/css/UserClub.less';
+import './css/UserClub.less';
 
 
 const UserClubList = ({load, setLoad, match}) => {

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import BrokenClubList from "./BrokenClubList";
 
-import '../../userPage/content/css/UserClub.less';
+import './css/UserClub.less';
 
 const BrokenClubContent = () => {
     const [clubs, setClubs] = useState({
