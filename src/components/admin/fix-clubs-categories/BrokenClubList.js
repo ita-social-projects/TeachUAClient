@@ -41,7 +41,7 @@ const UserClubList = ({load, setLoad, match}) => {
     return load ? <Loader/> : (
         <div className="test">
             <Layout className="user-clubs">
-                <Space wrap className="cards" size={[0, 0]}>
+                <Space wrap className="cards" size="middle">
                     {clubs.content.map((club, index) => <UserClubCardItem club={club} key={index}/>)}
                 </Space>
                 <Pagination className="user-clubs-pagination"
