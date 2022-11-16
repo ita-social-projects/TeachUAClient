@@ -101,7 +101,7 @@ function App() {
                                     <Route path="/admin/news/:id" exact component={EditNews}/>
                                     <Route path="/admin/categories" exact component={CategoryTable}/>
                                     <Route path="/admin/districts" exact component={DistrictTable}/>
-                                    <Route path="/admin/fix-clubs-description" exact component={BrokenClubContent}/>
+                                    <Route path="/admin/fix-clubs-categories" exact component={BrokenClubContent}/>
                                     <Route path="/admin/questions" exact component={QuestionTable}/>
                                     <Route path="/admin/users" exact component={UsersTable}/>
                                     <Route path="/admin/contact-types" exact component={ContactTypeTable}/>

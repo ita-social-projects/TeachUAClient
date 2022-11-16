@@ -1,6 +1,6 @@
 import {Layout, Pagination, Space} from "antd";
 import React, {useEffect, useState} from "react";
-import {getBrokenClubs} from "../../../service/ClubService";
+import {getClubsWithoutCategories} from "../../../service/ClubService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
 import UserClubCardItem from "../../userPage/content/UserClubCardItem";
@@ -20,7 +20,7 @@ const UserClubList = ({load, setLoad, match}) => {
     const getData = (currPage) => {
         setLoad(true);
 
-        getBrokenClubs(currPage).then(response => {
+        getClubsWithoutCategories(currPage).then(response => {
             setClubs(response);
             setLoad(false)
         });

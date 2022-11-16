@@ -107,7 +107,7 @@ const AuthMenu = () => {
                             <Menu.Item><Link to="/admin/districts">Райони</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/stations">Станції/Місцевості</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/categories">Категорії</Link></Menu.Item>
-                            <Menu.Item><Link to="/admin/fix-clubs-description">Клуби без Категорій</Link></Menu.Item>
+                            <Menu.Item><Link to="/admin/fix-clubs-categories">Клуби без Категорій</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/users">Користувачі</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/questions">FAQ</Link></Menu.Item>
