@@ -66,6 +66,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                                initialValue={result.ageFrom ? result.ageFrom : 2}>
                         <InputNumber className="input-age"
                             min={2}
+                            maxLength = {2}
                             max={18}/>
                     </Form.Item>
                     до
@@ -74,6 +75,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                                initialValue={result.ageTo ? result.ageTo : 18}>
                         <InputNumber className="input-age"
                             min={3}
+                            maxLength = {2}
                             max={18}/>
                     </Form.Item>
                     років
