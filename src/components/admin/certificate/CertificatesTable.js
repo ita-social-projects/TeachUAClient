@@ -60,7 +60,7 @@ const CertificatesTable = () => {
             title: 'Учасник',
             dataIndex: 'userName',
             width: '18%',
-            editable: false,
+            editable: true,
             render: (userName) => userName
         },
         {
