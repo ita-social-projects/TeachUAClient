@@ -63,6 +63,9 @@ import CertificatesTable from "./components/admin/certificate/CertificatesTable"
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
 import BrokenClubContent from "./components/admin/fix-clubs-categories/BrokenClubContent";
 
+import {AllFileList} from "./components/admin/files/AllFileList";
+import {UnusedFileList} from "./components/admin/files/UnusedFileList";
+
 const {Content} = Layout;
 
 function App() {
@@ -114,6 +117,9 @@ function App() {
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
                                     <Route path="/admin/certificates" exact component={CertificatesTable}/>
+                                    <Route path="/admin/files" exact component={AllFileList}/>
+                                    <Route path="/admin/files/:path+" exact component={AllFileList}/>
+                                    <Route path="/admin/unused-files" exact component={UnusedFileList}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>
                                     <Route path="/clubs" exact component={ClubListComponent}/>
