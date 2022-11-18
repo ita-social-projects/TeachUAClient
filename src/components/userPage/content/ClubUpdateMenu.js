@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Menu} from "antd";
+import {Button, Menu , message} from "antd";
 import './css/UserClub.less';
 import {deleteClubById} from "../../../service/ClubService";
 import EditClubModal from "../../editClub/EditClubModal";
@@ -17,7 +17,13 @@ const clubUpdateMenu = (clubId) => (
         </Menu.Item>
         <Menu.Item>
             <a onClick={() => {
-                deleteClubById(clubId).then(window.location.reload())
+                deleteClubById(clubId).then((response) => {
+                    if(response.status != 400){
+                        window.location.reload()
+                    } else{
+                        message.warning(response.message);
+                    }
+                });
             }}>Видалити гурток</a>
         </Menu.Item>
     </Menu>
