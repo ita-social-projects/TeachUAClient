@@ -79,9 +79,9 @@ export const getClubById = async (id) => {
         });
 };
 
-export const getBrokenClubs = async (page) => {
+export const getClubsWithoutCategories = async (page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/club/broken-clubs" + "?page=" + page)
+        .get(BASE_URL + "/api/club/clubs-without-categories" + "?page=" + page)
         .then((response) => {
             return response.data;
         })

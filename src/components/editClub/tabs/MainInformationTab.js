@@ -1,4 +1,4 @@
-import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
+import {Button, Checkbox, Form, Input, InputNumber, Select, message} from "antd";
 import React, {useState} from "react";
 import "../css/MainInformationTab.less"
 import {updateClubBuId} from "../../../service/ClubService";
@@ -22,7 +22,16 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
 
         //setResult(Object.assign(result, values));
 
-        updateClubBuId(result).then(window.location.reload());
+        //.then(window.location.reload())
+
+        updateClubBuId(result).then((response) => {
+            if(response.status != 400){
+                window.location.reload()
+            } else{
+                message.warning(response.message);
+            }
+        });
+        
     };
 
     const categoriesName = result.categories.map((category) => category.name);

@@ -1,4 +1,4 @@
-import {Button, Form, Input, Typography, Upload} from "antd";
+import {Button, Form, Input, Typography, Upload, message} from "antd";
 import React, {useRef, useState} from "react";
 import EditClubContentFooter from "../EditClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -67,7 +67,13 @@ const DescriptionTab = ({setResult, result}) => {
         //setResult(Object.assign(result, values));
 
         //addClub(result).then(response => console.log(response));
-        updateClubBuId(result).then(window.location.reload());
+        updateClubBuId(result).then((response) => {
+            if(response.status != 400){
+                window.location.reload()
+            } else{
+                message.warning(response.message);
+            }
+        });
         //window.location.reload();
     };
 
@@ -126,8 +132,8 @@ const DescriptionTab = ({setResult, result}) => {
                        hasFeedback
                        rules={[{
                            required: true,
-                           max:1500,
-                           pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії \/\\'’.,"!?:*|><]){39,}\S$/
+                           max:1100,
+                           pattern: "^[А-Яа-яіІєЄїЇґҐa-zA-Z0-9()" + "\\\\!\\\"\\\"#$%&'*\\n+\\r, ,\\-.:;\\\\<=>—«»„”“–’‘?|@_`{}№~^/\\[\\]]+$"
                        }]}>
                 {/*<EditorComponent ref={editorRef}/>*/}
                 <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description).trim()} style={{ height: 200 }} />

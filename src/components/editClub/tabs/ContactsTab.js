@@ -84,7 +84,13 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         //
         //         setResult(Object.assign(result, values));
         //     });
-        updateClubBuId(result).then(window.location.reload());
+        updateClubBuId(result).then((response) => {
+            if(response.status != 400){
+                window.location.reload()
+            } else{
+                message.warning(response.message);
+            }
+        });
     };
 
     const handleSelect = address => {
