@@ -88,7 +88,7 @@ const AuthMenu = () => {
                     <Menu.Item key="add_centre"><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
                     <Menu.Item key="search_certificates"><Link to="/certificate"><div onClick={() => setShowSearchCertificate(true)}>Пошук сертифікатів</div></Link></Menu.Item>
 
-                    { (user !== null && user !== undefined && user !== '' && user.roleName === "ROLE_ADMIN") &&
+                    { (user && user.roleName === "ROLE_ADMIN") &&
                     <>
 
                         <SubMenu title="Контент" key="content">
