@@ -92,8 +92,10 @@ const AuthMenu = () => {
                     <>
 
                         <SubMenu title="Контент" key="content">
-                            <Menu.Item key="tasks"><Link to="/admin/tasks">Завдання</Link></Menu.Item>
-                            <Menu.Item key="challenges"><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
+                            <SubMenu title="Челенджі" key="challenges-submenu">
+                                <Menu.Item key="tasks"><Link to="/admin/tasks">Завдання</Link></Menu.Item>
+                                <Menu.Item key="challenges"><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
+                            </SubMenu>
                             <SubMenu title="Сертифікати" key="certificates">
                                 <Menu.Item key="all_certificates"><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
                                 <Menu.Item key="generate_certificates"><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
@@ -104,8 +106,6 @@ const AuthMenu = () => {
                                 <Menu.Item key="unused_files"><Link to="/admin/unused-files">Невикористані файли</Link></Menu.Item>
                             </SubMenu>
                             <Menu.Item key="users"><Link to="/admin/users">Користувачі</Link></Menu.Item>
-                            <Menu.Item key="import_database"><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
-                            <Menu.Item key="export_database"><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>Експортувати дані</Link></Menu.Item>
                         </SubMenu>
 
                         <SubMenu title="Локаціі" key="locations">
@@ -120,6 +120,8 @@ const AuthMenu = () => {
                             <Menu.Item key="club_approve"><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                             <Menu.Item key="change_club_owner"><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
                             <Menu.Item key="update_rating" onClick={() => {updateRating().then();}}>Перерахувати рейтинги</Menu.Item>
+                            <Menu.Item key="import_database"><Link to="/admin/import-database">Імпортувати дані</Link></Menu.Item>
+                            <Menu.Item key="export_database"><Link target="_blank" to={{ pathname: DOWNLOAD_DATABASE_SQL }} download>Експортувати дані</Link></Menu.Item>
                         </SubMenu>
 
                         <SubMenu title="Сторінка" key="website">
