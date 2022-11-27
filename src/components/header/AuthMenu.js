@@ -92,7 +92,8 @@ const AuthMenu = () => {
                     <>
 
                         <SubMenu title="Контент" key="content">
-                            <SubMenu title="Челенджі" key="challenges-submenu">
+                            {/* For some reason challenges pop up to the right. Added an offset to fix that */}
+                            <SubMenu title="Челенджі" key="challenges-submenu" popupOffset={[-215, 0]}>
                                 <Menu.Item key="tasks"><Link to="/admin/tasks">Завдання</Link></Menu.Item>
                                 <Menu.Item key="challenges"><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
                             </SubMenu>
