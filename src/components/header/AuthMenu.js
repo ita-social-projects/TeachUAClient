@@ -100,6 +100,7 @@ const AuthMenu = () => {
                             <SubMenu title="Сертифікати">
                                 <Menu.Item><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
                                 <Menu.Item><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
+                                <Menu.Item><Link to="/admin/certificate-by-template/generate">Згенерувати сертифікати за шаблоном</Link></Menu.Item>
                             </SubMenu>
                             <Menu.Item><Link to="/admin/news">Новини</Link></Menu.Item>
                             <Menu.Item><Link to="/admin/about">Про нас</Link></Menu.Item>
