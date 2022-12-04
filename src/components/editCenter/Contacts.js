@@ -14,12 +14,21 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
         console.log(result)
         if (result) {
             contactsForm.setFieldsValue({ ...result });
-            if(result.contactТелефон){
-                setContactsData({
-                    ...contacts_data,
-                    1: result.contactТелефон
-                });
-            }
+            // if(result.contactТелефон){
+            //     setContactsData({
+            //         ...contacts_data,
+            //         [1]: result.contactТелефон
+            //     });
+            // }
+
+            setContactsData({
+                [1]: result.contactТелефон,
+                [2]: result.contactFacebook,
+                [3]: result.contactWhatsApp,
+                [4]: result.contactПошта,
+                [5]: result.contactSkype,
+                [6]: result.contactSite,
+            })
         }
     }, [])
 

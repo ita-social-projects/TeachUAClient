@@ -55,8 +55,9 @@ const CenterEditModal = ({centerId}) => {
         getCenterById(centerId).then(response => {
             setCenter(response);
 
+            let locationsWithDuplicates = [];
             response.locations.map(location => {
-                locations.push({
+                locationsWithDuplicates.push({
                     id: location.id,
                     name: location.name,
                     cityName: location.locationCity.name,
@@ -66,10 +67,14 @@ const CenterEditModal = ({centerId}) => {
                     latitude: location.latitude,
                     longitude: location.longitude,
                     phone: location.phone
-                })
+                });
+                // this code removes duplicates from locations
+                let s = new Set(locationsWithDuplicates);
+                let it = s.values();
+                setLocations(Array.from(it));
             })
 
-            let contactTelephoneData = [];
+            let contactTelephoneData = null;
             let contactFacebookData = null;
             let contactSiteData = null;
             let contactSkypeData = null;
@@ -82,7 +87,7 @@ const CenterEditModal = ({centerId}) => {
                     contactПоштаData = contact.contactData
                 }
                 if(contact.contactType.name === "Телефон"){
-                    contactTelephoneData.push(contact.contactData)
+                    contactTelephoneData = contact.contactData
                 }
                 if(contact.contactType.name === "Facebook"){
                     contactFacebookData = contact.contactData

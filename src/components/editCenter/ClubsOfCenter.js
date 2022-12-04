@@ -1,4 +1,4 @@
-import {Form, Checkbox, Typography} from 'antd';
+import {Form, Checkbox, Typography, message} from 'antd';
 import React, {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
@@ -31,7 +31,7 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         console.log(result);
         updateCenter(result.id,result).then(response => {
             if(response.status && response.status ===  400 && response.data.message){
-                alert(response.data.message)
+                message.warning(response.data.message);
             } else {
                 window.location.reload()
                 //setVisible(false)
