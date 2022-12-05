@@ -58,6 +58,8 @@ import NewsTable from "./components/admin/news/NewsTable";
 import EditNews from "./components/admin/news/EditNews";
 import ValidateCertificatePage from "./components/certificate/validation/ValidateCertificatePage";
 
+import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
+import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
@@ -116,6 +118,8 @@ function App() {
                                     <Route path="/admin/stations" exact component={StationTable}/>
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
+                                    <Route path="/admin/questions-import" exact component={ImportQuestionsData}/>
+                                    <Route path="/admin/quiz/questions"  exact component={QuestionsTable}/>
                                     <Route path="/admin/certificates" exact component={CertificatesTable}/>
                                     <Route path="/admin/files" exact component={AllFileList}/>
                                     <Route path="/admin/files/:path+" exact component={AllFileList}/>
