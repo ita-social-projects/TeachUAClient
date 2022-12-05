@@ -57,15 +57,9 @@ export const getCertificatesOfAuthenticatedUser = async () => {
         })
 }
 
-export const downloadCertificate = async (id, closeModal) => {
+export const downloadCertificate = async (id) => {
     return await fetchRequest
         .get(BASE_URL + "/api/certificates/download/" + id, {
-            onDownloadProgress: (progress) => {
-                let percentCompleted = (progress.loaded * 100) / progress.total;
-                if (percentCompleted === 100) {
-                    closeModal();
-                }
-            },
             headers: {"content-type": "application/pdf"},
             responseType: "blob"
         })
@@ -79,7 +73,12 @@ export const downloadCertificate = async (id, closeModal) => {
             anchor.click();
             anchor.remove();
             URL.revokeObjectURL(url);
+            return response
         })
+        .catch(async error => {
+            console.log(JSON.parse(await error.response.data.text()));
+            return error.response;
+        });
 }
 
 export const updateCertificateProfile = async (id, data) => {

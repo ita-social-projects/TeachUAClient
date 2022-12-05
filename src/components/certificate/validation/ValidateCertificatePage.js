@@ -3,7 +3,7 @@ import { Layout, Result } from "antd";
 import { useEffect, useState } from "react";
 import { useParams, BrowserRouter, Redirect, useHistory } from "react-router-dom";
 import { getValidationResponse } from "../../../service/CertificateService";
-import { getCertificateTypeBySerialNumber } from "../../../util/CertificateUtil";
+import { getCertificateTypeAsString } from "../../../util/CertificateUtil";
 import "../css/CertificateValidation.css";
 
 const ValidateCertificatePage = () => {
@@ -47,7 +47,7 @@ const ValidateCertificatePage = () => {
                             </div>
                             <div className="main-text">
                                 <div className="sub-title">
-                                    {getCertificateTypeBySerialNumber(certificate.serialNumber)}
+                                    {getCertificateTypeAsString(certificate.certificateType)}
                                 </div>
                                 <div className="user-name">
                                     {certificate.userName}

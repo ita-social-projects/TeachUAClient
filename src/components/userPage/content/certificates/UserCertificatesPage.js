@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { getCertificatesOfAuthenticatedUser, downloadCertificate } from "../../../../service/CertificateService";
 import "../messages/css/UserMessagesPage.less";
 import "./css/UserCertificatesPage.less";
+import { message } from 'antd';
 
 const UserCertificatesPage = () => {
 
@@ -20,7 +21,13 @@ const UserCertificatesPage = () => {
 
     const startDownload = (certificate) => {
         setIsModalShown(true);
-        downloadCertificate(certificate.id, () => setIsModalShown(false));
+        downloadCertificate(certificate.id).then((response) => {
+            if (response.status != 200) {
+                message.error("Помилка завантаження");
+            }
+            setIsModalShown(false);
+        });
+        
     }
 
     if (!getToken()) {
