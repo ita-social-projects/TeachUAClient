@@ -3,7 +3,8 @@ import React, {useEffect, useState} from "react";
 import {getSentCertificates, updateCertificateProfile} from "../../../service/CertificateService";
 import {editCellValue} from "../../../util/TableUtil";
 import './css/CertificatesTable.css';
-import {Button, Form, message, Popconfirm, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Typography, Input} from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import EditableTable from "../../EditableTable";
 import moment from "moment";
@@ -14,6 +15,7 @@ const CertificatesTable = () => {
 
     const [form] = Form.useForm();
     const [certificates, setCertificates] = useState([]);
+    const [searchedText, setSearchedText] = useState("");
 
     const getData = () => {
         getSentCertificates().then(response => {
@@ -53,7 +55,42 @@ const CertificatesTable = () => {
             dataIndex: 'id',
             width: '3%',
             editable: false,
-            render: (id) => id
+            render: (id) => id,
+            filteredValue:[searchedText],
+            onFilter: (value, record) =>{
+                return (
+                    String(record.id)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+                
+                String(record.userName)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                String(record.sendToEmail)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                String(record.serialNumber)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                // (record.date != null ? moment(record.date.toString()).format('DD.MM.YYYY') : "-")
+                // .includes(value) ||
+
+                String(record.dates.date)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                String(record.dates.duration)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                (value.toLowerCase() === "видано" && record.sendStatus === true) ||
+                (value.toLowerCase() === "не видано" && record.sendStatus === null) ||
+                ("помилка відправки".includes(value.toLowerCase()) && record.sendStatus === false) 
+                )
+            }
             // render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>
         },
         {
@@ -111,6 +148,18 @@ const CertificatesTable = () => {
 
     return (
         <div className="certificatesContent">
+            <Input.Search 
+            placeholder="Пошук без дати відправки"
+            onSearch={(value)=>{
+                setSearchedText(value);
+            }}
+            // onChange={(e)=>{
+            //     setSearchedText(e.target.value);
+            // }}
+            style={{
+                width: 500,
+            }}
+            />
             <Title level={3}>Сертифікати</Title>
             <EditableTable bordered
                            columns={columns}

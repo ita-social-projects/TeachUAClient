@@ -12,7 +12,10 @@ export const sortMessages = (messages) => {
 
 export const getDate = (messageDate) => {
     const md = messageDate;
-    return  new Date(md[0], md[1] - 1, md[2], md[3], md[4], md[5]);
+    if (md) {
+        return new Date(md[0], md[1] - 1, md[2], md[3], md[4], md[5]);
+    }
+    return new Date(0);
 }
 
 export const getFormattedDate = (messageDate) => {
