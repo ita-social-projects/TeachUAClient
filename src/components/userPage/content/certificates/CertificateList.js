@@ -1,5 +1,5 @@
 import { Typography, List, Button } from "antd";
-import { getCertificateTypeBySerialNumber } from "../../../../util/CertificateUtil";
+import { getCertificateTypeAsString } from "../../../../util/CertificateUtil";
 
 const CertificateList = ({certificates, startDownload}) => {
     
@@ -24,7 +24,7 @@ const CertificateList = ({certificates, startDownload}) => {
                         title={<h3>{certificate.courseDescription}</h3>}
                         description={certificate.date}
                     />
-                    <Text italic>{getCertificateTypeBySerialNumber(certificate.serialNumber)}</Text>
+                    <Text italic>{getCertificateTypeAsString(certificate.certificateType)}</Text>
                 </List.Item>
             )}
         />

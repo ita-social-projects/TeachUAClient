@@ -9,3 +9,14 @@ export const getCertificateTypeBySerialNumber = (serialNumber) => {
             return "Учасник";
     }
 };
+
+export const getCertificateTypeAsString = (certificateType) => {
+    switch(certificateType){
+        case 1:
+            return 'Тренер';
+        case 2:
+            return 'Модератор';
+        default: 
+            return "Учасник";
+    }
+};
