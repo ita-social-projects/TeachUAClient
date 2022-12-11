@@ -40,6 +40,10 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
         nextStep();
         descriptionForm.resetFields();
 
+        if (result.urlLogo && result.urlLogo.file) {
+            result.urlLogo = result.urlLogo.file.response;
+        }
+
         // if location doesn't have phone number, we assign club number
         result.locations.forEach(location => {
             if(!location.phone){
@@ -88,9 +92,9 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
                     <Upload
                         name="image"
                         action={UPLOAD_IMAGE_URL}
-                        accept="image/png,image/jpeg,image/jpg,image/svg,image/jfif,image/.pjp"
                         maxCount={1}
                         data={{folder: `center/${centerName}/logo`}}
+                        accept="image/png,image/jpeg,image/jpg,image/svg"
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     >
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
