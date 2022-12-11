@@ -1,4 +1,4 @@
-import {Form, Input, Upload, Button, Typography} from 'antd';
+import {Form, Input, Upload, Button, Typography, message} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import EditorComponent from "../editor/EditorComponent";
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
@@ -6,9 +6,10 @@ import {saveContent} from "../editor/EditorConverter";
 import React, {useEffect, useRef} from 'react';
 import "./css/Description.css";
 import {transToEng} from '../../util/Translit';
+import { updateCenter } from '../../service/CenterService';
 import {tokenToHeader} from "../../service/UploadService";
 
-const Description = ({step, setStep, result, setResult}) => {
+const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
@@ -38,6 +39,36 @@ const Description = ({step, setStep, result, setResult}) => {
         setResult(Object.assign(result, values));
         nextStep();
         descriptionForm.resetFields();
+
+        // if location doesn't have phone number, we assign club number
+        result.locations.forEach(location => {
+            if(!location.phone){
+                location.phone = result.contactТелефон
+            }
+        });
+        console.log(result);
+        updateCenter(result.id,result).then(response => {
+            if(response.status && response.status ===  400 && response.data.message){
+                message.warning(response.data.message);
+            } else {
+                window.location.reload()
+                //setVisible(false)
+            }
+
+            //window.location.reload();
+            /*
+            Temporary solution, page shouldn't reload every time
+             */
+            // console.log(response);
+            // setResult(null)
+            // setLocations([]);
+            // nextStep();
+        })
+        if(result.clubs.length===0){
+            alert("Ви не вибрали жодного клубу")
+        }
+        // window.location.reload()
+
     }
 
     return (
@@ -110,8 +141,8 @@ const Description = ({step, setStep, result, setResult}) => {
                 </Form.Item>
             </div>
             <div className="btn">
-                <Button className="prev-btn" type="button" onClick={prevStep}>Назад</Button>
-                <Button className="next-btn" htmlType="submit">Наступний крок</Button>
+                <button className="prev-btn" type="button" onClick={prevStep}>Назад</button>
+                <button className="finish-btn" htmlType="submit">Завершити</button>
             </div>
         </Form>
 

@@ -52,9 +52,11 @@ const CenterEditModal = ({centerId}) => {
         //     // ))
         // });
 
+        let centerClubsIds = [];
         getAllClubsByCenterId(centerId).then(response =>{
             console.log("MY CLUBS FETCHED")
             console.log(response);
+            response.forEach(club => centerClubsIds.push(club.id))
             setClubs(response);
         })
 
@@ -63,25 +65,6 @@ const CenterEditModal = ({centerId}) => {
 
         getCenterById(centerId).then(response => {
             setCenter(response);
-
-            let locationsWithDuplicates = [];
-            response.locations.map(location => {
-                locationsWithDuplicates.push({
-                    id: location.id,
-                    name: location.name,
-                    cityName: location.locationCity.name,
-                    districtName: location.district?.name,
-                    stationName: location.station?.name,
-                    address: location.address,
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    phone: location.phone
-                });
-                // this code removes duplicates from locations
-                let s = new Set(locationsWithDuplicates);
-                let it = s.values();
-                setLocations(Array.from(it));
-            })
 
             let contactTelephoneData = null;
             let contactFacebookData = null;
@@ -111,6 +94,26 @@ const CenterEditModal = ({centerId}) => {
                     contactWhatsAppData = contact.contactData
                 }
             })
+
+
+            let locationsWithDuplicates = [];
+            response.locations.map(location => {
+                locationsWithDuplicates.push({
+                    id: location.id,
+                    name: location.name,
+                    cityName: location.locationCity.name,
+                    districtName: location.district?.name,
+                    stationName: location.station?.name,
+                    address: location.address,
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    phone: location.phone
+                });
+                // this code removes duplicates from locations
+                let s = new Set(locationsWithDuplicates);
+                let it = s.values();
+                setLocations(Array.from(it));
+            })
             
             setResult({
                 id: response.id,
@@ -120,6 +123,7 @@ const CenterEditModal = ({centerId}) => {
                 urlLogo: response.urlLogo,
                 urlWeb: response.urlWeb,
                 urlBackgroundPicture: response.urlBackgroundPicture,
+                clubs: centerClubsIds,
                 contactТелефон : contactTelephoneData,
                 contactFacebook: contactFacebookData,
                 contactSite: contactSiteData,
@@ -182,21 +186,8 @@ const CenterEditModal = ({centerId}) => {
                     setResult={setResult}
                     center={center}
                     setCenter={setCenter}
-                />;
-
-            case 3:
-                return <ClubsOfCenter
-                    step={step}
-                    setStep={setStep}
-                    setVisible={setVisible}
                     clubs={clubs}
                     setClubs={setClubs}
-                    result={result}
-                    setResult={setResult}
-                    setLocations={setLocations}
-                    fromCenter={fromCenter}
-                    center={center}
-                    setCenter={setCenter}
                 />;
         }
     };
