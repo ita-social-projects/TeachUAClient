@@ -6,7 +6,7 @@ import MainInformation from '../../editCenter/MainInformation';
 import Contacts from '../../editCenter/Contacts';
 import Description from '../../editCenter/Description';
 import ClubsOfCenter from '../../editCenter/ClubsOfCenter';
-import { getAllClubsByUserId, getClubsByUserId } from "../../../service/ClubService";
+import { getAllClubsByCenterId, getAllClubsByUserId, getClubsByUserId } from "../../../service/ClubService";
 import { getUserId } from "../../../service/StorageService";
 import { getAllCities } from '../../../service/CityService';
 import { getAllContacts } from '../../../service/ContactService';
@@ -33,24 +33,33 @@ const CenterEditModal = ({centerId}) => {
     const [center, setCenter] = useState({});
 
     useEffect(() => {
-        getAllClubsByUserId(getUserId()).then(response => {
-            setClubs(response)
-            // response.map(club => (
-            //     club.locations.map(location => {
-            //         locations.push({
-            //             id: location.id,
-            //             name: location.name,
-            //             cityName: location.locationCity.name,
-            //             districtName: location.district?.name,
-            //             stationName: location.station?.name,
-            //             address: location.address,
-            //             latitude: location.latitude,
-            //             longitude: location.longitude,
-            //             phone: location.phone
-            //         });
-            //     })
-            // ))
-        });
+        // getAllClubsByUserId(getUserId()).then(response => {
+        //     setClubs(response)
+        //     // response.map(club => (
+        //     //     club.locations.map(location => {
+        //     //         locations.push({
+        //     //             id: location.id,
+        //     //             name: location.name,
+        //     //             cityName: location.locationCity.name,
+        //     //             districtName: location.district?.name,
+        //     //             stationName: location.station?.name,
+        //     //             address: location.address,
+        //     //             latitude: location.latitude,
+        //     //             longitude: location.longitude,
+        //     //             phone: location.phone
+        //     //         });
+        //     //     })
+        //     // ))
+        // });
+
+        getAllClubsByCenterId(centerId).then(response =>{
+            console.log("MY CLUBS FETCHED")
+            console.log(response);
+            setClubs(response);
+        })
+
+        console.log("CLUBS BEGIN")
+        console.log(clubs)
 
         getCenterById(centerId).then(response => {
             setCenter(response);

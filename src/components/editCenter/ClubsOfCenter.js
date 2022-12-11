@@ -22,13 +22,21 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
         setResult(Object.assign(result, clubsOfCenterForm.getFieldValue()));
         setStep(step - 1);
     }
+
     const onChange = e => {
         setClubsIds(e)
     }
+
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
         result.clubs = clubsId;
         console.log(result);
+        // if location doesn't have phone number, we assign club number
+        result.locations.forEach(location => {
+            if(!location.phone){
+                location.phone = result.contactТелефон
+            }
+        });
         updateCenter(result.id,result).then(response => {
             if(response.status && response.status ===  400 && response.data.message){
                 message.warning(response.data.message);

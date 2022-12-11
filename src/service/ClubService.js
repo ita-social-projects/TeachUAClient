@@ -195,6 +195,12 @@ export const getAllClubs = async () => {
     });
 };
 
+export const getAllClubsByCenterId = async (centerId) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubsByCenterId/" + centerId).then((response) => {
+        return response.data;
+    });
+};
+
 export const getClubReport = async (id, fileName) => {
     const response = await fetchRequest.get(BASE_URL + `/api/pdf/club/${id}`,
         {
