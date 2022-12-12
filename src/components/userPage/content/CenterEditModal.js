@@ -54,14 +54,9 @@ const CenterEditModal = ({centerId}) => {
 
         let centerClubsIds = [];
         getAllClubsByCenterId(centerId).then(response =>{
-            console.log("MY CLUBS FETCHED")
-            console.log(response);
             response.forEach(club => centerClubsIds.push(club.id))
             setClubs(response);
         })
-
-        console.log("CLUBS BEGIN")
-        console.log(clubs)
 
         getCenterById(centerId).then(response => {
             setCenter(response);
@@ -72,8 +67,6 @@ const CenterEditModal = ({centerId}) => {
             let contactSkypeData = null;
             let contactWhatsAppData = null;
             let contactПоштаData = null;
-            console.log("RESPONSE CONTACTS")
-            console.log(response.contacts)
             response.contacts.forEach(contact =>{
                 if(contact.contactType.name === "Пошта"){
                     contactПоштаData = contact.contactData
@@ -136,8 +129,6 @@ const CenterEditModal = ({centerId}) => {
 
         getAllCities().then(response => setCities(response));
         getAllContacts().then(response => setContacts(response));
-        console.log("RESULT START TAB ")
-        console.log(result)
         window.addEventListener("resize", handleResize)
     }, [visible])
 

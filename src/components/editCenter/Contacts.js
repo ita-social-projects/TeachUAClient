@@ -10,8 +10,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
 
 
     useEffect(() => {
-        console.log("RESULT CONTACTS TAB START ")
-        console.log(result)
         if (result) {
             contactsForm.setFieldsValue({ ...result });
             // if(result.contactТелефон){
@@ -34,10 +32,10 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
 
 
     const nextStep = () => {
-        console.log("FIELDS VALUE")
-        console.log(contactsForm.getFieldValue());
-        console.log("CONTACTS_DATA")
-        console.log(contacts_data)
+        // console.log("FIELDS VALUE")
+        // console.log(contactsForm.getFieldValue());
+        // console.log("CONTACTS_DATA")
+        // console.log(contacts_data)
         setStep(step + 1);
     }
 
@@ -62,8 +60,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
     const onFinish = (values) => {
         values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
         setResult(Object.assign(result,values))
-        console.log("RESULT CONTACTS TAB END ")
-        console.log(result)
         nextStep();
     }
 

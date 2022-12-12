@@ -29,7 +29,6 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
 
     useEffect(() => {
         if (result) {
-            console.log(result)
             descriptionForm.setFieldsValue({...result});
         }
     }, [])
@@ -50,7 +49,6 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
                 location.phone = result.contactТелефон
             }
         });
-        console.log(result);
         updateCenter(result.id,result).then(response => {
             if(response.status && response.status ===  400 && response.data.message){
                 message.warning(response.data.message);

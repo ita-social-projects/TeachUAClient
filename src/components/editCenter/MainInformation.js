@@ -19,8 +19,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
     }
 
     useEffect(() => {
-        console.log("RESULT MAIN TAB START ")
-        console.log(result)
         if (result) {
             mainInformationFrom.setFieldsValue({...result})
         }
@@ -34,8 +32,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
             }
         })
         setResult(Object.assign(result, values));
-        console.log("RESULT MAIN TAB END ")
-        console.log(result)
         mainInformationFrom.resetFields();
         nextStep();
     };
