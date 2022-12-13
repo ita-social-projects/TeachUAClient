@@ -91,3 +91,31 @@ export const addCenter = async (data) => {
 
 
 };
+
+export const updateCenter = async (id,data) => {
+    // data.locations.map(location => {
+    //     if (location.address.value) {
+    //         location.address = location.address.value.structured_formatting.main_text
+    //     }
+    // });
+    return await fetchRequest.put(BASE_URL + "/api/center/" + id, {
+        name: data.name,
+        description: data.description,
+        userId: data.userId,
+        contacts: data.contacts,
+        locations: data.locations,
+        urlLogo: data.urlLogo !== undefined ? data.urlLogo : undefined,
+        urlBackgroundPicture: data.urlBackground !== undefined ? data.urlBackground.file.response : undefined,
+        clubsId: data.clubs,
+    }).then((response) => {
+        console.log("RESPONSE DATA")
+        console.log(response.data)
+        return response.data
+    }).catch((error) => {
+        console.log("ERROR RESPONSE")
+        console.log(error.response)
+        return error.response
+    })
+
+
+};

@@ -58,6 +58,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                 <Checkbox.Group className="edit-club-categories"
                 >
                     {categories.map(category => <Checkbox
+                        style={{display: "flex"}}
                         value={category.name}
                     >
                         {category.name}
