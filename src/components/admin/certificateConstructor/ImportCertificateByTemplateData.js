@@ -74,17 +74,18 @@ const ImportCertificateByTemplateData = () => {
             templateMetadata.templateName = value.file.response.templateName;
             templateMetadata.templateLastModifiedDate = value.file.lastModified;
 
-            loadTemplateMetadata(templateMetadata)
-
-            setDataToPdfCreating({
-                ...dataToPdfCreating,
-                fieldsList: value.file.response.fieldsList,
-                templateName: value.file.response.templateName
-            });
-            Object.keys(inputtedValues).forEach(key => delete inputtedValues[key]);
-            for (const element of value.file.response.fieldsList) {
-                inputtedValues[element] = "";
-            }
+            CertificateByTemplateService.loadTemplateMetadata(templateMetadata).then(response => {
+                    setDataToPdfCreating({
+                        ...dataToPdfCreating,
+                        fieldsList: value.file.response.fieldsList,
+                        templateName: response
+                    });
+                    Object.keys(inputtedValues).forEach(key => delete inputtedValues[key]);
+                    for (const element of value.file.response.fieldsList) {
+                        inputtedValues[element] = "";
+                    }
+                }
+            );
         }
 
     }
@@ -134,9 +135,10 @@ const ImportCertificateByTemplateData = () => {
     }
 
     const saveValue = (element) => {
+        console.log(element);
         inputtedValues[element.nativeEvent.srcElement.name] = element.target.value;
         setInputtedValues(inputtedValues)
-        console.log(inputtedValues);
+        // console.log(inputtedValues);
     };
 
     const checkButtonState = () => {
@@ -165,12 +167,6 @@ const ImportCertificateByTemplateData = () => {
                 }
                 console.log(response);
                 message.success('Дані успішно додані');
-            })
-    }
-    const loadTemplateMetadata = (data) => {
-        CertificateByTemplateService.loadTemplateMetadata(data)
-            .then(response => {
-                dataToPdfCreating.templateName = response;
             })
     }
 

@@ -62,6 +62,8 @@ import ImportCertificateData from "./components/admin/certificate/ImportCertific
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
 import ImportCertificateByTemplateData from "./components/admin/certificateConstructor/ImportCertificateByTemplateData";
+import TemplatesTable from "./components/admin/certificateConstructor/template/TemplatesTable";
+import AddTemplate from "./components/admin/certificateConstructor/template/AddTemplate";
 
 const {Content} = Layout;
 
@@ -113,6 +115,8 @@ function App() {
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
                                     <Route path="/admin/certificate-by-template/generate" exact component={ImportCertificateByTemplateData}/>
+                                    <Route path="/admin/templates" exact component={TemplatesTable}/>
+                                    <Route path="/admin/add-template" exact component={AddTemplate}/>
                                     <Route path="/admin/certificates" exact component={CertificatesTable}/>
                                     <Route path="/club/:id" exact component={ClubPage}/>
                                     <Route path="/center/:id" exact component={CenterPage}/>

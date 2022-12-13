@@ -12,7 +12,7 @@ export const loadDataCertificatesByTemplateToDB = async (data) => {
 };
 
 export const loadTemplateMetadata = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/load-last-modified-date",
+    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/load-template-metadata",
         data
     ).then((response) => {
         return response.data
