@@ -1,3 +1,72 @@
-.import-file {
-	margin: 0 10% 0 10%;
+@item-height: 40px;
+
+.certificate-by-template {
+	.import-file {
+		margin: 0 10% 0 10%;
+	}
+
+	.form {
+		width: fit-content;
+		margin-right: 0;
+	}
+
+	.configuration {
+		display: flex;
+		min-height: 350px;
+	}
+
+	.form-item {
+		width: fit-content;
+		height: @item-height;
+		margin: 5px;
+		display: flex;
+		align-items: center;
+	}
+
+	.draggable-list-wrapper {
+		position: relative;
+		user-select: none;
+	}
+
+	.draggable-list {
+		cursor: url('http://gtms02.alicdn.com/tps/i2/T1_PMSFLBaXXcu5FDa-20-20.png') 10 10, pointer !important;
+		position: relative;
+		height: 305px;
+	}
+
+	.draggable-list-list {
+		background-color: rgba(#fff, .9);
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: @item-height;
+		margin: 5px;
+		transition: box-shadow .5s, transform .5s;
+	}
+
+	.draggable-list-list.list-drag-selected {
+		box-shadow: 0 8px 20px #E6E6E6;
+		transform: scale(1.1) !important;
+	}
+
+	.draggable-list-text {
+		padding: 0 15px;
+	}
+
+	.draggable-list-text p {
+		font-size: 12px;
+		margin-bottom: 0;
+	}
+
+	.draggable-list-checkbox {
+		padding-right: 15px;
+	}
+
+	@media screen and (max-width: 320px) {
+		.draggable-list-text h1 {
+			font-size: 14px;
+			line-height: 28px;
+		}
+	}
 }

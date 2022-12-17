@@ -8,7 +8,7 @@ export const createTemplate = async (data) => {
         projectDescription: data.projectDescription,
         certificateType: data.certificateType,
         filePath: data.filePath,
-        properties: data.properties
+        properties: JSON.stringify(data.properties)
     }).then((response) => {
         return response.data;
     }).catch((error) => {

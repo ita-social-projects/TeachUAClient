@@ -1,4 +1,6 @@
-import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space, Select} from "antd";
+import {
+    Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space, Select, Checkbox
+} from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportCertificateDataStyles.less';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -10,13 +12,18 @@ import {BASE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import {useForm} from "antd/es/form/Form";
 import {
-    loadDataCertificatesByTemplateToDB
+    loadDataCertificatesByTemplateToDB, loadTemplateName
 } from "../../../service/CertificateByTemplateService";
 import * as CertificateByTemplateService from "../../../service/CertificateByTemplateService";
+import {getAllTemplates} from "../../../service/TemplateService";
+import {sendCertificatesScheduler} from "../../../service/CertificateService";
+import DraggableList from "../../../util/DraggableList";
+import Icon from 'antd/lib/icon';
 
 const ImportCertificateByTemplateData = () => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [dataToLoad, setDataToLoad] = useState({});
+    const [templates, setTemplates] = useState([]);
     const [mistakes, setMistakes] = useState([]);
     const [inputtedValues, setInputtedValues] = useState({});
     const [sendButtonState, setSendButtonState] = useState(true);
@@ -26,16 +33,33 @@ const ImportCertificateByTemplateData = () => {
     });
     const [dataToPdfCreating, setDataToPdfCreating] = useState({
         fieldsList: [],
-        inputtedValues: [],
         templateName: "",
         columnHeadersList: [],
-        excelContent: [[]]
+        excelContent: [[]],
+        values: ""
     })
     const [templateMetadata, setTemplateMetadata] = useState({
         templateName: "",
         templateLastModifiedDate: ""
     })
     const [datesForm] = useForm();
+
+    const getTemplates = () => {
+        getAllTemplates().then(response => {
+            let list = [];
+            response.forEach(value => {
+                list.push({
+                    label: value.name,
+                    value: value.filePath
+                })
+            })
+            setTemplates(list);
+        });
+    }
+
+    useEffect(() => {
+        getTemplates();
+    }, []);
 
     const onFinish = () => {
     };
@@ -53,6 +77,29 @@ const ImportCertificateByTemplateData = () => {
             case ICON_OK:
                 return (<CheckCircleOutlined className="icon ok-icon"/>)
         }
+    }
+
+    const onTemplateChange = (value) => {
+        loadTemplateName(value).then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            setDataToPdfCreating({
+                ...dataToPdfCreating,
+                fieldsList: response.fieldsList,
+                templateName: response.templateName
+            })
+
+            const form = document.getElementById('importCertificateByTemplateDataFieldsForm');
+            form.reset();
+
+            Object.keys(inputtedValues).forEach(key => delete inputtedValues[key]);
+            for (const element of response.fieldsList) {
+                inputtedValues[element] = "";
+            }
+            console.log(inputtedValues);
+        })
     }
 
     const uploadExcel = (value) => {
@@ -111,12 +158,15 @@ const ImportCertificateByTemplateData = () => {
     const columnsList = () => {
         let items = dataToPdfCreating.fieldsList.map(element =>
             <Form.Item
+                className="form-item"
                 name={element}
-                label={element + ': '}
             >
-                <Input
+                <span>{element + ': '}</span>
+                <input
+                    id="input"
                     name={element}
-                    value={inputtedValues[element]}
+                    value=""
+                    key={element}
                     onChange={e => {
                         saveValue(e);
                         checkButtonState()
@@ -126,7 +176,8 @@ const ImportCertificateByTemplateData = () => {
         )
 
         return (<Form
-            className="load-excel-form"
+            className="form"
+            id="importCertificateByTemplateDataFieldsForm"
             name="basic"
             requiredMark={false}
             initialValues={{remember: true}}>
@@ -135,10 +186,9 @@ const ImportCertificateByTemplateData = () => {
     }
 
     const saveValue = (element) => {
-        console.log(element);
         inputtedValues[element.nativeEvent.srcElement.name] = element.target.value;
         setInputtedValues(inputtedValues)
-        // console.log(inputtedValues);
+        console.log(inputtedValues);
     };
 
     const checkButtonState = () => {
@@ -152,7 +202,7 @@ const ImportCertificateByTemplateData = () => {
     };
 
     const loadCertificatesByTemplateToDB = () => {
-        dataToPdfCreating.inputtedValues = Object.values(inputtedValues)
+        dataToPdfCreating.values = JSON.stringify(inputtedValues);
         console.log(dataToPdfCreating)
         setSendButtonState(true);
         setTimeout(function () {
@@ -170,7 +220,64 @@ const ImportCertificateByTemplateData = () => {
             })
     }
 
-    return (<Layout className="" style={{paddingTop: 40, background: 'white'}}>
+    const sendCertificates = () => {
+        sendCertificatesScheduler().then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            console.log(response);
+            message.success('Процес надсилання сертифікатів розпочато');
+        })
+
+    };
+
+    const dataArray = [
+        {
+            title: 'Senior Product Designer',
+            text: 'Senior Product Designer',
+        },
+        {
+            title: 'Senior Animator',
+            text: 'Senior Animator',
+        },
+        {
+            title: 'Visual Designer',
+            text: 'Visual Designer',
+        },
+        {
+            title: 'Computer Engineer',
+            text: 'Computer Engineer',
+        }
+    ];
+
+    const childrenToRender = dataArray.map((item, i) => {
+        const {
+            text
+        } = item;
+        return (
+            <div key={i} className={`draggable-list-list`}>
+                <div className={`draggable-list-text`}>
+                    <p>{text}</p>
+                </div>
+                <Checkbox
+                    className={`draggable-list-checkbox`}
+                    onChange={e => {
+                        if (e.target.checked) {
+                            e.nativeEvent.path[3].style.opacity = .5;
+                        } else {
+                            e.nativeEvent.path[3].style.opacity = 1;
+                        }
+                    }
+                    }
+
+                ></Checkbox>
+
+            </div>
+        );
+    });
+
+    return (<Layout className="certificate-by-template" style={{paddingTop: 40, background: '#faedde'}}>
         <Content className="certificate-page">
             <div className="import-file">
                 <Form
@@ -182,39 +289,31 @@ const ImportCertificateByTemplateData = () => {
 
                     <Text
                         className="text-hint">
-                        Завантажте pdf-файл для імпорту інформації про шаблон:
+                        Оберіть pdf-файл для імпорту інформації про шаблон:
                     </Text>
+
+                    <span style={{textAlign: "center", marginTop: '15px'}}>
+                        <Form.Item>
+                        <Select
+                            name="template"
+                            className="dropdown"
+                            placeholder="Оберіть шаблон"
+                            options={templates}
+                            key={templates}
+                            onChange={onTemplateChange}
+                        />
+                        </Form.Item>
+                    </span>
 
                     <div
                         style={dataToPdfCreating.fieldsList.length !== 0 ? {} : {display: 'none'}}
-                        className="import-report">
+                        className="">
                         <span>
                             {renderIcon(ICON_OK)}
                             Знайдено {dataToPdfCreating.fieldsList ? dataToPdfCreating.fieldsList.length : 0} полів
                         </span>
                     </div>
 
-                    <span className="buttons">
-                        <Form.Item
-                            rules={[{
-                                required: true, message: "Завантажте pdf-шаблон"
-                            }]}
-                        >
-                            <Upload
-                                name="pdf-file"
-                                accept={".pdf"}
-                                action={BASE_URL + "/api/certificate-by-template/pdf"}
-                                maxCount={1}
-                                icon={<UploadOutlined/>}
-                                headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
-                                onChange={uploadPdf}
-                            >
-                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>
-                                    Завантажити pdf-шаблон
-                                </Button>
-                            </Upload>
-                        </Form.Item>
-                        </span>
                 </Form>
             </div>
             <div className="import-file">
@@ -273,10 +372,27 @@ const ImportCertificateByTemplateData = () => {
                 </Form>
             </div>
             <div
-                style={pdfUploadFormControl > 0 ? {} : {display: 'none'}}
+                className={"configuration"}
+                style={dataToPdfCreating.fieldsList.length > 0 ? {} : {display: 'none'}}
             >
                 {columnsList()}
+                <div className={"draggable-list-wrapper"}>
+                    <div className={"draggable-list"}>
+                        <DraggableList
+                            dragClassName="list-drag-selected"
+                            appearAnim={{animConfig: {marginTop: [5, 5], opacity: [1, 0]}}}
+                            onChange={e => {
+                                console.log(e);
+                            }
+                            }
+                        >
+                            {childrenToRender}
+                        </DraggableList>
+                    </div>
+                </div>
             </div>
+
+            <span className="buttons">
             <Button
                 style={dataToPdfCreating.fieldsList.length !== 0 ? {} : {display: 'none'}}
                 className="flooded-button send-data-button"
@@ -284,8 +400,17 @@ const ImportCertificateByTemplateData = () => {
                 headers={{Authorization: tokenToHeader()}}
                 onClick={() => loadCertificatesByTemplateToDB()}
             >
-                Надіслати
+                Відправити всі дані у БД
             </Button>
+            <Button
+                className="flooded-button send-data-button"
+                disabled={sendButtonState}
+                headers={{Authorization: tokenToHeader()}}
+                onClick={() => sendCertificates()}
+            >
+                Надіслати сертифікати
+            </Button>
+            </span>
         </Content>
     </Layout>)
 }

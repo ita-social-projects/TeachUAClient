@@ -59,6 +59,8 @@ const AddTemplate = () => {
         {label: "—", value: ""},
         {label: "Серійний номер", value: "serial_number"},
         {label: "ПІБ учасника", value: "user_name"},
+        {label: "Дата видачі", value: "date"},
+        {label: "Тривалість", value: "duration"},
         {label: "Кількість годин", value: "hours"},
         {label: "Номер курсу", value: "course_number"},
         {label: "Форма навчання", value: "study_form"},
@@ -71,7 +73,6 @@ const AddTemplate = () => {
     };
 
     const loadToDatabase = () => {
-        console.log(dataToDB);
         createTemplate(dataToDB)
             .then((response) => {
                 if (response.status) {
@@ -137,6 +138,8 @@ const AddTemplate = () => {
                         filePath: response,
                         properties: chosenProperties
                     })
+                    const form = document.getElementById('templateCreatingFormId');
+                    form.reset();
                 }
             );
         }
@@ -189,6 +192,7 @@ const AddTemplate = () => {
                 </Link>
                 <Title>Додайте шаблон</Title>
                 <Form
+                    id="templateCreatingFormId"
                     form={challengeForm}
                     onFinishFailed={onFinishFailed}
                     initialValues={{remember: true}}
@@ -240,7 +244,7 @@ const AddTemplate = () => {
                         <Upload
                             name="pdf-file"
                             accept={".pdf"}
-                            action={BASE_URL + "/api/certificate-by-template/pdf"}
+                            action={BASE_URL + "/api/template/pdf"}
                             maxCount={1}
                             icon={<UploadOutlined/>}
                             headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
