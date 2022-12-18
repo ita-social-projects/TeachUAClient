@@ -160,7 +160,6 @@ export default class DraggableList extends React.Component {
                 height: item.clientHeight,
                 top: item.offsetTop,
                 left: item.offsetLeft,
-                margin: '5px 0',
                 marginHeight,
                 marginWidth,
                 position: 'absolute',

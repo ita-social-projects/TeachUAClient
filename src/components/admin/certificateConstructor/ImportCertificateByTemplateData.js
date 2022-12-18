@@ -21,27 +21,20 @@ import DraggableList from "../../../util/DraggableList";
 import Icon from 'antd/lib/icon';
 
 const ImportCertificateByTemplateData = () => {
-    const [dataLoaded, setDataLoaded] = useState(false);
-    const [dataToLoad, setDataToLoad] = useState({});
     const [templates, setTemplates] = useState([]);
     const [mistakes, setMistakes] = useState([]);
     const [inputtedValues, setInputtedValues] = useState({});
     const [sendButtonState, setSendButtonState] = useState(true);
-    const [pdfUploadFormControl, setPdfUploadFormControl] = useState(0);
-    const [dataToDB, setDataToDB] = useState({
-        type: null, startDate: '', endDate: '', hours: 40, courseNumber: null, studyType: "дистанційна", excelList: {}
-    });
     const [dataToPdfCreating, setDataToPdfCreating] = useState({
         fieldsList: [],
         templateName: "",
+        values: "",
         columnHeadersList: [],
-        excelContent: [[]],
-        values: ""
+        excelContent: [],
+        excelColumnsOrder: []
     })
-    const [templateMetadata, setTemplateMetadata] = useState({
-        templateName: "",
-        templateLastModifiedDate: ""
-    })
+    const [excelColumnHeadersList, setExcelColumnHeadersList] = useState([]);
+
     const [datesForm] = useForm();
 
     const getTemplates = () => {
@@ -105,41 +98,26 @@ const ImportCertificateByTemplateData = () => {
     const uploadExcel = (value) => {
         if (value.file.response !== undefined) {
             console.log(value.file.response)
-            setDataLoaded(value.file.response[0].parsingMistakes.length === 0)
-            setMistakes(value.file.response[0].parsingMistakes)
-            setDataToLoad(value.file.response[0].certificatesInfo)
-            setExcelList(value.file.response[0].certificatesInfo)
-        }
-        console.log(dataToDB);
-    };
+            setExcelColumnHeadersList([])
 
-    const uploadPdf = (value) => {
-        if (value.file.response !== undefined) {
-            console.log(value);
-            setPdfUploadFormControl(value.fileList.length);
-
-            templateMetadata.templateName = value.file.response.templateName;
-            templateMetadata.templateLastModifiedDate = value.file.lastModified;
-
-            CertificateByTemplateService.loadTemplateMetadata(templateMetadata).then(response => {
-                    setDataToPdfCreating({
-                        ...dataToPdfCreating,
-                        fieldsList: value.file.response.fieldsList,
-                        templateName: response
-                    });
-                    Object.keys(inputtedValues).forEach(key => delete inputtedValues[key]);
-                    for (const element of value.file.response.fieldsList) {
-                        inputtedValues[element] = "";
-                    }
+            let columnHeadersList = value.file.response.columnHeadersList
+            if (dataToPdfCreating.fieldsList.length > columnHeadersList.length) {
+                let count = dataToPdfCreating.fieldsList.length - columnHeadersList.length;
+                for (let i = 0; i < count; i++) {
+                    columnHeadersList.push("");
                 }
-            );
+            }
+
+            setExcelColumnHeadersList(columnHeadersList)
+            setSendButtonState(false);
+            setDataToPdfCreating({
+                ...dataToPdfCreating,
+                excelContent: value.file.response.excelContent,
+                columnHeadersList: value.file.response.columnHeadersList,
+                excelColumnsOrder: columnHeadersList
+            })
         }
-
-    }
-
-    const setExcelList = (value) => {
-        setDataToDB({...dataToDB, excelList: value})
-    }
+    };
 
     const mistakesList = () => {
         return (<List
@@ -165,7 +143,6 @@ const ImportCertificateByTemplateData = () => {
                 <input
                     id="input"
                     name={element}
-                    value=""
                     key={element}
                     onChange={e => {
                         saveValue(e);
@@ -232,52 +209,29 @@ const ImportCertificateByTemplateData = () => {
 
     };
 
-    const dataArray = [
-        {
-            title: 'Senior Product Designer',
-            text: 'Senior Product Designer',
-        },
-        {
-            title: 'Senior Animator',
-            text: 'Senior Animator',
-        },
-        {
-            title: 'Visual Designer',
-            text: 'Visual Designer',
-        },
-        {
-            title: 'Computer Engineer',
-            text: 'Computer Engineer',
-        }
-    ];
-
-    const childrenToRender = dataArray.map((item, i) => {
-        const {
-            text
-        } = item;
+    const childrenToRender = excelColumnHeadersList.map((item, i) => {
         return (
-            <div key={i} className={`draggable-list-list`}>
-                <div className={`draggable-list-text`}>
-                    <p>{text}</p>
+            <div key={i + "_" + item} className={`draggable-list-element`}>
+                <div className="draggable-list-element-content-wrapper"
+                     style={item.length === 0 ? {opacity: .4} : {}}
+                >
+                    <div className={`draggable-list-text`}>
+                        <p>{item}</p>
+                    </div>
                 </div>
-                <Checkbox
-                    className={`draggable-list-checkbox`}
-                    onChange={e => {
-                        if (e.target.checked) {
-                            e.nativeEvent.path[3].style.opacity = .5;
-                        } else {
-                            e.nativeEvent.path[3].style.opacity = 1;
-                        }
-                    }
-                    }
-
-                ></Checkbox>
-
             </div>
         );
     });
 
-    return (<Layout className="certificate-by-template" style={{paddingTop: 40, background: '#faedde'}}>
+    const onDraggableListChange = (elements) => {
+        let array = [];
+        elements.forEach(element => {
+            array.push(element.key.slice(element.key.indexOf("_")+1));
+        })
+        setDataToPdfCreating({...dataToPdfCreating, excelColumnsOrder: array})
+    }
+
+    return (<Layout className="certificate-by-template">
         <Content className="certificate-page">
             <div className="import-file">
                 <Form
@@ -329,15 +283,6 @@ const ImportCertificateByTemplateData = () => {
                         Введіть або завантажте дані:
                     </Text>
 
-                    <div
-                        style={dataLoaded ? {} : {display: 'none'}}
-                        className="import-report">
-                        <span>
-                            {renderIcon(ICON_OK)}
-                            Знайдено інформацію для генерації {dataLoaded ? dataToLoad.length : 0} сертифікатів
-                        </span>
-                    </div>
-
                     <span className="buttons">
                         <Form.Item
                             name="excel-file"
@@ -359,7 +304,14 @@ const ImportCertificateByTemplateData = () => {
                             </Upload>
                         </Form.Item>
                         </span>
-
+                    <div
+                        style={dataToPdfCreating.excelContent.length !== 0 ? {} : {display: 'none'}}
+                        className="">
+                        <span>
+                            {renderIcon(ICON_OK)}
+                            Знайдено інформацію для генерації {dataToPdfCreating.excelContent ? dataToPdfCreating.excelContent.length : 0} сертифікатів
+                        </span>
+                    </div>
                     <div style={mistakes.length !== 0 ? {} : {display: 'none'}}>
                         <Paragraph>
                             <Text
@@ -380,11 +332,7 @@ const ImportCertificateByTemplateData = () => {
                     <div className={"draggable-list"}>
                         <DraggableList
                             dragClassName="list-drag-selected"
-                            appearAnim={{animConfig: {marginTop: [5, 5], opacity: [1, 0]}}}
-                            onChange={e => {
-                                console.log(e);
-                            }
-                            }
+                            onChange={onDraggableListChange}
                         >
                             {childrenToRender}
                         </DraggableList>
@@ -412,7 +360,7 @@ const ImportCertificateByTemplateData = () => {
             </Button>
             </span>
         </Content>
-    </Layout>)
+    </Layout>);
 }
 
 export default ImportCertificateByTemplateData;
