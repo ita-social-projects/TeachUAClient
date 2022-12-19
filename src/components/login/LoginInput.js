@@ -17,7 +17,7 @@ const LoginInput = () => {
                            }]}>
                     <Input className="login-box"
                            placeholder="Введіть ваш емейл"
-                           suffix={<MailOutlined classname="mail-icon"/>}/>
+                           suffix={<MailOutlined className="mail-icon"/>}/>
                 </Form.Item>
 
                 <Form.Item name="password"
