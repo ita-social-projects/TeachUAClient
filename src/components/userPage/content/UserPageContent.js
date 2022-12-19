@@ -14,7 +14,7 @@ import AddCenter from "../../addCenter/AddCenter";
 import AddClubModal from "../../addClub/AddClubModal";
 import {useState} from "react";
 
-const UserPageContent = ({user, id}) => {
+const UserPageContent = () => {
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
     const [isCenterChecked, setIsCenterChecked] = useState(false);
@@ -28,10 +28,8 @@ const UserPageContent = ({user, id}) => {
     };
 
     const menu = () => {
-
         return (
-
-            <Menu classname="menu">
+            <Menu className="menu">
                 <Menu.Item className="menu-item">
                     <div onClick={() => setShowAddClub(true)}>Додати гурток</div>
                 </Menu.Item>
@@ -39,15 +37,13 @@ const UserPageContent = ({user, id}) => {
                     <div onClick={() => setShowAddCenter(true)}>Додати центр</div>
                 </Menu.Item>
             </Menu>
-
         )
     };
-
 
     return (
         <Content className="user-content">
             <div className="content-title">Мій профіль</div>
-            <UserInformationComponent user={user}/>
+            <UserInformationComponent/>
             <div>
                 <div className="club-title">Мої &nbsp;
                     <Select onChange={onClubChange}
@@ -64,24 +60,20 @@ const UserPageContent = ({user, id}) => {
                         <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub}/>
                         <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter}/>
                         <Dropdown сlassname overlay={menu} placement="bottomRight">
-                            <Button classname="add-button">
+                            <Button className="add-button">
                                 <PlusOutlined/>
                                 Додати</Button>
                         </Dropdown>
                     </div>
                 </div>
                 {isCenterChecked === true ? (
-                    <UserCenterContent id={id}/>
+                    <UserCenterContent/>
                     ) :
-                    <UserClubContent id={id}/>
+                    <UserClubContent/>
                 }
             </div>
         </Content>
     )
-};
-
-PageContent.propTypes = {
-    user: PropTypes.object.isRequired
 };
 
 export default UserPageContent;

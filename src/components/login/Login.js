@@ -2,42 +2,29 @@ import React, { useState } from 'react';
 import { Form, message, Modal } from "antd";
 import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
-import { signIn } from "../../service/UserService";
-import './css/Login.less';
-import { saveUserId, saveToken } from '../../service/StorageService';
 import RestorePasswordModal from "../restorePassword/restorePasswordModal";
-import './../restorePassword/css/RestorePassword.less'
+import { signIn } from "../../service/UserService";
+import { saveUserId, saveToken, saveRole } from '../../service/StorageService';
+import './../restorePassword/css/RestorePassword.less';
+import './css/Login.less';
 
-const Login = ({isShowing, setShowing, verifyCode}) => {
-    const [loginVisible, setLoginVisible] = useState(false);
+const Login = ({isShowing, setShowing, setIsLogin}) => {
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
             if (response.status>=500) {
                 message.error("Ваш email не підтверджено. Будь ласка підтвердіть email");
-            } else if(response.status<500){
+            } else if(response.status < 500){
                 message.destroy();
                 message.error("Введено невірний пароль або email");
             }
             else {
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
+                saveRole(response.roleName);
                 saveToken(response.accessToken);
                 setShowing(false);
-                if (verifyCode !== undefined) {
-                    if(process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080"){
-                        window.location = "http://localhost:3000/dev";
-                    }else{
-                        window.location = process.env.REACT_APP_ROOT_SERVER + process.env.PUBLIC_URL;
-                    }
-                    //window.location = "https://speak-ukrainian.org.ua/dev/";
-                    // window.location = "http://localhost:3000/dev";
-                }
-                let a = setTimeout(() => {
-                    console.log("before reload ");
-                    window.location.reload();
-                    clearTimeout(a);
-                    }, 1000);
+                setIsLogin(true);
             }
         });
     };
