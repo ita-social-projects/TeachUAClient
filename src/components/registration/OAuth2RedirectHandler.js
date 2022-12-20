@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import { saveToken, saveUserId } from '../../service/StorageService';
+import { saveRole, saveToken, saveUserId } from '../../service/StorageService';
 import { message } from "antd";
 
 class OAuth2RedirectHandler extends Component {
@@ -17,6 +17,7 @@ class OAuth2RedirectHandler extends Component {
 
         const token = this.getUrlParameter('token');
         const userId = this.getUrlParameter('id');
+        const role = this.getUrlParameter('role');
         const error = this.getUrlParameter('error');
         const successMesage = (msg) => {
             message.success(msg);
@@ -26,10 +27,11 @@ class OAuth2RedirectHandler extends Component {
         }
         saveToken(token);
         saveUserId(userId);
+        saveRole(role);
         if (token) {
             return (<div>
                 <Redirect to={{
-                    pathname: `/user/${userId}`,
+                    pathname: `/user/${userId}/page`,
                     state: { from: this.props.location }
                 }}>
                     {successMesage("Успішний вхід в систему")}
