@@ -66,7 +66,7 @@ const QuestionsTable = () => {
             // render: (text, record) => <Link to={'/admin/quiz/questions' + record.id}>{record.id}</Link>
         },
         {
-            title: 'Варіанти відповідей',
+            title: 'Категорія',
             dataIndex: 'category',
             width: '20%',
             editable: true,
@@ -82,14 +82,14 @@ const QuestionsTable = () => {
                 </Link>
             </Button>
 
-            {/*<Link*/}
-            {/*    to="/admin/"*/}
-            {/*    className="back-btn"*/}
-            {/*>*/}
-            {/*    <Button className="flooded-button add-btn">*/}
-            {/*        Додати запитання*/}
-            {/*    </Button>*/}
-            {/*</Link>*/}
+            <Link
+                to="/admin/questions/generate"
+                className="back-btn"
+            >
+                <Button className="flooded-button add-btn">
+                    Згенерувати запитання
+                </Button>
+            </Link>
 
 
             <Title level={3}>Запитання</Title>

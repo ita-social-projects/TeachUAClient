@@ -1,21 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Avatar, Dropdown, Menu, message } from "antd";
+import React, {useEffect, useState, useContext} from "react";
+import {Avatar, Dropdown, Menu, message} from "antd";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import Registration from "../registration/Registration";
 import '../registration/сss/Registration.less'
-import { Link, useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import './css/authMenu.css';
-import { getToken, getUserId, deleteUserStorage } from "../../service/StorageService";
+import {getToken, getUserId, deleteUserStorage} from "../../service/StorageService";
 import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
-import { getUserById } from "../../service/UserService";
+import {getUserById} from "../../service/UserService";
 import AddCenter from "../addCenter/AddCenter";
 import {updateRating} from "../../service/RatingService";
 import {AuthContext} from "../../context/AuthContext";
 
-const { SubMenu } = Menu;
+const {SubMenu} = Menu;
 
 const AuthMenu = () => {
     const history = useHistory(); 
@@ -38,7 +38,7 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        if(getUserId()) {
+        if (getUserId()) {
             getUserById(getUserId()).then(response => {
                 setUser(response);
                 if (response) {
@@ -57,17 +57,18 @@ const AuthMenu = () => {
     }, [isLogin])
 
     const checkToken = () => {
-        if(getToken()){
+        if (getToken()) {
             const token = getToken();
             const payload = JSON.parse(atob(token.split(".")[1]));
             const expiration = new Date(payload.exp);
             const now = new Date();
-            if( expiration.getTime() - now.getTime()/1000  < 0 ){
+            if (expiration.getTime() - now.getTime() / 1000 < 0) {
                 onExitClick();
                 return false;
-            }else{
+            } else {
                 return true;
-            }}
+            }
+        }
     }
     const [isTokenValid, setIsTokenValid] = useState(checkToken);
 
@@ -94,15 +95,17 @@ const AuthMenu = () => {
                                 <Menu.Item key="challenges"><Link to="/admin/challenges">Челенджі</Link></Menu.Item>
                             </SubMenu>
 
-                            <SubMenu title="Тести" key="quiz-submenu" >
-                                <Menu.Item key="questions"><Link to="/admin/quiz/questions">Запитання</Link></Menu.Item>
-                                <Menu.Item key="import_questions"><Link to="/admin/questions-import">Імпортувати запитання</Link></Menu.Item>
-                            </SubMenu>
-
                             <SubMenu title="Сертифікати" key="certificates">
                                 <Menu.Item key="all_certificates"><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
                                 <Menu.Item key="generate_certificates"><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
                             </SubMenu>
+
+                            <SubMenu title="Тести" key="quiz-submenu">
+                                <Menu.Item key="questions"><Link to="/admin/quiz/questions">Всі запитання</Link></Menu.Item>
+                                <Menu.Item key="import_questions"><Link to="/admin/questions-import"> Імпортувати запитання</Link></Menu.Item>
+                                <Menu.Item key="generate_questions"><Link to="/admin/questions/generate">Згенерувати запитання</Link></Menu.Item>
+                            </SubMenu>
+
                             <Menu.Item key="logs"><Link to="/logs">Логи</Link></Menu.Item>
                             <SubMenu title="Файли" key="files">
                                 <Menu.Item key="all_files"><Link to="/admin/files">Всі файли</Link></Menu.Item>

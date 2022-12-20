@@ -61,12 +61,12 @@ const CenterEditModal = ({centerId}) => {
         getCenterById(centerId).then(response => {
             setCenter(response);
 
-            let contactTelephoneData = null;
-            let contactFacebookData = null;
-            let contactSiteData = null;
-            let contactSkypeData = null;
-            let contactWhatsAppData = null;
-            let contactПоштаData = null;
+            let contactTelephoneData = "";
+            let contactFacebookData = "";
+            let contactSiteData = "";
+            let contactSkypeData = "";
+            let contactWhatsAppData = "";
+            let contactПоштаData = "";
             response.contacts.forEach(contact =>{
                 if(contact.contactType.name === "Пошта"){
                     contactПоштаData = contact.contactData
