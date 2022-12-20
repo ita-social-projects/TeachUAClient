@@ -1,5 +1,5 @@
 import {
-    Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space, Select, Checkbox
+    Button, Form, Layout, List, Upload, message, Select
 } from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportCertificateDataStyles.less';
@@ -16,12 +16,13 @@ import {
 } from "../../../service/CertificateByTemplateService";
 import * as CertificateByTemplateService from "../../../service/CertificateByTemplateService";
 import {getAllTemplates} from "../../../service/TemplateService";
-import {sendCertificatesScheduler} from "../../../service/CertificateService";
+import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
 import DraggableList from "../../../util/DraggableList";
 import Icon from 'antd/lib/icon';
 
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
+    const [unsentCertificates, setUnsentCertificates] = useState();
     const [mistakes, setMistakes] = useState([]);
     const [inputtedValues, setInputtedValues] = useState({});
     const [sendButtonState, setSendButtonState] = useState(true);
@@ -177,6 +178,16 @@ const ImportCertificateByTemplateData = () => {
 
         setSendButtonState(false);
     };
+
+    const getData = () => {
+        getNumberOfUnsentCertificates().then(response => {
+            setUnsentCertificates(response);
+        });
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     const loadCertificatesByTemplateToDB = () => {
         dataToPdfCreating.values = JSON.stringify(inputtedValues);
@@ -352,7 +363,7 @@ const ImportCertificateByTemplateData = () => {
             </Button>
             <Button
                 className="flooded-button send-data-button"
-                disabled={sendButtonState}
+                disabled={unsentCertificates === 0}
                 headers={{Authorization: tokenToHeader()}}
                 onClick={() => sendCertificates()}
             >

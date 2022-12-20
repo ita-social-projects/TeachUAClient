@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {Layout, Typography, Form, Input, Button, message, Upload, Select} from 'antd';
-import {createChallenge} from "../../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
-import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../../service/config/ApiConfig";
+import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {Link} from "react-router-dom";
 import {tokenToHeader} from "../../../../service/UploadService";
@@ -15,7 +14,6 @@ const {Title} = Typography;
 
 const AddTemplate = () => {
     const [challengeForm] = useForm();
-    const [dataLoaded, setDataLoaded] = useState(false);
     const [pdfUploadFormControl, setPdfUploadFormControl] = useState(0);
     const [chosenProperties, setChosenProperties] = useState({});
     const [fieldsList, setFieldsList] = useState([]);
@@ -129,10 +127,21 @@ const AddTemplate = () => {
 
             CertificateByTemplateService.loadTemplateMetadata(templateMetadata).then(response => {
                     setFieldsList(value.file.response.fieldsList)
-                    Object.keys(chosenProperties).forEach(key => delete chosenProperties[key]);
+                    let includesFields = [];
+                    Object.keys(chosenProperties).forEach(key => {
+                        if (!value.file.response.fieldsList.includes(key)) {
+                            delete chosenProperties[key];
+                        } else {
+                            includesFields.push(key);
+                        }
+                    });
+
                     for (const element of value.file.response.fieldsList) {
-                        chosenProperties[element] = "";
+                        if (!includesFields.includes(element)) {
+                            chosenProperties[element] = "";
+                        }
                     }
+
                     setDataToDB({
                         ...dataToDB,
                         filePath: response,
@@ -164,20 +173,9 @@ const AddTemplate = () => {
                         onFieldPropertyChange();
                     }}
                 />
-
             </Form.Item>
         )
     }
-
-    const checkButtonState = () => {
-        for (const field of Object.values(chosenProperties)) {
-            if (field.trim().length === 0) {
-                return;
-            }
-        }
-
-        // setSendButtonState(false);
-    };
 
     return (
         <Layout className="" style={{paddingTop: 40, background: '#f8e5d7'}}>
@@ -192,7 +190,6 @@ const AddTemplate = () => {
                 </Link>
                 <Title>Додайте шаблон</Title>
                 <Form
-                    id="templateCreatingFormId"
                     form={challengeForm}
                     onFinishFailed={onFinishFailed}
                     initialValues={{remember: true}}
@@ -263,11 +260,15 @@ const AddTemplate = () => {
                         </span>
                         </div>
                     </Form.Item>
-                    <div
+                    <Form
+                        id="templateCreatingFormId"
+                        labelCol={{span: 4}}
+                        wrapperCol={{span: 14}}
                         style={pdfUploadFormControl > 0 ? {} : {display: 'none'}}
                     >
-                        {fieldPropertiesList()}
-                    </div>
+                        <div>{fieldPropertiesList()}</div>
+
+                    </Form>
                     <Form.Item
                     >
                         <Button

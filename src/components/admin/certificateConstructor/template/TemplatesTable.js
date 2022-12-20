@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Typography} from "antd";
+import {Button, Form, Popconfirm, Typography} from "antd";
 
-import {deleteChallenge, getAllChallenges, updateChallengePreview} from "../../../../service/ChallengeService";
-import {deleteFromTable, editCellValue} from "../../../../util/TableUtil";
 import EditableTable from "../../../EditableTable";
 import {getAllTemplates} from "../../../../service/TemplateService";
 
