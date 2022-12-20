@@ -75,8 +75,6 @@ export const verify = async (data) => {
         password: data.currentPassword
     }).then((response) => {
         return response.data
-    }).catch((error) => {
-        return error.response.data
     });
 };
 
@@ -94,9 +92,6 @@ export const updateUser = async (data) => {
     }).then((response) => {
         console.log('after response' + response.data)
         return response.data
-    }).catch((error) => {
-        console.log(error.response.data)
-        return error.response.data
     });
 };
 
@@ -107,8 +102,6 @@ export const updatePassword = async (data) => {
         newPasswordVerify: data.password
     }).then((response) => {
         return response.data
-    }).catch((error) => {
-        return error.response.data
     });
 };
 

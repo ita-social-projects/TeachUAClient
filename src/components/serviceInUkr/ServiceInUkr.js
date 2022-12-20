@@ -70,7 +70,7 @@ const ServiceInUkr = () => {
 
                 <Collapse class="collapse"
                           defaultActiveKey={['1']}
-                          expandIconPosition="left"
+                          expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                           rotate={isActive ? 90 : 0}/>}
                 >
@@ -87,7 +87,7 @@ const ServiceInUkr = () => {
                     </Panel>
                 </Collapse>
                 <Collapse class="collapse"
-                          expandIconPosition="left"
+                          expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                           rotate={isActive ? 90 : 0}/>}>
                     <Panel className="panel" header="Куди можна подавати скаргу" key="2">
@@ -95,7 +95,7 @@ const ServiceInUkr = () => {
                     </Panel>
                 </Collapse>
                 <Collapse class="collapse"
-                          expandIconPosition="left"
+                          expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                           rotate={isActive ? 90 : 0}/>}>
                     <Panel className="panel" header="Що має містити скарга" key="3">

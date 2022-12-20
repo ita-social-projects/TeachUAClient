@@ -1,43 +1,41 @@
-import React, {useEffect, useState} from "react";
-import {Avatar, Dropdown, Menu} from "antd";
+import React, {useEffect, useState, useContext} from "react";
+import {Avatar, Dropdown, Menu, message} from "antd";
 import CaretDownFilled from "@ant-design/icons/lib/icons/CaretDownFilled";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import '../registration/сss/Registration.less'
 import Registration from "../registration/Registration";
-import {Link} from "react-router-dom";
+import '../registration/сss/Registration.less'
+import {Link, useHistory} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
-import {deleteToken, deleteUserId, getToken, getUserId} from "../../service/StorageService";
+import './css/authMenu.css';
+import {getToken, getUserId, deleteUserStorage} from "../../service/StorageService";
 import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 import {getUserById} from "../../service/UserService";
-import './css/authMenu.css';
 import AddCenter from "../addCenter/AddCenter";
 import {updateRating} from "../../service/RatingService";
+import {AuthContext} from "../../context/AuthContext";
 
 const {SubMenu} = Menu;
 
 const AuthMenu = () => {
+    const history = useHistory(); 
 
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
-    const [showSearchCertificate, setShowSearchCertificate] = useState(false);
-    const [showAddChallenge, setShowAddChallenge] = useState(false);
 
-    const [showLogin, setShowLogin] = useState(false);
+    const {showLogin, setShowLogin} = useContext(AuthContext);
     const [showRegister, setShowRegister] = useState(false);
-
 
     const [user, setUser] = useState('');
     const [source, setSource] = useState('');
     const [styleClass, setStyleClass] = useState('');
-    const [isLogin, setIsLogin] = useState('');
+    const [isLogin, setIsLogin] = useState(null);
 
     const onExitClick = () => {
-        deleteToken();
-        deleteUserId();
-        window.location.assign(process.env.PUBLIC_URL);
+        deleteUserStorage();
+        setIsLogin(false);
+        history.push("/");
     };
-
 
     useEffect(() => {
         if (getUserId()) {
@@ -50,11 +48,12 @@ const AuthMenu = () => {
                         setSource(BASE_URL + response.urlLogo)
                     }
                     setStyleClass("avatarIfLogin");
-                } else {
-                    setStyleClass("avatarIfNotLogin");
+                    return;
                 }
             })
         }
+        setSource('');
+        setStyleClass("avatarIfNotLogin");
     }, [isLogin])
 
     const checkToken = () => {
@@ -78,8 +77,6 @@ const AuthMenu = () => {
         setIsTokenValid(checkToken());
     })
 
-
-
     const profileDropdown = () => {
 
         if (isTokenValid) {
@@ -87,11 +84,10 @@ const AuthMenu = () => {
                 <Menu>
                     <Menu.Item key="add_club"><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
                     <Menu.Item key="add_centre"><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
-                    <Menu.Item key="search_certificates"><Link to="/certificate"><div onClick={() => setShowSearchCertificate(true)}>Пошук сертифікатів</div></Link></Menu.Item>
+                    <Menu.Item key="search_certificates"><Link to="/certificate">Пошук сертифікатів</Link></Menu.Item>
 
                     { (user && user.roleName === "ROLE_ADMIN") &&
                     <>
-
                         <SubMenu title="Контент" key="content">
                             {/* For some reason challenges pop up to the right. Added an offset to fix that */}
                             <SubMenu title="Челенджі" key="challenges-submenu" popupOffset={[-215, 0]}>
@@ -139,7 +135,7 @@ const AuthMenu = () => {
                             <Menu.Item key="news"><Link to="/admin/news">Новини</Link></Menu.Item>
                             <Menu.Item key="about"><Link to="/admin/about">Про нас</Link></Menu.Item>
                             <Menu.Item key="contact_types"><Link to="/admin/contact-types">Контакти</Link></Menu.Item>
-                            <Menu.Item key="questions"><Link to="/admin/questions">FAQ</Link></Menu.Item>
+                            <Menu.Item key="faq"><Link to="/admin/questions">FAQ</Link></Menu.Item>
                         </SubMenu>
                     </>
                     }
@@ -162,7 +158,7 @@ const AuthMenu = () => {
     return (
         <>
             <Registration isShowing={showRegister} setShowing={setShowRegister} />
-            <Login isShowing={showLogin} setShowing={setShowLogin} />
+            <Login isShowing={showLogin} setShowing={setShowLogin} setIsLogin={setIsLogin} />
             {showAddClub &&
                 <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
             }

@@ -34,7 +34,6 @@ const NavMenu = () => {
     const {SubMenu} = Menu;
 
     useEffect(() => {
-
         let slashPos = document.URL.lastIndexOf("/");
         let urlPage = document.URL.substr(slashPos + 1);
 
@@ -84,7 +83,7 @@ const NavMenu = () => {
                 </Menu.Item>
                 {/*Замість лого лінка в бургері головної сторінки*/}
                 {isMobile &&
-                <Menu.Item key="news" className="home">
+                <Menu.Item key="home" className="home">
                     <Link to="/"><span><HomeOutlined className="icon" /></span><span className="home-page">Головна сторінка</span></Link>
                 </Menu.Item>
                 }

@@ -148,7 +148,7 @@ class CommentEditComponent extends React.Component {
                             >
                                 <Input
                                     className="comment-input-box"
-                                    suffix={<MailOutlined classname="mail-icon"/>}
+                                    suffix={<MailOutlined className="mail-icon"/>}
                                     value={this.state.user.email}
                                     readOnly={true}
 

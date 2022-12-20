@@ -4,7 +4,7 @@ import {deleteCenterById} from "../../../service/CenterService";
 import CenterEditModal from "./CenterEditModal";
 
 const centerUpdateMenu = (centerId) => (
-    <Menu classname="update-menu">
+    <Menu className="update-menu">
         <Menu.Item className="menu-item">
             <CenterEditModal centerId={centerId}/>
         </Menu.Item>

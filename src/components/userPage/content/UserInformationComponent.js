@@ -3,14 +3,16 @@ import './css/UserContent.less';
 import { Avatar } from "antd";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import UserEditModal from "../useredit/UserEditModal";
-import PropTypes from "prop-types";
 import {BASE_URL} from "../../../service/config/ApiConfig";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
 
 
 
-const UserInformationComponent = ({ user }) => {
+const UserInformationComponent = () => {
     const [userAvatar, setUserAvatart] = useState(null);
-    const [isMobile, setIsMobile]  = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const {user, setUser} = useContext(AuthContext);
 
     useEffect(() => {
         if (window.outerWidth <= 850) {
@@ -19,11 +21,9 @@ const UserInformationComponent = ({ user }) => {
             setIsMobile(false)
         }
 
-        console.log(user);
         if (user?.urlLogo?.includes("https")) {
             setUserAvatart(user.urlLogo);
-        }
-        else {
+        } else {
             setUserAvatart(BASE_URL + user.urlLogo)
         }
     }, [user])
@@ -43,7 +43,7 @@ const UserInformationComponent = ({ user }) => {
             <div className="user-information">
                 {!isMobile &&
                 <div className="edit-button">
-                    <UserEditModal user={user}/>
+                    <UserEditModal user={user} setUser={setUser}/>
                 </div>
                 }
                 <div className="user-info">
@@ -72,16 +72,11 @@ const UserInformationComponent = ({ user }) => {
             </div>
             {isMobile &&
                 <div className="edit-button">
-                    <UserEditModal user={user}/>
+                    <UserEditModal user={user} setUser={setUser}/>
                 </div>
             }
         </div>
-    )
+    );
 };
-
-UserInformationComponent.propTypes = {
-    user: PropTypes.object.isRequired
-};
-
 
 export default UserInformationComponent;
