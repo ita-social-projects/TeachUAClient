@@ -60,6 +60,7 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
 import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
+import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
@@ -117,6 +118,7 @@ function App() {
                                     <Route path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
                                     <Route path="/admin/stations" exact component={StationTable}/>
                                     <Route path="/admin/about" exact component={AboutUsEdit}/>
+                                    <Route path="/admin/questions/generate" exact component={ImportQuestionExcelData}/>
                                     <Route path="/admin/certificate/generate" exact component={ImportCertificateData}/>
                                     <Route path="/admin/questions-import" exact component={ImportQuestionsData}/>
                                     <Route path="/admin/quiz/questions"  exact component={QuestionsTable}/>

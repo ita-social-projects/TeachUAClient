@@ -21,3 +21,14 @@ export const getAllQuestions = async () => {
             return response.data;
         });
 };
+
+export const loadDataToDatabase = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/questions/load-to-db",
+        data
+    )
+        .then((response) => {
+            return response.data
+        }).catch((error) => {
+            return error.response.data
+        });
+};
