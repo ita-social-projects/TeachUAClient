@@ -22,8 +22,6 @@ const AuthMenu = () => {
 
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
-    const [showSearchCertificate, setShowSearchCertificate] = useState(false);
-    const [showAddChallenge, setShowAddChallenge] = useState(false);
 
     const {showLogin, setShowLogin} = useContext(AuthContext);
     const [showRegister, setShowRegister] = useState(false);
@@ -59,7 +57,6 @@ const AuthMenu = () => {
     }, [isLogin])
 
     const checkToken = () => {
-        console.log("checkToken!!!!!!!!!!!!!!!!");
         if(getToken()){
             const token = getToken();
             const payload = JSON.parse(atob(token.split(".")[1]));
@@ -86,11 +83,10 @@ const AuthMenu = () => {
                 <Menu>
                     <Menu.Item key="add_club"><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
                     <Menu.Item key="add_centre"><div onClick={() => setShowAddCenter(true)}>Додати центр</div></Menu.Item>
-                    <Menu.Item key="search_certificates"><Link to="/certificate"><div onClick={() => setShowSearchCertificate(true)}>Пошук сертифікатів</div></Link></Menu.Item>
+                    <Menu.Item key="search_certificates"><Link to="/certificate">Пошук сертифікатів</Link></Menu.Item>
 
                     { (user && user.roleName === "ROLE_ADMIN") &&
                     <>
-
                         <SubMenu title="Контент" key="content">
                             {/* For some reason challenges pop up to the right. Added an offset to fix that */}
                             <SubMenu title="Челенджі" key="challenges-submenu" popupOffset={[-215, 0]}>
