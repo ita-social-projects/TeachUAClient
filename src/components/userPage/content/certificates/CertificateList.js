@@ -2,8 +2,14 @@ import { Typography, List, Button } from "antd";
 import { getCertificateTypeAsString } from "../../../../util/CertificateUtil";
 
 const CertificateList = ({certificates, startDownload}) => {
-    
-    const { Text } = Typography;
+
+    const {Text} = Typography;
+
+    const extractContent = (htmlText) => {
+        let span = document.createElement('span');
+        span.innerHTML = htmlText;
+        return span.textContent;
+    }
 
     return (
         <List
@@ -21,7 +27,7 @@ const CertificateList = ({certificates, startDownload}) => {
                     </Button>
                 ]}>
                     <List.Item.Meta
-                        title={<h3>{certificate.courseDescription}</h3>}
+                        title={<h3>{extractContent(certificate.courseDescription)}</h3>}
                         description={certificate.date}
                     />
                     <Text italic>{getCertificateTypeAsString(certificate.certificateType)}</Text>
