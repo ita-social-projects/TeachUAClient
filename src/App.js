@@ -135,7 +135,7 @@ function App() {
                                 <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
                                 <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
                                 <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
-                                <AdminRoute path="/admin/quiz/edit-questions" exact component={TestQuestionTable}/>
+                                <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
                                 <AdminRoute path="/admin/quiz/question/new" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/quiz/question/:id" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
