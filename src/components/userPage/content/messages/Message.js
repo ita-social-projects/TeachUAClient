@@ -49,7 +49,7 @@ const Message = ({message}) => {
                    extra={
                        <div className="extra">
                            <div className="date">
-                               {getFormattedDate(message.date)}
+                               {message.date ? getFormattedDate(message.date) : ''}
                            </div>
                            {showReadMessage(active)}
                        </div>

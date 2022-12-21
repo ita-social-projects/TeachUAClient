@@ -123,6 +123,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                                      placeholder="2"
                                      min={2}
                                      max={17}
+                                     maxLength = {2}
                                      type="number"/>
                     </Form.Item>
                     до
@@ -134,6 +135,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                                      placeholder="18"
                                      min={3}
                                      max={18}
+                                     maxLength = {2}
                                      type="number"/>
                     </Form.Item>
                     років

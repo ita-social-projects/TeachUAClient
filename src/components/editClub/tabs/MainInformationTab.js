@@ -1,4 +1,4 @@
-import {Button, Checkbox, Form, Input, InputNumber, Select} from "antd";
+import {Button, Checkbox, Form, Input, InputNumber, Select, message} from "antd";
 import React, {useState} from "react";
 import "../css/MainInformationTab.less"
 import {updateClubBuId} from "../../../service/ClubService";
@@ -22,7 +22,16 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
 
         //setResult(Object.assign(result, values));
 
-        updateClubBuId(result).then(window.location.reload());
+        //.then(window.location.reload())
+
+        updateClubBuId(result).then((response) => {
+            if(response.status != 400){
+                window.location.reload()
+            } else{
+                message.warning(response.message);
+            }
+        });
+        
     };
 
     const categoriesName = result.categories.map((category) => category.name);
@@ -49,6 +58,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                 <Checkbox.Group className="edit-club-categories"
                 >
                     {categories.map(category => <Checkbox
+                        style={{display: "flex"}}
                         value={category.name}
                     >
                         {category.name}
@@ -66,6 +76,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                                initialValue={result.ageFrom ? result.ageFrom : 2}>
                         <InputNumber className="input-age"
                             min={2}
+                            maxLength = {2}
                             max={18}/>
                     </Form.Item>
                     до
@@ -74,6 +85,7 @@ const MainInformationTab = ({categories, centers, setResult, result}) => {
                                initialValue={result.ageTo ? result.ageTo : 18}>
                         <InputNumber className="input-age"
                             min={3}
+                            maxLength = {2}
                             max={18}/>
                     </Form.Item>
                     років

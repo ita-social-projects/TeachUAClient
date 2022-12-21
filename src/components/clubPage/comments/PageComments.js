@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './css/PageComments.css';
-import {Button, Comment, List, Rate, Tooltip} from "antd";
+import {Button, Comment, List, message, Rate, Tooltip} from "antd";
 import {Content} from "antd/es/layout/layout";
 
 import CommentEditComponent from "./CommentEditComponent";
@@ -21,7 +21,7 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                                     if (localStorage.getItem('id') != null)
                                         setCommentEditVisible(true);
                                     else
-                                        alert("Увійдіть або зареєструйтеся!!!");
+                                        message.info("Увійдіть або зареєструйтеся!");
                                 }}
                         >
                             Залишити коментар

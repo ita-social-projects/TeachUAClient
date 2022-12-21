@@ -257,6 +257,7 @@ const ClubListSider = ({
                          onKeyPress={onKeyPress}
                          max={18}
                          min={2}
+                         maxLength = {2}
                      />
                      років
                  </span>

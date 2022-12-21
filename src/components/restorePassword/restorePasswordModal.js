@@ -1,24 +1,23 @@
 import React, {useState} from "react";
-import {Button, Form, message, Modal} from "antd";
+import {Form, message, Modal} from "antd";
 import EmailInput from "./emailConfirmation";
 import  "./../login/css/Login.less"
 import "./css/RestorePassword.less"
 import {resetPassword} from "../../service/UserService";
 import {Link} from "react-router-dom";
+
 export const RestorePasswordModal = () => {
 
-    const [visible, setVisible] = useState(false);
+    const [open, setOpen] = useState(false);
 
    const onFinish = (values) => {
 
        resetPassword(values).then((response) => {
-            if (response.status>400) {
-                //window.location.reload();
-               setVisible(true);
+            if (response.status > 400) {
+                setOpen(true);
                 message.error("Користувача з вказаним емейлом не знайдено")
             } else {
-                //window.location.reload();
-                setVisible(true);
+                setOpen(false);
                 message.success("Перевірте свій емейл та знайдіть лист із темою «Відновлення паролю»");
             }
         });
@@ -34,13 +33,12 @@ export const RestorePasswordModal = () => {
         }
     };
 
-
     return (
         <>
             <div className="reset-button"/>
             <Link
                 className="restore-password-button"
-                    onClick={() => setVisible(true)}>
+                    onClick={() => setOpen(true)}>
                 Забули пароль?
             </Link>
             <div/>
@@ -48,9 +46,9 @@ export const RestorePasswordModal = () => {
                 className="modal-login"
                 centered
                 width={540}
-                visible={visible}
+                open={open}
                 onOk={() => stepComponent(1)}
-                onCancel={() => setVisible(false)}
+                onCancel={() => setOpen(false)}
                 footer={null}
             >
                 <div className="login-header">
@@ -67,8 +65,5 @@ export const RestorePasswordModal = () => {
         </>
     );
 };
-
-// UserEditModal.propTypes = {
-//     user: PropTypes.object.isRequired
 
 export default RestorePasswordModal;

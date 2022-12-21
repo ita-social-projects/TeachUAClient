@@ -9,7 +9,6 @@ const EmailInput = () => {
             <div className="login-column">
                 <Form.Item name="email"
                            className="login-input"
-                          // label="Емейл"
                            hasFeedback
                            rules={[{
                                required: true,
@@ -17,7 +16,7 @@ const EmailInput = () => {
                            }]}>
                     <Input className="login-box"
                            placeholder="Введіть ваш емейл"
-                           suffix={<MailOutlined classname="mail-icon"/>}/>
+                           suffix={<MailOutlined className="mail-icon"/>}/>
                 </Form.Item>
 
             </div>

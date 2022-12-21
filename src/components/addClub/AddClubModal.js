@@ -11,13 +11,11 @@ import DescriptionStep from "./steps/DescriptionStep";
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
-import {getUserId, saveToken, saveUserId, getToken} from '../../service/StorageService';
+import {saveUserId, saveToken, saveRole, getUserId, getToken} from '../../service/StorageService';
 import {getAllCenters} from "../../service/CenterService";
 import LoginInput from "../login/LoginInput";
 import LoginSocial from "../login/LoginSocial";
 import {signIn} from "../../service/UserService";
-import Login from "../login/Login";
-import AddLocationModal from "./location/AddLocationModal";
 
 const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
     const [visible, setVisible] = useState(isShowing);
@@ -55,6 +53,7 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
                 console.log(response)
                 message.success("Ви успішно залогувалися!");
                 saveUserId(response.id);
+                saveRole(response.roleName);
                 saveToken(response.accessToken);
                 setShowing(false)
                 refreshPage();

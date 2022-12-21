@@ -53,6 +53,10 @@ class Search extends React.Component {
         getAllCategories().then((response) => {
             this.setState({allCategories: response});
         });
+        this.setState({loading: true});
+        getPossibleResults(searchParameters).then((response) => {
+            this.setState({possibleResults: response, loading: false});
+        });
         if(getUserId()) {
             getUserById(getUserId()).then(response => {
                 this.setState({user:response});
@@ -66,7 +70,6 @@ class Search extends React.Component {
         if (value === undefined) {
             return;
         }
-
         if (value.trim().length === 0) {
             return;
         }
@@ -127,14 +130,18 @@ class Search extends React.Component {
         }
     };
 
-    onSearch = (val) => {
-        searchInputData.input = val;
-        val = val.trim();
-        this.onSearchChange(val, "all");
-        this.setState({loading: true});
-        getPossibleResultsByText(val, searchParameters).then((response) => {
-            this.setState({possibleResults: response, loading: false});
-        });
+    onSearch = (value) => {
+        searchInputData.input = value;
+        value = value.trim();
+        clearTimeout(this.timer);
+
+        this.timer = setTimeout(() => {
+            this.onSearchChange(value, "all");
+            this.setState({loading: true});
+            getPossibleResultsByText(value, searchParameters).then((response) => {
+                this.setState({possibleResults: response, loading: false});
+            });
+        }, 1000);
     };
 
     onSelect = (value, option) => {
@@ -150,13 +157,6 @@ class Search extends React.Component {
                 this.context.setClubs(response);
             });
         }
-    };
-
-    onFocus = () => {
-        this.setState({loading: true});
-        getPossibleResults(searchParameters).then((response) => {
-            this.setState({possibleResults: response, loading: false});
-        });
     };
 
     onKeyDown = (event) => {
@@ -211,8 +211,6 @@ class Search extends React.Component {
                     //disabled={searchParameters.isAdvancedSearch}
                     onSelect={this.onSelect}
                     onSearch={this.onSearch}
-                    onChange={this.onSearchChange}
-                    onFocus={this.onFocus}
                     onInputKeyDown={this.onKeyDown}
                     onClear={this.onClear}
                     onBlur={this.onKeyDown}
@@ -221,7 +219,6 @@ class Search extends React.Component {
                         //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
                     placeholder="Який гурток шукаєте?"
-                    value={searchInputData.input}
                     maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (

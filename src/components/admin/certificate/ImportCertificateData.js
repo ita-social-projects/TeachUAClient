@@ -76,7 +76,7 @@ const ImportCertificateData = () => {
     }
 
     const onHoursChange = (value) => {
-        dataToDB.hours = value
+        setDataToDB({...dataToDB, hours: value})
         isFilled()
         console.log(dataToDB)
     }

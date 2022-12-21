@@ -79,6 +79,17 @@ export const getClubById = async (id) => {
         });
 };
 
+export const getClubsWithoutCategories = async (page) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/club/clubs-without-categories" + "?page=" + page)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/" + id + "?page=" + page)
@@ -180,6 +191,12 @@ export const getClubsByParameters = async (parameters, page) => {
 
 export const getAllClubs = async () => {
     return await fetchRequest.get(BASE_URL + "/api/clubs").then((response) => {
+        return response.data;
+    });
+};
+
+export const getAllClubsByCenterId = async (centerId) => {
+    return await fetchRequest.get(BASE_URL + "/api/clubsByCenterId/" + centerId).then((response) => {
         return response.data;
     });
 };

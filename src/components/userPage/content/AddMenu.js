@@ -6,7 +6,7 @@ import AddCenter from "../../addCenter/AddCenter";
 
 
 const menu = (
-    <Menu classname="menu">
+    <Menu className="menu">
         <Menu.Item className="menu-item">
             <AddClubModal />
         </Menu.Item>

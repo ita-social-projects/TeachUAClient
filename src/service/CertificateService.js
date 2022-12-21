@@ -57,9 +57,9 @@ export const getCertificatesOfAuthenticatedUser = async () => {
         })
 }
 
-export const downloadCertificate = async (serialNumber) => {
+export const downloadCertificate = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates/download/" + serialNumber, {
+        .get(BASE_URL + "/api/certificates/download/" + id, {
             headers: {"content-type": "application/pdf"},
             responseType: "blob"
         })
@@ -73,7 +73,12 @@ export const downloadCertificate = async (serialNumber) => {
             anchor.click();
             anchor.remove();
             URL.revokeObjectURL(url);
+            return response
         })
+        .catch(async error => {
+            console.log(JSON.parse(await error.response.data.text()));
+            return error.response;
+        });
 }
 
 export const updateCertificateProfile = async (id, data) => {
