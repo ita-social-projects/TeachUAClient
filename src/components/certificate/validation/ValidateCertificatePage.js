@@ -62,8 +62,8 @@ const ValidateCertificatePage = () => {
                                     Навчальний курс:
                                 </div>
                                 <p>
-                                    <p>{certificate.courseDescription}</p>
-                                    <p>{certificate.projectDescription}</p>
+                                    <p dangerouslySetInnerHTML={{__html:certificate.courseDescription}}></p>
+                                    <p dangerouslySetInnerHTML={{__html:certificate.projectDescription}}></p>
                                 </p>
                             </div>
                             

@@ -62,11 +62,12 @@ import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcel
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
+import ImportCertificateByTemplateData from "./components/admin/certificateConstructor/ImportCertificateByTemplateData";
+import TemplatesTable from "./components/admin/certificateConstructor/template/TemplatesTable";
+import AddTemplate from "./components/admin/certificateConstructor/template/AddTemplate";
 import BrokenClubContent from "./components/admin/fix-clubs-categories/BrokenClubContent";
-
 import {AllFileList} from "./components/admin/files/AllFileList";
 import {UnusedFileList} from "./components/admin/files/UnusedFileList";
-
 import {PageContext} from "./context/PageContext";
 import {SearchContext} from "./context/SearchContext";
 import {AuthContext} from "./context/AuthContext";
@@ -127,6 +128,9 @@ function App() {
                                 <AdminRoute path="/admin/about" exact component={AboutUsEdit}/>
                                 <AdminRoute path="/admin/questions/generate" exact component={ImportQuestionExcelData}/>
                                 <AdminRoute path="/admin/certificate/generate" exact component={ImportCertificateData}/>
+                                <AdminRoute path="/admin/certificate-by-template/generate" exact component={ImportCertificateByTemplateData}/>
+                                <AdminRoute path="/admin/templates" exact component={TemplatesTable}/>
+                                <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
                                 <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
                                 <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
@@ -142,8 +146,6 @@ function App() {
                                 {/* Comment next 2 lines for prod version */}
                                 <Route path="/news" exact component={NewsListComponent}/>
                                 <Route path="/news/:id" exact component={NewsPage}/>
-                                {/*The previous version of this route*/}
-                                {/*<Route path="/user/:id" exact component={UserPage}/>*/}
                                 <Route path="/verify" exact component={VerifyPage}/>
                                 <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
