@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Typography, Form, Input, Button, message, Select, Col, Row } from 'antd';
+import { Typography, Form, Input, InputNumber, Button, message, Select, Col, Row } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Link, useParams } from "react-router-dom";
 import './css/TestQuestion.css';
@@ -165,6 +165,16 @@ export const TestQuestion = () => {
                                             <Select 
                                                     options={ questionIsTrueOptions }
                                             />
+                                        </Form.Item>
+                                    </Col>
+
+                                    <Col>
+                                        <Form.Item
+                                            {...restField}
+                                            name={[name, 'value']}
+                                        
+                                        >
+                                            <InputNumber/>
                                         </Form.Item>
                                     </Col>
 
