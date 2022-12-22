@@ -91,7 +91,7 @@ export const TestQuestion = () => {
     return (
         <div className="question-form">
             <Link
-                to="/admin/test/questions"
+                to="/admin/quiz/questions/edit"
                 className="back-btn"
             >
                 <Button  className="flooded-button">

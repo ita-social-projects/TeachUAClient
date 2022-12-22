@@ -150,6 +150,14 @@ export const TestQuestionTable = () => {
         key: 'action',
         render: (_, record) => (
           <>
+            <Link
+                to={"/admin/quiz/questions/" + record.id}
+                className="back-btn"
+            >
+                <Button>
+                  Редагувати
+                </Button>
+            </Link>
             <Popconfirm 
                 title="Видалити питання?" 
                 onConfirm={() => deleteQuestionById(record.id)}
@@ -159,14 +167,6 @@ export const TestQuestionTable = () => {
             >
                 <Button danger={true}>Видалити</Button>
             </Popconfirm>
-            <Link
-              to={"/test/question/" + record.id}
-              className="back-btn"
-            >
-              <Button>
-                Редагувати
-              </Button>
-            </Link>
           </>
         )
       }
@@ -185,7 +185,7 @@ export const TestQuestionTable = () => {
               }}
           />
           <Link
-                to="/admin/test/question/new"
+                to="/admin/quiz/questions/new"
                 className="back-btn"
             >
               <Button className="flooded-button add-btn">
