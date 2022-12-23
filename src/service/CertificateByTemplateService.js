@@ -21,13 +21,3 @@ export const loadTemplateName = async (value) => {
         return error.response.data
     });
 };
-
-export const loadTemplateMetadata = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/load-template-metadata",
-        data
-    ).then((response) => {
-        return response.data
-    }).catch((error) => {
-        return error.response.data
-    });
-};

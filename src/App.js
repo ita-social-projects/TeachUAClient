@@ -73,6 +73,7 @@ import {SearchContext} from "./context/SearchContext";
 import {AuthContext} from "./context/AuthContext";
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
+import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
 
 const {Content} = Layout;
 
@@ -130,6 +131,7 @@ function App() {
                                 <AdminRoute path="/admin/certificate/generate" exact component={ImportCertificateData}/>
                                 <AdminRoute path="/admin/certificate-by-template/generate" exact component={ImportCertificateByTemplateData}/>
                                 <AdminRoute path="/admin/templates" exact component={TemplatesTable}/>
+                                <AdminRoute path="/admin/template/:id" exact component={EditTemplate}/>
                                 <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
                                 <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
                                 <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>

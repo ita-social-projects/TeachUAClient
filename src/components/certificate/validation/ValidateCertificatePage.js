@@ -39,7 +39,7 @@ const ValidateCertificatePage = () => {
             {certificate ? 
                     <BrowserRouter>
                         <div className="banner-image">
-                                <img src={process.env.PUBLIC_URL + certificate.picturePath} />
+                                <img src={process.env.PUBLIC_URL + certificate.picturePath} alt={""}/>
                         </div>
                         <div className="validation-content">    
                             <div className="title-text">
