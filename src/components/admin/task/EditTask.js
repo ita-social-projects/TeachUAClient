@@ -11,7 +11,7 @@ import {getAllChallenges} from "../../../service/ChallengeService";
 
 import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import Editor from "../challenge/Editor";
+import Editor from "../../../util/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader, uploadImage} from "../../../service/UploadService";

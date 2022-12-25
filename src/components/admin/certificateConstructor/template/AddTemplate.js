@@ -5,10 +5,11 @@ import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {Link} from "react-router-dom";
 import {tokenToHeader} from "../../../../service/UploadService";
-import Editor from "./Editor";
+import Editor from "../../../../util/Editor";
 import {createTemplate} from "../../../../service/TemplateService";
 import * as TemplateService from "../../../../service/TemplateService";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
+import {certificateTypes, fieldsProperties} from "./TemplateConstants"
 
 const {Title} = Typography;
 
@@ -46,26 +47,6 @@ const AddTemplate = () => {
         filePath: "",
         properties: {}
     });
-
-    const certificateTypes = [
-        {label: "учасник", value: 3},
-        {label: "модератор", value: 2},
-        {label: "тренер", value: 1}
-    ];
-
-    const fieldsProperties = [
-        {label: "—", value: ""},
-        {label: "Серійний номер", value: "serial_number"},
-        {label: "ПІБ учасника", value: "user_name"},
-        {label: "Дата видачі", value: "date"},
-        {label: "Тривалість", value: "duration"},
-        {label: "Кількість годин", value: "hours"},
-        {label: "Номер курсу", value: "course_number"},
-        {label: "Форма навчання", value: "study_form"},
-        {label: "QR-код(білий)", value: "qrCode_white"},
-        {label: "QR-код(чорний)", value: "qrCode_black"}
-
-    ];
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -180,6 +161,7 @@ const AddTemplate = () => {
             <Form.Item
                 name={element}
                 label={element}
+                key={"item_" + element}
                 initialValue="—"
             >
                 <Select

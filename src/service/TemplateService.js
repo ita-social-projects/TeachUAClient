@@ -43,13 +43,9 @@ export const getTemplateById = async (id) => {
     });
 };
 
-export const updateTemplate = async (data, id) => {
+export const updateTemplate = async (data) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/template/" + id, {
-            name: data.name,
-            courseDescription: data.courseDescription,
-            projectDescription: data.projectDescription
-        })
+        .put(BASE_URL + "/api/template/" + data.id, data)
         .then((response) => {
             return response.data;
         })
@@ -68,3 +64,28 @@ export const deleteTemplate = async (id) => {
             return error.response.data;
         });
 };
+
+export const downloadTemplate = async (id) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/template/download/" + id, {
+            headers: {"content-type": "application/pdf"},
+            responseType: "blob"
+        })
+        .then(response => {
+            let url = URL.createObjectURL(response.data);
+            let anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = "template.pdf";
+            document.body.append(anchor);
+            anchor.style = "dislay: none";
+            anchor.click();
+            anchor.remove();
+            URL.revokeObjectURL(url);
+            return response
+        })
+        .catch(async error => {
+            console.log(JSON.parse(await error.response.data.text()));
+            return error.response;
+        });
+}
+

@@ -2,7 +2,7 @@ import React from 'react';
 import "./css/CreateNewsModal.less";
 import {Button, ConfigProvider, DatePicker, Form, Input, message, Modal, Switch, Upload} from "antd";
 import {createNews} from "../../../service/NewsService";
-import Editor from "../challenge/Editor";
+import Editor from "../../../util/Editor";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";

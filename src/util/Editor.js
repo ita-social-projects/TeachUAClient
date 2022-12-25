@@ -1,7 +1,7 @@
 import React from "react";
 import ReactQuill from 'react-quill';
-import {BASE_URL} from "../../../../service/config/ApiConfig";
-import {uploadImage} from "../../../../service/UploadService";
+import {BASE_URL} from "../service/config/ApiConfig";
+import {uploadImage} from "../service/UploadService";
 
 
 class Editor extends React.Component {
@@ -31,10 +31,6 @@ class Editor extends React.Component {
         }
     }
 
-    onChange(element) {
-        const { onChange } = this.props;
-        onChange(element);
-    }
     handleOnChange(html) {
         const { onChange } = this.props;
         onChange(html);

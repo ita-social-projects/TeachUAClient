@@ -49,6 +49,7 @@ const TemplatesTable = () => {
             title="Видалити шаблон?"
             cancelText="Ні"
             okText="Так"
+            key={record.id}
             cancelButtonProps={{className: "popConfirm-cancel-button"}}
             okButtonProps={{className: "popConfirm-ok-button"}}
             onConfirm={() => remove(record)}>
