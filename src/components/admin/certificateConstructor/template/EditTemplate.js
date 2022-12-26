@@ -35,6 +35,12 @@ const EditTemplate = () => {
         templateLastModifiedDate: ""
     })
 
+    const extractContent = (htmlText) => {
+        let span = document.createElement('span');
+        span.innerHTML = htmlText;
+        return span.textContent;
+    }
+
     const saveForm = (values) => {
         template.name = values.name;
         template.courseDescription = values.courseDescription;
@@ -46,8 +52,8 @@ const EditTemplate = () => {
 
         template.properties = JSON.stringify(chosenProperties);
         console.log(template)
-        if (values.name.length === 0 || values.courseDescription === "<p><br></p>" ||
-            values.projectDescription === "<p><br></p>") {
+        if (values.name.trim().length === 0 || extractContent(values.courseDescription).trim().length === 0 ||
+            extractContent(values.projectDescription).trim().length === 0) {
             message.error("Усі поля повинні бути заповнені!");
             return;
         }

@@ -52,12 +52,19 @@ const AddTemplate = () => {
         console.log('Failed:', errorInfo);
     };
 
+    const extractContent = (htmlText) => {
+        let span = document.createElement('span');
+        span.innerHTML = htmlText;
+        return span.textContent;
+    }
+
     const loadToDatabase = (values) => {
         if (!!values.name && !!values.courseDescription && !!values.projectDescription) {
-            dataToDB.name = values.name;
-            dataToDB.courseDescription = values.courseDescription;
-            dataToDB.projectDescription = values.projectDescription;
-
+            if (values.name.trim().length === 0 || extractContent(values.courseDescription).trim().length === 0 ||
+                extractContent(values.projectDescription).trim().length === 0) {
+                message.error("Усі поля повинні бути заповнені!");
+                return;
+            }
             if (values.name.length > 250) {
                 message.error("Занадто велика назва!")
                 return;
@@ -72,6 +79,10 @@ const AddTemplate = () => {
                 message.error("Завантажте pdf-шаблон!")
                 return;
             }
+
+            dataToDB.name = values.name;
+            dataToDB.courseDescription = values.courseDescription;
+            dataToDB.projectDescription = values.projectDescription;
 
             createTemplate(dataToDB)
                 .then((response) => {
