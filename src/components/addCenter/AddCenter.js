@@ -53,7 +53,6 @@ const AddCenter = ({isShowing, setShowing}) => {
         setResult({
             userId: getUserId()
         })
-        console.log("ADD CENTER USE EFFECT")
         window.addEventListener("resize", handleResize)
     }, [visible])
 

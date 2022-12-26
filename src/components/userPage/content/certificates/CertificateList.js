@@ -14,6 +14,7 @@ const CertificateList = ({certificates, startDownload}) => {
                 emptyText: <div className="noMessages">Сертифікатів немає</div>
             }}
             dataSource={certificates}
+            pagination={{ hideOnSinglePage: true, defaultPageSize: 4 }}
             renderItem={(certificate) => (
                 <List.Item actions={[
                     <Button onClick={() => startDownload(certificate)}>

@@ -1,43 +1,46 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, message, Modal } from "antd";
 import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
 import RestorePasswordModal from "../restorePassword/restorePasswordModal";
-import { signIn } from "../../service/UserService";
-import { saveUserId, saveToken, saveRole } from '../../service/StorageService';
+import { getUserById, signIn } from "../../service/UserService";
+import { saveUserId, saveToken, saveRole, getUserId } from '../../service/StorageService';
 import './../restorePassword/css/RestorePassword.less';
 import './css/Login.less';
+import { AuthContext } from '../../context/AuthContext';
 
-const Login = ({isShowing, setShowing, setIsLogin}) => {
+const Login = () => {
+    const {showLogin, setShowLogin, setUser} = useContext(AuthContext);
 
     const onFinish = (values) => {
         signIn(values).then((response) => {
-            if (response.status>=500) {
+            message.success("Ви успішно залогувалися!");
+            saveUserId(response.id);
+            saveRole(response.roleName);
+            saveToken(response.accessToken);
+            setShowLogin(false);
+            getUserById(getUserId()).then(response => {
+                setUser(response);
+            });
+        }).catch((error) => {
+            const response = error.response.data;
+            if (response.status >= 500) {
                 message.error("Ваш email не підтверджено. Будь ласка підтвердіть email");
             } else if(response.status < 500){
                 message.destroy();
                 message.error("Введено невірний пароль або email");
             }
-            else {
-                message.success("Ви успішно залогувалися!");
-                saveUserId(response.id);
-                saveRole(response.roleName);
-                saveToken(response.accessToken);
-                setShowing(false);
-                setIsLogin(true);
-            }
         });
     };
 
     return (
-        
             <Modal
                 className="modal-login"
                 centered
                 width={520}
-                visible={isShowing}
-                onOk={() => setShowing(false)}
-                onCancel={() => setShowing(false)}
+                visible={showLogin}
+                onOk={() => setShowLogin(false)}
+                onCancel={() => setShowLogin(false)}
                 footer={null}
             >
                 <div className="login-header">

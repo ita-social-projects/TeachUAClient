@@ -146,7 +146,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                         <Text style={{fontSize: '19px', color: 'GrayText'}}>Назва</Text>
                         <Form.Item name="name"
                                    className="add-club-row"
-                                   // label="Назва"
                                    hasFeedback
                                    rules={[
                                        {
@@ -169,7 +168,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Text style={{fontSize: '19px', color: 'GrayText'}}>Місто</Text>
                             <Form.Item name="cityName"
                                        className="add-club-row"
-                                       // label="Місто"
                                        initialValue={editedLocation && editedLocation.cityName}
                                        hasFeedback
                                        rules={[{
@@ -199,12 +197,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Text style={{fontSize: '19px', color: 'GrayText'}}>Район міста</Text>
                             <Form.Item name="districtName"
                                        className="add-club-row"
-                                       // label="Район міста"
                                        hasFeedback
-                                       // rules={[{
-                                       //     required: true,
-                                       //     message: "Це поле є обов'язковим"
-                                       // }]}
                                 >
                                 <Select
                                     className="add-club-select"
@@ -219,12 +212,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Text style={{fontSize: '19px', color: 'GrayText'}}>Метро/Місцевість</Text>
                             <Form.Item name="stationName"
                                        className="add-club-row"
-                                       // label="Метро/Місцевість"
                                        hasFeedback
-                                // rules={[{
-                                //     required: true,
-                                //     message: "Це поле є обов'язковим"
-                                // }]}
                             >
                                 <Select
                                     className="add-club-select"
@@ -238,7 +226,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                         <Text style={{fontSize: '19px', color: 'GrayText'}}>Адреса</Text>
                         <Form.Item name="address"
                                    className="add-club-row"
-                                   // label="Адреса"
                                    hasFeedback
                                    rules={[{
                                        required: true,
@@ -251,17 +238,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                             <Input className="add-club-input"
                                    placeholder="Адреса"
                             />
-                            {/*<AddClubInputAddress*/}
-                            {/*    editedLocation={editedLocation}*/}
-                            {/*    form={form}*/}
-                            {/*    setCityName={setCityName}*/}
-                            {/*    onChange={handleSelect}/>*/}
                         </Form.Item>
                             <div>
                             <Text style={{fontSize: '19px', color: 'GrayText'}}>Географічні координати</Text>
                             <Form.Item name="coordinates"
                                        className="add-club-row"
-                                       // label="Географічні координати"
                                        hasFeedback
                                        rules={[{
                                            required: true,
@@ -275,12 +256,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                 <Input className="add-club-input add-club-select"
                                        value={coordinates}
                                        onInput={e => setCoordinates(e.target.value)}
-
-                                    // suffix={
-                                    //     <Tooltip title="Буде автоматично заповнено при введені адреси">
-                                    //         <InfoCircleOutlined className="info-icon"/>
-                                    //     </Tooltip>
-                                    // }
                                        placeholder="Широта та довгота"/>
                             </Form.Item>
                             </div>
@@ -298,22 +273,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                            required: false,
                                            pattern: /^\d{10}$/,
                                            message: "Телефон не відповідає вказаному формату"
-                                       },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^A-Za-zА-Яа-яІіЇїЄєҐґ]*$/,
-                                       //     message: "Телефон не може містити літери"
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^-`~!@#$%^&*()/_+={}\[\]|\\:;“"’'<,>.?๐฿]*$/,
-                                       //     message: "Телефон не може містити спеціальні символи"
-                                       // },
-                                       // {
-                                       //     required: false,
-                                       //     pattern: /^[^\s]*$/,
-                                       //     message: "Телефон не може містити пробільні символи"
-                                       // }
+                                       }
                                    ]}>
                             <Input className="add-club-input"
                                    prefix='+38'

@@ -8,12 +8,11 @@ import {Link, useHistory} from "react-router-dom";
 import AddClubModal from "../addClub/AddClubModal";
 import Login from "../login/Login";
 import './css/authMenu.css';
-import {getToken, getUserId, deleteUserStorage} from "../../service/StorageService";
 import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
-import {getUserById} from "../../service/UserService";
 import AddCenter from "../addCenter/AddCenter";
 import {updateRating} from "../../service/RatingService";
 import {AuthContext} from "../../context/AuthContext";
+import { deleteUserStorage, getToken } from "../../service/StorageService";
 
 const {SubMenu} = Menu;
 
@@ -23,63 +22,35 @@ const AuthMenu = () => {
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
 
-    const {showLogin, setShowLogin} = useContext(AuthContext);
+    const {showLogin, setShowLogin, isLogin} = useContext(AuthContext);
     const [showRegister, setShowRegister] = useState(false);
 
-    const [user, setUser] = useState('');
+    const {user, setUser} = useContext(AuthContext);
     const [source, setSource] = useState('');
     const [styleClass, setStyleClass] = useState('');
-    const [isLogin, setIsLogin] = useState(null);
 
     const onExitClick = () => {
         deleteUserStorage();
-        setIsLogin(false);
+        setUser({});
         history.push("/");
     };
 
     useEffect(() => {
-        if (getUserId()) {
-            getUserById(getUserId()).then(response => {
-                setUser(response);
-                if (response) {
-                    if (response.urlLogo?.includes("https")) {
-                        setSource(response.urlLogo);
-                    } else {
-                        setSource(BASE_URL + response.urlLogo)
-                    }
-                    setStyleClass("avatarIfLogin");
-                    return;
-                }
-            })
+        if (user.urlLogo) {
+            if (user.urlLogo.includes("https")) {
+                setSource(user.urlLogo);
+            } else {
+                setSource(BASE_URL + user.urlLogo)
+            }
+            setStyleClass("avatarIfLogin");
+            return;
         }
         setSource('');
         setStyleClass("avatarIfNotLogin");
-    }, [isLogin])
-
-    const checkToken = () => {
-        if (getToken()) {
-            const token = getToken();
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            const expiration = new Date(payload.exp);
-            const now = new Date();
-            if (expiration.getTime() - now.getTime() / 1000 < 0) {
-                onExitClick();
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-    const [isTokenValid, setIsTokenValid] = useState(checkToken);
-
-
-    useEffect(() => {
-        setIsTokenValid(checkToken());
-    })
+    }, [user]);
 
     const profileDropdown = () => {
-
-        if (isTokenValid) {
+        if (getToken()) {
             return (
                 <Menu>
                     <Menu.Item key="add_club"><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>
@@ -158,7 +129,7 @@ const AuthMenu = () => {
     return (
         <>
             <Registration isShowing={showRegister} setShowing={setShowRegister} />
-            <Login isShowing={showLogin} setShowing={setShowLogin} setIsLogin={setIsLogin} />
+            <Login />
             {showAddClub &&
                 <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub} />
             }

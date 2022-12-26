@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {SearchContext} from "../../context/SearchContext";
 import Cities from "./Cities";
 import {useLocation} from 'react-router-dom'
@@ -10,6 +10,12 @@ const HeaderRight = () => {
     const {setClubs} = useContext(SearchContext);
     const location = useLocation();
     const [showModal, setShowModal] = useState(false);
+
+    // const location = useLocation();
+
+    useEffect(() => {
+      console.log('Location changed');
+    }, [location]);
 
     return (
       

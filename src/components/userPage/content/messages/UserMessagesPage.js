@@ -1,27 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {Content} from "antd/es/layout/layout";
-import {getToken, getUserId} from "../../../../service/StorageService";
-import {Redirect} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Content } from "antd/es/layout/layout";
+import { getUserId } from "../../../../service/StorageService";
 import "./css/UserMessagesPage.less";
-import {getMessagesByRecipientId} from "../../../../service/MessageService";
+import { getMessagesByRecipientId } from "../../../../service/MessageService";
 import Message from "./Message";
-import {sortMessages} from "./MessageUtil";
+import { List } from 'antd';
 
 const UserMessagesPage = () => {
 
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-            getMessagesByRecipientId(getUserId()).then(response => setMessages(sortMessages(response)));
-        },
-        []
-    );
+        getMessagesByRecipientId(getUserId()).then(response => setMessages(response));
+    }, []);
 
-    if (!getToken()) {
-        return (
-            <Redirect to="/"/>
-        );
-    }
     return (
         <Content className="messagesContent">
 
@@ -33,14 +25,19 @@ const UserMessagesPage = () => {
 
                 <div className="messages">
 
-                    {messages.length === 0
-                        ?
-                        <div className="noMessages">
-                            Повідомлень немає
-                        </div>
-                        :
-                        messages.map(message => <Message message={message} key={message.id}/>)
-                    }
+                    <List
+                        className="certificates"
+                        itemLayout="horizontal"
+                        split={false}
+                        locale={{
+                            emptyText: <div className="noMessages">Повідомлень немає</div>
+                        }}
+                        dataSource={messages}
+                        pagination={{ hideOnSinglePage: true, defaultPageSize: 4 }}
+                        renderItem={(message) => (
+                            <Message message={message} key={message.id} />
+                        )}
+                    />
                 </div>
             </div>
         </Content>

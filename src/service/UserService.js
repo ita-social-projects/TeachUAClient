@@ -38,7 +38,6 @@ export const changePassword = async (data) => {
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
-    }).catch((error) => {
     });
 };
 
@@ -64,8 +63,6 @@ export const signIn = async (data) => {
         password: data.password
     }).then((response) => {
         return response.data
-    }).catch((error) => {
-        return error.response.data
     });
 };
 
