@@ -90,8 +90,6 @@ function App() {
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState({});
 
-
-
     useEffect(() => {
         if (getUserId()) {
             getUserById(getUserId()).then(response => {
@@ -99,8 +97,6 @@ function App() {
             }).catch(() => deleteUserStorage());
         }
     }, []);
-
-
 
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
     const pageProvider = useMemo(() => ({currentPage, setCurrentPage}), [currentPage, setCurrentPage]);
@@ -184,7 +180,7 @@ function App() {
                                 <Route path="/" exact component={MainComponent}/>
                                 <Route path="*" exact component={NotFoundPage}/>
                             </Switch>
-                            {/* <AuthVerify /> */}
+                            <AuthVerify />
                         </Content>
                     </Layout>
                 </SearchContext.Provider>
