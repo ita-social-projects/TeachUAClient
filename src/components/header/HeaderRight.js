@@ -11,12 +11,6 @@ const HeaderRight = () => {
     const location = useLocation();
     const [showModal, setShowModal] = useState(false);
 
-    // const location = useLocation();
-
-    useEffect(() => {
-      console.log('Location changed');
-    }, [location]);
-
     return (
       
         <div className="right-side-menu">

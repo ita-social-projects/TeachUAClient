@@ -22,7 +22,7 @@ const AuthMenu = () => {
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
 
-    const {showLogin, setShowLogin, isLogin} = useContext(AuthContext);
+    const {setShowLogin} = useContext(AuthContext);
     const [showRegister, setShowRegister] = useState(false);
 
     const {user, setUser} = useContext(AuthContext);
@@ -136,7 +136,7 @@ const AuthMenu = () => {
             {showAddCenter &&
                 <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter} />
             }
-            <Dropdown overlay={profileDropdown} className="user-profile" placement="bottomCenter" arrow trigger={'click'}>
+            <Dropdown overlay={profileDropdown} className="user-profile" placement="bottom" arrow trigger={'click'}>
                 <div>
                     <Avatar size="large" className={styleClass} src={source} icon={<UserOutlined />} /> <CaretDownFilled />
                 </div>
