@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {Modal} from 'antd';
+import {message, Modal} from 'antd';
 import "./css/EditMainInformationTab.less"
 import {getAllCategories} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getAllContacts} from "../../service/ContactService";
-import {getClubById} from "../../service/ClubService";
+import {getClubById, updateClubById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
 import {getAllCenters} from "../../service/CenterService";
+import { getUserId } from '../../service/StorageService';
+import { useHistory } from 'react-router-dom';
 
-const EditClubModal = ({clubId}) => {
+const EditClubModal = ({clubId, reloadAfterChange}) => {
+    const history = useHistory();
     const [visible, setVisible] = useState(false);
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
@@ -23,6 +26,16 @@ const EditClubModal = ({clubId}) => {
         getAllContacts().then(response => setContacts(response));
         getClubById(clubId).then(response => setResult(response));
     }, []);
+
+    const onFinish = () => {
+        updateClubById(result).then(() => {
+            setVisible(false);
+            reloadAfterChange();
+            message.success("Гурто успішно оновлено");
+        }).catch(() => {
+            message.error("Помилка при оновленні гуртка");
+        });
+    };
 
     return (
         <div>
@@ -44,7 +57,8 @@ const EditClubModal = ({clubId}) => {
                               setResult={setResult}
                               result={result}
                               contacts={contacts}
-                              cities={cities}/>
+                              cities={cities}
+                              onFinish={onFinish}/>
             </Modal>
         </div>
     );

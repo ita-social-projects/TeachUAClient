@@ -1,4 +1,4 @@
-import {Button, Form, message, Popconfirm, Select, Space, Table} from "antd";
+import {message, Space, Table} from "antd";
 import React, {useEffect, useState} from "react";
 import {deleteFromTable} from "../../../../util/TableUtil";
 import {deleteClubById, getAllClubs, updateClubById} from "../../../../service/ClubService";
@@ -24,7 +24,8 @@ const ApproveClubTable = () => {
                         <span>{id}</span>
                         <ClubListItemInfo visible={clubInfoVisible}
                                           setVisible={setClubInfoVisible}
-                                          club={club}/>
+                                          club={club}
+                                          reloadAfterChange={getData}/>
                     </div>
                 )
             }
@@ -68,17 +69,14 @@ const ApproveClubTable = () => {
     ];
 
     const deleteClub = (id) => {
-        deleteClubById(id)
-            .then(response => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
-
-                message.success(`Гурток ${response.name} успішно видалений`);
-
-                setClubs(deleteFromTable(clubs, id));
-            });
+        deleteClubById(id).then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            message.success(`Гурток ${response.name} успішно видалений`);
+            setClubs(deleteFromTable(clubs, id));
+        });
     }
 
     const approveClub = (id) => {

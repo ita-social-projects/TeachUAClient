@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import EmptySearch from "../EmptySearch";
 import "./css/ClubSider.css"
-import {getTopClubsByCity} from "../../service/ClubService";
 import ClubListItem from "../clubList/ClubListItem";
 import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
 import ClubListItemInfo from "../clubList/ClubListItemInfo";
-import Loader from "../Loader";
 
-const ClubSider = ({clubs}) => {
+const ClubSider = ({clubs, reloadAfterChange}) => {
 
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const [clickedClub, setClickedClub] = useState(null);
@@ -28,7 +26,7 @@ const ClubSider = ({clubs}) => {
             {clubs.map((club, index) => <ClubListItem club={club} key={index} onClubClick={onClubClick}/>)}
             {clickedClub &&
                 <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
-                                  club={clickedClub}/>}
+                                  club={clickedClub} reloadAfterChange={reloadAfterChange}/>}
         </div>
 
     )

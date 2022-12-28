@@ -116,6 +116,10 @@ const ClubList = ({
         window.scrollTo(0, 0);
     };
 
+    const reloadAfterChange = () => {
+        onPageChange(currentPage);
+    };
+
     const onClubClick = (club) => {
         setClickedClub(club);
         setClubInfoVisible(true);
@@ -155,6 +159,7 @@ const ClubList = ({
             ) : (
                 <ClubsListDisplayContent
                     clubs={clubs}
+                    reloadAfterChange={reloadAfterChange}
                     view={view}
                     setView={setView}
                     advancedSearch={advancedSearch}
