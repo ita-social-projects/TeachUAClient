@@ -142,7 +142,7 @@ const AuthMenu = () => {
                     </>
                     }
 
-                    <Menu.Item key="profile"><Link to={`/user/${localStorage.getItem('id')}/page`}>Мій Профіль</Link></Menu.Item>
+                    <Menu.Item key="profile"><Link to={`/user/${localStorage.getItem('id')}/page`}>Особистий кабінет</Link></Menu.Item>
                     <Menu.Item key="logout" onClick={onExitClick} danger>Вийти</Menu.Item>
                 </Menu>
             );
