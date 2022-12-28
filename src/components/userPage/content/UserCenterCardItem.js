@@ -2,16 +2,12 @@ import {Avatar, Card, Dropdown} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/UserCenterCardItem.less';
-import PropTypes from "prop-types";
-import UserClubCardItem from "./UserClubCardItem";
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
-import CenterEditModal from "./CenterEditModal";
-import clubUpdateMenu from "./ClubUpdateMenu";
 import {MoreOutlined} from "@ant-design/icons";
 import centerUpdateMenu from "./CenterUpdateMenu";
 
 
-const UserCenterCardItem = ({center}) => {
+const UserCenterCardItem = ({center, reloadAfterDelete}) => {
     return (
         <Card className="center-card">
             <div className="center-information">
@@ -29,13 +25,10 @@ const UserCenterCardItem = ({center}) => {
                             </div>
                         </div>
                     </div>
-                    <div className="center-categories">
-                        {/*<Tags categories={center.categories}/>*/}
-                    </div>
                 </div>
                 <div className="center-right">
                     <div className="center-edit-button">
-                        <Dropdown overlay={centerUpdateMenu(center.id)} placement="bottomRight">
+                        <Dropdown overlay={centerUpdateMenu(center.id, reloadAfterDelete)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
@@ -48,11 +41,6 @@ const UserCenterCardItem = ({center}) => {
         </Card>
     )
 };
-
-UserClubCardItem.propTypes = {
-    center: PropTypes.object.isRequired
-};
-
 
 export default UserCenterCardItem;
 

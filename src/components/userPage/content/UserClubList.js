@@ -23,18 +23,21 @@ const UserClubList = ({load, setLoad, match}) => {
 
         getClubsByUserId(userId, currPage).then(response => {
             setClubs(response);
-            setLoad(false)
+            setLoad(false);
         });
     };
 
 
     useEffect(() => {
-            getData(page)
-        }, []
-    )
+        getData(page);
+    }, []);
+
+    const reloadAfterChange = () => {
+        onPageChange(page);
+    };
 
     const onPageChange = (currPage) => {
-        setPage(currPage - 1)
+        setPage(currPage - 1);
         getData(currPage - 1);
     };
 
@@ -43,7 +46,7 @@ const UserClubList = ({load, setLoad, match}) => {
         <div className="test">
             <Layout className="user-clubs">
                 <Space wrap className="cards" size={[0, 0]}>
-                    {clubs.content.map((club, index) => <UserClubCardItem club={club} key={index}/>)}
+                    {clubs.content.map((club, index) => <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)}
                 </Space>
                 <Pagination className="user-clubs-pagination"
                             hideOnSinglePage

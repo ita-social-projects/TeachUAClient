@@ -96,7 +96,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             <Text style={{fontSize :'19px', color:'GrayText'}}>Локації</Text>
             <Form.Item name="locations"
                 className="add-club-row"
-                // label="Локації"
                 initialValue={result.locations}>
                 <List
                     className="add-club-location-list"
@@ -132,7 +131,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Доступний онлайн</Text>
                 <Form.Item name="isOnline"
                     className="add-club-row"
-                    // label="Доступний онлайн?"
                 >
                 <Switch checkedChildren="Так" unCheckedChildren="Ні" onChange={onChange} checked={checked}/>
                     <Tooltip title="Якщо не додано жодної локації буде автоматично онлайн" >
@@ -144,7 +142,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
 
             <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
             <Form.Item
-                // label="Контакти"
                 className="add-club-row add-club-contacts"
                 name="contacts"
             >
