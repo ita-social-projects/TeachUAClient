@@ -3,7 +3,19 @@ import {Form, Popconfirm, Table, Typography} from "antd";
 import "./admin/city/css/CityTable.css";
 import EditableColumn from "./EditableColumn";
 
-const EditableTable = ({bordered, className, columns, data, onSave, form, actions, footer, header}) => {
+const EditableTable = ({
+                           bordered,
+                           className,
+                           columns,
+                           data,
+                           onSave,
+                           form,
+                           actions,
+                           footer,
+                           header,
+                           editAction,
+                           onEditClick
+                       }) => {
     const [editingKey, setEditingKey] = useState('');
 
     const edit = (record) => {
@@ -39,7 +51,8 @@ const EditableTable = ({bordered, className, columns, data, onSave, form, action
             ) : (
                 <div>
                     <Typography.Link disabled={editingKey !== ''}
-                                     onClick={() => edit(record)}>
+                                     onClick={() => editAction ? onEditClick(record) : edit(record)}
+                    >
                         <span className="table-action">Редагувати</span>
                     </Typography.Link>
                     {actions(record)}

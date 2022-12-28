@@ -5,15 +5,16 @@ import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {Link} from "react-router-dom";
 import {tokenToHeader} from "../../../../service/UploadService";
-import Editor from "./Editor";
+import Editor from "../../../../util/Editor";
 import {createTemplate} from "../../../../service/TemplateService";
-import * as CertificateByTemplateService from "../../../../service/CertificateByTemplateService";
+import * as TemplateService from "../../../../service/TemplateService";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
+import {certificateTypes, fieldsProperties} from "./TemplateConstants"
 
 const {Title} = Typography;
 
 const AddTemplate = () => {
-    const [challengeForm] = useForm();
+    const [templateForm] = useForm();
     const [pdfUploadFormControl, setPdfUploadFormControl] = useState(0);
     const [chosenProperties, setChosenProperties] = useState({});
     const [fieldsList, setFieldsList] = useState([]);
@@ -47,60 +48,68 @@ const AddTemplate = () => {
         properties: {}
     });
 
-    const certificateTypes = [
-        {label: "учасник", value: 3},
-        {label: "модератор", value: 2},
-        {label: "тренер", value: 1}
-    ];
-
-    const fieldsProperties = [
-        {label: "—", value: ""},
-        {label: "Серійний номер", value: "serial_number"},
-        {label: "ПІБ учасника", value: "user_name"},
-        {label: "Дата видачі", value: "date"},
-        {label: "Тривалість", value: "duration"},
-        {label: "Кількість годин", value: "hours"},
-        {label: "Номер курсу", value: "course_number"},
-        {label: "Форма навчання", value: "study_form"},
-        {label: "QR-код", value: "qrCode"}
-
-    ];
-
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const loadToDatabase = () => {
-        createTemplate(dataToDB)
-            .then((response) => {
-                if (response.status) {
-                    message.warning(response.message);
-                    return;
-                }
-                message.success("Шаблон '" + response.name + "' успішно доданий!");
-                console.log('Success:', dataToDB);
-            });
+    const extractContent = (htmlText) => {
+        let span = document.createElement('span');
+        span.innerHTML = htmlText;
+        return span.textContent;
     }
 
-    const onNameChange = (element) => {
-        setDataToDB({
-            ...dataToDB,
-            name: element.target.value
-        })
-    }
+    const loadToDatabase = (values) => {
+        if (!!values.name && !!values.courseDescription && !!values.projectDescription) {
+            if (values.name.trim().length === 0 || extractContent(values.courseDescription).trim().length === 0 ||
+                extractContent(values.projectDescription).trim().length === 0) {
+                message.error("Усі поля повинні бути заповнені!");
+                return;
+            }
+            if (values.name.length > 250) {
+                message.error("Занадто велика назва!")
+                return;
+            } else if (values.courseDescription.length > 1020) {
+                message.error("Занадто великий опис курсу!")
+                return;
+            } else if (values.projectDescription.length > 1020) {
+                message.error("Занадто великий опис проекту!")
+                return;
+            }
+            if (dataToDB.filePath === "") {
+                message.error("Завантажте pdf-шаблон!")
+                return;
+            }
 
-    const onCourseDescriptionChange = (element) => {
-        setDataToDB({
-            ...dataToDB,
-            courseDescription: element.target.innerHTML
-        })
-    }
+            dataToDB.name = values.name;
+            dataToDB.courseDescription = values.courseDescription;
+            dataToDB.projectDescription = values.projectDescription;
 
-    const onProjectDescriptionChange = (element) => {
-        setDataToDB({
-            ...dataToDB,
-            projectDescription: element.target.innerHTML
-        })
+            createTemplate(dataToDB)
+                .then((response) => {
+                    if (response.status) {
+                        console.log(dataToDB)
+                        message.warning(response.message);
+                        return;
+                    }
+                    if (!response.valid) {
+                        for (const error of response.messages) {
+                            message.error(error);
+                        }
+                        return;
+                    }
+                    message.success("Шаблон '" + response.template.name + "' успішно доданий!");
+                    console.log('Success:', dataToDB);
+
+                    document.getElementById('add-template_form').reset();
+                    setFieldsList([])
+                    setPdfUploadFormControl(0)
+                });
+        } else {
+            message.error("Усі поля повинні бути заповнені!")
+            if (dataToDB.filePath === "") {
+                message.error("Завантажте pdf-шаблон!")
+            }
+        }
     }
 
     const onFieldPropertyChange = () => {
@@ -125,7 +134,7 @@ const AddTemplate = () => {
             templateMetadata.templateName = value.file.response.templateName;
             templateMetadata.templateLastModifiedDate = value.file.lastModified;
 
-            CertificateByTemplateService.loadTemplateMetadata(templateMetadata).then(response => {
+            TemplateService.loadTemplateMetadata(templateMetadata).then(response => {
                     setFieldsList(value.file.response.fieldsList)
                     let includesFields = [];
                     Object.keys(chosenProperties).forEach(key => {
@@ -144,11 +153,15 @@ const AddTemplate = () => {
 
                     setDataToDB({
                         ...dataToDB,
-                        filePath: response,
+                        filePath: response.filePath,
                         properties: chosenProperties
                     })
-                    const form = document.getElementById('templateCreatingFormId');
-                    form.reset();
+
+                    if (response.messages != null) {
+                        for (const warning of response.messages) {
+                            message.warning(warning)
+                        }
+                    }
                 }
             );
         }
@@ -159,6 +172,7 @@ const AddTemplate = () => {
             <Form.Item
                 name={element}
                 label={element}
+                key={"item_" + element}
                 initialValue="—"
             >
                 <Select
@@ -190,7 +204,9 @@ const AddTemplate = () => {
                 </Link>
                 <Title>Додайте шаблон</Title>
                 <Form
-                    form={challengeForm}
+                    form={templateForm}
+                    id="add-template_form"
+                    onFinish={loadToDatabase}
                     onFinishFailed={onFinishFailed}
                     initialValues={{remember: true}}
                     autoComplete="off"
@@ -201,22 +217,19 @@ const AddTemplate = () => {
                         name="name"
                         label="Назва шаблону"
                     >
-                        <Input
-                            onChange={onNameChange}
-                        />
+                        <Input/>
                     </Form.Item>
                     <Form.Item
                         name="courseDescription"
                         label="Опис курсу"
-                        onInput={onCourseDescriptionChange}
                     >
                         <Editor/>
                     </Form.Item>
                     <Form.Item
                         name="projectDescription"
                         label="Опис проекту"
-                        onInput={onProjectDescriptionChange}
                     >
+
                         <Editor/>
                     </Form.Item>
                     <Form.Item
@@ -233,10 +246,8 @@ const AddTemplate = () => {
                         />
                     </Form.Item>
                     <Form.Item
+                        name="pdfFile"
                         label="Pdf-шаблон"
-                        rules={[{
-                            required: true, message: "Завантажте pdf-шаблон"
-                        }]}
                     >
                         <Upload
                             name="pdf-file"
@@ -247,7 +258,7 @@ const AddTemplate = () => {
                             headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                             onChange={uploadPdf}
                         >
-                            <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>
+                            <Button className="flooded-button"><UploadOutlined className="icon"/>
                                 Завантажити
                             </Button>
                         </Upload>
@@ -267,24 +278,22 @@ const AddTemplate = () => {
                         style={pdfUploadFormControl > 0 ? {} : {display: 'none'}}
                     >
                         <div>{fieldPropertiesList()}</div>
-
                     </Form>
                     <Form.Item
                     >
                         <Button
                             type="primary"
                             htmlType="submit"
-                            onClick={() => loadToDatabase()}
-                            headers={{Authorization: tokenToHeader()}}
                             className="flooded-button add-contact-type-button"
                         >
                             Зберегти
                         </Button>
                     </Form.Item>
                 </Form>
+
             </div>
         </Layout>
-    )
+    );
 }
 
 export default AddTemplate;

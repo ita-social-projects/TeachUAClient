@@ -16,6 +16,16 @@ export const createTemplate = async (data) => {
     });
 };
 
+export const loadTemplateMetadata = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/template/load-metadata",
+        data
+    ).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
 export const getAllTemplates = async () => {
     return await fetchRequest
         .get(BASE_URL + "/api/templates")
@@ -23,4 +33,59 @@ export const getAllTemplates = async () => {
             return response.data;
         });
 };
+
+
+export const getTemplateById = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/api/template/" + id).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
+export const updateTemplate = async (data) => {
+    return await fetchRequest
+        .put(BASE_URL + "/api/template/" + data.id, data)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const deleteTemplate = async (id) => {
+    return await fetchRequest
+        .delete(BASE_URL + "/api/template/" + id)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const downloadTemplate = async (id) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/template/download/" + id, {
+            headers: {"content-type": "application/pdf"},
+            responseType: "blob"
+        })
+        .then(response => {
+            let url = URL.createObjectURL(response.data);
+            let anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = "template.pdf";
+            document.body.append(anchor);
+            anchor.style = "dislay: none";
+            anchor.click();
+            anchor.remove();
+            URL.revokeObjectURL(url);
+            return response
+        })
+        .catch(async error => {
+            console.log(JSON.parse(await error.response.data.text()));
+            return error.response;
+        });
+}
 

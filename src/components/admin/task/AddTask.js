@@ -4,7 +4,7 @@ import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {useForm} from "antd/es/form/Form";
 import {createTask} from "../../../service/TaskService";
-import Editor from "../challenge/Editor";
+import Editor from "../../../util/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link, useHistory } from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";

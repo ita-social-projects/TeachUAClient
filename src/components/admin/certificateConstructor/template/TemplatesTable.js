@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
-import {Button, Form, Popconfirm, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Typography} from "antd";
 
 import EditableTable from "../../../EditableTable";
-import {getAllTemplates} from "../../../../service/TemplateService";
+import {deleteTemplate, getAllTemplates} from "../../../../service/TemplateService";
+import {deleteFromTable} from "../../../../util/TableUtil";
 
 const {Title} = Typography;
 
@@ -23,42 +24,44 @@ const TemplatesTable = () => {
 
     const remove = (record) => {
         console.log(record);
-        // deleteChallenge(record.id).then((response) => {
-        //     if (response.status) {
-        //         message.warning(response.message)
-        //         return;
-        //     }
-        //     message.success('Шаблон ' + record.name + ' успішно видалено!');
-        //
-        //     setTemplates(deleteFromTable(templates, record.id));
-        // });
+        deleteTemplate(record.id).then((response) => {
+            if (response.status) {
+                message.warning(response.message)
+                return;
+            }
+            if (response) {
+                message.success('Шаблон "' + record.name + '" успішно видалено!');
+                setTemplates(deleteFromTable(templates, record.id));
+            } else {
+                message.error('Шаблон "' + record.name + '" використовується!');
+            }
+        });
     };
+    const history = useHistory();
 
-    const save = async (record) => {
-        // form.setFieldsValue({
-        //     ...form.getFieldsValue()
-        // });
-        // editCellValue(form, templates, record.id).then((editedData) => {
-        //     updateChallengePreview(editedData.item, record.id).then(response => {
-        //         if (response.status) {
-        //             message.warning(response.message)
-        //             return;
-        //         }
-        //         getData();
-        //     });
-        // });
+
+    const onEditClick = async (record) => {
+        history.push("/admin/template/" + record.id);
     }
 
     const actions = (record) => [
-        <Popconfirm title="Видалити шаблон?"
-                    cancelText="Ні"
-                    okText="Так"
-                    cancelButtonProps={{className: "popConfirm-cancel-button"}}
-                    okButtonProps={{className: "popConfirm-ok-button"}}
-                    onConfirm={() => remove(record)}>
+        <Popconfirm
+            title="Видалити шаблон?"
+            cancelText="Ні"
+            okText="Так"
+            key={record.id}
+            cancelButtonProps={{className: "popConfirm-cancel-button"}}
+            okButtonProps={{className: "popConfirm-ok-button"}}
+            onConfirm={() => remove(record)}>
             <span className="table-action">Видалити</span>
         </Popconfirm>
     ];
+
+    const extractContent = (htmlText) => {
+        let span = document.createElement('span');
+        span.innerHTML = htmlText;
+        return span.textContent;
+    }
 
     useEffect(() => {
         getData();
@@ -84,14 +87,14 @@ const TemplatesTable = () => {
             dataIndex: 'courseDescription',
             width: '32%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/template/' + record.id}>{record.courseDescription}</Link>
+            render: (text, record) => <Link to={'/admin/template/' + record.id}>{extractContent(record.courseDescription)}</Link>
         },
         {
             title: 'Опис проекту',
             dataIndex: 'projectDescription',
             width: '30%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/template/' + record.id}>{record.projectDescription}</Link>
+            render: (text, record) => <Link to={'/admin/template/' + record.id}>{extractContent(record.projectDescription)}</Link>
         }
     ];
 
@@ -109,7 +112,8 @@ const TemplatesTable = () => {
                 columns={columns}
                 data={templates}
                 form={form}
-                onSave={save}
+                editAction={true}
+                onEditClick={onEditClick}
                 actions={actions}
             />
         </div>

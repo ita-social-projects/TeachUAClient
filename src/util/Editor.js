@@ -1,7 +1,7 @@
 import React from "react";
-import ReactQuill, {Quill} from 'react-quill';
-import {BASE_URL} from "../../../../service/config/ApiConfig";
-import {uploadImage} from "../../../../service/UploadService";
+import ReactQuill from 'react-quill';
+import {BASE_URL} from "../service/config/ApiConfig";
+import {uploadImage} from "../service/UploadService";
 
 
 class Editor extends React.Component {
@@ -11,7 +11,6 @@ class Editor extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnBlur = this.handleOnBlur.bind(this);
     }
-
 
     imageHandler = () => {
         const input = document.createElement('input');
@@ -32,11 +31,7 @@ class Editor extends React.Component {
         }
     }
 
-    onChange(element) {
-        const { onChange } = this.props;
-        onChange(element);
-    }
-    handleOnChange(html, delta, source) {
+    handleOnChange(html) {
         const { onChange } = this.props;
         onChange(html);
     }
@@ -77,7 +72,6 @@ class Editor extends React.Component {
             <ReactQuill
                 value={value || ''}
                 onChange={this.handleOnChange}
-                //onBlur={this.handleOnBlur}
                 modules={modules}
                 ref={(el) => this.quill = el}
                 theme="snow">

@@ -14,11 +14,9 @@ import {useForm} from "antd/es/form/Form";
 import {
     loadDataCertificatesByTemplateToDB, loadTemplateName
 } from "../../../service/CertificateByTemplateService";
-import * as CertificateByTemplateService from "../../../service/CertificateByTemplateService";
 import {getAllTemplates} from "../../../service/TemplateService";
 import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
 import DraggableList from "../../../util/DraggableList";
-import Icon from 'antd/lib/icon';
 
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
@@ -192,10 +190,6 @@ const ImportCertificateByTemplateData = () => {
     const loadCertificatesByTemplateToDB = () => {
         dataToPdfCreating.values = JSON.stringify(inputtedValues);
         console.log(dataToPdfCreating)
-        setSendButtonState(true);
-        setTimeout(function () {
-            setSendButtonState(false);
-        }, 2000)
 
         loadDataCertificatesByTemplateToDB(dataToPdfCreating)
             .then(response => {
@@ -204,6 +198,23 @@ const ImportCertificateByTemplateData = () => {
                     return;
                 }
                 console.log(response);
+                getData();
+                setSendButtonState(true);
+                setExcelColumnHeadersList([])
+                setDataToPdfCreating({
+                    ...dataToPdfCreating,
+                    values: "",
+                    columnHeadersList: [],
+                    excelContent: [],
+                    excelColumnsOrder: []
+                })
+                document.getElementById('importCertificateByTemplateDataFieldsForm').reset();
+                document.getElementById('load-excel-form').reset();
+                Object.keys(inputtedValues).forEach(key => delete inputtedValues[key]);
+                for (const element of dataToPdfCreating.fieldsList) {
+                    inputtedValues[element] = "";
+                }
+
                 message.success('Дані успішно додані');
             })
     }
@@ -237,7 +248,7 @@ const ImportCertificateByTemplateData = () => {
     const onDraggableListChange = (elements) => {
         let array = [];
         elements.forEach(element => {
-            array.push(element.key.slice(element.key.indexOf("_")+1));
+            array.push(element.key.slice(element.key.indexOf("_") + 1));
         })
         setDataToPdfCreating({...dataToPdfCreating, excelColumnsOrder: array})
     }
@@ -285,6 +296,7 @@ const ImportCertificateByTemplateData = () => {
                 <Form
                     form={datesForm}
                     className="load-excel-form"
+                    id="load-excel-form"
                     name="basic"
                     requiredMark={false}
                     onFinish={onFinish}>
