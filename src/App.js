@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
 import './App.less';
 import {Layout} from 'antd';
-import {BrowserRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
 import FooterComponent from "./components/footer/FooterComponent";
@@ -76,7 +76,6 @@ import UserRoute from "./components/routes/UserRoute";
 import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
-import AuthVerify from "./components/routes/AuthVerify";
 
 const {Content} = Layout;
 
@@ -182,7 +181,6 @@ function App() {
                                 <Route path="/" exact component={MainComponent}/>
                                 <Route path="*" exact component={NotFoundPage}/>
                             </Switch>
-                            <AuthVerify />
                         </Content>
                     </Layout>
                 </SearchContext.Provider>
