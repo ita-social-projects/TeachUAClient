@@ -25,7 +25,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
     }, [])
 
     const onFinish = (values) => {
-        console.log('Success: ', values);
         values.locations.map(location => {
             if (!location.coordinates) {
                 location.coordinates = location.latitude + ", " + location.longitude;
@@ -49,7 +48,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
                 <Form.Item
                     name="name"
                     className="form-item"
-                    // label="Назва центру"
                     rules={[
                         {
                             required: true,
@@ -74,7 +72,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
                 <Form.Item
                     name="locations"
                     className="form-item locations"
-                    // label="Локації"
                     rules={[{
                         required: true,
                         message: "Додайте і виберіть локацію"

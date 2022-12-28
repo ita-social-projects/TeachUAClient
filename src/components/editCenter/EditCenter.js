@@ -53,7 +53,6 @@ const EditCenter = ({isShowing, setShowing}) => {
         setResult({
             userId: getUserId()
         })
-        console.log("ADD CENTER USE EFFECT")
         window.addEventListener("resize", handleResize)
     }, [visible])
 
@@ -114,7 +113,6 @@ const EditCenter = ({isShowing, setShowing}) => {
     };
 
     return (
-      
             <Modal
                 className="addCenter"
                 centered
@@ -137,7 +135,6 @@ const EditCenter = ({isShowing, setShowing}) => {
                     </Content>
                 </Layout>
             </Modal>
-      
     )
 };
 

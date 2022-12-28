@@ -17,8 +17,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts }) =>
 
 
     const nextStep = () => {
-        console.log("FIELDS VALUE")
-        console.log(contactsForm.getFieldValue());
         setStep(step + 1);
     }
 

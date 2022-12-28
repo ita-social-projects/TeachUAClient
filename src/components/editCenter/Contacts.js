@@ -12,12 +12,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
     useEffect(() => {
         if (result) {
             contactsForm.setFieldsValue({ ...result });
-            // if(result.contactТелефон){
-            //     setContactsData({
-            //         ...contacts_data,
-            //         [1]: result.contactТелефон
-            //     });
-            // }
 
             setContactsData({
                 [1]: result.contactТелефон,
@@ -32,10 +26,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
 
 
     const nextStep = () => {
-        // console.log("FIELDS VALUE")
-        // console.log(contactsForm.getFieldValue());
-        // console.log("CONTACTS_DATA")
-        // console.log(contacts_data)
         setStep(step + 1);
     }
 
@@ -75,7 +65,6 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
 
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
                 <Form.Item
-                    // label="Контакти"
                     className="add-club-row add-club-contacts">
                     {contacts.map(contact =>
                         <Form.Item name={`contact${contact.name}`}

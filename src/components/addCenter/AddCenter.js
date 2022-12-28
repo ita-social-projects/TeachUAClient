@@ -101,7 +101,7 @@ const AddCenter = ({isShowing, setShowing}) => {
                 return <ClubsOfCenter
                     step={step}
                     setStep={setStep}
-                    setVisible={setVisible}
+                    setShowing={setShowing}
                     clubs={clubs}
                     setClubs={setClubs}
                     result={result}

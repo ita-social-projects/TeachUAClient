@@ -7,11 +7,9 @@ import {getAllContacts} from "../../service/ContactService";
 import {getClubById, updateClubById} from "../../service/ClubService";
 import EditClubTabs from "./EditClubTabs";
 import {getAllCenters} from "../../service/CenterService";
-import { getUserId } from '../../service/StorageService';
-import { useHistory } from 'react-router-dom';
+
 
 const EditClubModal = ({clubId, reloadAfterChange}) => {
-    const history = useHistory();
     const [visible, setVisible] = useState(false);
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
@@ -31,7 +29,7 @@ const EditClubModal = ({clubId, reloadAfterChange}) => {
         updateClubById(result).then(() => {
             setVisible(false);
             reloadAfterChange();
-            message.success("Гурто успішно оновлено");
+            message.success("Гурток успішно оновлено");
         }).catch(() => {
             message.error("Помилка при оновленні гуртка");
         });
