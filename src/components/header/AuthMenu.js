@@ -93,7 +93,7 @@ const AuthMenu = () => {
 
                         <SubMenu title="Гуртки" key="clubs">
                             <Menu.Item key="categories"><Link to="/admin/categories">Категорії</Link></Menu.Item>
-                            <Menu.Item key="fix_club_categories"><Link to="/admin/fix-clubs-categories">Клуби без Категорій</Link></Menu.Item>
+                            <Menu.Item key="fix_club_categories"><Link to="/admin/fix-clubs-categories">Гуртки без Категорій</Link></Menu.Item>
                             <Menu.Item key="club_approve"><Link to="/admin/club-approve">Підтвердження</Link></Menu.Item>
                             <Menu.Item key="change_club_owner"><Link to="/admin/change-club-owner">Зміна власника</Link></Menu.Item>
                             <Menu.Item key="update_rating" onClick={() => {updateRating().then();}}>Перерахувати рейтинги</Menu.Item>
