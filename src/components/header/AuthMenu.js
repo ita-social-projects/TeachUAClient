@@ -68,7 +68,9 @@ const AuthMenu = () => {
 
                             <SubMenu title="Сертифікати" key="certificates">
                                 <Menu.Item key="all_certificates"><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
+                                <Menu.Item key="all_templates"><Link to="/admin/templates">Всі шаблони</Link></Menu.Item>
                                 <Menu.Item key="generate_certificates"><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
+                                <Menu.Item key="generate_certificate_by_template"><Link to="/admin/certificate-by-template/generate">Згенерувати сертифікати за шаблоном</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu title="Тести" key="quiz-submenu">
@@ -111,7 +113,7 @@ const AuthMenu = () => {
                     </>
                     }
 
-                    <Menu.Item key="profile"><Link to={`/user/${localStorage.getItem('id')}/page`}>Мій Профіль</Link></Menu.Item>
+                    <Menu.Item key="profile"><Link to={`/user/${localStorage.getItem('id')}/page`}>Особистий кабінет</Link></Menu.Item>
                     <Menu.Item key="logout" onClick={onExitClick} danger>Вийти</Menu.Item>
                 </Menu>
             );

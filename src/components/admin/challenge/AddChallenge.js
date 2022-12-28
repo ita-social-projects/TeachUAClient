@@ -5,7 +5,7 @@ import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import Editor from "./Editor";
+import Editor from "../../../util/Editor";
 import {Link} from "react-router-dom";
 import {tokenToHeader} from "../../../service/UploadService";
 

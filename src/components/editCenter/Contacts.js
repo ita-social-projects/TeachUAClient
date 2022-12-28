@@ -48,7 +48,7 @@ const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, cent
     };
 
     const onFinish = (values) => {
-        values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":","::").replaceAll(":://","://");
         setResult(Object.assign(result,values))
         nextStep();
     }

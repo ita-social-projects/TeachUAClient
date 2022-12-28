@@ -1,0 +1,112 @@
+@item-height: 40px;
+
+.certificate-by-template {
+	padding-top: 40px;
+	background: #faedde;
+
+	.import-file {
+		margin: 0 10% 0 10%;
+	}
+
+	.form {
+		width: fit-content;
+		margin-right: 0;
+	}
+
+	.configuration {
+		display: flex;
+		margin-top: 25px;
+		min-height: 350px;
+	}
+
+	.form-item {
+		height: @item-height;
+		margin: 0;
+		padding: 5px;
+		display: flex;
+		align-items: center;
+
+		span {
+			padding-right: 10px;
+		}
+
+		input {
+			margin-right: 10px;
+		}
+
+		.ant-form-item-row {
+			width: 100%;
+		}
+
+		.ant-form-item-control-input-content {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+
+	#input {
+		width: 350px;
+	}
+
+	.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
+		border-color: #d9d9d9;
+	}
+
+	.ant-checkbox-checked .ant-checkbox-inner {
+		background-color: #fa8c16;
+		border-color: #fa8c16;
+	}
+
+	.draggable-list-wrapper {
+		position: relative;
+		user-select: none;
+	}
+
+	.draggable-list {
+		cursor: url('http://gtms02.alicdn.com/tps/i2/T1_PMSFLBaXXcu5FDa-20-20.png') 10 10, pointer !important;
+		position: relative;
+		height: 305px;
+	}
+
+	.draggable-list-element {
+		display: flex;
+		align-items: center;
+		height: @item-height;
+		transition: box-shadow .5s, transform .5s;
+	}
+
+	.draggable-list-element-content-wrapper {
+		background-color: rgba(#fff, .9);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-radius: 4px;
+		height: 90%;
+		width: 100%;
+	}
+
+	.draggable-list-element.list-drag-selected {
+		box-shadow: 0 8px 20px #E6E6E6;
+		transform: scale(1.1) !important;
+	}
+
+	.draggable-list-text {
+		padding: 0 15px;
+	}
+
+	.draggable-list-text p {
+		font-size: 12px;
+		margin-bottom: 0;
+	}
+
+	.draggable-list-checkbox {
+		padding-right: 15px;
+	}
+
+	@media screen and (max-width: 320px) {
+		.draggable-list-text h1 {
+			font-size: 14px;
+			line-height: 28px;
+		}
+	}
+}

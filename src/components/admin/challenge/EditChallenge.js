@@ -9,7 +9,7 @@ import { getChallengeById, updateChallenge } from "../../../service/ChallengeSer
 import { BASE_URL, UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
-import Editor from './Editor';
+import Editor from '../../../util/Editor';
 import TasksInChallenge from "./TasksInChallenge";
 import { tokenToHeader } from "../../../service/UploadService";
 
