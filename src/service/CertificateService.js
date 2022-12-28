@@ -14,7 +14,6 @@ export const loadDataToDatabase = async (data) => {
         data
     )
         .then((response) => {
-            // console.log(response.data);
             return response.data
         }).catch((error) => {
             return error.response.data
@@ -76,7 +75,6 @@ export const downloadCertificate = async (id) => {
             return response
         })
         .catch(async error => {
-            console.log(JSON.parse(await error.response.data.text()));
             return error.response;
         });
 }

@@ -26,8 +26,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     }, []);
 
     const nextStep = () => {
-        console.log("FIELDS VALUE")
-        console.log(contactsForm.getFieldValue());
         setStep(step + 1);
     }
 
@@ -37,8 +35,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     }
 
     const onFinish = (values) => {
-        console.log("================= values in onFinish");
-        console.log(values);
         if (locations.length <= 0) {
             values.isOnline = true;
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
@@ -48,7 +44,6 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
         values.locations = locations;
 
         setResult(Object.assign(result, values));
-        console.log(result);
         nextStep();
         contactsForm.resetFields();
     };

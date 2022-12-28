@@ -1,6 +1,5 @@
 import React from "react";
 import './css/PageRating.css';
-import PropTypes from "prop-types";
 import {Rate} from "antd";
 
 
@@ -31,10 +30,6 @@ const PageRating = ({rating, count}) => {
             <span className="feedback">{count} {feedback}</span>
         </div>
     )
-};
-
-PageRating.propTypes = {
-    rating: PropTypes.symbol.isRequired
 };
 
 export default PageRating;

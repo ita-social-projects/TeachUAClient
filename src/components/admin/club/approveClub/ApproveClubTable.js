@@ -1,7 +1,7 @@
 import {Button, Form, message, Popconfirm, Select, Space, Table} from "antd";
 import React, {useEffect, useState} from "react";
 import {deleteFromTable} from "../../../../util/TableUtil";
-import {deleteClubById, getAllClubs, updateClubBuId} from "../../../../service/ClubService";
+import {deleteClubById, getAllClubs, updateClubById} from "../../../../service/ClubService";
 import ClubListItemInfo from "../../../clubList/ClubListItemInfo";
 
 const ApproveClubTable = () => {
@@ -17,9 +17,8 @@ const ApproveClubTable = () => {
             defaultSortOrder: 'ascend',
             sorter: (a, b) => a.id - b.id,
             render: (id) => {
-                let club = clubs.find(club => club.id === id)
+                let club = clubs.find(club => club.id === id);
                 club.categories.map(category => category.name);
-                console.log(club)
                 return (
                     <div>
                         <span>{id}</span>
@@ -69,7 +68,6 @@ const ApproveClubTable = () => {
     ];
 
     const deleteClub = (id) => {
-        console.log(id)
         deleteClubById(id)
             .then(response => {
                 if (response.status) {
@@ -86,10 +84,8 @@ const ApproveClubTable = () => {
     const approveClub = (id) => {
         const club = clubs.find(club => club.id === id)
         club.isApproved = true;
-        console.log(club)
         if (club.isApproved === true) {
-            console.log(club.id)
-            updateClubBuId(club).then(response => {
+            updateClubById(club).then(response => {
                 if (response.status) {
                     message.warning(response.message);
                     return;

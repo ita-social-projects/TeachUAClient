@@ -1,9 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Button, Form, Input, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {updateClubBuId} from "../../../service/ClubService";
-import {deleteFromTable} from "../../../util/TableUtil";
 import {updateItemById} from "../../../service/AboutUsService";
 
 const EditTitle = ({visible, setVisible, item, upd}) => {
@@ -42,7 +39,6 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
                 onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 footer={null}
-                // className="modal"
             >
             <br></br>
             <Layout className="aboutProject">
@@ -66,7 +62,6 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
                         >
                             <Input
                                 className="input"
-                                // defaultValue={item.text}
                                 suffix={
                                     <Tooltip placement="bottomRight"
                                              title="Це поле може містити тільки українські та англійські літери, довжиною 5-100 символів">
