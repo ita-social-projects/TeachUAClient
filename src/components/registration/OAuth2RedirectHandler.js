@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import { saveRole, saveToken, saveUserId } from '../../service/StorageService';
+import { deleteUserStorage, saveRole, saveToken, saveUserId } from '../../service/StorageService';
 import { message } from "antd";
 
 class OAuth2RedirectHandler extends Component {
@@ -38,6 +38,7 @@ class OAuth2RedirectHandler extends Component {
                 </Redirect>
             </div>)
         } else {
+            deleteUserStorage();
             return (<div>
                 <Redirect to={{
                     pathname: "/",
