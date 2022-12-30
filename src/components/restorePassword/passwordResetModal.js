@@ -1,39 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React, { useContext, useState } from "react";
 import Layout from "antd/lib/layout/layout";
 import './../verifyPage/css/VerifyPage.less';
-import {useLocation} from "react-router";
 import "../userPage/css/User.less"
-import {Form, message, Modal} from "antd";
-//import EmailInput from "./emailConfirmation";
-import {changePassword, verifyReset} from "../../service/UserService";
-import {verifyUser} from "../../service/VerifyService";
-import Login from "../login/Login";
+import { Form, message, Modal } from "antd";
+import { changePassword } from "../../service/UserService";
 import PasswordResetInput from "./passwordResetInput";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const ResetPasswordModal = () => {
-
     const [visible, setVisible] = useState(true);
+    const {setShowLogin} = useContext(AuthContext);
+    const history = useHistory();
 
     const onFinish = (values) => {
-
-        changePassword(values).then((response) => {
-            if (response.status > 400) {
-                message.destroy()
-                message.error(response.message)
-            } else {
-                message.success("Пароль змінено успішно");
-                setTimeout(function () {
-                    if (process.env.REACT_APP_ROOT_SERVER === "http://localhost:8080") {
-                        window.location = "http://localhost:3000/dev";
-                    } else {
-                        window.location = process.env.REACT_APP_ROOT_SERVER + process.env.PUBLIC_URL;
-                    }
-                }, 3000);
-
-                setVisible(false);
-
-            }
-        });
+        changePassword(values).then(() => {
+            message.success("Пароль змінено успішно");
+            history.push("/");
+            setVisible(false);
+            setShowLogin(true);
+        }).catch((error) => message.error(error.response.data.message));
     };
 
     return (

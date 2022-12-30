@@ -3,7 +3,6 @@ import {BASE_URL} from "./config/ApiConfig";
 
 
 export const resetPassword = async (data) => {
-    console.log(data);
     return await fetchRequest.post(BASE_URL + "/api/resetpassword", {
         email: data.email,
     }).then((response) => {
@@ -30,8 +29,6 @@ export const changePassword = async (data) => {
         verificationCode: data.verificationCode
     }).then((response) => {
         return response.data
-    }).catch((error) => {
-        return error.response.data
     });
 };
 
@@ -76,8 +73,6 @@ export const verify = async (data) => {
 };
 
 export const updateUser = async (data) => {
-    console.log('before response' + data);
-
     return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -87,13 +82,12 @@ export const updateUser = async (data) => {
         urlLogo: data.urlLogo,
         status: data.status
     }).then((response) => {
-        console.log('after response' + response.data)
-        return response.data
+        return response.data;
     });
 };
 
 export const updatePassword = async (data) => {
-    return await fetchRequest.patch(BASE_URL + "/api/user/"+data.id, {
+    return await fetchRequest.patch(BASE_URL + "/api/user/" + data.id, {
         oldPassword: data.currentPassword,
         newPassword: data.password,
         newPasswordVerify: data.password
@@ -104,11 +98,11 @@ export const updatePassword = async (data) => {
 
 export const getAllUsers = async () => {
     return await fetchRequest.get(BASE_URL + "/api/users")
-        .then((response) => {
-            return response.data
-        }).catch((error) => {
-            return error.response.data
-        })
+    .then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    })
 };
 
 export const getUsersByRole = async (role) => {

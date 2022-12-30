@@ -14,7 +14,6 @@ const PasswordResetInput = () => {
 
             <Form.Item name="password"
                        className="user-edit-input"
-                // label="Пароль"
                        hasFeedback
                        rules={[
                            {
