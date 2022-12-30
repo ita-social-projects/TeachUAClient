@@ -36,17 +36,17 @@ const AuthMenu = () => {
     };
 
     useEffect(() => {
-        if (user.urlLogo) {
-            if (user.urlLogo.includes("https")) {
+        if (getToken()) {
+            if (user.urlLogo && user.urlLogo.includes("https")) {
                 setSource(user.urlLogo);
-            } else {
+            } else if (user.urlLogo) {
                 setSource(BASE_URL + user.urlLogo)
             }
             setStyleClass("avatarIfLogin");
-            return;
+        } else {
+            setSource('');
+            setStyleClass("avatarIfNotLogin");
         }
-        setSource('');
-        setStyleClass("avatarIfNotLogin");
     }, [user]);
 
     const profileDropdown = () => {
