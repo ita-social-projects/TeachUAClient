@@ -6,7 +6,6 @@ import "./css/ClubsItemStyles.css"
 const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible}) =>{
 
     const onClubClick = (club) => {
-        console.log(club);
         setClickedClub(club);
         setClubInfoVisible(true);
     };

@@ -2,7 +2,6 @@ import {Button, Card, Dropdown, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
 import ClubLogo from "../../clubPage/header/ClubLogo";
 import {getShortContent} from "../../editor/EditorConverter";
 import Tags from "../../Tags";
@@ -12,14 +11,14 @@ import {MoreOutlined} from "@ant-design/icons";
 import clubUpdateMenu from "./ClubUpdateMenu";
 
 
-const UserClubCardItem = ({club}) => {
+const UserClubCardItem = ({club, reloadAfterChange}) => {
     return (
         <Card className="card">
             <div className="title">
                 <ClubLogo category={club.categories[0]} logo={club.urlLogo}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={clubUpdateMenu(club.id)} placement="bottomRight">
+                        <Dropdown overlay={clubUpdateMenu(club.id, reloadAfterChange)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
@@ -43,9 +42,5 @@ const UserClubCardItem = ({club}) => {
         </Card>
     )
 };
-UserClubCardItem.propTypes = {
-    club: PropTypes.object.isRequired
-};
-
 
 export default UserClubCardItem;

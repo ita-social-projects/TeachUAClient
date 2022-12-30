@@ -1,9 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Button, Form, Input, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
-import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {updateClubBuId} from "../../../service/ClubService";
-import {deleteFromTable} from "../../../util/TableUtil";
+import React from 'react';
+import {Button, Form, Input, Layout, message, Modal} from 'antd';
 import {updateItemById} from "../../../service/AboutUsService";
 import "../css/aboutProject.css";
 

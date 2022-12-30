@@ -85,7 +85,6 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
                 <Form.Item name="urlLogo"
                            className="add-club-row"
-                           // label="Логотип"
                            hasFeedback>
                     <Upload
                         name="image"
@@ -102,7 +101,6 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Фото</Text>
                 <Form.Item name="urlBackground"
                            className="add-club-row"
-                           // label="Фото"
                            hasFeedback>
                     <Upload
                         name="image"
@@ -119,7 +117,6 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
                 <Form.Item name="description"
                            className="add-center-row"
-                           // label="Опис"
                            hasFeedback
                            rules={[{
                                required: true,

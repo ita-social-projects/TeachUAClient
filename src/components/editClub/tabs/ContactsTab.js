@@ -1,17 +1,13 @@
 import {Button, Form, Input, message, Select} from "antd";
 import React, {useEffect, useState} from "react";
-import EditClubContentFooter from "../EditClubContentFooter";
-import EditClubInputAddress from "../EditClubInputAddress";
 import MaskIcon from "../../MaskIcon";
-import {geocodeByAddress, getLatLng} from "react-google-places-autocomplete";
 import {getDistrictsByCityName} from "../../../service/DisctrictService";
 import "../css/MainInformationTab.less"
-import {deleteClubById, updateClubBuId} from "../../../service/ClubService";
 import {getStationsByCity, getStationsByDistrictNameAndCityName} from "../../../service/StationService";
 
 const {Option} = Select;
 
-const ContactsTab = ({contacts, cities, setResult, result}) => {
+const ContactsTab = ({contacts, cities, setResult, result, onFinish}) => {
 
     //TODO Add to UI ability to choose which location is being updated as club can possess several locations
     const FIRST_LOCATION = 0;//test mode work only with first location
@@ -70,29 +66,6 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
         setHideButton({display:"none"});
     }
 
-    const onFinish = (values) => {
-        // if (inputAddressProps.validateStatus === 'error') {
-        //     message.error("Некоректно вибрана адреса");
-        //     return;
-        // }
-
-        // geocodeByAddress(values.address.label)
-        //     .then(results => getLatLng(results[0]))
-        //     .then(({lat, lng}) => {
-        //         values.latitude = lat;
-        //         values.longitude = lng;
-        //
-        //         setResult(Object.assign(result, values));
-        //     });
-        updateClubBuId(result).then((response) => {
-            if(response.status != 400){
-                window.location.reload()
-            } else{
-                message.warning(response.message);
-            }
-        });
-    };
-
     const handleSelect = address => {
         setInputAddressProps({validateStatus: 'success'});
         setCityOnInput(cityName);
@@ -131,6 +104,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть місто"
+                        style={{ width: 150 }}
                         onChange={(value) => {
                             if (cityName) {
                                 cityOnInput === value ?
@@ -154,6 +128,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть район"
+                        style={{ width: 150 }}
                         optionFilterProp="children">
                         {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
                     </Select>
@@ -166,6 +141,7 @@ const ContactsTab = ({contacts, cities, setResult, result}) => {
                     <Select
                         className="edit-club-select"
                         placeholder="Виберіть станцію"
+                        style={{ width: 150 }}
                         optionFilterProp="children">
                         {stations.map(station => <Option value={station.name}>{station.name}</Option>)}
                     </Select>

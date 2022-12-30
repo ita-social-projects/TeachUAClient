@@ -68,7 +68,7 @@ const ServiceInUkr = () => {
             <div className="faq">
                 <div className="faq-title">Популярні Питання (FAQ)</div>
 
-                <Collapse class="collapse"
+                <Collapse className="collapse"
                           defaultActiveKey={['1']}
                           expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
@@ -86,7 +86,7 @@ const ServiceInUkr = () => {
                         </p>
                     </Panel>
                 </Collapse>
-                <Collapse class="collapse"
+                <Collapse className="collapse"
                           expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                           rotate={isActive ? 90 : 0}/>}>
@@ -94,7 +94,7 @@ const ServiceInUkr = () => {
                         <p>Ви можете подати скаргу до Уповноваженого із захисту державної мови на поштову адресу 01001, м. Київ, провулок Музейний, 12, електронну скриньку skarha@mova-ombudsman.gov.ua або заповнити відповідну форму на сайті Уповноваженого https://mova-ombudsman.gov.ua/</p>
                     </Panel>
                 </Collapse>
-                <Collapse class="collapse"
+                <Collapse className="collapse"
                           expandIconPosition="start"
                           expandIcon={({isActive}) => <CaretRightOutlined style={{color: '#2E69C9'}}
                                                                           rotate={isActive ? 90 : 0}/>}>

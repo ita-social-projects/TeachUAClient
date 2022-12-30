@@ -11,7 +11,7 @@ import {Layout, Pagination} from "antd";
 const {Content} = Layout;
 
 const ClubsListDisplayContent = ({
-                                     clubs, view, setView, loading, advancedSearch, currentPage,
+                                     clubs, reloadAfterChange, view, setView, loading, advancedSearch, currentPage,
                                      onPageChange, setSortBy, sortDirection, setSortDirection, sortBy
                                  }) => {
 
@@ -55,7 +55,7 @@ const ClubsListDisplayContent = ({
 
             {clickedClub &&
             <ClubListItemInfo visible={clubInfoVisible} setVisible={setClubInfoVisible}
-                              club={clickedClub}/>}
+                              club={clickedClub} reloadAfterChange={reloadAfterChange} />}
 
             <Pagination className="pagination"
                         hideOnSinglePage

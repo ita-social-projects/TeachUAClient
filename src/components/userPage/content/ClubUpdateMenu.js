@@ -4,20 +4,17 @@ import './css/UserClub.less';
 import {deleteClubById} from "../../../service/ClubService";
 import EditClubModal from "../../editClub/EditClubModal";
 
-const clubUpdateMenu = (clubId) => (
+const clubUpdateMenu = (clubId, reloadAfterChange) => (
     <Menu className="update-menu">
-        <Menu.Item className="menu-item">
-            <EditClubModal clubId={clubId} />
+        <Menu.Item className="menu-item" key="edit_club">
+            <EditClubModal clubId={clubId} reloadAfterChange={reloadAfterChange}/>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key="delete_club">
             <a onClick={() => {
-                deleteClubById(clubId).then((response) => {
-                    if(response.status != 400){
-                        window.location.reload()
-                    } else{
-                        message.warning(response.message);
-                    }
-                });
+                deleteClubById(clubId).then(() => {
+                    reloadAfterChange();
+                    message.success("Гурток успішно видалено");
+                }).catch(() => message.error("Помилка при видаленні гуртка"));
             }}>Видалити гурток</a>
         </Menu.Item>
     </Menu>

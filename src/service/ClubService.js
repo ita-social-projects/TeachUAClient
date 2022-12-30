@@ -7,11 +7,6 @@ import {handleDownloadFile} from "../util/FileUtil";
 import {getCenterById} from "./CenterService";
 
 export const addClub = async (data) => {
-    // data.locations.map(
-    //     (location) =>
-    //         (location.address =
-    //             location.address.value.structured_formatting.main_text)
-    // );
     return await fetchRequest
         .post(BASE_URL + "/api/club", {
             categoriesName: data.categories,
@@ -31,13 +26,10 @@ export const addClub = async (data) => {
         })
         .then((response) => {
             return response.data;
-        })
-        .catch((error) => {
-            return error.response.data;
         });
 };
 
-export const updateClubBuId = async (data) => {
+export const updateClubById = async (data) => {
     return await fetchRequest
         .put(BASE_URL + "/api/club/" + data.id, {
             id: data.id,
@@ -62,9 +54,6 @@ export const updateClubBuId = async (data) => {
         })
         .then((response) => {
             return response.data;
-        })
-        .catch((error) => {
-            return error.response.data;
         });
 };
 
@@ -245,9 +234,6 @@ export const deleteClubById = async (id) => {
         .delete(BASE_URL + "/api/club/" + id)
         .then((response) => {
             return response.data;
-        })
-        .catch((error) => {
-            return error.data;
         });
 };
 

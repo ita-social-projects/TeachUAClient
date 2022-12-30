@@ -30,7 +30,6 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
         result.clubs = clubsId;
-        console.log(result);
         // if location doesn't have phone number, we assign club number
         result.locations.forEach(location => {
             if(!location.phone){
@@ -45,19 +44,10 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
                 //setVisible(false)
             }
 
-            //window.location.reload();
-            /*
-            Temporary solution, page shouldn't reload every time
-             */
-            // console.log(response);
-            // setResult(null)
-            // setLocations([]);
-            // nextStep();
         })
-        if(result.clubs.length===0){
-            alert("Ви не вибрали жодного клубу")
+        if (result.clubs.length === 0){
+            message.warning("Ви не вибрали жодного клубу");
         }
-        // window.location.reload()
     }
 
     useEffect(() => {

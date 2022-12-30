@@ -1,4 +1,4 @@
-import {Form, Input, Typography, Upload} from "antd";
+import {Form, Input, message, Typography, Upload} from "antd";
 import React, { useEffect, useState } from "react";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import { saveContent } from "../../editor/EditorConverter";
@@ -10,23 +10,20 @@ import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
 import {tokenToHeader, uploadImage} from "../../../service/UploadService";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
+import { useHistory } from "react-router-dom";
 
-const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLocations, clubs, setClubs,fromCenter }) => {
+const DescriptionStep = ({ step, setStep, setResult, result, setShowing }) => {
+    const history = useHistory();
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
     const {Text} = Typography;
-
-    const folderName = uuidv4();
-    const logoFolder = `clubs/${folderName}/logo`;
-    const coverFolder = `clubs/${folderName}/background`;
-    const galleryFolder = `clubs/${folderName}/gallery`;
 
     const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
     const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
 
     useEffect(() => {
         if (result) {
-            descriptionForm.setFieldsValue({ ...result })
+            descriptionForm.setFieldsValue({ ...result });
         }
     }, []);
 
@@ -40,7 +37,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
     }
 
     const onFinish = (values) => {
-        console.log("ON FINISH");
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
         const text = result.description.replace(/(\r\n|\n|\r)/gm, "");
         const textEdit = text.replace(/"/gm, '\\"');
@@ -58,33 +54,19 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
 
         if (values.urlGallery) {
             result.urlGallery = [];
-            console.log("GALLERY: " + values.urlGallery)
             values.urlGallery.forEach((el) => {
-                console.log("EL: " + el.response + " " + el.file + " " + el.url)
-                console.log(el.uid + " " + el.name);
                 result.urlGallery.push(el.response);
             })
         }
         addClub(result).then(() => {
-            window.location.reload();
-            /*
-            Temporary solution, page shouldn't reload every time
-             */
-            // setVisible(false);
-            // setResult(null);
-            // setLocations([]);
-            // setStep(0);
-            // if (clubs) {
-            //     getAllClubsByUserId(getUserId()).then(response => {
-            //         setClubs(response);
-            //     })
-            // }
+            setShowing(false);
+            history.push("/user/" + getUserId() +"/page");
+            message.success("Гурток успішно створено");
+        }).catch((error) => {
+            if (error.response.status === 409) {
+                message.warning("Гурток з такою назвою вже існує");
+            }
         });
-        // if(!fromCenter)
-        // {
-        //  window.location.reload();
-        // }
-
     };
 
     return (
@@ -99,7 +81,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
             <Form.Item name="urlLogo"
                 className="add-club-row"
-                // label="Логотип"
                 hasFeedback>
                 <Upload
                     name="image"
@@ -116,7 +97,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             <Text style={{fontSize :'19px', color:'GrayText'}}>Обкладинка</Text>
             <Form.Item name="urlBackground"
                 className="add-club-row"
-                // label="Обкладинка"
                 hasFeedback>
                 <Upload
                     name="image"
@@ -133,7 +113,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             <Text style={{fontSize :'19px', color:'GrayText'}}>Галерея</Text>
             <Form.Item name="urlGallery"
                 className="add-club-row"
-                // label="Галерея"
                 hasFeedback>
                 <AddClubGalery onChange={onChangeHandler}/>
             </Form.Item>
@@ -141,7 +120,6 @@ const DescriptionStep = ({ step, setStep, setResult, result, setVisible, setLoca
             <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
             <Form.Item name="description"
                 className="add-club-row"
-                // label="Опис"
                 hasFeedback
                 rules={[
                     {

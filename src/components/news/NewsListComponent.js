@@ -15,13 +15,16 @@ const NewsListComponent = () => {
     const [newsList, setNewsList] = useState([]);
     const [clubs, setClubs] = useState([]);
 
-    useEffect(() => {
-        setLoad(true);
+    const getTopClubs = () => {
         getTopClubsByCity(searchParameters.cityName, 3).then(response => {
             setClubs(response);
         })
+    };
+
+    useEffect(() => {
+        setLoad(true);
+        getTopClubs();
         getNewsList(currentPage).then(response => {
-            console.log(response);
             setNewsList(response);
             setLoad(false);
         })
@@ -32,7 +35,7 @@ const NewsListComponent = () => {
             <NewsHeader/>
             <div className="global-padding news-content">
                 <NewsList className="newslist" newsList={newsList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-                <ClubSider className="clubsider" clubs={clubs} />
+                <ClubSider className="clubsider" clubs={clubs} reloadAfterChange={getTopClubs}/>
             </div>
         </Layout>
     );

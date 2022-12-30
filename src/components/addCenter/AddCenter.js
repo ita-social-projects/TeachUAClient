@@ -53,7 +53,6 @@ const AddCenter = ({isShowing, setShowing}) => {
         setResult({
             userId: getUserId()
         })
-        console.log("ADD CENTER USE EFFECT")
         window.addEventListener("resize", handleResize)
     }, [visible])
 
@@ -102,7 +101,7 @@ const AddCenter = ({isShowing, setShowing}) => {
                 return <ClubsOfCenter
                     step={step}
                     setStep={setStep}
-                    setVisible={setVisible}
+                    setShowing={setShowing}
                     clubs={clubs}
                     setClubs={setClubs}
                     result={result}

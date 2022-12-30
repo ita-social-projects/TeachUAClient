@@ -1,17 +1,17 @@
 import {Button, Form, Input, Typography, Upload, message} from "antd";
 import React, {useRef, useState} from "react";
-import EditClubContentFooter from "../EditClubContentFooter";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import EditorComponent from "../../editor/EditorComponent";
-import {convertFromJson, getShortContent, saveContent} from "../../editor/EditorConverter";
+import {getShortContent, saveContent} from "../../editor/EditorConverter";
 import {transToEng} from "../../../util/Translit";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
-import {addClub, updateClubBuId} from "../../../service/ClubService";
+import {updateClubById} from "../../../service/ClubService";
 import "../css/MainInformationTab.less"
 import {tokenToHeader} from "../../../service/UploadService";
 import AddClubGalery from "../../addClub/AddClubGalery";
+import EditorComponent from "../../editor/EditorComponent";
+import { getUserId } from "../../../service/StorageService";
 
-const DescriptionTab = ({setResult, result}) => {
+const DescriptionTab = ({setResult, result, setVisible, onFinish}) => {
     const [descriptionForm] = Form.useForm();
     const [fileList, setFileList] = useState([]);
     const editorRef = useRef(null);
@@ -30,7 +30,6 @@ const DescriptionTab = ({setResult, result}) => {
     const commitTab = (values) => {
 
         Object.assign(values, descriptionForm.getFieldValue());
-        //result.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
         if (values.descriptionText) {
             const text = values.descriptionText.replace(/(\r\n|\n|\r)/gm, "");
             const textEdit = text.replace(/"/gm, '\\"');
@@ -53,29 +52,7 @@ const DescriptionTab = ({setResult, result}) => {
         }
 
         setHideButton({display:"none"});
-
-        console.log("result: ");
-        console.log(result);
-
     }
-
-    const onFinish = (values) => {
-        //values.description = saveContent(editorRef.current.state.editorState.getCurrentContent());
-
-        //descriptionForm.setFieldsValue(values);
-
-        //setResult(Object.assign(result, values));
-
-        //addClub(result).then(response => console.log(response));
-        updateClubBuId(result).then((response) => {
-            if(response.status != 400){
-                window.location.reload()
-            } else{
-                message.warning(response.message);
-            }
-        });
-        //window.location.reload();
-    };
 
     return (
         <Form
@@ -86,7 +63,6 @@ const DescriptionTab = ({setResult, result}) => {
             <Text style={{fontSize :'19px', color:'GrayText'}}>Логотип</Text>
             <Form.Item name="urlLogo"
                        className="edit-club-row"
-                       // label="Логотип"
                        hasFeedback>
                 <Upload
                     name="image"
@@ -103,7 +79,6 @@ const DescriptionTab = ({setResult, result}) => {
             <Text style={{fontSize :'19px', color:'GrayText'}}>Обкладинка</Text>
             <Form.Item name="urlBackground"
                        className="edit-club-row"
-                       // label="Обкладинка"
                        hasFeedback>
                 <Upload
                     name="image"
@@ -120,7 +95,6 @@ const DescriptionTab = ({setResult, result}) => {
             <Text style={{fontSize :'19px', color:'GrayText'}}>Галерея</Text>
             <Form.Item name="urlGallery"
                        className="add-club-row"
-                       // label="Галерея"
                        hasFeedback>
                 <AddClubGalery onChange={onChangeHandler}/>
             </Form.Item>
@@ -128,14 +102,13 @@ const DescriptionTab = ({setResult, result}) => {
             <Text style={{fontSize :'19px', color:'GrayText'}}>Опис</Text>
             <Form.Item name="descriptionText"
                        className="edit-club-row"
-                       // label="Опис"
                        hasFeedback
                        rules={[{
                            required: true,
                            max:1100,
                            pattern: "^[А-Яа-яіІєЄїЇґҐa-zA-Z0-9()" + "\\\\!\\\"\\\"#$%&'*\\n+\\r, ,\\-.:;\\\\<=>—«»„”“–’‘?|@_`{}№~^/\\[\\]]+$"
                        }]}>
-                {/*<EditorComponent ref={editorRef}/>*/}
+                {/* <EditorComponent ref={editorRef}/> */}
                 <Input.TextArea className="editor-textarea" defaultValue={getShortContent(result.description).trim()} style={{ height: 200 }} />
             </Form.Item>
             <div style={{height: 70}}>

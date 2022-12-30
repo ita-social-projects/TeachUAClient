@@ -1,14 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Button, Form, Input, Layout, message, Modal, Tooltip, Upload} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
-import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {updateClubBuId} from "../../../service/ClubService";
-import {deleteFromTable} from "../../../util/TableUtil";
+import React from 'react';
+import {Button, Form, Input, Layout, message, Modal, Upload} from 'antd';
 import {updateItemById} from "../../../service/AboutUsService";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import {tokenToHeader, uploadImage} from "../../../service/UploadService";
-import {deleteFile} from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const EditPicture = ({visible, setVisible, item}) => {
     const [descriptionForm] = Form.useForm();
@@ -19,7 +14,6 @@ const EditPicture = ({visible, setVisible, item}) => {
 
     const onFinish = (values) => {
         if (values.picture && values.picture.file) {
-            console.log(deleteFile(item.picture));
             item.picture = values.picture.file.response;
         }
         item.text = values.text;

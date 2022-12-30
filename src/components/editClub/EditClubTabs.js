@@ -14,7 +14,8 @@ const EditClubTabs = ({
                           setResult,
                           result,
                           contacts,
-                          cities
+                          cities,
+                          onFinish
                       }) => (
     <Tabs defaultActiveKey="1">
         <TabPane tab="Основна інформація" key="1">
@@ -22,18 +23,20 @@ const EditClubTabs = ({
                                 centers={centers}
                                 setResult={setResult}
                                 result={result}
-            />
+                                onFinish={onFinish}/>
         </TabPane>
         <TabPane tab="Адреса і контакти" key="2">
             <ContactsTab contacts={contacts}
                          cities={cities}
                          categories={categories}
                          setResult={setResult}
-                         result={result}/>
+                         result={result}
+                         onFinish={onFinish}/>
         </TabPane>
         <TabPane tab="Опис гуртка" key="3">
             <DescriptionTab setResult={setResult}
-                            result={result}/>
+                            result={result}
+                            onFinish={onFinish}/>
         </TabPane>
     </Tabs>
 );

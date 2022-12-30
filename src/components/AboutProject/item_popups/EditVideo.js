@@ -1,9 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Button, Form, Input, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
-import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {updateClubBuId} from "../../../service/ClubService";
-import {deleteFromTable} from "../../../util/TableUtil";
 import {updateItemById} from "../../../service/AboutUsService";
 
 const EditVideo = ({visible, setVisible, item, upd}) => {
@@ -43,7 +39,6 @@ const EditVideo = ({visible, setVisible, item, upd}) => {
                 onCancel={() => closePopup()}
                 width={1200}
                 footer={null}
-                // modalRender={() => rerender()}
             >
             <br></br>
             <Layout className="aboutProject">
@@ -65,7 +60,6 @@ const EditVideo = ({visible, setVisible, item, upd}) => {
                             ]}
                         >
                             <Input
-                                // defaultValue={item.video}
                                 placeholder="Введіть посилання на відео" />
                         </Form.Item>
                     </div>

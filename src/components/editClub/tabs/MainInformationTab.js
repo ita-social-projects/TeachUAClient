@@ -1,38 +1,21 @@
 import {Button, Checkbox, Form, Input, InputNumber, Select, message} from "antd";
 import React, {useState} from "react";
 import "../css/MainInformationTab.less"
-import {updateClubBuId} from "../../../service/ClubService";
+import {updateClubById} from "../../../service/ClubService";
 import {Option} from "antd/es/mentions";
 
-const MainInformationTab = ({categories, centers, setResult, result}) => {
+const MainInformationTab = ({categories, centers, setResult, result, onFinish}) => {
 
     const [mainInfoForm] = Form.useForm();
     const [hideButton, setHideButton] = useState();
 
     const commitTab = () => {
-
         Object.assign(result, mainInfoForm.getFieldValue());
         result.categories = categories.filter(e => result.categoryNames.includes(e.name));
         result.center = centers.find(e => e.name === result.centerName);
 
         setHideButton({display:"none"});
     }
-
-    const onFinish = (values) => {
-
-        //setResult(Object.assign(result, values));
-
-        //.then(window.location.reload())
-
-        updateClubBuId(result).then((response) => {
-            if(response.status != 400){
-                window.location.reload()
-            } else{
-                message.warning(response.message);
-            }
-        });
-        
-    };
 
     const categoriesName = result.categories.map((category) => category.name);
 

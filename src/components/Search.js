@@ -42,8 +42,6 @@ class Search extends React.Component {
 
     componentWillUnmount() {
         if (this.props.location.pathname !== '/') {
-            //console.log(this.props.location.pathname); // prev
-            //console.log(this.props.history.location.pathname); // curr
             clearSearchParameters();
             searchInputData.input = "";
         }

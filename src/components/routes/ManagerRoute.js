@@ -7,7 +7,7 @@ const ManagerRoute = (props) => {
     const role = getRole();
     const {setShowLogin} = useContext(AuthContext);
     
-    if (role == "ROLE_ADMIN" || role == "ROLE_MANAGER") {
+    if (role === "ROLE_ADMIN" || role === "ROLE_MANAGER") {
         return <Route {... props}/>;
     } else if (!role) {
         setShowLogin(true);

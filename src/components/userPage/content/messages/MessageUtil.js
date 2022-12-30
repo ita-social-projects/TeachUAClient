@@ -1,15 +1,5 @@
 import {BASE_URL} from "../../../../service/config/ApiConfig";
 
-
-export const sortMessages = (messages) => {
-    messages.sort((a, b) => {
-        if (getDate(a.date) < getDate(b.date)) return -1;
-        if (getDate(a.date) > getDate(b.date)) return 1;
-        return 0;
-    });
-    return messages;
-}
-
 export const getDate = (messageDate) => {
     const md = messageDate;
     if (md) {

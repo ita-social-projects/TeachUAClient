@@ -7,7 +7,7 @@ const AdminRoute = (props) => {
     const role = getRole();
     const {setShowLogin} = useContext(AuthContext);
     
-    if (role == "ROLE_ADMIN") {
+    if (role === "ROLE_ADMIN") {
         return <Route {... props}/>;
     } else if (!role) {
         setShowLogin(true);

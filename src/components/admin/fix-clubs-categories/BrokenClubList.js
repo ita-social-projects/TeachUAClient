@@ -26,11 +26,14 @@ const UserClubList = ({load, setLoad, match}) => {
         });
     };
 
-
     useEffect(() => {
             getData(page)
         }, []
-    )
+    );
+
+    const reloadAfterChange = () => {
+        onPageChange(page);
+    };
 
     const onPageChange = (currPage) => {
         setPage(currPage - 1)
@@ -42,7 +45,7 @@ const UserClubList = ({load, setLoad, match}) => {
         <div className="test">
             <Layout className="user-clubs">
                 <Space wrap className="cards" size="middle">
-                    {clubs.content.map((club, index) => <UserClubCardItem club={club} key={index}/>)}
+                    {clubs.content.map((club, index) => <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)}
                 </Space>
                 <Pagination className="user-clubs-pagination"
                             hideOnSinglePage

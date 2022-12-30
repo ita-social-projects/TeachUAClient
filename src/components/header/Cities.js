@@ -45,7 +45,7 @@ class Cities extends React.Component {
         return (
             <Dropdown overlay={cityList}
                       className="city"
-                      placement="bottomCenter"
+                      placement="bottom"
                       disabled={searchParameters.isAdvancedSearch}
                       arrow
                       trigger = {'click'}>

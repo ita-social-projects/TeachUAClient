@@ -5,7 +5,5 @@ export const verifyUser = async (verifyCode) => {
     return await fetchRequest.get(BASE_URL + "/api/verify?code=" + verifyCode)
         .then((response) => {
             return response;
-        }).catch((error) => {
-            return error.response;
         });
 };

@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import './App.less';
 import {Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -76,6 +76,8 @@ import {AuthContext} from "./context/AuthContext";
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
 import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
+import { getUserById } from "./service/UserService";
+import { deleteUserStorage, getUserId } from "./service/StorageService";
 
 const {Content} = Layout;
 
@@ -90,6 +92,14 @@ function App() {
     const [currentPage, setCurrentPage] = useState(0);
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState({});
+
+    useEffect(() => {
+        if (getUserId()) {
+            getUserById(getUserId()).then(response => {
+                setUser(response);
+            }).catch(() => deleteUserStorage());
+        }
+    }, []);
 
     const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
     const pageProvider = useMemo(() => ({currentPage, setCurrentPage}), [currentPage, setCurrentPage]);
@@ -150,14 +160,12 @@ function App() {
                                 <Route path="/club/:id" exact component={ClubPage}/>
                                 <Route path="/center/:id" exact component={CenterPage}/>
                                 <Route path="/clubs" exact component={ClubListComponent}/>
-                                {/* Comment next 2 lines for prod version */}
                                 <Route path="/news" exact component={NewsListComponent}/>
                                 <Route path="/news/:id" exact component={NewsPage}/>
                                 <Route path="/verify" exact component={VerifyPage}/>
                                 <Route path="/verifyreset" exact component={ResetPasswordModal}/>
                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                 <Route path="/service" exact component={ServiceInUkr}/>
-                                {/*<Route path="/about" exact component={PreviousAboutProject}/>*/}
                                 <Route path="/about" exact component={AboutProject}/>
                                 <Route path="/challenges/registration/:challengeId" exact
                                         component={RegistrationPage}/>

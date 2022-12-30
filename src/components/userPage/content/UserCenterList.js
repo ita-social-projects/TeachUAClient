@@ -17,31 +17,32 @@ const UserCenterList = ({load, setLoad, match}) => {
     const [page, setPage] = useState(0);
 
     const getData = (currPage) => {
-
         setLoad(true);
         let userId = match.params.id;
 
         getCentersByUserId(userId, currPage).then(response => {
             setCenters(response);
-            setLoad(false)
+            setLoad(false);
         });
     };
 
     useEffect(() => {
             getData(page)
-        }, []
-    )
+    }, []);
+
+    const reloadAfterDelete = () => {
+        onPageChange(page);
+    };
 
     const onPageChange = (page) => {
-        setPage(page - 1)
-        // getData();
+        setPage(page - 1);
         getData(page - 1);
     };
 
     return load ? <Loader/> : (
         <Layout className="user-centers">
             <Space wrap className="centers-cards" size={[0, 0]}>
-                {centers.content.map((center, index) => <UserCenterCardItem center={center} key={index}/>)}
+                {centers.content.map((center, index) => <UserCenterCardItem center={center} reloadAfterDelete={reloadAfterDelete} key={index}/>)}
             </Space>
             <Pagination className="user-centers-pagination"
                         hideOnSinglePage
@@ -51,8 +52,7 @@ const UserCenterList = ({load, setLoad, match}) => {
                         pageSize={centers.size}
                         total={centers.totalElements}/>
         </Layout>
-    )
+    );
 }
-
 
 export default withRouter(UserCenterList);

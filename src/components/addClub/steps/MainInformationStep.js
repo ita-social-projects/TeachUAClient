@@ -11,7 +11,6 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
 
     useEffect(() => {
         if (result) {
-            console.log(result);
             mainForm.setFieldsValue({...result})
         }
     }, []);
@@ -69,7 +68,6 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             <Text style={{fontSize :'19px', color:'GrayText'}}>Назва</Text>
             <Form.Item name="name"
                        className="add-club-row"
-                       // label="Назва"
                        hasFeedback
                        rules={[
                            {
@@ -80,13 +78,7 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                                required: false,
                                pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
                                message: "Некоректна назва гуртка",
-                           },
-                           // {
-                           //     required: false,
-                           //     pattern: /^.*\S$/,
-                           //     message: "Некоректна назва гуртка",
-                           // }
-                            ]}>
+                           }]}>
                 <Input className="add-club-input"
                        placeholder="Назва гуртка"/>
             </Form.Item>
@@ -94,7 +86,6 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             <Text style={{fontSize :'19px', color:'GrayText'}}>Категорія</Text>
             <Form.Item name="categories"
                        className="add-club-row"
-                       // label="Категорія"
                        hasFeedback
                        rules={[
                            {
@@ -109,14 +100,18 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
 
             <Text style={{fontSize :'19px', color:'GrayText'}}>Вік дитини</Text>
             <Form.Item
-                // label="Вік дитини"
                 className="add-club-row"
                 hasFeedback
                 validateStatus={ageValidateStatus}>
                 <span className="add-club-age">
                     Від
                     <Form.Item name="ageFrom"
-                               style={{margin: 0}}>
+                               style={{margin: 0}}
+                               rules={[
+                                {
+                                    required: true,
+                                    message: "Вік є обов'язковим"
+                                }]}>
                         <InputNumber onChange={onChange}
                                      onKeyPress={onKeyPress}
                                      className="input-age"
@@ -128,7 +123,12 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                     </Form.Item>
                     до
                     <Form.Item name="ageTo"
-                               style={{margin: 0}}>
+                               style={{margin: 0}}
+                               rules={[
+                                {
+                                    required: true,
+                                    message: "Вік є обов'язковим"
+                                }]}>
                         <InputNumber onChange={onChange}
                                      onKeyPress={onKeyPress}
                                      className="input-age"
@@ -146,7 +146,6 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Приналежність до центру</Text>
                 <Form.Item name="centerId"
                        className="add-club-row"
-                       // label="Приналежність до центру"
                 >
                 <Select
                     className="add-club-select"

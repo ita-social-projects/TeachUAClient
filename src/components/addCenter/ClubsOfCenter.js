@@ -1,4 +1,4 @@
-import {Form, Checkbox, Typography} from 'antd';
+import {Form, Checkbox, Typography, message} from 'antd';
 import React, {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
@@ -6,42 +6,35 @@ import "./css/ClubsOfCenter.css";
 import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService';
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
+import { useHistory } from 'react-router-dom';
 
-const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
+const ClubsOfCenter = ({ step, setStep, setShowing, clubs, setClubs, result, setResult, setLocations ,fromCenter}) => {
+    const history = useHistory();
     const [clubsOfCenterForm] = Form.useForm();
     const [clubsId,setClubsIds] = useState([]);
     const {Text} = Typography;
-
-    const nextStep = () => {
-        setStep(0);
-        setVisible(false)
-    }
 
     const prevStep = () => {
         setResult(Object.assign(result, clubsOfCenterForm.getFieldValue()));
         setStep(step - 1);
     }
+
     const onChange = e => {
         setClubsIds(e)
     }
+
     const onFinish = (values) => {
         setResult(Object.assign(result, values));
         result.clubs = clubsId;
-        console.log(result);
-        addCenter(result).then(response => {
-            window.location.reload();
-            /*
-            Temporary solution, page shouldn't reload every time
-             */
-            // console.log(response);
-            // setResult(null)
-            // setLocations([]);
-            // nextStep();
-        })
-        if(result.clubs.length===0){
-            alert("Ви не вибрали жодного клубу")
-        }
-        // window.location.reload()
+        addCenter(result).then(() => {
+            setShowing(false);
+            history.push("/user/" + getUserId() +"/page");
+            message.success("Центр успішно створено");
+        }).catch((error) => {
+            if (error.response.status === 409) {
+                message.warning("Центр з такою назвою вже існує");
+            }
+        });
     }
 
     useEffect(() => {
@@ -63,7 +56,6 @@ const ClubsOfCenter = ({ step, setStep, setVisible, clubs, setClubs, result, set
             <Text style={{fontSize :'19px', color:'GrayText'}}>Оберіть гурток</Text>
             <Form.Item
             className="form-item"
-            // label="Оберіть гурток"
             name="clubs"
             rules={[{
                 required: true,

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Menu, Dropdown, Button, Modal, Rate, Popconfirm} from "antd";
+import {Menu, Dropdown, Button, Modal, Rate, Popconfirm, message} from "antd";
 import "./css/ClubInfo.css";
 import {Link} from "react-router-dom";
 import Tags from "../Tags";
@@ -15,16 +15,16 @@ import {getFeedbackListByClubId} from "../../service/FeedbackService";
 import PageRating from "../clubPage/content/PageRating";
 import {BASE_URL} from "../../service/config/ApiConfig";
 import {FilePdfOutlined} from "@ant-design/icons";
+import EditClubModal from "../editClub/EditClubModal";
 
 
-const ClubListItemInfo = ({visible, setVisible, club}) => {
+const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
     const [rating, setRating] = useState(0);
     const [count, setCount] = useState(0);
     const feedback = getFeedbackListByClubId(club.id);
     const images = club.urlGallery.map(image => BASE_URL + image.url);
 
     feedback.then((value) => {
-
         var clubRate = 0;
         for (let i = 0; i < value.length; i++) {
             clubRate += value[i].rate;
@@ -41,40 +41,38 @@ const ClubListItemInfo = ({visible, setVisible, club}) => {
         </div>
     );
 
-    function confirmPopup(e) {
-        deleteClubById(club.id).then(window.location.reload());
+    function confirmPopupDelete(e) {
+        deleteClubById(club.id).then(() => {
+            setVisible(false);
+            reloadAfterChange();
+            message.success("Гурток успішно видалено");
+        });
     }
-
 
     function showDropdown() {
         return (club.center != null && (club.center.user != null && Number(club.center.user.id) == getUserId())) ||
             (club.center == null && club.user != null && getUserId() == Number(club.user.id));
     };
 
-    // function closeModal() {
-    //     setVisible(false);
-    // }
-
     const menu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item key="delete_club_popup">
                 <Popconfirm
                     className="popConfirm"
                     icon={""}
                     title={popupHeaderText}
                     placement="bottom"
-                    onConfirm={confirmPopup}
+                    onConfirm={confirmPopupDelete}
                     okButtonProps={{className: "clubModal popConfirm"}}
-                    // onCancel={cancelPopup}
                     cancelButtonProps={{className: "clubModal popCancel"}}
                     okText="Видалити гурток"
                     cancelText="Відмінити">
                     <a href="!#">Видалити</a>
                 </Popconfirm>
             </Menu.Item>
-            {/* <Menu.Item onClick={closeModal}>
-                <EditClubModal visible={true} />
-            </Menu.Item> */}
+            <Menu.Item onClick={() => setVisible(false)} key="edit_club_popup">
+                <EditClubModal clubId={club.id} reloadAfterChange={() => {setVisible(false); reloadAfterChange();}}/>
+            </Menu.Item>
         </Menu>
     );
 
@@ -90,7 +88,6 @@ const ClubListItemInfo = ({visible, setVisible, club}) => {
             <div className="container">
                 {showDropdown() && (
                     <Dropdown
-                        // trigger="click"
                         overlay={menu}
                         placement="bottomRight">
                         <Button className="modal-settings-btn">

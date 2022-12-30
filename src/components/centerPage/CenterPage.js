@@ -8,7 +8,6 @@ import {getCenterById} from "../../service/CenterService";
 import CenterPageContent from "./content/CenterPageContent";
 import Loader from "../Loader";
 import ClubsOfCenter from "./clubsOfCenter/ClubsOfCenter";
-import ClubListItemInfo from "../clubList/ClubListItemInfo";
 import './css/CenterPage.css';
 
 const CenterPage = () => {
@@ -36,7 +35,7 @@ const CenterPage = () => {
 
     useEffect(() =>  {
         getData();
-    },[]);
+    }, []);
 
         return (
             !center.clubs ? <Loader/> :
