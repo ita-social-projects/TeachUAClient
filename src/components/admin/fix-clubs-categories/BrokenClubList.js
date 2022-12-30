@@ -43,7 +43,7 @@ const UserClubList = ({load, setLoad, match}) => {
 
     return load ? <Loader/> : (
         <div className="test">
-            <Layout className="user-clubs">
+            <Layout className="user-clubs" style={{marginTop: 50}}>
                 <Space wrap className="cards" size="middle">
                     {clubs.content.map((club, index) => <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)}
                 </Space>
