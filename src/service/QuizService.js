@@ -32,3 +32,26 @@ export const loadDataToDatabase = async (data) => {
             return error.response.data
         });
 };
+
+export const downloadExcel = async () => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/questions/export", {
+
+            headers: {"content-type": "application/octet-stream"},
+            responseType: "blob"
+        })
+        .then(response => {
+            let url = URL.createObjectURL(response.data);
+            console.info(response.data)
+            console.info(response)
+
+            let anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = "questions_export.xlsx";
+            document.body.append(anchor);
+            anchor.style = "dislay: none";
+            anchor.click();
+            anchor.remove();
+            URL.revokeObjectURL(url);
+        })
+}

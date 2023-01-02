@@ -11,6 +11,7 @@ import './css/authMenu.css';
 import {BASE_URL, DOWNLOAD_DATABASE_SQL} from "../../service/config/ApiConfig";
 import AddCenter from "../addCenter/AddCenter";
 import {updateRating} from "../../service/RatingService";
+import {downloadExcel} from "../../service/QuizService"
 import {AuthContext} from "../../context/AuthContext";
 import { deleteUserStorage, getToken } from "../../service/StorageService";
 
@@ -77,6 +78,7 @@ const AuthMenu = () => {
                                 <Menu.Item key="questions"><Link to="/admin/quiz/questions">Всі запитання</Link></Menu.Item>
                                 <Menu.Item key="import_questions"><Link to="/admin/questions-import"> Імпортувати запитання</Link></Menu.Item>
                                 <Menu.Item key="generate_questions"><Link to="/admin/questions/generate">Згенерувати запитання</Link></Menu.Item>
+                                <Menu.Item key="export_questions" onClick={() => {downloadExcel().then();}}>Експортувати дані</Menu.Item>
                                 <Menu.Item key="edit_questions"><Link to="/admin/quiz/questions/edit">Редагувати запитання</Link></Menu.Item>
                             </SubMenu>
 
