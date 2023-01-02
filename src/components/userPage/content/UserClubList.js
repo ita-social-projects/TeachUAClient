@@ -48,7 +48,7 @@ const UserClubList = ({load, setLoad, match}) => {
                 <Space wrap className="cards" size={[0, 0]}>
                     {clubs.content.map((club, index) => <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)}
                 </Space>
-                <Pagination className="user-clubs-pagination"
+                <Pagination className="user-content-pagination"
                             hideOnSinglePage
                             showSizeChanger={false}
                             onChange={onPageChange}
