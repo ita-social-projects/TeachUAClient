@@ -58,6 +58,8 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
 import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
+import {TestQuestionTable} from "./components/admin/test/TestQuestionTable"
+import {TestQuestion} from "./components/admin/test/TestQuestion"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
@@ -145,6 +147,9 @@ function App() {
                                 <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
                                 <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
                                 <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
+                                <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
+                                <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
+                                <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
                                 <AdminRoute path="/admin/files" exact component={AllFileList}/>
                                 <AdminRoute path="/admin/files/:path+" exact component={AllFileList}/>

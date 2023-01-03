@@ -58,7 +58,7 @@ const ImportCertificateData = () => {
     });
 
     const onTypeChange = (value) => {
-        dataToDB.type = value.target.value;
+        setDataToDB({...dataToDB, type: value.target.value})
         isFilled();
         console.log(dataToDB)
     }
@@ -97,7 +97,7 @@ const ImportCertificateData = () => {
                 dataToDB.courseNumber != null) {
                 setFormFilled(true)
             }
-        } else if (dataToDB.type === '1' || dataToDB.type === '2') {
+        } else if (dataToDB.type === '1' || dataToDB.type === '2' || dataToDB.type === "4") {
             if (dataToDB.type !== null &&
                 dataToDB.hours != null &&
                 dataToDB.courseNumber != null &&
@@ -253,6 +253,7 @@ const ImportCertificateData = () => {
                             }]}>
                             <Upload
                                 name="excel-file"
+                                accept={".xlsx"}
                                 action={BASE_URL + "/api/certificate/excel"}
                                 maxCount={1}
                                 icon={<UploadOutlined/>}
@@ -321,12 +322,21 @@ const ImportCertificateData = () => {
                                            onChange={onTypeChange}/>
                                     <label htmlFor="participant">учасника</label>
                                 </div>
+                                <div>
+                                    <input type="radio"
+                                           value="4"
+                                           id="basic_participant"
+                                           name="type"
+                                           className="radio-button"
+                                           onChange={onTypeChange}/>
+                                    <label htmlFor="basic_participant">учасника базового рівня</label>
+                                </div>
                             </div>
                         </Form.Item>
 
                         <Text
                             className="text-hint">
-                            Інформація про челендж:
+                            Інформація про курс:
                         </Text>
 
                         <div style={{display: "flex", marginTop: 10}}>
@@ -341,7 +351,7 @@ const ImportCertificateData = () => {
                                     name="startDate"
                                     id = "startDate"
                                     value={dataToDB.startDate}
-                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2")}
+                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4"}
                                     // value={moment(dataToDB.startDate,"YYYY-MM-DD")}
                                 />
                             </Form.Item>
@@ -355,7 +365,7 @@ const ImportCertificateData = () => {
                                     format={dateFormat}
                                     name="endDate"
                                     value={dataToDB.endDate}
-                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2")}
+                                    disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4"}
                                 />
                             </Form.Item>
                         </div>
