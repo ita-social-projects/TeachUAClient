@@ -1,5 +1,5 @@
 import {
-    Button, Form, Layout, List, Upload, message, Select
+    Button, Form, Layout, List, Upload, message, Select, InputNumber, DatePicker
 } from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportCertificateDataStyles.less';
@@ -12,7 +12,7 @@ import {BASE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import {useForm} from "antd/es/form/Form";
 import {
-    loadDataCertificatesByTemplateToDB, loadTemplateName
+    loadDataCertificatesByTemplateToDB, loadTemplateName, validateCertificateExcelData
 } from "../../../service/CertificateByTemplateService";
 import {getAllTemplates} from "../../../service/TemplateService";
 import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
@@ -21,17 +21,22 @@ import DraggableList from "../../../util/DraggableList";
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
     const [unsentCertificates, setUnsentCertificates] = useState();
-    const [mistakes, setMistakes] = useState([]);
+    const [validationResult, setValidationResult] = useState([]);
     const [inputtedValues, setInputtedValues] = useState({});
     const [sendButtonState, setSendButtonState] = useState(true);
+
+    const dateFormat = 'DD.MM.YYYY';
+
     const [dataToPdfCreating, setDataToPdfCreating] = useState({
         fieldsList: [],
+        fieldPropertiesList: [],
         templateName: "",
         values: "",
         columnHeadersList: [],
         excelContent: [],
         excelColumnsOrder: []
     })
+
     const [excelColumnHeadersList, setExcelColumnHeadersList] = useState([]);
 
     const [datesForm] = useForm();
@@ -56,18 +61,16 @@ const ImportCertificateByTemplateData = () => {
     const onFinish = () => {
     };
 
-    const ICON_WARNING = 1;
-    const ICON_ERROR = 2;
-    const ICON_OK = 3;
+    const ICON_OK = "3";
 
     const renderIcon = (type) => {
         switch (type) {
-            case ICON_WARNING:
+            case "1":
                 return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
-            case ICON_ERROR:
-                return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
-            case ICON_OK:
+            case "3":
                 return (<CheckCircleOutlined className="icon ok-icon"/>)
+            default:
+                return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
         }
     }
 
@@ -80,6 +83,7 @@ const ImportCertificateByTemplateData = () => {
             setDataToPdfCreating({
                 ...dataToPdfCreating,
                 fieldsList: response.fieldsList,
+                fieldPropertiesList: response.fieldPropertiesList,
                 templateName: response.templateName
             })
 
@@ -90,7 +94,6 @@ const ImportCertificateByTemplateData = () => {
             for (const element of response.fieldsList) {
                 inputtedValues[element] = "";
             }
-            console.log(inputtedValues);
         })
     }
 
@@ -108,7 +111,6 @@ const ImportCertificateByTemplateData = () => {
             }
 
             setExcelColumnHeadersList(columnHeadersList)
-            setSendButtonState(false);
             setDataToPdfCreating({
                 ...dataToPdfCreating,
                 excelContent: value.file.response.excelContent,
@@ -118,58 +120,109 @@ const ImportCertificateByTemplateData = () => {
         }
     };
 
-    const mistakesList = () => {
+    const validationResultList = () => {
         return (<List
             size="small"
-            dataSource={mistakes}
-            renderItem={item => <List.Item className="import-db-list-item">
-                {renderIcon(ICON_ERROR)}
-                {`
-                            Рядок ${item.rowIndex}. 
-                            ${item.errorDetails}: 
-                            ${item.cellValue.length !== 0 ? `зі значенням "${item.cellValue} "` : " немає даних"}  
-                        `}
-            </List.Item>}
+            className={"validation-result-list"}
+            dataSource={validationResult}
+            renderItem={item =>
+                <List.Item className="validation-result-wrapper">
+                    {renderIcon(item[1])}
+                    <span>{item[0]}</span>
+                </List.Item>}
         />)
     }
     const columnsList = () => {
-        let items = dataToPdfCreating.fieldsList.map(element =>
-            <Form.Item
-                className="form-item"
-                name={element}
-            >
-                <span>{element + ': '}</span>
-                <input
-                    id="input"
-                    name={element}
-                    key={element}
-                    onChange={e => {
-                        saveValue(e);
-                        checkButtonState()
-                    }}
-                />
-            </Form.Item>
-        )
+        let items = [];
+        for (let i = 0; i < dataToPdfCreating.fieldsList.length; i++) {
+            const element = dataToPdfCreating.fieldsList[i];
+            const property = dataToPdfCreating.fieldPropertiesList[i];
+            switch (property) {
+                case "int":
+                    items.push(
+                        <Form.Item
+                            className=" form-item form-item-int"
+                            name={element}
+                        >
+                            <span className={"field-name"}>{element + ': '}</span>
+                            <div className="inputNumber-wrapper">
+                                <InputNumber
+                                    id="input-int"
+                                    name={element}
+                                    key={element}
+                                    onChange={e => {
+                                        saveValue(element, e ? e.toString() : "");
+                                        checkButtonState();
+                                    }}
+                                />
+                            </div>
+                        </Form.Item>
+                    );
+                    break;
+                case "date":
+                    items.push(
+                        <Form.Item
+                            className="form-item form-item-int"
+                            name={element}
+                        >
+                            <span className={"field-name"}>{element + ': '}</span>
+                            <div className="inputNumber-wrapper">
+                                <DatePicker
+                                    onChange={(date, dateString) => {
+                                        saveValue(element, dateString);
+                                        checkButtonState();
+                                    }}
+                                    format={dateFormat}
 
-        return (<Form
-            className="form"
-            id="importCertificateByTemplateDataFieldsForm"
-            name="basic"
-            requiredMark={false}
-            initialValues={{remember: true}}>
-            {items}
-        </Form>)
+                                    name="startDate"
+                                    id="input-date"
+                                />
+                            </div>
+                        </Form.Item>
+                    );
+                    break;
+                default:
+                    items.push(
+                        <Form.Item
+                            className="form-item form-item-text"
+                            name={element}
+                        >
+                            <span className={"field-name"}>{element + ': '}</span>
+                            <input
+                                id="input-text"
+                                name={element}
+                                key={element}
+                                onChange={e => {
+                                    saveValue(element, e.target.value);
+                                    checkButtonState();
+                                }}
+                            />
+                        </Form.Item>
+                    );
+            }
+        }
+
+        return (
+            <Form
+                className="form"
+                id="importCertificateByTemplateDataFieldsForm"
+                name="basic"
+                requiredMark={false}
+                initialValues={{remember: true}}>
+                {items}
+            </Form>
+        )
     }
 
-    const saveValue = (element) => {
-        inputtedValues[element.nativeEvent.srcElement.name] = element.target.value;
+    const saveValue = (fieldName, value) => {
+        inputtedValues[fieldName] = value;
         setInputtedValues(inputtedValues)
-        console.log(inputtedValues);
     };
 
     const checkButtonState = () => {
         for (const field of Object.values(inputtedValues)) {
-            if (field.trim().length === 0) {
+            if (field.toString().trim().length === 0) {
+                setSendButtonState(true);
                 return;
             }
         }
@@ -200,6 +253,7 @@ const ImportCertificateByTemplateData = () => {
                 console.log(response);
                 getData();
                 setSendButtonState(true);
+                setValidationResult([]);
                 setExcelColumnHeadersList([])
                 setDataToPdfCreating({
                     ...dataToPdfCreating,
@@ -250,7 +304,30 @@ const ImportCertificateByTemplateData = () => {
         elements.forEach(element => {
             array.push(element.key.slice(element.key.indexOf("_") + 1));
         })
-        setDataToPdfCreating({...dataToPdfCreating, excelColumnsOrder: array})
+        if (!sendButtonState) {
+            setSendButtonState(true);
+        }
+        setDataToPdfCreating({...dataToPdfCreating, excelColumnsOrder: array});
+    }
+
+    const validateExcel = () => {
+        dataToPdfCreating.values = JSON.stringify(inputtedValues);
+
+        validateCertificateExcelData(dataToPdfCreating).then((response) => {
+            if (response.status) {
+                console.log(dataToPdfCreating)
+                message.warning(response.message);
+                return;
+            }
+            setValidationResult(response);
+            for (const message of response) {
+                if (message[1] === "2") {
+                    setSendButtonState(true);
+                    return;
+                }
+            }
+            setSendButtonState(false);
+        });
     }
 
     return (<Layout className="certificate-by-template">
@@ -335,15 +412,6 @@ const ImportCertificateByTemplateData = () => {
                             Знайдено інформацію для генерації {dataToPdfCreating.excelContent ? dataToPdfCreating.excelContent.length : 0} сертифікатів
                         </span>
                     </div>
-                    <div style={mistakes.length !== 0 ? {} : {display: 'none'}}>
-                        <Paragraph>
-                            <Text
-                                className="text-hint">
-                                При зчитуванні excel-файлу не вдалось розпізнати наступні дані:
-                            </Text>
-                        </Paragraph>
-                        {mistakesList()}
-                    </div>
                 </Form>
             </div>
             <div
@@ -362,26 +430,47 @@ const ImportCertificateByTemplateData = () => {
                     </div>
                 </div>
             </div>
-
+            <div className={"import-file"}
+                 style={validationResult.length !== 0 ? {} : {display: 'none'}}
+            >
+                <Paragraph>
+                    <Text
+                        className="text-hint">
+                        Результати валідації:
+                    </Text>
+                </Paragraph>
+                {validationResultList()}
+            </div>
             <span className="buttons">
-            <Button
-                style={dataToPdfCreating.fieldsList.length !== 0 ? {} : {display: 'none'}}
-                className="flooded-button send-data-button"
-                disabled={sendButtonState}
-                headers={{Authorization: tokenToHeader()}}
-                onClick={() => loadCertificatesByTemplateToDB()}
-            >
-                Відправити всі дані у БД
-            </Button>
-            <Button
-                className="flooded-button send-data-button"
-                disabled={unsentCertificates === 0}
-                headers={{Authorization: tokenToHeader()}}
-                onClick={() => sendCertificates()}
-            >
-                Надіслати сертифікати
-            </Button>
-            </span>
+                    <div className={"certificate-data-control-wrapper"}>
+                        <Button
+                            style={dataToPdfCreating.fieldsList.length !== 0 && dataToPdfCreating.excelContent.length !== 0 ? {} : {display: 'none'}}
+                            className="flooded-button send-data-button"
+                            disabled={!sendButtonState}
+                            headers={{Authorization: tokenToHeader()}}
+                            onClick={() => validateExcel()}
+                        >
+                            Валідувати дані
+                        </Button>
+                        <Button
+                            style={dataToPdfCreating.fieldsList.length !== 0 ? {} : {display: 'none'}}
+                            className="flooded-button send-data-button"
+                            disabled={sendButtonState}
+                            headers={{Authorization: tokenToHeader()}}
+                            onClick={() => loadCertificatesByTemplateToDB()}
+                        >
+                            Відправити всі дані у БД
+                        </Button>
+                    </div>
+                    <Button
+                        className="flooded-button send-data-button"
+                        disabled={unsentCertificates === 0}
+                        headers={{Authorization: tokenToHeader()}}
+                        onClick={() => sendCertificates()}
+                    >
+                        Надіслати сертифікати
+                    </Button>
+                </span>
         </Content>
     </Layout>);
 }

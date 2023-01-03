@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './css/TemplateStyles.less';
 import {Layout, Typography, Form, Input, Button, message, Upload, Select} from 'antd';
 import {useForm} from "antd/es/form/Form";
 import {BASE_URL} from "../../../../service/config/ApiConfig";
@@ -192,7 +193,7 @@ const AddTemplate = () => {
     }
 
     return (
-        <Layout className="" style={{paddingTop: 40, background: '#f8e5d7'}}>
+        <Layout className="template add-template" style={{paddingTop: 40, background: '#f8e5d7'}}>
             <div className="add-form" style={{paddingTop: 0}}>
                 <Link
                     to="/admin/templates"
@@ -251,6 +252,7 @@ const AddTemplate = () => {
                     >
                         <Upload
                             name="pdf-file"
+                            className={"pdf-upload-wrapper"}
                             accept={".pdf"}
                             action={BASE_URL + "/api/template/pdf"}
                             maxCount={1}
