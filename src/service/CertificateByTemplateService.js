@@ -21,3 +21,12 @@ export const loadTemplateName = async (value) => {
         return error.response.data
     });
 };
+
+export const validateCertificateExcelData = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/validate", data
+    ).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
