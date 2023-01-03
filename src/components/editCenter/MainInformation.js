@@ -1,4 +1,4 @@
-import {Form, Input, Checkbox, Button, Tooltip, Typography, List, Popconfirm} from 'antd';
+import {Form, Input, Checkbox, Button, Tooltip, Typography, List, Popconfirm, message} from 'antd';
 import React, {useEffect, useState} from 'react';
 import AddLocationModal from "../addClub/location/AddLocationModal";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
@@ -8,10 +8,11 @@ import {PlusOutlined} from "@ant-design/icons";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 
-const MainInformation = ({step, setStep, clubs, cities, locations, setLocations, result, setResult , center, setCenter}) => {
+const MainInformation = ({step, setStep, clubs, cities, result, setResult , center, setCenter}) => {
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
+    const [locations, setLocations] = useState([]);
     const [mainInformationFrom] = Form.useForm();
     const {Text} = Typography;
 
@@ -23,16 +24,23 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
     useEffect(() => {
         if (result) {
             mainInformationFrom.setFieldsValue({...result})
+            setLocations(result.locations);
         }
     }, [])
 
     const onFinish = (values) => {
-        values.locations.map(location => {
+        if (locations.length <= 0) {
+            message.info('Ви не додали жодної локації!');
+            return;
+        }
+        locations.map(location => {
             if (!location.coordinates) {
                 location.coordinates = location.latitude + ", " + location.longitude;
             }
         })
+        values.locations = locations;
         setResult(Object.assign(result, values));
+        console.log(result)
         mainInformationFrom.resetFields();
         nextStep();
     };
@@ -85,7 +93,7 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
                 <Text style={{fontSize: '19px', color: 'GrayText'}}>Локації</Text>
                 <Form.Item name="locations"
                 className="add-club-row"
-                initialValue={result.locations}>
+                initialValue={locations}>
                 <List
                     className="add-club-location-list"
                     itemLayout="horizontal"

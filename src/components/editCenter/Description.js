@@ -34,16 +34,17 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
     }, [])
 
     const onFinish = (values) => {
+        if(result.clubs.length===0){
+            alert("Ви не вибрали жодного клубу")
+            return;
+        }
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
-        nextStep();
-        descriptionForm.resetFields();
-
         if (result.urlLogo && result.urlLogo.file) {
             result.urlLogo = result.urlLogo.file.response;
         }
 
-        // if location doesn't have phone number, we assign club number
+        // if location doesn't have phone number, we assign center number
         result.locations.forEach(location => {
             if(!location.phone){
                 location.phone = result.contactТелефон
@@ -52,6 +53,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
         updateCenter(result.id,result).then(response => {
             if(response.status && response.status ===  400 && response.data.message){
                 message.warning(response.data.message);
+                return;
             } else {
                 window.location.reload()
                 //setVisible(false)
@@ -66,11 +68,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
             // setLocations([]);
             // nextStep();
         })
-        if(result.clubs.length===0){
-            alert("Ви не вибрали жодного клубу")
-        }
         // window.location.reload()
-
     }
 
     return (

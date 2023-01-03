@@ -24,7 +24,6 @@ const CenterEditModal = ({centerId}) => {
     const [step, setStep] = useState(0);
     const [clubs, setClubs] = useState(null);
     const [cities, setCities] = useState([]);
-    const [locations, setLocations] = useState([]);
     const [contacts, setContacts] = useState([]);
     const [result, setResult] = useState({});
     const [fromCenter,setFromCenter] = useState(true);
@@ -90,6 +89,7 @@ const CenterEditModal = ({centerId}) => {
 
 
             let locationsWithDuplicates = [];
+            let locationsWithoutDuplicates = [];
             response.locations.map(location => {
                 locationsWithDuplicates.push({
                     id: location.id,
@@ -105,7 +105,7 @@ const CenterEditModal = ({centerId}) => {
                 // this code removes duplicates from locations
                 let s = new Set(locationsWithDuplicates);
                 let it = s.values();
-                setLocations(Array.from(it));
+                locationsWithoutDuplicates = Array.from(it);
             })
             
             setResult({
@@ -113,6 +113,7 @@ const CenterEditModal = ({centerId}) => {
                 userId: getUserId(),
                 name: response.name,
                 description: response.description,
+                locations: locationsWithoutDuplicates,
                 urlLogo: response.urlLogo,
                 urlWeb: response.urlWeb,
                 urlBackgroundPicture: response.urlBackgroundPicture,
@@ -149,8 +150,6 @@ const CenterEditModal = ({centerId}) => {
                     setStep={setStep}
                     clubs={clubs}
                     cities={cities}
-                    locations={locations}
-                    setLocations={setLocations}
                     result={result}
                     setResult={setResult}
                     center={center}
