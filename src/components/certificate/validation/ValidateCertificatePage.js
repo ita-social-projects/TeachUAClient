@@ -59,7 +59,7 @@ const ValidateCertificatePage = () => {
                                     {certificate.serialNumber}
                                 </div>
                                 <div className="sub-title">
-                                    Навчальний курс:
+                                    Навчальний курс
                                 </div>
                                 <p>
                                     <p dangerouslySetInnerHTML={{__html:certificate.courseDescription}}></p>
