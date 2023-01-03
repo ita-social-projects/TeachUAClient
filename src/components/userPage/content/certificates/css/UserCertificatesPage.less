@@ -41,28 +41,25 @@
     background: #FA8C16;
 }
 
-.contentBox .ant-pagination-item-link {
-    color: black;
+.user-content-pagination {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
 }
 
-.contentBox .ant-pagination-item-link:hover {
-    color: white;
-    background: #FE7729;
+.user-content-pagination .ant-pagination-item-link:hover {
+    color: #000;
+    background: #FA8C16;
 }
 
-.contentBox .ant-pagination-item a {
-    color: black;
-    background: white;
+.user-content-pagination .ant-pagination-item-link {
+    color: #000;
 }
 
-.contentBox .ant-pagination-item-active a,
-.contentBox .ant-pagination-item a:hover {
-    color: white;
-    background: #FE7729;
-}
-
-.contentBox .ant-pagination {
-    margin-bottom: 20px;
+.user-content-pagination .ant-pagination-item:hover,
+.user-content-pagination .ant-pagination-item-active {
+    text-decoration: none;
+    background-color: @primary-hover-color;
 }
 
 .download-modal .ant-spin-dot-item {

@@ -44,7 +44,7 @@ const UserCenterList = ({load, setLoad, match}) => {
             <Space wrap className="centers-cards" size={[0, 0]}>
                 {centers.content.map((center, index) => <UserCenterCardItem center={center} reloadAfterDelete={reloadAfterDelete} key={index}/>)}
             </Space>
-            <Pagination className="user-centers-pagination"
+            <Pagination className="user-content-pagination"
                         hideOnSinglePage
                         showSizeChanger={false}
                         onChange={onPageChange}

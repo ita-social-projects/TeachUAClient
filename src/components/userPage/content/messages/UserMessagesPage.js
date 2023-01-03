@@ -33,7 +33,7 @@ const UserMessagesPage = () => {
                             emptyText: <div className="noMessages">Повідомлень немає</div>
                         }}
                         dataSource={messages}
-                        pagination={{ hideOnSinglePage: true, defaultPageSize: 4 }}
+                        pagination={{ hideOnSinglePage: true, defaultPageSize: 4, className: "user-content-pagination" }}
                         renderItem={(message) => (
                             <Message message={message} key={message.id} />
                         )}
