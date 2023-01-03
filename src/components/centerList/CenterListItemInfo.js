@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Modal, Rate } from 'antd';
+import React , {useEffect, useState} from 'react';
+import { Layout,  Button, Modal, Rate } from 'antd';
 import "../clubList/css/ClubInfo.css"
 import { Link } from "react-router-dom";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
@@ -11,6 +11,7 @@ import PageRatingCenter from "../centerPage/content/PageRatingCenter";
 import {getClubReport} from "../../service/ClubService";
 import {getCenterReport} from "../../service/CenterService";
 import {FilePdfOutlined} from "@ant-design/icons";
+import ClubsOfCenter from '../centerPage/clubsOfCenter/ClubsOfCenter';
 
 const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const images = [
@@ -19,6 +20,8 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
         process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/exercise.jpg",
         process.env.PUBLIC_URL+"/static/images/clubs_carousel_tmp/pencils.jpg",
     ];
+    const [club, setClickedClub]  = useState(false);
+    const [clubInfoVisible, setClubInfoVisible] = useState(false);
 
     return (
         <Modal
@@ -50,6 +53,13 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                     <span className="title">Про центр</span>
                     <ImageCarousel className="carousel" urls={images} />
                     <div className="description">{center.description}</div>
+                </div>
+                <div>
+                <Layout >
+                <ClubsOfCenter clubs={center.clubs}
+                            setClickedClub={setClickedClub}
+                            setClubInfoVisible={setClubInfoVisible} />
+                </Layout>
                 </div>
                 <div>
                     <Button onClick={() => getCenterReport(center.id, center.name)} className="outlined-button details-button">

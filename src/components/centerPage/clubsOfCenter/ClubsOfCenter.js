@@ -1,4 +1,4 @@
-import { Layout, Pagination } from "antd";
+import { Carousel, Layout, Pagination } from "antd";
 import ClubListItem from "../../clubList/ClubListItem";
 import "./css/ClubsItemStyles.css"
 
@@ -14,11 +14,11 @@ const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible}) =>{
         !clubs ?
             <div className="empty-list-of-clubs"/>  :
 
-            <Layout className="club-list">
+            <Layout className="club-list" >
 
-                <div className="clubs-inscription">
+                <span className="title" style={{fontSize:18}}>
                     Гуртки центру
-                </div>
+                </span>
                 <div className="display-content">
                     {clubs.map( club => (
                             <ClubListItem club={club} onClubClick={onClubClick} key={club.id}/>
