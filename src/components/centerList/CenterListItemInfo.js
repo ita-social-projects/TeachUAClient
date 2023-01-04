@@ -54,7 +54,7 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                     <ImageCarousel className="carousel" urls={images} />
                     <div className="description">{center.description}</div>
                 </div>
-                <div>
+                <div style={{paddingTop: 20}}>
                 <Layout >
                 <ClubsOfCenter clubs={center.clubs}
                             setClickedClub={setClickedClub}
