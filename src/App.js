@@ -76,6 +76,7 @@ import {SearchContext} from "./context/SearchContext";
 import {AuthContext} from "./context/AuthContext";
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
+import ResultsImportFromGoogleForms from "./components/admin/results-import-from-google-forms/ResultsImportFromGoogleForms";
 import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
@@ -148,6 +149,7 @@ function App() {
                                 <AdminRoute path="/admin/template/:id" exact component={EditTemplate}/>
                                 <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
                                 <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
+                                <AdminRoute path="/admin/results-import-from-google-forms" exact component={ResultsImportFromGoogleForms}/>
                                 <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
                                 <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
                                 <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>

@@ -18,7 +18,7 @@ import { deleteUserStorage, getToken } from "../../service/StorageService";
 const {SubMenu} = Menu;
 
 const AuthMenu = () => {
-    const history = useHistory(); 
+    const history = useHistory();
 
     const [showAddClub, setShowAddClub] = useState(false);
     const [showAddCenter, setShowAddCenter] = useState(false);
@@ -81,6 +81,7 @@ const AuthMenu = () => {
                                 <Menu.Item key="generate_questions"><Link to="/admin/questions/generate">Згенерувати запитання</Link></Menu.Item>
                                 <Menu.Item key="export_questions" onClick={() => {downloadExcel().then();}}>Експортувати дані</Menu.Item>
                                 <Menu.Item key="edit_questions"><Link to="/admin/quiz/questions/edit">Редагувати запитання</Link></Menu.Item>
+                                <Menu.Item key="import_results_from_google_forms"><Link to="/admin/results-import-from-google-forms">Імпортувати результати з Forms</Link></Menu.Item>
                             </SubMenu>
 
                             <Menu.Item key="logs"><Link to="/logs">Логи</Link></Menu.Item>
@@ -129,7 +130,7 @@ const AuthMenu = () => {
                 </Menu>
             )
         }
-        
+
     };
 
     return (
