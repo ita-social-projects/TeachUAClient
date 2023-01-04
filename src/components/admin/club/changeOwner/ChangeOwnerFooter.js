@@ -33,7 +33,6 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
     }, []);
 
     const onFinish = (values) => {
-        console.log(selectedRowKeys);
 
         const userId = values.userId;
 
@@ -44,7 +43,6 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                     message.warning(response.message);
                 }
                 updateTable();
-                console.log(response);
             });
         });
         setSelectedRowKeys([]);
@@ -63,7 +61,6 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                         placeholder="Select a person"
                         optionFilterProp="children"
                         onChange={(event, value) => {
-                            console.log(value);
                             setUserId(value);
                         }}
                         filterOption={(input, option) =>
