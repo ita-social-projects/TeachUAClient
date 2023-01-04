@@ -178,6 +178,8 @@ const CenterEditModal = ({centerId}) => {
                     setCenter={setCenter}
                     clubs={clubs}
                     setClubs={setClubs}
+                    visible={visible}
+                    setVisible={setVisible}
                 />;
         }
     };

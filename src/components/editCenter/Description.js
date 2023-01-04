@@ -9,7 +9,7 @@ import {transToEng} from '../../util/Translit';
 import { updateCenter } from '../../service/CenterService';
 import {tokenToHeader} from "../../service/UploadService";
 
-const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
+const Description = ({step, setStep, result, setResult, clubs, setClubs, visible, setVisible}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
@@ -35,7 +35,8 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
 
     const onFinish = (values) => {
         if(result.clubs.length===0){
-            message.warning("Ви не вибрали жодного клубу");
+            message.warning("У цього Центру нема Гуртків, спочатку треба додати цей Центр до Клубу (у редагуванні клубу)");
+            setVisible(false);
             return;
         }
         descriptionForm.setFieldsValue(values);
