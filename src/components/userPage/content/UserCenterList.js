@@ -30,8 +30,8 @@ const UserCenterList = ({load, setLoad, match}) => {
             getData(page)
     }, []);
 
-    const reloadAfterDelete = () => {
-        onPageChange(page);
+    const reloadAfterChange = () => {
+        onPageChange(page + 1);
     };
 
     const onPageChange = (page) => {
@@ -42,7 +42,7 @@ const UserCenterList = ({load, setLoad, match}) => {
     return load ? <Loader/> : (
         <Layout className="user-centers">
             <Space wrap className="centers-cards" size={[0, 0]}>
-                {centers.content.map((center, index) => <UserCenterCardItem center={center} reloadAfterDelete={reloadAfterDelete} key={index}/>)}
+                {centers.content.map((center, index) => <UserCenterCardItem center={center} reloadAfterChange={reloadAfterChange} key={index}/>)}
             </Space>
             <Pagination className="user-content-pagination"
                         hideOnSinglePage

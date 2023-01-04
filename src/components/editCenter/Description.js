@@ -1,26 +1,17 @@
-import {Form, Input, Upload, Button, Typography, message} from 'antd';
+import {Form, Input, Upload, Typography, message} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import EditorComponent from "../editor/EditorComponent";
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
-import {saveContent} from "../editor/EditorConverter";
 import React, {useEffect, useRef} from 'react';
 import "./css/Description.css";
 import {transToEng} from '../../util/Translit';
 import { updateCenter } from '../../service/CenterService';
 import {tokenToHeader} from "../../service/UploadService";
 
-const Description = ({step, setStep, result, setResult, clubs, setClubs, visible, setVisible}) => {
+const Description = ({step, setStep, result, setResult, setVisible, reloadAfterChange}) => {
     const [descriptionForm] = Form.useForm();
     const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
-    const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
-    const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
     const {Text} = Typography;
-
-
-    const nextStep = () => {
-        setStep(step + 1);
-    }
 
     const prevStep = () => {
         setResult(Object.assign(result, descriptionForm.getFieldValue()));
@@ -31,7 +22,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs, visible
         if (result) {
             descriptionForm.setFieldsValue({...result});
         }
-    }, [])
+    }, []);
 
     const onFinish = (values) => {
         if(result.clubs.length===0){
@@ -39,6 +30,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs, visible
             setVisible(false);
             return;
         }
+
         descriptionForm.setFieldsValue(values);
         setResult(Object.assign(result, values));
         if (result.urlLogo && result.urlLogo.file) {
@@ -51,12 +43,15 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs, visible
                 location.phone = result.contactТелефон
             }
         });
-        updateCenter(result.id,result).then(response => {
-            window.location.reload()
+
+        updateCenter(result.id,result).then(() => {
+            reloadAfterChange();
+            setVisible(false);
+            message.success("Центр успішно оновлено");
         }).catch((error) => {
             message.warning(error.response.data.message);
             return;
-        })
+        });
     }
 
     return (
