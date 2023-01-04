@@ -35,7 +35,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
 
     const onFinish = (values) => {
         if(result.clubs.length===0){
-            alert("Ви не вибрали жодного клубу")
+            message.warning("Ви не вибрали жодного клубу");
             return;
         }
         descriptionForm.setFieldsValue(values);
@@ -51,24 +51,11 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs}) => {
             }
         });
         updateCenter(result.id,result).then(response => {
-            if(response.status && response.status ===  400 && response.data.message){
-                message.warning(response.data.message);
-                return;
-            } else {
-                window.location.reload()
-                //setVisible(false)
-            }
-
-            //window.location.reload();
-            /*
-            Temporary solution, page shouldn't reload every time
-             */
-            // console.log(response);
-            // setResult(null)
-            // setLocations([]);
-            // nextStep();
+            window.location.reload()
+        }).catch((error) => {
+            message.warning(error.response.data.message);
+            return;
         })
-        // window.location.reload()
     }
 
     return (
