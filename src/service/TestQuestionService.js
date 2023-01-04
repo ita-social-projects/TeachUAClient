@@ -18,8 +18,8 @@ export const searchQuestions = async (pageNumber, size, sortField, sortDirection
                 + "&sort=" + sortField + "," + sortDirection
                 + "&query=" + query
                 + "&type=" + type
-                + "&category=" + category)
-        .then((response) => {
+                + "&category=" + category
+        ).then((response) => {
             return response;
         });
 }
@@ -70,4 +70,16 @@ export const deleteQuestion = async (id) => {
         .then((response) => {
             return response;
         })
+}
+
+export const searchCategories = async (pageNumber, size, sortField, sortDirection, query) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/questions/categories/search"
+                + "?page=" + (pageNumber - 1) // pagination starts with 0
+                + "&size=" + size
+                + "&sort=" + sortField + "," + sortDirection
+                + "&query=" + query
+        ).then((response) => {
+            return response;
+        });
 }
