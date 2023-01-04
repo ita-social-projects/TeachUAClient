@@ -7,7 +7,7 @@ const {Option} = Select;
 
 const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) => {
     const [users, setUsers] = useState([]);
-    const [email, setEmail] = useState('');
+    const [userId, setUserId] = useState(-1);
 
     const showModal = () => {
         if (selectedRowKeys.length === 0) {
@@ -16,7 +16,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                 content: ''
             })
         }
-        if (email === '' || email === null) {
+        if (userId === -1 || userId === null) {
             Modal.error({
                 title: 'Виберіть email нового власника!',
                 content: ''
@@ -33,15 +33,13 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
     }, []);
 
     const onFinish = (values) => {
-        console.log(selectedRowKeys)
-        console.log(email)
+        console.log(selectedRowKeys);
 
-        const params = {
-            email: values.email
-        };
+        const userId = values.userId;
 
         selectedRowKeys.map(selectedRowKey => {
-            changeClubOwner(params, selectedRowKey).then((response) => {
+            changeClubOwner(userId, selectedRowKey)
+            .then((response) => {
                 if (response.status) {
                     message.warning(response.message);
                 }
@@ -58,7 +56,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                   requiredMark={false}
                   onFinish={onFinish}>
                 <Form.Item
-                    name="email">
+                    name="userId">
                     <Select
                         showSearch
                         style={{width: 200}}
@@ -66,13 +64,13 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                         optionFilterProp="children"
                         onChange={(event, value) => {
                             console.log(value);
-                            setEmail(value)
+                            setUserId(value);
                         }}
                         filterOption={(input, option) =>
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
-                        {users.map(user => <Option key={user.email} value={user.email}>{user.email}</Option>)}
+                        {users.map(user => <Option key={user.id} value={user.id}>{user.email}</Option>)}
                     </Select>
                 </Form.Item>
                 <Button htmlType="submit" className="flooded-button"
