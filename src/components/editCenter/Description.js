@@ -106,7 +106,7 @@ const Description = ({step, setStep, result, setResult, clubs, setClubs, visible
                            hasFeedback
                            rules={[{
                                required: true,
-                               pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%&'*+\n, ,-.:\r;<=>?|@№_`{}~^\/[\]\\]*$/,
+                               pattern: /^[А-Яа-яЇїІіЄєҐґa-zA-Z0-9()!"#$%—&'*+\n, ,-.:\r;<=>?|@№_`{}~^\/[\]\\]*$/,
                                message: "Некоректний опис центру"
                            },
                                {

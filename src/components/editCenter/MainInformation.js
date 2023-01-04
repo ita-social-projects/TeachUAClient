@@ -75,7 +75,7 @@ const MainInformation = ({step, setStep, clubs, cities, result, setResult , cent
                     rules={[
                         {
                             required: true,
-                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/,
+                            pattern: /^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_—`{}~]){5,100}$/,
                             message: "Некоректна назва центру",
                         },
                     ]}>
