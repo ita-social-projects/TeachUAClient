@@ -1,14 +1,13 @@
-import {Form, Input, Checkbox, Button, Tooltip, Typography, List, Popconfirm, message} from 'antd';
+import {Form, Input, Button, Tooltip, Typography, List, Popconfirm, message} from 'antd';
 import React, {useEffect, useState} from 'react';
 import AddLocationModal from "../addClub/location/AddLocationModal";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import "./css/MainInformation.css";
-import {PlusOutlined} from "@ant-design/icons";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 
-const MainInformation = ({step, setStep, clubs, cities, result, setResult , center, setCenter}) => {
+const MainInformation = ({step, setStep, cities, result, setResult}) => {
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();

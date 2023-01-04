@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import MaskIcon from '../MaskIcon';
 import "./css/Contacts.css";
 
-const Contacts = ({ step, setStep, contacts, result, setResult,setContacts, center, setCenter }) => {
+const Contacts = ({ step, setStep, contacts, result, setResult }) => {
     const [contactsForm] = Form.useForm();
     const [contacts_data, setContactsData] = useState({});
     const {Text} = Typography;
