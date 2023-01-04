@@ -40,7 +40,6 @@ const MainInformation = ({step, setStep, clubs, cities, result, setResult , cent
         })
         values.locations = locations;
         setResult(Object.assign(result, values));
-        console.log(result)
         mainInformationFrom.resetFields();
         nextStep();
     };
