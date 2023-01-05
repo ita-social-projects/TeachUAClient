@@ -1,21 +1,19 @@
-import {Avatar, Card, Dropdown} from "antd";
+import {Card, Dropdown} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import './css/UserCenterCardItem.less';
-import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import {MoreOutlined} from "@ant-design/icons";
 import centerUpdateMenu from "./CenterUpdateMenu";
+import CenterLogo from "../../centerList/CenterLogo";
 
 
-const UserCenterCardItem = ({center, reloadAfterDelete}) => {
+const UserCenterCardItem = ({center, reloadAfterChange}) => {
     return (
         <Card className="center-card">
             <div className="center-information">
                 <div className="center-left">
                     <div className="center-info">
-                        <Avatar size={42}
-                                src={center.urlLogo}
-                                icon={<UserOutlined/>}/>
+                        <CenterLogo urlLogo={center.urlLogo} />
                         <div>
                             <div className="center-title">
                                 Центр Розвитку
@@ -28,7 +26,7 @@ const UserCenterCardItem = ({center, reloadAfterDelete}) => {
                 </div>
                 <div className="center-right">
                     <div className="center-edit-button">
-                        <Dropdown overlay={centerUpdateMenu(center.id, reloadAfterDelete)} placement="bottomRight">
+                        <Dropdown overlay={centerUpdateMenu(center.id, reloadAfterChange)} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>

@@ -17,7 +17,6 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
     const [cityName, setCityName] = useState(null);
-    const [isDisabled, setDisabled] = useState(true)
     const [station, setStation] = useState([])
     const [coordinates, setCoordinates] = useState();
     const [isMobile, setIsMobile] = useState(false);
@@ -58,14 +57,12 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
             !locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) ||
             !locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) ||
             !locationForm.phoneNumber.match(/^\d{9}$/)) {
-            setDisabled(true)
         }
         if (cityName != null &&
             locationForm.inputAddress.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.latAndLng.match(/([0-9]+\.[0-9]+), ([0-9]+\.[0-9]+)/) &&
             locationForm.locationName.match(/^(?!\s)([\wА-ЩЬЮЯҐЄІЇа-щьюяґєії !"#$%&'()*+,\-.\/:;<=>?@[\]^_`{}~]){5,100}$/) &&
             locationForm.phoneNumber.match(/^\d{10}$/)) {
-            setDisabled(false)
         }
     }
 
@@ -97,10 +94,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         form.setFieldsValue({
             name: fields.name,
             cityName: fields.cityName,
-            phone: fields.phone
+            phone: fields.phone,
+            address: fields.address,
+            coordinates: fields.coordinates
         });
         form.validateFields();
-        setDisabled(true);
     }
     const  changeStation = (value) =>{
         const fields = form.getFieldValue();
@@ -277,11 +275,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
 
                         <div className="add-club-content-footer add-club-add-location-button">
                             {
-                                !isDisabled ?
-                                    <Button htmlType="submit"
-                                            className="flooded-button add-club-content-next">Додати</Button> :
-                                    <Button disabled={isDisabled} htmlType="submit"
-                                            className="flooded-button add-club-content-next-disabled">Додати</Button>
+                                <Button htmlType="submit"
+                                        className="flooded-button add-club-content-next">Додати</Button>
                             }
                         </div>
                     </Form>

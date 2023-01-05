@@ -178,6 +178,7 @@
     line-height: 24px;
     color: #FFFFFF;
     border: 0;
+    cursor: pointer;
 }
 
 .addCenter .start {

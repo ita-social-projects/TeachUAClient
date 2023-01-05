@@ -94,8 +94,6 @@ export const updateCenter = async (id,data) => {
         clubsId: data.clubs,
     }).then((response) => {
         return response.data
-    }).catch((error) => {
-        return error.response
     })
 
 
