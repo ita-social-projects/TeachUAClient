@@ -1,16 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {message, Modal} from 'antd';
-import "./css/EditMainInformationTab.less"
-import {getAllCategories} from "../../service/CategoryService";
-import {getAllCities} from "../../service/CityService";
-import {getAllContacts} from "../../service/ContactService";
-import {getClubById, updateClubById} from "../../service/ClubService";
-import EditClubTabs from "./EditClubTabs";
-import {getAllCenters} from "../../service/CenterService";
+import React, { useState, useEffect } from 'react';
+import { Layout, Modal } from 'antd';
+import { getAllCategories } from "../../service/CategoryService";
+import { getAllCities } from "../../service/CityService";
+import { getAllContacts } from "../../service/ContactService";
+import { getClubById } from "../../service/ClubService";
+import { getAllCenters } from "../../service/CenterService";
+import { Content } from 'antd/es/layout/layout';
+import AddClubSider from '../addClub/AddClubSider';
+import AddClubSiderMobile from '../addClub/AddClubSiderMobile';
+import ContactsStep from './steps/ContactsStep';
+import DescriptionStep from './steps/DescriptionStep';
+import MainInformationStep from './steps/MainInformationStep';
 
 
-const EditClubModal = ({clubId, reloadAfterChange}) => {
-    const [visible, setVisible] = useState(false);
+const EditClubModal = ({ clubId, reloadAfterChange }) => {
+    const [step, setStep] = useState(0);
+    const [isShowing, setShowing] = useState(false);
+
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
     const [centers, setCenters] = useState([]);
@@ -25,38 +31,61 @@ const EditClubModal = ({clubId, reloadAfterChange}) => {
         getClubById(clubId).then(response => setResult(response));
     }, []);
 
-    const onFinish = () => {
-        updateClubById(result).then(() => {
-            setVisible(false);
-            reloadAfterChange();
-            message.success("Гурток успішно оновлено");
-        }).catch(() => {
-            message.error("Помилка при оновленні гуртка");
-        });
+    const stepComponent = (step) => {
+        switch (step) {
+            case 0:
+                return <MainInformationStep
+                    categories={categories}
+                    setResult={setResult}
+                    result={result}
+                    step={step}
+                    setStep={setStep}
+                    centers={centers} />;
+            case 1:
+                return <ContactsStep
+                    contacts={contacts}
+                    cities={cities}
+                    setResult={setResult}
+                    result={result}
+                    step={step}
+                    setStep={setStep} />;
+            case 2:
+                return <DescriptionStep
+                    setResult={setResult}
+                    result={result}
+                    step={step}
+                    setShowing={setShowing}
+                    setStep={setStep}
+                    reloadAfterChange={reloadAfterChange} />;
+        }
     };
+
 
     return (
         <div>
-            <div onClick={() => setVisible(true)}>
+            <div onClick={() => setShowing(true)}>
                 Редагувати гурток
             </div>
             <Modal
-                className="modal-edit-club"
+                className="modal-add-club"
                 centered
                 width={880}
-                visible={visible}
-                onOk={() => setVisible(false)}
-                onCancel={() => setVisible(false)}
-                footer={false}
-                >
-                <div className="header-edit-club">Редагувати гурток</div>
-                <EditClubTabs categories={categories}
-                              centers={centers}
-                              setResult={setResult}
-                              result={result}
-                              contacts={contacts}
-                              cities={cities}
-                              onFinish={onFinish}/>
+                open={isShowing}
+                onOk={() => setShowing(false)}
+                onCancel={() => setShowing(false)}
+                footer={null}>
+                <Layout>
+                    <AddClubSider step={step} />
+                    <Content className="add-club-container">
+                        <div className="add-club-header">
+                            Редагувати гурток
+                        </div>
+                        <AddClubSiderMobile step={step} />
+                        <div className="add-club-content">
+                            {stepComponent(step)}
+                        </div>
+                    </Content>
+                </Layout>
             </Modal>
         </div>
     );

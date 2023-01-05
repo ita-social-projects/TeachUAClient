@@ -33,7 +33,7 @@ const UserClubList = ({load, setLoad, match}) => {
     }, []);
 
     const reloadAfterChange = () => {
-        onPageChange(page);
+        onPageChange(page + 1);
     };
 
     const onPageChange = (currPage) => {

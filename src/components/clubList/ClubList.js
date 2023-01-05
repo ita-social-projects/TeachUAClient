@@ -117,7 +117,7 @@ const ClubList = ({
     };
 
     const reloadAfterChange = () => {
-        onPageChange(currentPage);
+        onPageChange(currentPage + 1);
     };
 
     const onClubClick = (club) => {
