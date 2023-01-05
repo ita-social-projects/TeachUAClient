@@ -200,12 +200,12 @@ export const getClubReport = async (id, fileName) => {
     handleDownloadFile(response.data, fileName, "pdf")
 }
 
-export const changeClubOwner = async (params, id) => {
+export const changeClubOwner = async (userId, clubId) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/user", {params})
+        .get(BASE_URL + "/api/user/" + userId)
         .then((response) => {
             return fetchRequest
-                .patch(BASE_URL + "/api/club/" + id, {
+                .patch(BASE_URL + "/api/club/change-owner/" + clubId, {
                     user: {
                         id: response.data.id,
                         email: response.data.email,
