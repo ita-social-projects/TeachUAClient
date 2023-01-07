@@ -18,8 +18,12 @@ const ClubsOfCenterList = ({load, setLoad, match}) => {
 
     const getData = (currPage) => {
         setLoad(true);
-        setClubs(clubs.content);
-        setLoad(false);
+        let userId = match.params.id;
+
+        getClubsByUserId(userId, currPage).then(response => {
+            setClubs(response);
+            setLoad(false);
+        });
     };
 
 
@@ -55,7 +59,6 @@ const ClubsOfCenterList = ({load, setLoad, match}) => {
     )
 
 }
-
 
 export default withRouter(ClubsOfCenterList);
 
