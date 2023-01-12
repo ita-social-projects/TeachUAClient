@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, Space} from "react";
 import ClubsOfCenterList from "./ClubsOfCenterList"
+import UserClubCardItem from "../../userPage/content/UserClubCardItem";
 
-const ClubsOfCenterContent = (centerClubs) => {
+const ClubsOfCenterContent = (centerId) => {
+    
     const [clubs, setClubs] = useState({
-        content: centerClubs,
+        content: [],
         pageable: {},
         size: 0,
         totalElements: 0
@@ -13,7 +15,7 @@ const ClubsOfCenterContent = (centerClubs) => {
 
     return (
         <div className="user-club-content">
-            <ClubsOfCenterList load={loading} setLoad={setLoading} clubs={clubs} setClubs={setClubs}/>
+            <ClubsOfCenterList centerId={centerId.centerId} load={loading} setLoad={setLoading} clubs={clubs} setClubs={setClubs}/>
         </div>
     )
 };

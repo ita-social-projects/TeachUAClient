@@ -22,12 +22,16 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
     ];
     const [club, setClickedClub]  = useState(false);
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
+    const centerId = center.id;
 
     return (
         <Modal
             centered
             visible={visible}
-            onCancel={() => setVisible(false)}
+            onCancel={() => {
+                    setVisible(false);
+                }
+            }
             width={900}
             footer={null}
             className='centerInfo'
@@ -58,7 +62,9 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                 <Layout >
                 <ClubsOfCenter clubs={center.clubs}
                             setClickedClub={setClickedClub}
-                            setClubInfoVisible={setClubInfoVisible} />
+                            setClubInfoVisible={setClubInfoVisible}
+                            centerId={centerId}
+                            key={centerId}/>
                 </Layout>
                 </div>
                 <div>

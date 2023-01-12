@@ -1,12 +1,13 @@
 import {Layout, Pagination, Space} from "antd";
 import React, {useEffect, useState} from "react";
+import { getCenterClubsByCenterId } from "../../../service/CenterService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
 import UserClubCardItem from "../../userPage/content/UserClubCardItem";
 //import './css/UserClub.less';
 
 
-const ClubsOfCenterList = ({load, setLoad, match}) => {
+const ClubsOfCenterList = ({centerId, load, setLoad, match}) => {
     const [clubs, setClubs] = useState({
         content: [],
         pageable: {},
@@ -18,9 +19,8 @@ const ClubsOfCenterList = ({load, setLoad, match}) => {
 
     const getData = (currPage) => {
         setLoad(true);
-        let userId = match.params.id;
-
-        getClubsByUserId(userId, currPage).then(response => {
+        
+        getCenterClubsByCenterId(centerId, currPage).then(response => {
             setClubs(response);
             setLoad(false);
         });
@@ -59,6 +59,7 @@ const ClubsOfCenterList = ({load, setLoad, match}) => {
     )
 
 }
+
 
 export default withRouter(ClubsOfCenterList);
 

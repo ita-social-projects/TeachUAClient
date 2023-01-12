@@ -54,7 +54,8 @@ const CenterPage = () => {
                     </Layout>
                     <Layout className="clubs-of-center">
 
-                        <ClubsOfCenter clubs={center.clubs}
+                        <ClubsOfCenter centerId={centerId.id}
+                                       clubs={center.clubs}
                                        setClickedClub={setClickedClub}
                                        setClubInfoVisible={setClubInfoVisible} />
 
