@@ -68,14 +68,15 @@ const AuthMenu = () => {
                             </SubMenu>
 
                             <SubMenu title="Сертифікати" key="certificates">
-                                <Menu.Item key="all_certificates"><Link to="/admin/certificates">Всі сертифікати</Link></Menu.Item>
-                                <Menu.Item key="all_templates"><Link to="/admin/templates">Всі шаблони</Link></Menu.Item>
+                                <Menu.Item key="all_certificates"><Link to="/admin/certificates">Усі сертифікати</Link></Menu.Item>
+                                <Menu.Item key="all_certificate_types"><Link to="/admin/certificate-types">Усі типи сертифікатів</Link></Menu.Item>
+                                <Menu.Item key="all_templates"><Link to="/admin/templates">Усі шаблони</Link></Menu.Item>
                                 <Menu.Item key="generate_certificates"><Link to="/admin/certificate/generate">Згенерувати сертифікати</Link></Menu.Item>
                                 <Menu.Item key="generate_certificate_by_template"><Link to="/admin/certificate-by-template/generate">Згенерувати сертифікати за шаблоном</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu title="Тести" key="quiz-submenu">
-                                <Menu.Item key="questions"><Link to="/admin/quiz/questions">Всі запитання</Link></Menu.Item>
+                                <Menu.Item key="questions"><Link to="/admin/quiz/questions">Усі запитання</Link></Menu.Item>
                                 <Menu.Item key="import_questions"><Link to="/admin/questions-import"> Імпортувати запитання</Link></Menu.Item>
                                 <Menu.Item key="generate_questions"><Link to="/admin/questions/generate">Згенерувати запитання</Link></Menu.Item>
                                 <Menu.Item key="export_questions" onClick={() => {downloadExcel().then();}}>Експортувати дані</Menu.Item>
@@ -84,7 +85,7 @@ const AuthMenu = () => {
 
                             <Menu.Item key="logs"><Link to="/logs">Логи</Link></Menu.Item>
                             <SubMenu title="Файли" key="files">
-                                <Menu.Item key="all_files"><Link to="/admin/files">Всі файли</Link></Menu.Item>
+                                <Menu.Item key="all_files"><Link to="/admin/files">Усі файли</Link></Menu.Item>
                                 <Menu.Item key="unused_files"><Link to="/admin/unused-files">Невикористані файли</Link></Menu.Item>
                             </SubMenu>
                             <Menu.Item key="users"><Link to="/admin/users">Користувачі</Link></Menu.Item>
