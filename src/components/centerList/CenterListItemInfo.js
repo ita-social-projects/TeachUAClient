@@ -23,6 +23,7 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const [club, setClickedClub]  = useState(false);
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
     const centerId = center.id;
+    const clubsPerPage = 2; // size of pagination
 
     return (
         <Modal
@@ -64,6 +65,7 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                             setClickedClub={setClickedClub}
                             setClubInfoVisible={setClubInfoVisible}
                             centerId={centerId}
+                            clubsPerPage={clubsPerPage}
                             key={centerId}/>
                 </Layout>
                 </div>

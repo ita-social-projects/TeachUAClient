@@ -20,6 +20,7 @@ const CenterPage = () => {
     const [clubInfoVisible, setClubInfoVisible] = useState(false);
 
     const centerId  = useParams();
+    const clubsPerPage = 3; // size of pagination
 
     const getData = () => {
             getCenterById(centerId.id).then(response => {
@@ -56,8 +57,10 @@ const CenterPage = () => {
 
                         <ClubsOfCenter centerId={centerId.id}
                                        clubs={center.clubs}
+                                       clubsPerPage={clubsPerPage}
                                        setClickedClub={setClickedClub}
-                                       setClubInfoVisible={setClubInfoVisible} />
+                                       setClubInfoVisible={setClubInfoVisible} 
+                                       key={centerId.id}/>
 
                     </Layout>
                 </Layout>

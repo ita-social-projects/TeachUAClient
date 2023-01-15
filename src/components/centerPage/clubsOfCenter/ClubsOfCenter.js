@@ -5,7 +5,7 @@ import ClubsOfCenterContent from "./ClubsOfCenterContent";
 import "./css/ClubsItemStyles.css"
 
 
-const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible, centerId}) =>{
+const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible, centerId, clubsPerPage}) =>{
 
     const onClubClick = (club) => {
         setClickedClub(club);
@@ -21,8 +21,9 @@ const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible, centerId}) =>{
                 <span className="title" style={{fontSize:18}}>
                     Гуртки центру
                 </span>
-                <ClubsOfCenterContent centerId={centerId}/>
-                {/* <div className="display-content">
+                <ClubsOfCenterContent centerId={centerId} clubsPerPage={clubsPerPage}/>
+
+                {/* <div className="display-content"> // variant without pagination
                     {clubs.map( club => (
                             <ClubListItem club={club} onClubClick={onClubClick} key={club.id}/>
                     ))}

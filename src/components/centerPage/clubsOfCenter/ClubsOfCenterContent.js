@@ -1,8 +1,7 @@
 import React, {useState, useEffect, Space} from "react";
 import ClubsOfCenterList from "./ClubsOfCenterList"
-import UserClubCardItem from "../../userPage/content/UserClubCardItem";
 
-const ClubsOfCenterContent = (centerId) => {
+const ClubsOfCenterContent = (centerId, clubsPerPage) => {
     
     const [clubs, setClubs] = useState({
         content: [],
@@ -15,7 +14,12 @@ const ClubsOfCenterContent = (centerId) => {
 
     return (
         <div className="user-club-content">
-            <ClubsOfCenterList centerId={centerId.centerId} load={loading} setLoad={setLoading} clubs={clubs} setClubs={setClubs}/>
+            <ClubsOfCenterList centerId={centerId.centerId} // to pass props to child
+                                clubsPerPage={centerId.clubsPerPage}  // to pass props to child
+                                load={loading} 
+                                setLoad={setLoading} 
+                                clubs={clubs} 
+                                setClubs={setClubs}/>
         </div>
     )
 };
