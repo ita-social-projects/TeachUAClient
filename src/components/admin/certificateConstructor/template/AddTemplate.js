@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './css/TemplateStyles.less';
-import {Layout, Typography, Form, Input, Button, message, Upload, Select} from 'antd';
+import {Button, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
 import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {Link} from "react-router-dom";
 import {tokenToHeader} from "../../../../service/UploadService";
 import Editor from "../../../../util/Editor";
-import {createTemplate} from "../../../../service/TemplateService";
 import * as TemplateService from "../../../../service/TemplateService";
+import {createTemplate} from "../../../../service/TemplateService";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
-import {certificateTypes, fieldsProperties} from "./TemplateConstants"
+import {fieldsProperties} from "./TemplateConstants"
+import {getCertificateTypes} from "../../../../service/CertificateTypeService";
 
 const {Title} = Typography;
 
@@ -19,6 +20,7 @@ const AddTemplate = () => {
     const [pdfUploadFormControl, setPdfUploadFormControl] = useState(0);
     const [chosenProperties, setChosenProperties] = useState({});
     const [fieldsList, setFieldsList] = useState([]);
+    const [certificateTypes, setCertificateTypes] = useState([]);
 
     const [templateMetadata, setTemplateMetadata] = useState({
         templateName: "",
@@ -48,6 +50,28 @@ const AddTemplate = () => {
         filePath: "",
         properties: {}
     });
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        getCertificateTypes().then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            let certificateTypesArray = [];
+            for (const certificateType of response) {
+                certificateTypesArray.push({
+                    label: `${certificateType.codeNumber}. ${certificateType.name}`,
+                    value: certificateType.codeNumber
+                })
+            }
+            setCertificateTypes(certificateTypesArray);
+            document.getElementsByClassName("ant-select-selection-item")[0].textContent = certificateTypesArray[0].label;
+        });
+    }
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -129,7 +153,6 @@ const AddTemplate = () => {
 
     const uploadPdf = (value) => {
         if (value.file.response !== undefined) {
-            console.log(value);
             setPdfUploadFormControl(value.fileList.length);
 
             templateMetadata.templateName = value.file.response.templateName;

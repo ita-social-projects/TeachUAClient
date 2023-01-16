@@ -44,9 +44,9 @@ const EditableTable = ({
                                     onSave(record);
                                     cancelEditing();
                                 }}>
-                        Зберегти
+                        <span className="table-action">Зберегти</span>
                     </Popconfirm>
-                    <span style={{marginLeft: 8}} onClick={cancelEditing}>Відмінити</span>
+                    <span className="table-action" onClick={cancelEditing}>Відмінити</span>
                 </div>
             ) : (
                 <div>

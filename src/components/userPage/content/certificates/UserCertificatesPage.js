@@ -16,7 +16,9 @@ const UserCertificatesPage = () => {
 
     useEffect(() => {
         getCertificatesOfAuthenticatedUser()
-            .then(response => setCertificates(response));
+            .then(response => {
+                setCertificates(response)
+            });
     }, []);
 
     const startDownload = (certificate) => {

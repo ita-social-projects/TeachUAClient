@@ -1,9 +1,3 @@
-export const certificateTypes = [
-    {label: "учасник", value: 3},
-    {label: "модератор", value: 2},
-    {label: "тренер", value: 1}
-];
-
 export const fieldsProperties = [
     {label: "—", value: ""},
     {label: "Серійний номер", value: "serial_number"},

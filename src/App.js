@@ -63,6 +63,7 @@ import {TestQuestion} from "./components/admin/test/TestQuestion"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
+import CertificateTypesTable from "./components/admin/certificateType/CertificateTypesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
 import ImportCertificateByTemplateData from "./components/admin/certificateConstructor/ImportCertificateByTemplateData";
 import TemplatesTable from "./components/admin/certificateConstructor/template/TemplatesTable";
@@ -78,6 +79,7 @@ import UserRoute from "./components/routes/UserRoute";
 import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
+import AddCertificateType from "./components/admin/certificateType/AddCertificateType";
 
 const {Content} = Layout;
 
@@ -151,6 +153,8 @@ function App() {
                                 <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
+                                <AdminRoute path="/admin/certificate-types" exact component={CertificateTypesTable}/>
+                                <AdminRoute path="/admin/add-certificate-type" exact component={AddCertificateType}/>
                                 <AdminRoute path="/admin/files" exact component={AllFileList}/>
                                 <AdminRoute path="/admin/files/:path+" exact component={AllFileList}/>
                                 <AdminRoute path="/admin/unused-files" exact component={UnusedFileList}/>

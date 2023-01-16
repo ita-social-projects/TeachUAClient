@@ -1,9 +1,8 @@
 import React from "react";
 import { Layout, Result } from "antd";
 import { useEffect, useState } from "react";
-import { useParams, BrowserRouter, Redirect, useHistory } from "react-router-dom";
+import { useParams, BrowserRouter, useHistory } from "react-router-dom";
 import { getValidationResponse } from "../../../service/CertificateService";
-import { getCertificateTypeAsString } from "../../../util/CertificateUtil";
 import "../css/CertificateValidation.css";
 
 const ValidateCertificatePage = () => {
@@ -12,7 +11,7 @@ const ValidateCertificatePage = () => {
     const history = useHistory();
     const[certificate, setCertificate] = useState({
         serialNumber: 0,
-        certificateType: "",
+        certificateTypeName: "",
         userName: "",
         courseDescription: "",
         projectDescription: "",    
@@ -47,7 +46,7 @@ const ValidateCertificatePage = () => {
                             </div>
                             <div className="main-text">
                                 <div className="sub-title">
-                                    {getCertificateTypeAsString(certificate.certificateType)}
+                                    {certificate.certificateTypeName}
                                 </div>
                                 <div className="user-name">
                                     {certificate.userName}

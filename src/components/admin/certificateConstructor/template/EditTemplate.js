@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Button, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
 import "react-quill/dist/quill.snow.css";
 import Editor from '../../../../util/Editor';
+import * as TemplateService from "../../../../service/TemplateService";
 import {getTemplateById, updateTemplate} from "../../../../service/TemplateService";
 import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {tokenToHeader} from "../../../../service/UploadService";
-import {certificateTypes, fieldsProperties} from "./TemplateConstants";
-import * as TemplateService from "../../../../service/TemplateService";
+import {fieldsProperties} from "./TemplateConstants";
+import {getCertificateTypes} from "../../../../service/CertificateTypeService";
 
 const {Title} = Typography;
 
@@ -19,6 +19,7 @@ const EditTemplate = () => {
     const templateId = useParams();
     const [chosenProperties, setChosenProperties] = useState({});
     const [fieldsList, setFieldsList] = useState([]);
+    const [certificateTypeDefaultLabel, setCertificateTypeDefaultLabel] = useState("");
 
     const [template, setTemplate] = useState({
         name: "",
@@ -34,6 +35,8 @@ const EditTemplate = () => {
         templateName: "",
         templateLastModifiedDate: ""
     })
+
+    const [certificateTypes, setCertificateTypes] = useState([]);
 
     const extractContent = (htmlText) => {
         let span = document.createElement('span');
@@ -51,7 +54,6 @@ const EditTemplate = () => {
         }
 
         template.properties = JSON.stringify(chosenProperties);
-        console.log(template)
         if (values.name.trim().length === 0 || extractContent(values.courseDescription).trim().length === 0 ||
             extractContent(values.projectDescription).trim().length === 0) {
             message.error("Усі поля повинні бути заповнені!");
@@ -69,7 +71,6 @@ const EditTemplate = () => {
         }
 
         updateTemplate(template).then(response => {
-            console.log(response);
             if (response.status) {
                 message.warning(response.message);
                 return;
@@ -87,34 +88,42 @@ const EditTemplate = () => {
 
     const getData = () => {
         getTemplateById(templateId.id).then(response => {
-            console.log(response);
-            setTemplate(response);
+            setTemplate({...response, certificateType: response.certificateType.codeNumber});
             setChosenProperties(JSON.parse(response.properties))
             setFieldsList(Object.keys(JSON.parse(response.properties)))
 
             if (response.used) {
                 message.warning("Шаблон використовується, можливості редагування обмежено!", 5)
             }
-
-            let certificateTypeName;
-            if (response.certificateType === 1) {
-                certificateTypeName = "тренер";
-            } else if (response.certificateType === 2) {
-                certificateTypeName = "модератор";
-            } else {
-                certificateTypeName = "учасник";
-            }
-            document.getElementsByClassName("ant-select-selection-item")[0].textContent = certificateTypeName;
+            setCertificateTypeDefaultLabel(`${response.certificateType.codeNumber}. ${response.certificateType.name}`);
         }).catch(response => {
             if (response.status === 404) {
                 console.log(response);
             }
+        });
+        getCertificateTypes().then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            let certificateTypesArray = [];
+            for (const certificateType of response) {
+                certificateTypesArray.push({
+                    label: `${certificateType.codeNumber}. ${certificateType.name}`,
+                    value: certificateType.codeNumber
+                })
+            }
+            setCertificateTypes(certificateTypesArray);
         });
     };
 
     useEffect(() => {
         getData();
     }, []);
+
+    useEffect(() => {
+        document.getElementsByClassName("ant-select-selection-item")[0].textContent = certificateTypeDefaultLabel;
+    }, [certificateTypes, certificateTypeDefaultLabel]);
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -126,8 +135,6 @@ const EditTemplate = () => {
 
     const uploadPdf = (value) => {
         if (value.file.response !== undefined) {
-            console.log(value);
-
             templateMetadata.templateName = value.file.response.templateName;
             templateMetadata.templateLastModifiedDate = value.file.lastModified;
 
