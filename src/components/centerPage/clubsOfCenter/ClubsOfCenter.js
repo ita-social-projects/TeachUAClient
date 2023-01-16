@@ -1,9 +1,11 @@
-import { Layout, Pagination } from "antd";
+import React , {useEffect, useState} from 'react';
+import { Carousel, Layout, Pagination} from "antd";
 import ClubListItem from "../../clubList/ClubListItem";
+import ClubsOfCenterContent from "./ClubsOfCenterContent";
 import "./css/ClubsItemStyles.css"
 
 
-const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible}) =>{
+const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible, centerId, clubsPerPage}) =>{
 
     const onClubClick = (club) => {
         setClickedClub(club);
@@ -14,16 +16,18 @@ const ClubsOfCenter = ({clubs,setClickedClub, setClubInfoVisible}) =>{
         !clubs ?
             <div className="empty-list-of-clubs"/>  :
 
-            <Layout className="club-list">
+            <Layout className="club-list" >
 
-                <div className="clubs-inscription">
+                <span className="title" style={{fontSize:18}}>
                     Гуртки центру
-                </div>
-                <div className="display-content">
+                </span>
+                <ClubsOfCenterContent centerId={centerId} clubsPerPage={clubsPerPage}/>
+
+                {/* <div className="display-content"> // variant without pagination
                     {clubs.map( club => (
                             <ClubListItem club={club} onClubClick={onClubClick} key={club.id}/>
                     ))}
-                </div>
+                </div> */}
 
             </Layout>
 

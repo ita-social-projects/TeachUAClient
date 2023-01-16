@@ -1,13 +1,14 @@
 import {Layout, Pagination, Space} from "antd";
 import React, {useEffect, useState} from "react";
-import {getClubsWithoutCategories} from "../../../service/ClubService";
+import { getCenterClubsByCenterId } from "../../../service/CenterService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
+import ClubListItem from "../../clubList/ClubListItem";
 import UserClubCardItem from "../../userPage/content/UserClubCardItem";
-import './css/UserClub.less';
+//import './css/UserClub.less';
 
 
-const UserClubList = ({load, setLoad, match}) => {
+const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
     const [clubs, setClubs] = useState({
         content: [],
         pageable: {},
@@ -18,34 +19,39 @@ const UserClubList = ({load, setLoad, match}) => {
     const [page, setPage] = useState(0);
 
     const getData = (currPage) => {
-        setLoad(true);
-
-        getClubsWithoutCategories(currPage).then(response => {
+        //setLoad(true);
+        
+        getCenterClubsByCenterId(centerId, currPage, clubsPerPage).then(response => {
             setClubs(response);
-            setLoad(false)
+            //setLoad(false);
         });
     };
 
+
     useEffect(() => {
-            getData(page)
-        }, []
-    );
+        getData(page);
+    }, []);
 
     const reloadAfterChange = () => {
-        onPageChange(page + 1);
+        onPageChange(page);
     };
 
     const onPageChange = (currPage) => {
-        setPage(currPage - 1)
+        setPage(currPage - 1);
         getData(currPage - 1);
     };
+
+    const onClubClick = () => {};
 
 
     return load ? <Loader/> : (
         <div className="test">
-            <Layout className="user-clubs" style={{marginTop: 50}}>
-                <Space wrap className="cards" size="middle">
-                    {clubs.content.map((club, index) => <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)}
+            <Layout className="user-clubs">
+                <Space wrap className="cards" size={[0, 0]}>
+                    {clubs.content.map((club, index) => 
+                    // <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)
+                    <ClubListItem club={club} onClubClick={onClubClick}/>)
+                    }
                 </Space>
                 <Pagination className="user-clubs-pagination"
                             hideOnSinglePage
@@ -61,5 +67,5 @@ const UserClubList = ({load, setLoad, match}) => {
 }
 
 
-export default withRouter(UserClubList);
+export default withRouter(ClubsOfCenterList);
 

@@ -27,7 +27,6 @@
 
 .centerInfo .ant-modal-body {
     display: flex;
-    max-height: 944px;
     padding: 0;
 }
 
@@ -152,7 +151,7 @@
 }
 
 .centerInfo .about-club .description {
-    height: 234px;
+    height: auto;
     font-family: Open Sans;
     font-style: normal;
     font-weight: normal;
