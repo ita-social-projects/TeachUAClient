@@ -93,7 +93,7 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                 </Layout>
                 </div>
                 <div>
-                    <Button onClick={() => console.log(center)} className="outlined-button details-button">
+                    <Button onClick={() => getCenterReport(center.id, center.name)} className="outlined-button details-button">
                         Завантажити
                         <FilePdfOutlined/>
                     </Button>
