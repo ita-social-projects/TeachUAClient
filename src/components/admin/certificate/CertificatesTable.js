@@ -149,7 +149,7 @@ const CertificatesTable = () => {
     return (
         <div className="certificatesContent">
             <Input.Search 
-            placeholder="Пошук без дати відправки"
+            placeholder="Пошук по сертифікатах"
             onSearch={(value)=>{
                 setSearchedText(value);
             }}
