@@ -13,6 +13,19 @@ import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 
 const CenterListRectangleItem = ({center, onCenterClick}) => {
     const [visible, setVisible] = useState(false);
+
+    const getRating= () =>{
+        let rating = 0;
+        let ratedClubs = 0;
+        center.clubs.forEach(club => {
+            if(parseInt(club.rating)){
+                rating += parseInt(club.rating);
+                ratedClubs++;
+            }
+        });
+        return ratedClubs === 0 ? 0 : rating / ratedClubs;
+    }
+
     return (
         <div>
             <Card className="card center-list-rectangle-item" onClick={() => onCenterClick(center)} key={center.name}>
@@ -24,7 +37,7 @@ const CenterListRectangleItem = ({center, onCenterClick}) => {
                 </div>
               
                     <div className="item-rating-address">
-                    <Rate className="rating" disabled value={center.rating}/>
+                    <Rate className="rating" disabled value={getRating()}/>
                           {
                     center.locations.length > 0 &&
                     <div className="center-address" onClick={() => { setVisible(true) }} >

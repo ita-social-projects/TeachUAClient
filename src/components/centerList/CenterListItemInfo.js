@@ -25,6 +25,29 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
     const centerId = center.id;
     const clubsPerPage = 2; // size of pagination
 
+
+    const getFeedBackCount= () =>{
+        let feedBackCount = 0;
+        center.clubs.forEach(club => {
+            if(parseInt(club.feedbackCount)){
+                feedBackCount += parseInt(club.feedbackCount);
+            }
+        });
+        return feedBackCount;
+    }
+
+    const getRating= () =>{
+        let rating = 0;
+        let ratedClubs = 0;
+        center.clubs.forEach(club => {
+            if(parseInt(club.rating)){
+                rating += parseInt(club.rating);
+                ratedClubs++;
+            }
+        });
+        return ratedClubs === 0 ? 0 : rating / ratedClubs;
+    }
+
     return (
         <Modal
             centered
@@ -43,8 +66,8 @@ const CenterListItemInfo = ({ visible, setVisible, center }) => {
                     <div className="center-name">{center.name}</div>
                 </div>
                 <div className="rating">
-                    <span className="feedback">{3} відгуків</span>
-                    {/*<PageRatingCenter rating={rating} count={count}*/}
+                    {/* <span className="feedback">{3} відгуків</span> */}
+                    <PageRatingCenter rating={getRating()} count={getFeedBackCount()}/>
                 </div>
                 <div className="address">
                     <EnvironmentFilled className="address-icon" />
