@@ -97,6 +97,9 @@ const NewsTable = () => {
             dataIndex: 'id',
             width: '3%',
             editable: false,
+            sorter: (a, b) => {
+                return a.id - b.id;
+            },
             render: (text, record) => <Link to={'/admin/news/' + record.id}>{record.id}</Link>
         },
         {
