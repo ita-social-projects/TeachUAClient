@@ -80,8 +80,11 @@ import EditTemplate from "./components/admin/certificateConstructor/template/Edi
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificateType/AddCertificateType";
+import ReactGA from 'react-ga4';
 
 const {Content} = Layout;
+
+ReactGA.initialize("G-HV3EDGF9VB")
 
 function App() {
     const [clubs, setClubs] = useState({
