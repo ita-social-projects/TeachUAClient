@@ -23,45 +23,6 @@ const MetricsTable = () => {
         setLoading(false);
     };
 
-    const remove = (record) => {
-        // console.log(record);
-        // deleteChallenge(record.id).then((response) => {
-        //     if (response.status) {
-        //         message.warning(response.message)
-        //         return;
-        //     }
-        //     message.success('Челендж ' + record.name + ' успішно видалено!');
-
-        //     setChallenges(deleteFromTable(challenges, record.id));
-        // });
-    };
-
-    const save = async (record) => {
-        // form.setFieldsValue({
-        //     ...form.getFieldsValue()
-        // });
-        // editCellValue(form, challenges, record.id).then((editedData) => {
-        //     updateChallengePreview(editedData.item, record.id).then(response => {
-        //         if (response.status) {
-        //             message.warning(response.message)
-        //             return;
-        //         }
-        //         getData();
-        //     });
-        // });
-    }
-
-    const actions = (record) => [
-        // <Popconfirm title="Видалити челендж?"
-        //             cancelText="Ні"
-        //             okText="Так"
-        //             cancelButtonProps={{className: "popConfirm-cancel-button"}}
-        //             okButtonProps={{className: "popConfirm-ok-button"}}
-        //             onConfirm={() => remove(record)}>
-        //     <span className="table-action">Видалити</span>
-        // </Popconfirm>
-    ];
-
     useEffect(() => {
         getData();
     }, []);
@@ -110,15 +71,6 @@ const MetricsTable = () => {
                 dataSource={metrics} 
                 pagination={{defaultPageSize:25}}
                 />
-            {/* <EditableTable
-                bordered
-                className="city-table"
-                columns={columns}
-                data={metrics}
-                form={form}
-                onSave={save}
-                actions={actions}
-            /> */}
         </div>
     )
 }
