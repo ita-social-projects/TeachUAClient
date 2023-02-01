@@ -81,6 +81,7 @@ import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificateType/AddCertificateType";
 import ReactGA from 'react-ga4';
+import MetricsTable from "./components/admin/metrics/MetricsTable";
 
 const {Content} = Layout;
 
@@ -134,6 +135,7 @@ function App() {
                                 <AdminRoute path="/admin/categories" exact component={CategoryTable}/>
                                 <AdminRoute path="/admin/districts" exact component={DistrictTable}/>
                                 <AdminRoute path="/admin/fix-clubs-categories" exact component={BrokenClubContent}/>
+                                <AdminRoute path="/admin/metrics" exact component={MetricsTable}/>
                                 <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
                                 <AdminRoute path="/admin/users" exact component={UsersTable}/>
                                 <AdminRoute path="/admin/contact-types" exact component={ContactTypeTable}/>
