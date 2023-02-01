@@ -81,6 +81,9 @@ const MetricsTable = () => {
                 {text:'PUT',value:'PUT'},
                 {text:'CPU usage',value:'system_cpu_usage'},
                 {text:'TomCat metrics',value:'tomcat'},
+                {text:'Spring Data seconds count',value:'spring_data_repository_invocations_seconds_count'},
+                {text:'Spring Data seconds max',value:'spring_data_repository_invocations_seconds_max'},
+                {text:'Spring Data seconds sum',value:'spring_data_repository_invocations_seconds_sum'},
             ],
             onFilter:(value, record)=>{
                 return record.name.includes(value);
