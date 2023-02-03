@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import {searchCategories, createCategory, updateCategory, deleteCategory} from "../../../service/TestQuestionService";
+import {searchTypes, createType, updateType, deleteType} from "../../../service/TestQuestionService";
 import './css/TestCategoryTable.css';
 import {Table, Typography, Input, Button, Popconfirm, message, Form} from "antd";
 
@@ -8,7 +8,7 @@ const {Title} = Typography;
 
 const {Search} = Input;
 
-export const TestCategoryTable = () => {
+export const TestTypeTable = () => {
 
     const tableProperties = {
         pagination: {
@@ -19,7 +19,7 @@ export const TestCategoryTable = () => {
     }
 
     const [form] = Form.useForm();
-    const [categories, setCategories] = useState([]);
+    const [types, setTypes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [properties, setProperties] = useState(tableProperties);
@@ -37,33 +37,32 @@ export const TestCategoryTable = () => {
         setEditingKey('');
         if (isAdding) {
             setAdding(false);
-            setCategories(categories.slice(1));
+            setTypes(types.slice(1));
         }
     };
 
     const save = async (id) => {
-        const category = (await form.validateFields());
+        const type = (await form.validateFields());
         if (isAdding) {
-            createCategory(category)
+            createType(type)
                 .then(response => {
-                    message.success('Категорію створено');
-                    refreshTableAfterEdit(id, category);
+                    message.success('Тип створено');
+                    refreshTableAfterEdit(id, type);
                 }).catch(function (error) {
-                    message.error(error.response.data.message);
-                });
-            return;
-        }
-        updateCategory(id, category)
-            .then(response => {
-                message.success('Категорію збережено');
-                refreshTableAfterEdit(id, category);
-            }).catch(function (error) {
                 message.error(error.response.data.message);
             });
-        refreshTableAfterEdit(id, category);
+            return;
+        }
+        updateType(id, type)
+            .then(response => {
+                message.success('Тип збережено');
+                refreshTableAfterEdit(id, type);
+            }).catch(function (error) {
+            message.error(error.response.data.message);
+        });
     }
 
-    const refreshTableAfterEdit = (id, category) => {
+    const refreshTableAfterEdit = (id, type) => {
         setEditingKey('');
         setAdding(false);
         fetchData();
@@ -73,13 +72,13 @@ export const TestCategoryTable = () => {
         if (isAdding) {
             return;
         }
-        const newCategory = {
+        const newType = {
             id: "",
-            title: "Нова Категорія"
+            title: "Нивий Тип"
         };
         setAdding(true);
-        setCategories([newCategory, ...categories]);
-        edit(newCategory);
+        setTypes([newType, ...types]);
+        edit(newType);
     }
 
     const fetchData = () => {
@@ -87,7 +86,7 @@ export const TestCategoryTable = () => {
         const order = properties.order === 'ascend' ? 'asc' : 'desc';
         const sortField = properties.field ? properties.field : 'id';
 
-        searchCategories(
+        searchTypes(
             properties.pagination.current,
             properties.pagination.pageSize,
             sortField,
@@ -99,7 +98,7 @@ export const TestCategoryTable = () => {
     }
 
     const handleResponse = (response) => {
-        setCategories(response.data.content);
+        setTypes(response.data.content);
         setLoading(false);
         setProperties({
             ...properties,
@@ -127,12 +126,12 @@ export const TestCategoryTable = () => {
         setSearchQuery(query);
     }
 
-    const deleteCategoryById = (id) => {
-        deleteCategory(id).then(response => {
-          message.success('Категорія видалена');
-          fetchData();
+    const deleteTypeById = (id) => {
+        deleteType(id).then(response => {
+            message.success('Тип видалено');
+            fetchData();
         }).catch(function (error) {
-          message.error(error.response.data.message);
+            message.error(error.response.data.message);
         });
     }
 
@@ -189,7 +188,7 @@ export const TestCategoryTable = () => {
                         </Typography.Link>
                         <Popconfirm
                             title="Видалити питання?"
-                            onConfirm={() => deleteCategoryById(record.id)}
+                            onConfirm={() => deleteTypeById(record.id)}
                             cancelText="Ні"
                             okText="Так"
                             okButtonProps={<Button/>}
@@ -219,10 +218,10 @@ export const TestCategoryTable = () => {
 
     return (
         <div className="categoriesContent">
-            <Title level={3}>Категоріі</Title>
+            <Title level={3}>Типи</Title>
             <div className="search-and-add-categories">
                 <Search
-                    placeholder="Введіть заголовок категоріі"
+                    placeholder="Введіть заголовок типу"
                     onSearch={handleSearch}
                     allowClear
                     style={{
@@ -234,7 +233,7 @@ export const TestCategoryTable = () => {
                     className="back-btn"
                 >
                     <Button className="flooded-button add-btn">
-                        Додати Категорію
+                        Додати Тип
                     </Button>
                 </Typography.Link>
             </div>
@@ -246,7 +245,7 @@ export const TestCategoryTable = () => {
                         },
                     }}
                     rowKey={(record) => record.id}
-                    dataSource={categories}
+                    dataSource={types}
                     columns={mergedColumns}
                     pagination={properties.pagination}
                     loading={loading}

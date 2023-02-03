@@ -1,15 +1,6 @@
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
-// export const searchQuestions = async (pageNumber, size, sortField, sortDirection, query) => {
-//     return await fetchRequest
-//         .get(BASE_URL + "/api/questions/search?page=" + (pageNumber - 1) 
-//                 + "&size=" + size + "&sort=" + sortField + "," + sortDirection + "&query=" + query) // pagination starts with 0
-//         .then((response) => {
-//             return response;
-//         });
-// }
-
 export const searchQuestions = async (pageNumber, size, sortField, sortDirection, query, type, category) => {
     return await fetchRequest
         .get(BASE_URL + "/api/questions/search"
@@ -82,4 +73,64 @@ export const searchCategories = async (pageNumber, size, sortField, sortDirectio
         ).then((response) => {
             return response;
         });
+}
+
+export const createCategory = async (category) => {
+    return await fetchRequest
+        .post(BASE_URL + "/api/question_categories/", category)
+        .then((response) => {
+            return response;
+        })
+}
+
+export const updateCategory = async (id, category) => {
+    return await fetchRequest
+        .put(BASE_URL + "/api/question_categories/" + id, category)
+        .then((response) => {
+            return response;
+        })
+}
+
+export const deleteCategory = async (id) => {
+    return await fetchRequest
+        .delete(BASE_URL + "/api/question_categories/" + id)
+        .then((response) => {
+            return response;
+        })
+}
+
+export const searchTypes = async (pageNumber, size, sortField, sortDirection, query) => {
+    return await fetchRequest
+        .get(BASE_URL + "/api/questions_types/search"
+            + "?page=" + (pageNumber - 1) // pagination starts with 0
+            + "&size=" + size
+            + "&sort=" + sortField + "," + sortDirection
+            + "&query=" + query
+        ).then((response) => {
+            return response;
+        });
+}
+
+export const createType = async (category) => {
+    return await fetchRequest
+        .post(BASE_URL + "/api/question_types", category)
+        .then((response) => {
+            return response;
+        })
+}
+
+export const updateType = async (id, category) => {
+    return await fetchRequest
+        .put(BASE_URL + "/api/question_types/" + id, category)
+        .then((response) => {
+            return response;
+        })
+}
+
+export const deleteType = async (id) => {
+    return await fetchRequest
+        .delete(BASE_URL + "/api/question_types/" + id)
+        .then((response) => {
+            return response;
+        })
 }

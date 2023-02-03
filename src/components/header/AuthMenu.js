@@ -79,7 +79,11 @@ const AuthMenu = () => {
                                 <Menu.Item key="import_questions"><Link to="/admin/questions-import"> Імпортувати запитання</Link></Menu.Item>
                                 <Menu.Item key="generate_questions"><Link to="/admin/questions/generate">Згенерувати запитання</Link></Menu.Item>
                                 <Menu.Item key="export_questions" onClick={() => {downloadExcel().then();}}>Експортувати дані</Menu.Item>
-                                <Menu.Item key="edit_questions"><Link to="/admin/quiz/questions/edit">Редагувати запитання</Link></Menu.Item>
+                                <SubMenu title="Редагувати" key="edit" popupOffset={[-400, 0]}>
+                                    <Menu.Item key="edit_questions"><Link to="/admin/quiz/questions/edit">Редагувати запитання</Link></Menu.Item>
+                                    <Menu.Item key="edit_question_categories"><Link to="/admin/quiz/categories/edit">Редагувати категоріі запитань</Link></Menu.Item>
+                                    <Menu.Item key="edit_question_types"><Link to="/admin/quiz/types/edit">Редагувати типи запитань</Link></Menu.Item>
+                                </SubMenu>
                             </SubMenu>
 
                             <Menu.Item key="logs"><Link to="/logs">Логи</Link></Menu.Item>
