@@ -58,10 +58,10 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
 import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
-import {TestQuestionTable} from "./components/admin/test/TestQuestionTable"
-import {TestQuestion} from "./components/admin/test/TestQuestion"
-import {TestCategoryTable} from "./components/admin/test/TestCategoryTable"
-import {TestTypeTable} from "./components/admin/test/TestTypeTable"
+import {TestQuestionTable} from "./components/admin/quiz/TestQuestionTable"
+import {TestQuestion} from "./components/admin/quiz/TestQuestion"
+import {TestCategoryTable} from "./components/admin/quiz/TestCategoryTable"
+import {TestTypeTable} from "./components/admin/quiz/TestTypeTable"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
