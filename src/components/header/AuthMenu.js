@@ -84,6 +84,7 @@ const AuthMenu = () => {
                             </SubMenu>
 
                             <Menu.Item key="logs"><Link to="/logs">Логи</Link></Menu.Item>
+                            <Menu.Item key="metrics"><Link to="/admin/metrics">Метрики</Link></Menu.Item>
                             <SubMenu title="Файли" key="files">
                                 <Menu.Item key="all_files"><Link to="/admin/files">Усі файли</Link></Menu.Item>
                                 <Menu.Item key="unused_files"><Link to="/admin/unused-files">Невикористані файли</Link></Menu.Item>
