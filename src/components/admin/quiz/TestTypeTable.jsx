@@ -39,6 +39,7 @@ export const TestTypeTable = () => {
             setAdding(false);
             setTypes(types.slice(1));
         }
+        fetchData();
     };
 
     const save = async (id) => {
@@ -187,7 +188,7 @@ export const TestTypeTable = () => {
                             </Button>
                         </Typography.Link>
                         <Popconfirm
-                            title="Видалити питання?"
+                            title="Видалити тип?"
                             onConfirm={() => deleteTypeById(record.id)}
                             cancelText="Ні"
                             okText="Так"

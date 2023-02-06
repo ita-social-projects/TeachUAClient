@@ -39,6 +39,7 @@ export const TestCategoryTable = () => {
             setAdding(false);
             setCategories(categories.slice(1));
         }
+        fetchData();
     };
 
     const save = async (id) => {
@@ -188,7 +189,7 @@ export const TestCategoryTable = () => {
                             </Button>
                         </Typography.Link>
                         <Popconfirm
-                            title="Видалити питання?"
+                            title="Видалити категорію?"
                             onConfirm={() => deleteCategoryById(record.id)}
                             cancelText="Ні"
                             okText="Так"
