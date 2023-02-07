@@ -32,7 +32,7 @@ export const TestQuestion = () => {
     const [question, setQuestion] = useState(emptyQuestion);
 
     const init = () => {
-        setEditing(params.id !== undefined);
+        setEditing(params.id !== undefined);    // if question is edited or a new one is created
     }
 
     const fetchData = () => {

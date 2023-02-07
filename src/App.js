@@ -58,8 +58,10 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
 import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
-import {TestQuestionTable} from "./components/admin/test/TestQuestionTable"
-import {TestQuestion} from "./components/admin/test/TestQuestion"
+import {TestQuestionTable} from "./components/admin/quiz/TestQuestionTable"
+import {TestQuestion} from "./components/admin/quiz/TestQuestion"
+import {TestCategoryTable} from "./components/admin/quiz/TestCategoryTable"
+import {TestTypeTable} from "./components/admin/quiz/TestTypeTable"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
@@ -157,6 +159,8 @@ function App() {
                                 <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
                                 <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
+                                <AdminRoute path="/admin/quiz/categories/edit" exact component={TestCategoryTable}/>
+                                <AdminRoute path="/admin/quiz/types/edit" exact component={TestTypeTable}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
                                 <AdminRoute path="/admin/certificate-types" exact component={CertificateTypesTable}/>
                                 <AdminRoute path="/admin/add-certificate-type" exact component={AddCertificateType}/>
