@@ -9,7 +9,7 @@ import {getTemplateById, updateTemplate} from "../../../../service/TemplateServi
 import {BASE_URL} from "../../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {tokenToHeader} from "../../../../service/UploadService";
-import {fieldsProperties} from "./TemplateConstants";
+import {fieldsProperties, showInfo} from "./TemplateConstants";
 import {getCertificateTypes} from "../../../../service/CertificateTypeService";
 
 const {Title} = Typography;
@@ -22,6 +22,7 @@ const EditTemplate = () => {
     const [certificateTypeDefaultLabel, setCertificateTypeDefaultLabel] = useState("");
 
     const [template, setTemplate] = useState({
+        id: templateId.id,
         name: "",
         used: true,
         courseDescription: "",
@@ -75,13 +76,11 @@ const EditTemplate = () => {
                 message.warning(response.message);
                 return;
             }
-            if (!response.updated) {
-                for (const error of response.messages) {
-                    message.error(error);
+            if (!!response.messages) {
+                if (showInfo(response.messages)) {
+                    return;
                 }
-                return;
             }
-
             message.success(`Шаблон "${response.template.name}" успішно оновлено`);
         });
     };

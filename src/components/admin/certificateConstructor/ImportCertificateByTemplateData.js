@@ -1,6 +1,4 @@
-import {
-    Button, Form, Layout, List, Upload, message, Select, InputNumber, DatePicker
-} from "antd";
+import {Button, DatePicker, Form, InputNumber, Layout, List, message, Select, Upload} from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportCertificateDataStyles.less';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -12,7 +10,9 @@ import {BASE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import {useForm} from "antd/es/form/Form";
 import {
-    loadDataCertificatesByTemplateToDB, loadTemplateName, validateCertificateExcelData
+    loadDataCertificatesByTemplateToDB,
+    loadTemplateName,
+    validateCertificateExcelData
 } from "../../../service/CertificateByTemplateService";
 import {getAllTemplates} from "../../../service/TemplateService";
 import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
@@ -117,6 +117,7 @@ const ImportCertificateByTemplateData = () => {
                 columnHeadersList: value.file.response.columnHeadersList,
                 excelColumnsOrder: columnHeadersList
             })
+            setSendButtonState(true);
         }
     };
 
@@ -304,9 +305,7 @@ const ImportCertificateByTemplateData = () => {
         elements.forEach(element => {
             array.push(element.key.slice(element.key.indexOf("_") + 1));
         })
-        if (!sendButtonState) {
-            setSendButtonState(true);
-        }
+        setSendButtonState(true);
         setDataToPdfCreating({...dataToPdfCreating, excelColumnsOrder: array});
     }
 

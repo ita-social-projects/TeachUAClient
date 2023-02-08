@@ -10,7 +10,7 @@ import Editor from "../../../../util/Editor";
 import * as TemplateService from "../../../../service/TemplateService";
 import {createTemplate} from "../../../../service/TemplateService";
 import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
-import {fieldsProperties} from "./TemplateConstants"
+import {fieldsProperties, showInfo} from "./TemplateConstants"
 import {getCertificateTypes} from "../../../../service/CertificateTypeService";
 
 const {Title} = Typography;
@@ -27,18 +27,17 @@ const AddTemplate = () => {
         templateLastModifiedDate: ""
     })
 
-    const ICON_WARNING = 1;
     const ICON_ERROR = 2;
     const ICON_OK = 3;
 
     const renderIcon = (type) => {
         switch (type) {
-            case ICON_WARNING:
-                return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
             case ICON_ERROR:
                 return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
             case ICON_OK:
                 return (<CheckCircleOutlined className="icon ok-icon"/>)
+            default:
+                return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
         }
     }
 
@@ -70,6 +69,7 @@ const AddTemplate = () => {
             }
             setCertificateTypes(certificateTypesArray);
             document.getElementsByClassName("ant-select-selection-item")[0].textContent = certificateTypesArray[0].label;
+            dataToDB.certificateType = certificateTypesArray[0].value;
         });
     }
 
@@ -83,58 +83,65 @@ const AddTemplate = () => {
         return span.textContent;
     }
 
-    const loadToDatabase = (values) => {
+    const isTemplateValid = (values) => {
         if (!!values.name && !!values.courseDescription && !!values.projectDescription) {
             if (values.name.trim().length === 0 || extractContent(values.courseDescription).trim().length === 0 ||
                 extractContent(values.projectDescription).trim().length === 0) {
                 message.error("Усі поля повинні бути заповнені!");
-                return;
+                return false;
             }
             if (values.name.length > 250) {
                 message.error("Занадто велика назва!")
-                return;
+                return false;
             } else if (values.courseDescription.length > 1020) {
                 message.error("Занадто великий опис курсу!")
-                return;
+                return false;
             } else if (values.projectDescription.length > 1020) {
                 message.error("Занадто великий опис проекту!")
-                return;
+                return false;
             }
             if (dataToDB.filePath === "") {
                 message.error("Завантажте pdf-шаблон!")
-                return;
+                return false;
             }
-
-            dataToDB.name = values.name;
-            dataToDB.courseDescription = values.courseDescription;
-            dataToDB.projectDescription = values.projectDescription;
-
-            createTemplate(dataToDB)
-                .then((response) => {
-                    if (response.status) {
-                        console.log(dataToDB)
-                        message.warning(response.message);
-                        return;
-                    }
-                    if (!response.valid) {
-                        for (const error of response.messages) {
-                            message.error(error);
-                        }
-                        return;
-                    }
-                    message.success("Шаблон '" + response.template.name + "' успішно доданий!");
-                    console.log('Success:', dataToDB);
-
-                    document.getElementById('add-template_form').reset();
-                    setFieldsList([])
-                    setPdfUploadFormControl(0)
-                });
         } else {
             message.error("Усі поля повинні бути заповнені!")
             if (dataToDB.filePath === "") {
                 message.error("Завантажте pdf-шаблон!")
             }
+            return false
         }
+        return true;
+    };
+
+    const loadToDatabase = (values) => {
+        if (!isTemplateValid(values)) {
+            return;
+        }
+        dataToDB.name = values.name;
+        dataToDB.courseDescription = values.courseDescription;
+        dataToDB.projectDescription = values.projectDescription;
+
+        createTemplate(dataToDB)
+            .then((response) => {
+                if (response.status) {
+                    message.warning(response.message);
+                    return;
+                }
+                if (!!response.messages) {
+                    if (showInfo(response.messages)) {
+                        return;
+                    }
+                }
+
+                message.success("Шаблон '" + response.template.name + "' успішно доданий!");
+
+                document.getElementById('add-template_form').reset();
+                setFieldsList([]);
+                setPdfUploadFormControl(0);
+                document.getElementsByClassName("ant-select-selection-item")[0].textContent = certificateTypes[0].label;
+                dataToDB.certificateType = certificateTypes[0].value;
+            });
     }
 
     const onFieldPropertyChange = () => {
@@ -152,43 +159,44 @@ const AddTemplate = () => {
     }
 
     const uploadPdf = (value) => {
-        if (value.file.response !== undefined) {
-            setPdfUploadFormControl(value.fileList.length);
+        if (value.file.response === undefined) {
+            return;
+        }
+        setPdfUploadFormControl(value.fileList.length);
 
-            templateMetadata.templateName = value.file.response.templateName;
-            templateMetadata.templateLastModifiedDate = value.file.lastModified;
+        templateMetadata.templateName = value.file.response.templateName;
+        templateMetadata.templateLastModifiedDate = value.file.lastModified;
 
-            TemplateService.loadTemplateMetadata(templateMetadata).then(response => {
-                    setFieldsList(value.file.response.fieldsList)
-                    let includesFields = [];
-                    Object.keys(chosenProperties).forEach(key => {
-                        if (!value.file.response.fieldsList.includes(key)) {
-                            delete chosenProperties[key];
-                        } else {
-                            includesFields.push(key);
-                        }
-                    });
-
-                    for (const element of value.file.response.fieldsList) {
-                        if (!includesFields.includes(element)) {
-                            chosenProperties[element] = "";
-                        }
+        TemplateService.loadTemplateMetadata(templateMetadata).then(response => {
+                setFieldsList(value.file.response.fieldsList)
+                let includesFields = [];
+                Object.keys(chosenProperties).forEach(key => {
+                    if (!value.file.response.fieldsList.includes(key)) {
+                        delete chosenProperties[key];
+                    } else {
+                        includesFields.push(key);
                     }
+                });
 
-                    setDataToDB({
-                        ...dataToDB,
-                        filePath: response.filePath,
-                        properties: chosenProperties
-                    })
-
-                    if (response.messages != null) {
-                        for (const warning of response.messages) {
-                            message.warning(warning)
-                        }
+                for (const element of value.file.response.fieldsList) {
+                    if (!includesFields.includes(element)) {
+                        chosenProperties[element] = "";
                     }
                 }
-            );
-        }
+
+                setDataToDB({
+                    ...dataToDB,
+                    filePath: response.filePath,
+                    properties: chosenProperties
+                })
+
+                if (response.messages != null) {
+                    for (const warning of response.messages) {
+                        message.warning(warning)
+                    }
+                }
+            }
+        );
     }
 
     const fieldPropertiesList = () => {
