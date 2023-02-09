@@ -28,6 +28,7 @@ import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import MarathonPage from "./components/marathonPage/MarathonPage";
+import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
 import EditChallenge from "./components/admin/challenge/EditChallenge";
@@ -57,8 +58,10 @@ import ValidateCertificatePage from "./components/certificate/validation/Validat
 
 import QuestionsTable  from "./components/admin/quiz/QuestionsTable";
 import ImportQuestionsData from "./components/admin/quiz/ImportQuestionsData"
-import {TestQuestionTable} from "./components/admin/test/TestQuestionTable"
-import {TestQuestion} from "./components/admin/test/TestQuestion"
+import {TestQuestionTable} from "./components/admin/quiz/TestQuestionTable"
+import {TestQuestion} from "./components/admin/quiz/TestQuestion"
+import {TestCategoryTable} from "./components/admin/quiz/TestCategoryTable"
+import {TestTypeTable} from "./components/admin/quiz/TestTypeTable"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
@@ -83,8 +86,12 @@ import ChallengeTable from "./components/admin/challenge/userChallenge/challenge
 import UserChallengeStatus from "./components/admin/challenge/userChallenge/userStatus/UserChallengeStatus";
 import ChallengeDurationPage from "./components/admin/challenge/userChallenge/duration/ChallengeDurationPage";
 import RegistrationPage from "./components/admin/challenge/userChallenge/registration/RegistrationPage";
+import ReactGA from 'react-ga4';
+import MetricsTable from "./components/admin/metrics/MetricsTable";
 
 const {Content} = Layout;
+
+ReactGA.initialize("G-HV3EDGF9VB")
 
 function App() {
     const [clubs, setClubs] = useState({
@@ -138,6 +145,7 @@ function App() {
                                 <AdminRoute path="/admin/categories" exact component={CategoryTable}/>
                                 <AdminRoute path="/admin/districts" exact component={DistrictTable}/>
                                 <AdminRoute path="/admin/fix-clubs-categories" exact component={BrokenClubContent}/>
+                                <AdminRoute path="/admin/metrics" exact component={MetricsTable}/>
                                 <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
                                 <AdminRoute path="/admin/users" exact component={UsersTable}/>
                                 <AdminRoute path="/admin/contact-types" exact component={ContactTypeTable}/>
@@ -159,6 +167,8 @@ function App() {
                                 <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
                                 <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
                                 <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
+                                <AdminRoute path="/admin/quiz/categories/edit" exact component={TestCategoryTable}/>
+                                <AdminRoute path="/admin/quiz/types/edit" exact component={TestTypeTable}/>
                                 <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
                                 <AdminRoute path="/admin/certificate-types" exact component={CertificateTypesTable}/>
                                 <AdminRoute path="/admin/add-certificate-type" exact component={AddCertificateType}/>
