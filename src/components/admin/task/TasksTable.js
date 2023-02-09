@@ -119,7 +119,8 @@ const TasksTable = () => {
                 .toLowerCase()
                 .includes(value.toLowerCase())
                 )
-            }
+            },
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Назва',
