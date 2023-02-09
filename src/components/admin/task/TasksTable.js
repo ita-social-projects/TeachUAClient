@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Select, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Select, Typography, Input} from "antd";
 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
@@ -17,6 +17,7 @@ const TasksTable = () => {
     const [form] = Form.useForm();
     const [selectedChallenges, setSelectedChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchedText, setSearchedText] = useState("");
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
@@ -102,7 +103,23 @@ const TasksTable = () => {
             dataIndex: 'id',
             width: '5%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>
+            filteredValue:[searchedText],
+            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
+            onFilter: (value, record) =>{
+                return (
+                    String(record.id)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+                
+                String(record.name)
+                .toLowerCase()
+                .includes(value.toLowerCase()) ||
+
+                String(record.startDate)
+                .toLowerCase()
+                .includes(value.toLowerCase())
+                )
+            }
         },
         {
             title: 'Назва',
@@ -145,6 +162,19 @@ const TasksTable = () => {
                         </Option>
                     ))}
                 </Select>
+                <Input.Search 
+            placeholder="Пошук по завданнях"
+            onSearch={(value)=>{
+                setSearchedText(value);
+            }}
+            // onChange={(e)=>{
+            //     setSearchedText(e.target.value);
+            // }}
+            style={{
+                width: 500,
+                paddingLeft: 5,
+            }}
+            />
             </div>
             <Title level={3}>Завдання</Title>
             <EditableTable
