@@ -84,9 +84,11 @@ const ChallengeTable = () =>{
             <div className="challengeTableContentBox">
                 <div className="challengeTableContentTitle">
                     Челенджі
-                    <Button className="challengeTableButton" style={{color: "black", marginLeft:"15px"}} href='/admin/user-challenge/status' icon={<PlusOutlined/>}>
+                    <Link to={'/admin/user-challenge/status'}>
+                    <Button className="challengeTableButton" style={{color: "black", marginLeft:"15px"}} icon={<PlusOutlined/>}>
                         Додати статус учасника
                     </Button>
+                    </Link>
                 </div> 
                 <Table className="challengeTable"
                        tableLayout="fixed" 

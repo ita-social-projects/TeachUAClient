@@ -28,7 +28,7 @@ import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import MarathonPage from "./components/marathonPage/MarathonPage";
-import RegistrationPage from "./components/challenges/RegistrationPage";
+// import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
 import EditChallenge from "./components/admin/challenge/EditChallenge";
