@@ -28,7 +28,6 @@ import LogByNameComponent from "./components/log/LogByNameComponent";
 import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import MarathonPage from "./components/marathonPage/MarathonPage";
-import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
 import EditChallenge from "./components/admin/challenge/EditChallenge";
@@ -80,6 +79,10 @@ import EditTemplate from "./components/admin/certificateConstructor/template/Edi
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificateType/AddCertificateType";
+import ChallengeTable from "./components/admin/challenge/userChallenge/challengeTable/ChallengeTable";
+import UserChallengeStatus from "./components/admin/challenge/userChallenge/userStatus/UserChallengeStatus";
+import ChallengeDurationPage from "./components/admin/challenge/userChallenge/duration/ChallengeDurationPage";
+import RegistrationPage from "./components/admin/challenge/userChallenge/registration/RegistrationPage";
 
 const {Content} = Layout;
 
@@ -126,6 +129,10 @@ function App() {
                                 <AdminRoute path="/admin/tasks" exact component={TasksTable}/>
                                 <AdminRoute path="/admin/addChallenge" exact component={AddChallenge}/>
                                 <AdminRoute path="/admin/challenges" exact component={ChallengesTable}/>
+                                <AdminRoute path="/admin/user-challenge" exact component={ChallengeTable}/>
+                                <AdminRoute path="/admin/user-challenge/status" exact component={UserChallengeStatus}/>
+                                <AdminRoute path="/admin/user-challenge/:id/duration" exact component={ChallengeDurationPage}/>
+                                <AdminRoute path="/admin/user-challenge/:id/duration/:id" exact component={RegistrationPage}/>
                                 <AdminRoute path="/admin/news" exact component={NewsTable}/>
                                 <AdminRoute path="/admin/news/:id" exact component={EditNews}/>
                                 <AdminRoute path="/admin/categories" exact component={CategoryTable}/>

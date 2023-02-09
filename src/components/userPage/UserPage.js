@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from "react";
-import {useRouteMatch} from "react-router-dom";
+import {Route, useRouteMatch} from "react-router-dom";
 import SiderComponent from "./sider/UserSider";
 import UserPageContent from "./content/UserPageContent";
 import '../userPage/css/User.less'
@@ -11,6 +11,7 @@ import UserMessagesPage from "./content/messages/UserMessagesPage";
 import UserCertificatesPage from "./content/certificates/UserCertificatesPage";
 import UserRoute from "../routes/UserRoute";
 import {AuthContext} from "../../context/AuthContext";
+import UserChallengesPage from "./content/challenges/UserChallengesPage";
 
 const UserPage = () => {
 
@@ -46,6 +47,9 @@ const UserPage = () => {
 
             <UserRoute exact path={`${routeMatch.path}/certificates`} >
                 <UserCertificatesPage />
+            </UserRoute>
+            <UserRoute exact path={`${routeMatch.path}/challenges`} >
+                <UserChallengesPage />
             </UserRoute>
         </Layout>
     )

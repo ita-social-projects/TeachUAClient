@@ -99,19 +99,15 @@ const ChallengesTable = () => {
 
     return (
         <div className="push-down">
-            <Button className="flooded-button add-btn">
-                <Link to="/admin/addChallenge">
-                    Додати челендж
-                </Link>
+            <Button className="flooded-button add-btn" href="/admin/addChallenge" style={{margin:"5px"}}>
+                Додати челендж
             </Button>
-            <Link
-                to="/admin/tasks"
-                className="back-btn"
-            >
-                <Button className="flooded-button">
-                    До списку завдань
-                </Button>
-            </Link>
+            <Button className="flooded-button add-btn" href="/admin/user-challenge" style={{margin:"5px"}}>
+                Керування челенджема
+            </Button>
+            <Button className="flooded-button back-btn" href="/admin/tasks" style={{margin:"5px"}}>
+                До списку завдань
+            </Button>
             <Title level={3}>Челенджі</Title>
             <EditableTable
                 bordered

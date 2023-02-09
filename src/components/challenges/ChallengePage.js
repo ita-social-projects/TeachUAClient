@@ -10,6 +10,7 @@ import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 import ChallengeBanner from "./ChallengeBanner";
 import ChallengeCarousel from "./ChallengeCarousel";
+import ChallengeRegistration from "./ChallengeRegistration";
 
 const ChallengePage = () => {
     const [challenge, setChallenge] = useState({
@@ -51,6 +52,7 @@ const ChallengePage = () => {
                     <AboutHeader/>
                     <ChallengeBanner challenge={challenge}/>
                     <SocialInfo/>
+                    <ChallengeRegistration/>
                     <ChallengeDescription challenge={challenge}/>
                     {challenge.registrationLink &&
                     <div className="button-div">

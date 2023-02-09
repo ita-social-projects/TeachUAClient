@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../sider/css/Sider.less'
-import {MailOutlined, UserOutlined, FileDoneOutlined} from "@ant-design/icons";
+import {MailOutlined, UserOutlined, FileDoneOutlined, CrownOutlined} from "@ant-design/icons";
 import {Menu} from "antd";
 import {Link, useHistory} from "react-router-dom";
 
@@ -43,6 +43,13 @@ const MenuSiderComponent = ({url}) => {
                            icon={<FileDoneOutlined className="icon-message" style={{fontSize: 20}} />}
                 >
                     <Link to={`${url}/certificates`}>Сертифікати</Link>
+                </Menu.Item>
+                <Menu.Item className="menu-item"
+                           style={{paddingLeft: 15}}
+                           key={`${url}/challenges`}
+                           icon={<CrownOutlined className="icon-message" style={{fontSize: 20}}/>}
+                >
+                    <Link to={`${url}/challenges`}>Челенджі</Link>
                 </Menu.Item>
             </Menu>
         </div>
