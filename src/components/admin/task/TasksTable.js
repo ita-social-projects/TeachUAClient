@@ -97,29 +97,29 @@ const TasksTable = () => {
         getChallengeData();
     }, []);
 
+    const search = (data) => {
+        return data.filter( (item) =>
+            String(item.id)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+            
+            String(item.name)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+
+            String(item.startDate)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase())
+        );
+    };
+
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             width: '5%',
             editable: false,
-            filteredValue:[searchedText],
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
-            onFilter: (value, record) =>{
-                return (
-                    String(record.id)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-                
-                String(record.name)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                String(record.startDate)
-                .toLowerCase()
-                .includes(value.toLowerCase())
-                )
-            },
             sorter: (a, b) => a.id - b.id,
         },
         {
@@ -163,18 +163,15 @@ const TasksTable = () => {
                         </Option>
                     ))}
                 </Select>
-                <Input.Search 
-            placeholder="Пошук по завданнях"
-            onSearch={(value)=>{
-                setSearchedText(value);
-            }}
-            // onChange={(e)=>{
-            //     setSearchedText(e.target.value);
-            // }}
-            style={{
-                width: 500,
-                paddingLeft: 5,
-            }}
+            <Input.Search 
+                placeholder="Пошук по завданнях"
+                onSearch={(value)=>{
+                    setSearchedText(value);
+                }}
+                style={{
+                    width: 500,
+                    paddingLeft: 5,
+                }}
             />
             </div>
             <Title level={3}>Завдання</Title>
@@ -182,7 +179,7 @@ const TasksTable = () => {
                 bordered
                 className="city-table"
                 columns={columns}
-                data={tasks}
+                data={search(tasks)}
                 form={form}
                 onSave={save}
                 actions={actions}
