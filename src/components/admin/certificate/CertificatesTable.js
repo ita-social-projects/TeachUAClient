@@ -8,6 +8,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import EditableTable from "../../EditableTable";
 import moment from "moment";
+import { render } from "@testing-library/react";
 
 const {Title} = Typography;
 
@@ -16,6 +17,7 @@ const CertificatesTable = () => {
     const [form] = Form.useForm();
     const [certificates, setCertificates] = useState([]);
     const [searchedText, setSearchedText] = useState("");
+    const keys = ["id","serialNumber","userName","sendToEmail"];
 
     const getData = () => {
         getSentCertificates().then(response => {
@@ -31,6 +33,13 @@ const CertificatesTable = () => {
 
     const actions = () => [
     ];
+
+    const search = (data) => {
+        return data.filter( (item) =>
+            keys.some((key) => String(item[key]).toLowerCase().includes(searchedText.toLowerCase())) ||
+            String(item.dates.date).includes(searchedText)
+        );
+    };
 
     const save = async (record) => {
         form.setFieldsValue({
@@ -56,41 +65,6 @@ const CertificatesTable = () => {
             width: '3%',
             editable: false,
             render: (id) => id,
-            filteredValue:[searchedText],
-            onFilter: (value, record) =>{
-                return (
-                    String(record.id)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-                
-                String(record.userName)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                String(record.sendToEmail)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                String(record.serialNumber)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                // (record.date != null ? moment(record.date.toString()).format('DD.MM.YYYY') : "-")
-                // .includes(value) ||
-
-                String(record.dates.date)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                String(record.dates.duration)
-                .toLowerCase()
-                .includes(value.toLowerCase()) ||
-
-                (value.toLowerCase() === "видано" && record.sendStatus === true) ||
-                (value.toLowerCase() === "не видано" && record.sendStatus === null) ||
-                ("помилка відправки".includes(value.toLowerCase()) && record.sendStatus === false) 
-                )
-            }
             // render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>
         },
         {
@@ -142,7 +116,15 @@ const CertificatesTable = () => {
             selectData: ["не видано"],
             width: '8%',
             editable: true,
-            render: (sendStatus) => sendStatus ? "видано" : sendStatus == null ? "не видано" : "помилка відправки"
+            render: (sendStatus) => sendStatus ? "видано" : sendStatus == null ? "не видано" : "помилка відправки",
+            filters:[
+                {text:'видано',value:'true'},
+                {text:'не видано',value:'null'},
+                {text:'помилка відправки',value:'false'},
+            ],
+            onFilter: (value, record) =>  {
+                return String(record.sendStatus).includes(String(value));
+            },
         }
     ];
 
@@ -153,9 +135,6 @@ const CertificatesTable = () => {
             onSearch={(value)=>{
                 setSearchedText(value);
             }}
-            // onChange={(e)=>{
-            //     setSearchedText(e.target.value);
-            // }}
             style={{
                 width: 500,
             }}
@@ -163,7 +142,7 @@ const CertificatesTable = () => {
             <Title level={3}>Сертифікати</Title>
             <EditableTable bordered
                            columns={columns}
-                           data={certificates}
+                           data={search(certificates)}
                            form={form}
                            onSave={save}
                            actions={actions}
