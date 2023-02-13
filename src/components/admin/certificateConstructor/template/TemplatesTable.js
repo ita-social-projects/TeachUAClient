@@ -23,10 +23,9 @@ const TemplatesTable = () => {
     };
 
     const remove = (record) => {
-        console.log(record);
         deleteTemplate(record.id).then((response) => {
             if (response.status) {
-                message.warning(response.message)
+                message.warning(response.message);
                 return;
             }
             if (response) {
@@ -87,14 +86,16 @@ const TemplatesTable = () => {
             dataIndex: 'courseDescription',
             width: '32%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/template/' + record.id}>{extractContent(record.courseDescription)}</Link>
+            render: (text, record) => <Link
+                to={'/admin/template/' + record.id}>{extractContent(record.courseDescription)}</Link>
         },
         {
             title: 'Опис проекту',
             dataIndex: 'projectDescription',
             width: '30%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/template/' + record.id}>{extractContent(record.projectDescription)}</Link>
+            render: (text, record) => <Link
+                to={'/admin/template/' + record.id}>{extractContent(record.projectDescription)}</Link>
         }
     ];
 
