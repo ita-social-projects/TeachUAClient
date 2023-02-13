@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Select, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Select, Typography, Input} from "antd";
 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
@@ -17,6 +17,7 @@ const TasksTable = () => {
     const [form] = Form.useForm();
     const [selectedChallenges, setSelectedChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchedText, setSearchedText] = useState("");
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
@@ -96,13 +97,30 @@ const TasksTable = () => {
         getChallengeData();
     }, []);
 
+    const search = (data) => {
+        return data.filter( (item) =>
+            String(item.id)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+            
+            String(item.name)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+
+            String(item.startDate)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase())
+        );
+    };
+
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             width: '5%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Назва',
@@ -145,13 +163,23 @@ const TasksTable = () => {
                         </Option>
                     ))}
                 </Select>
+            <Input.Search 
+                placeholder="Пошук по завданнях"
+                onSearch={(value)=>{
+                    setSearchedText(value);
+                }}
+                style={{
+                    width: 500,
+                    paddingLeft: 5,
+                }}
+            />
             </div>
             <Title level={3}>Завдання</Title>
             <EditableTable
                 bordered
                 className="city-table"
                 columns={columns}
-                data={tasks}
+                data={search(tasks)}
                 form={form}
                 onSave={save}
                 actions={actions}

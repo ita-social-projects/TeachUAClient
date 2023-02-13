@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Typography} from "antd";
+import {Button, Form, message, Popconfirm, Typography, Input} from "antd";
 
 import {deleteChallenge, getAllChallenges, updateChallengePreview} from "../../../service/ChallengeService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
@@ -14,6 +14,7 @@ const ChallengesTable = () => {
     const [form] = Form.useForm();
     const [challenges, setChallenges] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchedText, setSearchedText] = useState("");
 
     const getData = () => {
         getAllChallenges().then(response => {
@@ -65,6 +66,26 @@ const ChallengesTable = () => {
         getData();
     }, []);
 
+    const search = (data) => {
+        return data.filter( (item) =>
+            String(item.id)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+            
+            String(item.sortNumber)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+
+            String(item.name)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+
+            String(item.title)
+            .toLowerCase()
+            .includes(searchedText.toLowerCase())
+        );
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -112,12 +133,21 @@ const ChallengesTable = () => {
                     До списку завдань
                 </Button>
             </Link>
+            <Input.Search 
+                placeholder="Пошук по челенджам"
+                onSearch={(value)=>{
+                    setSearchedText(value);
+                }}
+                style={{
+                    width: 500,
+                }}
+            />
             <Title level={3}>Челенджі</Title>
             <EditableTable
                 bordered
                 className="city-table"
                 columns={columns}
-                data={challenges}
+                data={search(challenges)}
                 form={form}
                 onSave={save}
                 actions={actions}
