@@ -1,4 +1,4 @@
-import {Button, DatePicker, Form, Input, InputNumber, Layout, List, Upload, message, Radio, Space, Select} from "antd";
+import {Button, DatePicker, Form, InputNumber, Layout, List, Upload, message, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import './css/ImportData.css';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -22,13 +22,6 @@ const ImportCertificateData = () => {
 
     const [datesForm] = useForm();
 
-    // commented code will be used in the future
-    //
-    // const [startDate, setStartDate] = useState();
-    // const [endDate, setEndDate] = useState();
-    // const [hours, setHours] = useState();
-    // const [type, setType] = useState();
-    // const [courseNumber, setCourseNumber] = useState();
     const dateFormat = 'YYYY-MM-DD';
     const [formFilled, setFormFilled] = useState(false);
 
@@ -37,15 +30,6 @@ const ImportCertificateData = () => {
         {label: "дистанційна", value: "дистанційна"},
         {label: "змішана", value: "змішана"}
     ];
-
-    // const [dataToDB, setDataToDB] = useState({
-    //     type: 3,
-    //     hours: 40,
-    //     startDate: "2022-08-01",
-    //     endDate: "2022-08-28",
-    //     courseNumber: 4,
-    //     excelList: dataToLoad
-    // });
 
     const [dataToDB, setDataToDB] = useState({
         type: null,
@@ -87,6 +71,11 @@ const ImportCertificateData = () => {
         console.log(dataToDB)
     }
 
+    const onStudyFormChange = (value) => {
+        setDataToDB({...dataToDB, studyType: value});
+        isFilled();
+    }
+
     const isFilled = () => {
         setFormFilled(false);
         if (dataToDB.type === '3') {
@@ -121,11 +110,6 @@ const ImportCertificateData = () => {
     const onFinish = () => {
 
     };
-
-    const onFill = () => {
-        datesForm.setFieldsValue(dataToDB);
-    }
-
 
     const uploadExcel = (value) => {
         if (value.file.response !== undefined) {
@@ -278,8 +262,6 @@ const ImportCertificateData = () => {
                     </Form>
                 </div>
 
-                {/*commented code will be used in the future*/}
-
                 <div className="send-to-db">
                     <Form
                         className="load-excel-form"
@@ -379,6 +361,7 @@ const ImportCertificateData = () => {
                             <Select
                                 options={studyTypes}
                                 disabled={(dataToDB.type === "3")}
+                                onChange={onStudyFormChange}
                                 name="studyType"
                                 className="dropdown"
                             />
