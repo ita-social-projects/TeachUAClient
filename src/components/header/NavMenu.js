@@ -9,6 +9,7 @@ import HomeOutlined from "@ant-design/icons/lib/icons/HomeOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import { PageContext } from "../../context/PageContext";
 import { CaretDownOutlined} from "@ant-design/icons";
+import "./css/NavMenu.less";
 import {getActiveChallengesPreviews, getChallengesPreviews} from "../../service/ChallengeService";
 
 const NavMenu = () => {
