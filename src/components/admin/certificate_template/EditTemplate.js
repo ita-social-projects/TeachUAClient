@@ -3,14 +3,14 @@ import {Link, useParams} from "react-router-dom";
 import {Button, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
 import "react-quill/dist/quill.snow.css";
-import Editor from '../../../../util/Editor';
-import * as TemplateService from "../../../../service/TemplateService";
-import {getTemplateById, updateTemplate} from "../../../../service/TemplateService";
-import {BASE_URL} from "../../../../service/config/ApiConfig";
+import Editor from '../../../util/Editor';
+import * as TemplateService from "../../../service/TemplateService";
+import {getTemplateById, updateTemplate} from "../../../service/TemplateService";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import {tokenToHeader} from "../../../../service/UploadService";
-import {fieldsProperties, showInfo} from "./TemplateConstants";
-import {getCertificateTypes} from "../../../../service/CertificateTypeService";
+import {tokenToHeader} from "../../../service/UploadService";
+import {fieldsProperties, showInfo} from "../../constants/CertificateConstants";
+import {getCertificateTypes} from "../../../service/CertificateTypeService";
 
 const {Title} = Typography;
 
