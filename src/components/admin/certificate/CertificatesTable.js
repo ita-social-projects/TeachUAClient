@@ -62,7 +62,7 @@ const CertificatesTable = () => {
         {
             title: 'ID',
             dataIndex: 'id',
-            width: '3%',
+            width: '5%',
             editable: false,
             render: (id) => id,
             // render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>
