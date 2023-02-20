@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import { deleteUserStorage, saveRole, saveToken, saveUserId } from '../../service/StorageService';
+import { deleteUserStorage, saveRole, saveTokens, saveUserId } from '../../service/StorageService';
 import { message } from "antd";
 
 class OAuth2RedirectHandler extends Component {
@@ -15,7 +15,8 @@ class OAuth2RedirectHandler extends Component {
             maxCount: 1
         });
 
-        const token = this.getUrlParameter('token');
+        const accessToken = this.getUrlParameter('accessToken');
+        const refreshToken = this.getUrlParameter('refreshToken');
         const userId = this.getUrlParameter('id');
         const role = this.getUrlParameter('role');
         const error = this.getUrlParameter('error');
@@ -25,10 +26,10 @@ class OAuth2RedirectHandler extends Component {
         const errorMesage = (err) => {
             message.error(err);
         }
-        saveToken(token);
+        saveTokens(accessToken, refreshToken);
         saveUserId(userId);
         saveRole(role);
-        if (token) {
+        if (userId) {
             return (<div>
                 <Redirect to={{
                     pathname: `/user/${userId}/page`,

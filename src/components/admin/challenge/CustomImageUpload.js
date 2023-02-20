@@ -1,6 +1,6 @@
 import {UPLOAD_IMAGE_URL} from '../../../service/config/ApiConfig';
 
-const getToken = () => localStorage.getItem("accessToken") || false;
+const getAccessToken = () => localStorage.getItem("accessToken") || false;
 
 
 export default function CustomUploadAdapterPlugin( editor ) {
@@ -35,7 +35,7 @@ class CustomImageUpload {
         xhr.open('POST', this.url, true);
         xhr.responseType = 'json';
         xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-        xhr.setRequestHeader('Authorization', getToken())
+        xhr.setRequestHeader('Authorization', getAccessToken())
     }
 
     _initListeners(resolve, reject) {

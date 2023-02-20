@@ -1,8 +1,16 @@
 import axios from "axios";
+import { getAccessToken } from "./StorageService";
 
-const getToken = () => localStorage.getItem("accessToken") || false;
+export const fetchRequest = axios.create({
+    headers: {
+        "content-type": "application/json"
+    }
+})
 
-const fetchRequest = axios.create({
+/**
+ * Use this axios instance only for authentication or refresh token
+ */
+export const authRequest = axios.create({
     headers: {
         "content-type": "application/json"
     }
@@ -10,8 +18,8 @@ const fetchRequest = axios.create({
 
 fetchRequest.interceptors.request.use(
     config => {
-        const token = getToken();
-        if (token) config.headers['Authorization'] = 'Bearer ' + token;
+        const accessToken = getAccessToken();
+        if (accessToken) config.headers['Authorization'] = `Bearer ${accessToken}`;
         return config;
     },
     error => Promise.reject(error)

@@ -5,7 +5,7 @@ import NavMenu from "./NavMenu";
 import {Link, useHistory} from "react-router-dom";
 import {searchParameters} from "../../context/SearchContext";
 import {useLocation} from "react-router-dom";
-import { deleteUserStorage, getToken } from '../../service/StorageService';
+import { deleteUserStorage, getAccessToken, getRefreshToken } from '../../service/StorageService';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useEffect } from 'react';
@@ -23,7 +23,7 @@ const HeaderComponent = () => {
     };
 
     useEffect(() => {
-        const token = getToken();
+        const token = getRefreshToken();
         if (token) {
             const payload = JSON.parse(atob(token.split(".")[1]));
             if (payload.exp * 1000 < Date.now()) {
