@@ -3,9 +3,9 @@ import {Link, useHistory} from "react-router-dom";
 
 import {Button, Form, message, Popconfirm, Typography} from "antd";
 
-import EditableTable from "../../../EditableTable";
-import {deleteTemplate, getAllTemplates} from "../../../../service/TemplateService";
-import {deleteFromTable} from "../../../../util/TableUtil";
+import EditableTable from "../../EditableTable";
+import {deleteTemplate, getAllTemplates} from "../../../service/TemplateService";
+import {deleteFromTable} from "../../../util/TableUtil";
 
 const {Title} = Typography;
 

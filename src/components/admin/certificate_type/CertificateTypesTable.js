@@ -8,6 +8,7 @@ import {
     updateCertificateType
 } from "../../../service/CertificateTypeService";
 import {Link} from "react-router-dom";
+import {showInfo} from "../../constants/CertificateConstants";
 
 const {Title} = Typography;
 
@@ -56,18 +57,12 @@ const CertificateTypesTable = () => {
                             return;
                         }
                         if (!!response.messages) {
-                            for (const element of response.messages) {
-                                if (element[1] === "1") {
-                                    message.warning(element[0]);
-                                } else if (element[1] === "3") {
-                                    message.error(element[0]);
-                                    return;
-                                }
+                            if (showInfo(response.messages)) {
+                                return;
                             }
                         }
                         message.success(`Тип "${response.certificateType.name}" оновлено`);
                         getData();
-
                     });
             });
     };

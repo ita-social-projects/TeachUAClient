@@ -65,11 +65,11 @@ import {TestTypeTable} from "./components/admin/quiz/TestTypeTable"
 import ImportQuestionExcelData from "./components/admin/quiz/ImportQuestionExcelData"
 import ImportCertificateData from "./components/admin/certificate/ImportCertificateData";
 import CertificatesTable from "./components/admin/certificate/CertificatesTable";
-import CertificateTypesTable from "./components/admin/certificateType/CertificateTypesTable";
+import CertificateTypesTable from "./components/admin/certificate_type/CertificateTypesTable";
 import CertificatesSearch from "./components/certificate/CertificatesSearch";
-import ImportCertificateByTemplateData from "./components/admin/certificateConstructor/ImportCertificateByTemplateData";
-import TemplatesTable from "./components/admin/certificateConstructor/template/TemplatesTable";
-import AddTemplate from "./components/admin/certificateConstructor/template/AddTemplate";
+import ImportCertificateByTemplateData from "./components/admin/certificate_by_template/ImportCertificateByTemplateData";
+import TemplatesTable from "./components/admin/certificate_template/TemplatesTable";
+import AddTemplate from "./components/admin/certificate_template/AddTemplate";
 import BrokenClubContent from "./components/admin/fix-clubs-categories/BrokenClubContent";
 import {AllFileList} from "./components/admin/files/AllFileList";
 import {UnusedFileList} from "./components/admin/files/UnusedFileList";
@@ -78,10 +78,10 @@ import {SearchContext} from "./context/SearchContext";
 import {AuthContext} from "./context/AuthContext";
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
-import EditTemplate from "./components/admin/certificateConstructor/template/EditTemplate";
+import EditTemplate from "./components/admin/certificate_template/EditTemplate";
 import { getUserById } from "./service/UserService";
 import { deleteUserStorage, getUserId } from "./service/StorageService";
-import AddCertificateType from "./components/admin/certificateType/AddCertificateType";
+import AddCertificateType from "./components/admin/certificate_type/AddCertificateType";
 import ReactGA from 'react-ga4';
 import MetricsTable from "./components/admin/metrics/MetricsTable";
 

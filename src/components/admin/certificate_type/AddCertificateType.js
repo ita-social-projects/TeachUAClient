@@ -3,6 +3,7 @@ import {Button, Form, Input, InputNumber, Layout, message, Typography} from 'ant
 import {useForm} from "antd/es/form/Form";
 import {Link} from "react-router-dom";
 import {createCertificateType} from "../../../service/CertificateTypeService";
+import {showInfo} from "../../constants/CertificateConstants";
 
 const {Title} = Typography;
 
@@ -36,13 +37,8 @@ const AddCertificateType = () => {
                         return;
                     }
                     if (!!response.messages) {
-                        for (const element of response.messages) {
-                            if (element[1] === "1") {
-                                message.warning(element[0]);
-                            } else if (element[1] === "3") {
-                                message.error(element[0]);
-                                return;
-                            }
+                        if (showInfo(response.messages)) {
+                            return;
                         }
                     }
                     message.success("Тип '" + response.certificateType.name + "' успішно доданий!");
@@ -81,6 +77,7 @@ const AddCertificateType = () => {
                     >
                         <InputNumber
                             min={1}
+                            max={999}
                         />
                     </Form.Item>
                     <Form.Item
@@ -99,7 +96,6 @@ const AddCertificateType = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-
             </div>
         </Layout>
     );
