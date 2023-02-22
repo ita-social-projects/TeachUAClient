@@ -2,16 +2,15 @@ import React, {useEffect, useState} from 'react';
 import './css/TemplateStyles.less';
 import {Button, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
-import {BASE_URL} from "../../../../service/config/ApiConfig";
+import {BASE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {Link} from "react-router-dom";
-import {tokenToHeader} from "../../../../service/UploadService";
-import Editor from "../../../../util/Editor";
-import * as TemplateService from "../../../../service/TemplateService";
-import {createTemplate} from "../../../../service/TemplateService";
-import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
-import {fieldsProperties, showInfo} from "./TemplateConstants"
-import {getCertificateTypes} from "../../../../service/CertificateTypeService";
+import {tokenToHeader} from "../../../service/UploadService";
+import Editor from "../../../util/Editor";
+import * as TemplateService from "../../../service/TemplateService";
+import {createTemplate} from "../../../service/TemplateService";
+import {fieldsProperties, ICON_OK, renderIcon, showInfo} from "../../constants/CertificateConstants"
+import {getCertificateTypes} from "../../../service/CertificateTypeService";
 
 const {Title} = Typography;
 
@@ -26,20 +25,6 @@ const AddTemplate = () => {
         templateName: "",
         templateLastModifiedDate: ""
     })
-
-    const ICON_ERROR = 2;
-    const ICON_OK = 3;
-
-    const renderIcon = (type) => {
-        switch (type) {
-            case ICON_ERROR:
-                return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
-            case ICON_OK:
-                return (<CheckCircleOutlined className="icon ok-icon"/>)
-            default:
-                return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
-        }
-    }
 
     const [dataToDB, setDataToDB] = useState({
         name: "",
@@ -261,7 +246,6 @@ const AddTemplate = () => {
                         name="projectDescription"
                         label="Опис проекту"
                     >
-
                         <Editor/>
                     </Form.Item>
                     <Form.Item

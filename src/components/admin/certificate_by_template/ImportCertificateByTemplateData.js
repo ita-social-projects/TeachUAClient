@@ -4,7 +4,6 @@ import './css/ImportCertificateDataStyles.less';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Text from "antd/lib/typography/Text";
-import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {Content} from "antd/es/layout/layout";
 import {BASE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
@@ -17,6 +16,7 @@ import {
 import {getAllTemplates} from "../../../service/TemplateService";
 import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
 import DraggableList from "../../../util/DraggableList";
+import {ICON_OK, renderIcon} from "../../constants/CertificateConstants";
 
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
@@ -57,22 +57,6 @@ const ImportCertificateByTemplateData = () => {
     useEffect(() => {
         getTemplates();
     }, []);
-
-    const onFinish = () => {
-    };
-
-    const ICON_OK = "3";
-
-    const renderIcon = (type) => {
-        switch (type) {
-            case "1":
-                return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
-            case "3":
-                return (<CheckCircleOutlined className="icon ok-icon"/>)
-            default:
-                return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
-        }
-    }
 
     const onTemplateChange = (value) => {
         loadTemplateName(value).then(response => {
@@ -133,6 +117,7 @@ const ImportCertificateByTemplateData = () => {
                 </List.Item>}
         />)
     }
+
     const columnsList = () => {
         let items = [];
         for (let i = 0; i < dataToPdfCreating.fieldsList.length; i++) {
@@ -151,6 +136,8 @@ const ImportCertificateByTemplateData = () => {
                                     id="input-int"
                                     name={element}
                                     key={element}
+                                    min={1}
+                                    max={999}
                                     onChange={e => {
                                         saveValue(element, e ? e.toString() : "");
                                         checkButtonState();
@@ -336,8 +323,7 @@ const ImportCertificateByTemplateData = () => {
                     form={datesForm}
                     className="load-excel-form"
                     name="basic"
-                    requiredMark={false}
-                    onFinish={onFinish}>
+                    requiredMark={false}>
 
                     <Text
                         className="text-hint">
@@ -374,8 +360,7 @@ const ImportCertificateByTemplateData = () => {
                     className="load-excel-form"
                     id="load-excel-form"
                     name="basic"
-                    requiredMark={false}
-                    onFinish={onFinish}>
+                    requiredMark={false}>
 
                     <Text
                         className="text-hint">
