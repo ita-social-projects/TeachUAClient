@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CertificateList from "./CertificateList";
 import DownloadModal from "./DownloadModal";
 import { Content } from "antd/es/layout/layout";
-import { getToken } from "../../../../service/StorageService";
-import { Redirect } from "react-router-dom";
 import { getCertificatesOfAuthenticatedUser, downloadCertificate } from "../../../../service/CertificateService";
 import "../messages/css/UserMessagesPage.less";
 import "./css/UserCertificatesPage.less";
@@ -32,11 +30,6 @@ const UserCertificatesPage = () => {
         
     }
 
-    if (!getToken()) {
-        return (
-            <Redirect to="/" />
-        );
-    }
     return (
         <Content className="messagesContent">
             <div className="contentBox">

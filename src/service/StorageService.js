@@ -1,17 +1,19 @@
-export const saveToken = (token) => {
-    localStorage.setItem("accessToken", token)
+export const saveTokens = (accessToken, refreshToken) => {
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
 }
 
 export const saveUserId = (id) => {
-    localStorage.setItem("id", id)
+    localStorage.setItem("id", id);
 }
 
 export const saveRole = (role) => {
-    localStorage.setItem("role", role)
+    localStorage.setItem("role", role);
 }
 
-export const deleteToken = () => {
+export const deleteTokens = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 }
 
 export const deleteUserId = () => {
@@ -19,17 +21,21 @@ export const deleteUserId = () => {
 }
 
 export const deleteRole = () => {
-    localStorage.removeItem("role")
+    localStorage.removeItem("role");
 }
 
 export const deleteUserStorage = () => {
-    deleteToken();
+    deleteTokens();
     deleteUserId();
     deleteRole();
 }
 
-export const getToken = () => {
+export const getAccessToken = () => {
     return localStorage.getItem("accessToken");
+}
+
+export const getRefreshToken = () => {
+    return localStorage.getItem("refreshToken");
 }
 
 export const getUserId = () => {

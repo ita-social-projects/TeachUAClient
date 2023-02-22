@@ -13,7 +13,8 @@ import AddCenter from "../addCenter/AddCenter";
 import {updateRating} from "../../service/RatingService";
 import {downloadExcel} from "../../service/QuizService"
 import {AuthContext} from "../../context/AuthContext";
-import { deleteUserStorage, getToken } from "../../service/StorageService";
+import { deleteUserStorage, getUserId } from "../../service/StorageService";
+import { revokeRefreshToken } from "../../service/UserService";
 
 const {SubMenu} = Menu;
 
@@ -31,13 +32,14 @@ const AuthMenu = () => {
     const [styleClass, setStyleClass] = useState('');
 
     const onExitClick = () => {
+        revokeRefreshToken();
         deleteUserStorage();
         setUser({});
         history.push("/");
     };
 
     useEffect(() => {
-        if (getToken()) {
+        if (getUserId()) {
             if (user.urlLogo && user.urlLogo.includes("https")) {
                 setSource(user.urlLogo);
             } else if (user.urlLogo) {
@@ -48,10 +50,10 @@ const AuthMenu = () => {
             setSource('');
             setStyleClass("avatarIfNotLogin");
         }
-    }, [user]);
+    }, [user.urlLogo]);
 
     const profileDropdown = () => {
-        if (getToken()) {
+        if (getUserId()) {
             return (
                 <Menu>
                     <Menu.Item key="add_club"><div onClick={() => setShowAddClub(true)}>Додати гурток</div></Menu.Item>

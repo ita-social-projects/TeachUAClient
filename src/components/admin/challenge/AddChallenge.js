@@ -12,8 +12,6 @@ import {tokenToHeader} from "../../../service/UploadService";
 const { Title } = Typography;
 
 const AddChallenge = () => {
-    const getToken = () => localStorage.getItem("accessToken") || false;
-    const token = getToken();
     const [challengeForm] = useForm();
     const [name, setName] = useState();
     const [title, setTitle] = useState();

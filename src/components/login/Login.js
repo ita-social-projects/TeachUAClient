@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Form, message, Modal } from "antd";
 import LoginSocial from "./LoginSocial";
 import LoginInput from "./LoginInput";
 import RestorePasswordModal from "../restorePassword/restorePasswordModal";
 import { getUserById, signIn } from "../../service/UserService";
-import { saveUserId, saveToken, saveRole, getUserId } from '../../service/StorageService';
+import { saveUserId, saveTokens, saveRole, getUserId } from '../../service/StorageService';
 import './../restorePassword/css/RestorePassword.less';
 import './css/Login.less';
 import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
+    const [form] = Form.useForm();
     const {showLogin, setShowLogin, setUser} = useContext(AuthContext);
 
     const onFinish = (values) => {
@@ -17,11 +18,12 @@ const Login = () => {
             message.success("Ви успішно залогувалися!");
             saveUserId(response.id);
             saveRole(response.roleName);
-            saveToken(response.accessToken);
+            saveTokens(response.accessToken, response.refreshToken);
             setShowLogin(false);
             getUserById(getUserId()).then(response => {
                 setUser(response);
             });
+            form.resetFields();
         }).catch((error) => {
             const response = error.response.data;
             if (response.status >= 500) {
@@ -48,6 +50,7 @@ const Login = () => {
                 </div>
                 <div className="login-content">
                     <Form
+                        form={form}
                         name="basic"
                         requiredMark={false}
                         onFinish={onFinish}

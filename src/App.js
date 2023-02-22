@@ -84,6 +84,7 @@ import { deleteUserStorage, getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificate_type/AddCertificateType";
 import ReactGA from 'react-ga4';
 import MetricsTable from "./components/admin/metrics/MetricsTable";
+import WithAxios from "./components/WithAxios";
 
 const {Content} = Layout;
 
@@ -105,7 +106,7 @@ function App() {
         if (getUserId()) {
             getUserById(getUserId()).then(response => {
                 setUser(response);
-            }).catch(() => deleteUserStorage());
+            }).catch(() => setShowLogin(true));
         }
     }, []);
 
@@ -116,8 +117,9 @@ function App() {
         <Layout className="layout">
             <div className="behind-header"/>
             <Router basename={process.env.PUBLIC_URL}>
+            <AuthContext.Provider value={{showLogin, setShowLogin, user, setUser}}>
+            <WithAxios>
                 <ScrollToTop/>
-                <AuthContext.Provider value={{showLogin, setShowLogin, user, setUser}}>
                 <PageContext.Provider value={pageProvider}>
                 <SearchContext.Provider value={clubProvider}>
                     <HeaderComponent/>
@@ -203,8 +205,9 @@ function App() {
                     </Layout>
                 </SearchContext.Provider>
                 </PageContext.Provider>
-                </AuthContext.Provider>
                 <FooterComponent/>
+            </WithAxios>
+            </AuthContext.Provider>
             </Router>
         </Layout>
     );

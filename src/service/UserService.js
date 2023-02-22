@@ -1,6 +1,6 @@
-import fetchRequest from "./FetchRequest";
-import {BASE_URL} from "./config/ApiConfig";
-
+import { fetchRequest, authRequest } from "./FetchRequest";
+import { BASE_URL } from "./config/ApiConfig";
+import { getRefreshToken } from "./StorageService";
 
 export const resetPassword = async (data) => {
     return await fetchRequest.post(BASE_URL + "/api/resetpassword", {
@@ -55,13 +55,29 @@ export const signUp = async (data) => {
 };
 
 export const signIn = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/signin", {
+    return await authRequest.post(BASE_URL + "/api/signin", {
         email: data.email,
         password: data.password
     }).then((response) => {
         return response.data
     });
 };
+
+export const refreshAccessToken = async () => {
+    return await fetchRequest.post(BASE_URL + "/api/token/refresh", {
+        refreshToken: getRefreshToken(),
+    }).then((response) => {
+        return response.data
+    });
+}
+
+export const revokeRefreshToken = async () => {
+    return await authRequest.post(BASE_URL + "/api/token/revoke", {
+        refreshToken: getRefreshToken(),
+    }).then((response) => {
+        return response.data
+    });
+}
 
 export const verify = async (data) => {
     return await fetchRequest.post(BASE_URL + "/api/verify", {
@@ -98,20 +114,20 @@ export const updatePassword = async (data) => {
 
 export const getAllUsers = async () => {
     return await fetchRequest.get(BASE_URL + "/api/users")
-    .then((response) => {
-        return response.data
-    }).catch((error) => {
-        return error.response.data
-    })
+        .then((response) => {
+            return response.data
+        }).catch((error) => {
+            return error.response.data
+        })
 };
 
 export const getUsersByRole = async (role) => {
     return await fetchRequest.get(BASE_URL + "/api/users/" + role)
         .then((response) => {
-        return response.data
-    }).catch((error) => {
-        return error.response.data
-    });
+            return response.data
+        }).catch((error) => {
+            return error.response.data
+        });
 };
 
 export const deleteUserById = async (id) => {
