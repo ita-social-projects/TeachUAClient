@@ -130,7 +130,9 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
                 </Button>
                 <div className="about-club">
                     <span className="title">Про гурток</span>
-                    <ImageCarousel className="carousel" urls={images}/>
+                    {images.length > 0 &&
+                        <ImageCarousel className="carousel" urls={images}/>
+                    }
                     <div className="description">
                         {getShortContent(club.description)}
                     </div>
