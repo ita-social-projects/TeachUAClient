@@ -30,14 +30,17 @@ const PageContent = ({club, feedbackCount}) => {
     return (
         <Content className="page-content">
             <PageRating rating={rate} count={feedbackCount}/>
-            <ImageCarousel className="carousel" urls={images}/>
+            {images.length > 0 &&
+                <ImageCarousel className="carousel" urls={images}/>
+            }
             {!club.description ?
                 <div className="content">У цього гуртка опису немає...</div>
                 :
                 <div className="content">
                     {getShortContent(club.description)}
                     {/*{club.description}*/}
-                </div>}
+                </div>
+            }
             <div className="full-width button-box">
                 <Button className="flooded-button apply-button"
                         onClick={() => setSignUpForClubVisible(true)}
