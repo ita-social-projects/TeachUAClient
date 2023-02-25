@@ -208,6 +208,7 @@
     font-size: 16px;
     padding: 2px 14px 5px;
 }
+
 .clubModal.popConfirm span:hover {
     background-color: #ffa940;
 }
@@ -229,7 +230,13 @@
     font-size: 16px;
     padding: 2px 14px 5px;
 }
+
 .clubModal.popCancel span:hover {
     background-color: #fa8c16;
     color: white;
+}
+
+.download-button {
+    display: block;
+    margin: 0 auto;
 }

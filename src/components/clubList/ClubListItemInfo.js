@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Menu, Dropdown, Button, Modal, Rate, Popconfirm, message} from "antd";
+import {Button, Dropdown, Menu, message, Modal, Popconfirm} from "antd";
 import "./css/ClubInfo.css";
 import {Link} from "react-router-dom";
 import Tags from "../Tags";
@@ -71,7 +71,10 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
                 </Popconfirm>
             </Menu.Item>
             <Menu.Item onClick={() => setVisible(false)} key="edit_club_popup">
-                <EditClubModal clubId={club.id} reloadAfterChange={() => {setVisible(false); reloadAfterChange();}}/>
+                <EditClubModal clubId={club.id} reloadAfterChange={() => {
+                    setVisible(false);
+                    reloadAfterChange();
+                }}/>
             </Menu.Item>
         </Menu>
     );
@@ -138,7 +141,8 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
                     </div>
                 </div>
                 <div>
-                    <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
+                    <Button onClick={() => getClubReport(club.id, club.name)}
+                            className="outlined-button details-button download-button">
                         Завантажити
                         <FilePdfOutlined/>
                     </Button>
