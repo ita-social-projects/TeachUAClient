@@ -3,10 +3,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     color: #2D4C68;
     border-radius: 4px;
     padding-left: 11px;
+    margin-left: 5px;
+    margin-right: 16px;
 }
 
 .center-list-control .center-control-sort {
@@ -56,16 +57,8 @@
     display: none;
 }
 
-.center-list-control .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-    color: #FA8C16;
-}
-
 .center-list-control .ant-radio-button-wrapper:first-child {
     right: -5px;
-}
-
-.center-list-control .center-view-button .ant-radio-button-checked:hover {
-    background: white;
 }
 
 .center-list-control .center-view-button .ant-radio-button-checked {
