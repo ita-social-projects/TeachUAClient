@@ -3,8 +3,6 @@ import "./css/ClubListControl.css";
 import ArrowDownOutlined from "@ant-design/icons/lib/icons/ArrowDownOutlined";
 import ArrowUpOutlined from "@ant-design/icons/lib/icons/ArrowUpOutlined";
 import {Form, Radio, Select} from "antd";
-import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
-import Sider from "antd/es/layout/Sider";
 
 const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirection, setView, centerIsChecked}) => {
     const [isMobile, setIsMobile] = useState(false);
@@ -52,11 +50,28 @@ const ClubListControl = ({view, setSortBy, setSortDirection, sortBy, sortDirecti
                              buttonStyle="solid">
                     <Radio.Button value="LIST"
                                   className="club-view-button">
-                        <img src={`${process.env.PUBLIC_URL}/static/images/clubs/control/list.svg`}/>
+                        <div className="club-view-button-icon">
+                            <svg className={"club-button-icon"} width="17" height="14"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <title>Layer 1</title>
+                                    <path id="svg_1" fill="currentColor"
+                                          d="m5,0l0,4l12,0l0,-4l-12,0zm0,14l12,0l0,-4l-12,0l0,4zm0,-5l12,0l0,-4l-12,0l0,4zm-5,-5l4,0l0,-4l-4,0l0,4zm0,10l4,0l0,-4l-4,0l0,4zm0,-5l4,0l0,-4l-4,0l0,4z"/>
+                                </g>
+                            </svg>
+                        </div>
                     </Radio.Button>
                     <Radio.Button value="BLOCK"
                                   className="club-view-button">
-                        <img src={`${process.env.PUBLIC_URL}/static/images/clubs/control/block.svg`}/>
+                        <div className="club-view-button-icon">
+                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                                <g>
+                                    <title>Layer 1</title>
+                                    <path id="svg_1" fill="currentColor"
+                                          d="m0,8l8,0l0,-8l-8,0l0,8zm0,10l8,0l0,-8l-8,0l0,8zm10,0l8,0l0,-8l-8,0l0,8zm0,-18l0,8l8,0l0,-8"/>
+                                </g>
+                            </svg>
+                        </div>
                     </Radio.Button>
                 </Radio.Group>
             </div>
