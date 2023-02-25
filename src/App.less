@@ -471,15 +471,26 @@
   margin-right: 8px;
 }
 
-.table .ant-pagination-item a {
+.ant-pagination-item a {
   color: black;
   background: white;
 }
 
-.table .ant-pagination-item-active a,
-.table .ant-pagination-item a:hover {
+.ant-pagination-item-active a,
+.ant-pagination-item a:hover {
   color: white;
-  background: #FE7729;
+  background-color: @primary-hover-color;
+}
+
+.pagination .ant-pagination-item:hover {
+  text-decoration: none;
+  background-color: @primary-hover-color;
+}
+
+.pagination .ant-pagination-item:focus a,
+.ant-pagination-item-active {
+  background-color: @primary-hover-color;
+  border-color: @primary-hover-color;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
