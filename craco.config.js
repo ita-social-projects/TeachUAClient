@@ -13,6 +13,7 @@ module.exports = {
                             '@link-color': '#000',
                             '@text-color': '#000',
                             '@primary-hover-color': '#FA8C16',
+                            '@primary-hover-color_2': '#FFA940',
                             '@menu-highlight-color': '#FFF'
                         },
                         javascriptEnabled: true,
