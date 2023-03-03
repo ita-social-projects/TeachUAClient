@@ -12,7 +12,6 @@
 
 .club-list-sider .club-list-label {
     font-weight: 600;
-    color: #2D4C68;
     font-size: 24px;
     opacity: 0.6;
     margin-bottom: 40px;
@@ -23,7 +22,6 @@
     text-align: left;
     padding-right: 16px;
     display: block;
-    color: #2D4C68;
 }
 
 .club-list-sider .club-list-row label:after {
@@ -55,20 +53,6 @@
     padding: 0;
 }
 
-.club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner {
-    border-color: #0050B3;
-}
-
-.club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner::after,
-.club-list-sider .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #0050B3;
-    border-color: #0050B3;
-}
-
-.club-list-sider .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner:hover {
-    border-color: #0050B3;
-}
-
 .club-list-sider .club-list-age {
     color: #595959;
     display: flex;
@@ -92,10 +76,6 @@
 .club-list-sider .club-list-age  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
 .club-list-sider .club-list-age  .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner{
     margin-right: -4px;
-}
-
-.club-list-sider .ant-switch-checked {
-    background: #0050B3;
 }
 
 .club-list-sider .ant-checkbox-input:focus + .ant-checkbox-inner {

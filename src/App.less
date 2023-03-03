@@ -51,6 +51,26 @@
   vertical-align: middle;
 }
 
+.ant-btn:active, .ant-btn:focus {
+  color: @text-color;
+  border-color: #d9d9d9;
+}
+
+.ant-btn:hover{
+  color: @primary-hover-color_2;
+  border-color: @primary-hover-color_2;
+
+}
+.ant-btn-primary:active, .ant-btn-primary:focus {
+  background-color: @primary-color;
+  color: #fff;
+}
+
+.ant-btn-primary:hover{
+  background-color: @primary-hover-color_2;
+  color: #fff;
+}
+
 .outlined-button,
 .outlined-button:active,
 .outlined-button:focus {
@@ -79,7 +99,7 @@
 .flooded-button:focus {
   background: white;
   border: none;
-  color: @primary-hover-color;
+  color: @primary-color;
   font-weight: 700;
 }
 
@@ -471,15 +491,26 @@
   margin-right: 8px;
 }
 
-.table .ant-pagination-item a {
+.ant-pagination-item a {
   color: black;
   background: white;
 }
 
-.table .ant-pagination-item-active a,
-.table .ant-pagination-item a:hover {
+.ant-pagination-item-active a,
+.ant-pagination-item a:hover {
   color: white;
-  background: #FE7729;
+  background-color: @primary-hover-color;
+}
+
+.pagination .ant-pagination-item:hover {
+  text-decoration: none;
+  background-color: @primary-hover-color;
+}
+
+.pagination .ant-pagination-item:focus a,
+.ant-pagination-item-active {
+  background-color: @primary-hover-color;
+  border-color: @primary-hover-color;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
