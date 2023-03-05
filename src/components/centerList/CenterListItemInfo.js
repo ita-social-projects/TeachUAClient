@@ -68,29 +68,34 @@ const CenterListItemInfo = ({visible, setVisible, center}) => {
                     {/* <span className="feedback">{3} відгуків</span> */}
                     <PageRatingCenter rating={getRating()} count={getFeedBackCount()}/>
                 </div>
-                <div className="address">
-                    <EnvironmentFilled
-                        className="address-icon"/>
-                    {
-                        center.locations.length === 1 ?
-                            <span className="oneAddress"> {center.locations[0].address}</span>
-                            :
-                            <Popover
-                                className="popover"
-                                title="Локації"
-                                placement="topRight"
-                                content={center.locations.map(location =>
-                                    <div>
-                                        <EnvironmentFilled className="address-small-icon"/>
-                                        <span className="text"> {location.address}</span>
-                                    </div>
-                                )}>
-                                    <span className="text" style={{display: "flex", alignItems: "center"}}><span
-                                        className="oneAddress"
-                                    >{center.locations[0].address}</span>, і ще {center.locations.length - 1}</span>
-                            </Popover>
-                    }
-                </div>
+                {center.locations[0] ?
+                    <div className="address">
+                        <EnvironmentFilled
+                            className="address-icon"/>
+                        {
+                            center.locations.length === 1 ?
+                                <span className="oneAddress"> {center.locations[0].address}</span>
+                                :
+                                <Popover
+                                    className="popover"
+                                    title="Локації"
+                                    placement="topRight"
+                                    content={center.locations.map(location =>
+                                        <div>
+                                            <EnvironmentFilled className="address-small-icon"/>
+                                            <span className="text"> {location.address}</span>
+                                        </div>
+                                    )}>
+                                    <span className="text" style={{display: "flex", alignItems: "center"}}>
+                                        <span className="oneAddress">
+                                            {(center.locations[0]) ? center.locations[0].address : ""}
+                                        </span>
+                                        , і ще {center.locations.length - 1}
+                                    </span>
+                                </Popover>
+                        }
+                    </div> : <div></div>
+                }
                 <ContactsInfoUtil className="socialMedia" label="Контакти центру" contacts={center.contacts}/>
                 <Button className="flooded-button more-button">
                     <Link to={`/center/${center.id}`}>Більше про центр</Link>
