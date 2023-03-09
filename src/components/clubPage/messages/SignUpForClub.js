@@ -12,11 +12,7 @@ import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 const SignUpForClub = ({isShowing, setShowing, club}) => {
 
     const [messageForm] = Form.useForm();
-    const [admin, setAdmin] = useState(0);
-
-    useEffect(() => {
-        getUsersByRole("ROLE_ADMIN").then((response) => setAdmin(response[0]));
-    }, [isShowing]);
+    const [admin, setAdmin] = useState({id: 1});
 
     const getRecipientId = () => {
         if (club.user) {
