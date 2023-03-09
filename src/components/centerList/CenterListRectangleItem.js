@@ -50,15 +50,21 @@ const CenterListRectangleItem = ({center, onCenterClick}) => {
                                             className="popover"
                                             title="Локації"
                                             placement="topRight"
-                                            content={center.locations.map(location =>
+                                            content={
+                                                center.locations.map(location =>
                                                 <div>
                                                     <EnvironmentFilled className="address-small-icon"/>
                                                     <span className="text"> {location.address}</span>
                                                 </div>
-                                            )}>
-                                    <span className="text" style={{display: "flex", alignItems: "center"}}><span
-                                        className="oneAddress"
-                                    >{center.locations[0].address}</span>, і ще {center.locations.length - 1}</span>
+                                                )
+                                            }
+                                        >
+                                            <span className="text" style={{display: "flex", alignItems: "center"}}>
+                                                <span className="oneAddress">
+                                                    {center.locations[0].address}
+                                                </span>
+                                                , і ще {center.locations.length - 1}
+                                            </span>
                                         </Popover>
                                 }
                             </div>
