@@ -17,6 +17,7 @@ import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../..
 import DraggableList from "../../../util/DraggableList";
 import {ICON_OK, renderIcon} from "../../constants/CertificateConstants";
 import {getGoogleFormResults} from "../../../service/GoogleFormsService";
+import GoogleFormResultTable from "./GoogleFormResultTable";
 
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
@@ -557,6 +558,10 @@ const ImportCertificateByTemplateData = () => {
                                 Загальна кількість учасників: {quizInfo.results.length};<br/>
                                 Із них отримають сертифікат: {dataToPdfCreating.googleFormResults.length};
                             </span>
+                            <GoogleFormResultTable
+                                passingScore={googleFormInfo.passingScore}
+                                quizInfo={quizInfo}
+                            />
                         </div>
                     </div>
                     <div
