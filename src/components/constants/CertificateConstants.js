@@ -8,13 +8,12 @@ export const ICON_ERROR = 2;
 export const ICON_OK = 3;
 
 export const renderIcon = (type) => {
-    switch (type) {
-        case ICON_ERROR:
-            return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
-        case ICON_OK:
-            return (<CheckCircleOutlined className="icon ok-icon"/>)
-        default:
-            return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
+    if (type == ICON_ERROR){
+        return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
+    } else if (type == ICON_OK){
+        return (<CheckCircleOutlined className="icon ok-icon"/>)
+    } else {
+        return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)
     }
 }
 
