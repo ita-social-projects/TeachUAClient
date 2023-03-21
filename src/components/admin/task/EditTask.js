@@ -106,6 +106,7 @@ const EditTask = () => {
 
     const onChange = (value) => {
         setSelectedChallenges(value);
+        setTask({...task, challengeId: value});
     }
 
     const handlePictureChange = (value) => {
