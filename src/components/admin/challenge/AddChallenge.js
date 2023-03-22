@@ -119,6 +119,7 @@ const AddChallenge = () => {
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
+                        accept="image/*"
                         data={{folder:`challenges`}}
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
