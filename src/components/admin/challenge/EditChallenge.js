@@ -184,6 +184,7 @@ const EditChallenge = (props) => {
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
                         fileList={currentPicture}
+                        accept="image/*"
                         data={{ folder: `challenges` }}
                         headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader() }}
                         onChange={(uploaded) => handlePictureChange(uploaded)}

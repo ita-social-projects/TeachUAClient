@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
-import {Button, DatePicker, Form, Image, Input, message, Select, Upload} from "antd";
+import {Button, DatePicker, Form, Input, message, Select, Upload} from "antd";
 import moment from "moment";
 
 import {useForm} from "antd/es/form/Form";
@@ -14,15 +13,15 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Editor from "../../../util/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
-import {tokenToHeader, uploadImage} from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
 
-const { Option } = Select;
-const { TextArea } = Input;
+const {Option} = Select;
+const {TextArea} = Input;
 
 const EditTask = () => {
 
     const [taskEditForm] = useForm();
-    const taskId  = useParams();
+    const taskId = useParams();
     const [taskNotFound, setTaskNotFound] = useState(false);
     const [task, setTask] = useState({
         id: 0,
@@ -45,10 +44,10 @@ const EditTask = () => {
     const [picture, setPicture] = useState(task.picture);
     const [challengeList, setChallengeList] = useState([
         {
-            'id' : 0,
-            'name' : '',
-            'title' : '',
-            'sortNumber' : 0
+            'id': 0,
+            'name': '',
+            'title': '',
+            'sortNumber': 0
         }
     ]);
     const [selectedChallenges, setSelectedChallenges] = useState([]);
@@ -68,7 +67,7 @@ const EditTask = () => {
                 setCurrentPicture(img);
             }
         ).catch(response => {
-            if(response.status === 404){
+            if (response.status === 404) {
                 setTaskNotFound(true);
             }
         });
@@ -99,7 +98,8 @@ const EditTask = () => {
             if (response.status) {
                 message.warning(response.message);
                 return;
-            } message.success(`Завдання ${task.name} успішно оновлено`);
+            }
+            message.success(`Завдання ${task.name} успішно оновлено`);
         });
         setTask(formValues);
     }
@@ -110,7 +110,7 @@ const EditTask = () => {
     }
 
     const handlePictureChange = (value) => {
-        if(value.file.status == "removed"){
+        if (value.file.status == "removed") {
             task.picture = null;
         } else {
             setPicture("/upload/tasks/" + value.file.name)
@@ -130,15 +130,15 @@ const EditTask = () => {
                 to="/admin/tasks"
                 className="back-btn"
             >
-                <Button  className="flooded-button">
+                <Button className="flooded-button">
                     До списку завдань
                 </Button>
             </Link>
             <Link
-                to={"/challenges/task/"+taskId.id}
+                to={"/challenges/task/" + taskId.id}
                 className="back-btn"
             >
-                <Button  className="flooded-button">
+                <Button className="flooded-button">
                     Переглянути завдання
                 </Button>
             </Link>
@@ -149,8 +149,8 @@ const EditTask = () => {
                 onFinish={saveForm}
                 initialValues={onFill()}
                 autoComplete="off"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 14 }}>
+                labelCol={{span: 4}}
+                wrapperCol={{span: 14}}>
                 <Form.Item
                     label="Дата початку"
                 >
@@ -159,21 +159,28 @@ const EditTask = () => {
                         format={dateFormat}
                         name="startDate"
                         allowClear={false}
-                        value={moment(task.startDate,"YYYY-MM-DD")}
+                        value={moment(task.startDate, "YYYY-MM-DD")}
                     />
                 </Form.Item>
                 <Form.Item
                     name="picture"
                     label="Фото"
                     value={picture}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Фото не може бути пустим",
+                        }]}
+
                 >
                     <Upload
                         name="image"
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
+                        accept="image/*"
                         fileList={currentPicture}
-                        data={{folder:`tasks`}}
+                        data={{folder: `tasks`}}
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                         onChange={(uploaded) => handlePictureChange(uploaded)}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
@@ -183,6 +190,22 @@ const EditTask = () => {
                     label="Назва"
                     name="name"
                     value={task.name}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Назва\" не може бути пустим",
+                        },
+                        {
+                            min: 5,
+                            max: 50,
+                            message: "Поле \"Назва\" може містити мінімум 5 максимум 50 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Назва\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Input/>
                 </Form.Item>
@@ -190,14 +213,49 @@ const EditTask = () => {
                     label="Заголовок"
                     name="headerText"
                     value={task.headerText}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Заголовок\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 3000,
+                            message: "Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Заголовок\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
+
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     label="Опис"
                     name="description"
+
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Опис\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 3000,
+                            message: "Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
+
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     label="Челендж"
@@ -231,7 +289,7 @@ const EditTask = () => {
             </Form>
             <div>
                 <Title level={3}>Усі челенджі</Title>
-                <ChallengesInTasks />
+                <ChallengesInTasks/>
             </div>
         </div>
     )
