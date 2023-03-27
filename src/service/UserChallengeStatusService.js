@@ -25,6 +25,7 @@ export const addUserChallengeStatus = async (statusName) => {
         statusName: statusName
     })
         .then((response) => {
+            console.log("addUserChallengeStatus ", response.data)
             return response.data
         }).catch((error) => {
         });
@@ -38,6 +39,7 @@ export const updateUserChallengeStatus = async (id, statusName) => {
         statusName: statusName,
     })
         .then((response) => {
+            console.log("updateUserChallengeStatus ", response.data)
             return response.data
         }).catch((error) => {
         });
@@ -53,8 +55,7 @@ export const deleteUserChallengeStatus = async (id) => {
 export const checkIfUserChallengeStatusIdExist = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user-challenge/status/exist/" + id)
         .then((response) => {
-            console.log("servicecheckIfUserChallengeStatusIdExist ", response.data)
-            return response.data;
+            return response.data['userExist'];
         }).catch((error) => {
         });
 };

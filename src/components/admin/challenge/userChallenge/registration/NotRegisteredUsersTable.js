@@ -113,9 +113,7 @@ const NotRegisteredUsersTable = ({users, handleAddClick, handleDeleteClickNotReg
             tableLayout="fixed"
             dataSource={users}
             columns={columns}
-            scroll={{
-                x: true
-            }}
+            scroll={{ x: true }}
         />
             </>
     );

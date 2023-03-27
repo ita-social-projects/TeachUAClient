@@ -107,8 +107,8 @@ const RegisteredUsersTable = ({challengeId, users, durationId, handleDeleteClick
                     value: 'ADDED',
                 },
                 {
-                    text: 'In progress',
-                    value: 'IN_PROGRESS',
+                    text: 'Active',
+                    value: 'ACTIVE',
                 },
                 {
                     text: 'Check if passed',

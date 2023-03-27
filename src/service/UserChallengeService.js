@@ -88,7 +88,6 @@ export const getAllChallengeDurationByChallengeId = async (id) => {
         });
 };
 export const registrationOnChallenge = async (userId, challengeId, selectedDate) => {
-    console.log('registrationOnChallenge' + userId)
     return await fetchRequest
         .post(BASE_URL + "/api/user/user-challenge/registration", {
             userId: userId,

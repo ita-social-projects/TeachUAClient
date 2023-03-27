@@ -19,7 +19,6 @@ export const getAllForDurationChallengePageByChallengeId = (id) => {
 };
 
 export const createDuration = async (createDurationData, challengeId) => {
-    console.log("create dur ", challengeId ,createDurationData)
     return await fetchRequest
         .post(BASE_URL + "/api/admin/challenge-duration/" + challengeId, createDurationData)
         .then((response) => {

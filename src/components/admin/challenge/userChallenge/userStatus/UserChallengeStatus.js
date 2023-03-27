@@ -78,10 +78,13 @@ const UserChallengeStatus = () => {
                         ...row,
                     });
                     const resultCheckIfExist = await checkIfUserChallengeStatusIdExist(id);
+                    console.log("res "+ resultCheckIfExist)
                     if (resultCheckIfExist === true) {
-                        await updateUserChallengeStatus(id, row.statusName);
+                        const dataFromUpdate = await updateUserChallengeStatus(id, row.statusName);
+                        message.success(`Успішно оновлено номер - ${dataFromUpdate['id']} статус - ${dataFromUpdate['statusName']}`)
                     } else {
-                        await addUserChallengeStatus(row.statusName);
+                        const dataFromAdd = await addUserChallengeStatus(row.statusName);
+                        message.success(`Успішно додано статус - ${dataFromAdd['statusName']}`)
 
                     }
                     setData(newData);
@@ -129,6 +132,8 @@ const UserChallengeStatus = () => {
 
     const handleDelete = (id) => {
         const newData = data.filter((item) => item.id !== id);
+        deleteUserChallengeStatus(id).then(r =>
+            message.success(`Видалено id - ${r['id']} statusName - ${r['statusName']}`))
         setData(newData);
     };
 
@@ -188,7 +193,6 @@ const UserChallengeStatus = () => {
                                 okButtonProps={{className: "popConfirm-ok-button"}}
                                 onConfirm={() => {
                                     handleDelete(record.id);
-                                    deleteUserChallengeStatus(record.id);
                                 }
                                 }>
                                 <Button type='link'

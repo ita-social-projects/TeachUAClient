@@ -112,9 +112,15 @@ const DurationTable = ({challengeId, challengeDurations, setChallengeDurations})
     ];
 
     const onAddDuration = async (values) => {
-        console.log("addon click ",values)
         let uniqueDuration = unique(values, ['startDate', 'endDate']);
-        message.success(await createDuration(uniqueDuration, challengeId));
+
+        const setChallengeDurationAdded = Object.values(await createDuration(uniqueDuration, challengeId));
+
+        if(setChallengeDurationAdded != null) {
+            setChallengeDurationAdded.forEach(challengeDuration => {
+                    message.success(`Успішно додано ${challengeDuration['startDate']} / ${challengeDuration['endDate']}`)
+            });
+        }
         getAllForChallengeDurationTable(challengeId).then(response => {
             setChallengeDurations(response);
         });

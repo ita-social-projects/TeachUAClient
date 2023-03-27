@@ -66,7 +66,8 @@ const ChallengeRegistration = () => {
                     if (response.status) {
                         message.warning(response.message);
                     } else {
-                        message.success(`Ви успішно зареєструвались на челендж - ${response} !`);
+                        console.log("dfvafvafv ", response)
+                        message.success(`Ви успішно зареєструвались на челендж - ${response['challengeName']} ${response['startDate']} / ${response['endDate']} !`);
                     }
                 });
             } else {
