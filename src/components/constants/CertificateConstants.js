@@ -3,14 +3,14 @@ import {CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined} fro
 import React from "react";
 
 
-export const ICON_WARNING = 1;
-export const ICON_ERROR = 2;
-export const ICON_OK = 3;
+export const WARNING_CODE = 1;
+export const ERROR_CODE = 2;
+export const SUCCESS_CODE = 3;
 
 export const renderIcon = (type) => {
-    if (type == ICON_ERROR){
+    if (type == ERROR_CODE){
         return (<CloseCircleOutlined className="site-result-demo-error-icon icon error-icon"/>)
-    } else if (type == ICON_OK){
+    } else if (type == SUCCESS_CODE){
         return (<CheckCircleOutlined className="icon ok-icon"/>)
     } else {
         return (<ExclamationCircleOutlined className="site-result-demo-error-icon icon warn-icon"/>)

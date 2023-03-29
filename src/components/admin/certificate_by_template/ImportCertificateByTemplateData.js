@@ -1,12 +1,13 @@
-import {Button, DatePicker, Form, Input, InputNumber, Layout, List, message, Select, Upload} from "antd";
-import React, {useEffect, useState} from "react";
+import {Button, DatePicker, Form, Input, InputNumber, Layout, List, message, Modal, Select, Upload} from "antd";
+import React, {useEffect, useRef, useState} from "react";
 import './css/ImportCertificateDataStyles.less';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import Paragraph from "antd/lib/typography/Paragraph";
 import {Content} from "antd/es/layout/layout";
-import {BASE_URL} from "../../../service/config/ApiConfig";
+import {BASE_URL, SERVICE_EMAIL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import {useForm} from "antd/es/form/Form";
+import * as CertificateByTemplateService from "../../../service/CertificateByTemplateService";
 import {
     loadDataCertificatesByTemplateToDB,
     loadTemplateName,
@@ -15,9 +16,10 @@ import {
 import {getAllTemplates} from "../../../service/TemplateService";
 import {getNumberOfUnsentCertificates, sendCertificatesScheduler} from "../../../service/CertificateService";
 import DraggableList from "../../../util/DraggableList";
-import {ICON_OK, renderIcon} from "../../constants/CertificateConstants";
+import {ERROR_CODE, renderIcon, showInfo, SUCCESS_CODE} from "../../constants/CertificateConstants";
 import {getGoogleFormResults} from "../../../service/GoogleFormsService";
 import GoogleFormResultTable from "./GoogleFormResultTable";
+import {DownloadOutlined, QuestionCircleOutlined, WarningOutlined} from "@ant-design/icons";
 
 const ImportCertificateByTemplateData = () => {
     const [templates, setTemplates] = useState([]);
@@ -27,6 +29,10 @@ const ImportCertificateByTemplateData = () => {
     const [isSendButtonActive, setIsSendButtonActive] = useState(false);
     const [isGoogleFormButtonActive, setIsGoogleFormButtonActive] = useState(false);
     const [googleFormButtonLoadingState, setGoogleFormButtonLoadingState] = useState(false);
+    const [invalidCertificateValues, setInvalidCertificateValues] = useState([]);
+    const [passingScore, setPassingScore] = useState(0);
+    const [openHelpModal, setOpenHelpModal] = useState(false);
+    const textRef = useRef(null);
 
     const dateFormat = 'DD.MM.YYYY';
 
@@ -55,7 +61,6 @@ const ImportCertificateByTemplateData = () => {
     })
 
     const [datesForm] = useForm();
-
     const getTemplates = () => {
         getAllTemplates().then(response => {
             let list = [];
@@ -353,14 +358,30 @@ const ImportCertificateByTemplateData = () => {
                 message.warning(response.message);
                 return;
             }
-            setValidationResult(response);
-            for (const message of response) {
-                if (message[1] === "2") {
+            setValidationResult(response.messages);
+            for (const message of response.messages) {
+                if (message[1] === ERROR_CODE) {
                     setIsSendButtonActive(false);
                     return;
                 }
             }
             setIsSendButtonActive(true);
+        });
+    }
+
+    const saveGoogleFormCertificateData = () => {
+        dataToPdfCreating.values = JSON.stringify(inputtedValues);
+        CertificateByTemplateService.saveGoogleFormCertificateData(dataToPdfCreating).then((response) => {
+            if (response.status) {
+                console.log(dataToPdfCreating)
+                message.warning(response.message);
+                return;
+            }
+
+            setInvalidCertificateValues(response.invalidValues);
+            setValidationResult(response.messages);
+            showInfo([response.messages[0]])
+            getData();
         });
     }
 
@@ -410,6 +431,7 @@ const ImportCertificateByTemplateData = () => {
                 excelColumnsOrder: [],
                 googleFormResults: filterResults(response.quizResults, googleFormInfo.passingScore)
             })
+            setPassingScore(googleFormInfo.passingScore);
             setIsGoogleFormButtonActive(false);
             setGoogleFormButtonLoadingState(false);
         });
@@ -434,6 +456,19 @@ const ImportCertificateByTemplateData = () => {
             }
         }
         return resultsArray;
+    };
+
+    const downloadInvalidCertificatesExcel = () => {
+        CertificateByTemplateService.downloadInvalidCertificatesExcel(invalidCertificateValues).then(response => {
+            const url = window.URL.createObjectURL(response);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'certificates.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        })
     };
 
     return (<Layout className="certificate-by-template">
@@ -464,7 +499,7 @@ const ImportCertificateByTemplateData = () => {
                                 style={dataToPdfCreating.fieldsList.length !== 0 ? {} : {display: 'none'}}
                                 className="">
                         <span>
-                            {renderIcon(ICON_OK)}
+                            {renderIcon(SUCCESS_CODE)}
                             Знайдено {dataToPdfCreating.fieldsList ? dataToPdfCreating.fieldsList.length : 0} полів
                         </span>
                             </div>
@@ -548,7 +583,7 @@ const ImportCertificateByTemplateData = () => {
                         </div>
                         <div style={dataToPdfCreating.excelContent.length !== 0 ? {} : {display: 'none'}}>
                             <span>
-                                {renderIcon(ICON_OK)}
+                                {renderIcon(SUCCESS_CODE)}
                                 Знайдено інформацію для генерації {dataToPdfCreating.excelContent ? dataToPdfCreating.excelContent.length : 0} сертифікатів
                             </span>
                         </div>
@@ -559,7 +594,7 @@ const ImportCertificateByTemplateData = () => {
                                 Із них отримають сертифікат: {dataToPdfCreating.googleFormResults.length};
                             </span>
                             <GoogleFormResultTable
-                                passingScore={googleFormInfo.passingScore}
+                                passingScore={passingScore}
                                 quizInfo={quizInfo}
                             />
                         </div>
@@ -591,11 +626,19 @@ const ImportCertificateByTemplateData = () => {
                             </h2>
                         </Paragraph>
                         {validationResultList()}
+                        <div className="download-float-button-wrapper"
+                             style={(dataToPdfCreating.googleFormResults.length !== 0) ? {} : {display: 'none'}}>
+                            <Button
+                                onClick={downloadInvalidCertificatesExcel}>
+                                <DownloadOutlined/>Завантажити .excel файл невалідних сертифікатів
+                            </Button>
+                        </div>
                     </div>
                     <span className="buttons">
-                    <div className={"certificate-data-control-wrapper"}>
+                    <div className={"certificate-data-control-wrapper"}
+                         style={(dataToPdfCreating.googleFormResults.length === 0) ? {} : {display: 'none'}}>
                         <Button
-                            style={(dataToPdfCreating.fieldsList.length !== 0 && dataToPdfCreating.excelContent.length !== 0) || (dataToPdfCreating.googleFormResults.length !== 0) ? {} : {display: 'none'}}
+                            style={(dataToPdfCreating.fieldsList.length !== 0 && dataToPdfCreating.excelContent.length !== 0) ? {} : {display: 'none'}}
                             className="flooded-button send-data-button"
                             disabled={isSendButtonActive}
                             headers={{Authorization: tokenToHeader()}}
@@ -611,6 +654,16 @@ const ImportCertificateByTemplateData = () => {
                             onClick={() => loadCertificatesByTemplateToDB()}
                         >
                             Відправити всі дані у БД
+                        </Button>
+                    </div>
+                        <div className={"certificate-data-control-wrapper"}
+                             style={(dataToPdfCreating.googleFormResults.length !== 0) ? {} : {display: 'none'}}>
+                        <Button
+                            className="flooded-button send-data-button"
+                            headers={{Authorization: tokenToHeader()}}
+                            onClick={() => saveGoogleFormCertificateData()}
+                        >
+                            Валідувати та надіслати дані
                         </Button>
                     </div>
                     <Button
