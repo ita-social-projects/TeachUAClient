@@ -471,6 +471,31 @@ const ImportCertificateByTemplateData = () => {
         })
     };
 
+    const showHelpModal = () => {
+        setOpenHelpModal(true);
+    };
+
+    const handleOk = () => {
+        setOpenHelpModal(false);
+    };
+
+    const handleCancel = () => {
+        setOpenHelpModal(false);
+    };
+
+    const handleCopyClick = () => {
+        if (textRef.current) {
+            navigator.clipboard.writeText(textRef.current.value)
+                .then(() => {
+                    message.success("Email скопійовано в буфер обміну!")
+                })
+                .catch((error) => {
+                    console.error("Error copying text: ", error);
+                    message.error("Вибачте, щось пішло не так...")
+                });
+        }
+    };
+
     return (<Layout className="certificate-by-template">
             <Content className="certificate-page">
                 <div className="container">
@@ -545,9 +570,47 @@ const ImportCertificateByTemplateData = () => {
                                     </Form.Item>
                                 </Form>
                             </div>
-                            <div className={"google-form-wrapper"}>
-                                <p style={{color: "#002766"}}>Імпортувати дані з Google Forms</p>
-                                <Form id={"import-google-form-form"}>
+                            <div className={"google-form_wrapper"}>
+                                <div className="google-form_title_wrapper">
+                                    <p>Імпортувати дані з Google Forms </p>
+                                    <QuestionCircleOutlined
+                                        id={"question-ico"}
+                                        onClick={showHelpModal}
+                                    />
+                                    <Modal
+                                        className={"certificate-by-template_modal"}
+                                        open={openHelpModal}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                        width={800}
+                                        footer={null}
+                                        bodyStyle={{padding: '0'}}
+                                    >
+                                        <div className={"certificate-by-template_help-image_wrapper custom-scroll"}>
+                                            <img
+                                                src={`${process.env.PUBLIC_URL}/static/images/certificate/helpModalPhoto.png`}
+                                                style={{width: '100%'}} alt={"help"}/>
+                                            <span
+                                                className={"certificate-by-template_modal_tip tip-1"}
+                                                onClick={handleCopyClick}>
+                                                Відкривши потрібну форму в режимі редагування, потрібно виконати кроки, зображені на фото, та підключити сервісний акаунт, увівши електронну пошту в обведене поле (назву електронної скриньки можна скопіювати, просто клікнувши по цьому тексту)
+                                            </span>
+                                            <span className={"certificate-by-template_modal_tip tip-2"}>
+                                                У випадку успішного підключення, акаунт буде відображатися у списку користувачів, що мають доступ.
+                                            </span>
+                                            <span className={"certificate-by-template_modal_tip tip-3"}>
+                                                <WarningOutlined className={"warning-ico"}/><br/>
+                                                Посилання на форму, яке буде надіслане, для опрацювання сервером, потрібно копіювати з режиму редагування цієї форми!                                            </span>
+                                        </div>
+                                        <textarea
+                                            ref={textRef}
+                                            defaultValue={SERVICE_EMAIL}
+                                            style={{display: "none"}}
+                                        />
+
+                                    </Modal>
+                                </div>
+                                <Form id={"import-google-form_form"}>
                                     <Form.Item name="google-form">
                                         <Input.Group compact>
                                             <Input

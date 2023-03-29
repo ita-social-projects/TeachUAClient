@@ -67,6 +67,7 @@
 	.draggable-list-wrapper {
 		position: relative;
 		user-select: none;
+		min-width: 25%;
 	}
 
 	.draggable-list {
@@ -156,8 +157,23 @@
 		align-items: center;
 	}
 
-	.google-form-wrapper {
+	.google-form_wrapper {
 		width: 50%;
+		color: #002766;
+	}
+
+	.google-form_title_wrapper {
+		position: relative;
+		width: fit-content;
+
+		#question-ico {
+			color: red;
+			position: absolute;
+			bottom: 80%;
+			left: 101%;
+			cursor: pointer;
+		}
+
 	}
 
 	.validation-result-list {
@@ -165,5 +181,78 @@
 		max-height: 300px;
 		overflow: scroll;
 		overflow-x: hidden;
+	}
+
+	.download-float-button-wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		padding-right: 10px;
+
+		button {
+			border-radius: 20px;
+			margin-top: 5px;
+			margin-bottom: 20px;
+			text-align: right;
+		}
+	}
+
+	&_modal {
+		top: 5%;
+		border-radius: 20px;
+		overflow: hidden;
+
+		.ant-modal-close-x {
+			display: none;
+		}
+	}
+
+	&_help-image_wrapper {
+		border-radius: 20px;
+		width: 800px;
+		height: 600px;
+		overflow: auto;
+		position: relative;
+
+		img {
+			position: absolute;
+		}
+
+	}
+
+	&_modal_tip {
+		position: absolute;
+		padding: 15px;
+		background-color: rgba(255, 255, 255, .7);
+		border-radius: 20px;
+		border: 1px solid red;
+		backdrop-filter: blur(5px);
+		box-shadow: 0 0 40px rgb(0 0 0 / 45%);
+
+		&.tip-1 {
+			top: 30%;
+			left: 2.5%;
+			width: 40%;
+			cursor: pointer;
+		}
+
+		&.tip-2 {
+			top: 139%;
+			right: 2%;
+			width: 27%;
+			border: 1px solid @primary-color;
+		}
+
+		&.tip-3 {
+			top: 195%;
+			left: 10%;
+			width: 80%;
+			text-align: center;
+			background-color: #fff;
+
+			.warning-ico {
+				color: @primary-color;
+			}
+		}
 	}
 }
