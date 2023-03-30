@@ -4,8 +4,12 @@
 	padding-top: 40px;
 	background: #faedde;
 
-	.import-file {
+	.container {
 		margin: 0 10% 0 10%;
+	}
+
+	.stage-header {
+		margin-bottom: 10px;
 	}
 
 	.form {
@@ -16,7 +20,6 @@
 	.configuration {
 		display: flex;
 		margin-top: 25px;
-		min-height: 350px;
 	}
 
 	.form-item {
@@ -27,6 +30,8 @@
 
 		.field-name {
 			padding-right: 10px;
+			display: flex;
+			align-items: center;
 		}
 
 		.ant-form-item-row {
@@ -59,19 +64,10 @@
 		}
 	}
 
-
-	.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {
-		border-color: #d9d9d9;
-	}
-
-	.ant-checkbox-checked .ant-checkbox-inner {
-		background-color: #fa8c16;
-		border-color: #fa8c16;
-	}
-
 	.draggable-list-wrapper {
 		position: relative;
 		user-select: none;
+		min-width: 25%;
 	}
 
 	.draggable-list {
@@ -122,10 +118,6 @@
 		}
 	}
 
-	.buttons {
-		align-items: center;
-	}
-
 	.certificate-data-control-wrapper {
 		button {
 			margin: 0 0 10px;
@@ -158,4 +150,109 @@
 		}
 	}
 
+	.import-wrapper {
+		margin: 25px 0;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	.google-form_wrapper {
+		width: 50%;
+		color: #002766;
+	}
+
+	.google-form_title_wrapper {
+		position: relative;
+		width: fit-content;
+
+		#question-ico {
+			color: red;
+			position: absolute;
+			bottom: 80%;
+			left: 101%;
+			cursor: pointer;
+		}
+
+	}
+
+	.validation-result-list {
+		min-height: fit-content;
+		max-height: 300px;
+		overflow: scroll;
+		overflow-x: hidden;
+	}
+
+	.download-float-button-wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		padding-right: 10px;
+
+		button {
+			border-radius: 20px;
+			margin-top: 5px;
+			margin-bottom: 20px;
+			text-align: right;
+		}
+	}
+
+	&_modal {
+		top: 5%;
+		border-radius: 20px;
+		overflow: hidden;
+
+		.ant-modal-close-x {
+			display: none;
+		}
+	}
+
+	&_help-image_wrapper {
+		border-radius: 20px;
+		width: 800px;
+		height: 600px;
+		overflow: auto;
+		position: relative;
+
+		img {
+			position: absolute;
+		}
+
+	}
+
+	&_modal_tip {
+		position: absolute;
+		padding: 15px;
+		background-color: rgba(255, 255, 255, .7);
+		border-radius: 20px;
+		border: 1px solid red;
+		backdrop-filter: blur(5px);
+		box-shadow: 0 0 40px rgb(0 0 0 / 45%);
+
+		&.tip-1 {
+			top: 30%;
+			left: 2.5%;
+			width: 40%;
+			cursor: pointer;
+		}
+
+		&.tip-2 {
+			top: 139%;
+			right: 2%;
+			width: 27%;
+			border: 1px solid @primary-color;
+		}
+
+		&.tip-3 {
+			top: 195%;
+			left: 10%;
+			width: 80%;
+			text-align: center;
+			background-color: #fff;
+
+			.warning-ico {
+				color: @primary-color;
+			}
+		}
+	}
 }

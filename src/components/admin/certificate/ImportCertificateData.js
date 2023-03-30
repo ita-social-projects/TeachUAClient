@@ -14,7 +14,7 @@ import {
 import {tokenToHeader} from "../../../service/UploadService";
 import moment from "moment";
 import {useForm} from "antd/es/form/Form";
-import {ICON_ERROR, ICON_OK, ICON_WARNING, renderIcon} from "../../constants/CertificateConstants";
+import {ERROR_CODE, SUCCESS_CODE, WARNING_CODE, renderIcon} from "../../constants/CertificateConstants";
 
 const ImportCertificateData = () => {
 
@@ -122,7 +122,7 @@ const ImportCertificateData = () => {
             size="small"
             dataSource={mistakes}
             renderItem={item => <List.Item className="import-db-list-item">
-                {renderIcon(ICON_ERROR)}
+                {renderIcon(ERROR_CODE)}
                 {`
                             Рядок ${item.rowIndex}. 
                             ${item.errorDetails}: 
@@ -137,7 +137,7 @@ const ImportCertificateData = () => {
             size="small"
             dataSource={databaseResponse}
             renderItem={item => <List.Item className="import-db-list-item">
-                {renderIcon(ICON_WARNING)}
+                {renderIcon(WARNING_CODE)}
                 {`
                             ${item.message}  
                         `}
@@ -233,7 +233,7 @@ const ImportCertificateData = () => {
                         style={dataLoaded ? {} : {display: 'none'}}
                         className="import-report">
                         <span>
-                            {renderIcon(ICON_OK)}
+                            {renderIcon(SUCCESS_CODE)}
                             Знайдено інформацію для генерації {dataLoaded ? dataToLoad.length : 0} сертифікатів
                         </span>
                     </div>

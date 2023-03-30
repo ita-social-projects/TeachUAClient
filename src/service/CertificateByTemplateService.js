@@ -30,3 +30,26 @@ export const validateCertificateExcelData = async (data) => {
         return error.response.data
     });
 };
+
+export const saveGoogleFormCertificateData = async (data) => {
+    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/save-gf", data
+    ).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error.response.data
+    });
+};
+
+export const downloadInvalidCertificatesExcel = async (values) => {
+    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/get-invalid-certificates-excel",
+        JSON.stringify(values)
+        , {
+            headers: {"content-type": "application/octet-stream"},
+            responseType: "blob"
+        }
+    ).then((response) => {
+        return response.data
+    }).catch((error) => {
+        return error
+    });
+}

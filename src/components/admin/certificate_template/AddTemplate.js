@@ -9,7 +9,7 @@ import {tokenToHeader} from "../../../service/UploadService";
 import Editor from "../../../util/Editor";
 import * as TemplateService from "../../../service/TemplateService";
 import {createTemplate} from "../../../service/TemplateService";
-import {fieldsProperties, ICON_OK, renderIcon, showInfo} from "../../constants/CertificateConstants"
+import {fieldsProperties, SUCCESS_CODE, renderIcon, showInfo} from "../../constants/CertificateConstants"
 import {getCertificateTypes} from "../../../service/CertificateTypeService";
 
 const {Title} = Typography;
@@ -283,7 +283,7 @@ const AddTemplate = () => {
                             style={fieldsList.length !== 0 ? {} : {display: 'none'}}
                             className="import-report">
                         <span>
-                            {renderIcon(ICON_OK)}
+                            {renderIcon(SUCCESS_CODE)}
                             Знайдено {fieldsList ? fieldsList.length : 0} полів
                         </span>
                         </div>
