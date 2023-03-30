@@ -16,9 +16,10 @@ export const getAllUserChallengeStatusOptions = async () => {
         });
 };
 
-export const addUserChallengeStatus = async (statusName) => {
+export const addUserChallengeStatus = async (statusName, statusTitle) => {
     return await fetchRequest.post(BASE_URL + "/api/user-challenge/status", {
-        statusName: statusName
+        statusName : statusName,
+        statusTitle : statusTitle
     })
         .then((response) => {
             return response.data
@@ -26,9 +27,11 @@ export const addUserChallengeStatus = async (statusName) => {
         });
 };
 
-export const updateUserChallengeStatus = async (id, statusName) => {
+export const updateUserChallengeStatus = async (id, statusName, statusTitle) => {
     return await fetchRequest.put(BASE_URL + "/api/user-challenge/status/edit", {
-        id: id, statusName: statusName,
+        id: id,
+        statusName: statusName,
+        statusTitle: statusTitle
     }).then((response) => {
         return response.data
     }).catch((error) => {

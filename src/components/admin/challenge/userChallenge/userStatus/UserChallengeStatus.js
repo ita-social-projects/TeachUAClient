@@ -80,10 +80,10 @@ const UserChallengeStatus = () => {
                     });
                     const resultCheckIfExist = await checkIfUserChallengeStatusIdExist(id);
                     if (resultCheckIfExist === true) {
-                        const dataFromUpdate = await updateUserChallengeStatus(id, row.statusName);
-                        message.success(`Успішно оновлено номер - ${dataFromUpdate['id']} статус - ${dataFromUpdate['statusName']}`)
+                        const dataFromUpdate = await updateUserChallengeStatus(id, row.statusName, row.statusTitle);
+                        message.success(`Успішно оновлено номер статус - ${dataFromUpdate['statusName']}`)
                     } else {
-                        const dataFromAdd = await addUserChallengeStatus(row.statusName);
+                        const dataFromAdd = await addUserChallengeStatus(row.statusName, row.statusTitle);
                         message.success(`Успішно додано статус - ${dataFromAdd['statusName']}`)
 
                     }
@@ -123,6 +123,7 @@ const UserChallengeStatus = () => {
             const newData = {
                 id: data.length > 0 ? findMaxIdFromData(data) + 1 : 1,
                 statusName: ``,
+                statusTitle: ``
             };
             setData([...data, newData]);
             edit(newData)
@@ -133,7 +134,7 @@ const UserChallengeStatus = () => {
     const handleDelete = (id) => {
         const newData = data.filter((item) => item.id !== id);
         deleteUserChallengeStatus(id).then(r =>
-            message.success(`Видалено id - ${r['id']} statusName - ${r['statusName']}`))
+            message.success(`Видалено statusName - ${r['statusName']}`))
         setData(newData);
     };
 
@@ -145,6 +146,11 @@ const UserChallengeStatus = () => {
             sorter: {
                 compare: (a, b) => Sorter.DEFAULT(a.roleName, b.roleName),
             },
+            editable: true,
+        },   {
+            title: 'Заголовок',
+            dataIndex: 'statusTitle',
+            width: '25%',
             editable: true,
         },
         {
