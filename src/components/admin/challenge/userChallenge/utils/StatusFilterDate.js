@@ -14,7 +14,6 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
   confirm();
   setSearchText(selectedKeys);
   setSearchedColumn(dataIndex);
-  
 };
 
 const filtrationOfDate=(selectedKeys,startDate, endDate)=>{
@@ -25,10 +24,6 @@ const filtrationOfDate=(selectedKeys,startDate, endDate)=>{
   }else if(selectedKeys === 3){
     return moment().isBefore(moment([startDate[0],startDate[1]-1,startDate[2]-1]))
   }
-  console.log('startDate ',startDate)
-  console.log('endDate ',endDate)
-  console.log("selected keys ", selectedKeys)
-  // return moment(record[0]+"-"+record[1]+"-"+record[2]).isBetween(searchDate[0],searchDate[1],'days','[]');
 }
 
 const handleReset = clearFilters => {
@@ -50,7 +45,6 @@ return ({
       style={{display:"grid", padding:"10px"}}
       defaultValue={[2,3]} 
       onChange={(values) => {
-          console.log("onChange "+values);
           setSelectedKeys(values !== null ? values : [])
           setSearchText(values !== null ? values : [])
         } 

@@ -10,8 +10,6 @@ const [searchText, setSearchText] = useState('');
 const [searchedColumn, setSearchedColumn] = useState('');
 const searchInput = useRef(null);
 
-// console.log("GetColumnSearchProps "+Object.values(dataIndex));
-
 
 const handleSearch = (selectedKeys, confirm, dataIndex) => {
   confirm();

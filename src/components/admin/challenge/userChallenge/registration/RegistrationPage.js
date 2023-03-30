@@ -1,18 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
-import moment from 'moment';
 import {message} from "antd";
 import "./css/RegistrationPage.less";
 import NotRegisteredUsersTable from './NotRegisteredUsersTable';
-// import RegisteredUsersTable from './RegisteredUsersTable';
 import {
     deleteUserChallengeByUserIdDurationId,
     getAllNotRegisteredUsersByDurationId,
     getAllUsersByDurationId,
     registrationByUserIdDurationId
 } from '../../../../../service/UserChallengeService';
-import RegistrationUserChallenge from "./RegistrationUserChallenge";
-import RegisteredUsersTable from "./test/RegisteredUsersTable";
+import RegisteredUsersTable from "./RegisteredUsersTable";
 
 const RegistrationPage = () => {
     let location = useLocation();

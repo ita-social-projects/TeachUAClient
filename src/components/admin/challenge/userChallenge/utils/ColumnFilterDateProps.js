@@ -34,7 +34,6 @@ return ({
         value={selectedKeys}
         placeholder={["Початкова дата","Кінцева дата"]}
         onChange={(values) => {
-          console.log("onChange "+values);
           setSelectedKeys(values !== null ? values : [])
           setSearchText(values !== null ? values : [])
         }

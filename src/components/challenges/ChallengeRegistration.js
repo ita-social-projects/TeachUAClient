@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import "./css/ChallengeRegistration.less"
 import {Button, Select, message, Space} from "antd";
 import Login from "../login/Login";
@@ -8,7 +8,7 @@ import {getUserById} from "../../service/UserService";
 import {getAllChallengeDurationByChallengeId, registrationOnChallenge} from "../../service/UserChallengeService";
 
 const ChallengeRegistration = () => {
-
+    const location = useLocation();
     const [durations, setDurations] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
     const challengeId = useParams().challengeId;
@@ -17,7 +17,7 @@ const ChallengeRegistration = () => {
 
     useEffect(() => {
         getData();
-    },[]);
+    },[location]);
 
     const getData = () => {
         getAllChallengeDurationByChallengeId(challengeId).then(response => {
@@ -66,7 +66,6 @@ const ChallengeRegistration = () => {
                     if (response.status) {
                         message.warning(response.message);
                     } else {
-                        console.log("dfvafvafv ", response)
                         message.success(`Ви успішно зареєструвались на челендж - ${response['challengeName']} ${response['startDate']} / ${response['endDate']} !`);
                     }
                 });

@@ -4,28 +4,20 @@ import {BASE_URL} from "./config/ApiConfig";
 export const getUserChallengesByUserId = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/profile/user-challenge/user/" + id)
         .then((response) => {
-            console.log('getUserChallengesByUserId', response)
             return response.data
         });
 };
 
 export const getAllUsersByDurationId = async (data) => {
-    console.log("getAllUsersByChallengeId", data.challengeId, data.durationId)
-
     return await fetchRequest
         .post(BASE_URL + "/api/admin/user-challenge/challenge/duration/registered-users/", {
             challengeId: data.challengeId,
             durationId: data.durationId
         }).then((response) => {
             return response.data
-        }).catch((error) => {
-            console.log("ERROR reg ", error.response)
-            // return error.response;
-        })
+        });
 };
 export const getAllNotRegisteredUsersByDurationId = async (data) => {
-    console.log("getAllNotRegisteredUsersByDurationId", data.challengeId, data.durationId)
-
     return await fetchRequest
         .post(BASE_URL + "/api/admin/user-challenge/challenge/duration/not-registered-users/", {
             challengeId: data.challengeId,
@@ -33,17 +25,10 @@ export const getAllNotRegisteredUsersByDurationId = async (data) => {
         })
         .then((response) => {
             return response.data
-        }).catch((error) => {
-            console.log("ERROR notreg ", error.response)
-            // return error.response;
-        })
+        });
 };
 
 export const updateUserChallengeFromAdmin = async (userChallengeId, userId,  data) => {
-    console.log("updateUserChallengeFromAdmin id", userChallengeId)
-    console.log("updateUserChallengeFromAdmin userId", userId)
-    console.log("updateUserChallengeFromAdmin", data)
-
     return await fetchRequest
         .put(BASE_URL + "/api/admin/user-challenge/challenge/duration/edit/", {
             userChallengeId : userChallengeId,
@@ -103,8 +88,6 @@ export const registrationOnChallenge = async (userId, challengeId, selectedDate)
         });
 };
 export const registrationByUserIdDurationId = async (userId, challengeId, durationId) => {
-    console.log('registrationOnChallengegbsgbsgbsgbw' + userId)
-    console.log('registrationOnChallengegbsgbsgbsgbw' + durationId)
     return await fetchRequest
         .post(BASE_URL + "/api/admin/user-challenge/challenge/duration/registration", {
             userId: userId,
@@ -131,7 +114,6 @@ export const deleteUserChallengesById = async (id) => {
 };
 
 export const deleteUserChallengeByUserIdDurationId = async (userId, challengeId, durationId) => {
-    console.log(`userIdForDelete: ${userId}`)
     return await fetchRequest
         .post(BASE_URL + "/api/admin/user-challenge/challenge/duration/delete", {
             userId: userId,
@@ -146,7 +128,6 @@ export const deleteUserChallengeByUserIdDurationId = async (userId, challengeId,
         });
 };
 export const deleteUserChallengeByUserIdChallengeId = async (userId, data) => {
-    console.log(`userIdForDelete: ${userId}`)
     return await fetchRequest
         .post(BASE_URL + "/api/profile/user-challenge/user/delete", {
             userIdForDelete: userId,

@@ -106,7 +106,7 @@ const ChallengesTable = () => {
             </Link>
             <Link to={"/admin/user-challenge"}>
             <Button className="flooded-button add-btn" style={{margin:"5px"}}>
-                Керування челенджема
+                Керування челенджами
             </Button>
             </Link>
             <Link to={"/admin/tasks"}>

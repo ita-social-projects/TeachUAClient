@@ -9,6 +9,7 @@ import {
     getAllUserChallengeStatus,
     updateUserChallengeStatus
 } from '../../../../../service/UserChallengeStatusService';
+import {Sorter} from "../utils/Sorter";
 
 const EditableCell = ({editing, dataIndex, title, inputType, record, index, children, ...restProps}) => {
 
@@ -78,7 +79,6 @@ const UserChallengeStatus = () => {
                         ...row,
                     });
                     const resultCheckIfExist = await checkIfUserChallengeStatusIdExist(id);
-                    console.log("res "+ resultCheckIfExist)
                     if (resultCheckIfExist === true) {
                         const dataFromUpdate = await updateUserChallengeStatus(id, row.statusName);
                         message.success(`Успішно оновлено номер - ${dataFromUpdate['id']} статус - ${dataFromUpdate['statusName']}`)
@@ -121,7 +121,7 @@ const UserChallengeStatus = () => {
             return message.error("Ви не зберегли нове поле");
         } else {
             const newData = {
-                id: findMaxIdFromData(data) + 1,
+                id: data.length > 0 ? findMaxIdFromData(data) + 1 : 1,
                 statusName: ``,
             };
             setData([...data, newData]);
@@ -139,15 +139,12 @@ const UserChallengeStatus = () => {
 
     const columns = [
         {
-            title: 'Id',
-            dataIndex: 'id',
-            width: '25%',
-            sorter: (a, b) => a.id - b.id,
-        },
-        {
             title: 'Статус',
             dataIndex: 'statusName',
             width: '25%',
+            sorter: {
+                compare: (a, b) => Sorter.DEFAULT(a.roleName, b.roleName),
+            },
             editable: true,
         },
         {
@@ -223,41 +220,31 @@ const UserChallengeStatus = () => {
         };
     });
 
-    return (data.length > 0 ?
-            (
-                <div className="registrationPageContainer">
-                    <div className="registrationPageContentBox">
-                        <div className="registrationPageContentTitle">
-                            Статуси учасника
-                            <Button className="userChallengeStatusAddStatusButton"
-                                    style={{color: "black", marginLeft: "15px"}}
-                                    onClick={handleAdd}
-                                    icon={<PlusOutlined/>}>
-                                Додати статус
-                            </Button>
-                        </div>
-                        <div>
-                            <Form form={form} component={false}>
-                                <Table style={{padding: '2%', backgroundColor: 'white', borderRadius: '16px'}}
-                                       components={{body: {cell: EditableCell}}}
-                                       dataSource={data}
-                                       columns={mergedColumns}
-                                       rowClassName="editable-row"
-                                       pagination={{onChange: cancel}}
-                                />
-                            </Form>
-                        </div>
-                    </div>
+    return (
+        <div className="registrationPageContainer">
+            <div className="registrationPageContentBox">
+                <div className="registrationPageContentTitle">
+                    Статуси учасника
+                    <Button className="userChallengeStatusAddStatusButton"
+                            style={{color: "black", marginLeft: "15px"}}
+                            onClick={handleAdd}
+                            icon={<PlusOutlined/>}>
+                        Додати статус
+                    </Button>
                 </div>
-            ) : (
-                <div className="registrationPageContainer">
-                    <div className="registrationPageContentBox">
-                        <div className="registrationPageContentTitle">
-                            Статусів учасника немає
-                        </div>
-                    </div>
+                <div>
+                    <Form form={form} component={false}>
+                        <Table style={{padding: '2%', backgroundColor: 'white', borderRadius: '16px'}}
+                               components={{body: {cell: EditableCell}}}
+                               dataSource={data}
+                               columns={mergedColumns}
+                               rowClassName="editable-row"
+                               pagination={{onChange: cancel}}
+                        />
+                    </Form>
                 </div>
-            )
+            </div>
+        </div>
     );
 };
 
