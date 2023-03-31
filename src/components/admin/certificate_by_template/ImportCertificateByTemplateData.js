@@ -460,6 +460,10 @@ const ImportCertificateByTemplateData = () => {
 
     const downloadInvalidCertificatesExcel = () => {
         CertificateByTemplateService.downloadInvalidCertificatesExcel(invalidCertificateValues).then(response => {
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
             const url = window.URL.createObjectURL(response);
             const link = document.createElement('a');
             link.href = url;
@@ -494,6 +498,12 @@ const ImportCertificateByTemplateData = () => {
                     message.error("Вибачте, щось пішло не так...")
                 });
         }
+    };
+
+    const getCopyData = () => {
+        return SERVICE_EMAIL.replace(/[a-zA-Z]/g, function(c) {
+            return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+        });
     };
 
     return (<Layout className="certificate-by-template">
@@ -604,7 +614,7 @@ const ImportCertificateByTemplateData = () => {
                                         </div>
                                         <textarea
                                             ref={textRef}
-                                            defaultValue={SERVICE_EMAIL}
+                                            defaultValue={getCopyData()}
                                             style={{display: "none"}}
                                         />
 
