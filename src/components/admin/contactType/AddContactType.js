@@ -46,6 +46,7 @@ const AddContactType = ({contactTypes, setContactTypes}) => {
                         name="image"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
+                        accept="image/*"
                         data={{folder: `contact-types`}}
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                     >

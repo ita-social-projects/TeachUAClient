@@ -157,6 +157,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                                 listType="picture-card"
                                 action={UPLOAD_IMAGE_URL}
                                 maxCount={1}
+                                accept="image/*"
                                 data={{folder: `news`}}
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                         >

@@ -114,6 +114,7 @@ const AddBannerItem = ({bannerItems, setBannerItems}) => {
                         <Upload name="image"
                                 action={UPLOAD_IMAGE_URL}
                                 maxCount={1}
+                                accept="image/*"
                                 data={{folder: `banners`}}
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                             <span className="add-banner-item-upload"><UploadOutlined
