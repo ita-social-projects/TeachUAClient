@@ -130,6 +130,7 @@ const AddTask = () => {
                         name="image"
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
+                        accept="image/*"
                         maxCount={1}
                         data={{folder:`tasks`}}
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>

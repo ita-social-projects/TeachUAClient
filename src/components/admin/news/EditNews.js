@@ -177,6 +177,7 @@ const EditNews = (props) => {
                         listType="picture-card"
                         action={UPLOAD_IMAGE_URL}
                         maxCount={1}
+                        accept="image/*"
                         fileList={currentUrlTitleLogo}
                         data={{ folder: `news` }}
                         headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader() }}
