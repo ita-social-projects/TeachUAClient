@@ -15,6 +15,7 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
                 name="image"
                 action={UPLOAD_IMAGE_URL}
                 maxCount={1}
+                accept="image/*"
                 data={{folder: uploadFolder}}
                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
             >

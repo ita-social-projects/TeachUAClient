@@ -9,6 +9,7 @@ import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link, useHistory } from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
+import moment from "moment";
 const { Option } = Select;
 
 const { Title } = Typography;
@@ -114,6 +115,11 @@ const AddTask = () => {
                 <Form.Item
                     label="Дата початку"
                     name="startDate"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Дата не може бути пустою",
+                        }]}
                 >
                         <DatePicker
                             onChange={onDateChange}
@@ -125,6 +131,11 @@ const AddTask = () => {
                     name="picture"
                     label="Фото"
                     value={picture}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Фото не може бути пустим",
+                        }]}
                 >
                     <Upload
                         name="image"
@@ -141,24 +152,77 @@ const AddTask = () => {
                     label="Назва"
                     name="name"
                     value={name}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Назва\" не може бути пустим",
+                        },
+                        {
+                            min: 5,
+                            max: 50,
+                            message: "Поле \"Назва\" може містити мінімум 5 максимум 50 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Назва\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Заголовок"
                     name="headerText"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Заголовок\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 3000,
+                            message: "Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Заголовок\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
                     name="description"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Опис\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 3000,
+                            message: "Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Челендж"
                     name="challengeId"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Челлендж не може бути пустим",
+                        }]}
                 >
                     <Select
                         placeholder="Оберіть челендж"

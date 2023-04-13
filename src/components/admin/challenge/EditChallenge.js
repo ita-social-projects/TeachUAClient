@@ -143,6 +143,18 @@ const EditChallenge = (props) => {
                     name="sortNumber"
                     label="Порядковий номер"
                     value={challenge.sortNumber}
+                    rules={[
+                        {
+                            required: true,
+                            min: 5,
+                            max: 30,
+                            message: "Поле \"Порядковий номер\" може містити мінімум 5 максимум 30 символів",
+                        },
+                        {
+                            required: false,
+                            pattern: /^[-0-9]*$/,
+                            message: "Поле \"Порядковий номер\" може містити тільки цифри",
+                        }]}
                 >
                     <InputNumber />
                 </Form.Item>
@@ -157,6 +169,22 @@ const EditChallenge = (props) => {
                     label="Назва"
                     name="name"
                     value={challenge.name}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Назва\" не може бути пустим",
+                        },
+                        {
+                            min: 5,
+                            max: 30,
+                            message: "Поле \"Назва\" може містити мінімум 5 максимум 30 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Назва\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Input />
                 </Form.Item>
@@ -164,12 +192,44 @@ const EditChallenge = (props) => {
                     label="Заголовок"
                     name="title"
                     value={challenge.title}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Заголовок\" не може бути пустим",
+                        },
+                        {
+                            min: 5,
+                            max: 100,
+                            message: "Поле \"Заголовок\" може містити мінімум 5 максимум 100 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Заголовок\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
                     name="description"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Опис\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 25000,
+                            message: "Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Editor />
                 </Form.Item>
@@ -177,6 +237,11 @@ const EditChallenge = (props) => {
                     name="picture"
                     label="Фото"
                     value={picture}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Фото не може бути пустим",
+                        }]}
                 >
                     <Upload
                         name="image"

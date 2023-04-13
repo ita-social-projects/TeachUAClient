@@ -261,6 +261,11 @@ const EditTask = () => {
                     label="Челендж"
                     name="challengeId"
                     value={task.challengeId}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Челлендж не може бути пустим",
+                        }]}
                 >
                     <Select
                         placeholder="Оберіть челендж"
