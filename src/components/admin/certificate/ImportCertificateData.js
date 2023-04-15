@@ -31,7 +31,7 @@ const ImportCertificateData = () => {
 
     const studyTypes = [
         {label: "очна", value: "очна"},
-        {label: "дистанційна", value: "дистанційна"},
+        {label: "онлайн", value: "онлайн"},
         {label: "змішана", value: "змішана"}
     ];
 
@@ -41,7 +41,7 @@ const ImportCertificateData = () => {
         endDate: '',
         hours: 40,
         courseNumber: null,
-        studyType: "дистанційна",
+        studyType: "онлайн",
         excelList: {}
     });
 
@@ -326,7 +326,7 @@ const ImportCertificateData = () => {
                     <Form.Item
                         name="studyType"
                         label="Форма навчання"
-                        initialValue="дистанційна"
+                        initialValue="онлайн"
                     >
                         <Select
                             options={studyTypes}
