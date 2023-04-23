@@ -215,13 +215,15 @@ const EditTask = () => {
                     value={task.headerText}
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Заголовок\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 3000,
-                            message: "Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
@@ -236,16 +238,18 @@ const EditTask = () => {
                 <Form.Item
                     label="Опис"
                     name="description"
-
+                    value={task.description}
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Опис\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 3000,
-                            message: "Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
@@ -253,7 +257,6 @@ const EditTask = () => {
                             message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
                         }
                     ]}
-
                 >
                     <Editor/>
                 </Form.Item>

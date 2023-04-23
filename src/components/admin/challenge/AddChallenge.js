@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './css/AddChallenge.css';
-import {Layout, Typography, Form, Input, Button, message, Upload} from 'antd';
+import { Typography, Form, Input, Button, message, Upload} from 'antd';
 import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
@@ -151,13 +151,15 @@ const AddChallenge = () => {
                     name="description"
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Опис\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 25000,
-                            message: "Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"));
+                                }
+                                return Promise.resolve();
+                            }
                         },
                         {
                             required: false,

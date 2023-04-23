@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { Button, Form, Image, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
+import { Button, Form, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
 import { useForm } from "antd/es/form/Form";
 
 import { getChallengeById, updateChallenge } from "../../../service/ChallengeService";
@@ -216,13 +216,15 @@ const EditChallenge = (props) => {
                     name="description"
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Опис\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 25000,
-                            message: "Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"));
+                                }
+                                return Promise.resolve();
+                            }
                         },
                         {
                             required: false,
@@ -230,6 +232,7 @@ const EditChallenge = (props) => {
                             message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
                         }
                     ]}
+
                 >
                     <Editor />
                 </Form.Item>

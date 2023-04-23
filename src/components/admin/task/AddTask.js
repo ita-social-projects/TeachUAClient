@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Form, Input, message, Typography, Upload, DatePicker, Space, Button, Select} from "antd";
+import {Form, Input, message, Typography, Upload, DatePicker, Button, Select} from "antd";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {useForm} from "antd/es/form/Form";
@@ -9,7 +9,6 @@ import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link, useHistory } from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
-import moment from "moment";
 const { Option } = Select;
 
 const { Title } = Typography;
@@ -176,13 +175,15 @@ const AddTask = () => {
                     name="headerText"
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Заголовок\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 3000,
-                            message: "Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
@@ -198,13 +199,15 @@ const AddTask = () => {
                     name="description"
                     rules={[
                         {
-                            required: true,
-                            message: "Поле \"Опис\" не може бути пустим",
-                        },
-                        {
-                            min: 40,
-                            max: 3000,
-                            message: "Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
