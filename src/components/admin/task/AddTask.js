@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Form, Input, message, Typography, Upload, DatePicker, Space, Button, Select} from "antd";
+import {Form, Input, message, Typography, Upload, DatePicker, Button, Select} from "antd";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {useForm} from "antd/es/form/Form";
@@ -114,6 +114,11 @@ const AddTask = () => {
                 <Form.Item
                     label="Дата початку"
                     name="startDate"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Дата не може бути пустою",
+                        }]}
                 >
                         <DatePicker
                             onChange={onDateChange}
@@ -125,6 +130,11 @@ const AddTask = () => {
                     name="picture"
                     label="Фото"
                     value={picture}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Фото не може бути пустим",
+                        }]}
                 >
                     <Upload
                         name="image"
@@ -141,24 +151,81 @@ const AddTask = () => {
                     label="Назва"
                     name="name"
                     value={name}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Поле \"Назва\" не може бути пустим",
+                        },
+                        {
+                            min: 5,
+                            max: 50,
+                            message: "Поле \"Назва\" може містити мінімум 5 максимум 50 символів"
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Назва\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Заголовок"
                     name="headerText"
+                    rules={[
+                        {
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Заголовок\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
                     name="description"
+                    rules={[
+                        {
+                            validator: (_, value) => {
+                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
+                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                }
+                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"));
+                                }
+                                return Promise.resolve();
+                            },
+                        },
+                        {
+                            required: false,
+                            pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                            message: "Поле \"Опис\" може містити тільки українські та англійські літери, цифри та спеціальні символи",
+                        }
+                    ]}
                 >
                     <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Челендж"
                     name="challengeId"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Челлендж не може бути пустим",
+                        }]}
                 >
                     <Select
                         placeholder="Оберіть челендж"
