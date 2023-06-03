@@ -14,7 +14,7 @@ import {
 import {tokenToHeader} from "../../../service/UploadService";
 import moment from "moment";
 import {useForm} from "antd/es/form/Form";
-import {ERROR_CODE, SUCCESS_CODE, WARNING_CODE, renderIcon} from "../../constants/CertificateConstants";
+import {ERROR_CODE, renderIcon, SUCCESS_CODE, WARNING_CODE} from "../../constants/CertificateConstants";
 
 const ImportCertificateData = () => {
 
@@ -86,7 +86,7 @@ const ImportCertificateData = () => {
                 dataToDB.courseNumber != null) {
                 setFormFilled(true)
             }
-        } else if (dataToDB.type === '1' || dataToDB.type === '2' || dataToDB.type === "4") {
+        } else if (dataToDB.type === '1' || dataToDB.type === '2' || dataToDB.type === "4" || dataToDB.type === "5") {
             if (dataToDB.type !== null &&
                 dataToDB.hours != null &&
                 dataToDB.courseNumber != null &&
@@ -182,6 +182,15 @@ const ImportCertificateData = () => {
                        className="radio-button"
                        onChange={onTypeChange}/>
                 <label htmlFor="basic_participant">учасника базового рівня</label>
+            </div>
+            <div>
+                <input type="radio"
+                       value="5"
+                       id="business_participant"
+                       name="type"
+                       className="radio-button"
+                       onChange={onTypeChange}/>
+                <label htmlFor="business_participant">учасника бізнес-курсу</label>
             </div>
         </div>)
     };
@@ -305,7 +314,7 @@ const ImportCertificateData = () => {
                                 name="startDate"
                                 id="startDate"
                                 value={dataToDB.startDate}
-                                disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4"}
+                                disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4" || dataToDB.type === "5"}
                             />
                         </Form.Item>
 
@@ -318,7 +327,7 @@ const ImportCertificateData = () => {
                                 format={dateFormat}
                                 name="endDate"
                                 value={dataToDB.endDate}
-                                disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4"}
+                                disabled={(dataToDB.type === "1" || dataToDB.type === "2") || dataToDB.type === "4" || dataToDB.type === "5"}
                             />
                         </Form.Item>
                     </div>
