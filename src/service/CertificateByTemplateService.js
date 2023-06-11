@@ -2,7 +2,7 @@ import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const loadDataCertificatesByTemplateToDB = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/load-to-db",
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate-by-template",
         data
     ).then((response) => {
         return response.data
@@ -12,7 +12,7 @@ export const loadDataCertificatesByTemplateToDB = async (data) => {
 };
 
 export const loadTemplateName = async (value) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/pdf", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate-by-template/pdf", {
             filePath: value
         }
     ).then((response) => {
@@ -23,7 +23,7 @@ export const loadTemplateName = async (value) => {
 };
 
 export const validateCertificateExcelData = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/validate", data
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate-by-template/validate", data
     ).then((response) => {
         return response.data
     }).catch((error) => {
@@ -32,7 +32,7 @@ export const validateCertificateExcelData = async (data) => {
 };
 
 export const saveGoogleFormCertificateData = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/save-gf", data
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate-by-template/save-gf", data
     ).then((response) => {
         return response.data
     }).catch((error) => {
@@ -41,7 +41,7 @@ export const saveGoogleFormCertificateData = async (data) => {
 };
 
 export const downloadInvalidCertificatesExcel = async (values) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate-by-template/get-invalid-certificates-excel",
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate-by-template/get-invalid-certificates-excel",
         JSON.stringify(values)
         , {
             headers: {"content-type": "application/octet-stream"},

@@ -563,7 +563,7 @@ const ImportCertificateByTemplateData = () => {
                                         <Upload
                                             name="excel-file"
                                             accept={".xlsx"}
-                                            action={BASE_URL + "/api/certificate-by-template/excel"}
+                                            action={BASE_URL + "/api/v1/certificate-by-template/excel"}
                                             maxCount={1}
                                             icon={<UploadOutlined/>}
                                             headers={{

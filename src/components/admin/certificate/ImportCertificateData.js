@@ -256,7 +256,7 @@ const ImportCertificateData = () => {
                             <Upload
                                 name="excel-file"
                                 accept={".xlsx"}
-                                action={BASE_URL + "/api/certificate/excel"}
+                                action={BASE_URL + "/api/v1/certificate/excel"}
                                 maxCount={1}
                                 icon={<UploadOutlined/>}
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}

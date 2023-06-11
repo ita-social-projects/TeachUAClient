@@ -275,7 +275,7 @@ const EditTemplate = () => {
                         <Upload
                             name="pdf-file"
                             accept={".pdf"}
-                            action={BASE_URL + "/api/template/pdf"}
+                            action={BASE_URL + "/api/v1/certificate/template/pdf"}
                             maxCount={1}
                             icon={<UploadOutlined/>}
                             headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}

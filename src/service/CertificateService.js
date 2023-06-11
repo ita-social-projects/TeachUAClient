@@ -3,14 +3,14 @@ import fetchRequest from "./FetchRequest";
 
 export const getNumberOfUnsentCertificates = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificate/generate")
+        .get(BASE_URL + "/api/v1/certificate/generate")
         .then((response) => {
             return response.data;
         });
 };
 
 export const loadDataToDatabase = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/certificate/load-to-db",
+    return await fetchRequest.post(BASE_URL + "/api/v1/certificate",
         data
     )
         .then((response) => {
@@ -22,7 +22,7 @@ export const loadDataToDatabase = async (data) => {
 
 export const sendCertificatesScheduler = async () => {
     return await fetchRequest
-        .post(BASE_URL + "/api/scheduler")
+        .post(BASE_URL + "/api/v1/certificate/scheduler")
         .then((response) => {
             return response.data;
         });
@@ -30,7 +30,7 @@ export const sendCertificatesScheduler = async () => {
 
 export const getSentCertificates = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates")
+        .get(BASE_URL + "/api/v1/certificate/all")
         .then((response) => {
             return response.data;
         });
@@ -38,7 +38,7 @@ export const getSentCertificates = async () => {
 
 export const getCertificatesByUserName = async (data) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificate", {
+        .get(BASE_URL + "/api/v1/certificate", {
             params: {
                 userName: data.userName
             }
@@ -50,7 +50,7 @@ export const getCertificatesByUserName = async (data) => {
 
 export const getCertificatesOfAuthenticatedUser = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates/my")
+        .get(BASE_URL + "/api/v1/user/certificates")
         .then((response) => {
             return response.data;
         })
@@ -58,7 +58,7 @@ export const getCertificatesOfAuthenticatedUser = async () => {
 
 export const downloadCertificate = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/certificates/download/" + id, {
+        .get(BASE_URL + "/api/v1/certificate/download/" + id, {
             headers: {"content-type": "application/pdf"},
             responseType: "blob"
         })
@@ -80,7 +80,7 @@ export const downloadCertificate = async (id) => {
 }
 
 export const updateCertificateProfile = async (id, data) => {
-    return await fetchRequest.put(BASE_URL + "/api/certificates/" + id, {
+    return await fetchRequest.put(BASE_URL + "/api/v1/certificate/" + id, {
         userName: data.userName,
         sendToEmail: data.sendToEmail,
         sendStatus: null,
@@ -94,7 +94,7 @@ export const updateCertificateProfile = async (id, data) => {
 }
 
 export const getValidationResponse = (serialNumber) => {
-    return fetchRequest.get(BASE_URL + "/api/certificate/" + serialNumber)
+    return fetchRequest.get(BASE_URL + "/api/v1/certificate/" + serialNumber)
     .then((response) => {
         return response.data;
     }).catch((error) =>{
