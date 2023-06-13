@@ -205,21 +205,7 @@ export const changeClubOwner = async (userId, clubId) => {
         .get(BASE_URL + "/api/user/" + userId)
         .then((response) => {
             return fetchRequest
-                .patch(BASE_URL + "/api/club/change-owner/" + clubId, {
-                    user: {
-                        id: response.data.id,
-                        email: response.data.email,
-                        password: response.data.password,
-                        firstName: response.data.firstName,
-                        lastName: response.data.lastName,
-                        phone: response.data.phone,
-                        urlLogo: response.data.urlLogo,
-                        provider: response.data.provider,
-                        providerId: response.data.providerId,
-                        status: response.data.status,
-                        verificationCode: response.data.verificationCode,
-                    },
-                })
+                .patch(BASE_URL + "/api/club/change-owner/" + clubId + "/" + response.data.id)
                 .then((response) => {
                     return response.data;
                 })
