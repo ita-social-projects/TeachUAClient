@@ -13,10 +13,21 @@ import "./css/ClubList.less"
 import {logDOM} from "@testing-library/react";
 
 import { PageContext } from "../../context/PageContext";
+import {BASE_URL} from "../../service/config/ApiConfig";
+import {getFeedbackListByClubId} from "../../service/FeedbackService";
+import {clubFeedback} from "../../util/ClubUtil";
+
 
 const ClubListItem = ({ club, onClubClick }) => {
 
     const [visible, setVisible] = useState(false);
+    const [rate, setRate] = useState(0);
+
+    const feedback = getFeedbackListByClubId(club.id);
+
+    feedback.then((value) => {
+        setRate(clubFeedback(value));
+    })
 
     return (
         <div>
@@ -47,7 +58,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                     {/*<DribbbleOutlined className="club-online-icon"/>*/}
                     <span className="club-online-label">Гурток онлайн</span>
                 </div>}
-                <Rate className="rating" disabled value={club.rating} onClick={() => onClubClick(club)} />
+                <Rate className="rating" disabled value={rate} allowHalf onClick={() => onClubClick(club)} />
                 {
                     club.locations.length > 0 &&
                     <div className="address" onClick={() => { setVisible(true) }}>
