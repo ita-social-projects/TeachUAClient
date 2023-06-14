@@ -72,7 +72,8 @@ class CommentEditComponent extends React.Component {
 
     hasNoDataEntered() {
         const hasNoRate = (this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint;
-        const hasNoCommentText = this.state.commentText === undefined || this.state.commentText === "";
+        const hasNoCommentText = this.state.commentText === undefined || this.state.commentText.length < 10 ||
+            (this.state.isComplaint && this.state.commentText.length < 30);
         return hasNoRate || hasNoCommentText;
     }
 
@@ -180,7 +181,17 @@ class CommentEditComponent extends React.Component {
                                  }
 
                                  visible={this.state.tooltipVisible}
-                                 title={(this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint ? "поставте оцінку" : "напишіть опис"}
+                                 title={
+                                     (this.state.rate === undefined || this.state.rate === 0) && !this.state.isComplaint
+                                         ? "Поставте оцінку"
+                                         : this.state.isComplaint
+                                             ? (this.state.commentText && this.state.commentText.length < 30) || this.state.commentText === undefined
+                                                 ? "Напишіть більше 30 символів"
+                                                 : ""
+                                             : (this.state.commentText && this.state.commentText.length < 10) || this.state.commentText === undefined
+                                                 ? "Напишіть більше 10 символів"
+                                                 : ""
+                                 }
                         >
                             <Form.Item>
                                 <Button
