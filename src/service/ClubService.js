@@ -8,7 +8,7 @@ import {getCenterById} from "./CenterService";
 
 export const addClub = async (data) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/club", {
+        .post(BASE_URL + "/api/v1/club/", {
             categoriesName: data.categories,
             name: data.name,
             ageFrom: data.ageFrom,
@@ -31,7 +31,7 @@ export const addClub = async (data) => {
 
 export const updateClubById = async (data) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/club/" + data.id, {
+        .put(BASE_URL + "/api/v1/club/" + data.id, {
             id: data.id,
             ageFrom: data.ageFrom,
             ageTo: data.ageTo,
@@ -59,7 +59,7 @@ export const updateClubById = async (data) => {
 
 export const getClubById = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/club/" + id)
+        .get(BASE_URL + "/api/v1/club/" + id)
         .then((response) => {
             return response.data;
         })
@@ -70,7 +70,7 @@ export const getClubById = async (id) => {
 
 export const getClubsWithoutCategories = async (page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/club/clubs-without-categories" + "?page=" + page)
+        .get(BASE_URL + "/api/v1/club/clubs-without-categories" + "?page=" + page)
         .then((response) => {
             return response.data;
         })
@@ -81,7 +81,7 @@ export const getClubsWithoutCategories = async (page) => {
 
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/" + id + "?page=" + page)
+        .get(BASE_URL + "/api/v1/club/all/" + id + "?page=" + page)
         .then((response) => {
             return response.data;
         });
@@ -89,7 +89,7 @@ export const getClubsByUserId = async (id, page) => {
 
 export const getAllClubsByUserId = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/user/" + id)
+        .get(BASE_URL + "/api/v1/club/all/user/" + id)
         .then((response) => {
             return response.data;
         });
@@ -101,7 +101,7 @@ export const getSimilarClubsByCategoryName = async (
     cityName
 ) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/search/similar", {
+        .get(BASE_URL + "/api/v1/club/all/search/similar", {
             params: {
                 id: id,
                 categoriesName: replaceCommaToSemicolon(categoriesName),
@@ -115,7 +115,7 @@ export const getSimilarClubsByCategoryName = async (
 
 export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/search/simple", {
+        .get(BASE_URL + "/api/v1/club/all/search/simple", {
             params: {
                 cityName: mapSearchParameters.cityName,
                 categoryName: mapSearchParameters.categoryName,
@@ -133,7 +133,7 @@ export const getClubsByAdvancedSearch = async (
     sortPath
 ) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/search/advanced", {
+        .get(BASE_URL + "/api/v1/club/all/search/advanced", {
             params: {
                 name: parameters.name
                     ? parameters.name
@@ -164,7 +164,7 @@ export const getClubsByAdvancedSearch = async (
 
 export const getClubsByParameters = async (parameters, page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/search", {
+        .get(BASE_URL + "/api/v1/club/all/search", {
             params: {
                 clubName: parameters.clubName,
                 cityName: parameters.cityName,
@@ -179,19 +179,19 @@ export const getClubsByParameters = async (parameters, page) => {
 };
 
 export const getAllClubs = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/clubs").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/all").then((response) => {
         return response.data;
     });
 };
 
 export const getAllClubsByCenterId = async (centerId) => {
-    return await fetchRequest.get(BASE_URL + "/api/clubsByCenterId/" + centerId).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/all/ByCenterId/" + centerId).then((response) => {
         return response.data;
     });
 };
 
 export const getClubReport = async (id, fileName) => {
-    const response = await fetchRequest.get(BASE_URL + `/api/pdf/club/${id}`,
+    const response = await fetchRequest.get(BASE_URL + `/api/v1/club/pdf/${id}`,
         {
             method: "get",
             responseType: "blob"
@@ -205,7 +205,7 @@ export const changeClubOwner = async (userId, clubId) => {
         .get(BASE_URL + "/api/user/" + userId)
         .then((response) => {
             return fetchRequest
-                .patch(BASE_URL + "/api/club/change-owner/" + clubId + "/" + response.data.id)
+                .patch(BASE_URL + "/api/v1/club/change-owner/" + clubId + "/" + response.data.id)
                 .then((response) => {
                     return response.data;
                 })
@@ -217,7 +217,7 @@ export const changeClubOwner = async (userId, clubId) => {
 
 export const deleteClubById = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/club/" + id)
+        .delete(BASE_URL + "/api/v1/club/" + id)
         .then((response) => {
             return response.data;
         });
@@ -225,7 +225,7 @@ export const deleteClubById = async (id) => {
 
 export const getTopClubsByCity = async (city, amount) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/clubs/top/search",{
+        .get(BASE_URL + "/api/v1/club/all/top/search",{
             params:{
                 cityName: city,
                 amount: amount

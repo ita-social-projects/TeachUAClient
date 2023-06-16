@@ -4,7 +4,7 @@ import {searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
 
 export const getPossibleResults = async (parameters) => {
-    return await fetchRequest.get(BASE_URL + "/api/search", {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/search", {
         params: {
             text: searchInputData.input,
             cityName: parameters.cityName
@@ -15,7 +15,7 @@ export const getPossibleResults = async (parameters) => {
 };
 
 export const getPossibleResultsByText = async (text, parameters) => {
-    return await fetchRequest.get(BASE_URL + "/api/search", {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/search", {
         params: {
             text: text,
             cityName: parameters.cityName
@@ -26,7 +26,7 @@ export const getPossibleResultsByText = async (text, parameters) => {
 };
 
 export const getResultSearchReport = async (parameters, fileName) => {
-    const response = await fetchRequest.get(BASE_URL + `/api/pdf/resultsearch`,
+    const response = await fetchRequest.get(BASE_URL + `/api/v1/club/pdf/resultsearch`,
         {
             method: "get",
             responseType: "blob",

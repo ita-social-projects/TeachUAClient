@@ -2,13 +2,13 @@ import fetchRequest from "./FetchRequest";
 import { BASE_URL } from "./config/ApiConfig";
 
 export const getFeedbackListByClubId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/feedbacks/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/feedback/all/" + id).then((response) => {
         return response.data
     });
 };
 
 export const createFeedback = async (text, rate, userId, clubId) => {
-    return await fetchRequest.post(BASE_URL + "/api/feedback", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/club/feedback", {
         text: text,
         rate: rate,
         userId: userId,
