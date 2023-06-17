@@ -3,7 +3,7 @@ import fetchRequest from "./FetchRequest";
 
 export const questionsImport = async (data)=>{
     return await fetchRequest
-        .post(BASE_URL+"/api/questions-import",{
+        .post(BASE_URL+"/api/v1/question/import",{
             formId: data.formId
         })
         .then((response)=>{
@@ -16,14 +16,14 @@ export const questionsImport = async (data)=>{
 
 export const getAllQuestions = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/quiz/questions")
+        .get(BASE_URL + "/api/v1/question/all")
         .then((response) => {
             return response.data;
         });
 };
 
 export const loadDataToDatabase = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/questions/load-to-db",
+    return await fetchRequest.post(BASE_URL + "/api/v1/question/all",
         data
     )
         .then((response) => {
@@ -35,7 +35,7 @@ export const loadDataToDatabase = async (data) => {
 
 export const downloadExcel = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/export", {
+        .get(BASE_URL + "/api/v1/question/all/excel", {
 
             headers: {"content-type": "application/octet-stream"},
             responseType: "blob"

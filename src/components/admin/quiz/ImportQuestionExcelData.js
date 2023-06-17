@@ -156,7 +156,7 @@ const ImportQuestionExcelData = () => {
                             }]}>
                             <Upload
                                 name="excel-file"
-                                action={BASE_URL + "/api/questions/excel"}
+                                action={BASE_URL + "/api/v1/question/all/excel"}
                                 maxCount={1}
                                 icon={<UploadOutlined/>}
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}

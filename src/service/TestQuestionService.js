@@ -3,7 +3,7 @@ import fetchRequest from "./FetchRequest";
 
 export const searchQuestions = async (pageNumber, size, sortField, sortDirection, query, type, category) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/search"
+        .get(BASE_URL + "/api/v1/question/all/search"
                 + "?page=" + (pageNumber - 1) // pagination starts with 0
                 + "&size=" + size
                 + "&sort=" + sortField + "," + sortDirection
@@ -17,7 +17,7 @@ export const searchQuestions = async (pageNumber, size, sortField, sortDirection
 
 export const getQuestionTypes = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/types")
+        .get(BASE_URL + "/api/v1/question-type/all")
         .then((response) => {
             return response;
         })
@@ -25,7 +25,7 @@ export const getQuestionTypes = async () => {
 
 export const getQuestionCategories = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/categories")
+        .get(BASE_URL + "/api/v1/question-category/all")
         .then((response) => {
             return response;
         })
@@ -33,7 +33,7 @@ export const getQuestionCategories = async () => {
 
 export const getQuestionById = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/" + id)
+        .get(BASE_URL + "/api/v1/question/" + id)
         .then((response) => {
             return response;
         })
@@ -41,7 +41,7 @@ export const getQuestionById = async (id) => {
 
 export const createQuestion = async (question) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/questions/new", question)
+        .post(BASE_URL + "/api/v1/question/new", question)
         .then((response) => {
             return response;
         })
@@ -49,7 +49,7 @@ export const createQuestion = async (question) => {
 
 export const updateQuestion = async (id, question) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/questions/" + id, question)
+        .put(BASE_URL + "/api/v1/question/" + id, question)
         .then((response) => {
             return response;
         })
@@ -57,7 +57,7 @@ export const updateQuestion = async (id, question) => {
 
 export const deleteQuestion = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/questions/" + id)
+        .delete(BASE_URL + "/api/v1/question/" + id)
         .then((response) => {
             return response;
         })
@@ -65,7 +65,7 @@ export const deleteQuestion = async (id) => {
 
 export const searchCategories = async (pageNumber, size, sortField, sortDirection, query) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions/categories/search"
+        .get(BASE_URL + "/api/v1/question-category/all/search"
                 + "?page=" + (pageNumber - 1) // pagination starts with 0
                 + "&size=" + size
                 + "&sort=" + sortField + "," + sortDirection
@@ -77,7 +77,7 @@ export const searchCategories = async (pageNumber, size, sortField, sortDirectio
 
 export const createCategory = async (category) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/question_categories/", category)
+        .post(BASE_URL + "/api/v1/question-category", category)
         .then((response) => {
             return response;
         })
@@ -85,7 +85,7 @@ export const createCategory = async (category) => {
 
 export const updateCategory = async (id, category) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/question_categories/" + id, category)
+        .put(BASE_URL + "/api/v1/question-category/" + id, category)
         .then((response) => {
             return response;
         })
@@ -93,7 +93,7 @@ export const updateCategory = async (id, category) => {
 
 export const deleteCategory = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/question_categories/" + id)
+        .delete(BASE_URL + "/api/v1/question-category/" + id)
         .then((response) => {
             return response;
         })
@@ -101,7 +101,7 @@ export const deleteCategory = async (id) => {
 
 export const searchTypes = async (pageNumber, size, sortField, sortDirection, query) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/questions_types/search"
+        .get(BASE_URL + "/api/v1/question-type/search"
             + "?page=" + (pageNumber - 1) // pagination starts with 0
             + "&size=" + size
             + "&sort=" + sortField + "," + sortDirection
@@ -113,7 +113,7 @@ export const searchTypes = async (pageNumber, size, sortField, sortDirection, qu
 
 export const createType = async (category) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/question_types", category)
+        .post(BASE_URL + "/api/v1/question-type", category)
         .then((response) => {
             return response;
         })
@@ -121,7 +121,7 @@ export const createType = async (category) => {
 
 export const updateType = async (id, category) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/question_types/" + id, category)
+        .put(BASE_URL + "/api/v1/question-type/" + id, category)
         .then((response) => {
             return response;
         })
@@ -129,7 +129,7 @@ export const updateType = async (id, category) => {
 
 export const deleteType = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/question_types/" + id)
+        .delete(BASE_URL + "/api/v1/question-type/" + id)
         .then((response) => {
             return response;
         })
