@@ -4,9 +4,9 @@ import {Form, Radio} from "antd";
 
 const UserEditRoles = ({user}) => {
     function disable(value) {
-        if (value === "ROLE_USER" || value ==="ROLE_ADMIN") {
+        if (value ==="ROLE_ADMIN") {
             return true;
-        } else if (value === "ROLE_MANAGER")
+        } else if (value === "ROLE_MANAGER" || value === "ROLE_USER")
             return false;
     }
 
