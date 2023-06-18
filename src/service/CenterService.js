@@ -23,7 +23,7 @@ export const getCenterClubsByCenterId = async (id, page, clubsPerPage) => {
 };
 
 export const getAllCenterClubsByCenterId = async (id) => {
-    const url = BASE_URL + "/api/centers/clubs?centerId=" + id;
+    const url = BASE_URL + "/api/clubsByCenterId/" + id;
     return await fetchRequest.get(url)
         .then((response) => {
             return response.data;
