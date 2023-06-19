@@ -1,17 +1,26 @@
 import { Button, Card, Popover, Rate } from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React, { useState } from "react";
+import {React, useState} from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import CenterLogo from "./CenterLogo";
 import "./css/CenterList.less"
+import {getAllCenterClubsByCenterId} from "../../service/CenterService";
+import { centerFeedback } from "../../util/CenterUtil";
 
 
 const CenterListItem = ({ center, onCenterClick }) => {
 
     const [visible, setVisible] = useState(false);
+    const [rate, setRate] = useState(0);
+
+    const feedback = getAllCenterClubsByCenterId(center.id);
+
+    feedback.then((value) => {
+        setRate(centerFeedback(value));
+    })
 
     return (
         <div>
@@ -27,7 +36,7 @@ const CenterListItem = ({ center, onCenterClick }) => {
                         {center.description}
                     </p>
                 }
-                {/*<Rate className="center-rating" disabled value={center.rating} onClick={() => onCenterClick(center)} />*/}
+                <Rate className="center-rating" allowHalf disabled value={rate} onClick={() => onCenterClick(center)} />
                 {
                     center.locations.length > 0 &&
                     <div className="address" onClick={() => { setVisible(true) }} >
