@@ -11,6 +11,7 @@ import {getFeedbackListByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import SignUpForClub from "../messages/SignUpForClub";
+import {clubFeedback} from "../../../util/ClubUtil";
 
 const PageContent = ({club, feedbackCount}) => {
     const [rate, setRate] = useState(0);
@@ -20,11 +21,7 @@ const PageContent = ({club, feedbackCount}) => {
     const feedback = getFeedbackListByClubId(club.id);
 
     feedback.then((value) => {
-        var clubRate = 0;
-        for (let i = 0; i < value.length; i++) {
-            clubRate += value[i].rate;
-        }
-        setRate(clubRate / value.length);
+        setRate(clubFeedback(value));
     })
 
     return (
