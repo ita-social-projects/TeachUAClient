@@ -68,8 +68,9 @@ class Search extends React.Component {
         if (value === undefined) {
             return;
         }
-        if (value.trim().length === 0) {
-            return;
+        if (value.length === 0) {
+            getClubsByParameters(searchParameters).then((response) => {
+                this.context.setClubs(response);});
         }
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
