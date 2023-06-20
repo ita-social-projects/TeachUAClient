@@ -32,13 +32,13 @@ export const deleteDistrictById = async (id) => {
 };
 
 export const getDistrictsByCityName = async (name) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/district/all/" + name).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/district/" + name).then((response) => {
         return response.data
     });
 };
 
 export const getAllDistrict = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/district/all").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/district").then((response) => {
         return response.data
     });
 };

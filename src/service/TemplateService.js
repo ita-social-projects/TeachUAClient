@@ -28,7 +28,7 @@ export const loadTemplateMetadata = async (data) => {
 
 export const getAllTemplates = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/certificate/template/all")
+        .get(BASE_URL + "/api/v1/certificate/template")
         .then((response) => {
             return response.data;
         });

@@ -2,7 +2,7 @@ import fetchRequest from "./FetchRequest";
 import { BASE_URL } from "./config/ApiConfig";
 
 export const getFeedbackListByClubId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/feedback/all/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/feedback/" + id).then((response) => {
         return response.data
     });
 };

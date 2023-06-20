@@ -32,7 +32,7 @@ export const updateStationById = async (data) => {
 };
 export  const  getStationsByDistrictNameAndCityName  = async (data) =>{
     return await  fetchRequest
-        .post(BASE_URL + "/api/v1/club/station/all/district",
+        .post(BASE_URL + "/api/v1/club/station/district",
             {
                 name: data.name,
                 cityName: data.cityName,
@@ -59,7 +59,7 @@ export const deleteStationById = async (id) => {
 
 export const getAllStations = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/station/all")
+        .get(BASE_URL + "/api/v1/club/station")
         .then((response) => {
             return response.data;
         });
@@ -67,7 +67,7 @@ export const getAllStations = async () => {
 
 export const getStationsByCity = async (name) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/station/all/" + name)
+        .get(BASE_URL + "/api/v1/club/station/" + name)
         .then((response) => {
             return response.data;
         });

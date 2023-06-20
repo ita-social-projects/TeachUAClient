@@ -30,7 +30,7 @@ export const sendCertificatesScheduler = async () => {
 
 export const getSentCertificates = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/certificate/all")
+        .get(BASE_URL + "/api/v1/certificate")
         .then((response) => {
             return response.data;
         });

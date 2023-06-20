@@ -12,7 +12,7 @@ export const createCertificateType = async (data) => {
 
 export const getCertificateTypes = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/certificate/type/all")
+        .get(BASE_URL + "/api/v1/certificate/type")
         .then((response) => {
             return response.data;
         });

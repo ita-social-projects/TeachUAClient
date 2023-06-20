@@ -32,7 +32,7 @@ export const deleteContactTypeById = async (id) => {
 };
 
 export const getAllContactTypes = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/contact-type/all").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/contact-type").then((response) => {
         return response.data
     });
 };

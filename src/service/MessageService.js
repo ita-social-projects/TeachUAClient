@@ -15,7 +15,7 @@ export const createMessage = async (data) => {
 }
 
 export const getMessagesByRecipientId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/participant/message/all/" + id)
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/participant/message/" + id)
         .then((response) => {
             return response.data
         });

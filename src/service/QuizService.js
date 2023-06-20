@@ -16,14 +16,14 @@ export const questionsImport = async (data)=>{
 
 export const getAllQuestions = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question/all")
+        .get(BASE_URL + "/api/v1/question")
         .then((response) => {
             return response.data;
         });
 };
 
 export const loadDataToDatabase = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/v1/question/all",
+    return await fetchRequest.post(BASE_URL + "/api/v1/question/excel",
         data
     )
         .then((response) => {
@@ -35,7 +35,7 @@ export const loadDataToDatabase = async (data) => {
 
 export const downloadExcel = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question/all/excel", {
+        .get(BASE_URL + "/api/v1/question/excel", {
 
             headers: {"content-type": "application/octet-stream"},
             responseType: "blob"

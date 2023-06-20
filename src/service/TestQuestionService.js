@@ -3,7 +3,7 @@ import fetchRequest from "./FetchRequest";
 
 export const searchQuestions = async (pageNumber, size, sortField, sortDirection, query, type, category) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question/all/search"
+        .get(BASE_URL + "/api/v1/question/search"
                 + "?page=" + (pageNumber - 1) // pagination starts with 0
                 + "&size=" + size
                 + "&sort=" + sortField + "," + sortDirection
@@ -17,7 +17,7 @@ export const searchQuestions = async (pageNumber, size, sortField, sortDirection
 
 export const getQuestionTypes = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question-type/all")
+        .get(BASE_URL + "/api/v1/question-type")
         .then((response) => {
             return response;
         })
@@ -25,7 +25,7 @@ export const getQuestionTypes = async () => {
 
 export const getQuestionCategories = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question-category/all")
+        .get(BASE_URL + "/api/v1/question-category")
         .then((response) => {
             return response;
         })
@@ -65,7 +65,7 @@ export const deleteQuestion = async (id) => {
 
 export const searchCategories = async (pageNumber, size, sortField, sortDirection, query) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/question-category/all/search"
+        .get(BASE_URL + "/api/v1/question-category/search"
                 + "?page=" + (pageNumber - 1) // pagination starts with 0
                 + "&size=" + size
                 + "&sort=" + sortField + "," + sortDirection

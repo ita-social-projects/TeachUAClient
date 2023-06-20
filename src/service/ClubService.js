@@ -81,7 +81,7 @@ export const getClubsWithoutCategories = async (page) => {
 
 export const getClubsByUserId = async (id, page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/" + id + "?page=" + page)
+        .get(BASE_URL + "/api/v1/club/" + id + "?page=" + page)
         .then((response) => {
             return response.data;
         });
@@ -89,7 +89,7 @@ export const getClubsByUserId = async (id, page) => {
 
 export const getAllClubsByUserId = async (id) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/user/" + id)
+        .get(BASE_URL + "/api/v1/club/user/" + id)
         .then((response) => {
             return response.data;
         });
@@ -101,7 +101,7 @@ export const getSimilarClubsByCategoryName = async (
     cityName
 ) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/search/similar", {
+        .get(BASE_URL + "/api/v1/club/search/similar", {
             params: {
                 id: id,
                 categoriesName: replaceCommaToSemicolon(categoriesName),
@@ -115,7 +115,7 @@ export const getSimilarClubsByCategoryName = async (
 
 export const getClubsByCategoryAndCity = async (mapSearchParameters) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/search/simple", {
+        .get(BASE_URL + "/api/v1/club/search/simple", {
             params: {
                 cityName: mapSearchParameters.cityName,
                 categoryName: mapSearchParameters.categoryName,
@@ -133,7 +133,7 @@ export const getClubsByAdvancedSearch = async (
     sortPath
 ) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/search/advanced", {
+        .get(BASE_URL + "/api/v1/club/search/advanced", {
             params: {
                 name: parameters.name
                     ? parameters.name
@@ -164,7 +164,7 @@ export const getClubsByAdvancedSearch = async (
 
 export const getClubsByParameters = async (parameters, page) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/search", {
+        .get(BASE_URL + "/api/v1/club/search", {
             params: {
                 clubName: parameters.clubName,
                 cityName: parameters.cityName,
@@ -179,13 +179,13 @@ export const getClubsByParameters = async (parameters, page) => {
 };
 
 export const getAllClubs = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/all").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club").then((response) => {
         return response.data;
     });
 };
 
 export const getAllClubsByCenterId = async (centerId) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/all/ByCenterId/" + centerId).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/ByCenterId/" + centerId).then((response) => {
         return response.data;
     });
 };
@@ -225,7 +225,7 @@ export const deleteClubById = async (id) => {
 
 export const getTopClubsByCity = async (city, amount) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/all/top/search",{
+        .get(BASE_URL + "/api/v1/club/top/search",{
             params:{
                 cityName: city,
                 amount: amount

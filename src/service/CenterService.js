@@ -16,14 +16,14 @@ export const getCenterById = async (id) => {
 
 export const getCenterClubsByCenterId = async (id, page, clubsPerPage) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/center/all/clubs/" + id + "?size=" + clubsPerPage + "&page=" + page)
+        .get(BASE_URL + "/api/v1/center/clubs/" + id + "?size=" + clubsPerPage + "&page=" + page)
         .then((response) => {
             return response.data;
         });
 };
 
 export const getCentersByUserId = async (id, page) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/center/all/" + id + "?page=" + page).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/center/" + id + "?page=" + page).then((response) => {
         return response.data
     }).catch((error) => {
         return error.data;
@@ -31,7 +31,7 @@ export const getCentersByUserId = async (id, page) => {
 };
 
 export const getAllCenters = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/center/all").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/center").then((response) => {
         return response.data
     });
 };

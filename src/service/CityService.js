@@ -41,7 +41,7 @@ export const getCityById = async (id) => {
 };
 
 export const getAllCities = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/club/city/all").then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/club/city").then((response) => {
         return response.data
     });
 };

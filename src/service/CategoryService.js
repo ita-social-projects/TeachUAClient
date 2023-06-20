@@ -11,7 +11,7 @@ export const getPageableCategory = async (page) => {
 
 export const getAllCategories = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/v1/club/category/all")
+        .get(BASE_URL + "/api/v1/club/category")
         .then((response) => {
             return response.data;
         });
