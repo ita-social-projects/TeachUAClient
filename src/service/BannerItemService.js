@@ -2,7 +2,7 @@ import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const addBannerItem = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/banner", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/banner", {
         title: data.title,
         subtitle: data.subtitle,
         link: data.link,
@@ -16,7 +16,7 @@ export const addBannerItem = async (data) => {
 };
 
 export const updateBannerItemById = async (data) => {
-    return await fetchRequest.put(BASE_URL + "/api/banner/" + data.id, {
+    return await fetchRequest.put(BASE_URL + "/api/v1/banner/" + data.id, {
         title: data.title,
         subtitle: data.subtitle,
         link: data.link,
@@ -31,7 +31,7 @@ export const updateBannerItemById = async (data) => {
 };
 
 export const deleteBannerItemById = async (id) => {
-    return await fetchRequest.delete(BASE_URL + "/api/banner/" + id)
+    return await fetchRequest.delete(BASE_URL + "/api/v1/banner/" + id)
         .then((response) => {
             return response.data;
         }).catch((error) => {
@@ -40,14 +40,14 @@ export const deleteBannerItemById = async (id) => {
 };
 
 export const getBannerItemById = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/banner/" + id)
+    return await fetchRequest.get(BASE_URL + "/api/v1/banner/" + id)
         .then((response) => {
             return response.data;
         });
 };
 
 export const getAllBannerItems = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/banners")
+    return await fetchRequest.get(BASE_URL + "/api/v1/banner")
         .then((response) => {
             return response.data;
         });

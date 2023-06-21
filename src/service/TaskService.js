@@ -2,7 +2,7 @@ import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const getTasksByChallenge = (id) => {
-    return fetchRequest.get(BASE_URL + "/api/challenge/" + id + "/tasks")
+    return fetchRequest.get(BASE_URL + "/api/v1/challenge/task?challengeId=" + id)
         .then((response) => {
             return response.data;
         });
@@ -10,7 +10,7 @@ export const getTasksByChallenge = (id) => {
 
 export const getTasks = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/tasks")
+        .get(BASE_URL + "/api/v1/challenge/task")
         .then((response) => {
             return response.data;
         });
@@ -18,7 +18,7 @@ export const getTasks = async () => {
 
 export const createTask = async (data, id) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/challenge/" + id + "/task", {
+        .post(BASE_URL + "/api/v1/challenge/task?challengeId=" + id, {
             name: data.name,
             headerText: data.headerText,
             description: data.description,
@@ -41,7 +41,7 @@ export const createTask = async (data, id) => {
 
 export const deleteTask = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/challenge/task/" + id)
+        .delete(BASE_URL + "/api/v1/challenge/task/" + id)
         .then((response) => {
             return response.data;
         })
@@ -52,7 +52,7 @@ export const deleteTask = async (id) => {
 
 export const updateTask = async (data, id) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/challenge/task/" + id, {
+        .put(BASE_URL + "/api/v1/challenge/task/" + id, {
             name: data.name,
             headerText: data.headerText,
             description: data.description,
@@ -69,7 +69,7 @@ export const updateTask = async (data, id) => {
 };
 
 export const getTask = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/challenge/task/" + id)
+    return await fetchRequest.get(BASE_URL + "/api/v1/challenge/task/" + id)
         .then((response) => {
             return response.data
         }).catch((error) => {

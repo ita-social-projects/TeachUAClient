@@ -2,7 +2,7 @@ import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const getChallengeProfile = (id) => {
-    return fetchRequest.get(BASE_URL + "/api/challenge/" + id)
+    return fetchRequest.get(BASE_URL + "/api/v1/challenge/" + id)
         .then((response) => {
             return response.data;
         }).catch((error) => {
@@ -11,7 +11,7 @@ export const getChallengeProfile = (id) => {
 };
 
 export const getActiveChallengesPreviews = () => {
-    return fetchRequest.get(BASE_URL + "/api/challenges?active=true")
+    return fetchRequest.get(BASE_URL + "/api/v1/challenge?active=true")
         .then((response) => {
             return response.data
         }).catch((error) => {
@@ -20,7 +20,7 @@ export const getActiveChallengesPreviews = () => {
 };
 
 export const getTaskProfile = (id) => {
-    return fetchRequest.get(BASE_URL + "/api/challenge/task/" + id)
+    return fetchRequest.get(BASE_URL + "/api/v1/challenge/task/" + id)
         .then((response) => {
             return response.data;
         }).catch((error) => {
@@ -30,7 +30,7 @@ export const getTaskProfile = (id) => {
 
 export const createChallenge = async (data) => {
     return await fetchRequest
-        .post(BASE_URL + "/api/challenge", {
+        .post(BASE_URL + "/api/v1/challenge", {
             name: data.name,
             description: data.description,
             title: data.title,
@@ -47,14 +47,14 @@ export const createChallenge = async (data) => {
 
 export const getAllChallenges = async () => {
     return await fetchRequest
-        .get(BASE_URL + "/api/challenges")
+        .get(BASE_URL + "/api/v1/challenge")
         .then((response) => {
             return response.data;
         });
 };
 
 export const getChallengeById = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/challenge/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/challenge/" + id).then((response) => {
         return response.data
     }).catch((error) => {
         console.log(error);
@@ -64,7 +64,7 @@ export const getChallengeById = async (id) => {
 
 export const updateChallenge = async (data, id) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/challenge/" + id, {
+        .put(BASE_URL + "/api/v1/challenge/" + id, {
             name: data.name,
             title: data.title,
             description: data.description,
@@ -82,7 +82,7 @@ export const updateChallenge = async (data, id) => {
 
 export const updateChallengePreview = async (data, id) => {
     return await fetchRequest
-        .patch(BASE_URL + "/api/challenge/" + id, {
+        .patch(BASE_URL + "/api/v1/challenge/" + id, {
             name: data.name,
             sortNumber: data.sortNumber,
             title: data.title,
@@ -98,7 +98,7 @@ export const updateChallengePreview = async (data, id) => {
 
 export const deleteChallenge = async (id) => {
     return await fetchRequest
-        .delete(BASE_URL + "/api/challenge/" + id)
+        .delete(BASE_URL + "/api/v1/challenge/" + id)
         .then((response) => {
             return response.data;
         })
@@ -109,7 +109,7 @@ export const deleteChallenge = async (id) => {
 
 export const cloneChallenge = async (data, id) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/challenge/" + id + "/clone", {
+        .put(BASE_URL + "/api/v1/challenge/" + id + "/clone", {
             startDate: data.startDate
         })
         .then((response) => {

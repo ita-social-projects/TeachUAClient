@@ -2,16 +2,16 @@ import { BASE_URL } from './config/ApiConfig'
 import fetchRequest from './FetchRequest'
 
 export const getAllLogs = async () => {
-    return await fetchRequest.get(`${BASE_URL}/api/logs`)
+    return await fetchRequest.get(`${BASE_URL}/api/v1/v1/log`)
 }
 
 export const getLogByName = async (params) => {
-    return await fetchRequest.get(`${BASE_URL}/api/logs/${params}`)
+    return await fetchRequest.get(`${BASE_URL}/api/v1/log/${params}`)
 }
 
 export const downloadLogByName = async ({fileName}) => {
     const response = await fetchRequest.get(
-        `${BASE_URL}/api/logs/${fileName}/download`,
+        `${BASE_URL}/api/v1/log/${fileName}/download`,
         {
             method: 'get',
             responseType: 'blob',
@@ -27,5 +27,5 @@ export const downloadLogByName = async ({fileName}) => {
 }
 
 export const deleteLogByName = async (params) => {
-    return await fetchRequest.delete(`${BASE_URL}/api/logs/${params}`)
+    return await fetchRequest.delete(`${BASE_URL}/api/v1/log/${params}`)
 }
