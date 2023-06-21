@@ -9,7 +9,9 @@ const ClubListHeader = ({
                             setAdvancedSearch,
                             advancedSearch,
                             setShowHideMenu,
-                            showHideMenu}) => {
+                            showHideMenu,
+                            centerCheck,
+                            centerOrClub}) => {
 
     const [mapVisible, setMapVisible] = useState(false);
 
@@ -17,18 +19,22 @@ const ClubListHeader = ({
         <div className="lower-header-box global-padding">
             <div className="city-name-box">
                 <div className="city-name-box-small-screen">
-                    {mapSearchParameters.cityName !== 'online' ?
-
-                            <h2 className="city-name">{searchParameters.cityName !== undefined ? "Гуртки у місті " + searchParameters.cityName : "Гуртки у всіх містах"}</h2>
-                            :
-                            <h2 className="city-name">Гуртки без локації</h2>}
+                    {mapSearchParameters.cityName !== 'online' ? (
+                        <h2 className="city-name">
+                            {centerCheck && searchParameters.cityName !== undefined
+                                ? `Центри в місті ${searchParameters.cityName}`
+                                : `Гуртки у місті ${searchParameters.cityName !== undefined ? searchParameters.cityName : 'всіх містах'}`}
+                        </h2>
+                    ) : (
+                        <h2 className="city-name">Гуртки без локації</h2>
+                    )}
                     <EnvironmentFilled className="icon"/>
                 </div>
                 {mapSearchParameters.cityName !== 'online' && <Button className="flooded-button show-map-button"
                         onClick={() => setMapVisible(true)}>Показати на мапі</Button>}
 			</div>
 			<div className="search-container">
-	            <Search showHideMenu={showHideMenu} setShowHideMenu={setShowHideMenu} setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
+	            <Search centerOrClub={centerOrClub} showHideMenu={showHideMenu} setShowHideMenu={setShowHideMenu} setAdvancedSearch={setAdvancedSearch} advancedSearch={advancedSearch}/>
 			</div>
             <MapComponent visible={mapVisible} setVisible={setMapVisible} cityName={searchParameters.cityName}/>
         </div>

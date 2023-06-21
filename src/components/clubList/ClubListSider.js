@@ -19,6 +19,7 @@ const ClubListSider = ({
                            setShowHideMenu,
                            setIsCenterChecked,
                            activeCategory,
+                            toggleCenter
                        }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
@@ -27,6 +28,7 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub , setStateForClub] = useState(false);
+
 
     const getData = () => {
         setCurrentPage(0);
@@ -134,7 +136,7 @@ const ClubListSider = ({
                     className="club-list-row"
                     // label="Гурток/Центр"
                     initialValue={false}>
-                    <Radio.Group className="club-list-kind">
+                    <Radio.Group className="club-list-kind" onChange={toggleCenter}>
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
                     </Radio.Group>
