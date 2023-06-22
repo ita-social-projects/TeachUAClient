@@ -217,7 +217,7 @@ class Search extends React.Component {
                         width: 230,
                         //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
-                    placeholder={`Який ${this.props.centerOrClub} шукаєте?`}
+                    placeholder={this.props.centerOrClub ? `Який ${this.props.centerOrClub} шукаєте?` : `Який гурток шукаєте?`}
                     maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (
