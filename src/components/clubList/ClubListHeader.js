@@ -23,7 +23,7 @@ const ClubListHeader = ({
                     {mapSearchParameters.cityName !== 'online' ? (
                         <h2 className="city-name">
                             {centerCheck
-                                ? `Центри ${city !== undefined ? 'в місті ' + searchParameters.cityName : 'у всіх містах'}`
+                                ? `Центри ${searchParameters.cityName !== undefined ? 'в місті ' + searchParameters.cityName : 'у всіх містах'}`
                                 : `Гуртки ${searchParameters.cityName !== undefined ? 'в місті ' + searchParameters.cityName : 'у всіх містах'}`}
                         </h2>
                     ) : (
