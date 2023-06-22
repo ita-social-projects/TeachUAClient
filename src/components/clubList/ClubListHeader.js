@@ -11,7 +11,8 @@ const ClubListHeader = ({
                             setShowHideMenu,
                             showHideMenu,
                             centerCheck,
-                            centerOrClub}) => {
+                            centerOrClub,
+                            city}) => {
 
     const [mapVisible, setMapVisible] = useState(false);
 
@@ -21,12 +22,12 @@ const ClubListHeader = ({
                 <div className="city-name-box-small-screen">
                     {mapSearchParameters.cityName !== 'online' ? (
                         <h2 className="city-name">
-                            {centerCheck && searchParameters.cityName !== undefined
-                                ? `Центри в місті ${searchParameters.cityName}`
-                                : `Гуртки у місті ${searchParameters.cityName !== undefined ? searchParameters.cityName : 'всіх містах'}`}
+                            {centerCheck
+                                ? `Центри у ${city !== undefined ? 'місті ' + city : 'всіх містах'}`
+                                : `Гуртки у ${city !== undefined ? 'місті ' + city : 'всіх містах'}`}
                         </h2>
                     ) : (
-                        <h2 className="city-name">Гуртки без локації</h2>
+                        centerCheck ? <h2 className="city-name">Центри без локації</h2> : <h2 className="city-name">Гуртки без локації</h2>
                     )}
                     <EnvironmentFilled className="icon"/>
                 </div>

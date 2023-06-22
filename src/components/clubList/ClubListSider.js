@@ -19,7 +19,8 @@ const ClubListSider = ({
                            setShowHideMenu,
                            setIsCenterChecked,
                            activeCategory,
-                            toggleCenter
+                           toggleCenter,
+                           changeCityName
                        }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
@@ -94,10 +95,7 @@ const ClubListSider = ({
 
     };
 
-    const onCityChange = (value) => {
-        setCityName(value);
-        searchParameters.cityName = value;
-        mapSearchParameters.cityName = value;
+    const onCityChange = () => {
         form.setFieldsValue({districtName: undefined});
         form.setFieldsValue({stationName: undefined});
     };
@@ -157,7 +155,10 @@ const ClubListSider = ({
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
-                        onChange={onCityChange}>
+                        onChange={(value) => {
+                            onCityChange(value);
+                            changeCityName(value);
+                        }}>
                         {cities.map((city) => (
                             <Option value={city.name}>{city.name}</Option>
                         ))}

@@ -11,7 +11,7 @@ import Loader from "../Loader";
 import MainInformationStep from "../addClub/steps/MainInformationStep";
 import ContactsStep from "../addClub/steps/ContactsStep";
 import DescriptionStep from "../addClub/steps/DescriptionStep";
-import {searchParameters} from "../../context/SearchContext";
+import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
 
 const ClubListComponent = () => {
     const DEFAULT_SORT_BY = "name";
@@ -25,7 +25,8 @@ const ClubListComponent = () => {
     const location = useLocation();
     const [showHideMenu, setShowHideMenu] = useState(true);
     const [isCenter, setIsCenter] = useState(false);
-    const [centerOrClub, setCenterOrClub] = useState("гурток")
+    const [centerOrClub, setCenterOrClub] = useState("гурток");
+    const [cityName, setCityName] = useState("Київ");
 
     useEffect(() => {
         if (typeof location.state !== "undefined") {
@@ -40,6 +41,11 @@ const ClubListComponent = () => {
         isCenter === false ? setCenterOrClub("центр") : setCenterOrClub("гурток")
     }
 
+    function toggleChangeCityName(value) {
+        setCityName(value);
+        mapSearchParameters.cityName = value;
+    }
+
     return loading ? (
         <Loader />
     ) : (
@@ -52,6 +58,7 @@ const ClubListComponent = () => {
                 centerCheck={isCenter}
                 toggleCenter={toggleCenter}
                 centerOrClub={centerOrClub}
+                city={cityName}
             />
             <ClubList
                 toggleCenter={toggleCenter}
@@ -60,6 +67,7 @@ const ClubListComponent = () => {
                 showHideMenu={showHideMenu}
                 setShowHideMenu={setShowHideMenu}
                 advancedSearch={advancedSearch}
+                changeCityName={toggleChangeCityName}
                 defaultSortBy={DEFAULT_SORT_BY}
                 defaultSortDir={DEFAULT_SORT_DIRECTION}
                 defaultSortView={DEFAULT_SORT_VIEW}

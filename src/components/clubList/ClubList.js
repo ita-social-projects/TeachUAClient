@@ -24,7 +24,8 @@ const ClubList = ({
                       defaultSortBy,
                       defaultSortDir,
                       defaultSortView,
-                        toggleCenter
+                      toggleCenter,
+                      changeCityName
                   }) => {
     const [searchForm] = Form.useForm();
     const {clubs, setClubs} = useContext(SearchContext);
@@ -141,6 +142,7 @@ const ClubList = ({
                     setIsCenterChecked={setIsCenterCheckedAndSort}
                     activeCategory={activeCategory}
                     toggleCenter={toggleCenter}
+                    changeCityName={changeCityName}
                 />
             )}
 
