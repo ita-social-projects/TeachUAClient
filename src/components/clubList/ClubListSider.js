@@ -72,8 +72,10 @@ const ClubListSider = ({
         if (values.hasOwnProperty("isCenter")){
             if (values.isCenter !== true){
                 setStateForClub(false);
+                searchParameters.isCenter = false;
             } else {
                 setStateForClub(true);
+                searchParameters.isCenter = true;
             }
         }
 

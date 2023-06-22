@@ -17,6 +17,7 @@ import {getAllCategories} from "../service/CategoryService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import {getUserId} from "../service/StorageService";
 import {getUserById} from "../service/UserService";
+import {getCentersByAdvancedSearch} from "../service/CenterService";
 
 
 const {Option, OptGroup} = Select;
@@ -123,9 +124,16 @@ class Search extends React.Component {
             const DEFAULT_SORT_BY = "name";
             const DEFAULT_SORT_DIRECTION = "asc";
             let checkUndefPage = page === undefined ? 0 : page;
-            getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
-                this.context.setClubs(response);
-            })
+            if (!searchParameters.isCenter){
+                getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
+                    this.context.setClubs(response);
+                })
+            }
+            else {
+                getCentersByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response ) => {
+                    this.setState({ centers: response });
+                });
+            }
         }
     };
 

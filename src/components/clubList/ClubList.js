@@ -52,14 +52,14 @@ const ClubList = ({
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
-        if(advancedSearch && showHideMenu){
+        if (advancedSearch && showHideMenu) {
 
             setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
-            } else if (isCenterChecked!=undefined){
+            } else if (isCenterChecked != undefined) {
                 getClubsByAdvancedSearch(
                     params,
                     checkUndefPage,
@@ -69,8 +69,7 @@ const ClubList = ({
                     setClubs(response);
                 });
             }
-        } else if (!advancedSearch){
-            setSearchParams(searchParameters);
+        } else if (!advancedSearch) {
             getClubsByParameters(
                 searchParams,
                 checkUndefPage,
@@ -80,7 +79,6 @@ const ClubList = ({
                 setClubs(response);
             });
         }
-
         if (advancedSearch && !showHideMenu) {
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
