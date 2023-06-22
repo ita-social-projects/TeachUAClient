@@ -59,7 +59,6 @@ const ClubListComponent = () => {
                 centerCheck={isCenter}
                 toggleCenter={toggleCenter}
                 centerOrClub={centerOrClub}
-                city={cityName}
             />
             <ClubList
                 toggleCenter={toggleCenter}

@@ -11,8 +11,7 @@ const ClubListHeader = ({
                             setShowHideMenu,
                             showHideMenu,
                             centerCheck,
-                            centerOrClub,
-                            city}) => {
+                            centerOrClub}) => {
 
     const [mapVisible, setMapVisible] = useState(false);
 
