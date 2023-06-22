@@ -98,7 +98,6 @@ const ClubListSider = ({
     const onCityChange = (value) => {
         setCityName(value);
         searchParameters.cityName = value;
-        mapSearchParameters.cityName = value;
         form.setFieldsValue({districtName: undefined});
         form.setFieldsValue({stationName: undefined});
     };

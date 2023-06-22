@@ -43,6 +43,8 @@ const ClubListComponent = () => {
 
     function toggleChangeCityName(value) {
         setCityName(value);
+        mapSearchParameters.cityName = value;
+        searchParameters.cityName = value;
     }
 
     return loading ? (
