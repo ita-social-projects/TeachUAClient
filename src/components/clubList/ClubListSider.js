@@ -178,7 +178,10 @@ const ClubListSider = ({
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть район"
-                        optionFilterProp="children">
+                        optionFilterProp="children"
+                        disabled={
+                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                        }>
                         {districts.map((district) => (
                             <Option value={district.name}>
                                 {district.name}
@@ -197,7 +200,10 @@ const ClubListSider = ({
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть станцію"
-                        optionFilterProp="children">
+                        optionFilterProp="children"
+                        disabled={
+                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                        }>
                         {stations.map((station) => (
                             <Option value={station.name}>{station.name}</Option>
                         ))}
