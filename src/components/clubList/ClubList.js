@@ -36,12 +36,7 @@ const ClubList = ({
     const [sortDirection, setSortDirection] = useState(defaultSortDir);
     const [view, setView] = useState(defaultSortView);
     const [isCenterChecked, setIsCenterChecked] = useState(false);
-    const [centers, setCenters] = useState({
-        content: [],
-        pageable: {},
-        size: 0,
-        totalElements: 0,
-    });
+    const {centers, setCenters} = useContext(SearchContext);
     const [centerInfoVisible, setCenterInfoVisible] = useState(false);
     const [clickedCenter, setClickedCenter] = useState(null);
 
@@ -59,7 +54,7 @@ const ClubList = ({
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
-            } else if (isCenterChecked != undefined) {
+            } else if (isCenterChecked !== undefined) {
                 getClubsByAdvancedSearch(
                     params,
                     checkUndefPage,

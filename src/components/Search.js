@@ -126,12 +126,12 @@ class Search extends React.Component {
             let checkUndefPage = page === undefined ? 0 : page;
             if (!searchParameters.isCenter){
                 getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
-                    this.context.setClubs(response);
+                    this.context.setClubs(response)
                 })
             }
             else {
                 getCentersByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response ) => {
-                    this.setState({ centers: response });
+                    this.context.setCenters(response);
                 });
             }
         }
