@@ -202,7 +202,7 @@ export const getClubReport = async (id, fileName) => {
 
 export const changeClubOwner = async (userId, clubId) => {
     return await fetchRequest
-        .get(BASE_URL + "/api/user/" + userId)
+        .get(BASE_URL + "/api/v1/user/" + userId)
         .then((response) => {
             return fetchRequest
                 .patch(BASE_URL + "/api/v1/club/change-owner/" + clubId + "/" + response.data.id)

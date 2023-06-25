@@ -3,7 +3,7 @@ import { BASE_URL } from "./config/ApiConfig";
 import { getRefreshToken } from "./StorageService";
 
 export const resetPassword = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/resetpassword", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/auth/password/reset", {
         email: data.email,
     }).then((response) => {
         return response.data
@@ -12,17 +12,8 @@ export const resetPassword = async (data) => {
     });
 };
 
-export const verifyReset = async (verifyCode) => {
-    return await fetchRequest.get(BASE_URL + "/api/verifyreset?code=" + verifyCode)
-        .then((response) => {
-            return response;
-        }).catch((error) => {
-            return error.response;
-        });
-};
-
 export const changePassword = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/verifyreset", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/auth/password/reset/verify", {
         id: data.id,
         email: data.email,
         password: data.password,
@@ -33,13 +24,13 @@ export const changePassword = async (data) => {
 };
 
 export const getUserById = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
+    return await fetchRequest.get(BASE_URL + "/api/v1/user/" + id).then((response) => {
         return response.data
     });
 };
 
 export const signUp = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/signup", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/auth/signup", {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -55,7 +46,7 @@ export const signUp = async (data) => {
 };
 
 export const signIn = async (data) => {
-    return await authRequest.post(BASE_URL + "/api/signin", {
+    return await authRequest.post(BASE_URL + "/api/v1/auth/signin", {
         email: data.email,
         password: data.password
     }).then((response) => {
@@ -64,7 +55,7 @@ export const signIn = async (data) => {
 };
 
 export const refreshAccessToken = async () => {
-    return await fetchRequest.post(BASE_URL + "/api/token/refresh", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/jwt/refresh", {
         refreshToken: getRefreshToken(),
     }).then((response) => {
         return response.data
@@ -72,7 +63,7 @@ export const refreshAccessToken = async () => {
 }
 
 export const revokeRefreshToken = async () => {
-    return await authRequest.post(BASE_URL + "/api/token/revoke", {
+    return await authRequest.post(BASE_URL + "/api/v1/jwt/revoke", {
         refreshToken: getRefreshToken(),
     }).then((response) => {
         return response.data
@@ -80,7 +71,7 @@ export const revokeRefreshToken = async () => {
 }
 
 export const verify = async (data) => {
-    return await fetchRequest.post(BASE_URL + "/api/verify", {
+    return await fetchRequest.post(BASE_URL + "/api/v1/auth/password/verify", {
         id: data.id,
         password: data.currentPassword
     }).then((response) => {
@@ -89,7 +80,7 @@ export const verify = async (data) => {
 };
 
 export const updateUser = async (data) => {
-    return await fetchRequest.put(BASE_URL + "/api/user/" + data.id, {
+    return await fetchRequest.put(BASE_URL + "/api/v1/user/" + data.id, {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -103,7 +94,7 @@ export const updateUser = async (data) => {
 };
 
 export const updatePassword = async (data) => {
-    return await fetchRequest.patch(BASE_URL + "/api/user/" + data.id, {
+    return await fetchRequest.patch(BASE_URL + "/api/v1/user/" + data.id, {
         oldPassword: data.currentPassword,
         newPassword: data.password,
         newPasswordVerify: data.password
@@ -113,7 +104,7 @@ export const updatePassword = async (data) => {
 };
 
 export const getAllUsers = async () => {
-    return await fetchRequest.get(BASE_URL + "/api/users")
+    return await fetchRequest.get(BASE_URL + "/api/v1/user")
         .then((response) => {
             return response.data
         }).catch((error) => {
@@ -122,7 +113,7 @@ export const getAllUsers = async () => {
 };
 
 export const getUsersByRole = async (role) => {
-    return await fetchRequest.get(BASE_URL + "/api/users/" + role)
+    return await fetchRequest.get(BASE_URL + "/api/v1/user/" + role)
         .then((response) => {
             return response.data
         }).catch((error) => {
@@ -131,7 +122,7 @@ export const getUsersByRole = async (role) => {
 };
 
 export const deleteUserById = async (id) => {
-    return await fetchRequest.delete(BASE_URL + "/api/user/" + id, {
+    return await fetchRequest.delete(BASE_URL + "/api/v1/user/" + id, {
         id: id
     }).then((response) => {
         return response.data

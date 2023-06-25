@@ -25,7 +25,7 @@ const WithAxios = ({ children }) => {
                     if (error.response.status === 401 && !originalConfig._retry) {
                         originalConfig._retry = true;
                         try {
-                            const tokens = await authRequest.post(BASE_URL + "/api/token/refresh", {
+                            const tokens = await authRequest.post(BASE_URL + "/api/v1/jwt/refresh", {
                                 refreshToken: getRefreshToken(),
                             }).then(response => response.data);
                             const { accessToken, refreshToken } = tokens;
