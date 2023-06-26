@@ -23,6 +23,9 @@ export const mapSearchParameters = {
 export const clearSearchParameters = () => {
     searchParameters.categoryName = "";
     searchParameters.clubName = "";
+    searchParameters.cityName = "Київ";
+    searchParameters.districtName = "";
+    searchParameters.stationName = "";
 };
 
 export const searchInputData = {

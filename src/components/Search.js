@@ -190,6 +190,12 @@ class Search extends React.Component {
     };
 
     handleAdvancedSearch = () => {
+        clearSearchParameters();
+        if(this.props.centerOrClub === "центр"){
+            getClubsByParameters(searchParameters).then((response) => {
+                this.context.setClubs(response);
+            });
+        }
         if (this.props.redirect) {
             //redirect with props value for component
             this.props.history.push({
