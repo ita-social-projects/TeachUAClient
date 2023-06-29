@@ -4,7 +4,7 @@ import ModalHint from "./ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
 import classes from "./css/SignUpForClub.module.css";
 import TextArea from "antd/lib/input/TextArea";
-import {Button, Form, Modal} from "antd";
+import {Button, Col, Form, Modal, Row} from "antd";
 import {createMessage} from "../../../service/MessageService";
 import {getUsersByRole} from "../../../service/UserService";
 import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
@@ -83,21 +83,30 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                         <div className={classes.formItem}>
                             <Form.Item
                                 label="Написати організатору гуртка"
-                                labelCol={{className: classes.labelBlock}}
+                                labelCol={{ span: 24, className: classes.labelBlock}}
                                 name="text"
-                                rules={[{
-                                    required: true,
-                                    message: "Додайте текст повідомлення"
-                                }]}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Додайте текст повідомлення",
+                                    },
+                                ]}
+                                colon={false}
+                                className={classes.formItem}
                             >
+                                <Row justify="center">
+                                    <Col span={30}>
+                                        <TextArea
+                                            className={classes.textArea}
+                                            autoSize={{ minRows: 5, maxRows: 5 }}
+                                            placeholder="Додайте опис"
+                                        />
+                                    </Col>
+                                </Row>
                             </Form.Item>
-                            <TextArea className={classes.textArea}
-                                      autoSize={{minRows: 5, maxRows: 5}}
-                                      placeholder="Додайте опис"
-                            />
                         </div>
 
-                        <div className={classes.formItem}>
+                        <div>
                             <Button
                                 className={classes.formButton}
                                 type="primary"
