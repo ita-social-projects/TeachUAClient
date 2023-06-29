@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {getUserId} from "../../../service/StorageService";
 import ModalHint from "./ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
@@ -80,23 +80,24 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                         requiredMark={true}
                         onFinish={onFinish}
                     >
-                        <Form.Item
-                            className={classes.formItem}
-                            label="Написати організатору гуртка"
-                            labelCol={{className: classes.labelBlock}}
-                            name="text"
-                            rules={[{
-                                required: true,
-                                message: "Додайте текст повідомлення"
-                            }]}
-                        >
+                        <div className={classes.formItem}>
+                            <Form.Item
+                                label="Написати організатору гуртка"
+                                labelCol={{className: classes.labelBlock}}
+                                name="text"
+                                rules={[{
+                                    required: true,
+                                    message: "Додайте текст повідомлення"
+                                }]}
+                            >
+                            </Form.Item>
                             <TextArea className={classes.textArea}
                                       autoSize={{minRows: 5, maxRows: 5}}
                                       placeholder="Додайте опис"
                             />
-                        </Form.Item>
+                        </div>
 
-                        <Form.Item>
+                        <div className={classes.formItem}>
                             <Button
                                 className={classes.formButton}
                                 type="primary"
@@ -104,7 +105,7 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                             >
                                 Надіслати
                             </Button>
-                        </Form.Item>
+                        </div>
                     </Form>
                 </div>
             </Modal>
