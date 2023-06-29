@@ -93,7 +93,7 @@
 }
 
 .form {
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,15 +109,14 @@
 .label {
     font-weight: 400;
     font-size: 18px;
-    line-height: 32px;
+    line-height: 100%;
     width: 100%;
     text-align: center;
     color: #2D4C68;
-    margin-bottom: 8px;
 }
 
 .textArea {
-    width: 450px;
+    width: 27em;
 }
 
 .formButton {
