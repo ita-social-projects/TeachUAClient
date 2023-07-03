@@ -1,7 +1,6 @@
-
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
-import {searchParameters} from "../context/SearchContext";
+import {searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
 
 
@@ -62,6 +61,7 @@ export const getCentersByAdvancedSearch = async (
 ) => {
     return await fetchRequest.get(BASE_URL + "/api/centers/search/advanced", {
         params: {
+            centerName: parameters.centerName ? parameters.centerName : searchInputData.input,
             cityName: parameters.cityName ? parameters.cityName : searchParameters.cityName,
             districtName: parameters.districtName,
             stationName: parameters.stationName,
@@ -69,7 +69,7 @@ export const getCentersByAdvancedSearch = async (
             page: page,
         },
     }).then((response) => {
-        return response.data
+        return response.data;
     });
 }
 export const deleteCenterById = async (id) => {
@@ -98,7 +98,7 @@ export const addCenter = async (data) => {
     });
 };
 
-export const updateCenter = async (id,data) => {
+export const updateCenter = async (id, data) => {
     return await fetchRequest.put(BASE_URL + "/api/center/" + id, {
         name: data.name,
         description: data.description,

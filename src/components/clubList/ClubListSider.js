@@ -19,6 +19,8 @@ const ClubListSider = ({
                            setShowHideMenu,
                            setIsCenterChecked,
                            activeCategory,
+                           toggleCenter,
+                           changeCityName
                        }) => {
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
@@ -27,6 +29,7 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub , setStateForClub] = useState(false);
+
 
     const getData = () => {
         setCurrentPage(0);
@@ -69,8 +72,10 @@ const ClubListSider = ({
         if (values.hasOwnProperty("isCenter")){
             if (values.isCenter !== true){
                 setStateForClub(false);
+                searchParameters.isCenter = false;
             } else {
                 setStateForClub(true);
+                searchParameters.isCenter = true;
             }
         }
 
@@ -95,7 +100,6 @@ const ClubListSider = ({
     const onCityChange = (value) => {
         setCityName(value);
         searchParameters.cityName = value;
-        mapSearchParameters.cityName = value;
         form.setFieldsValue({districtName: undefined});
         form.setFieldsValue({stationName: undefined});
     };
@@ -134,7 +138,7 @@ const ClubListSider = ({
                     className="club-list-row"
                     // label="Гурток/Центр"
                     initialValue={false}>
-                    <Radio.Group className="club-list-kind">
+                    <Radio.Group className="club-list-kind" onChange={toggleCenter}>
                         <Radio value={false}>Гурток</Radio>
                         <Radio value={true}>Центр</Radio>
                     </Radio.Group>
@@ -155,7 +159,10 @@ const ClubListSider = ({
                         className="club-list-select"
                         placeholder="Виберіть місто"
                         optionFilterProp="children"
-                        onChange={onCityChange}>
+                        onChange={(value) => {
+                            onCityChange(value);
+                            changeCityName(value);
+                        }}>
                         {cities.map((city) => (
                             <Option value={city.name}>{city.name}</Option>
                         ))}
@@ -173,7 +180,10 @@ const ClubListSider = ({
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть район"
-                        optionFilterProp="children">
+                        optionFilterProp="children"
+                        disabled={
+                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                        }>
                         {districts.map((district) => (
                             <Option value={district.name}>
                                 {district.name}
@@ -192,7 +202,10 @@ const ClubListSider = ({
                         allowClear
                         className="club-list-select"
                         placeholder="Виберіть станцію"
-                        optionFilterProp="children">
+                        optionFilterProp="children"
+                        disabled={
+                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                        }>
                         {stations.map((station) => (
                             <Option value={station.name}>{station.name}</Option>
                         ))}

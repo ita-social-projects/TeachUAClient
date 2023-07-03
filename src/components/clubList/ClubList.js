@@ -24,6 +24,8 @@ const ClubList = ({
                       defaultSortBy,
                       defaultSortDir,
                       defaultSortView,
+                      toggleCenter,
+                      changeCityName
                   }) => {
     const [searchForm] = Form.useForm();
     const {clubs, setClubs} = useContext(SearchContext);
@@ -34,12 +36,7 @@ const ClubList = ({
     const [sortDirection, setSortDirection] = useState(defaultSortDir);
     const [view, setView] = useState(defaultSortView);
     const [isCenterChecked, setIsCenterChecked] = useState(false);
-    const [centers, setCenters] = useState({
-        content: [],
-        pageable: {},
-        size: 0,
-        totalElements: 0,
-    });
+    const {centers, setCenters} = useContext(SearchContext);
     const [centerInfoVisible, setCenterInfoVisible] = useState(false);
     const [clickedCenter, setClickedCenter] = useState(null);
 
@@ -50,14 +47,14 @@ const ClubList = ({
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
-        if(advancedSearch && showHideMenu){
+        if (advancedSearch && showHideMenu) {
 
             setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
                 });
-            } else if (isCenterChecked!=undefined){
+            } else if (isCenterChecked !== undefined) {
                 getClubsByAdvancedSearch(
                     params,
                     checkUndefPage,
@@ -67,8 +64,7 @@ const ClubList = ({
                     setClubs(response);
                 });
             }
-        } else if (!advancedSearch){
-            setSearchParams(searchParameters);
+        } else if (!advancedSearch) {
             getClubsByParameters(
                 searchParams,
                 checkUndefPage,
@@ -78,7 +74,6 @@ const ClubList = ({
                 setClubs(response);
             });
         }
-
         if (advancedSearch && !showHideMenu) {
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
@@ -139,6 +134,8 @@ const ClubList = ({
                     isCenterChecked={isCenterChecked}
                     setIsCenterChecked={setIsCenterCheckedAndSort}
                     activeCategory={activeCategory}
+                    toggleCenter={toggleCenter}
+                    changeCityName={changeCityName}
                 />
             )}
 

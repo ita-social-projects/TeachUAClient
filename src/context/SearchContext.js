@@ -2,6 +2,7 @@ import { createContext } from "react";
 
 export const SearchContext = createContext(null);
 
+
 export const searchParameters = {
     clubName: "",
     cityName: "Київ",
@@ -10,7 +11,8 @@ export const searchParameters = {
     categoryName: "",
     isOnline: false,
     page: 0,
-    isAdvancedSearch: false
+    isAdvancedSearch: false,
+    isCenter: false
 };
 
 export const mapSearchParameters = {

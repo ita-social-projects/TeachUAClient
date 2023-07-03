@@ -17,6 +17,7 @@ import {getAllCategories} from "../service/CategoryService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import {getUserId} from "../service/StorageService";
 import {getUserById} from "../service/UserService";
+import {getCentersByAdvancedSearch} from "../service/CenterService";
 
 
 const {Option, OptGroup} = Select;
@@ -68,8 +69,9 @@ class Search extends React.Component {
         if (value === undefined) {
             return;
         }
-        if (value.trim().length === 0) {
-            return;
+        if (value.length === 0) {
+            getClubsByParameters(searchParameters).then((response) => {
+                this.context.setClubs(response);});
         }
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
@@ -122,9 +124,16 @@ class Search extends React.Component {
             const DEFAULT_SORT_BY = "name";
             const DEFAULT_SORT_DIRECTION = "asc";
             let checkUndefPage = page === undefined ? 0 : page;
-            getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
-                this.context.setClubs(response);
-            })
+            if (!searchParameters.isCenter){
+                getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
+                    this.context.setClubs(response)
+                })
+            }
+            else {
+                getCentersByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response ) => {
+                    this.context.setCenters(response);
+                });
+            }
         }
     };
 
@@ -216,7 +225,7 @@ class Search extends React.Component {
                         width: 230,
                         //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                     }}
-                    placeholder="Який гурток шукаєте?"
+                    placeholder={this.props.centerOrClub ? `Який ${this.props.centerOrClub} шукаєте?` : `Який гурток шукаєте?`}
                     maxLength={50}>
                     <OptGroup label="Категорії">
                         {this.state.possibleResults.categories.map((result) => (

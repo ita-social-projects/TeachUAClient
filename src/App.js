@@ -98,6 +98,13 @@ function App() {
         totalElements: 0
     });
 
+    const [centers, setCenters] = useState({
+        content: [],
+        pageable: {},
+        size: 0,
+        totalElements: 0
+    });
+
     const [currentPage, setCurrentPage] = useState(0);
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState({});
@@ -110,7 +117,7 @@ function App() {
         }
     }, []);
 
-    const clubProvider = useMemo(() => ({clubs, setClubs}), [clubs, setClubs]);
+    const clubProvider = useMemo(() => ({clubs, setClubs, centers, setCenters}), [clubs, setClubs, centers, setCenters]);
     const pageProvider = useMemo(() => ({currentPage, setCurrentPage}), [currentPage, setCurrentPage]);
 
     return (

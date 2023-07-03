@@ -42,20 +42,24 @@ class Cities extends React.Component {
             </Menu>
         );
 
-        return (
-            <Dropdown overlay={cityList}
-                      className="city"
-                      placement="bottom"
-                      disabled={searchParameters.isAdvancedSearch}
-                      arrow
-                      trigger = {'click'}>
-                <div style={{opacity: searchParameters.isAdvancedSearch ? 0.5 : 1}}>
-                    <EnvironmentFilled
-                        className="icon"/> {searchParameters.cityName}
-                    <CaretDownFilled/>
-                </div>
-            </Dropdown>
-        )
+        if (!searchParameters.isAdvancedSearch) {
+            return (
+                <Dropdown
+                    overlay={cityList}
+                    className="city"
+                    placement="bottom"
+                    arrow
+                    trigger="click"
+                >
+                    <div>
+                        <EnvironmentFilled className="icon" /> {searchParameters.cityName}
+                        <CaretDownFilled />
+                    </div>
+                </Dropdown>
+            );
+        }
+
+        return null;
     }
 }
 

@@ -8,6 +8,7 @@ import "./css/CenterList.less"
 import Loader from "../Loader";
 import ClubListControl from "../clubList/ClubListControl";
 import CenterListItemInfo from "./CenterListItemInfo";
+import CenterListEmptySearch from "./CenterListEmptySearch";
 
 
 const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearch, currentPage, onPageChange,
@@ -46,7 +47,7 @@ const CenterListDisplayContent = ({centers,loading, view, setView, advancedSearc
                              setView={setView}
                              centerIsChecked={true}/>}
 
-            {!loading && centers.content?.length === 0 ? <ClubListEmptySearch /> :
+            {!loading && centers.content?.length === 0 ? <CenterListEmptySearch /> :
 
                         <div className={`content-center-list ${view === 'BLOCK' && "content-center-block"}`}>
                             {centers.content.map((center) =>
