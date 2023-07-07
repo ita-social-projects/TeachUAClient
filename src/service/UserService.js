@@ -12,6 +12,17 @@ export const resetPassword = async (data) => {
     });
 };
 
+export const getChildren = async (userId) => {
+    return await fetchRequest
+        .get(`${BASE_URL}/api/children/${userId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
 export const verifyReset = async (verifyCode) => {
     return await fetchRequest.get(BASE_URL + "/api/verifyreset?code=" + verifyCode)
         .then((response) => {

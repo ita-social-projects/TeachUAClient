@@ -1,19 +1,39 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.childIcon {
+    width: 45px;
+    margin-right: 5px;
+}
+
+.customCheckbox {
+    font-size: 16px;
+}
+
+.textArea, .commentInput {
+    width: 100% ;
+    border-radius: 6px;
+    border-color: #D9D9D9;
+    font-size: 16px;
+}
+
+.addChildrenBtn {
+    margin: 10px 0;
+    margin-left: 20px; 
+}
+
 .signUpForClubModal {
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.title {
-    font-weight: 700;
-    font-size: 24px;
-    color: #2D4C68;
-    margin-bottom: 25px;
-}
-
 .content {
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 
@@ -26,103 +46,36 @@
     color: #003A8C;
 }
 
-.comment {
-    width: 230px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 18px;
+.label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    width: 100%;
+    white-space: normal;
     color: #595959;
-    /*margin-bottom: 10px;*/
-}
-
-.contacts {
-    /*margin-top: -26px;*/
-    inline-size: min-content;
-}
-
-.contacts > div {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.contacts > div > div {
-    display: flex;
-    flex-direction: column;
-}
-
-.contacts > div > div > div {
-    display: flex;
-    color: #2d4c68;
-    font-weight: 600;
-    margin-top: 12px;
-}
-
-.contacts > div > div > div > span {
-    opacity: 0.6;
-    color: #2d4c68;
-    margin-left: 11px;
-    max-width: 90%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-}
-
-.hr {
-    /*border: 1px solid black;*/
-    width: 100%;
-    color: black;
-    margin: 25px 0 15px;
-}
-
-.labelBlock {
-    padding-right: 16px;
-    color: #2D4C68;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-.labelBlock label {
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 32px;
-    padding-right: 16px;
-    color: #2D4C68;
-}
-
-.form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0;
 }
 
 .formItem {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-bottom: 16px;
     text-align: center;
-}
-
-.textArea {
-    width: 27em;
+    justify-content: space-between;
 }
 
 .formButton {
-    padding: 8px 70px;
+    float: right;
     height: 40px;
     background: #FA8C16 !important;
     border-radius: 6px;
     font-weight: bold;
     font-size: 16px;
     line-height: 24px;
-    text-align: center;
+    text-align: right;
     color: #FFFFFF !important;
 }
+
+.buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+}   
