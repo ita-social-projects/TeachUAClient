@@ -22,3 +22,14 @@ export const postUserClubRegistration = async (userClubRegistrationRequest) => {
             return error.response.data;
         });
 };
+
+export const getUnapprovedClubRegistrations = async (managerId) => {
+    return await fetchRequest
+        .get(`${BASE_URL}/api/club-registration/${managerId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
