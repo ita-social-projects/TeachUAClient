@@ -6,7 +6,7 @@ import {Button} from "antd";
 import Tags from "../../Tags";
 import ClubLogo from "./ClubLogo";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import SignUpForClub from "../messages/SignUpForClub";
+import SignUpForClub from "../register/SignUpForClub";
 
 const PageHeader = ({club}) => {
 

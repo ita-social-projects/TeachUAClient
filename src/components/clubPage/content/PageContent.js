@@ -10,7 +10,7 @@ import {BASE_URL} from "../../../service/config/ApiConfig";
 import {getFeedbackListByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
-import SignUpForClub from "../messages/SignUpForClub";
+import SignUpForClub from "../register/SignUpForClub";
 import {clubFeedback} from "../../../util/ClubUtil";
 
 const PageContent = ({club, feedbackCount}) => {

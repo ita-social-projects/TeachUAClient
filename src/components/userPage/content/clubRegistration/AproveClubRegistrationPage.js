@@ -3,41 +3,56 @@ import { Content } from "antd/es/layout/layout";
 import { getUserId } from "../../../../service/StorageService";
 import "./css/AproveClubRegistrationPage.less";
 import { getUnapprovedClubRegistrations } from "../../../../service/ClubRegistrationService";
-import { List } from 'antd';
+import { List, Spin } from 'antd';
+import UnapprovedRegistration from "./UnapprovedRegistration";
 
 const AproveClubRegistrationPage = () => {
-
+    const [loading, setLoading] = useState(true);
     const [unapprovedRegistrations, setUnapprovedRegistrations] = useState([]);
 
     useEffect(() => {
-        const managerId = getUserId();
-        getUnapprovedClubRegistrations(managerId).then(response => setUnapprovedRegistrations(response));
+        const managerId = getUserId(); 
+
+        getUnapprovedClubRegistrations(managerId)
+            .then(response => {
+                setUnapprovedRegistrations(response);
+                setLoading(false);
+            });
     }, []);
 
+    const updateRegistrations = (clubRegistrationId) => {
+        setUnapprovedRegistrations(unapprovedRegistrations.filter(reg => reg.id !== clubRegistrationId));
+    };
+
     return (
-        <Content className="messagesContent">
-
+        <Content className="registrationsContent">
             <div className="contentBox">
-
                 <div className="contentTitle">
-                    Мої повідомлення
+                    Заявки на реєстрацію
                 </div>
 
-                <div className="messages">
-
-                    <List
-                        className="certificates"
-                        itemLayout="horizontal"
-                        split={false}
-                        locale={{
-                            emptyText: <div className="noMessages">Повідомлень немає</div>
-                        }}
-                        dataSource={messages}
-                        pagination={{ hideOnSinglePage: true, defaultPageSize: 4, className: "user-content-pagination" }}
-                        renderItem={(message) => (
-                            <Message message={message} key={message.id} />
-                        )}
-                    />
+                <div className="registrations">
+                    {loading ? (
+                        <Spin size="large" />
+                    ) : (
+                        <List
+                            className="registrations"
+                            itemLayout="horizontal"
+                            split={false}
+                            locale={{
+                                emptyText: <div className="noRegistrations">Всі заявки підтверджено</div>
+                            }}
+                            dataSource={unapprovedRegistrations}
+                            pagination={{ hideOnSinglePage: true, defaultPageSize: 6, className: "user-content-pagination" }}
+                            renderItem={(registration) => (
+                                <UnapprovedRegistration 
+                                    registration={registration} 
+                                    key={registration.id} 
+                                    updateRegistrations={updateRegistrations} 
+                                />
+                            )}
+                        />
+                    )}
                 </div>
             </div>
         </Content>

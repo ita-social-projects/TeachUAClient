@@ -1,0 +1,28 @@
+.ant-collapse, .ant-collapse-content {
+    margin-bottom: 10px;
+    border: none; 
+    
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    border-bottom: none; 
+    box-shadow: none;
+}
+.ant-collapse {
+    border-radius: 16px;
+    overflow: hidden; 
+}
+
+.ant-collapse > .ant-collapse-item:last-child .ant-collapse-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ant-collapse > .ant-collapse-item:last-child.ant-collapse-item-active > .ant-collapse-content {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}

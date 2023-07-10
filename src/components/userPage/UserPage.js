@@ -9,6 +9,7 @@ import Sider from "antd/es/layout/Sider";
 import {getUserId, deleteUserStorage} from "../../service/StorageService";
 import UserMessagesPage from "./content/messages/UserMessagesPage";
 import UserCertificatesPage from "./content/certificates/UserCertificatesPage";
+import AproveClubRegistrationPage from "./content/clubRegistration/AproveClubRegistrationPage";
 import UserRoute from "../routes/UserRoute";
 import {AuthContext} from "../../context/AuthContext";
 
@@ -42,6 +43,10 @@ const UserPage = () => {
 
             <UserRoute exact path={`${routeMatch.path}/messages`} >
                 <UserMessagesPage />
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/registrations`} >
+                <AproveClubRegistrationPage />
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/certificates`} >

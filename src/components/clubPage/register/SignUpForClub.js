@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getUserId } from "../../../service/StorageService";
-import ModalHint from "./ModalHint";
+import ModalHint from "../register/ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
 import classes from "./css/SignUpForClub.module.css";
-import { Button, Form, Modal, Input, Checkbox } from "antd";
-import { getChildren } from "../../../service/UserService";
+import { Button, Form, Modal, Input, Checkbox, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import AddChildModal from "../../addChild/AddChildModal";
-import { postClubRegistration, postUserClubRegistration } from "../../../service/ClubRegistrationService";
+import { postClubRegistration, postUserClubRegistration, getChildren } from "../../../service/ClubRegistrationService";
 import './css/SignUpForClub.css';
 
 const SignUpForClub = ({ isShowing, setShowing, club }) => {
@@ -31,8 +30,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
 
     useEffect(() => {
         if (isShowing) {
-            const userId = getUserId();
-            getChildren(userId)
+            getChildren(club.id)
                 .then(data => {
                     setChildren(data);
                 })
@@ -43,7 +41,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
     }, [isShowing]);
 
     const onFinish = (values) => {
-        const comment = values.comment || '';
+        const comment = values.comment || ' ';
 
         if (selectedChildrenIds.includes("self")) {
             const userClubRegistrationRequest = {
@@ -56,6 +54,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                 .then((response) => {
                     setShowing(false);
                     registrationToClubForm.resetFields();
+                    setSelectedChildrenIds([]);
                 })
                 .catch((error) => {
                     console.error('There was an error!', error);
@@ -72,6 +71,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                 .then((response) => {
                     setShowing(false);
                     registrationToClubForm.resetFields();
+                    setSelectedChildrenIds([]);
                 })
                 .catch((error) => {
                     console.error('There was an error!', error);
@@ -116,20 +116,24 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                             Кого записуємо?
                         </div>
 
-                        <Checkbox.Group className={classes.checkboxGroup} onChange={onCheckboxChange}>
+                        <Checkbox.Group className={classes.checkboxGroup} value={selectedChildrenIds} onChange={onCheckboxChange}>
                             {children.length > 0 ? (
                                 children.map((child) => (
                                     <div key={child.id} className={classes.customCheckbox}>
-                                        <Checkbox value={child.id}>
-                                            <div className={classes.label}>
-                                                <img
-                                                    src={child.gender === 'MALE' ? boyIcon : girlIcon}
-                                                    alt={child.gender === 'MALE' ? 'Boy Icon' : 'Girl Icon'}
-                                                    className={classes.childIcon}
-                                                />
-                                                {child.firstName} {child.lastName}, {child.age}
-                                            </div>
-                                        </Checkbox>
+                                        <Tooltip title={child.disabled ? "Already registered in this club" : ""}>
+                                            <span>
+                                                <Checkbox value={child.id} disabled={child.disabled}>
+                                                    <div className={classes.label}>
+                                                        <img
+                                                            src={child.gender === 'MALE' ? boyIcon : girlIcon}
+                                                            alt={child.gender === 'MALE' ? 'Boy Icon' : 'Girl Icon'}
+                                                            className={classes.childIcon}
+                                                        />
+                                                        {child.firstName} {child.lastName}, {child.age}
+                                                    </div>
+                                                </Checkbox>
+                                            </span>
+                                        </Tooltip>
                                     </div>
                                 ))
                             ) : (
@@ -140,7 +144,6 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                                 </div>
                             )}
                         </Checkbox.Group>
-
                         <div>
                             <Button className="add-children-btn" onClick={() => setIsAddChildModalVisible(true)}>
                                 <PlusOutlined />

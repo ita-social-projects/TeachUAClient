@@ -33,3 +33,25 @@ export const getUnapprovedClubRegistrations = async (managerId) => {
             return error.response.data;
         });
 };
+
+export const approveClubRegistration = async (clubRegistrationId) => {
+    return await fetchRequest
+        .patch(`${BASE_URL}/api/club-registration/approve/${clubRegistrationId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const getChildren = async (clubId) => {
+    return await fetchRequest
+        .get(`${BASE_URL}/api/club-registration/user-children/${clubId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
