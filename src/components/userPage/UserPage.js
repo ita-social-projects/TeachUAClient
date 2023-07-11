@@ -9,9 +9,10 @@ import Sider from "antd/es/layout/Sider";
 import {getUserId, deleteUserStorage} from "../../service/StorageService";
 import UserMessagesPage from "./content/messages/UserMessagesPage";
 import UserCertificatesPage from "./content/certificates/UserCertificatesPage";
-import AproveClubRegistrationPage from "./content/clubRegistration/AproveClubRegistrationPage";
+import ApproveClubRegistrationPage from "./content/clubRegistration/ApproveClubRegistrationPage";
 import UserRoute from "../routes/UserRoute";
 import {AuthContext} from "../../context/AuthContext";
+import UserApplicationsPage from "./content/clubRegistration/UserApplicationsPage";
 
 const UserPage = () => {
 
@@ -46,7 +47,11 @@ const UserPage = () => {
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/registrations`} >
-                <AproveClubRegistrationPage />
+                <ApproveClubRegistrationPage />
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/applications`} >
+                <UserApplicationsPage />
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/certificates`} >

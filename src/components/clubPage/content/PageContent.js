@@ -12,6 +12,7 @@ import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import SignUpForClub from "../register/SignUpForClub";
 import {clubFeedback} from "../../../util/ClubUtil";
+import { getRole } from "../../../service/StorageService"
 
 const PageContent = ({club, feedbackCount}) => {
     const [rate, setRate] = useState(0);
@@ -35,12 +36,12 @@ const PageContent = ({club, feedbackCount}) => {
                 :
                 <div className="content">
                     {getShortContent(club.description)}
-                    {/*{club.description}*/}
                 </div>
             }
             <div className="full-width button-box">
                 <Button className="flooded-button apply-button"
                         onClick={() => setSignUpForClubVisible(true)}
+                        disabled={getRole() !== 'ROLE_USER'}
                 >
                     Записатись на гурток
                 </Button>

@@ -42,15 +42,7 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                                         <span
                                             className="name">{`${item.user ? item.user.firstName : "unknown"}
                                              ${item.user ? item.user.lastName : "unknown"}`}</span>
-                                        <Tooltip title={new Date(item.date).toLocaleString()}>
-                                                <span className="datetime">{
-                                                    new Date(item.date).toLocaleString('uk', {
-                                                        day: 'numeric',
-                                                        month: 'long',
-                                                        year: 'numeric'
-                                                    })
-                                                }</span>
-                                        </Tooltip>
+                                                <span className="datetime">{item.date}</span>
                                     </div>
                                     <Rate className="rating" disabled allowHalf value={item.rate}/>
                                 </div>

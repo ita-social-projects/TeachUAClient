@@ -1,9 +1,7 @@
 import React from 'react';
-import { Collapse } from 'antd';
-import classes from "./css/UnapprovedRegistration.module.css";
-import "./css/UnapprovedRegistration.css";
+import { Collapse, Button } from 'antd';
+import classes from "./css/ClubRegistration.module.css";
 import { approveClubRegistration } from "../../../../service/ClubRegistrationService";
-import { Button } from 'antd';
 
 const { Panel } = Collapse;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;

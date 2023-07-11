@@ -7,7 +7,6 @@ import { getRole } from "../../../service/StorageService"
 
 const MenuSiderComponent = ({ url }) => {
     const userRole = getRole();
-    console.log("Роль користувача:", userRole);
     const router = useHistory();
     const [currentKey, setCurrentKey] = useState(router.location.pathname);
 
@@ -47,6 +46,16 @@ const MenuSiderComponent = ({ url }) => {
                         icon={<CheckOutlined className="icon-message" style={{ fontSize: 20 }} />}
                     >
                         <Link to={`${url}/registrations`}>Реєстрації</Link>
+                    </Menu.Item>
+                )}
+                {userRole === 'ROLE_USER' && (
+                    <Menu.Item
+                        className="menu-item"
+                        style={{ paddingLeft: 15 }}
+                        key={`${url}/applications`}
+                        icon={<CheckOutlined className="icon-message" style={{ fontSize: 20 }} />}
+                    >
+                        <Link to={`${url}/applications`}>Заявки</Link>
                     </Menu.Item>
                 )}
                 <Menu.Item className="menu-item"

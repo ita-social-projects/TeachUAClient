@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Button, Radio } from 'antd';
+import {Modal, Form, Input, Button, Radio, message} from 'antd';
 import { postChild } from '../../service/ChildService.js';
 import "./AddChildModal.css";
 
@@ -9,12 +9,13 @@ const AddChildModal = ({ isVisible, setIsVisible, onChildAdded }) => {
     const onFinish = (values) => {
         postChild(values)
             .then(response => {
-                console.log(response);
                 onChildAdded(response);
                 setIsVisible(false);
                 formInstance.resetFields();
+                message.success("Дитину було додано");
             })
             .catch(error => {
+                message.error("Помилка при додавані дитини")
                 console.error('There was an error!', error);
             });
     };

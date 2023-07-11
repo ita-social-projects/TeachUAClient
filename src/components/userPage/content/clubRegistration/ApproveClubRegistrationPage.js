@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Content } from "antd/es/layout/layout";
 import { getUserId } from "../../../../service/StorageService";
-import "./css/AproveClubRegistrationPage.less";
+import "./css/ClubRegistrationPage.less";
+import "./css/ClubRegistration.css";
 import { getUnapprovedClubRegistrations } from "../../../../service/ClubRegistrationService";
 import { List, Spin } from 'antd';
 import UnapprovedRegistration from "./UnapprovedRegistration";
 
-const AproveClubRegistrationPage = () => {
+const ApproveClubRegistrationPage = () => {
     const [loading, setLoading] = useState(true);
     const [unapprovedRegistrations, setUnapprovedRegistrations] = useState([]);
 
@@ -59,4 +60,4 @@ const AproveClubRegistrationPage = () => {
     );
 };
 
-export default AproveClubRegistrationPage;
+export default ApproveClubRegistrationPage;
