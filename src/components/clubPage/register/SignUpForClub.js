@@ -3,7 +3,7 @@ import { getUserId } from "../../../service/StorageService";
 import ModalHint from "../register/ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
 import classes from "./css/SignUpForClub.module.css";
-import { Button, Form, Modal, Input, Checkbox, Tooltip } from "antd";
+import {Button, Form, Modal, Input, Checkbox, Tooltip, message} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import AddChildModal from "../../addChild/AddChildModal";
 import { postClubRegistration, postUserClubRegistration, getChildren } from "../../../service/ClubRegistrationService";
@@ -72,8 +72,10 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                     setShowing(false);
                     registrationToClubForm.resetFields();
                     setSelectedChildrenIds([]);
+                    message.success("Запит на реєстрацію в гурток надіслано");
                 })
                 .catch((error) => {
+                    message.error("Помилка при запиті на додавання в гурток")
                     console.error('There was an error!', error);
                 });
         }
@@ -120,7 +122,9 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                             {children.length > 0 ? (
                                 children.map((child) => (
                                     <div key={child.id} className={classes.customCheckbox}>
-                                        <Tooltip title={child.disabled ? "Already registered in this club" : ""}>
+                                        <Tooltip
+                                            title={child.disabled ? "Already registered in this club" : ""}
+                                            color={"#FFA940"}>
                                             <span>
                                                 <Checkbox value={child.id} disabled={child.disabled}>
                                                     <div className={classes.label}>

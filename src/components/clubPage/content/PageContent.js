@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
@@ -18,6 +18,7 @@ const PageContent = ({club, feedbackCount}) => {
     const [rate, setRate] = useState(0);
     const images = club.urlGallery.map(image => BASE_URL + image.url);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
+    const role = getRole();
 
     const feedback = getFeedbackListByClubId(club.id);
 
@@ -38,18 +39,31 @@ const PageContent = ({club, feedbackCount}) => {
                     {getShortContent(club.description)}
                 </div>
             }
+
             <div className="full-width button-box">
-                <Button className="flooded-button apply-button"
-                        onClick={() => setSignUpForClubVisible(true)}
-                        disabled={getRole() !== 'ROLE_USER'}
+                <Tooltip
+                    title={role !== 'ROLE_USER' ? "Ця функціональність доступна тільки користувачу" : ""}
+                    color={role !== 'ROLE_USER' ? "#FFA940" : ""}
                 >
-                    Записатись на гурток
-                </Button>
+                    <Button
+                        className="flooded-button apply-button"
+                        onClick={() => {
+                            if (role === 'ROLE_USER') {
+                                setSignUpForClubVisible(true);
+                            }
+                        }}
+                        disabled={role !== 'ROLE_USER'}
+                    >
+                        Записатись на гурток
+                    </Button>
+
                 <SignUpForClub isShowing={signUpForClubVisible}
                                setShowing={setSignUpForClubVisible}
                                club={club}
                 />
+            </Tooltip>
             </div>
+
             <div className="full-width button-box">
                 <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
                     Завантажити

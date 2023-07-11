@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Button } from 'antd';
+import {Collapse, Button, message} from 'antd';
 import classes from "./css/ClubRegistration.module.css";
 import { approveClubRegistration } from "../../../../service/ClubRegistrationService";
 
@@ -15,7 +15,9 @@ const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
             if (response.approved) {
                 updateRegistrations(response.id);
             }
+            message.success("Реєстрацію підтверджено")
         } catch (error) {
+            message.error("Помилка при підтверджені реєстрації")
             console.error('Failed to approve registration', error);
         }
     };

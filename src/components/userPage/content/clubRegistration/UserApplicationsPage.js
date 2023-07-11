@@ -4,26 +4,25 @@ import {getUserId} from "../../../../service/StorageService";
 import "./css/ClubRegistrationPage.less";
 import "./css/ClubRegistration.css";
 import {getUserApplications, cancelClubRegistration} from "../../../../service/ClubRegistrationService";
-import {List, Spin} from 'antd';
+import {List, message, Spin} from 'antd';
 import UserApplication from "./UserApplication";
 
 const UserApplicationsPage = () => {
     const [loading, setLoading] = useState(true);
     const [applications, setApplications] = useState([]);
-    const [error, setError] = useState(null);
 
     const cancelApplication = (applicationId) => {
         cancelClubRegistration(applicationId)
             .then((response) => {
-                // Update the 'active' field of the application with the same 'id'
                 const updatedApplications = applications.map(application =>
                     application.id === response.id ? {...application, active: response.active} : application
                 );
                 setApplications(updatedApplications);
+                message.success("Заявка скасована")
             })
             .catch(err => {
-                // Handle any errors
-                setError(err.message);
+                message.error("Помилка при скасуванні заявки")
+                console.error('Failed to cancel registration', err);
             });
     };
 

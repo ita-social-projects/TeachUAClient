@@ -43,6 +43,16 @@
     color: white;
     border-radius: 6px;
 }
+
+.page-content .apply-button[disabled] {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+.page-content .apply-button[disabled]:hover {
+    background: #ccc;
+}
+
 .page-content .apply-button:hover {
     background: #FFA940;
 }
