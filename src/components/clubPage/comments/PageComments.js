@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, {useState} from 'react';
 import './css/PageComments.css';
-import {Button, Comment, List, message, Rate, Tooltip} from "antd";
+import {Button, Comment, List, message, Rate} from "antd";
 import {Content} from "antd/es/layout/layout";
 
 import CommentEditComponent from "./CommentEditComponent";
@@ -36,7 +36,7 @@ const PageComments = ({feedback, club, feedbackAdded}) => {
                             author={
                                 <div className="author">
                                     <img className="avatar"
-                                         src={'https://iso.500px.com/wp-content/uploads/2016/11/stock-photo-159533631-1500x1000.jpg'}
+                                         src={`${process.env.PUBLIC_URL}${item.user.urlLogo}`}
                                          alt="avatar"/>
                                     <div className="author-content">
                                         <span
