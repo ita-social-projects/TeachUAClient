@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Content} from "antd/es/layout/layout";
 import {getUserId} from "../../../../service/StorageService";
-import "./css/ClubRegistrationPage.less";
 import "./css/ClubRegistration.css";
 import {getUserApplications, cancelClubRegistration} from "../../../../service/ClubRegistrationService";
 import {List, message, Spin} from 'antd';
