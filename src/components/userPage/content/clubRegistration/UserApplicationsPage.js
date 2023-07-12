@@ -5,7 +5,6 @@ import { getUserId } from "../../../../service/StorageService";
 import { getUserApplications, cancelClubRegistration } from "../../../../service/ClubRegistrationService";
 import UserApplication from "./UserApplication";
 import "./css/ClubRegistration.css";
-import { useSearchAndFilter } from './hooks/useSearchAndFilter';
 
 const { Option } = Select;
 
