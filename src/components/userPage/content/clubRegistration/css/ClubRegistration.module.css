@@ -1,10 +1,10 @@
 .childIcon {
     width: 45px;
     margin-right: 5px;
-    user-select: none;
 }
 
 .label {
+    user-select: none;
     font-size: 16px;
     margin-bottom: 5px;
     width: 100%;

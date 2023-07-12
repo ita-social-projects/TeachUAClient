@@ -25,7 +25,7 @@ export const postUserClubRegistration = async (userClubRegistrationRequest) => {
 
 export const getUnapprovedClubRegistrations = async (managerId) => {
     return await fetchRequest
-        .get(`${BASE_URL}/api/club-registration/${managerId}`)
+        .get(`${BASE_URL}/api/club-registration/unapproved/${managerId}`)
         .then((response) => {
             return response.data;
         })
@@ -70,6 +70,17 @@ export const getUserApplications = async (userId) => {
 export const cancelClubRegistration = async (clubRegistrationId) => {
     return await fetchRequest
         .patch(`${BASE_URL}/api/club-registration/cancel/${clubRegistrationId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const getAllClubRegistrations = async (managerId) => {
+    return await fetchRequest
+        .get(`${BASE_URL}/api/club-registration/${managerId}`)
         .then((response) => {
             return response.data;
         })

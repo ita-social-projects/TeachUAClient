@@ -6,11 +6,6 @@ import EditClubModal from "../../editClub/EditClubModal";
 
 const clubUpdateMenu = (clubId, reloadAfterChange) => (
     <Menu className="update-menu">
-        <Menu.Item className="menu-item" key="participants">
-            <a>
-                Учасники гуртка
-            </a>
-        </Menu.Item>
         <Menu.Item className="menu-item" key="edit_club">
             <EditClubModal clubId={clubId} reloadAfterChange={reloadAfterChange}/>
         </Menu.Item>

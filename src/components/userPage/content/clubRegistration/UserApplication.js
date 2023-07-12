@@ -16,6 +16,18 @@ const UserApplication = ({ application, cancelApplication }) => {
         labelClass += " " + classes.labelCanceled;
         statusClass = classes.labelCanceled;
     }
+
+    let statusMessage;
+    if (application.active) {
+        if (application.approved) {
+            statusMessage = "Схвалено";
+        } else {
+            statusMessage = "На розгляді";
+        }
+    } else {
+        statusMessage = "Скасовано";
+    }
+
     const panelHeader = application.child
         ? (
             <div className={labelClass}>
@@ -64,12 +76,7 @@ const UserApplication = ({ application, cancelApplication }) => {
                 {application.comment}
                 <br></br>
                 <h3 className={statusClass}>
-                    {application.active
-                        ? (application.approved
-                            ? "Схвалено"
-                            : "На розгляді")
-                        : "Скасовано"
-                    }
+                    {statusMessage}
                 </h3>
                 <h3>{application.registrationDate}</h3>
             </Panel>

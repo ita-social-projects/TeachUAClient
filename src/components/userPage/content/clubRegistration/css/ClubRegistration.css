@@ -20,6 +20,25 @@
     color: #2D4C68;
 }
 
+.contentTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentTitle .radioGroup .ant-radio-wrapper {
+    color: #2D4C68;
+    font-size: 18px;
+}
+
+.contentTitle .titleText {
+    margin-right: 20px;
+}
+
+.content .contentTitle .radioGroup {
+    display: flex;
+}
+
 .content .registrations {
     margin-top: 40px;
 }
@@ -76,13 +95,21 @@
     height: 100%;
     border: none;
     border-radius: 16px 0 0 16px ;
+    margin-right: 2px;
 }
 
-.filterSelect .ant-select-selector {
+.filterSelectRight .ant-select-selector {
     height: 100%;
     border: none;
     border-radius: 0 16px 16px 0!important;
 }
+
+.filterSelectStatuses {
+    margin-right: 2px;
+    height: 100%;
+    border: none;
+}
+
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
     align-items: center;
     height: 100%;
@@ -104,6 +131,7 @@
 }
 
 .registrationsContent .contentTitle {
+    user-select: none;
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
