@@ -12,22 +12,17 @@ const RegistrationRoles = ({ setDisabledButton, setRole }) => {
         }
 
         return (
-            <Form.Item name="role" initialValue="ROLE_MANAGER">
-                {/*<Form.Item name="role" initialValue="ROLE_MANAGER" >*/}
+            <Form.Item name="role" initialValue="ROLE_USER">
                     <Radio.Group className="button-container"
                                  onChange={onChange}
                                  optionType="button"
                                  buttonStyle="solid">
-                        {/*onChange={onChange}*/}
-                        {/*defaultValue="ROLE_MANAGER"*/}
-                        {/*optionType="button"*/}
-                        {/*buttonStyle="solid">*/}
-                        {/*<Radio.Button value="ROLE_USER">*/}
-                        {/*    <div className="button-box">*/}
-                        {/*        <div className="ellipse"><UserOutlined className="user-icon" /></div>*/}
-                        {/*        Відвідувач*/}
-                        {/*    </div>*/}
-                        {/*</Radio.Button>*/}
+                        <Radio.Button value="ROLE_USER">
+                            <div className="button-box">
+                                <div className="ellipse"><UserOutlined className="user-icon" /></div>
+                                Відвідувач
+                            </div>
+                        </Radio.Button>
                         <Radio.Button value="ROLE_MANAGER">
                             <div className="button-box">
                                 <div className="ellipse"><UserOutlined className="user-icon" /></div>
