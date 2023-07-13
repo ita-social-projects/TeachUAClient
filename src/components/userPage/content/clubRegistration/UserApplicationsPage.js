@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Content } from "antd/es/layout/layout";
-import { Input, Select, Spin, List, message } from 'antd';
+import { Input, Select, Spin, List } from 'antd';
 import { getUserId } from "../../../../service/StorageService";
-import { getUserApplications, cancelClubRegistration } from "../../../../service/ClubRegistrationService";
+import { getUserApplications } from "../../../../service/ClubRegistrationService";
 import UserApplication from "./UserApplication";
 import "./css/ClubRegistration.css";
+import {useCancelRegistration} from "./hooks/useCancelRegistration"
 
 const { Option } = Select;
 
@@ -16,21 +17,7 @@ const UserApplicationsPage = () => {
     const [selectedChild, setSelectedChild] = useState("default");
     const [selectedStatus, setSelectedStatus] = useState("default");
     const [childNames, setChildNames] = useState([]);
-
-    const cancelApplication = (applicationId) => {
-        cancelClubRegistration(applicationId)
-            .then((response) => {
-                const updatedApplications = applications.map(application =>
-                    application.id === response.id ? {...application, active: response.active} : application
-                );
-                setApplications(updatedApplications);
-                message.success("Заявка скасована")
-            })
-            .catch(err => {
-                message.error("Помилка при скасуванні заявки")
-                console.error('Failed to cancel registration', err);
-            });
-    };
+    const cancelApplication = useCancelRegistration(applications, setApplications);
 
     useEffect(() => {
         const loadApplications = async () => {

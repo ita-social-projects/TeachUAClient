@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useUnapprovedRegistrations} from './hooks/useUnapprovedRegistrations';
+import {useRegistrations} from './hooks/useRegistrations';
 import {useClubNames} from './hooks/useClubNames';
 import {useDisplayedRegistrations} from './hooks/useDisplayedRegistrations';
 import {Content} from "antd/es/layout/layout";
@@ -19,16 +19,17 @@ const ManagerClubRegistrationPage = () => {
     const [isAll, setIsAll] = useState(queryParams.get('all') === 'true');
     const [selectedClub, setSelectedClub] = useState(queryParams.get('clubName') || "all");
     const [selectedStatus, setSelectedStatus] = useState(queryParams.get('status') || "all");
-    const [unapprovedRegistrations, updateRegistrations] = useUnapprovedRegistrations(getUserId(), setLoading, isAll);
+    const [registrations, updateRegistrations, setRegistrations] = useRegistrations(getUserId(), setLoading, isAll);
     const [searchTerm, setSearchTerm] = useState("");
-    const clubNames = useClubNames(unapprovedRegistrations);
+    const clubNames = useClubNames(registrations);
     const displayedRegistrations = useDisplayedRegistrations(
         selectedClub,
         searchTerm,
-        unapprovedRegistrations,
+        registrations,
         isAll,
         selectedStatus
     );
+
 
     const onClubChange = (clubName) => {
         setSelectedClub(clubName);
@@ -87,7 +88,8 @@ const ManagerClubRegistrationPage = () => {
                 />
                 <RegistrationsList
                     loading={loading}
-                    unapprovedRegistrations={unapprovedRegistrations}
+                    registrations={registrations}
+                    setRegistrations={setRegistrations}
                     displayedRegistrations={displayedRegistrations}
                     updateRegistrations={updateRegistrations}
                     isAll={isAll}

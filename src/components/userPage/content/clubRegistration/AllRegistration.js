@@ -1,16 +1,14 @@
 import React from 'react';
-import {Collapse, Button} from 'antd';
+import {Collapse} from 'antd';
 import classes from "./css/ClubRegistration.module.css";
-import { useApproveRegistration } from "./hooks/useApproveRegistration";
+import ActionButtons from "./components/ActionButtons";
 
 
 const { Panel } = Collapse;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
-const AllRegistration = ({ registration, updateRegistrations }) => {
-    const approveRegistration = useApproveRegistration(updateRegistrations)
-
+const AllRegistration = ({ registration, approveRegistration, cancelRegistration }) => {
     let labelClass = classes.label;
     let statusClass;
     if (registration.active) {
@@ -45,36 +43,30 @@ const AllRegistration = ({ registration, updateRegistrations }) => {
                     <span>{registration.child.firstName} {registration.child.lastName}, {registration.child.age}р</span>
                 </div>
                 <span className={classes.clubName}>{registration.club.name}</span>
-                <Button className={classes.aproveButton}
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            approveRegistration(registration.id);
-                }}
-                        disabled={statusClass !== classes.labelPending}
-                >
-                    Підтвердити
-                </Button>
+                <ActionButtons
+                    approveRegistration={approveRegistration}
+                    statusClass={statusClass}
+                    cancelRegistration={cancelRegistration}
+                    registration={registration}>
+                </ActionButtons>
             </div>
         )
         : (
             <div className={labelClass}>
                 <span className={classes.userDetails}>{registration.user.firstName} {registration.user.lastName}</span>
                 <span className={classes.clubName}>{registration.club.name}</span>
-                <Button className={classes.aproveButton}
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            approveRegistration(registration.id);
-                        }}
-                        disabled={statusClass !== classes.labelPending}
-                >
-                    Підтвердити
-                </Button>
+                <ActionButtons
+                    approveRegistration={approveRegistration}
+                    statusClass={statusClass}
+                    cancelRegistration={cancelRegistration}
+                    registration={registration}>
+                </ActionButtons>
             </div>
         );
 
     return (
         <Collapse>
-            <Panel header={panelHeader}>
+            <Panel key={registration.id} header={panelHeader}>
                 {registration?.child?.parent && (
                     <>
                         <h3>Хто зареєстрував:</h3>

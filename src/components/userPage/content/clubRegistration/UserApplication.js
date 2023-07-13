@@ -7,6 +7,8 @@ const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
 const UserApplication = ({ application, cancelApplication }) => {
+
+
     let labelClass = classes.label;
     let statusClass;
     if (application.active) {

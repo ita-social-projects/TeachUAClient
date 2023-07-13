@@ -16,7 +16,12 @@
     justify-content: space-between;
 }
 
-
+.buttonContainer {
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
 .childDetails, .userDetails {
     width: 250px;
@@ -27,9 +32,15 @@
     font-weight: bold; 
 }  
 
-.aproveButton {
+.approveButton {
     border-radius: 16px;
 
+}
+
+
+.approveButton:hover {
+    color: green;
+    border-color: green;
 }
 
 .cancelButton {
@@ -48,6 +59,16 @@
     color: crimson;
 }
 
+@media (max-width: 750px) {
+    .buttonContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cancelButton {
+        width: 100%;
+    }
+}
+
 @media (max-width: 625px) {
     .label {
         flex-direction: column;
@@ -63,7 +84,8 @@
         margin-top: 10px;
     }
 
-    .aproveButton, .cancelButton {
+    .approveButton, .cancelButton {
         margin-top: 10px;
     }
 }
+
