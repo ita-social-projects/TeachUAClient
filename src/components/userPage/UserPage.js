@@ -45,7 +45,7 @@ const UserPage = () => {
                 <UserMessagesPage />
             </UserRoute>
 
-            <UserRoute exact path={`${routeMatch.path}/registrations`} >
+            <UserRoute exact path={`${routeMatch.path}/registrations`}>
                 <ManagerClubRegistrationPage />
             </UserRoute>
 

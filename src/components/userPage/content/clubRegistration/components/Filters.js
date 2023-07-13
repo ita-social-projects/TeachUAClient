@@ -2,7 +2,7 @@ import {Input, Select} from "antd";
 
 const { Option } = Select;
 
-const Filters = ({ isAll, onClubChange, onStatusChange, setSearchTerm, clubNames }) => (
+const Filters = ({ isAll, onClubChange, onStatusChange, setSearchTerm, clubNames, selectedStatus, selectedClub }) => (
     <div className="searchAndFilter">
         <Input
             className="searchBox"
@@ -11,24 +11,24 @@ const Filters = ({ isAll, onClubChange, onStatusChange, setSearchTerm, clubNames
         />
         {isAll ? (
             <Select
-                defaultValue="default"
+                value={selectedStatus}
                 className="filterSelectStatuses"
                 onChange={onStatusChange}
                 dropdownMatchSelectWidth={false}
             >
-                <Option value="default">Всі статуси</Option>
-                <Option value="Схвалено">Схвалено</Option>
-                <Option value="Скасовано">Скасовано</Option>
-                <Option value="На розгляді">На розгляді</Option>
+                <Option value="all">Всі статуси</Option>
+                <Option value="approved">Схвалено</Option>
+                <Option value="rejected">Скасовано</Option>
+                <Option value="under_review">На розгляді</Option>
             </Select>
         ) : null}
         <Select
-            defaultValue="default"
+            value={selectedClub}
             className="filterSelectRight"
             onChange={onClubChange}
             dropdownMatchSelectWidth={false}
         >
-            <Option value="default">Всі гуртки</Option>
+            <Option value="all">Всі гуртки</Option>
             {clubNames.map((name) => (
                 <Option value={name} key={name}>{name}</Option>
             ))}

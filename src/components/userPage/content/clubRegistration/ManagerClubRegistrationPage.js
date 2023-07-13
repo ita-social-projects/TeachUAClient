@@ -1,107 +1,89 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Content } from "antd/es/layout/layout";
-import { getUserId } from "../../../../service/StorageService";
-import { getUnapprovedClubRegistrations, getAllClubRegistrations } from "../../../../service/ClubRegistrationService";
+import React, {useState} from 'react';
+import {useUnapprovedRegistrations} from './hooks/useUnapprovedRegistrations';
+import {useClubNames} from './hooks/useClubNames';
+import {useDisplayedRegistrations} from './hooks/useDisplayedRegistrations';
+import {Content} from "antd/es/layout/layout";
+import {getUserId} from "../../../../service/StorageService";
 import "./css/ClubRegistration.css";
 import Title from './components/Title';
 import Filters from './components/Filters';
 import RegistrationsList from './components/RegistrationsList';
+import {useHistory, useLocation} from 'react-router-dom';
 
 
 const ManagerClubRegistrationPage = () => {
+    const history = useHistory();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
     const [loading, setLoading] = useState(true);
-    const [unapprovedRegistrations, setUnapprovedRegistrations] = useState([]);
-    const [displayedRegistrations, setDisplayedRegistrations] = useState([]);
+    const [isAll, setIsAll] = useState(queryParams.get('all') === 'true');
+    const [selectedClub, setSelectedClub] = useState(queryParams.get('clubName') || "all");
+    const [selectedStatus, setSelectedStatus] = useState(queryParams.get('status') || "all");
+    const [unapprovedRegistrations, updateRegistrations] = useUnapprovedRegistrations(getUserId(), setLoading, isAll);
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedClub, setSelectedClub] = useState("default");
-    const [clubNames, setClubNames] = useState([]);
-    const [isAll, setIsAll] = useState(false);
-    const [selectedStatus, setSelectedStatus] = useState("default");
-
-
-    useEffect(() => {
-        const loadRegistrations = async () => {
-            try {
-                let response;
-                if (!isAll) {
-                    response = await getUnapprovedClubRegistrations(getUserId());
-                } else {
-                    response = await getAllClubRegistrations(getUserId());
-                }
-                setUnapprovedRegistrations(response);
-                setLoading(false);
-            } catch (error) {
-                console.error('Failed to load registrations', error);
-                setLoading(false);
-            }
-        };
-
-        loadRegistrations();
-    }, [isAll]);
-
-    useEffect(() => {
-        const uniqueClubNames = Array.from(new Set(unapprovedRegistrations.map(reg => reg.club.name)));
-        setClubNames(uniqueClubNames);
-    }, [unapprovedRegistrations]);
+    const clubNames = useClubNames(unapprovedRegistrations);
+    const displayedRegistrations = useDisplayedRegistrations(
+        selectedClub,
+        searchTerm,
+        unapprovedRegistrations,
+        isAll,
+        selectedStatus
+    );
 
     const onClubChange = (clubName) => {
         setSelectedClub(clubName);
+        queryParams.set('all', isAll ? 'true' : 'false');
+        queryParams.set('clubName', clubName);
+        if (isAll) {
+            queryParams.set('status', selectedStatus);
+        } else {
+            queryParams.delete('status');
+        }
+        history.push({
+            pathname: location.pathname,
+            search: queryParams.toString()
+        });
     };
-
 
     const onStatusChange = (status) => {
         setSelectedStatus(status);
+        queryParams.set('all', isAll ? 'true' : 'false');
+        queryParams.set('clubName', selectedClub);
+        queryParams.set('status', status);
+        history.push({
+            pathname: location.pathname,
+            search: queryParams.toString()
+        });
     };
 
-    useMemo(() => {
-        let displayedRegistrations = [...unapprovedRegistrations];
-
-        if (selectedClub !== "default") {
-            displayedRegistrations = displayedRegistrations.filter(reg => reg.club.name === selectedClub);
+    const setIsAllAndUpdateURL = (newIsAll) => {
+        setIsAll(newIsAll);
+        queryParams.set('all', newIsAll ? 'true' : 'false');
+        queryParams.set('clubName', selectedClub);
+        if (newIsAll) {
+            queryParams.set('status', selectedStatus);
+        } else {
+            queryParams.delete('status');
         }
-
-        if (isAll && selectedStatus !== "default") {
-            displayedRegistrations = displayedRegistrations.filter(reg => {
-                if(selectedStatus === "Схвалено") return reg.active && reg.approved;
-                if(selectedStatus === "Скасовано") return !reg.active;
-                if(selectedStatus === "На розгляді") return reg.active && !reg.approved;
-                return true;
-            });
-        }
-
-        if (searchTerm !== "") {
-            displayedRegistrations = displayedRegistrations.filter(reg => {
-                const userName = reg.user ? `${reg.user.firstName} ${reg.user.lastName}`.toLowerCase() : '';
-                const childName = reg.child ? `${reg.child.firstName} ${reg.child.lastName}`.toLowerCase() : '';
-                const clubName = reg.club.name.toLowerCase();
-
-                return (
-                    clubName.includes(searchTerm.toLowerCase()) ||
-                    userName.includes(searchTerm.toLowerCase()) ||
-                    childName.includes(searchTerm.toLowerCase())
-                );
-            });
-        }
-
-        setDisplayedRegistrations(displayedRegistrations);
-    }, [selectedClub, searchTerm, unapprovedRegistrations, isAll, selectedStatus]);
-
-
-    const updateRegistrations = (clubRegistrationId) => {
-        setUnapprovedRegistrations(unapprovedRegistrations.filter(reg => reg.id !== clubRegistrationId));
+        history.push({
+            pathname: location.pathname,
+            search: queryParams.toString()
+        });
     };
 
 
     return (
         <Content className="registrationsContent">
             <div className="contentBox">
-                <Title setIsAll={setIsAll} />
+                <Title isAll={isAll} setIsAll={setIsAllAndUpdateURL}/>
                 <Filters
                     isAll={isAll}
                     onClubChange={onClubChange}
                     onStatusChange={onStatusChange}
                     setSearchTerm={setSearchTerm}
                     clubNames={clubNames}
+                    selectedStatus={selectedStatus}
+                    selectedClub={selectedClub}
                 />
                 <RegistrationsList
                     loading={loading}

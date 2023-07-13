@@ -1,26 +1,14 @@
 import React from 'react';
-import {Collapse, Button, message} from 'antd';
+import {Collapse, Button} from 'antd';
 import classes from "./css/ClubRegistration.module.css";
-import { approveClubRegistration } from "../../../../service/ClubRegistrationService";
+import {useApproveRegistration} from "./hooks/useApproveRegistration";
 
 const { Panel } = Collapse;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
 const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
-
-    const approveRegistration = async (clubRegistrationId) => {
-        try {
-            const response = await approveClubRegistration(clubRegistrationId);
-            if (response.approved) {
-                updateRegistrations(response.id);
-            }
-            message.success("Реєстрацію підтверджено")
-        } catch (error) {
-            message.error("Помилка при підтверджені реєстрації")
-            console.error('Failed to approve registration', error);
-        }
-    };
+    const approveRegistration = useApproveRegistration(updateRegistrations)
 
     const panelHeader = registration.child
         ? (

@@ -18,6 +18,7 @@ const UserApplication = ({ application, cancelApplication }) => {
     }
 
     let statusMessage;
+
     if (application.active) {
         if (application.approved) {
             statusMessage = "Схвалено";

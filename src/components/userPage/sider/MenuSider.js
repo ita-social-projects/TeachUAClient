@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../sider/css/Sider.less'
 import { MailOutlined, UserOutlined, FileDoneOutlined, CheckOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
@@ -13,6 +13,12 @@ const MenuSiderComponent = ({ url }) => {
     const handleClick = e => {
         setCurrentKey(e.key);
     };
+
+    useEffect(() => {
+        return router.listen((location) => {
+            setCurrentKey(location.pathname);
+        })
+    }, [router]);
 
     return (
         <div className="menu-component">
