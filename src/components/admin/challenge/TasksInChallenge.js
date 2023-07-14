@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Table, Tooltip} from "antd";
-import {useParams} from "react-router-dom";
 import moment from "moment";
 
 const TasksInChallenge = () => {
@@ -11,7 +10,7 @@ const TasksInChallenge = () => {
     const [challengeNotFound, setChallengeNotFound] = useState(false);
     const challengeId  = useParams();
 
-    const getTasksInChallenge = () => {
+    const getTasksInChallenge = (challengeId) => {
         getTasksByChallenge(challengeId.id).then(response => {
             console.log(response);
             setTaskPreview(response);
@@ -24,8 +23,8 @@ const TasksInChallenge = () => {
     };
 
     useEffect(() => {
-        getTasksInChallenge();
-    }, []);
+        getTasksInChallenge(challengeId);
+    }, [challengeId]);
 
     const columns = [
         {

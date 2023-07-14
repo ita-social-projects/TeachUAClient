@@ -1,16 +1,15 @@
 import React, { useEffect, useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
+import {useHistory, useParams, Link} from "react-router-dom";
 
 import {Button, DatePicker, Form, message, Typography} from "antd";
 
 import {useForm} from "antd/es/form/Form";
-import {cloneChallenge, getChallengeById} from "../../../service/ChallengeService";
+import {updateChallengeStartDate, getChallengeById} from "../../../service/ChallengeService";
 import moment from "moment";
 
 const {Title} = Typography;
 
-const CloneChallenge = () => {
+const UpdateChallengeStartDate = () => {
 
     const [challengeForm] = useForm()
     const [startDate, setStartDate] = useState({
@@ -52,7 +51,7 @@ const CloneChallenge = () => {
 
     const saveForm = (values) => {
         const formValues = {...values, startDate: startDate.updatedDate}
-        cloneChallenge(formValues, challengeId.id).then(response => {
+        updateChallengeStartDate(formValues, challengeId.id).then(response => {
             console.log(response);
             if (response.status) {
                 message.warning(response.message);
@@ -115,4 +114,4 @@ const CloneChallenge = () => {
     );
 };
 
-export default CloneChallenge;
+export default UpdateChallengeStartDate;
