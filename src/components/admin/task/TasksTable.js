@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Select, Typography, Input} from "antd";
+import {Button, Form, message, Popconfirm, Select, Typography, Input, Checkbox} from "antd";
 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
@@ -22,7 +22,8 @@ const TasksTable = () => {
         id: 0,
         name: '',
         picture: '',
-        startDate: ''
+        startDate: '',
+        isActive: true
     }]);
     const [challengeList, setChallengeList] = useState([
         {
@@ -35,7 +36,6 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
-            console.log(response);
             setTasks(response);
         });
         setLoading(false);
@@ -62,8 +62,8 @@ const TasksTable = () => {
         form.setFieldsValue({
             ...form.getFieldsValue()
         });
-        console.log(record);
         editCellValue(form, tasks, record.id).then((editedData) => {
+            console.log(editedData.item, record.id)
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
                     message.warning(response.message)
@@ -127,7 +127,16 @@ const TasksTable = () => {
             dataIndex: 'name',
             width: '35%',
             editable: true,
+            inputType: 'text',
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+        },
+        {
+            title: 'Активний',
+            dataIndex: 'isActive',
+            width: '7%',
+            editable: true,
+            inputType: 'checkbox',
+            render: (text, record) => <Checkbox checked={record.isActive} />
         },
         {
             title: 'Дата початку',

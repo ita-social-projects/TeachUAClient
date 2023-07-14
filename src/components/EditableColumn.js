@@ -1,4 +1,4 @@
-import {Form, Input, InputNumber, Select, Upload} from "antd";
+import {Checkbox, Form, Input, InputNumber, Select, Upload} from "antd";
 import React from "react";
 import {UPLOAD_IMAGE_URL} from "../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -8,6 +8,11 @@ const { TextArea } = Input;
 
 const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children, ...restProps}) => {
     let inputNode;
+
+    const handleCheckboxChange = (e) => {
+        const newValue = e.target.checked;
+        record[dataIndex] = newValue;
+    };
 
     switch (inputType) {
         case 'upload':
@@ -38,6 +43,14 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
             inputNode = <Input type="color" />
             break;
         }
+        case 'checkbox':
+            inputNode = (
+                <Checkbox
+                    checked={record[dataIndex]}
+                    onChange={handleCheckboxChange}
+                />
+            );
+            break;
         default: {
             inputNode = <Input/>;
             break;

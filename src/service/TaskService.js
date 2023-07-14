@@ -51,6 +51,7 @@ export const deleteTask = async (id) => {
 };
 
 export const updateTask = async (data, id) => {
+    console.log(data)
     return await fetchRequest
         .put(BASE_URL + "/api/challenge/task/" + id, {
             name: data.name,
@@ -58,7 +59,8 @@ export const updateTask = async (data, id) => {
             description: data.description,
             startDate: data.startDate,
             picture: data.picture,
-            challengeId: data.challengeId
+            challengeId: data.challengeId,
+            isActive: data.isActive
         })
         .then((response) => {
             return response.data;
