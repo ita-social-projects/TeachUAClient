@@ -116,6 +116,19 @@ const TasksTable = () => {
         );
     };
 
+    const handleChallengeChange = (record, value) => {
+        const updatedTasks = tasks.map(task => {
+            if (task.id === record.id) {
+                return {
+                    ...task,
+                    challengeId: value
+                };
+            }
+            return task;
+        });
+        setTasks(updatedTasks);
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -128,15 +141,30 @@ const TasksTable = () => {
         {
             title: 'Назва',
             dataIndex: 'name',
-            width: '35%',
+            width: '30%',
             editable: true,
             inputType: 'text',
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
         },
         {
+            title: 'Челендж',
+            dataIndex: 'challengeId',
+            width: '20%',
+            editable: true,
+            inputType: 'select',
+            selectData: challengeList.map(challenge => ({
+                    value: challenge.id,
+                    label: challenge.name
+                })),
+            render: (text, record) => {
+                const challenge = challengeList.find(challenge => challenge.id === record.challengeId);
+                return challenge ? challenge.name : '';
+            }
+        },
+        {
             title: 'Активний',
             dataIndex: 'isActive',
-            width: '7%',
+            width: '6%',
             editable: true,
             inputType: 'checkbox',
             render: (text, record) => <Checkbox className='checkbox-record' checked={record.isActive} />
@@ -144,7 +172,7 @@ const TasksTable = () => {
         {
             title: 'Дата початку',
             dataIndex: 'startDate',
-            width: '35%',
+            width: '15%',
             editable: false,
             render: (text) => moment(text.toString()).format('DD-MM-YYYY')
         },

@@ -32,8 +32,15 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
             inputNode = <InputNumber/>;
             break;
         case 'select': {
-            inputNode = <Select showSearch
-                                options={selectData.map(data => ({value: data}))}/>;
+            inputNode = (
+                <Select>
+                    {selectData.map(option => (
+                        <Select.Option key={option.value} value={option.value}>
+                            {option.label}
+                        </Select.Option>
+                    ))}
+                </Select>
+            );
             break;
         }
         case 'color': {
@@ -56,32 +63,49 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
 
     return (
         <td {...restProps}>
-            {editing ? (inputType === 'checkbox' ? (
-                <Form.Item
-                    name={dataIndex}
-                    initialValue={record[dataIndex]}
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            required: true,
-                            message: `Заповніть поле ${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) :  <Form.Item
-                name={dataIndex}
-                initialValue={record[dataIndex]}
-                rules={[
-                    {
-                        required: true,
-                        message: `Заповніть поле ${title}!`,
-                    },
-                ]}
-            >
-                {inputNode}
-            </Form.Item>) : (
+            {editing ? (
+                inputType === 'checkbox' ? (
+                    <Form.Item
+                        name={dataIndex}
+                        initialValue={record[dataIndex]}
+                        valuePropName="checked"
+                        rules={[
+                            {
+                                required: true,
+                                message: `Заповніть поле ${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
+                ) : inputType === 'select' ? (
+                    <Form.Item
+                        name={dataIndex}
+                        value={record[dataIndex]}
+                        rules={[
+                            {
+                                required: true,
+                                message: `Заповніть поле ${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
+                ) : (
+                    <Form.Item
+                        name={dataIndex}
+                        initialValue={record[dataIndex]}
+                        rules={[
+                            {
+                                required: true,
+                                message: `Заповніть поле ${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
+                )
+            ) : (
                 children
             )}
         </td>
