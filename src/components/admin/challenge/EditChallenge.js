@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useHistory, useParams, Link} from "react-router-dom";
 
-import { Button, Form, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
-import { useForm } from "antd/es/form/Form";
+import {Button, Form, Input, InputNumber, message, Switch, Typography, Upload} from 'antd';
+import {useForm} from "antd/es/form/Form";
 
-import { getChallengeById, updateChallenge } from "../../../service/ChallengeService";
-import { BASE_URL, UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
+import {cloneChallenge, getChallengeById, updateChallenge} from "../../../service/ChallengeService";
+import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from '../../../util/Editor';
 import TasksInChallenge from "./TasksInChallenge";
 import { tokenToHeader } from "../../../service/UploadService";
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 const EditChallenge = (props) => {
+    const history = useHistory();
+
 
     const [challenge, setChallenge] = useState([{
         id: 0,
@@ -47,7 +48,8 @@ const EditChallenge = (props) => {
         setName(value);
     }
 
-    const getData = () => {
+
+    const getData = (challengeId) => {
         getChallengeById(challengeId.id).then(response => {
             setChallenge(response);
             setIsChecked(response.isActive);
@@ -97,10 +99,22 @@ const EditChallenge = (props) => {
         }
         setCurrentPicture(value.fileList);
     }
+    const handleCloneChallenge = () => {
+        // Logic for cloning the challenge and obtaining the cloned challenge ID
+        cloneChallenge(challengeId.id).then(response => {
+            console.log(response);
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            message.success(`Челендж ${challenge.name} успішно клонований`);
+            history.push("/admin/challenge/" + response.id);
+        });
+    };
 
     useEffect(() => {
-        getData();
-    }, []);
+        getData(challengeId);
+    }, [challengeId]);
 
     return (
         <div className="add-form">
@@ -140,27 +154,23 @@ const EditChallenge = (props) => {
                 wrapperCol={{ span: 14 }}
             >
                 <Form.Item
-                    label="Порядковий номер"
                     name="sortNumber"
+                    label="Порядковий номер"
                     value={challenge.sortNumber}
                     rules={[
                         {
                             required: true,
-                            validator: (_, value) => {
-                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
-                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
-                                }
-                                return Promise.resolve();
-                            },
+                            min: 5,
+                            max: 30,
+                            message: "Поле \"Порядковий номер\" може містити мінімум 5 максимум 30 символів",
                         },
                         {
                             required: false,
                             pattern: /^[-0-9]*$/,
-                            message: "Поле 'Порядковий номер' може містити тільки цифри",
-                        },
-                    ]}
+                            message: "Поле \"Порядковий номер\" може містити тільки цифри",
+                        }]}
                 >
-                    <InputNumber style={{ width: "50%" }} />
+                    <InputNumber />
                 </Form.Item>
                 <Form.Item
                     name="isActive"
@@ -181,7 +191,7 @@ const EditChallenge = (props) => {
                         {
                             min: 5,
                             max: 30,
-                            message: "Поле \"Назва\" може містити мінімум 5 максимум 30 символів"
+                            message: "Поле \"Назва\" може містити мінімум 5, максимум 30 символів"
                         },
                         {
                             required: false,
@@ -204,7 +214,7 @@ const EditChallenge = (props) => {
                         {
                             min: 5,
                             max: 100,
-                            message: "Поле \"Заголовок\" може містити мінімум 5 максимум 100 символів"
+                            message: "Поле \"Заголовок\" може містити мінімум 5, максимум 100 символів"
                         },
                         {
                             required: false,
@@ -274,6 +284,9 @@ const EditChallenge = (props) => {
                     </Button>
                 </Form.Item>
             </Form>
+            <Button onClick={handleCloneChallenge} className="flooded-button back-btn">
+                Зробити копію челенджа
+            </Button>
             <div>
                 <Title level={3}>Усі завдання</Title>
                 <TasksInChallenge />
