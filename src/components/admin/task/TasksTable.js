@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-
+import './css/TaskTable.css';
 import {Button, Form, message, Popconfirm, Select, Typography, Input, Checkbox} from "antd";
 
 import EditableTable from "../../EditableTable";
@@ -139,7 +139,7 @@ const TasksTable = () => {
             width: '7%',
             editable: true,
             inputType: 'checkbox',
-            render: (text, record) => <Checkbox checked={record.isActive} />
+            render: (text, record) => <Checkbox className='checkbox-record' checked={record.isActive} />
         },
         {
             title: 'Дата початку',

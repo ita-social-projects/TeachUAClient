@@ -1,0 +1,7 @@
+.checkbox-record {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1.4);
+    padding-bottom: 4px;
+}

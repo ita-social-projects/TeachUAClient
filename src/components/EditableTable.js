@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Form, Popconfirm, Table, Typography} from "antd";
 import "./admin/city/css/CityTable.css";
-import EditableColumn from "./EditableColumn";
+import EditableColumn from "./editableColumn/EditableColumn";
 
 const EditableTable = ({
                            bordered,
