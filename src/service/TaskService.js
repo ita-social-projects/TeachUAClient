@@ -51,7 +51,6 @@ export const deleteTask = async (id) => {
 };
 
 export const updateTask = async (data, id) => {
-    console.log(data)
     return await fetchRequest
         .put(BASE_URL + "/api/challenge/task/" + id, {
             name: data.name,

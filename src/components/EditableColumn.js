@@ -6,13 +6,9 @@ import {tokenToHeader} from "../service/UploadService";
 
 const { TextArea } = Input;
 
-const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children, ...restProps}) => {
+const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children,
+                            updateRecord, ...restProps}) => {
     let inputNode;
-
-    const handleCheckboxChange = (e) => {
-        const newValue = e.target.checked;
-        record[dataIndex] = newValue;
-    };
 
     switch (inputType) {
         case 'upload':
@@ -45,11 +41,11 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
         }
         case 'checkbox':
             inputNode = (
-                <Checkbox
-                    checked={record[dataIndex]}
-                    onChange={handleCheckboxChange}
-                />
+                <Checkbox />
             );
+            break;
+        case 'text':
+            inputNode = <Input/>;
             break;
         default: {
             inputNode = <Input/>;
@@ -59,9 +55,11 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
 
     return (
         <td {...restProps}>
-            {editing ? (
+            {editing ? (inputType === 'checkbox' ? (
                 <Form.Item
                     name={dataIndex}
+                    initialValue={record[dataIndex]}
+                    valuePropName="checked"
                     rules={[
                         {
                             required: true,
@@ -71,7 +69,18 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
                 >
                     {inputNode}
                 </Form.Item>
-            ) : (
+            ) :  <Form.Item
+                name={dataIndex}
+                initialValue={record[dataIndex]}
+                rules={[
+                    {
+                        required: true,
+                        message: `Заповніть поле ${title}!`,
+                    },
+                ]}
+            >
+                {inputNode}
+            </Form.Item>) : (
                 children
             )}
         </td>

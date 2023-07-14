@@ -21,8 +21,11 @@ const TasksTable = () => {
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
+        headerText: '',
+        description: '',
         picture: '',
         startDate: '',
+        challengeId: 0,
         isActive: true
     }]);
     const [challengeList, setChallengeList] = useState([
@@ -36,6 +39,7 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
+            console.log(response)
             setTasks(response);
         });
         setLoading(false);
@@ -63,7 +67,6 @@ const TasksTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, tasks, record.id).then((editedData) => {
-            console.log(editedData.item, record.id)
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
                     message.warning(response.message)
