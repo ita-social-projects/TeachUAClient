@@ -141,15 +141,15 @@ const TasksTable = () => {
         {
             title: 'Назва',
             dataIndex: 'name',
-            width: '30%',
+            width: '35%',
             editable: true,
             inputType: 'text',
-            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+            render: (text, record) => <Link className="table-name" to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
         },
         {
             title: 'Челендж',
             dataIndex: 'challengeId',
-            width: '20%',
+            width: '22%',
             editable: true,
             inputType: 'select',
             selectData: challengeList.map(challenge => ({
