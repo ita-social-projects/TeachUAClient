@@ -162,7 +162,7 @@ const TasksTable = () => {
             }
         },
         {
-            title: 'Активний',
+            title: 'Активне',
             dataIndex: 'isActive',
             width: '6%',
             editable: true,
