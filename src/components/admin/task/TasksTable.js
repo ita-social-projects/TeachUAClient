@@ -120,7 +120,7 @@ const TasksTable = () => {
             width: '5%',
             editable: false,
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
-            sorter: (a, b) => a.id - b.id,
+            sorter: (a, b) => moment(a.startDate).unix() - moment(b.startDate).unix()
         },
         {
             title: 'Назва',
