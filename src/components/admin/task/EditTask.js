@@ -14,6 +14,7 @@ import Editor from "../../../util/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
+import locale from 'antd/es/date-picker/locale/uk_UA';
 
 const {Option} = Select;
 const {TextArea} = Input;
@@ -164,6 +165,7 @@ const EditTask = () => {
                         name="startDate"
                         allowClear={false}
                         value={moment(task.startDate, "YYYY-MM-DD")}
+                        locale={locale}
                     />
                 </Form.Item>
                 <Form.Item
