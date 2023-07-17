@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-
-import {Button, Form, message, Popconfirm, Select, Typography, Input} from "antd";
+import './css/TaskTable.css';
+import {Button, Form, message, Popconfirm, Select, Typography, Input, Checkbox} from "antd";
 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
@@ -21,8 +21,12 @@ const TasksTable = () => {
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
+        headerText: '',
+        description: '',
         picture: '',
-        startDate: ''
+        startDate: '',
+        challengeId: 0,
+        isActive: true
     }]);
     const [challengeList, setChallengeList] = useState([
         {
@@ -35,7 +39,7 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
-            console.log(response);
+            console.log(response)
             setTasks(response);
         });
         setLoading(false);
@@ -62,7 +66,6 @@ const TasksTable = () => {
         form.setFieldsValue({
             ...form.getFieldsValue()
         });
-        console.log(record);
         editCellValue(form, tasks, record.id).then((editedData) => {
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
@@ -113,6 +116,19 @@ const TasksTable = () => {
         );
     };
 
+    const handleChallengeChange = (record, value) => {
+        const updatedTasks = tasks.map(task => {
+            if (task.id === record.id) {
+                return {
+                    ...task,
+                    challengeId: value
+                };
+            }
+            return task;
+        });
+        setTasks(updatedTasks);
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -127,12 +143,36 @@ const TasksTable = () => {
             dataIndex: 'name',
             width: '35%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+            inputType: 'text',
+            render: (text, record) => <Link className="table-name" to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+        },
+        {
+            title: 'Челендж',
+            dataIndex: 'challengeId',
+            width: '22%',
+            editable: true,
+            inputType: 'select',
+            selectData: challengeList.map(challenge => ({
+                    value: challenge.id,
+                    label: challenge.name
+                })),
+            render: (text, record) => {
+                const challenge = challengeList.find(challenge => challenge.id === record.challengeId);
+                return challenge ? challenge.name : '';
+            }
+        },
+        {
+            title: 'Активне',
+            dataIndex: 'isActive',
+            width: '6%',
+            editable: true,
+            inputType: 'checkbox',
+            render: (text, record) => <Checkbox className='checkbox-record' checked={record.isActive} />
         },
         {
             title: 'Дата початку',
             dataIndex: 'startDate',
-            width: '35%',
+            width: '15%',
             editable: false,
             render: (text) => moment(text.toString()).format('DD-MM-YYYY')
         },
