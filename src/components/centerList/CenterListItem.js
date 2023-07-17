@@ -8,20 +8,12 @@ import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import CenterLogo from "./CenterLogo";
 import "./css/CenterList.less"
 import {getAllCenterClubsByCenterId} from "../../service/CenterService";
-import { centerFeedback } from "../../util/CenterUtil";
 
 
 const CenterListItem = ({ center, onCenterClick }) => {
 
     const [visible, setVisible] = useState(false);
-    const [rate, setRate] = useState(0);
-
-    const feedback = getAllCenterClubsByCenterId(center.id);
-
-    feedback.then((value) => {
-        setRate(centerFeedback(value));
-    })
-
+   
     return (
         <div>
             <Card className="card" key={center.name} >
@@ -36,7 +28,7 @@ const CenterListItem = ({ center, onCenterClick }) => {
                         {center.description}
                     </p>
                 }
-                <Rate className="center-rating" allowHalf disabled value={rate} onClick={() => onCenterClick(center)} />
+                <Rate className="center-rating" allowHalf disabled value={center.rating} onClick={() => onCenterClick(center)} />
                 {
                     center.locations.length > 0 &&
                     <div className="address" onClick={() => { setVisible(true) }} >
