@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './css/AddChallenge.css';
-import { Typography, Form, Input, Button, message, Upload} from 'antd';
+import {Typography, Form, Input, Button, message, Upload, InputNumber} from 'antd';
 import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
@@ -86,17 +86,21 @@ const AddChallenge = () => {
                     rules={[
                         {
                             required: true,
-                            min: 5,
-                            max: 30,
-                            message: "Поле \"Порядковий номер\" може містити мінімум 5 максимум 30 символів",
+                            validator: (_, value) => {
+                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
+                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
                             pattern: /^[-0-9]*$/,
-                            message: "Поле \"Порядковий номер\" може містити тільки цифри",
-                        }]}
-                    >
-                    <Input/>
+                            message: "Поле 'Порядковий номер' може містити тільки цифри",
+                        },
+                    ]}
+                >
+                    <InputNumber style={{ width: "50%" }} />
                 </Form.Item>
                 <Form.Item
                     label="Назва"
