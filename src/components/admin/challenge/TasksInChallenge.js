@@ -32,6 +32,8 @@ const TasksInChallenge = () => {
             title: 'ID',
             dataIndex: 'id',
             width: '5%',
+            defaultSortOrder: 'ascend',
+            sorter: (a, b) => moment(a.startDate).unix() - moment(b.startDate).unix()
         },
         {
             title: 'Назва',
@@ -60,7 +62,7 @@ const TasksInChallenge = () => {
             title: 'Дата початку',
             dataIndex: 'startDate',
             width: '35%',
-            render: (text)=>moment(text.toString()).format('YYYY-MM-DD')
+            render: (text)=>moment(text.toString()).format('YYYY-MM-DD'),
         }
     ];
 
