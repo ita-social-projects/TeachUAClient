@@ -22,7 +22,7 @@ export const getMessagesByRecipientId = async (id) => {
 }
 
 export const getNewMessagesByRecipientId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/messages/recipient_new/" + id)
+    return await fetchRequest.get(BASE_URL + "/api/messages/recipient-new/" + id)
         .then((response) => {
             return response.data
         });
