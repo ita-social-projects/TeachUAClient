@@ -53,7 +53,7 @@ const AddContactType = ({contactTypes, setContactTypes}) => {
                         <span className="add-club-upload"><UploadOutlined className="icon"/>Завантажити лого</span>
                     </Upload>
                 </Form.Item>
-                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити</Button>
+                <Button htmlType="submit" className="flooded-button add-contact-type-button">Додати</Button>
             </Form>
         </div>
     );

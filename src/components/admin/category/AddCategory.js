@@ -105,7 +105,7 @@ const AddCategory = ({categories, setCategories, setAddCategory}) => {
                         <label htmlFor="head">Tag Text Color</label>
                     </div>
                 </Form.Item>
-                <Button htmlType="submit" className="flooded-button add-contact-type-button">Добавити категорію</Button>
+                <Button htmlType="submit" className="flooded-button add-contact-type-button">Додати категорію</Button>
             </Form>
         </div>
     );
