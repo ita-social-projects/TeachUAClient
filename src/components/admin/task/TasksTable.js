@@ -9,6 +9,7 @@ import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Option} from "antd/es/mentions";
+import { ClearOutlined } from '@ant-design/icons';
 
 const {Title} = Typography;
 
@@ -116,6 +117,8 @@ const TasksTable = () => {
         );
     };
 
+    const searchResults = search(tasks);
+
     const handleChallengeChange = (record, value) => {
         const updatedTasks = tasks.map(task => {
             if (task.id === record.id) {
@@ -203,7 +206,7 @@ const TasksTable = () => {
                         </Option>
                     ))}
                 </Select>
-            <Input.Search 
+            <Input.Search
                 placeholder="Пошук по завданнях"
                 onSearch={(value)=>{
                     setSearchedText(value);
@@ -215,15 +218,19 @@ const TasksTable = () => {
             />
             </div>
             <Title level={3}>Завдання</Title>
-            <EditableTable
-                bordered
-                className="city-table"
-                columns={columns}
-                data={search(tasks)}
-                form={form}
-                onSave={save}
-                actions={actions}
-            />
+            {searchedText !== '' && searchResults.length === 0 ? (
+                <p className="no-results-message">За запитом "{searchedText}" завдань не знайдено.</p>
+            ) : (
+                <EditableTable
+                    bordered
+                    className="city-table"
+                    columns={columns}
+                    data={searchedText !== '' ? searchResults : tasks}
+                    form={form}
+                    onSave={save}
+                    actions={actions}
+                />
+            )}
         </div>
     )
 }
