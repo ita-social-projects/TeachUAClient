@@ -12,7 +12,7 @@ import { List, Switch } from 'antd';
 
 const UserMessagesPage = () => {
     const [messages, setMessages] = useState([]);
-    const [showOnlyNew, setShowOnlyNew] = useState(false);
+    const [showOnlyNew, setShowOnlyNew] = useState(true);
 
     useEffect(() => {
         if (showOnlyNew) {
@@ -41,6 +41,7 @@ const UserMessagesPage = () => {
                     <div className="filterContainer">
                         <span>Показати тільки нові повідомлення: </span>
                         <Switch
+
                             checked={showOnlyNew}
                             onChange={setShowOnlyNew}
                         />

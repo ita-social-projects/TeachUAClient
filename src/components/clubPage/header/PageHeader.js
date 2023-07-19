@@ -6,7 +6,7 @@ import {Button} from "antd";
 import Tags from "../../Tags";
 import ClubLogo from "./ClubLogo";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import SignUpForClub from "../register/SignUpForClub";
+import MessageToClubManager from "../messages/MessageToClubManager";
 
 const PageHeader = ({club}) => {
 
@@ -31,9 +31,9 @@ const PageHeader = ({club}) => {
                         <Button className="flooded-button apply-button"
                                 onClick={() => setSignUpForClubVisible(true)}
                         >
-                            Записатись на гурток
+                            Написати менеджеру
                         </Button>
-                        <SignUpForClub isShowing={signUpForClubVisible}
+                        <MessageToClubManager isShowing={signUpForClubVisible}
                                        setShowing={setSignUpForClubVisible}
                                        club={club}
                         />
