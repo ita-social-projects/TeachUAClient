@@ -9,6 +9,8 @@ import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link, useHistory } from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
+import locale from 'antd/es/date-picker/locale/uk_UA';
+
 const { Option } = Select;
 
 const { Title } = Typography;
@@ -75,7 +77,7 @@ const AddTask = () => {
                     return;
                 }
                 setTaskId(response.id)
-                message.success("Завдання" + response.name + "' успішно додане!");
+                message.success("Завдання '" + response.name + "' успішно додане!");
                 history.push("/challenges/task/" + response.id)
             });
     };
@@ -124,6 +126,7 @@ const AddTask = () => {
                             onChange={onDateChange}
                             format={dateFormat}
                             value={startDate}
+                            locale={locale}
                         />
                 </Form.Item>
                 <Form.Item

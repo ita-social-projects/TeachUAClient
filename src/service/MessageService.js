@@ -21,10 +21,25 @@ export const getMessagesByRecipientId = async (id) => {
         });
 }
 
+export const getNewMessagesByRecipientId = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/api/messages/recipient-new/" + id)
+        .then((response) => {
+            return response.data
+        });
+}
+
+
 export const updateMessageIsActiveById = async (id, data) => {
     return await fetchRequest.put(BASE_URL + "/api/message/active/" + id, {
         isActive: data.isActive
     }).then((response) => {
         return response.data
     });
+}
+
+export const deleteMessageById = async (id) => {
+    return await fetchRequest.delete(BASE_URL + "/api/message/" + id)
+        .then((response) => {
+            return response.data
+        });
 }

@@ -17,6 +17,8 @@ const Registration = ({isShowing, setShowing}) => {
     const onFinish = (values) => {
         setShowing(false)
 
+        values.role = role;
+
         console.log(values);
         signUp(values).then((response) => {
             if (response.status) {
@@ -51,16 +53,10 @@ const Registration = ({isShowing, setShowing}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <RegistrationSocial role="ROLE_MANAGER"/>
-                        <RegistrationRoles setDisabledButton={setDisabledButton} 
+                        <RegistrationSocial role={setRole}/>
+                        <RegistrationRoles setDisabledButton={setDisabledButton}
                                           disabledButton={disabledButton} setRole={setRole}/>
-                        {/*<RegistrationRoles setDisabledButton={setDisabledButton}*/}
-                        {/*                   disabledButton={disabledButton} setRole={setRole} />*/}
-
-                        {/*<RegistrationRoles setRole={setRole} />*/}
-                        {/*<RegistrationSocial role={role}/>*/}
                         <RegistrationInput disabledButton={disabledButton}/>
-                        {/*<RegistrationInput />*/}
                     </Form>
                 </div>
             </Modal>

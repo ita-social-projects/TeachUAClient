@@ -6,11 +6,16 @@ import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import {CheckCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {updateMessageIsActiveById} from "../../../../service/MessageService";
 import {getFormattedDate, getLogo} from "./MessageUtil";
+import { DeleteOutlined } from '@ant-design/icons';
 
-const Message = ({message}) => {
+const Message = ({message, onDelete}) => {
 
     const {Panel} = Collapse;
     const [active, setActive] = useState(message.isActive);
+    const handleDelete = () => {
+        onDelete(message.id);
+    };
+
 
     useEffect(() => {
             if (!active) {
@@ -51,7 +56,11 @@ const Message = ({message}) => {
                            <div className="date">
                                {message.date ? getFormattedDate(message.date) : ''}
                            </div>
+                           {/*<Button onClick={handleDelete} className="deleteButton">*/}
+                           {/*    Видалити*/}
+                           {/*</Button>*/}
                            {showReadMessage(active)}
+                           <DeleteOutlined className="deleteButton" onClick={handleDelete} />
                        </div>
                    }
             >
