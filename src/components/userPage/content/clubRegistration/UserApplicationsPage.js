@@ -35,7 +35,9 @@ const UserApplicationsPage = () => {
     }, []);
 
     useEffect(() => {
-        const uniqueChildNames = Array.from(new Set(applications.map(app => `${app.child.firstName} ${app.child.lastName}`)));
+        const uniqueChildNames = Array.from(new Set(applications
+            .filter(app => app.child != null)
+            .map(app => `${app.child.firstName} ${app.child.lastName}`)));
         setChildNames(uniqueChildNames);
     }, [applications]);
 
@@ -51,7 +53,9 @@ const UserApplicationsPage = () => {
         let displayedApplications = [...applications];
 
         if (selectedChild !== "default") {
-            displayedApplications = displayedApplications.filter(app => `${app.child.firstName} ${app.child.lastName}` === selectedChild);
+            displayedApplications = displayedApplications.filter(app =>
+                app.child != null && `${app.child.firstName} ${app.child.lastName}` === selectedChild
+            );
         }
 
         if (selectedStatus !== "default") {
