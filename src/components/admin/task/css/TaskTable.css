@@ -29,3 +29,16 @@
 .ant-typography {
     margin-right: 30px;
 }
+
+.no-results-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.clear-icon {
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+}
