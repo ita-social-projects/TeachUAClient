@@ -1,15 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {getUserId} from "../../../service/StorageService";
 import ModalHint from "./ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
-import classes from "./css/SignUpForClub.module.css";
+import classes from "./css/MessageToClubManager.module.css";
 import TextArea from "antd/lib/input/TextArea";
 import {Button, Col, Form, Modal, Row} from "antd";
 import {createMessage} from "../../../service/MessageService";
-import {getUsersByRole} from "../../../service/UserService";
 import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 
-const SignUpForClub = ({isShowing, setShowing, club}) => {
+const MessageToClubManager = ({isShowing, setShowing, club}) => {
 
     const [messageForm] = Form.useForm();
     const [admin, setAdmin] = useState({id: 1});
@@ -54,17 +53,13 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                 footer={null}
             >
                 <div className={classes.title}>
-                    Записатись на гурток
+                    Написати менеджеру
                 </div>
 
                 <div className={classes.content}>
 
                     <div className={classes.clubName}>
                         {club.name}
-                    </div>
-
-                    <div className={classes.comment}>
-                        Для запису на гурток зконтактуйте з відповідальними особами
                     </div>
 
                     <div className={classes.contacts}>
@@ -121,4 +116,4 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
     );
 };
 
-export default SignUpForClub;
+export default MessageToClubManager;

@@ -8,7 +8,7 @@ import Tags from "../../Tags";
 import './css/UserClub.less';
 import './css/UserClubCardItem.less';
 import {MoreOutlined} from "@ant-design/icons";
-import clubUpdateMenu from "./ClubUpdateMenu";
+import ClubUpdateMenu from "./ClubUpdateMenu";
 
 
 const UserClubCardItem = ({club, reloadAfterChange}) => {
@@ -18,7 +18,7 @@ const UserClubCardItem = ({club, reloadAfterChange}) => {
                 <ClubLogo category={club.categories[0]} logo={club.urlLogo}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={clubUpdateMenu(club.id, reloadAfterChange)} placement="bottomRight">
+                        <Dropdown overlay={<ClubUpdateMenu club={club} reloadAfterChange={reloadAfterChange} />} placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>

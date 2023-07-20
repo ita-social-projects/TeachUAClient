@@ -24,6 +24,10 @@
     width: 100%;
 }
 
+.avatar {
+    object-fit: cover;
+}
+
 .page-comments .author .avatar {
     width: 64px;
     height: 64px;

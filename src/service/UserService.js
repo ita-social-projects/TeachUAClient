@@ -12,6 +12,7 @@ export const resetPassword = async (data) => {
     });
 };
 
+
 export const verifyReset = async (verifyCode) => {
     return await fetchRequest.get(BASE_URL + "/api/verifyreset?code=" + verifyCode)
         .then((response) => {
