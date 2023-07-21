@@ -22,6 +22,10 @@ const ChangeOwnerTable = () => {
         ],
     };
 
+    const createLocations = () => {
+
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -41,22 +45,32 @@ const ChangeOwnerTable = () => {
         },
         {
             title: 'Власник',
-            dataIndex: ['user', 'email'],
+            dataIndex: 'user',
             width: '20%',
-            defaultSortOrder: 'ascend',
+            render: (user) => (
+                <span>
+                    {user && user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : 'Unknown User'}
+                </span>
+            ),
         },
         {
             title: 'Місто',
-            dataIndex: ['locations'],
+            dataIndex: 'locations',
             width: '20%',
             defaultSortOrder: 'ascend',
-            render: (locations) => (
-                locations.map(location =>
-                    <span>
-                        {location.city.name + ' '}
-                    </span>
-                )
-            ),
+            render: (locations) => {
+                const uniqueCityNamesSet = new Set(locations.map(location => location.cityName));
+                const uniqueCityNamesArray = Array.from(uniqueCityNamesSet);
+                return (
+                    <>
+                        {uniqueCityNamesArray.map(cityName => (
+                            <span >
+                                {cityName + ' '}
+                            </span>
+                        ))}
+                    </>
+                );
+            },
         }
     ];
 
@@ -65,7 +79,7 @@ const ChangeOwnerTable = () => {
     }
 
     const getData = () => {
-        getAllClubs().then(response => setClubs(response));
+        getAllClubs().then(response => {setClubs(response); console.log(response)});
     };
 
     useEffect(() => {
