@@ -67,7 +67,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
-                        {users.map(user => <Option key={user.id} value={user.id}>{user.email}</Option>)}
+                        {users.map(user => <Option key={user.id} value={user.id}>{user.firstName} {user.lastName}</Option>)}
                     </Select>
                 </Form.Item>
                 <Button htmlType="submit" className="flooded-button"
