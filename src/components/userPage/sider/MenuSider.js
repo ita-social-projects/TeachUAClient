@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../sider/css/Sider.less'
-import { MailOutlined, UserOutlined, FileDoneOutlined, CheckOutlined } from "@ant-design/icons";
+import { MailOutlined, UserOutlined, FileDoneOutlined, CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { Link, useHistory } from "react-router-dom";
 import { getRole } from "../../../service/StorageService"
@@ -52,6 +52,16 @@ const MenuSiderComponent = ({ url }) => {
                         icon={<CheckOutlined className="icon-message" style={{ fontSize: 20 }} />}
                     >
                         <Link to={`${url}/registrations`}>Реєстрації</Link>
+                    </Menu.Item>
+                )}
+                {userRole === 'ROLE_MANAGER' && (
+                    <Menu.Item
+                        className="menu-item"
+                        style={{ paddingLeft: 15 }}
+                        key={`${url}/complaints`}
+                        icon={<ExclamationOutlined className="icon-message" style={{ fontSize: 20 }} />}
+                    >
+                        <Link to={`${url}/complaints`}>Скарги</Link>
                     </Menu.Item>
                 )}
                 {userRole === 'ROLE_USER' && (

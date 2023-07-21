@@ -51,6 +51,7 @@ class CommentEditComponent extends React.Component {
             createComplaint(
                 this.state.commentText,
                 this.state.user.id,
+                this.props.club.user.id,
                 this.props.club.id).then(() => {
                 this.closeEditComponent();
                 this.state.isComplaint = false;
