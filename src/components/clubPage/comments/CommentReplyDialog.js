@@ -18,7 +18,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
         };
 
         fetchUser();
-    }, []);
+    }, [localStorage.getItem('id')]);
 
 
     const handleOk = () => {
@@ -40,7 +40,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
     return (
         <Modal
             className="comment-modal"
-            visible={visible}
+            open={visible}
             centered
             onOk={handleOk}
             destroyOnClose={true}
@@ -49,11 +49,12 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
             footer={null}
         >
             <span className="comment-reply-title">Відповісти на коментар</span>
+            {user ? (
+                <>
             <Form onFinish={handleOk}>
                 <div className="comment-fields">
-                    {user ? (
-                        <>
                             <Form.Item
+                                required={true}
                                 label="Ім'я"
                                 style={{marginBottom: 16}}
                             >
@@ -64,6 +65,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                                 />
                             </Form.Item>
                             <Form.Item
+                                required={true}
                                 label="Телефон"
                                 labelAlign={"right"}
                                 style={{marginBottom: 16}}
@@ -76,6 +78,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                                 />
                             </Form.Item>
                             <Form.Item
+                                required={true}
                                 label="Email"
                                 style={{marginBottom: 16}}
                             >
@@ -87,9 +90,21 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                                 />
                             </Form.Item>
                             <Form.Item
+                                required={true}
                                 label="Коментар"
                                 name="commentText"
-                            >
+                                rules={[
+                                    {
+                                        min: COMMENT_MIN_LENGTH,
+                                        max: COMMENT_MAX_LENGTH,
+                                        message: `Коментар може містити від ${COMMENT_MIN_LENGTH} до ${COMMENT_MAX_LENGTH} символів.`
+                                    },
+                                    {
+                                        required: false,
+                                        pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                                        message: 'Коментар не може містити російські літери'
+                                    }
+                                ]}>
                                 <TextArea
                                     autoSize={{minRows: 5, maxRows: 5}}
                                     placeholder="Додайте коментар"
@@ -97,8 +112,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                                     onChange={e => setReplyText(e.target.value)}
                                 />
                             </Form.Item>
-                        </>
-                    ) : null}
+
                 </div>
                 <Form.Item>
                     <Tooltip title={getTooltipTitle()}>
@@ -115,6 +129,8 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                     </Tooltip>
                 </Form.Item>
             </Form>
+                </>
+                ) : null}
         </Modal>
     );
 };
