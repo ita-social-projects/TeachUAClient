@@ -14,7 +14,8 @@ const Message = ({message, onDelete}) => {
     const {Panel} = Collapse;
     const [active, setActive] = useState(message.isActive);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
-    const handleDelete = () => {
+    const handleDelete = (event) => {
+        event.stopPropagation();
         onDelete(message.id);
     };
 
@@ -58,6 +59,9 @@ const Message = ({message, onDelete}) => {
                            <div className="date">
                                {message.date ? getFormattedDate(message.date) : ''}
                            </div>
+                           {/*<Button onClick={handleDelete} className="deleteButton">*/}
+                           {/*    Видалити*/}
+                           {/*</Button>*/}
                            {showReadMessage(active)}
                            <DeleteOutlined className="deleteButton" onClick={handleDelete} />
                        </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
@@ -7,11 +7,10 @@ import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import {getFeedbackListByClubId} from "../../../service/FeedbackService";
+import {getFeedbackRatingByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import SignUpForClub from "../register/SignUpForClub";
-import {clubFeedback} from "../../../util/ClubUtil";
 import { getRole } from "../../../service/StorageService"
 
 const PageContent = ({club, feedbackCount}) => {
@@ -20,11 +19,18 @@ const PageContent = ({club, feedbackCount}) => {
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
     const role = getRole();
 
-    const feedback = getFeedbackListByClubId(club.id);
+    useEffect(() => {
+        const fetchFeedbackRate = async () => {
+            try {
+                const value = await getFeedbackRatingByClubId(club.id);
+                setRate(value);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    feedback.then((value) => {
-        setRate(clubFeedback(value));
-    })
+        fetchFeedbackRate();
+    }, [club.id]);
 
     return (
         <Content className="page-content">

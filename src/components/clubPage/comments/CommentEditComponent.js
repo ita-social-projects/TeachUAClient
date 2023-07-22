@@ -8,7 +8,6 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import {createFeedback} from "../../../service/FeedbackService";
 import {createComplaint} from "../../../service/ComplaintService";
 import {getUserById} from "../../../service/UserService";
-import NotchedOutline from "@material-ui/core/OutlinedInput/NotchedOutline";
 
 const {TabPane} = Tabs;
 
