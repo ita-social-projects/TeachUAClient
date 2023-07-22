@@ -27,7 +27,6 @@ const PageComments = ({club}) => {
     };
 
     const handleReplySubmit = (item, replyText) => {
-        console.log(replyText);
         handleReply(item, replyText);
         setReplyDialogVisible(false);
     };
@@ -47,7 +46,7 @@ const PageComments = ({club}) => {
     }
 
     const handleAddComment = async (newFeedback) => {
-        setComments(prevComments => [...prevComments, newFeedback]);
+        setComments(prevComments => [newFeedback, ...prevComments]);
     };
 
     const handleShowMore = () => {
@@ -60,7 +59,6 @@ const PageComments = ({club}) => {
             .then(response => {
                 setComments(prevComments => [...prevComments, ...response.content]);
                 setLastPage(response.last);
-                console.log(lastPage);
                 setLoading(false);
             })
             .catch(error => {
@@ -83,7 +81,7 @@ const PageComments = ({club}) => {
                                         if (localStorage.getItem('id') != null)
                                             setCommentEditVisible(true);
                                         else
-                                            message.info("Увійдіть або зареєструйтеся!");
+                                            message.error("Увійдіть або зареєструйтеся!");
                                     }}
                             >
                                 Залишити коментар
@@ -114,7 +112,12 @@ const PageComments = ({club}) => {
                                              <>
                                                  {item.text.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                                                  <Button className={"answer-comment"}
-                                                         onClick={() => openReplyDialog(item)}>
+                                                         onClick={() => {
+                                                             if (localStorage.getItem('id') != null)
+                                                                 openReplyDialog(item);
+                                                             else
+                                                                 message.error("Увійдіть або зареєструйтеся!");
+                                                         }}>
                                                      <EnterOutlined style={{transform: "scaleX(-1)"}}/>
                                                      <p className={"answer-p"}>Відповісти</p>
                                                  </Button>

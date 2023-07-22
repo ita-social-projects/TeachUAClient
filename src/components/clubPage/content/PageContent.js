@@ -7,34 +7,19 @@ import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import {getFeedbackRatingByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import SignUpForClub from "../register/SignUpForClub";
 import { getRole } from "../../../service/StorageService"
 
-const PageContent = ({club, feedbackCount}) => {
-    const [rate, setRate] = useState(0);
+const PageContent = ({club}) => {
     const images = club.urlGallery.map(image => BASE_URL + image.url);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
     const role = getRole();
 
-    useEffect(() => {
-        const fetchFeedbackRate = async () => {
-            try {
-                const value = await getFeedbackRatingByClubId(club.id);
-                setRate(value);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchFeedbackRate();
-    }, [club.id]);
-
     return (
         <Content className="page-content">
-            <PageRating rating={rate} count={feedbackCount}/>
+            <PageRating rating={club.rating || 0} count={club.feedbackCount || 0}/>
             {images.length > 0 &&
                 <ImageCarousel className="carousel" urls={images}/>
             }

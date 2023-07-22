@@ -8,14 +8,12 @@ import {getClubById} from "../../service/ClubService";
 import Loader from "../Loader";
 import './css/ClubPage.css';
 import PageComments from "./comments/PageComments";
-import {getFeedbackFeedbackCountByClubId} from "../../service/FeedbackService";
 import {searchParameters} from "../../context/SearchContext";
 
 class ClubPage extends React.Component {
     state = {
         club: {},
         cityName: "",
-        feedbackCount: 0,
         clubNotFound: false,
     };
 
@@ -27,9 +25,6 @@ class ClubPage extends React.Component {
             if (response.status) {
                 this.setState({clubNotFound: true});
             }
-        });
-        getFeedbackFeedbackCountByClubId(clubId).then(response => {
-            this.setState({feedbackCount: response});
         });
     };
 
@@ -56,7 +51,7 @@ class ClubPage extends React.Component {
                 <Layout className="global-padding">
                     <PageHeader club={this.state.club}/>
                     <Layout className="club-page" style={{padding: 40, background: 'white'}}>
-                        <PageContent club={this.state.club} feedbackCount={this.state.feedbackCount}/>
+                        <PageContent club={this.state.club}/>
                         <PageSider cityName={this.state.cityName} club={this.state.club}/>
                     </Layout>
                     <PageComments club={this.state.club}/>

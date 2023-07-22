@@ -1,7 +1,7 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 
-export const getFeedbackListByClubId = async (id, page = 0, size = 2) => {
+export const getFeedbackListByClubId = async (id, page = 0, size = 5) => {
     return await fetchRequest.get(`${BASE_URL}/api/feedbacks/${id}`, {
         params: {
             page,
@@ -10,20 +10,6 @@ export const getFeedbackListByClubId = async (id, page = 0, size = 2) => {
     }).then((response) => {
         return response.data
     });
-};
-
-export const getFeedbackFeedbackCountByClubId = async (clubId) => {
-    return await fetchRequest.get(`${BASE_URL}/api/feedbacks/count/${clubId}`,)
-        .then((response) => {
-            return response.data
-        });
-};
-
-export const getFeedbackRatingByClubId = async (clubId) => {
-    return await fetchRequest.get(`${BASE_URL}/api/feedbacks/rating/${clubId}`,)
-        .then((response) => {
-            return response.data
-        });
 };
 
 export const createFeedback = async (text, rate, userId, clubId) => {

@@ -10,27 +10,10 @@ import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import ClubItemMap from "./ClubItemMap";
 import "./css/ClubList.less"
-import {getFeedbackRatingByClubId} from "../../service/FeedbackService";
 
 
 const ClubListItem = ({ club, onClubClick }) => {
-
     const [visible, setVisible] = useState(false);
-    const [rate, setRate] = useState(0);
-
-    useEffect(() => {
-        const fetchFeedbackRate = async () => {
-            try {
-                const value = await getFeedbackRatingByClubId(club.id);
-                setRate(value);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchFeedbackRate();
-    }, [club.id]);
-
 
     return (
         <div>
@@ -61,7 +44,7 @@ const ClubListItem = ({ club, onClubClick }) => {
                     {/*<DribbbleOutlined className="club-online-icon"/>*/}
                     <span className="club-online-label">Гурток онлайн</span>
                 </div>}
-                <Rate className="rating" disabled value={rate} allowHalf onClick={() => onClubClick(club)} />
+                <Rate className="rating" disabled value={club.rating || 0} allowHalf onClick={() => onClubClick(club)} />
                 {
                     club.locations.length > 0 &&
                     <div className="address" onClick={() => { setVisible(true) }}>
