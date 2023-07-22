@@ -109,6 +109,7 @@ const CommentReplyDialog = ({visible, onSubmit, onCancel, comment}) => {
                                     autoSize={{minRows: 5, maxRows: 5}}
                                     placeholder="Додайте коментар"
                                     value={replyText}
+                                    maxLength={COMMENT_MAX_LENGTH}
                                     onChange={e => setReplyText(e.target.value)}
                                 />
                             </Form.Item>

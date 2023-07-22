@@ -157,7 +157,16 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
 
                         <AddChildModal isVisible={isAddChildModalVisible} setIsVisible={setIsAddChildModalVisible} onChildAdded={handleChildAdded} />
 
-                        <Form.Item name="comment" className={classes.commentInput}>
+                        <Form.Item
+                            name="comment"
+                            className={classes.commentInput}
+                            rules={[
+                                {
+                                    required: false,
+                                    pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                                    message: 'Коментар не може містити російські літери'
+                                }
+                            ]}>
                             <Input.TextArea
                                 className={classes.textArea}
                                 placeholder="Додати коментар"
