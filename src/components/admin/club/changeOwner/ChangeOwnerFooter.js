@@ -18,7 +18,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
         }
         if (userId === -1 || userId === null) {
             Modal.error({
-                title: 'Виберіть email нового власника!',
+                title: 'Виберіть ім\'я нового власника!',
                 content: ''
             })
         }
@@ -58,7 +58,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                     <Select
                         showSearch
                         style={{width: 200}}
-                        placeholder="Select a person"
+                        placeholder="Виберіть власника"
                         optionFilterProp="children"
                         onChange={(event, value) => {
                             setUserId(value);
