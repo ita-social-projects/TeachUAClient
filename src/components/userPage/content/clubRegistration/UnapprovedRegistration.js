@@ -84,10 +84,8 @@ const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
                     </>
                 )}
                 <h3>Коментар: </h3>
-                {registration.comment}
-                <br></br>
+                {registration.comment.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                 <h3>{registration.registrationDate}</h3>
-
             </Panel>
         </Collapse>
     );

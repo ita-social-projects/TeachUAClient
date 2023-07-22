@@ -80,8 +80,7 @@ const AllRegistration = ({ registration, approveRegistration, cancelRegistration
                     </>
                 )}
                 <h3>Коментар: </h3>
-                {registration.comment}
-                <br></br>
+                {registration.comment.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                 <h3 className={statusClass}>
                     {statusMessage}
                 </h3>

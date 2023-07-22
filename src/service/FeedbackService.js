@@ -1,10 +1,29 @@
 import fetchRequest from "./FetchRequest";
-import { BASE_URL } from "./config/ApiConfig";
+import {BASE_URL} from "./config/ApiConfig";
 
-export const getFeedbackListByClubId = async (id) => {
-    return await fetchRequest.get(BASE_URL + "/api/feedbacks/" + id).then((response) => {
+export const getFeedbackListByClubId = async (id, page = 0, size = 2) => {
+    return await fetchRequest.get(`${BASE_URL}/api/feedbacks/${id}`, {
+        params: {
+            page,
+            size,
+        },
+    }).then((response) => {
         return response.data
     });
+};
+
+export const getFeedbackFeedbackCountByClubId = async (clubId) => {
+    return await fetchRequest.get(`${BASE_URL}/api/feedbacks/count/${clubId}`,)
+        .then((response) => {
+            return response.data
+        });
+};
+
+export const getFeedbackRatingByClubId = async (clubId) => {
+    return await fetchRequest.get(`${BASE_URL}/api/feedbacks/rating/${clubId}`,)
+        .then((response) => {
+            return response.data
+        });
 };
 
 export const createFeedback = async (text, rate, userId, clubId) => {
@@ -15,5 +34,14 @@ export const createFeedback = async (text, rate, userId, clubId) => {
         clubId: clubId
     }).then((response) => {
         return response.data
+    });
+};
+
+export const createReply = async (text, parentCommentId, userId) => {
+    return await fetchRequest.post(BASE_URL + "/api/feedback/" + parentCommentId + "/reply", {
+        text: text,
+        userId: userId
+    }).then((response) => {
+        return response.data;
     });
 };
