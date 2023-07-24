@@ -2,21 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { Content } from "antd/es/layout/layout";
 import { getUserId } from "../../../../service/StorageService";
 import {
-    getComplaintByRecipientId, 
-    deleteComplaintById
+    getComplaintByRecipientId,
+    deleteComplaintById,
+    getComplaintBySenderId
 } from "../../../../service/ComplaintService";
-import { List, Switch } from 'antd';
+import { List, Checkbox } from 'antd';
 import Complaint from './Compaint';
+import { getRole } from '../../../../service/StorageService';
 
 const UserComplaintsPage = () => {
+    const userRole = getRole();
     const [complaints, setComplaints] = useState([]);
     const [showOnlyNew, setShowOnlyNew] = useState(true);
+    const [showOnlyWithoutAnswer, setShowOnlyWithoutAnswer] = useState(true);
+
+    const toggleShowOnlyNew = () => {
+        setShowOnlyNew(!showOnlyNew);
+    };
+
+    const toggleShowOnlyWithoutAnswer = () => {
+        setShowOnlyWithoutAnswer(!showOnlyWithoutAnswer);
+    };
 
     useEffect(() => {
-        getComplaintByRecipientId(getUserId()).then(response => setComplaints(response));
-    }, []);
+        if (userRole === 'ROLE_MANAGER') {
+            getComplaintByRecipientId(getUserId()).then(response => setComplaints(response));
+        }
+        else {
+            getComplaintBySenderId(getUserId()).then(response => setComplaints(response));
+        }
+    }, [showOnlyNew, showOnlyWithoutAnswer]);
 
-    const filteredComplaints = showOnlyNew ? complaints.filter(complaint => complaint.isActive) : complaints;
+    let simulatedComplaints = complaints;
+    simulatedComplaints = showOnlyNew ? simulatedComplaints.filter(complaint => complaint.isActive) : simulatedComplaints;
+    const secondlyfilteredComplaints = showOnlyWithoutAnswer ? simulatedComplaints.filter(complaint => !complaint.hasAnswer) : simulatedComplaints;
 
     const handleDeleteComplaint = (complaintId) => {
         deleteComplaintById(complaintId)
@@ -34,12 +53,10 @@ const UserComplaintsPage = () => {
 
                 <div className="messages">
                     <div className="filterContainer">
-                        <span>Показати скарги без відповіді: </span>
-                        <Switch
-
-                            checked={showOnlyNew}
-                            onChange={setShowOnlyNew}
-                        />
+                        <Checkbox checked={showOnlyNew}
+                            onChange={toggleShowOnlyNew}>Показати нові скарги: </Checkbox>
+                        <Checkbox checked={showOnlyWithoutAnswer}
+                            onChange={toggleShowOnlyWithoutAnswer}>Показати скарги без відповіді: </Checkbox>
                     </div>
 
                     <List
@@ -49,10 +66,10 @@ const UserComplaintsPage = () => {
                         locale={{
                             emptyText: <div className="noMessages">Скарг немає</div>
                         }}
-                        dataSource={filteredComplaints}
+                        dataSource={secondlyfilteredComplaints}
                         pagination={{ hideOnSinglePage: true, defaultPageSize: 4, className: "user-content-pagination" }}
                         renderItem={(complaint) => (
-                            <Complaint message={complaint} key={complaint.id} onDelete={handleDeleteComplaint}/>
+                            <Complaint message={complaint} key={complaint.id} userRole={userRole} onDelete={handleDeleteComplaint} />
                         )}
                     />
                 </div>

@@ -20,6 +20,22 @@ export const getComplaintByRecipientId = async (id) => {
         });
 }
 
+export const getComplaintBySenderId = async (id) => {
+    return await fetchRequest.get(BASE_URL + "/api/complaints/sender/" + id)
+        .then((response) => {
+            return response.data
+        });
+}
+
+export const updateComplaintIsActiveById = async (id, data) => {
+    return await fetchRequest.put(BASE_URL + "/api/complaint/isActive/" + id, {
+        isActive: data.isActive
+    })
+        .then((response) => {
+            return response.data
+        });
+}
+
 export const deleteComplaintById = async (id) => {
     return await fetchRequest.delete(BASE_URL + "/api/complaint/" + id)
         .then((response) => {
