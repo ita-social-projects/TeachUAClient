@@ -54,8 +54,7 @@ const MenuSiderComponent = ({ url }) => {
                         <Link to={`${url}/registrations`}>Реєстрації</Link>
                     </Menu.Item>
                 )}
-                {userRole === 'ROLE_MANAGER' && (
-                    <Menu.Item
+                {<Menu.Item
                         className="menu-item"
                         style={{ paddingLeft: 15 }}
                         key={`${url}/complaints`}
@@ -63,7 +62,7 @@ const MenuSiderComponent = ({ url }) => {
                     >
                         <Link to={`${url}/complaints`}>Скарги</Link>
                     </Menu.Item>
-                )}
+                }
                 {userRole === 'ROLE_USER' && (
                     <Menu.Item
                         className="menu-item"
