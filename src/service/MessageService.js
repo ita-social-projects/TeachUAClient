@@ -37,6 +37,15 @@ export const updateMessageIsActiveById = async (id, data) => {
     });
 }
 
+export const updateMessageIsAnsweredById = async (id, data) => {
+    return await fetchRequest.put(BASE_URL + "/api/message/answered/" + id, {
+        isAnswered: data.isAnswered
+    }).then((response) => {
+        return response.data
+    });
+}
+
+
 export const deleteMessageById = async (id) => {
     return await fetchRequest.delete(BASE_URL + "/api/message/" + id)
         .then((response) => {
