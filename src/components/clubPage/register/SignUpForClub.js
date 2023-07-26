@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { getUserId } from "../../../service/StorageService";
+import React, {useEffect, useState} from 'react';
+import {getUserId} from "../../../service/StorageService";
 import ModalHint from "../register/ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
 import classes from "./css/SignUpForClub.module.css";
-import {Button, Form, Modal, Input, Checkbox, Tooltip, message} from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import {Button, Form, Modal, Input, Checkbox, message} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
 import AddChildModal from "../../addChild/AddChildModal";
-import { postClubRegistration, postUserClubRegistration, getChildren } from "../../../service/ClubRegistrationService";
+import {postClubRegistration, postUserClubRegistration, getChildren} from "../../../service/ClubRegistrationService";
 import './css/SignUpForClub.css';
+import ConditionalTooltip from "../../ConditionalTooltip";
 
-const SignUpForClub = ({ isShowing, setShowing, club }) => {
+const SignUpForClub = ({isShowing, setShowing, club}) => {
 
     const [registrationToClubForm] = Form.useForm();
     const [children, setChildren] = useState([]);
@@ -86,7 +87,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
         !getUserId()
             ?
             <ModalHint visible={isShowing}
-                setVisible={setShowing}
+                       setVisible={setShowing}
             >
                 Увійдіть або зареєструйтеся!!!
             </ModalHint>
@@ -118,13 +119,15 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                             Кого записуємо?
                         </div>
 
-                        <Checkbox.Group className={classes.checkboxGroup} value={selectedChildrenIds} onChange={onCheckboxChange}>
+                        <Checkbox.Group className={classes.checkboxGroup} value={selectedChildrenIds}
+                                        onChange={onCheckboxChange}>
                             {children.length > 0 ? (
                                 children.map((child) => (
                                     <div key={child.id} className={classes.customCheckbox}>
-                                        <Tooltip
-                                            title={child.disabled ? "Already registered in this club" : ""}
-                                            color={"#FFA940"}>
+                                        <ConditionalTooltip
+                                            condition={child.disabled}
+                                            title={"Already registered in this club"}
+                                        >
                                             <span>
                                                 <Checkbox value={child.id} disabled={child.disabled}>
                                                     <div className={classes.label}>
@@ -137,7 +140,7 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                                                     </div>
                                                 </Checkbox>
                                             </span>
-                                        </Tooltip>
+                                        </ConditionalTooltip>
                                     </div>
                                 ))
                             ) : (
@@ -150,12 +153,13 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                         </Checkbox.Group>
                         <div>
                             <Button className="add-children-btn" onClick={() => setIsAddChildModalVisible(true)}>
-                                <PlusOutlined />
+                                <PlusOutlined/>
                                 Додати дитину
                             </Button>
                         </div>
 
-                        <AddChildModal isVisible={isAddChildModalVisible} setIsVisible={setIsAddChildModalVisible} onChildAdded={handleChildAdded} />
+                        <AddChildModal isVisible={isAddChildModalVisible} setIsVisible={setIsAddChildModalVisible}
+                                       onChildAdded={handleChildAdded}/>
 
                         <Form.Item
                             name="comment"
@@ -170,9 +174,9 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                             <Input.TextArea
                                 className={classes.textArea}
                                 placeholder="Додати коментар"
-                                autoSize={{ minRows: 1, maxRows: 4 }}
+                                autoSize={{minRows: 1, maxRows: 4}}
                                 maxLength={300}
-                                style={{ width: '100%' }}
+                                style={{width: '100%'}}
                             />
                         </Form.Item>
 
