@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './css/PageComments.css';
 import {Button, Comment, List, message, Rate} from "antd";
 import {Content} from "antd/es/layout/layout";
-
 import CommentEditComponent from "./CommentEditComponent";
 import {EnterOutlined} from "@ant-design/icons";
 import CommentReplies from "./CommentReplies";
@@ -11,6 +10,7 @@ import {createReply, getFeedbackListByClubId} from "../../../service/FeedbackSer
 import {getUserId} from "../../../service/StorageService";
 import CommentReplyDialog from './CommentReplyDialog';
 import ArrowDownOutlined from "@ant-design/icons/lib/icons/ArrowDownOutlined";
+import ConditionalTooltip from "../../ConditionalTooltip";
 
 const PageComments = ({club}) => {
     const [comments, setComments] = useState([]);
@@ -20,6 +20,10 @@ const PageComments = ({club}) => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [lastPage, setLastPage] = useState(true);
+    const userId = useMemo(() => getUserId(), []);
+    const isUserClubOwner = useMemo(() => {
+        return club.user && userId ? userId.toString() === club.user.id.toString() : false;
+    }, [club, userId]);
 
     const openReplyDialog = (item) => {
         setReplyTargetComment(item);
@@ -36,7 +40,7 @@ const PageComments = ({club}) => {
     };
 
     const handleReply = async (item, replyText) => {
-        const newReply = await createReply(replyText, item.id, getUserId());
+        const newReply = await createReply(replyText, item.id, userId);
         const updatedComments = comments.map(comment =>
             comment.id === item.id
                 ? {...comment, replies: [...comment.replies, newReply]}
@@ -67,6 +71,7 @@ const PageComments = ({club}) => {
             });
     }, [currentPage, club.id]);
 
+
     return (
         <Content className="page-comments">
             <div className="comments-container">
@@ -76,16 +81,24 @@ const PageComments = ({club}) => {
                     header={
                         <div className="comment-header">
                             <span className="comment-label">Коментарі</span>
-                            <Button className="outlined-button comment-button"
+                            <ConditionalTooltip
+                                condition={isUserClubOwner}
+                                title="Не можна оцінити свій гурток"
+                            >
+                                <Button
+                                    className={`outlined-button comment-button`}
+                                    disabled={isUserClubOwner}
+                                    style={isUserClubOwner ? { borderRadius: "6px" } : {}}
                                     onClick={() => {
-                                        if (localStorage.getItem('id') != null)
+                                        if (userId != null)
                                             setCommentEditVisible(true);
                                         else
                                             message.error("Увійдіть або зареєструйтеся!");
                                     }}
-                            >
-                                Залишити коментар
-                            </Button>
+                                >
+                                    Залишити коментар
+                                </Button>
+                            </ConditionalTooltip>
                         </div>
                     }
                     itemLayout="horizontal"
@@ -138,7 +151,7 @@ const PageComments = ({club}) => {
                             event.currentTarget.blur();
                         }}>
                         <p className={"show-more-p"}>Показати більше</p>
-                        <ArrowDownOutlined />
+                        <ArrowDownOutlined/>
                     </Button>
                 )}
             </div>
