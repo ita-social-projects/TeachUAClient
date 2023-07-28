@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { getUserId } from "../../../service/StorageService";
+import React, {useEffect, useMemo, useState} from 'react';
+import {getUserId} from "../../../service/StorageService";
 import ModalHint from "../register/ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
 import classes from "./css/SignUpForClub.module.css";
-import {Button, Form, Modal, Input, Checkbox, Tooltip, message} from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import {Button, Form, Modal, Input, Checkbox, message} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
 import AddChildModal from "../../addChild/AddChildModal";
-import { postClubRegistration, postUserClubRegistration, getChildren } from "../../../service/ClubRegistrationService";
+import {
+    postClubRegistration,
+    postUserClubRegistration,
+    getChildren,
+    isUserAlreadyRegistered
+} from "../../../service/ClubRegistrationService";
 import './css/SignUpForClub.css';
+import ConditionalTooltip from "../../ConditionalTooltip";
 
-const SignUpForClub = ({ isShowing, setShowing, club }) => {
+const SignUpForClub = ({isShowing, setShowing, club}) => {
 
     const [registrationToClubForm] = Form.useForm();
     const [children, setChildren] = useState([]);
     const [isAddChildModalVisible, setIsAddChildModalVisible] = useState(false);
     const [selectedChildrenIds, setSelectedChildrenIds] = useState([]);
+    const [userAlreadyRegistered, setUserAlreadyRegistered] = useState(false);
     const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
     const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
+    const userId = useMemo(() => getUserId(), []);
 
     const onCheckboxChange = checkedValues => {
         setSelectedChildrenIds(checkedValues);
@@ -28,38 +36,39 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
     };
 
 
-    useEffect(() => {
-        if (isShowing) {
-            getChildren(club.id)
-                .then(data => {
-                    setChildren(data);
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
-        }
-    }, [isShowing]);
+    const fetchChildren = async (clubId, userId, setChildren, setUserAlreadyRegistered) => {
+        try {
+            const response = await getChildren(clubId);
 
-    const onFinish = (values) => {
+            if (response.status === 200) {
+                setChildren(response.data);
+            } else if (response.status === 204) {
+                const data = await isUserAlreadyRegistered(clubId, userId);
+                setUserAlreadyRegistered(data);
+            }
+        } catch (error) {
+            console.error('There was an error in getChildren!', error);
+        }
+    };
+
+    const handleSubmit = async (values, selectedChildrenIds, userId, clubId, setShowing, registrationToClubForm, setSelectedChildrenIds) => {
         const comment = values.comment || ' ';
 
         if (selectedChildrenIds.includes("self")) {
             const userClubRegistrationRequest = {
-                userId: getUserId(),
+                userId: userId,
                 clubId: club.id,
                 comment: comment
             };
 
-            postUserClubRegistration(userClubRegistrationRequest)
-                .then((response) => {
-                    setShowing(false);
-                    registrationToClubForm.resetFields();
-                    setSelectedChildrenIds([]);
-                })
-                .catch((error) => {
-                    console.error('There was an error!', error);
-                });
-
+            try {
+                const response = await postUserClubRegistration(userClubRegistrationRequest);
+                setShowing(false);
+                registrationToClubForm.resetFields();
+                setSelectedChildrenIds([]);
+            } catch (error) {
+                console.error('There was an error!', error);
+            }
         } else {
             const clubRegistrationRequest = {
                 childIds: selectedChildrenIds,
@@ -67,26 +76,36 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                 comment: comment
             };
 
-            postClubRegistration(clubRegistrationRequest)
-                .then((response) => {
-                    setShowing(false);
-                    registrationToClubForm.resetFields();
-                    setSelectedChildrenIds([]);
-                    message.success("Запит на реєстрацію в гурток надіслано");
-                })
-                .catch((error) => {
-                    message.error("Помилка при запиті на додавання в гурток")
-                    console.error('There was an error!', error);
-                });
+            try {
+                const response = await postClubRegistration(clubRegistrationRequest);
+                setShowing(false);
+                registrationToClubForm.resetFields();
+                setSelectedChildrenIds([]);
+                message.success("Запит на реєстрацію в гурток надіслано");
+            } catch (error) {
+                message.error("Помилка при запиті на додавання в гурток")
+                console.error('There was an error!', error);
+            }
         }
     };
 
 
+    useEffect(() => {
+        if (isShowing) {
+            fetchChildren(club.id, userId, setChildren, setUserAlreadyRegistered);
+        }
+    }, [isShowing]);
+
+    const onFinish = (values) => {
+        handleSubmit(values, selectedChildrenIds, userId, club.id, setShowing, registrationToClubForm, setSelectedChildrenIds);
+    };
+
+
     return (
-        !getUserId()
+        !userId
             ?
             <ModalHint visible={isShowing}
-                setVisible={setShowing}
+                       setVisible={setShowing}
             >
                 Увійдіть або зареєструйтеся!!!
             </ModalHint>
@@ -118,13 +137,15 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                             Кого записуємо?
                         </div>
 
-                        <Checkbox.Group className={classes.checkboxGroup} value={selectedChildrenIds} onChange={onCheckboxChange}>
+                        <Checkbox.Group className={classes.checkboxGroup} value={selectedChildrenIds}
+                                        onChange={onCheckboxChange}>
                             {children.length > 0 ? (
                                 children.map((child) => (
                                     <div key={child.id} className={classes.customCheckbox}>
-                                        <Tooltip
-                                            title={child.disabled ? "Already registered in this club" : ""}
-                                            color={"#FFA940"}>
+                                        <ConditionalTooltip
+                                            condition={child.disabled}
+                                            title={"Вже є активна заявка у цей гурток"}
+                                        >
                                             <span>
                                                 <Checkbox value={child.id} disabled={child.disabled}>
                                                     <div className={classes.label}>
@@ -137,33 +158,51 @@ const SignUpForClub = ({ isShowing, setShowing, club }) => {
                                                     </div>
                                                 </Checkbox>
                                             </span>
-                                        </Tooltip>
+                                        </ConditionalTooltip>
                                     </div>
                                 ))
                             ) : (
                                 <div className={classes.customCheckbox}>
-                                    <Checkbox value="self">
-                                        Записати мене на гурток
-                                    </Checkbox>
+                                    <ConditionalTooltip
+                                        condition={userAlreadyRegistered}
+                                        title={"Вже є активна заявка у цей гурток"}
+                                    >
+                                        <Checkbox
+                                            value="self"
+                                            disabled={userAlreadyRegistered}
+                                        >
+                                            Записати мене на гурток
+                                        </Checkbox>
+                                    </ConditionalTooltip>
                                 </div>
                             )}
                         </Checkbox.Group>
                         <div>
                             <Button className="add-children-btn" onClick={() => setIsAddChildModalVisible(true)}>
-                                <PlusOutlined />
+                                <PlusOutlined/>
                                 Додати дитину
                             </Button>
                         </div>
 
-                        <AddChildModal isVisible={isAddChildModalVisible} setIsVisible={setIsAddChildModalVisible} onChildAdded={handleChildAdded} />
+                        <AddChildModal isVisible={isAddChildModalVisible} setIsVisible={setIsAddChildModalVisible}
+                                       onChildAdded={handleChildAdded}/>
 
-                        <Form.Item name="comment" className={classes.commentInput}>
+                        <Form.Item
+                            name="comment"
+                            className={classes.commentInput}
+                            rules={[
+                                {
+                                    required: false,
+                                    pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                                    message: 'Коментар не може містити російські літери'
+                                }
+                            ]}>
                             <Input.TextArea
                                 className={classes.textArea}
                                 placeholder="Додати коментар"
-                                autoSize={{ minRows: 1, maxRows: 4 }}
+                                autoSize={{minRows: 1, maxRows: 4}}
                                 maxLength={300}
-                                style={{ width: '100%' }}
+                                style={{width: '100%'}}
                             />
                         </Form.Item>
 
