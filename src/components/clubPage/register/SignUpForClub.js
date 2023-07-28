@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {getUserId} from "../../../service/StorageService";
 import ModalHint from "../register/ModalHint";
 import '../../clubPage/sider/css/PageSider.css';
@@ -6,7 +6,12 @@ import classes from "./css/SignUpForClub.module.css";
 import {Button, Form, Modal, Input, Checkbox, message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import AddChildModal from "../../addChild/AddChildModal";
-import {postClubRegistration, postUserClubRegistration, getChildren} from "../../../service/ClubRegistrationService";
+import {
+    postClubRegistration,
+    postUserClubRegistration,
+    getChildren,
+    isUserAlreadyRegistered
+} from "../../../service/ClubRegistrationService";
 import './css/SignUpForClub.css';
 import ConditionalTooltip from "../../ConditionalTooltip";
 
@@ -16,8 +21,10 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
     const [children, setChildren] = useState([]);
     const [isAddChildModalVisible, setIsAddChildModalVisible] = useState(false);
     const [selectedChildrenIds, setSelectedChildrenIds] = useState([]);
+    const [userAlreadyRegistered, setUserAlreadyRegistered] = useState(false);
     const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
     const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
+    const userId = useMemo(() => getUserId(), []);
 
     const onCheckboxChange = checkedValues => {
         setSelectedChildrenIds(checkedValues);
@@ -29,38 +36,39 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
     };
 
 
-    useEffect(() => {
-        if (isShowing) {
-            getChildren(club.id)
-                .then(data => {
-                    setChildren(data);
-                })
-                .catch(error => {
-                    console.error('There was an error!', error);
-                });
-        }
-    }, [isShowing]);
+    const fetchChildren = async (clubId, userId, setChildren, setUserAlreadyRegistered) => {
+        try {
+            const response = await getChildren(clubId);
 
-    const onFinish = (values) => {
+            if (response.status === 200) {
+                setChildren(response.data);
+            } else if (response.status === 204) {
+                const data = await isUserAlreadyRegistered(clubId, userId);
+                setUserAlreadyRegistered(data);
+            }
+        } catch (error) {
+            console.error('There was an error in getChildren!', error);
+        }
+    };
+
+    const handleSubmit = async (values, selectedChildrenIds, userId, clubId, setShowing, registrationToClubForm, setSelectedChildrenIds) => {
         const comment = values.comment || ' ';
 
         if (selectedChildrenIds.includes("self")) {
             const userClubRegistrationRequest = {
-                userId: getUserId(),
+                userId: userId,
                 clubId: club.id,
                 comment: comment
             };
 
-            postUserClubRegistration(userClubRegistrationRequest)
-                .then((response) => {
-                    setShowing(false);
-                    registrationToClubForm.resetFields();
-                    setSelectedChildrenIds([]);
-                })
-                .catch((error) => {
-                    console.error('There was an error!', error);
-                });
-
+            try {
+                const response = await postUserClubRegistration(userClubRegistrationRequest);
+                setShowing(false);
+                registrationToClubForm.resetFields();
+                setSelectedChildrenIds([]);
+            } catch (error) {
+                console.error('There was an error!', error);
+            }
         } else {
             const clubRegistrationRequest = {
                 childIds: selectedChildrenIds,
@@ -68,23 +76,33 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                 comment: comment
             };
 
-            postClubRegistration(clubRegistrationRequest)
-                .then((response) => {
-                    setShowing(false);
-                    registrationToClubForm.resetFields();
-                    setSelectedChildrenIds([]);
-                    message.success("Запит на реєстрацію в гурток надіслано");
-                })
-                .catch((error) => {
-                    message.error("Помилка при запиті на додавання в гурток")
-                    console.error('There was an error!', error);
-                });
+            try {
+                const response = await postClubRegistration(clubRegistrationRequest);
+                setShowing(false);
+                registrationToClubForm.resetFields();
+                setSelectedChildrenIds([]);
+                message.success("Запит на реєстрацію в гурток надіслано");
+            } catch (error) {
+                message.error("Помилка при запиті на додавання в гурток")
+                console.error('There was an error!', error);
+            }
         }
     };
 
 
+    useEffect(() => {
+        if (isShowing) {
+            fetchChildren(club.id, userId, setChildren, setUserAlreadyRegistered);
+        }
+    }, [isShowing]);
+
+    const onFinish = (values) => {
+        handleSubmit(values, selectedChildrenIds, userId, club.id, setShowing, registrationToClubForm, setSelectedChildrenIds);
+    };
+
+
     return (
-        !getUserId()
+        !userId
             ?
             <ModalHint visible={isShowing}
                        setVisible={setShowing}
@@ -126,7 +144,7 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                                     <div key={child.id} className={classes.customCheckbox}>
                                         <ConditionalTooltip
                                             condition={child.disabled}
-                                            title={"Already registered in this club"}
+                                            title={"Вже є активна заявка у цей гурток"}
                                         >
                                             <span>
                                                 <Checkbox value={child.id} disabled={child.disabled}>
@@ -145,9 +163,17 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                                 ))
                             ) : (
                                 <div className={classes.customCheckbox}>
-                                    <Checkbox value="self">
-                                        Записати мене на гурток
-                                    </Checkbox>
+                                    <ConditionalTooltip
+                                        condition={userAlreadyRegistered}
+                                        title={"Вже є активна заявка у цей гурток"}
+                                    >
+                                        <Checkbox
+                                            value="self"
+                                            disabled={userAlreadyRegistered}
+                                        >
+                                            Записати мене на гурток
+                                        </Checkbox>
+                                    </ConditionalTooltip>
                                 </div>
                             )}
                         </Checkbox.Group>
