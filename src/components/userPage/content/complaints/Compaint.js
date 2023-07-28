@@ -99,15 +99,17 @@ const Complaint = ({ message, onDelete, userRole }) => {
             </div>
           }
           extra={
-            <div className="extra">
+            userRole === 'ROLE_MANAGER' ? <div className="extra">
               {showReadComplaint(active)}
               <MessageOutlined className="answerButton" onClick={handleAnswer} />
               <DeleteOutlined className="deleteButton" onClick={handleDelete} />
             </div>
+              :
+              <></>
           }
         >
           <div>
-            {message.text === null ? 'Немає відповіді': message.text }
+            {message.text === null ? 'Немає відповіді' : message.text}
           </div>
         </Panel>
       </Collapse>
@@ -143,7 +145,7 @@ const Complaint = ({ message, onDelete, userRole }) => {
             name="Відповідь"
             rules={[{ required: true, message: 'Будь ласка, введіть відповідь!' }]}
           >
-            <Input.TextArea rows={4} onChange={handleInputChange}/>
+            <Input.TextArea rows={4} onChange={handleInputChange} />
           </Form.Item>
         </Form>
       </Modal>
