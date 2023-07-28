@@ -42,3 +42,12 @@ export const deleteComplaintById = async (id) => {
             return response.data
         });
 }
+
+export const updateComplaintAnswerById = async (id, answer) => {
+    return await fetchRequest.put(BASE_URL + `/api/complaint/${id}/answer`, {
+        answerText: answer
+    })
+        .then((response) => {
+            return response.data
+        });
+}
