@@ -54,7 +54,7 @@ const UserComplaintsPage = () => {
                 <div className="messages">
                     <div className="filterContainer">
                         <Checkbox checked={showOnlyNew}
-                            onChange={toggleShowOnlyNew}>Показати нові скарги </Checkbox>
+                            onChange={toggleShowOnlyNew}>Показати непрочитані скарги </Checkbox>
                         <Checkbox checked={showOnlyWithoutAnswer}
                             onChange={toggleShowOnlyWithoutAnswer}>Показати скарги без відповіді </Checkbox>
                     </div>
