@@ -40,11 +40,15 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
-            console.log(response)
+            response.forEach(task => {
+                task.isActive = task.challengeId !== null;
+            });
+
             setTasks(response);
+            setLoading(false);
         });
-        setLoading(false);
     };
+
     const getChallengeData = () => {
         getAllChallenges().then(response => {
             setChallengeList(response);
@@ -68,6 +72,10 @@ const TasksTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, tasks, record.id).then((editedData) => {
+            if(editedData.item.challengeId === null) {
+                editedData.item.challengeId = false;
+            }
+            console.log(editedData)
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
                     message.warning(response.message)
