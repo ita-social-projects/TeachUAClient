@@ -72,13 +72,9 @@ const TasksTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, tasks, record.id).then((editedData) => {
-            if(editedData.item.challengeId === null) {
-                editedData.item.challengeId = false;
-            }
-            console.log(editedData)
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
-                    message.warning(response.message)
+                    message.warning("Будь ласка, виберіть челендж!")
                     return;
                 }
                 getTaskData();
