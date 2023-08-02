@@ -43,21 +43,8 @@ const Complaint = ({ message, onDelete, userRole }) => {
     onDelete(message.id);
   };
 
-  const handleAnswer = () => {
-    setShowAnswerForm(true);
-  };
-
-  const onCancel = () => {
-    setShowAnswerForm(false);
-  };
-
-
   const handleNameClick = () => {
     message.hasAnswer ? setShowModal(true) : setShowModal(false);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
   };
 
   const showReadComplaint = (isActive) => {
@@ -99,13 +86,11 @@ const Complaint = ({ message, onDelete, userRole }) => {
             </div>
           }
           extra={
-            userRole === 'ROLE_MANAGER' ? <div className="extra">
+            userRole === 'ROLE_MANAGER' && <div className="extra">
               {showReadComplaint(active)}
-              <MessageOutlined className="answerButton" onClick={handleAnswer} />
+              <MessageOutlined className="answerButton" onClick={() => { setShowAnswerForm(true) }} />
               <DeleteOutlined className="deleteButton" onClick={handleDelete} />
             </div>
-              :
-              <></>
           }
         >
           <div>
@@ -116,8 +101,8 @@ const Complaint = ({ message, onDelete, userRole }) => {
 
       <Modal
         visible={showModal}
-        onCancel={handleCloseModal}
-        footer={
+        onCancel={() => { setShowModal(false) }}
+        footer={userRole !== 'ROLE_MANAGER' &&
           <Button key="submit" type="primary" onClick={() => redirectToClubPage()}>
             Написати нову скаргу
           </Button>}
@@ -130,9 +115,9 @@ const Complaint = ({ message, onDelete, userRole }) => {
       <Modal
         visible={showAnswerForm}
         title="Дати відповідь на скаргу"
-        onCancel={onCancel}
+        onCancel={() => { setShowAnswerForm(false) }}
         footer={[
-          <Button key="cancel" onClick={onCancel}>
+          <Button key="cancel" onClick={() => { setShowAnswerForm(false) }}>
             Скасувати
           </Button>,
           <Button key="submit" type="primary" onClick={handleSubmit}>
