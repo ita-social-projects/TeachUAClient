@@ -10,8 +10,7 @@ import {signUp} from "../../service/UserService";
 const Registration = ({isShowing, setShowing}) => {
  
     const [disabledButton, setDisabledButton] = useState(true);
-    const [role, setRole] = useState(null);
-    // const [isChecked, setIsChecked] = useState(false);
+    const [role, setRole] = useState("ROLE_USER");
 
 
     const onFinish = (values) => {
@@ -40,7 +39,7 @@ const Registration = ({isShowing, setShowing}) => {
                 className="modal-registration"
                 centered
                 width={520}
-                visible={isShowing}
+                open={isShowing}
                 onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 footer={null}
@@ -53,7 +52,7 @@ const Registration = ({isShowing, setShowing}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <RegistrationSocial role={setRole}/>
+                        <RegistrationSocial role={role}/>
                         <RegistrationRoles setDisabledButton={setDisabledButton}
                                           disabledButton={disabledButton} setRole={setRole}/>
                         <RegistrationInput disabledButton={disabledButton}/>

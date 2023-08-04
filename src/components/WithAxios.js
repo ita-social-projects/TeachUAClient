@@ -17,7 +17,7 @@ const WithAxios = ({ children }) => {
     const history = useHistory();
 
     useEffect(() => {
-        fetchRequest.interceptors.response.use(
+        const interceptor = fetchRequest.interceptors.response.use(
             response => response,
             async (error) => {
                 const originalConfig = error.config;
@@ -25,9 +25,9 @@ const WithAxios = ({ children }) => {
                     if (error.response.status === 401 && !originalConfig._retry) {
                         originalConfig._retry = true;
                         try {
-                            const tokens = await authRequest.post(BASE_URL + "/api/token/refresh", {
+                            const { data: tokens } = await authRequest.post(BASE_URL + "/api/token/refresh", {
                                 refreshToken: getRefreshToken(),
-                            }).then(response => response.data);
+                            });
                             const { accessToken, refreshToken } = tokens;
                             saveTokens(accessToken, refreshToken);
                             return fetchRequest(originalConfig);
@@ -42,8 +42,11 @@ const WithAxios = ({ children }) => {
                 }
                 return Promise.reject(error);
             }
-        )
-    }, [])
+        );
+        return () => {
+            fetchRequest.interceptors.response.eject(interceptor);
+        };
+    }, [setUser, setShowLogin, history]);
 
     return children
 }
