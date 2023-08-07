@@ -2,33 +2,25 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
-import {Button, Tooltip} from "antd";
+import {Button} from "antd";
 import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import {getFeedbackListByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
 import SignUpForClub from "../register/SignUpForClub";
-import {clubFeedback} from "../../../util/ClubUtil";
 import { getRole } from "../../../service/StorageService"
+import ConditionalTooltip from "../../ConditionalTooltip";
 
-const PageContent = ({club, feedbackCount}) => {
-    const [rate, setRate] = useState(0);
+const PageContent = ({club}) => {
     const images = club.urlGallery.map(image => BASE_URL + image.url);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
     const role = getRole();
 
-    const feedback = getFeedbackListByClubId(club.id);
-
-    feedback.then((value) => {
-        setRate(clubFeedback(value));
-    })
-
     return (
         <Content className="page-content">
-            <PageRating rating={rate} count={feedbackCount}/>
+            <PageRating rating={club.rating || 0} count={club.feedbackCount || 0}/>
             {images.length > 0 &&
                 <ImageCarousel className="carousel" urls={images}/>
             }
@@ -41,9 +33,9 @@ const PageContent = ({club, feedbackCount}) => {
             }
 
             <div className="full-width button-box">
-                <Tooltip
-                    title={role !== 'ROLE_USER' ? "Ця функціональність доступна тільки користувачу" : ""}
-                    color={role !== 'ROLE_USER' ? "#FFA940" : ""}
+                <ConditionalTooltip
+                    condition={role !== 'ROLE_USER'}
+                    title={"Ця функціональність доступна тільки користувачу"}
                 >
                     <Button
                         className="flooded-button apply-button"
@@ -61,7 +53,7 @@ const PageContent = ({club, feedbackCount}) => {
                                setShowing={setSignUpForClubVisible}
                                club={club}
                 />
-            </Tooltip>
+            </ConditionalTooltip>
             </div>
 
             <div className="full-width button-box">

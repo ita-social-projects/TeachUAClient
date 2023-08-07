@@ -8,7 +8,6 @@ import {MailOutlined, PhoneOutlined} from "@ant-design/icons";
 import {createFeedback} from "../../../service/FeedbackService";
 import {createComplaint} from "../../../service/ComplaintService";
 import {getUserById} from "../../../service/UserService";
-import NotchedOutline from "@material-ui/core/OutlinedInput/NotchedOutline";
 
 const {TabPane} = Tabs;
 
@@ -52,6 +51,7 @@ class CommentEditComponent extends React.Component {
             createComplaint(
                 this.state.commentText,
                 this.state.user.id,
+                this.props.club.user.id,
                 this.props.club.id).then(() => {
                 this.closeEditComponent();
                 this.state.isComplaint = false;
@@ -124,6 +124,7 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 label="Ім'я"
                                 style={{marginBottom: 16}}
+                                required={true}
                             >
                                 <Input
                                     className="comment-input-box"
@@ -134,7 +135,8 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 label="Телефон"
                                 labelAlign={"right"}
-                                style={{marginBottom: 16}}>
+                                style={{marginBottom: 16}}
+                                required={true}>
                                 <Input
                                     className="comment-input-box"
                                     suffix={<PhoneOutlined className="phone-icon"/>}
@@ -146,6 +148,7 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 label="Email"
                                 style={{marginBottom: 16}}
+                                required={true}
                             >
                                 <Input
                                     className="comment-input-box"
@@ -159,7 +162,9 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 style={this.state.isComplaint ? {display: 'none'} : {}}
                                 label="Оцінка"
-                                name="rate">
+                                name="rate"
+                                required={true}
+                            >
                                 <Rate className="edit-field-input"/>
                             </Form.Item>
 
@@ -167,8 +172,16 @@ class CommentEditComponent extends React.Component {
                             <Form.Item
                                 label="Опис"
                                 name="commentText"
-                                value="Dsd">
-                                <TextArea autoSize={{minRows: 5, maxRows: 5}} placeholder="Додайте опис"/>
+                                value="Dsd"
+                                rules={[
+                                    {
+                                        required: false,
+                                        pattern: /^[^ЁёЪъЫыЭэ]+$/,
+                                        message: 'Коментар не може містити російські літери'
+                                    }
+                                ]}>
+
+                                <TextArea autoSize={{minRows: 2, maxRows: 5}} placeholder="Додайте коментар"/>
                             </Form.Item>
                         </div>
 

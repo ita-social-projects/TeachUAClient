@@ -76,8 +76,7 @@ const UserApplication = ({ application, cancelApplication }) => {
         <Collapse>
             <Panel header={panelHeader}>
                 <h3>Коментар: </h3>
-                {application.comment}
-                <br></br>
+                {application.comment.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                 <h3 className={statusClass}>
                     {statusMessage}
                 </h3>

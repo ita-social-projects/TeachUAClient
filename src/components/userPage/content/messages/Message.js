@@ -14,7 +14,8 @@ const Message = ({message, onDelete}) => {
     const {Panel} = Collapse;
     const [active, setActive] = useState(message.isActive);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
-    const handleDelete = () => {
+    const handleDelete = (event) => {
+        event.stopPropagation();
         onDelete(message.id);
     };
 
