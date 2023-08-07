@@ -13,6 +13,7 @@ import ManagerClubRegistrationPage from "./content/clubRegistration/ManagerClubR
 import UserRoute from "../routes/UserRoute";
 import {AuthContext} from "../../context/AuthContext";
 import UserApplicationsPage from "./content/clubRegistration/UserApplicationsPage";
+import UserComplaintsPage from "./content/complaints/UserComplaintsPage";
 
 const UserPage = () => {
 
@@ -42,7 +43,11 @@ const UserPage = () => {
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/messages`} >
-                <UserMessagesPage />
+                <UserMessagesPage  />
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/complaints`} >
+                <UserComplaintsPage/>
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/registrations`}>
