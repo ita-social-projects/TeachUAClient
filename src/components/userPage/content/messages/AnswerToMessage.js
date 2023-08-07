@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import '/home/beaver/Downloads/teachua/TeachUAClient/src/components/clubPage/sider/css/PageSider.css';
+import "../../../clubPage/sider/css/PageSider.css";
 import TextArea from "antd/lib/input/TextArea";
 import {Button, Col, Form, Modal, Row} from "antd";
 import {createMessage, updateMessageIsAnsweredById} from "../../../../service/MessageService";
 import {getUserId} from "../../../../service/StorageService";
 import ModalHint from "../../../clubPage/messages/ModalHint";
-import classes from "/home/beaver/Downloads/teachua/TeachUAClient/src/components/clubPage/messages/css/MessageToClubManager.module.css";
+import classes from "../../../clubPage/messages/css/MessageToClubManager.module.css";
 
 const AnswerToMessage = ({isShowing, setShowing, message}) => {
 
