@@ -18,7 +18,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
         }
         if (userId === -1 || userId === null) {
             Modal.error({
-                title: 'Виберіть email нового власника!',
+                title: 'Виберіть ім\'я нового власника!',
                 content: ''
             })
         }
@@ -58,7 +58,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                     <Select
                         showSearch
                         style={{width: 200}}
-                        placeholder="Select a person"
+                        placeholder="Виберіть власника"
                         optionFilterProp="children"
                         onChange={(event, value) => {
                             setUserId(value);
@@ -67,7 +67,7 @@ const ChangeOwnerFooter = ({selectedRowKeys, setSelectedRowKeys, updateTable}) =
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
                     >
-                        {users.map(user => <Option key={user.id} value={user.id}>{user.email}</Option>)}
+                        {users.map(user => <Option key={user.id} value={user.id}>{user.firstName} {user.lastName}</Option>)}
                     </Select>
                 </Form.Item>
                 <Button htmlType="submit" className="flooded-button"

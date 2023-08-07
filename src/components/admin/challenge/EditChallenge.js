@@ -155,16 +155,27 @@ const EditChallenge = (props) => {
                 wrapperCol={{span: 14}}
             >
                 <Form.Item
-                    name="sortNumber"
                     label="Порядковий номер"
+                    name="sortNumber"
                     value={challenge.sortNumber}
                     rules={[
                         {
-                            validator: validateSortNumber,
+                            required: true,
+                            validator: (_, value) => {
+                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
+                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
+                                }
+                                return Promise.resolve();
+                            },
+                        },
+                        {
+                            required: false,
+                            pattern: /^[-0-9]*$/,
+                            message: "Поле 'Порядковий номер' може містити тільки цифри",
                         },
                     ]}
                 >
-                    <InputNumber/>
+                    <InputNumber style={{ width: "50%" }} />
                 </Form.Item>
                 <Form.Item
                     name="isActive"

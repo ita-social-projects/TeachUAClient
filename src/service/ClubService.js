@@ -132,13 +132,18 @@ export const getClubsByAdvancedSearch = async (
     sortBy,
     sortPath
 ) => {
+    let age = parameters.age;
+    if (age < 2 || age > 18) {
+        age = undefined;
+    }
+
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/search/advanced", {
             params: {
                 name: parameters.name
                     ? parameters.name
                     : searchInputData.input,
-                age: parameters.age,
+                age: age,
                 cityName: parameters.cityName
                     ? parameters.cityName
                     : searchParameters.cityName,

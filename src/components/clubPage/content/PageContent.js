@@ -7,26 +7,20 @@ import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
 import {BASE_URL} from "../../../service/config/ApiConfig";
-import {getFeedbackListByClubId} from "../../../service/FeedbackService";
 import {getClubReport} from "../../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
-import SignUpForClub from "../messages/SignUpForClub";
-import {clubFeedback} from "../../../util/ClubUtil";
+import SignUpForClub from "../register/SignUpForClub";
+import { getRole } from "../../../service/StorageService"
+import ConditionalTooltip from "../../ConditionalTooltip";
 
-const PageContent = ({club, feedbackCount}) => {
-    const [rate, setRate] = useState(0);
+const PageContent = ({club}) => {
     const images = club.urlGallery.map(image => BASE_URL + image.url);
     const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
-
-    const feedback = getFeedbackListByClubId(club.id);
-
-    feedback.then((value) => {
-        setRate(clubFeedback(value));
-    })
+    const role = getRole();
 
     return (
         <Content className="page-content">
-            <PageRating rating={rate} count={feedbackCount}/>
+            <PageRating rating={club.rating || 0} count={club.feedbackCount || 0}/>
             {images.length > 0 &&
                 <ImageCarousel className="carousel" urls={images}/>
             }
@@ -35,20 +29,33 @@ const PageContent = ({club, feedbackCount}) => {
                 :
                 <div className="content">
                     {getShortContent(club.description)}
-                    {/*{club.description}*/}
                 </div>
             }
+
             <div className="full-width button-box">
-                <Button className="flooded-button apply-button"
-                        onClick={() => setSignUpForClubVisible(true)}
+                <ConditionalTooltip
+                    condition={role !== 'ROLE_USER'}
+                    title={"Ця функціональність доступна тільки користувачу"}
                 >
-                    Записатись на гурток
-                </Button>
+                    <Button
+                        className="flooded-button apply-button"
+                        onClick={() => {
+                            if (role === 'ROLE_USER') {
+                                setSignUpForClubVisible(true);
+                            }
+                        }}
+                        disabled={role !== 'ROLE_USER'}
+                    >
+                        Записатись на гурток
+                    </Button>
+
                 <SignUpForClub isShowing={signUpForClubVisible}
                                setShowing={setSignUpForClubVisible}
                                club={club}
                 />
+            </ConditionalTooltip>
             </div>
+
             <div className="full-width button-box">
                 <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
                     Завантажити

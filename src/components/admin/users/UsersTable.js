@@ -92,6 +92,7 @@ const UsersTable = () => {
     }, []);
 
     const remove = (record) => {
+
         deleteUserById(record.id)
             .then((response) => {
                 if (response.status) {
@@ -106,8 +107,17 @@ const UsersTable = () => {
     };
 
     const save = async (record) => {
+        console.log(record)
         console.log("before users update ")
         editCellValue(form, users, record.id).then((editedData) => {
+
+            if (checkLastAdmin(record.roleName, users)) {
+                message.warning(
+                    "Не можна змінювати роль адміністратора, якщо немає інших адміністраторів."
+                );
+                return;
+            }
+
             updateUser(editedData.item).then(response => {
                 const st = response.status;
                 if (!(st === "true" || st === "false")) {
@@ -121,6 +131,12 @@ const UsersTable = () => {
                 console.log(users);
             });
         });
+    };
+
+    const checkLastAdmin = (roleName, users) => {
+        const isAdmin = roleName === 'ROLE_ADMIN';
+        const adminCount = users.filter(user => user.roleName === 'ROLE_ADMIN').length;
+        return isAdmin && adminCount === 1;
     };
 
     return (

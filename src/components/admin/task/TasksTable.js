@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-
-import {Button, Form, message, Popconfirm, Select, Typography, Input} from "antd";
+import './css/TaskTable.css';
+import {Button, Form, message, Popconfirm, Select, Typography, Input, Checkbox} from "antd";
 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
@@ -9,6 +9,7 @@ import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Option} from "antd/es/mentions";
+import { ClearOutlined } from '@ant-design/icons';
 
 const {Title} = Typography;
 
@@ -21,8 +22,12 @@ const TasksTable = () => {
     const [tasks, setTasks] = useState([{
         id: 0,
         name: '',
+        headerText: '',
+        description: '',
         picture: '',
-        startDate: ''
+        startDate: '',
+        challengeId: 0,
+        isActive: true
     }]);
     const [challengeList, setChallengeList] = useState([
         {
@@ -35,11 +40,15 @@ const TasksTable = () => {
 
     const getTaskData = () => {
         getTasks().then(response => {
-            console.log(response);
+            response.forEach(task => {
+                task.isActive = task.challengeId !== null;
+            });
+
             setTasks(response);
+            setLoading(false);
         });
-        setLoading(false);
     };
+
     const getChallengeData = () => {
         getAllChallenges().then(response => {
             setChallengeList(response);
@@ -62,11 +71,10 @@ const TasksTable = () => {
         form.setFieldsValue({
             ...form.getFieldsValue()
         });
-        console.log(record);
         editCellValue(form, tasks, record.id).then((editedData) => {
             updateTask(editedData.item, record.id).then(response => {
                 if (response.status) {
-                    message.warning(response.message)
+                    message.warning("Будь ласка, виберіть челендж!")
                     return;
                 }
                 getTaskData();
@@ -113,6 +121,21 @@ const TasksTable = () => {
         );
     };
 
+    const searchResults = search(tasks);
+
+    const handleChallengeChange = (record, value) => {
+        const updatedTasks = tasks.map(task => {
+            if (task.id === record.id) {
+                return {
+                    ...task,
+                    challengeId: value
+                };
+            }
+            return task;
+        });
+        setTasks(updatedTasks);
+    };
+
     const columns = [
         {
             title: 'ID',
@@ -120,19 +143,43 @@ const TasksTable = () => {
             width: '5%',
             editable: false,
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
-            sorter: (a, b) => a.id - b.id,
+            sorter: (a, b) => moment(a.startDate).unix() - moment(b.startDate).unix()
         },
         {
             title: 'Назва',
             dataIndex: 'name',
             width: '35%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+            inputType: 'text',
+            render: (text, record) => <Link className="table-name" to={'/admin/challenge/task/' + record.id}>{record.name}</Link>
+        },
+        {
+            title: 'Челендж',
+            dataIndex: 'challengeId',
+            width: '22%',
+            editable: true,
+            inputType: 'select',
+            selectData: challengeList.map(challenge => ({
+                    value: challenge.id,
+                    label: challenge.name
+                })),
+            render: (text, record) => {
+                const challenge = challengeList.find(challenge => challenge.id === record.challengeId);
+                return challenge ? challenge.name : '';
+            }
+        },
+        {
+            title: 'Активне',
+            dataIndex: 'isActive',
+            width: '6%',
+            editable: true,
+            inputType: 'checkbox',
+            render: (text, record) => <Checkbox className='checkbox-record' checked={record.isActive} />
         },
         {
             title: 'Дата початку',
             dataIndex: 'startDate',
-            width: '35%',
+            width: '15%',
             editable: false,
             render: (text) => moment(text.toString()).format('DD-MM-YYYY')
         },
@@ -163,7 +210,7 @@ const TasksTable = () => {
                         </Option>
                     ))}
                 </Select>
-            <Input.Search 
+            <Input.Search
                 placeholder="Пошук по завданнях"
                 onSearch={(value)=>{
                     setSearchedText(value);
@@ -175,15 +222,19 @@ const TasksTable = () => {
             />
             </div>
             <Title level={3}>Завдання</Title>
-            <EditableTable
-                bordered
-                className="city-table"
-                columns={columns}
-                data={search(tasks)}
-                form={form}
-                onSave={save}
-                actions={actions}
-            />
+            {searchedText !== '' && searchResults.length === 0 ? (
+                <p className="no-results-message">За запитом "{searchedText}" завдань не знайдено.</p>
+            ) : (
+                <EditableTable
+                    bordered
+                    className="city-table"
+                    columns={columns}
+                    data={searchedText !== '' ? searchResults : tasks}
+                    form={form}
+                    onSave={save}
+                    actions={actions}
+                />
+            )}
         </div>
     )
 }

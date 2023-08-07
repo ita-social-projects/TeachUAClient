@@ -6,13 +6,14 @@ import {useForm} from "antd/es/form/Form";
 import {createTask} from "../../../service/TaskService";
 import Editor from "../../../util/Editor";
 import {getAllChallenges} from "../../../service/ChallengeService";
-import {Link, useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
-const { Option } = Select;
 
-const { Title } = Typography;
-const { TextArea } = Input;
+const {Option} = Select;
+
+const {Title} = Typography;
+const {TextArea} = Input;
 
 const AddTask = () => {
     const [taskForm] = useForm();
@@ -32,10 +33,10 @@ const AddTask = () => {
     });
     const [challengeList, setChallengeList] = useState([
         {
-            'id' : 0,
-            'name' : '',
-            'title' : '',
-            'sortNumber' : 0
+            'id': 0,
+            'name': '',
+            'title': '',
+            'sortNumber': 0
         }
     ]);
     const [loading, setLoading] = useState(true);
@@ -90,7 +91,7 @@ const AddTask = () => {
                 to="/admin/tasks"
                 className="back-btn"
             >
-                <Button  className="flooded-button">
+                <Button className="flooded-button">
                     До списку завдань
                 </Button>
             </Link>
@@ -107,24 +108,24 @@ const AddTask = () => {
                 form={taskForm}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-                initialValues={{ remember: true }}
+                initialValues={{remember: true}}
                 autoComplete="off"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 14 }}>
+                labelCol={{span: 4}}
+                wrapperCol={{span: 14}}>
                 <Form.Item
                     label="Дата початку"
                     name="startDate"
                     rules={[
                         {
                             required: true,
-                            message: "Дата не може бути пустою",
+                            message: "Дата не може бути порожньою",
                         }]}
                 >
-                        <DatePicker
-                            onChange={onDateChange}
-                            format={dateFormat}
-                            value={startDate}
-                        />
+                    <DatePicker
+                        onChange={onDateChange}
+                        format={dateFormat}
+                        value={startDate}
+                    />
                 </Form.Item>
                 <Form.Item
                     name="picture"
@@ -133,7 +134,7 @@ const AddTask = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Фото не може бути пустим",
+                            message: "Фото не може бути порожнім",
                         }]}
                 >
                     <Upload
@@ -142,7 +143,7 @@ const AddTask = () => {
                         action={UPLOAD_IMAGE_URL}
                         accept="image/*"
                         maxCount={1}
-                        data={{folder:`tasks`}}
+                        data={{folder: `tasks`}}
                         headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}>
                         <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
@@ -154,7 +155,7 @@ const AddTask = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Поле \"Назва\" не може бути пустим",
+                            message: "Поле \"Назва\" не може бути порожнім",
                         },
                         {
                             min: 5,
@@ -176,14 +177,19 @@ const AddTask = () => {
                     rules={[
                         {
                             validator: (_, value) => {
-                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
-                                    return Promise.reject(new Error("Поле \"Заголовок\" не може бути порожнім"));
-                                }
-                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
-                                    return Promise.reject(new Error("Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"));
+                                if (value) {
+                                    if (value.replace(/<[^>]+>/g, '').trim().length === 0) {
+                                        return Promise.reject(new Error("Поле \"Заголовок\" не може бути порожнім"));
+                                    } else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                        return Promise.reject(new Error("Поле \"Заголовок\" може містити мінімум 40 максимум 3000 символів"));
+                                    }
                                 }
                                 return Promise.resolve();
                             },
+                        },
+                        {
+                            required: true,
+                            message: "Поле \"Заголовок\" не може бути порожнім",
                         },
                         {
                             required: false,
@@ -192,7 +198,7 @@ const AddTask = () => {
                         }
                     ]}
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -200,14 +206,19 @@ const AddTask = () => {
                     rules={[
                         {
                             validator: (_, value) => {
-                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
-                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
-                                }
-                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
-                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"));
+                                if (value) {
+                                    if (value.replace(/<[^>]+>/g, '').trim().length === 0) {
+                                        return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
+                                    } else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 3000) {
+                                        return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 3000 символів"));
+                                    }
                                 }
                                 return Promise.resolve();
                             },
+                        },
+                        {
+                            required: true,
+                            message: "Поле \"Опис\" не може бути порожнім",
                         },
                         {
                             required: false,
@@ -216,7 +227,7 @@ const AddTask = () => {
                         }
                     ]}
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     label="Челендж"
@@ -224,7 +235,7 @@ const AddTask = () => {
                     rules={[
                         {
                             required: true,
-                            message: "Челлендж не може бути пустим",
+                            message: "Челлендж не може бути порожнім",
                         }]}
                 >
                     <Select
@@ -257,7 +268,7 @@ const AddTask = () => {
             </Form>
             <div>
                 <Title level={3}>Доступні челенджі</Title>
-                <ChallengesInTasks />
+                <ChallengesInTasks/>
             </div>
         </div>
     )

@@ -92,7 +92,8 @@ const ChallengesTable = () => {
             dataIndex: 'id',
             width: '5%',
             editable: false,
-            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.id}</Link>,
+            sorter: (a, b) => a.id - b.id
         },
         {
             title: 'Порядковий номер',
@@ -100,21 +101,25 @@ const ChallengesTable = () => {
             inputType: 'number',
             width: '10%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{text}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{text}</Link>,
+            sorter: (a, b) => a.sortNumber - b.sortNumber
         },
         {
             title: 'Назва',
             dataIndex: 'name',
             width: '30%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.name}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.name}</Link>,
+            defaultSortOrder: 'ascend',
+            sorter: (a, b) => a.name.localeCompare(b.name)
         },
         {
             title: 'Заголовок',
             dataIndex: 'title',
             width: '35%',
             editable: true,
-            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.title}</Link>
+            render: (text, record) => <Link to={'/admin/challenge/' + record.id}>{record.title}</Link>,
+            sorter: (a, b) => a.name.localeCompare(b.name)
         },
     ];
 

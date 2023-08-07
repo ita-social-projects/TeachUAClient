@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './css/AddChallenge.css';
-import { Typography, Form, Input, Button, message, Upload} from 'antd';
+import {Typography, Form, Input, Button, message, Upload, InputNumber} from 'antd';
 import {createChallenge} from "../../../service/ChallengeService";
 import {useForm} from "antd/es/form/Form";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
@@ -16,9 +16,25 @@ const AddChallenge = () => {
     const [name, setName] = useState();
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
-    const [sortNumber, setSortNumber] = useState();
+    const [sortNumber, setSortNumber] = useState(1);
     const [picture, setPicture] = useState();
     const [challengeId, setChallengeId] = useState();
+
+    const checkFormValidity = () => {
+        if (name && sortNumber && title && description && picture){
+            return !(challengeForm.getFieldValue('name').length >= 5 &&
+                challengeForm.getFieldValue('name').length <= 30 &&
+                challengeForm.getFieldValue('sortNumber') >= 10000 &&
+                challengeForm.getFieldValue('title').length >= 5 &&
+                challengeForm.getFieldValue('title').length <= 100 &&
+                challengeForm.getFieldValue('description').length >= 40 &&
+                challengeForm.getFieldValue('description').length <= 25000
+            )
+        }
+        else{
+            return true;
+        }
+    };
 
     const handleNameChange = (value) => {
         setName(value);
@@ -33,6 +49,9 @@ const AddChallenge = () => {
         setPicture(value);
     }
 
+    const handleDescriptionChange = (value) => {
+        setDescription(value);
+    }
     const onFinish = (values) => {
         createChallenge(values)
             .then((response) => {
@@ -77,26 +96,31 @@ const AddChallenge = () => {
                 autoComplete="off"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
+                shouldUpdate={true}
             >
                 <Form.Item
                     name="sortNumber"
                     label="Порядковий номер"
-                    value={sortNumber}
+                    initialValue={sortNumber}
                     onChange={handleSortNumberChange}
                     rules={[
                         {
                             required: true,
-                            min: 5,
-                            max: 30,
-                            message: "Поле \"Порядковий номер\" може містити мінімум 5 максимум 30 символів",
+                            validator: (_, value) => {
+                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
+                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
                             pattern: /^[-0-9]*$/,
-                            message: "Поле \"Порядковий номер\" може містити тільки цифри",
-                        }]}
-                    >
-                    <Input/>
+                            message: "Поле 'Порядковий номер' може містити тільки цифри",
+                        },
+                    ]}
+                >
+                    <InputNumber style={{ width: "50%" }} />
                 </Form.Item>
                 <Form.Item
                     label="Назва"
@@ -151,15 +175,13 @@ const AddChallenge = () => {
                     name="description"
                     rules={[
                         {
-                            validator: (_, value) => {
-                                if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
-                                    return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
-                                }
-                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
-                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"));
-                                }
-                                return Promise.resolve();
-                            }
+                            required: true,
+                            message: "Поле \"Опис\" не може бути пустим",
+                        },
+                        {
+                            min: 40,
+                            max: 25000,
+                            message: "Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"
                         },
                         {
                             required: false,
@@ -168,7 +190,7 @@ const AddChallenge = () => {
                         }
                     ]}
                 >
-                    <Editor />
+                    <Editor value={description} onChange={handleDescriptionChange}/>
                 </Form.Item>
                 <Form.Item
                     name="picture"
@@ -198,6 +220,7 @@ const AddChallenge = () => {
                         type="primary"
                         htmlType="submit"
                         className="flooded-button add-contact-type-button"
+                        disabled={checkFormValidity()}
                     >
                         Зберегти
                     </Button>

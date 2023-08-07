@@ -86,9 +86,6 @@ const ClubListSider = ({
             } else if (values.age > 18) {
                 setAge(18);
                 form.setFieldsValue({age: 18});
-            } else if (values.age < 2) {
-                setAge(2);
-                form.setFieldsValue({age: 2});
             } else {
                 setAge(values.age);
                 form.setFieldsValue({age: values.age});
@@ -122,7 +119,6 @@ const ClubListSider = ({
             return false;
         }
     };
-
 
     return (
         <Sider className="club-list-sider">

@@ -1,16 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
-import {Avatar, Collapse} from "antd";
+import {Avatar, Button, Collapse} from "antd";
 import "./css/Message.less"
 import UserOutlined from "@ant-design/icons/lib/icons/UserOutlined";
 import {CheckCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {updateMessageIsActiveById} from "../../../../service/MessageService";
 import {getFormattedDate, getLogo} from "./MessageUtil";
+import { DeleteOutlined } from '@ant-design/icons';
+import AnswerToMessage from "./AnswerToMessage";
 
-const Message = ({message}) => {
+const Message = ({message, onDelete}) => {
 
     const {Panel} = Collapse;
     const [active, setActive] = useState(message.isActive);
+    const [signUpForClubVisible, setSignUpForClubVisible] = useState(false);
+    const handleDelete = (event) => {
+        event.stopPropagation();
+        onDelete(message.id);
+    };
+
 
     useEffect(() => {
             if (!active) {
@@ -52,11 +60,24 @@ const Message = ({message}) => {
                                {message.date ? getFormattedDate(message.date) : ''}
                            </div>
                            {showReadMessage(active)}
+                           <DeleteOutlined className="deleteButton" onClick={handleDelete} />
                        </div>
                    }
+
             >
                 <div>
                     {message.text}
+                    <div className="apply-box">
+                        <Button className="flooded-button apply-button"
+                                onClick={() => setSignUpForClubVisible(true)}
+                        >
+                            Відповісти
+                        </Button>
+                        <AnswerToMessage isShowing={signUpForClubVisible}
+                                         setShowing={setSignUpForClubVisible}
+                                         message={message}
+                        />
+                    </div>
                 </div>
             </Panel>
         </Collapse>

@@ -10,12 +10,13 @@ import {signUp} from "../../service/UserService";
 const Registration = ({isShowing, setShowing}) => {
  
     const [disabledButton, setDisabledButton] = useState(true);
-    const [role, setRole] = useState(null);
-    // const [isChecked, setIsChecked] = useState(false);
+    const [role, setRole] = useState("ROLE_USER");
 
 
     const onFinish = (values) => {
         setShowing(false)
+
+        values.role = role;
 
         console.log(values);
         signUp(values).then((response) => {
@@ -38,7 +39,7 @@ const Registration = ({isShowing, setShowing}) => {
                 className="modal-registration"
                 centered
                 width={520}
-                visible={isShowing}
+                open={isShowing}
                 onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 footer={null}
@@ -51,16 +52,10 @@ const Registration = ({isShowing, setShowing}) => {
                         requiredMark={false}
                         onFinish={onFinish}
                     >
-                        <RegistrationSocial role="ROLE_MANAGER"/>
-                        <RegistrationRoles setDisabledButton={setDisabledButton} 
+                        <RegistrationSocial role={role}/>
+                        <RegistrationRoles setDisabledButton={setDisabledButton}
                                           disabledButton={disabledButton} setRole={setRole}/>
-                        {/*<RegistrationRoles setDisabledButton={setDisabledButton}*/}
-                        {/*                   disabledButton={disabledButton} setRole={setRole} />*/}
-
-                        {/*<RegistrationRoles setRole={setRole} />*/}
-                        {/*<RegistrationSocial role={role}/>*/}
                         <RegistrationInput disabledButton={disabledButton}/>
-                        {/*<RegistrationInput />*/}
                     </Form>
                 </div>
             </Modal>

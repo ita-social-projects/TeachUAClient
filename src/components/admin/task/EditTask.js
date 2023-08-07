@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 
-import {Button, DatePicker, Form, Input, message, Select, Upload} from "antd";
+import {Button, Checkbox, DatePicker, Form, Input, message, Select, Upload} from "antd";
 import moment from "moment";
 
 import {useForm} from "antd/es/form/Form";
@@ -14,12 +14,12 @@ import Editor from "../../../util/Editor";
 import Title from "antd/es/typography/Title";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
+import locale from 'antd/es/date-picker/locale/uk_UA';
 
 const {Option} = Select;
 const {TextArea} = Input;
 
 const EditTask = () => {
-
     const [taskEditForm] = useForm();
     const taskId = useParams();
     const [taskNotFound, setTaskNotFound] = useState(false);
@@ -31,6 +31,7 @@ const EditTask = () => {
         picture: '',
         startDate: '',
         challengeId: 0,
+        isActive: true
     });
 
     const [currentPicture, setCurrentPicture] = useState([{
@@ -54,9 +55,13 @@ const EditTask = () => {
     const [loading, setLoading] = useState(true);
     const dateFormat = 'DD-MM-YYYY';
 
+    const handleIsActiveChange = (e) => {
+        setTask({...task, isActive: e.target.checked});
+    };
+
     const getData = () => {
         getTask(taskId.id).then(response => {
-                console.log(response);
+                console.log(response.isActive);
                 setTask(response);
                 let img = [{
                     uid: "1",
@@ -92,7 +97,7 @@ const EditTask = () => {
     }
 
     const saveForm = (values) => {
-        const formValues = {...values, challengeId: task.challengeId, startDate: task.startDate}
+        const formValues = {...values, challengeId: task.challengeId, startDate: task.startDate, isActive: task.isActive}
         updateTask(formValues, taskId.id).then(response => {
             console.log(response);
             if (response.status) {
@@ -160,6 +165,7 @@ const EditTask = () => {
                         name="startDate"
                         allowClear={false}
                         value={moment(task.startDate, "YYYY-MM-DD")}
+                        locale={locale}
                     />
                 </Form.Item>
                 <Form.Item
@@ -259,6 +265,16 @@ const EditTask = () => {
                     ]}
                 >
                     <Editor/>
+                </Form.Item>
+                <Form.Item
+                    label="Активний"
+                    name="isActive"
+                    value={task.isActive}
+                >
+                    <Checkbox
+                        checked={task.isActive}
+                        onChange={handleIsActiveChange}
+                    />
                 </Form.Item>
                 <Form.Item
                     label="Челендж"

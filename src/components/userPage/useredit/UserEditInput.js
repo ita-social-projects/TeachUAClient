@@ -201,7 +201,7 @@ const UserEditInput = (
                        hasFeedback
                        rules={[{
                            required: true,
-                           message: "Будь ласка введіть Ваше ім'я"
+                           message: "Введіть Ваше ім'я"
                        },
                            {
                                required: false,
@@ -211,7 +211,7 @@ const UserEditInput = (
                            {
                                required: false,
                                pattern: /^(?=[^-'ʼ\s]).*[^-'ʼ\s]$/,
-                               message: 'Ім\'я повинно починатися і закінчуватися літерою',
+                               message: 'Ім\'я повинно починатися та закінчуватися літерою',
                            },
                            {
                                required: false,

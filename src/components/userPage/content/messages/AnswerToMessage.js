@@ -1,41 +1,45 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {getUserId} from "../../../service/StorageService";
-import ModalHint from "./ModalHint";
-import '../../clubPage/sider/css/PageSider.css';
-import classes from "./css/SignUpForClub.module.css";
+import React, {useState} from 'react';
+import '/home/beaver/Downloads/teachua/TeachUAClient/src/components/clubPage/sider/css/PageSider.css';
 import TextArea from "antd/lib/input/TextArea";
 import {Button, Col, Form, Modal, Row} from "antd";
-import {createMessage} from "../../../service/MessageService";
-import {getUsersByRole} from "../../../service/UserService";
-import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
+import {createMessage, updateMessageIsAnsweredById} from "../../../../service/MessageService";
+import {getUserId} from "../../../../service/StorageService";
+import ModalHint from "../../../clubPage/messages/ModalHint";
+import classes from "/home/beaver/Downloads/teachua/TeachUAClient/src/components/clubPage/messages/css/MessageToClubManager.module.css";
 
-const SignUpForClub = ({isShowing, setShowing, club}) => {
+const AnswerToMessage = ({isShowing, setShowing, message}) => {
 
     const [messageForm] = Form.useForm();
-    const [admin, setAdmin] = useState({id: 1});
+    const [answered, setAnswered] = useState(message.isAnswered);
+
+
 
     const getRecipientId = () => {
-        if (club.user) {
-            return club.user.id;
-        } else if (club.center && club.center.user) {
-            return club.center.user.id;
-        } else {
-            return admin.id;
-        }
+        console.log(message);
+        return message.sender.id;
     }
 
     const onFinish = (values) => {
         const data = {
             senderId: getUserId(),
-            clubId: club.id,
+            clubId: message.club.id,
             recipientId: getRecipientId(),
             text: values.text,
         };
         setShowing(false);
+        console.log(data);
         createMessage(data).then(() => messageForm.resetFields())
     };
 
-    return (
+function UpdateAnswered() {
+    if (!answered) {
+        updateMessageIsAnsweredById(message.id, {isAnswered: true})
+            .then(response => setAnswered(response.isAnswered));
+    }
+}
+
+
+return (
         !getUserId()
             ?
             <ModalHint visible={isShowing}
@@ -54,35 +58,21 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                 footer={null}
             >
                 <div className={classes.title}>
-                    Записатись на гурток
+                    Відповісти
                 </div>
 
                 <div className={classes.content}>
 
-                    <div className={classes.clubName}>
-                        {club.name}
-                    </div>
-
-                    <div className={classes.comment}>
-                        Для запису на гурток зконтактуйте з відповідальними особами
-                    </div>
-
-                    <div className={classes.contacts}>
-                        <ContactsInfoUtil className={classes.contacts} contacts={club.contacts}/>
-                    </div>
-
-                    <hr className={classes.hr}/>
-
                     <Form
                         className={classes.form}
-                        name="message-from-club"
+                        name="answer-to-message"
                         form={messageForm}
                         requiredMark={true}
                         onFinish={onFinish}
                     >
                         <div className={classes.formItem}>
                             <Form.Item
-                                label="Написати організатору гуртка"
+                                label="Напишіть відповідь"
                                 labelCol={{ span: 24, className: classes.labelBlock}}
                                 name="text"
                                 rules={[
@@ -108,6 +98,7 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
 
                         <div>
                             <Button
+                                onClick={()=> UpdateAnswered()}
                                 className={classes.formButton}
                                 type="primary"
                                 htmlType="submit"
@@ -121,4 +112,4 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
     );
 };
 
-export default SignUpForClub;
+export default AnswerToMessage;

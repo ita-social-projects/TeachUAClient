@@ -9,8 +9,11 @@ import Sider from "antd/es/layout/Sider";
 import {getUserId, deleteUserStorage} from "../../service/StorageService";
 import UserMessagesPage from "./content/messages/UserMessagesPage";
 import UserCertificatesPage from "./content/certificates/UserCertificatesPage";
+import ManagerClubRegistrationPage from "./content/clubRegistration/ManagerClubRegistrationPage";
 import UserRoute from "../routes/UserRoute";
 import {AuthContext} from "../../context/AuthContext";
+import UserApplicationsPage from "./content/clubRegistration/UserApplicationsPage";
+import UserComplaintsPage from "./content/complaints/UserComplaintsPage";
 
 const UserPage = () => {
 
@@ -24,7 +27,6 @@ const UserPage = () => {
     const getData = () => {
         getUserById(getUserId()).then(response => {
             setUser(response);
-            return;
         }).catch(() => {
             deleteUserStorage();
         });
@@ -41,7 +43,19 @@ const UserPage = () => {
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/messages`} >
-                <UserMessagesPage />
+                <UserMessagesPage  />
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/complaints`} >
+                <UserComplaintsPage/>
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/registrations`}>
+                <ManagerClubRegistrationPage />
+            </UserRoute>
+
+            <UserRoute exact path={`${routeMatch.path}/applications`} >
+                <UserApplicationsPage />
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/certificates`} >
