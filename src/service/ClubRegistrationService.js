@@ -1,4 +1,4 @@
-import { BASE_URL } from "./config/ApiConfig";
+import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const postClubRegistration = async (clubRegistrationRequest) => {
@@ -46,15 +46,21 @@ export const approveClubRegistration = async (clubRegistrationId) => {
 };
 
 export const getChildren = async (clubId) => {
-    return await fetchRequest
-        .get(`${BASE_URL}/api/club-registration/user-children/${clubId}`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => {
-            return error.response.data;
-        });
+    try {
+        return await fetchRequest.get(`${BASE_URL}/api/club-registration/user-children/${clubId}`);
+    } catch (error) {
+        return error.response;
+    }
 };
+
+export const isUserAlreadyRegistered = async (clubId, userId) => {
+    try {
+        const response = await fetchRequest.get(`${BASE_URL}/api/club-registration/${clubId}/${userId}`);
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
+}
 
 export const getUserApplications = async (userId) => {
     return await fetchRequest

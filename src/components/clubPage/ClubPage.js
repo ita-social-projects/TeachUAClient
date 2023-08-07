@@ -1,4 +1,4 @@
-import {Button, Layout, Result} from "antd";
+import { Layout, Result} from "antd";
 import {withRouter} from 'react-router-dom';
 import React from "react";
 import PageHeader from "./header/PageHeader";
@@ -8,18 +8,16 @@ import {getClubById} from "../../service/ClubService";
 import Loader from "../Loader";
 import './css/ClubPage.css';
 import PageComments from "./comments/PageComments";
-import {getFeedbackListByClubId} from "../../service/FeedbackService";
 import {searchParameters} from "../../context/SearchContext";
 
 class ClubPage extends React.Component {
     state = {
         club: {},
         cityName: "",
-        feedback: [],
         clubNotFound: false,
     };
 
-    getData = () => {
+    getData = (page, size) => {
         const clubId = this.props.match.params.id;
 
         getClubById(clubId).then(response => {
@@ -27,9 +25,6 @@ class ClubPage extends React.Component {
             if (response.status) {
                 this.setState({clubNotFound: true});
             }
-        });
-        getFeedbackListByClubId(clubId).then(response => {
-            this.setState({feedback: response});
         });
     };
 
@@ -50,17 +45,16 @@ class ClubPage extends React.Component {
                 className="club-not-found"
                 status="404"
                 title="404"
-                subTitle="Клуб який ви намагаєтесь відкрити не існує"
+                subTitle="Гурток який ви намагаєтесь відкрити не існує"
             /> :
             !this.state.club.categories ? <Loader/> : (
                 <Layout className="global-padding">
                     <PageHeader club={this.state.club}/>
                     <Layout className="club-page" style={{padding: 40, background: 'white'}}>
-                        <PageContent club={this.state.club} feedbackCount={this.state.feedback.length}/>
+                        <PageContent club={this.state.club}/>
                         <PageSider cityName={this.state.cityName} club={this.state.club}/>
                     </Layout>
-                    <PageComments feedback={this.state.feedback} feedbackAdded={this.getData}
-                                  club={this.state.club}/>
+                    <PageComments club={this.state.club}/>
                 </Layout>)
     }
 }
