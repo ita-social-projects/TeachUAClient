@@ -32,7 +32,7 @@ import RegistrationPage from "./components/challenges/RegistrationPage";
 import TaskPage from "./components/challenges/tasks/TaskPage";
 import AddChallenge from "./components/admin/challenge/AddChallenge";
 import EditChallenge from "./components/admin/challenge/EditChallenge";
-import CloneChallenge from "./components/admin/challenge/CloneChallenge";
+import UpdateChallengeStartDate from "./components/admin/challenge/UpdateChallengeStartDate";
 import AddTask from "./components/admin/task/AddTask";
 import TasksTable from "./components/admin/task/TasksTable";
 import ChallengesTable from "./components/admin/challenge/ChallengesTable";
@@ -136,7 +136,7 @@ function App() {
                                 <AdminRoute path="/admin/banners" exact component={BannerItemsTable}/>
                                 <AdminRoute path="/admin/challenge/task/:id" exact component={EditTask}/>
                                 <AdminRoute path="/admin/challenge/:id" exact component={EditChallenge}/>
-                                <AdminRoute path="/admin/challenge/:id/clone" exact component={CloneChallenge}/>
+                                <AdminRoute path="/admin/challenge/:id/clone" exact component={UpdateChallengeStartDate}/>
                                 <AdminRoute path="/admin/addTask" exact component={AddTask}/>
                                 <AdminRoute path="/admin/tasks" exact component={TasksTable}/>
                                 <AdminRoute path="/admin/addChallenge" exact component={AddChallenge}/>

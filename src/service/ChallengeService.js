@@ -107,11 +107,22 @@ export const deleteChallenge = async (id) => {
         });
 };
 
-export const cloneChallenge = async (data, id) => {
+export const updateChallengeStartDate = async (data, id) => {
     return await fetchRequest
-        .put(BASE_URL + "/api/challenge/" + id + "/clone", {
+        .put(BASE_URL + "/api/challenge/" + id + "/start/date", {
             startDate: data.startDate
         })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response.data);
+            return error.response.data;
+        });
+};
+export const cloneChallenge = async (id) => {
+    return await fetchRequest
+        .put(BASE_URL + "/api/challenge/" + id + "/clone")
         .then((response) => {
             return response.data;
         })

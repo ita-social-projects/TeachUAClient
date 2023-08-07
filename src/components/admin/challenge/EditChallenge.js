@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useHistory, useParams, Link} from "react-router-dom";
 
-import { Button, Form, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
-import { useForm } from "antd/es/form/Form";
+import {Button, Form, Input, InputNumber, message, Switch, Typography, Upload} from 'antd';
+import {useForm} from "antd/es/form/Form";
 
-import { getChallengeById, updateChallenge } from "../../../service/ChallengeService";
-import { BASE_URL, UPLOAD_IMAGE_URL } from "../../../service/config/ApiConfig";
+import {cloneChallenge, getChallengeById, updateChallenge} from "../../../service/ChallengeService";
+import {BASE_URL, UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from '../../../util/Editor';
 import TasksInChallenge from "./TasksInChallenge";
-import { tokenToHeader } from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
+import {validateSortNumber} from "../../../util/ChallengeUtil";
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 const EditChallenge = (props) => {
+    const history = useHistory();
+
 
     const [challenge, setChallenge] = useState([{
         id: 0,
@@ -47,7 +49,8 @@ const EditChallenge = (props) => {
         setName(value);
     }
 
-    const getData = () => {
+
+    const getData = (challengeId) => {
         getChallengeById(challengeId.id).then(response => {
             setChallenge(response);
             setIsChecked(response.isActive);
@@ -97,10 +100,22 @@ const EditChallenge = (props) => {
         }
         setCurrentPicture(value.fileList);
     }
+    const handleCloneChallenge = () => {
+        // Logic for cloning the challenge and obtaining the cloned challenge ID
+        cloneChallenge(challengeId.id).then(response => {
+            console.log(response);
+            if (response.status) {
+                message.warning(response.message);
+                return;
+            }
+            message.success(`Челендж ${challenge.name} успішно клонований`);
+            history.push("/admin/challenge/" + response.id);
+        });
+    };
 
     useEffect(() => {
-        getData();
-    }, []);
+        getData(challengeId);
+    }, [challengeId]);
 
     return (
         <div className="add-form">
@@ -120,7 +135,6 @@ const EditChallenge = (props) => {
                     Переглянути челендж
                 </Button>
             </Link>
-
             <Link
                 to={"/admin/challenge/" + challengeId.id + "/clone"}
                 className="back-btn"
@@ -130,14 +144,15 @@ const EditChallenge = (props) => {
                 </Button>
             </Link>
 
+
             <Title>Редагування челенджа</Title>
             <Form
                 initialValues={onFill()}
                 onFinish={saveForm}
                 form={challengeEditForm}
                 autoComplete="off"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 14 }}
+                labelCol={{span: 4}}
+                wrapperCol={{span: 14}}
             >
                 <Form.Item
                     label="Порядковий номер"
@@ -167,7 +182,7 @@ const EditChallenge = (props) => {
                     label="Статус"
                     initialValue={isChecked}
                 >
-                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch} />
+                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch}/>
                 </Form.Item>
                 <Form.Item
                     label="Назва"
@@ -181,7 +196,7 @@ const EditChallenge = (props) => {
                         {
                             min: 5,
                             max: 30,
-                            message: "Поле \"Назва\" може містити мінімум 5 максимум 30 символів"
+                            message: "Поле \"Назва\" може містити мінімум 5, максимум 30 символів"
                         },
                         {
                             required: false,
@@ -190,7 +205,7 @@ const EditChallenge = (props) => {
                         }
                     ]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Заголовок"
@@ -204,7 +219,7 @@ const EditChallenge = (props) => {
                         {
                             min: 5,
                             max: 100,
-                            message: "Поле \"Заголовок\" може містити мінімум 5 максимум 100 символів"
+                            message: "Поле \"Заголовок\" може містити мінімум 5, максимум 100 символів"
                         },
                         {
                             required: false,
@@ -213,7 +228,7 @@ const EditChallenge = (props) => {
                         }
                     ]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -223,9 +238,8 @@ const EditChallenge = (props) => {
                             validator: (_, value) => {
                                 if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
                                     return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
-                                }
-                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
-                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"));
+                                } else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40, максимум 25000 символів"));
                                 }
                                 return Promise.resolve();
                             }
@@ -238,7 +252,7 @@ const EditChallenge = (props) => {
                     ]}
 
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     name="picture"
@@ -257,11 +271,11 @@ const EditChallenge = (props) => {
                         maxCount={1}
                         fileList={currentPicture}
                         accept="image/*"
-                        data={{ folder: `challenges` }}
-                        headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader() }}
+                        data={{folder: `challenges`}}
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                         onChange={(uploaded) => handlePictureChange(uploaded)}
                     >
-                        <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
+                        <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>
                 <Form.Item>
@@ -274,9 +288,12 @@ const EditChallenge = (props) => {
                     </Button>
                 </Form.Item>
             </Form>
+            <Button onClick={handleCloneChallenge} className="flooded-button back-btn">
+                Зробити копію челенджа
+            </Button>
             <div>
                 <Title level={3}>Усі завдання</Title>
-                <TasksInChallenge />
+                <TasksInChallenge/>
             </div>
         </div>
     )
