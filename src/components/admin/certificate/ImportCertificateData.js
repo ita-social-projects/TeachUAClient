@@ -172,7 +172,7 @@ const ImportCertificateData = () => {
                        name="type"
                        className="radio-button"
                        onChange={onTypeChange}/>
-                <label htmlFor="participant">учасника</label>
+                <label htmlFor="participant">учасника (курс підтримки)</label>
             </div>
             <div>
                 <input type="radio"
@@ -181,7 +181,7 @@ const ImportCertificateData = () => {
                        name="type"
                        className="radio-button"
                        onChange={onTypeChange}/>
-                <label htmlFor="basic_participant">учасника базового рівня</label>
+                <label htmlFor="basic_participant">учасника базового рівня (граматичний курс)</label>
             </div>
             <div>
                 <input type="radio"
