@@ -9,7 +9,6 @@ import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import moment from "moment";
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Option} from "antd/es/mentions";
-import { ClearOutlined } from '@ant-design/icons';
 
 const {Title} = Typography;
 
@@ -122,19 +121,6 @@ const TasksTable = () => {
     };
 
     const searchResults = search(tasks);
-
-    const handleChallengeChange = (record, value) => {
-        const updatedTasks = tasks.map(task => {
-            if (task.id === record.id) {
-                return {
-                    ...task,
-                    challengeId: value
-                };
-            }
-            return task;
-        });
-        setTasks(updatedTasks);
-    };
 
     const columns = [
         {

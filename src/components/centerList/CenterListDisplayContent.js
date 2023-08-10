@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import ClubListEmptySearch from "../clubList/ClubListEmptySearch";
 import { Layout, Pagination } from "antd";
 import React, {useEffect, useState} from "react";
 import CenterListItem from "./CenterListItem";

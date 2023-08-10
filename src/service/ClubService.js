@@ -2,9 +2,8 @@ import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
 import {replaceCommaToSemicolon} from "../util/CategoryUtil";
 
-import {clearSearchParameters, searchInputData, searchParameters} from "../context/SearchContext";
+import {searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
-import {getCenterById} from "./CenterService";
 
 export const addClub = async (data) => {
     return await fetchRequest

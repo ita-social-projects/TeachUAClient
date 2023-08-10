@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getAllItems} from "../../service/AboutUsService";
-import {Button, Form, Input, Layout, Tooltip} from "antd";
+import {Button, Layout} from "antd";
 import Search from "../Search";
 import "./css/aboutProject.css";
 import AddItemComponent from "./item_popups/AddItemComponent";

@@ -1,6 +1,5 @@
-import {Form, Input, List, message, Popconfirm, Select, Switch, Tooltip, Typography} from "antd";
+import {Form, Input, List, message, Popconfirm, Switch, Tooltip, Typography} from "antd";
 import React, { useState, useEffect } from "react";
-import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";

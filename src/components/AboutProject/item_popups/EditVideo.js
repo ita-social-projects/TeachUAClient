@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Form, Input, Layout, message, Modal, Tooltip} from 'antd';
+import {Button, Form, Input, Layout, message, Modal} from 'antd';
 import {updateItemById} from "../../../service/AboutUsService";
 
 const EditVideo = ({visible, setVisible, item, upd}) => {

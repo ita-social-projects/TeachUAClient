@@ -1,18 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Typography, Table, Pagination} from "antd";
+import { Form, Typography, Table} from "antd";
 
 import { getAllMetrics } from "../../../service/MetricsService";
-import { deleteFromTable, editCellValue } from "../../../util/TableUtil";
-import EditableTable from "../../EditableTable";
-import { renderIntoDocument } from "react-dom/test-utils";
 
 const {Title} = Typography;
 
 
 const MetricsTable = () => {
-    const [form] = Form.useForm();
     const [metrics, setMetrics] = useState([]);
     const [loading, setLoading] = useState(true);
 

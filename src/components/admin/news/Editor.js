@@ -1,5 +1,5 @@
 import React from "react";
-import ReactQuill, {Quill} from 'react-quill';
+import ReactQuill from 'react-quill';
 import {BASE_URL} from "../../../service/config/ApiConfig";
 import {uploadImage} from "../../../service/UploadService";
 

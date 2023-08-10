@@ -4,8 +4,6 @@ import { getCenterClubsByCenterId } from "../../../service/CenterService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
 import ClubListItem from "../../clubList/ClubListItem";
-import UserClubCardItem from "../../userPage/content/UserClubCardItem";
-//import './css/UserClub.less';
 
 
 const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
@@ -32,10 +30,6 @@ const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
         getData(page);
     }, []);
 
-    const reloadAfterChange = () => {
-        onPageChange(page);
-    };
-
     const onPageChange = (currPage) => {
         setPage(currPage - 1);
         getData(currPage - 1);
@@ -49,7 +43,6 @@ const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
             <Layout className="user-clubs">
                 <Space wrap className="cards" size={[0, 0]}>
                     {clubs.content.map((club, index) => 
-                    // <UserClubCardItem club={club} reloadAfterChange={reloadAfterChange} key={index}/>)
                     <ClubListItem club={club} onClubClick={onClubClick}/>)
                     }
                 </Space>

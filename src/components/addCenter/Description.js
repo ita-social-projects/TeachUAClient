@@ -1,8 +1,6 @@
 import {Form, Input, Upload, Button, Typography} from 'antd';
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import EditorComponent from "../editor/EditorComponent";
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
-import {saveContent} from "../editor/EditorConverter";
 import React, {useEffect, useRef} from 'react';
 import "./css/Description.css";
 import {transToEng} from '../../util/Translit';
@@ -10,10 +8,7 @@ import {tokenToHeader} from "../../service/UploadService";
 
 const Description = ({step, setStep, result, setResult}) => {
     const [descriptionForm] = Form.useForm();
-    const editorRef = useRef(null);
     const centerName = transToEng(result.name.replace(/[^a-zA-ZА-Яа-яЁё0-9]/gi, ""));
-    const leftDesc = "{\"blocks\":[{\"key\":\"brl63\",\"text\":\"";
-    const rightDesc = "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
     const {Text} = Typography;
 
 

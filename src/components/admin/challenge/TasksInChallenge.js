@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
-import {Link, useParams} from "react-router-dom";
+import {getTasksByChallenge} from "../../../service/TaskService";
+import {useParams} from "react-router-dom";
 import {Table, Tooltip} from "antd";
 import moment from "moment";
 

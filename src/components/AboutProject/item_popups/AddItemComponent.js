@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import {Button, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
+import React from 'react';
+import {Button, Layout, message, Modal} from 'antd';
 import {createItem} from "../../../service/AboutUsService";
 
 const AddItemComponent = ({ visible, setVisible}) => {

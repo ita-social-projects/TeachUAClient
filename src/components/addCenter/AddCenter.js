@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Modal } from 'antd';
-import { Steps } from 'antd';
 import "./css/AddCenter.css"
 import MainInformation from './MainInformation';
 import Contacts from './Contacts';
 import Description from './Description';
 import ClubsOfCenter from './ClubsOfCenter';
-import { getAllClubsByUserId, getClubsByUserId } from "../../service/ClubService";
+import { getAllClubsByUserId } from "../../service/ClubService";
 import { getUserId } from "../../service/StorageService";
 import { getAllCities } from '../../service/CityService';
 import { getAllContacts } from '../../service/ContactService';
 import AddCenterSider from "./AddCenterSider";
 import AddCenterSiderMobile from "./AddCenterSiderMobile";
 import {Content} from "antd/es/layout/layout";
-
-
-const { Step } = Steps;
 
 
 const AddCenter = ({isShowing, setShowing}) => {

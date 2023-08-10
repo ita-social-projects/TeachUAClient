@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./css/NewsItem.css";
 import {BASE_URL} from "../../service/config/ApiConfig";
 import {Link, useHistory} from "react-router-dom";

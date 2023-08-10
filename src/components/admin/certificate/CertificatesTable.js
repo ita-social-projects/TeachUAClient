@@ -3,12 +3,9 @@ import React, {useEffect, useState} from "react";
 import {getSentCertificates, updateCertificateProfile} from "../../../service/CertificateService";
 import {editCellValue} from "../../../util/TableUtil";
 import './css/CertificatesTable.css';
-import {Button, Form, message, Popconfirm, Typography, Input} from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import {Link} from "react-router-dom";
+import {Form, message, Typography, Input} from "antd";
 import EditableTable from "../../EditableTable";
 import moment from "moment";
-import { render } from "@testing-library/react";
 
 const {Title} = Typography;
 

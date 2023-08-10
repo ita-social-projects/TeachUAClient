@@ -11,7 +11,6 @@ import "react-quill/dist/quill.snow.css";
 import Editor from '../../../util/Editor';
 import TasksInChallenge from "./TasksInChallenge";
 import {tokenToHeader} from "../../../service/UploadService";
-import {validateSortNumber} from "../../../util/ChallengeUtil";
 
 const {Title} = Typography;
 
@@ -41,14 +40,7 @@ const EditChallenge = (props) => {
     const [picture, setPicture] = useState();
     const [challengeEditForm, form] = useForm();
     const challengeId = useParams();
-    const [name, setName] = useState();
     const [isChecked, setIsChecked] = useState(challenge.isActive);
-
-
-    const handleNameChange = (value) => {
-        setName(value);
-    }
-
 
     const getData = (challengeId) => {
         getChallengeById(challengeId.id).then(response => {
@@ -92,7 +84,7 @@ const EditChallenge = (props) => {
     };
 
     const handlePictureChange = (value) => {
-        if (value.file.status == "removed") {
+        if (value.file.status === "removed") {
             challenge.picture = null;
         } else {
             setPicture("/upload/challenges/" + value.file.name);

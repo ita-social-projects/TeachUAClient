@@ -1,6 +1,6 @@
 import fetchRequest from "./FetchRequest";
 import {BASE_URL} from "./config/ApiConfig";
-import {searchInputData, searchParameters} from "../context/SearchContext";
+import {searchInputData} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
 
 export const getPossibleResults = async (parameters) => {

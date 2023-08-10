@@ -6,7 +6,6 @@ import {
     deleteNewsById,
     getAllNews,
     getSimilarNewsByTitle,
-    getSimmilarNewsByTitle,
     updateNewsById
 } from "../../../service/NewsService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";

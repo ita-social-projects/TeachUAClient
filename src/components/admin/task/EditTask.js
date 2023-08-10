@@ -17,7 +17,6 @@ import {tokenToHeader} from "../../../service/UploadService";
 import locale from 'antd/es/date-picker/locale/uk_UA';
 
 const {Option} = Select;
-const {TextArea} = Input;
 
 const EditTask = () => {
     const [taskEditForm] = useForm();
@@ -115,7 +114,7 @@ const EditTask = () => {
     }
 
     const handlePictureChange = (value) => {
-        if (value.file.status == "removed") {
+        if (value.file.status === "removed") {
             task.picture = null;
         } else {
             setPicture("/upload/tasks/" + value.file.name)

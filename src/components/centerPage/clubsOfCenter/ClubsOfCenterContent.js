@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Space} from "react";
+import React, {useState} from "react";
 import ClubsOfCenterList from "./ClubsOfCenterList"
 
 const ClubsOfCenterContent = (centerId, clubsPerPage) => {

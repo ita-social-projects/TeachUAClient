@@ -42,7 +42,6 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
-import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 import NotFoundPage from "./components/NotFoundPage";
 import HardChallengePage from "./components/challengePage/ChallengePage";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
@@ -80,7 +79,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
 import EditTemplate from "./components/admin/certificate_template/EditTemplate";
 import { getUserById } from "./service/UserService";
-import { deleteUserStorage, getUserId } from "./service/StorageService";
+import { getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificate_type/AddCertificateType";
 import ReactGA from 'react-ga4';
 import MetricsTable from "./components/admin/metrics/MetricsTable";

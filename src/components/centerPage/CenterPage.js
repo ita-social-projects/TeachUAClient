@@ -1,4 +1,4 @@
-import { Layout, Result} from "antd";
+import { Layout } from "antd";
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import CenterPageHeader from "./header/CenterPageHeader";
