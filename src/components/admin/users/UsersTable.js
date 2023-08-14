@@ -52,7 +52,8 @@ const UsersTable = () => {
             title: 'Роль',
             dataIndex: 'roleName',
             inputType: 'select',
-            selectData: roles.map(role => role.roleName),
+            //selectData: roles.map(role => role.roleName),
+            selectData: roles.map(role => ({value: role.roleName, label: role.roleName})),
             width: '13%',
             editable: true,
         },
@@ -60,7 +61,7 @@ const UsersTable = () => {
             title: 'Активний/неактивний',
             dataIndex: 'status',
             inputType: 'select',
-            selectData: ["true", "false"],
+            selectData: [{ value: 'true', label: 'true' }, { value: 'false', label: 'false' }],
             width: '11%',
             editable: true,
         }
