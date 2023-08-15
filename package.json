@@ -15,7 +15,7 @@
     "@testing-library/user-event": "^12.7.2",
     "antd": "^5.8.3",
     "axios": "^0.21.1",
-    "craco-less": "^1.17.1",
+    "craco-less": "^2.0.0",
     "dayjs": "^1.11.9",
     "draft-js": "^0.11.7",
     "draft-js-export-html": "^1.4.1",
@@ -37,7 +37,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^3.4.0"
   },
   "scripts": {
     "start": "craco start",
