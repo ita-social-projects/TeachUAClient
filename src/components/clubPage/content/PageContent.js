@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {Content} from "antd/es/layout/layout";
 import './css/PageContent.css';
-import {Button} from "antd";
+import {Button, ConfigProvider} from "antd";
 import ImageCarousel from "../../ImageCarousel";
 import PageRating from "./PageRating";
 import {getShortContent} from "../../editor/EditorConverter";
@@ -57,10 +57,19 @@ const PageContent = ({club}) => {
             </div>
 
             <div className="full-width button-box">
+                <ConfigProvider
+                    theme={{
+                        components:{
+                            Button:{
+                                colorPrimaryHover: '#FFA940',
+                            }
+                        }
+                    }}>
                 <Button onClick={() => getClubReport(club.id, club.name)} className="outlined-button details-button">
                     Завантажити
                     <FilePdfOutlined/>
                 </Button>
+                </ConfigProvider>
             </div>
         </Content>
     )

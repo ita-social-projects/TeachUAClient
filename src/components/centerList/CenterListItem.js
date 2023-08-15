@@ -1,4 +1,4 @@
-import {Button, Card, Popover, Rate} from "antd";
+import {Button, Card, ConfigProvider, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import {React, useState} from "react";
 import {Link} from "react-router-dom";
@@ -12,6 +12,17 @@ const CenterListItem = ({center, onCenterClick}) => {
     const [visible, setVisible] = useState(false);
 
     return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimaryHover: '#002766',
+                },
+                components:{
+                    Button:{
+                        colorPrimaryHover: '#002766',
+                    }
+                }
+            }}>
         <div>
             <Card className="card" key={center.name}>
                 <div className="center-title" onClick={() => onCenterClick(center)}>
@@ -55,12 +66,13 @@ const CenterListItem = ({center, onCenterClick}) => {
                         }
                     </div>
                 }
-                <Button className="outlined-button details-button">
+                <Button className="outlined-button details-button" href={`/center/${center.id}`}>
                     <Link to={`/center/${center.id}`}>Детальніше</Link>
                 </Button>
             </Card>
             {/*<ClubItemMap club={club} visible={visible} setVisible={setVisible} />*/}
         </div>
+        </ConfigProvider>
     )
 };
 CenterListItem.propTypes = {

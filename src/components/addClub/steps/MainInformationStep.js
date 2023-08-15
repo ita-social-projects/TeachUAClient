@@ -1,7 +1,7 @@
 import {Checkbox, Form, Input, InputNumber, Select, Typography} from "antd";
 import {Button} from "antd";
 import React, {useEffect, useState} from "react";
-
+import "../css/AddClubContentFooter.css";
 const {Option} = Select;
 const {Text} = Typography;
 
@@ -157,8 +157,8 @@ const MainInformationStep = ({categories, step, setStep, setResult, result, cent
             </>
             }
             <div className="add-club-content-footer">
-                <Button htmlType="submit"
-                        className="add-club-content-prev">{step > 0 && "Назад"}</Button>
+                {/*<Button htmlType="submit"*/}
+                {/*        className="add-club-content-prev">{step > 0 && "Назад"}</Button>*/}
                 <Button className="flooded-button add-club-content-next" htmlType="submit">Наступний крок</Button>
             </div>
         </Form>

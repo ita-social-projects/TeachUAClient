@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 
 import {Button, Checkbox, DatePicker, Form, Input, message, Select, Upload} from "antd";
-import moment from "moment";
+import dayjs from 'dayjs';
 
 import {useForm} from "antd/es/form/Form";
 import {getTask, updateTask} from "../../../service/TaskService";
@@ -91,7 +91,7 @@ const EditTask = () => {
 
     const onDateChange = (date, dateString) => {
         console.log(dateString);
-        setTask({...task, startDate: moment(date).format("YYYY-MM-DD")});
+        setTask({...task, startDate: dayjs(date).format("YYYY-MM-DD")});
         console.log(task);
     }
 
@@ -163,7 +163,7 @@ const EditTask = () => {
                         format={dateFormat}
                         name="startDate"
                         allowClear={false}
-                        value={moment(task.startDate, "YYYY-MM-DD")}
+                        value={dayjs(task.startDate, "YYYY-MM-DD")}
                         locale={locale}
                     />
                 </Form.Item>

@@ -12,7 +12,7 @@ import {
     sendCertificatesScheduler
 } from "../../../service/CertificateService";
 import {tokenToHeader} from "../../../service/UploadService";
-import moment from "moment";
+import dayjs from 'dayjs';
 import {useForm} from "antd/es/form/Form";
 import {ERROR_CODE, renderIcon, SUCCESS_CODE, WARNING_CODE} from "../../constants/CertificateConstants";
 
@@ -52,12 +52,12 @@ const ImportCertificateData = () => {
     }
 
     const onStartDateChange = (value) => {
-        dataToDB.startDate = moment(value).format(dateFormat)
+        dataToDB.startDate = dayjs(value).format(dateFormat)
         isFilled()
     }
 
     const onEndDateChange = (value) => {
-        dataToDB.endDate = moment(value).format(dateFormat)
+        dataToDB.endDate = dayjs(value).format(dateFormat)
         isFilled()
     }
 
@@ -262,7 +262,7 @@ const ImportCertificateData = () => {
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                                 onChange={uploadExcel}
                             >
-                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
+                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon add-template-upload-icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
                         </span>

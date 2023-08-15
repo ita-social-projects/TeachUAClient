@@ -1,4 +1,3 @@
-@import '~antd/dist/antd.less';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
 
 .ant-layout {
@@ -20,6 +19,7 @@
 * {
   &::selection {
     background: black;
+    color: white;
   }
 }
 
@@ -108,7 +108,7 @@
 }
 
 .flooded-button:hover {
-  color: white;
+  color: white !important;
   background: @primary-hover-color;
 }
 
@@ -138,9 +138,9 @@
 
 
 .header .nav-menu .ant-menu-submenu-title {
-  color: rgba(0, 0, 0, 0);
-  background: url("images/menu.svg") no-repeat center / cover;
-  font-size: 20px;
+  //color: rgba(0, 0, 0, 0);
+  //background: url("images/menu.svg") no-repeat center / cover;
+  //font-size: 20px;
   display: inline-block;
 }
 
@@ -227,6 +227,7 @@
   background: none;
   border: none;
   padding: 0;
+  border-radius: 0;
   border-bottom: 2px solid white;
   height: 30px;
   font-size: 26px;
@@ -336,12 +337,23 @@
 
 .icon {
   pointer-events: none;
+  color: #fff;
   user-select: none;
   width: 24px;
   height: 24px;
 }
+.subItem{
+  color: rgb(0,0,0, 0.8) !important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected .subItem{
+  color: #fff !important;
+}
 
 .card .details-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600;
   height: 40px;
   width: 100%;
@@ -413,7 +425,7 @@
   color: #2D4C68;
   width: 100%;
   height: 24px;
-  margin: 0;
+  margin: 2px 0 2px 0;;
   display: flex;
   font-weight: 600;
 }
@@ -498,12 +510,14 @@
 .ant-pagination-item a {
   color: black;
   background: white;
+  border-radius: 5px;
 }
 
 .ant-pagination-item-active a,
 .ant-pagination-item a:hover {
-  color: white;
+  color: white !important;
   background-color: @primary-hover-color;
+  border-radius: 5px;
 }
 
 .pagination .ant-pagination-item:hover {
@@ -1038,3 +1052,33 @@ span.anticon.anticon-home.icon {
       flex-direction: column;
   }
 }
+
+.ant-checkbox-group {
+  display: block !important;
+}
+
+.show-map-button:focus{
+  color: #fa8c16 !important;
+}
+
+.show-map-button:hover{
+  color: #fff !important;
+}
+
+.ant-menu-item a {
+  color: #000;
+}
+
+.challenge-text {
+  color: #fff;
+}
+
+.challenge-text:hover {
+  color: #fff;
+}
+
+//needs to be changed when antd team will add token to change color of subItem text
+:where(.css-dev-only-do-not-override-50es5f).ant-menu .ant-menu-item .ant-menu-item-icon, :where(.css-dev-only-do-not-override-50es5f).ant-menu .ant-menu-submenu-title .ant-menu-item-icon{
+  color: #fff;
+}
+

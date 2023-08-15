@@ -5,7 +5,7 @@ import {editCellValue} from "../../../util/TableUtil";
 import './css/CertificatesTable.css';
 import {Form, message, Typography, Input} from "antd";
 import EditableTable from "../../EditableTable";
-import moment from "moment";
+import dayjs from 'dayjs';
 
 const {Title} = Typography;
 
@@ -90,7 +90,7 @@ const CertificatesTable = () => {
             dataIndex: 'updateStatus',
             width: '9%',
             editable: false,
-            render: (date) => date != null ? moment(date.toString()).format('DD.MM.YYYY') : "-"
+            render: (date) => date != null ? dayjs(date.toString()).format('DD.MM.YYYY') : "-"
         },
         {
             title: 'Дата видачі',

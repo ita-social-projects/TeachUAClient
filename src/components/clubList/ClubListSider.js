@@ -1,11 +1,13 @@
 import React, {StrictMode, useEffect, useLayoutEffect, useState} from "react";
-import {Button, Checkbox, Form, InputNumber, Layout, Radio, Select, Typography} from "antd";
+import {Button, Checkbox, ConfigProvider, Form, InputNumber, Layout, Radio, Select, Typography} from "antd";
 import "./css/ClubListSider.css";
 import {getAllCategories, getPageableCategory} from "../../service/CategoryService";
 import {getAllCities} from "../../service/CityService";
 import {getDistrictsByCityName} from "../../service/DisctrictService";
 import {getStationsByCity} from "../../service/StationService";
 import {searchParameters, mapSearchParameters} from "../../context/SearchContext";
+import {getClubReport} from "../../service/ClubService";
+import {FilePdfOutlined} from "@ant-design/icons";
 
 const {Sider} = Layout;
 const {Option} = Select;
@@ -28,7 +30,7 @@ const ClubListSider = ({
     const [districts, setDistricts] = useState([]);
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
-    const [stateForClub , setStateForClub] = useState(false);
+    const [stateForClub, setStateForClub] = useState(false);
 
 
     const getData = () => {
@@ -69,8 +71,8 @@ const ClubListSider = ({
             form.setFieldsValue({stationName: undefined});
         }
 
-        if (values.hasOwnProperty("isCenter")){
-            if (values.isCenter !== true){
+        if (values.hasOwnProperty("isCenter")) {
+            if (values.isCenter !== true) {
                 setStateForClub(false);
                 searchParameters.isCenter = false;
             } else {
@@ -121,144 +123,155 @@ const ClubListSider = ({
     };
 
     return (
-        <Sider className="club-list-sider">
-            <div className="club-list-label">Розширений пошук</div>
-            <Form
-                name="basic"
-                requiredMark={false}
-                form={form}
-                onValuesChange={onValuesChange}>
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Гурток/Центр</Text>
-                <Form.Item
-                    name="isCenter"
-                    className="club-list-row"
-                    // label="Гурток/Центр"
-                    initialValue={false}>
-                    <Radio.Group className="club-list-kind" onChange={toggleCenter}>
-                        <Radio value={false}>Гурток</Radio>
-                        <Radio value={true}>Центр</Radio>
-                    </Radio.Group>
-                </Form.Item>
-
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Місто</Text>
-                <Form.Item
-                    name="cityName"
-                    className="club-list-row"
-                    // label="Місто"
-                    initialValue={
-                        searchParameters.cityName === "Без локації"
-                            ? "online"
-                            : searchParameters.cityName
-                    }>
-                    <Select
-                        allowClear
-                        className="club-list-select"
-                        placeholder="Виберіть місто"
-                        optionFilterProp="children"
-                        onChange={(value) => {
-                            onCityChange(value);
-                            changeCityName(value);
-                        }}>
-                        {cities.map((city) => (
-                            <Option value={city.name}>{city.name}</Option>
-                        ))}
-                        <Option value="online">Без локації</Option>
-                    </Select>
-                </Form.Item>
-
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Район міста</Text>
-                <Form.Item
-                    name="districtName"
-                    className="club-list-row"
-                    // label="Район міста"
-                >
-                    <Select
-                        allowClear
-                        className="club-list-select"
-                        placeholder="Виберіть район"
-                        optionFilterProp="children"
-                        disabled={
-                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
-                        }>
-                        {districts.map((district) => (
-                            <Option value={district.name}>
-                                {district.name}
-                            </Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Найближча станція метро</Text>
-                <Form.Item
-                    name="stationName"
-                    className="club-list-row"
-                    // label="Найближча станція метро"
-                >
-                    <Select
-                        allowClear
-                        className="club-list-select"
-                        placeholder="Виберіть станцію"
-                        optionFilterProp="children"
-                        disabled={
-                            form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
-                        }>
-                        {stations.map((station) => (
-                            <Option value={station.name}>{station.name}</Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-
-                {stateForClub === false ? (
-                    <>
-                    <Text style={{fontSize :'19px', color:'GrayText'}}>Ремоут</Text>
+        <ConfigProvider
+            theme={{
+                components: {
+                    Select: {
+                        colorPrimaryHover: '#d1d0d0',
+                    },
+                    Checkbox:{
+                        colorPrimaryHover: "#0958d9"
+                    }
+                }
+            }}>
+            <Sider className="club-list-sider">
+                <div className="club-list-label">Розширений пошук</div>
+                <Form
+                    name="basic"
+                    requiredMark={false}
+                    form={form}
+                    onValuesChange={onValuesChange}>
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Гурток/Центр</Text>
                     <Form.Item
-                    name="isOnline"
-                    className="club-list-row"
-                    // label="Ремоут"
-                    >
-                    <Checkbox.Group className="club-list-categories">
-                        <Checkbox
-                            style={{display: "flex"}}
-                            disabled={
-                                form.getFieldValue("cityName") === "online"
-                            }>
-                            Доступний онлайн
-                        </Checkbox>
-                    </Checkbox.Group>
-                </Form.Item>
-                </>
-                ): <Form.Item/>}
-                {stateForClub === false ? (
-                <>
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Категорії</Text>
-                <Form.Item
-                    name="categoriesName"
-                    className="club-list-row"
-                    // label="Категорії"
-                >
-                    <Checkbox.Group className="club-list-categories">
-                        {categories
-                            .sort((a, b) => a.sortby - b.sortby)
-                            .map((category) => (
-                                <Checkbox
-                                    style={{display: "flex"}}
-                                    value={category.name}>
-                                    {category.name}
-                                </Checkbox>
+                        name="isCenter"
+                        className="club-list-row"
+                        // label="Гурток/Центр"
+                        initialValue={false}>
+                        <Radio.Group className="club-list-kind" onChange={toggleCenter}>
+                            <Radio value={false}>Гурток</Radio>
+                            <Radio value={true}>Центр</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Місто</Text>
+                    <Form.Item
+                        name="cityName"
+                        className="club-list-row"
+                        // label="Місто"
+                        initialValue={
+                            searchParameters.cityName === "Без локації"
+                                ? "online"
+                                : searchParameters.cityName
+                        }>
+                        <Select
+                            allowClear
+                            className="club-list-select"
+                            placeholder="Виберіть місто"
+                            optionFilterProp="children"
+                            onChange={(value) => {
+                                onCityChange(value);
+                                changeCityName(value);
+                            }}>
+                            {cities.map((city) => (
+                                <Option value={city.name}>{city.name}</Option>
                             ))}
-                    </Checkbox.Group>
-                </Form.Item>
-                </>
-                ): <Form.Item/>}
-                {stateForClub === false ? (
-                <>
-                <Text style={{fontSize :'19px', color:'GrayText'}}>Вік дитини</Text>
-                <Form.Item
-                     name="age"
-                     // label="Вік дитини"
-                     className="club-list-row"
-                     inititalValue={0}
-                >
+                            <Option value="online">Без локації</Option>
+                        </Select>
+                    </Form.Item>
+
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Район міста</Text>
+                    <Form.Item
+                        name="districtName"
+                        className="club-list-row"
+                        // label="Район міста"
+                    >
+                        <Select
+                            allowClear
+                            className="club-list-select"
+                            placeholder="Виберіть район"
+                            optionFilterProp="children"
+                            disabled={
+                                form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                            }>
+                            {districts.map((district) => (
+                                <Option value={district.name}>
+                                    {district.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Найближча станція метро</Text>
+                    <Form.Item
+                        name="stationName"
+                        className="club-list-row"
+                        // label="Найближча станція метро"
+                    >
+                        <Select
+                            allowClear
+                            className="club-list-select"
+                            placeholder="Виберіть станцію"
+                            optionFilterProp="children"
+                            disabled={
+                                form.getFieldValue("cityName") === "online" || form.getFieldValue("cityName") === undefined
+                            }>
+                            {stations.map((station) => (
+                                <Option value={station.name}>{station.name}</Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+
+                    {stateForClub === false ? (
+                        <>
+                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Ремоут</Text>
+                            <Form.Item
+                                name="isOnline"
+                                className="club-list-row"
+                                // label="Ремоут"
+                            >
+                                <Checkbox.Group className="club-list-categories">
+                                    <Checkbox
+                                        style={{display: "flex"}}
+                                        disabled={
+                                            form.getFieldValue("cityName") === "online"
+                                        }>
+                                        Доступний онлайн
+                                    </Checkbox>
+                                </Checkbox.Group>
+                            </Form.Item>
+                        </>
+                    ) : <Form.Item/>}
+                    {stateForClub === false ? (
+                        <>
+                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Категорії</Text>
+                            <Form.Item
+                                name="categoriesName"
+                                className="club-list-row"
+                                // label="Категорії"
+                            >
+                                <Checkbox.Group className="club-list-categories">
+                                    {categories
+                                        .sort((a, b) => a.sortby - b.sortby)
+                                        .map((category) => (
+                                            <Checkbox
+                                                style={{display: "flex"}}
+                                                value={category.name}>
+                                                {category.name}
+                                            </Checkbox>
+                                        ))}
+                                </Checkbox.Group>
+                            </Form.Item>
+                        </>
+                    ) : <Form.Item/>}
+                    {stateForClub === false ? (
+                        <>
+                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Вік дитини</Text>
+                            <Form.Item
+                                name="age"
+                                // label="Вік дитини"
+                                className="club-list-row"
+                                inititalValue={0}
+                            >
                  <span>
                      <InputNumber
                          className="age"
@@ -266,27 +279,33 @@ const ClubListSider = ({
                          onKeyPress={onKeyPress}
                          max={18}
                          min={2}
-                         maxLength = {2}
+                         maxLength={2}
                      />
                      років
                  </span>
-                </Form.Item>
-                </>
-                ): <Form.Item/>}
-            <div className="use-clear-button">
-                <div className="mobile-clear-button">
-                        <Button className="mobile-button clear-button" onClick={() => {clearAllValues()}}>
-                            Очистити
-                        </Button>
-                </div>
-                <div className="mobile-use-button">
-                        <Button className="mobile-button use-button" onClick={() => { setShowHideMenu(false) } }>
-                            Застосувати
-                        </Button>
-                </div>
-            </div>
-            </Form>
-        </Sider>
+                            </Form.Item>
+                        </>
+                    ) : <Form.Item/>}
+                    <div className="use-clear-button">
+                        <div className="mobile-clear-button">
+                            <Button className="mobile-button clear-button" onClick={() => {
+                                clearAllValues()
+                            }}>
+                                Очистити
+                            </Button>
+                        </div>
+                        <div className="mobile-use-button">
+                            <Button className="mobile-button use-button" onClick={() => {
+                                setShowHideMenu(false)
+                            }}>
+                                Застосувати
+                            </Button>
+                        </div>
+                    </div>
+                </Form>
+            </Sider>
+        </ConfigProvider>
+
     );
 };
 

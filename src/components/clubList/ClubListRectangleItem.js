@@ -1,4 +1,4 @@
-import {Button, Card, Popover, Rate} from "antd";
+import {Button, Card, ConfigProvider, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -11,6 +11,17 @@ import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 
 const ClubListRectangleItem = ({club, onClubClick}) => {
     return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimaryHover: '#002766',
+                },
+                components: {
+                    Button: {
+                        colorPrimaryHover: '#002766',
+                    }
+                }
+            }}>
         <div>
             <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}  key={club.name}>
                 <div className="item-rectangle-row">
@@ -62,12 +73,13 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                             </div>
                         }
                     </div>
-                    <Button className="outlined-button details-button">
+                    <Button className="outlined-button details-button" href={`/club/${club.id}`}>
                         <Link to={`/club/${club.id}`}>Детальніше</Link>
                     </Button>
                 </div>
             </Card>
         </div>
+        </ConfigProvider>
     )
 };
 ClubListRectangleItem.propTypes = {

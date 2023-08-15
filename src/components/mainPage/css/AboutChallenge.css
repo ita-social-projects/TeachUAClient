@@ -42,11 +42,15 @@
     height: 40px;
     background: #FA8C16;
     border: none;
-    color: white;
+    color: white !important;
     margin-top: 24px;
     font-weight: 700;
     border-radius: 6px;
     font-size: 16px;
+}
+
+.about-challenge .challenge-description .materials-button:hover {
+    background: #FFA940;
 }
 
 .about-challenge .image {

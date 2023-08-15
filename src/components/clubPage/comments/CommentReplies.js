@@ -1,5 +1,6 @@
 import React from 'react';
-import { Comment, List} from 'antd';
+import { List } from 'antd';
+import { Comment } from '@ant-design/compatible';
 
 const CommentReplies = ({replies}) => {
     if (!replies || replies.length === 0) {

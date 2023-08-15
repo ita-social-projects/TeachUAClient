@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import React, {useEffect, useMemo, useState} from 'react';
 import './css/PageComments.css';
-import {Button, Comment, List, message, Rate} from "antd";
+import {Button, List, message, Rate} from "antd";
+import { Comment } from '@ant-design/compatible';
 import {Content} from "antd/es/layout/layout";
 import CommentEditComponent from "./CommentEditComponent";
 import {EnterOutlined} from "@ant-design/icons";

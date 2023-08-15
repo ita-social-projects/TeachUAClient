@@ -162,7 +162,7 @@ const ImportQuestionExcelData = () => {
                                 headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                                 onChange={uploadExcel}
                             >
-                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
+                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon add-template-upload-icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
                         </span>

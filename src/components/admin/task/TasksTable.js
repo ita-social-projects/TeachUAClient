@@ -6,7 +6,7 @@ import {Button, Form, message, Popconfirm, Select, Typography, Input, Checkbox} 
 import EditableTable from "../../EditableTable";
 import {deleteTask, getTasks, getTasksByChallenge, updateTask} from "../../../service/TaskService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
-import moment from "moment";
+import dayjs from 'dayjs';
 import {getAllChallenges} from "../../../service/ChallengeService";
 import {Option} from "antd/es/mentions";
 
@@ -129,7 +129,7 @@ const TasksTable = () => {
             width: '5%',
             editable: false,
             render: (text, record) => <Link to={'/admin/challenge/task/' + record.id}>{record.id}</Link>,
-            sorter: (a, b) => moment(a.startDate).unix() - moment(b.startDate).unix()
+            sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix()
         },
         {
             title: 'Назва',
@@ -167,7 +167,7 @@ const TasksTable = () => {
             dataIndex: 'startDate',
             width: '15%',
             editable: false,
-            render: (text) => moment(text.toString()).format('DD-MM-YYYY')
+            render: (text) => dayjs(text.toString()).format('DD-MM-YYYY')
         },
     ];
 

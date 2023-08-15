@@ -1,6 +1,6 @@
-import {Layout, Pagination, Space} from "antd";
+import {ConfigProvider, Layout, Pagination, Space} from "antd";
 import React, {useEffect, useState} from "react";
-import { getCenterClubsByCenterId } from "../../../service/CenterService";
+import {getCenterClubsByCenterId} from "../../../service/CenterService";
 import Loader from "../../Loader";
 import {withRouter} from "react-router-dom";
 import ClubListItem from "../../clubList/ClubListItem";
@@ -18,7 +18,7 @@ const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
 
     const getData = (currPage) => {
         //setLoad(true);
-        
+
         getCenterClubsByCenterId(centerId, currPage, clubsPerPage).then(response => {
             setClubs(response);
             //setLoad(false);
@@ -35,26 +35,37 @@ const ClubsOfCenterList = ({centerId, load, setLoad, match, clubsPerPage}) => {
         getData(currPage - 1);
     };
 
-    const onClubClick = () => {};
+    const onClubClick = () => {
+    };
 
 
     return load ? <Loader/> : (
-        <div className="test">
-            <Layout className="user-clubs">
-                <Space wrap className="cards" size={[0, 0]}>
-                    {clubs.content.map((club, index) => 
-                    <ClubListItem club={club} onClubClick={onClubClick}/>)
-                    }
-                </Space>
-                <Pagination className="user-clubs-pagination"
-                            hideOnSinglePage
-                            showSizeChanger={false}
-                            onChange={onPageChange}
-                            current={page + 1}
-                            pageSize={clubs.size}
-                            total={clubs.totalElements}/>
-            </Layout>
-        </div>
+        <ConfigProvider
+            theme={{
+                components: {
+                    Pagination: {
+                        colorPrimary: '#fff',
+                        colorPrimaryHover: '#fff',
+                    },
+                },
+            }}>
+            <div className="test">
+                <Layout className="user-clubs">
+                    <Space wrap className="cards" size={[0, 0]}>
+                        {clubs.content.map((club, index) =>
+                            <ClubListItem club={club} onClubClick={onClubClick}/>)
+                        }
+                    </Space>
+                    <Pagination className="user-clubs-pagination"
+                                hideOnSinglePage
+                                showSizeChanger={false}
+                                onChange={onPageChange}
+                                current={page + 1}
+                                pageSize={clubs.size}
+                                total={clubs.totalElements}/>
+                </Layout>
+            </div>
+        </ConfigProvider>
     )
 
 }

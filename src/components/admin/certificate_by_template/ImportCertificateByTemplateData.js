@@ -573,7 +573,7 @@ const ImportCertificateByTemplateData = () => {
                                             onChange={uploadExcel}
                                         >
                                             <Button className="flooded-button" htmlType="submit"><UploadOutlined
-                                                className="icon"/>
+                                                className="icon add-template-upload-icon"/>
                                                 Імпортувати дані з excel-файлу
                                             </Button>
                                         </Upload>
