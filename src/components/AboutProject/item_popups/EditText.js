@@ -35,7 +35,7 @@ const EditText = ({visible, setVisible, item, upd}) => {
 
         <Modal
                 centered
-                visible={isVisible()}
+                open={isVisible()}
                  onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 width={1200}

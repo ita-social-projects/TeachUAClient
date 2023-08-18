@@ -113,7 +113,7 @@ const AddCenter = ({isShowing, setShowing}) => {
             <Modal
                 className="addCenter"
                 centered
-                visible={isShowing}
+                open={isShowing}
                 onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 width={880}

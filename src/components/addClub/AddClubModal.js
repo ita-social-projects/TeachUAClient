@@ -74,7 +74,7 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
             className="modal-add-club"
             centered
             width={880}
-            visible={isShowing}
+            open={isShowing}
             onOk={() => setShowing(false)}
             onCancel={() => setShowing(false)}
             footer={null}>

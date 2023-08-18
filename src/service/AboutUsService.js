@@ -1,7 +1,7 @@
 import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
-export const ABOUT_URL = BASE_URL + "/api/about/"
+export const ABOUT_URL = BASE_URL + "/api/about"
 
 export const getAllItems = async () => {
     return await fetchRequest.get(ABOUT_URL)
@@ -12,7 +12,7 @@ export const getAllItems = async () => {
 
 export const updateItemById = async (data) => {
     return await fetchRequest
-        .put(ABOUT_URL + data.id, {
+        .put(ABOUT_URL + "/" + data.id, {
             picture: data.picture,
             text: data.text,
             video: data.video,
@@ -46,7 +46,7 @@ export const createItem = async (type) => {
 }
 
 export const deleteItem = async(id) => {
-    return await fetchRequest.delete(ABOUT_URL + id)
+    return await fetchRequest.delete(ABOUT_URL + "/" + id)
         .then((response) => {
             return response.data
         }).catch((error) => {
@@ -56,7 +56,7 @@ export const deleteItem = async(id) => {
 
 export const changeOrder = async (id, number) => {
     return await fetchRequest
-        .patch(ABOUT_URL + id, {
+        .patch(ABOUT_URL + "/" + id, {
             number: number
         })
         .then((response) => {

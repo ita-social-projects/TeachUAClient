@@ -30,7 +30,7 @@ const ResetPasswordModal = () => {
                     centered
                     width={540}
                     onOk={() => setVisible(false)}
-                    visible={visible}
+                    open={visible}
                     onCancel={() => setVisible(true)}
                     footer={null}
                     closeIcon={visible}

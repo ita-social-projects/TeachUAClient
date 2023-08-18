@@ -47,7 +47,7 @@ const MessageToClubManager = ({isShowing, setShowing, club}) => {
                 className={classes.signUpForClubModal}
                 centered
                 width={521}
-                visible={isShowing}
+                open={isShowing}
                 onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 footer={null}

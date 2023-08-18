@@ -100,7 +100,7 @@ const Complaint = ({ message, onDelete, userRole }) => {
       </Collapse>
 
       <Modal
-        visible={showModal}
+        open={showModal}
         onCancel={() => { setShowModal(false) }}
         footer={userRole !== 'ROLE_MANAGER' &&
           <Button key="submit" type="primary" onClick={() => redirectToClubPage()}>
@@ -113,7 +113,7 @@ const Complaint = ({ message, onDelete, userRole }) => {
         </div>
       </Modal>
       <Modal
-        visible={showAnswerForm}
+        open={showAnswerForm}
         title="Дати відповідь на скаргу"
         onCancel={() => { setShowAnswerForm(false) }}
         footer={[

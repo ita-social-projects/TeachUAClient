@@ -47,7 +47,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                 className="createNewsModal"
                 centered
                 width={900}
-                visible={visible}
+                open={visible}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
                 footer={null}

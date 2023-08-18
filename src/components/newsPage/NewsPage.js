@@ -81,19 +81,18 @@ const NewsPage = () => {
                     <NewsCarousel newsList={newsList}/>
 				</div>
 				<Helmet>
-					<script type="text/javascript" >
-						{`
-						let lastKnownScrollPosition = 0;
-						let image = document.getElementsByClassName('image')[0];
+                    <script type="text/javascript" >
+                        {`
 						window.addEventListener('scroll',(event) => {
-							lastKnownScrollPosition = window.scrollY;
+						    let image = document.getElementsByClassName('image')[0];
+							let lastKnownScrollPosition = window.scrollY;
 							bgPositionY = 50 + lastKnownScrollPosition/15;
-							if (bgPositionY < 100) {
+							if (image && bgPositionY < 100) {
 								image.style.backgroundPosition =  "50% " + bgPositionY + "%";
 							}
 						});
 						`}
-					</script>
+                    </script>
             	</Helmet>
             </div>
         ) : <Result

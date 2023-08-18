@@ -27,7 +27,7 @@ const CenterListItemInfo = ({visible, setVisible, center}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onCancel={() => {
                 setVisible(false);
             }

@@ -83,7 +83,7 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onCancel={() => setVisible(false)}
             width={900}
             footer={null}

@@ -12,7 +12,7 @@ const AddItemComponent = ({ visible, setVisible, item}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onOk={() => closePopup()}
             onCancel={() => closePopup()}
             footer={null}
