@@ -41,7 +41,7 @@ const TasksTable = () => {
     const getTaskData = () => {
         getTasks().then(response => {
             response.forEach(task => {
-                task.isActive = task.challengeId !== null;
+                task.isActive = task.challengeId == null ? false : task.isActive;
             });
 
             setTasks(response);
