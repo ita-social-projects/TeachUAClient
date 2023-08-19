@@ -356,6 +356,7 @@ const AuthMenu = () => {
             <Dropdown
                 className={'user-profile'}
                 trigger={'click'}
+                arrow={true}
                 menu={{
                     items,
                 }}>

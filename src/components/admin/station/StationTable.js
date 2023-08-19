@@ -71,7 +71,7 @@ const StationTable = () => {
 
     const getData = () => {
         getAllCities().then(response => setCities(response));
-        getDistrictsByCityName(district).then(response => setDistrict(response));
+        if(district.length !==0 ){getDistrictsByCityName(district).then(response => setDistrict(response));}
         getAllStations().then(response => setStations(response));
     };
 
@@ -81,7 +81,6 @@ const StationTable = () => {
 
     useEffect(() => {
         getDistrictsByCityName(cityName).then((response) => {
-
             getAllDistrict().then((response) => {
                 setDistrict(response);
             })
