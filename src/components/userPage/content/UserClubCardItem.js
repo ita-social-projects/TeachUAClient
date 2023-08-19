@@ -11,14 +11,26 @@ import {MoreOutlined} from "@ant-design/icons";
 import ClubUpdateMenu from "./ClubUpdateMenu";
 
 
+
 const UserClubCardItem = ({club, reloadAfterChange}) => {
+
+    const dropdownItems = [
+        {
+            key: '1',
+            label: (
+                <ClubUpdateMenu club={club} reloadAfterChange={reloadAfterChange}/>
+            ),
+        }
+    ]
+
     return (
         <Card className="card">
             <div className="title">
                 <ClubLogo category={club.categories[0]} logo={club.urlLogo}/>
                 <div className="side-menu">
                     <div className="update-club-dropdown">
-                        <Dropdown overlay={<ClubUpdateMenu club={club} reloadAfterChange={reloadAfterChange} />} placement="bottomRight">
+                        <Dropdown menu={dropdownItems}
+                                  placement="bottomRight">
                             <MoreOutlined/>
                         </Dropdown>
                     </div>
