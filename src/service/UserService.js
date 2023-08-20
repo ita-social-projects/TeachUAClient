@@ -36,6 +36,20 @@ export const changePassword = async (data) => {
 export const getUserById = async (id) => {
     return await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
         return response.data
+    }).catch(async (error) => {
+        if (error.response && error.response.status === 401) {
+            try {
+                await refreshAccessToken();
+                const retryResponse = await fetchRequest.get(BASE_URL + "/api/user/" + id).then((response) => {
+                    return response.data
+                });
+                return retryResponse.data;
+            } catch (refreshError) {
+                return refreshError.response;
+            }
+        } else {
+            return error.response;
+        }
     });
 };
 
