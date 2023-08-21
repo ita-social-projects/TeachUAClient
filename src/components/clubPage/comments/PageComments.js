@@ -125,11 +125,12 @@ const PageComments = ({club}) => {
                                              <>
                                                  {item.text.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                                                  <Button className={"answer-comment"}
-                                                         onClick={() => {
+                                                         onClick={(event) => {
                                                              if (localStorage.getItem('id') != null)
                                                                  openReplyDialog(item);
                                                              else
                                                                  message.error("Увійдіть або зареєструйтеся!");
+                                                             event.currentTarget.blur();
                                                          }}>
                                                      <EnterOutlined style={{transform: "scaleX(-1)"}}/>
                                                      <p className={"answer-p"}>Відповісти</p>
