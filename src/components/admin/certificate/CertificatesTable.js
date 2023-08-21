@@ -113,7 +113,7 @@ const CertificatesTable = () => {
             title: 'Статус видачі',
             dataIndex: 'sendStatus',
             inputType: 'select',
-            selectData: ["не видано"],
+            selectData: [{ value: 'не видано', label: 'не видано' }],
             width: '8%',
             editable: true,
             render: (sendStatus) => sendStatus ? "видано" : sendStatus == null ? "не видано" : "помилка відправки",

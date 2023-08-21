@@ -33,7 +33,7 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
             break;
         case 'select': {
             inputNode = (
-                <Select>
+                <Select style={{minWidth: `80px`, width: `fit-content`, textAlign: `left`}}>
                     {selectData.map(option => (
                         <Select.Option key={option.value} value={option.value}>
                             {option.label}
