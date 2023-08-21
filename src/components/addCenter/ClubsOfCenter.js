@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import ClubLogo from "../clubPage/header/ClubLogo";
 import AddClubModal from '../addClub/AddClubModal';
 import "./css/ClubsOfCenter.css";
-import { getAllClubsByUserId, getClubsByUserId } from '../../service/ClubService';
+import { getAllClubsByUserId } from '../../service/ClubService';
 import { getUserId } from '../../service/StorageService';
 import { addCenter } from '../../service/CenterService';
 import { useHistory } from 'react-router-dom';

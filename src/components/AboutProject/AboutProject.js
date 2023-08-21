@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getAllItems} from "../../service/AboutUsService";
-import {Button, Layout} from "antd";
+import {Layout} from "antd";
 import "./css/aboutProject.css";
 import AboutUsHeader from "./AboutUsHeader";
 import ItemView from "./ItemView";

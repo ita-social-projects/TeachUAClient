@@ -22,7 +22,7 @@ const UserCertificatesPage = () => {
     const startDownload = (certificate) => {
         setIsModalShown(true);
         downloadCertificate(certificate.id).then((response) => {
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 message.error("Помилка завантаження");
             }
             setIsModalShown(false);

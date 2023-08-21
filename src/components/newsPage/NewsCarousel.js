@@ -4,7 +4,7 @@ import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
 import {Link} from "react-router-dom";
 import "./css/NewsCarousel.css";
-import moment from "moment";
+import dayjs from 'dayjs';
 import {BASE_URL} from "../../service/config/ApiConfig";
 
 const NewsCarousel = ({newsList}) => {
@@ -30,7 +30,7 @@ const NewsCarousel = ({newsList}) => {
                             <div id="newsData">
                                 <div>
                                     <div id="newsTitle">{news.title}</div>
-                                    <div id="newsDate">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
+                                    <div id="newsDate">{dayjs(news.date.toString()).format(DATE_FORMAT)}</div>
                                 </div>
                                 <div id="detailButton">
                                     <Link to={`/news/${news.id}`}>Детальніше <ArrowRightOutlined /></Link>

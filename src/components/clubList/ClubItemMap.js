@@ -44,7 +44,7 @@ const ClubItemMap = ({ club, visible, setVisible }) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onOk={() => closeMap()}
             onCancel={() => closeMap()}
             width={1200}

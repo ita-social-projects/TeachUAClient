@@ -115,7 +115,7 @@ const SignUpForClub = ({isShowing, setShowing, club}) => {
                 centered
                 title="Записати на гурток"
                 width={420}
-                visible={isShowing}
+                open={isShowing}
                 onOk={() => setShowing(false)}
                 onCancel={() => setShowing(false)}
                 footer={null}

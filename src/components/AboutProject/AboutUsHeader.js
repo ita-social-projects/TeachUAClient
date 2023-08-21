@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {Button, Layout} from "antd";
+import {Button} from "antd";
 import Search from "../Search";
 import "./css/aboutProject.css";
 import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";

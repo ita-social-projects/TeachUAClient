@@ -1,6 +1,5 @@
-import React , {useEffect, useState} from 'react';
-import { Carousel, Layout, Pagination} from "antd";
-import ClubListItem from "../../clubList/ClubListItem";
+import React from 'react';
+import {Layout} from "antd";
 import ClubsOfCenterContent from "./ClubsOfCenterContent";
 import "./css/ClubsItemStyles.css"
 

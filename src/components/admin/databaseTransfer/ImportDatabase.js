@@ -114,7 +114,7 @@ const ImportDatabase = () => {
                         strong
                         style={{fontSize: 16}}
                         className="import-text-hint">
-                        Завантежте excel-файл для імпорту даних у БД:
+                        Завантажте excel-файл для імпорту даних у БД:
                     </Text>
 
 
@@ -144,7 +144,7 @@ const ImportDatabase = () => {
 
                                 onChange={uploadExcel}
                             >
-                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon"/>Завантажити excel-файл</Button>
+                                <Button className="flooded-button" htmlType="submit"><UploadOutlined className="icon add-template-upload-icon"/>Завантажити excel-файл</Button>
                             </Upload>
                         </Form.Item>
                         <Button onClick={() => loadDataToDatabase()} className="flooded-button send-data-button">Відправити всі дані у БД</Button>

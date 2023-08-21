@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Form, Input, message, Upload} from "antd";
 import {addToTable} from "../../../util/TableUtil";
 import {addContactType} from "../../../service/ContactTypeService";

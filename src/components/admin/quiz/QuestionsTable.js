@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-import {Button, Form, message, Popconfirm, Select, Typography} from "antd";
+import {Button, Form, Popconfirm, Typography} from "antd";
 
 import {getAllQuestions} from "../../../service/QuizService";
-import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
 import EditableTable from "../../EditableTable";
-import {Option} from "antd/es/mentions";
-import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
 
 const {Title} = Typography;
 

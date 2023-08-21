@@ -8,7 +8,7 @@ import FacebookOutlined from "@ant-design/icons/lib/icons/FacebookOutlined";
 import YoutubeOutlined from "@ant-design/icons/lib/icons/YoutubeOutlined";
 import InstagramOutlined from "@ant-design/icons/lib/icons/InstagramOutlined";
 import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
-import moment from "moment";
+import dayjs from 'dayjs';
 import Loader from "../Loader";
 import NewsCarousel from "./NewsCarousel";
 import {Helmet} from "react-helmet";
@@ -70,7 +70,7 @@ const NewsPage = () => {
                 <div className="content">
                     <div className="content-title">
                         <div id="title">{news.title}</div>
-                        <div id="date">{moment(news.date.toString()).format(DATE_FORMAT)}</div>
+                        <div id="date">{dayjs(news.date.toString()).format(DATE_FORMAT)}</div>
                     </div>
                     <div className="content-text">
                         <div id="description" dangerouslySetInnerHTML={{__html: `${news.description}`}}></div>
@@ -83,17 +83,16 @@ const NewsPage = () => {
 				<Helmet>
 					<script type="text/javascript" >
 						{`
-						let lastKnownScrollPosition = 0;
-						let image = document.getElementsByClassName('image')[0];
 						window.addEventListener('scroll',(event) => {
-							lastKnownScrollPosition = window.scrollY;
+						    let image = document.getElementsByClassName('image')[0];
+							let lastKnownScrollPosition = window.scrollY;
 							bgPositionY = 50 + lastKnownScrollPosition/15;
-							if (bgPositionY < 100) {
+							if (image && bgPositionY < 100) {
 								image.style.backgroundPosition =  "50% " + bgPositionY + "%";
 							}
 						});
 						`}
-					</script>
+                    </script>
             	</Helmet>
             </div>
         ) : <Result

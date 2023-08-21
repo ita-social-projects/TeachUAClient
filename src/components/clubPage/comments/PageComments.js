@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import React, {useEffect, useMemo, useState} from 'react';
 import './css/PageComments.css';
-import {Button, Comment, List, message, Rate} from "antd";
+import {Button, List, message, Rate} from "antd";
+import { Comment } from '@ant-design/compatible';
 import {Content} from "antd/es/layout/layout";
 import CommentEditComponent from "./CommentEditComponent";
 import {EnterOutlined} from "@ant-design/icons";
@@ -125,11 +126,12 @@ const PageComments = ({club}) => {
                                              <>
                                                  {item.text.split('\n').map((line, index) => <p key={index}>{line}</p>)}
                                                  <Button className={"answer-comment"}
-                                                         onClick={() => {
+                                                         onClick={(event) => {
                                                              if (localStorage.getItem('id') != null)
                                                                  openReplyDialog(item);
                                                              else
                                                                  message.error("Увійдіть або зареєструйтеся!");
+                                                             event.currentTarget.blur();
                                                          }}>
                                                      <EnterOutlined style={{transform: "scaleX(-1)"}}/>
                                                      <p className={"answer-p"}>Відповісти</p>

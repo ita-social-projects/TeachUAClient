@@ -10,7 +10,7 @@ import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import "react-quill/dist/quill.snow.css";
 import Editor from '../../../util/Editor';
 import TasksInChallenge from "./TasksInChallenge";
-import { tokenToHeader } from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
 
 const {Title} = Typography;
 
@@ -40,14 +40,7 @@ const EditChallenge = (props) => {
     const [picture, setPicture] = useState();
     const [challengeEditForm, form] = useForm();
     const challengeId = useParams();
-    const [name, setName] = useState();
     const [isChecked, setIsChecked] = useState(challenge.isActive);
-
-
-    const handleNameChange = (value) => {
-        setName(value);
-    }
-
 
     const getData = (challengeId) => {
         getChallengeById(challengeId.id).then(response => {
@@ -91,7 +84,7 @@ const EditChallenge = (props) => {
     };
 
     const handlePictureChange = (value) => {
-        if (value.file.status == "removed") {
+        if (value.file.status === "removed") {
             challenge.picture = null;
         } else {
             setPicture("/upload/challenges/" + value.file.name);
@@ -134,7 +127,6 @@ const EditChallenge = (props) => {
                     Переглянути челендж
                 </Button>
             </Link>
-
             <Link
                 to={"/admin/challenge/" + challengeId.id + "/clone"}
                 className="back-btn"
@@ -150,34 +142,38 @@ const EditChallenge = (props) => {
                 onFinish={saveForm}
                 form={challengeEditForm}
                 autoComplete="off"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 14 }}
+                labelCol={{span: 4}}
+                wrapperCol={{span: 14}}
             >
                 <Form.Item
-                    name="sortNumber"
                     label="Порядковий номер"
+                    name="sortNumber"
                     value={challenge.sortNumber}
                     rules={[
                         {
                             required: true,
-                            min: 5,
-                            max: 30,
-                            message: "Поле \"Порядковий номер\" може містити мінімум 5 максимум 30 символів",
+                            validator: (_, value) => {
+                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
+                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
+                                }
+                                return Promise.resolve();
+                            },
                         },
                         {
                             required: false,
                             pattern: /^[-0-9]*$/,
-                            message: "Поле \"Порядковий номер\" може містити тільки цифри",
-                        }]}
+                            message: "Поле 'Порядковий номер' може містити тільки цифри",
+                        },
+                    ]}
                 >
-                    <InputNumber />
+                    <InputNumber style={{ width: "50%" }} />
                 </Form.Item>
                 <Form.Item
                     name="isActive"
                     label="Статус"
                     initialValue={isChecked}
                 >
-                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch} />
+                    <Switch defaultChecked={isChecked} checked={isChecked} onChange={handleToggleSwitch}/>
                 </Form.Item>
                 <Form.Item
                     label="Назва"
@@ -200,7 +196,7 @@ const EditChallenge = (props) => {
                         }
                     ]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Заголовок"
@@ -223,7 +219,7 @@ const EditChallenge = (props) => {
                         }
                     ]}
                 >
-                    <Input />
+                    <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -233,9 +229,8 @@ const EditChallenge = (props) => {
                             validator: (_, value) => {
                                 if (!value.replace(/<[^>]+>/g, '').trim().length > 0) {
                                     return Promise.reject(new Error("Поле \"Опис\" не може бути порожнім"));
-                                }
-                                else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
-                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40 максимум 25000 символів"));
+                                } else if (value.replace(/<[^>]+>/g, '').length < 40 || value.replace(/<[^>]+>/g, '').length > 25000) {
+                                    return Promise.reject(new Error("Поле \"Опис\" може містити мінімум 40, максимум 25000 символів"));
                                 }
                                 return Promise.resolve();
                             }
@@ -248,7 +243,7 @@ const EditChallenge = (props) => {
                     ]}
 
                 >
-                    <Editor />
+                    <Editor/>
                 </Form.Item>
                 <Form.Item
                     name="picture"
@@ -267,11 +262,11 @@ const EditChallenge = (props) => {
                         maxCount={1}
                         fileList={currentPicture}
                         accept="image/*"
-                        data={{ folder: `challenges` }}
-                        headers={{ contentType: 'multipart/form-data', Authorization: tokenToHeader() }}
+                        data={{folder: `challenges`}}
+                        headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                         onChange={(uploaded) => handlePictureChange(uploaded)}
                     >
-                        <span className="upload-label"><UploadOutlined className="icon" />Завантажити</span>
+                        <span className="upload-label"><UploadOutlined className="icon"/>Завантажити</span>
                     </Upload>
                 </Form.Item>
                 <Form.Item>
@@ -289,7 +284,7 @@ const EditChallenge = (props) => {
             </Button>
             <div>
                 <Title level={3}>Усі завдання</Title>
-                <TasksInChallenge />
+                <TasksInChallenge/>
             </div>
         </div>
     )

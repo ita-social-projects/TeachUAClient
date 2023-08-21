@@ -6,11 +6,10 @@ import {
     deleteNewsById,
     getAllNews,
     getSimilarNewsByTitle,
-    getSimmilarNewsByTitle,
     updateNewsById
 } from "../../../service/NewsService";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";
-import moment from "moment";
+import dayjs from 'dayjs';
 import CreateNewsModal from "./CreateNewsModal";
 import {Link} from "react-router-dom";
 
@@ -56,7 +55,7 @@ const NewsTable = () => {
             ...form.getFieldsValue()
         });
         editCellValue(form, news, record.id).then((editedData) => {
-            editedData.item.date = moment(editedData.item.date.toString()).format("YYYY-MM-DD");
+            editedData.item.date = dayjs(editedData.item.date.toString()).format("YYYY-MM-DD");
             updateNewsById(record.id, editedData.item).then(response => {
                 if (response.status) {
                     message.warning(response.message)
@@ -121,13 +120,13 @@ const NewsTable = () => {
             dataIndex: 'date',
             width: '12%',
             editable: true,
-            render: (date) => moment(date.toString()).format('DD.MM.YYYY')
+            render: (date) => dayjs(date.toString()).format('DD.MM.YYYY')
         },
         {
             title: 'Активна/неактивна',
             dataIndex: 'isActive',
             inputType: 'select',
-            selectData: ["true", "false"],
+            selectData: [{ value: 'true', label: 'true' }, { value: 'false', label: 'false' }],
             width: '7%',
             editable: true,
             render: (isActive) => isActive.toString()

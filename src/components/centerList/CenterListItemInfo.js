@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Layout, Modal, Popover} from 'antd';
+import {Button, ConfigProvider, Layout, Modal, Popover} from 'antd';
 import "../clubList/css/ClubInfo.css"
 import {Link} from "react-router-dom";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
@@ -27,7 +27,7 @@ const CenterListItemInfo = ({visible, setVisible, center}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onCancel={() => {
                 setVisible(false);
             }
@@ -93,11 +93,20 @@ const CenterListItemInfo = ({visible, setVisible, center}) => {
                     </Layout>
                 </div>
                 <div>
-                    <Button onClick={() => getCenterReport(center.id, center.name)}
-                            className="outlined-button details-button download-button">
-                        Завантажити
-                        <FilePdfOutlined/>
-                    </Button>
+                    <ConfigProvider
+                        theme={{
+                            components: {
+                                Button: {
+                                    colorPrimaryHover: '#FFA940',
+                                }
+                            }
+                        }}>
+                        <Button onClick={() => getCenterReport(center.id, center.name)}
+                                className="outlined-button details-button download-button">
+                            Завантажити
+                            <FilePdfOutlined/>
+                        </Button>
+                    </ConfigProvider>
                 </div>
             </div>
         </Modal>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './css/TemplateStyles.less';
-import {Button, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
+import {Button, ConfigProvider, Form, Input, Layout, message, Select, Typography, Upload} from 'antd';
 import {useForm} from "antd/es/form/Form";
 import {BASE_URL} from "../../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
@@ -275,7 +275,7 @@ const AddTemplate = () => {
                             headers={{contentType: 'multipart/form-data', Authorization: tokenToHeader()}}
                             onChange={uploadPdf}
                         >
-                            <Button className="flooded-button"><UploadOutlined className="icon"/>
+                            <Button className="flooded-button"><UploadOutlined className="icon add-template-upload-icon"/>
                                 Завантажити
                             </Button>
                         </Upload>

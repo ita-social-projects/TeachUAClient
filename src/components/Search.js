@@ -1,4 +1,4 @@
-import {AutoComplete, Select} from "antd";
+import {AutoComplete, ConfigProvider, Select} from "antd";
 import React from "react";
 import {withRouter} from "react-router-dom";
 import {
@@ -37,7 +37,7 @@ class Search extends React.Component {
             allCategories: [],
             loading: false,
             searchClicked: false,
-            user:''
+            user: ''
         };
     }
 
@@ -56,9 +56,9 @@ class Search extends React.Component {
         getPossibleResults(searchParameters).then((response) => {
             this.setState({possibleResults: response, loading: false});
         });
-        if(getUserId()) {
+        if (getUserId()) {
             getUserById(getUserId()).then(response => {
-                this.setState({user:response});
+                this.setState({user: response});
             })
         }
     }
@@ -71,7 +71,8 @@ class Search extends React.Component {
         }
         if (value.length === 0) {
             getClubsByParameters(searchParameters).then((response) => {
-                this.context.setClubs(response);});
+                this.context.setClubs(response);
+            });
         }
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
@@ -92,9 +93,9 @@ class Search extends React.Component {
                     break;
                 default: {
                     if (this.state.allCategories.find((category) =>
-                            category.name
-                                .toLowerCase()
-                                .includes(value.toLowerCase()))) {
+                        category.name
+                            .toLowerCase()
+                            .includes(value.toLowerCase()))) {
                         searchParameters.categoryName = value;
                     } else {
                         searchParameters.clubName = value;
@@ -124,13 +125,12 @@ class Search extends React.Component {
             const DEFAULT_SORT_BY = "name";
             const DEFAULT_SORT_DIRECTION = "asc";
             let checkUndefPage = page === undefined ? 0 : page;
-            if (!searchParameters.isCenter){
+            if (!searchParameters.isCenter) {
                 getClubsByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
                     this.context.setClubs(response)
                 })
-            }
-            else {
-                getCentersByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response ) => {
+            } else {
+                getCentersByAdvancedSearch(searchInputData.input, checkUndefPage, DEFAULT_SORT_BY, DEFAULT_SORT_DIRECTION).then((response) => {
                     this.context.setCenters(response);
                 });
             }
@@ -211,74 +211,80 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className="search">
-                <AutoComplete
-                    allowClear={true}
-                    loading={this.state.loading}
-                    //disabled={searchParameters.isAdvancedSearch}
-                    onSelect={this.onSelect}
-                    onSearch={this.onSearch}
-                    onInputKeyDown={this.onKeyDown}
-                    onClear={this.onClear}
-                    onBlur={this.onKeyDown}
-                    style={{
-                        width: 230,
-                        //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
-                    }}
-                    placeholder={this.props.centerOrClub ? `Який ${this.props.centerOrClub} шукаєте?` : `Який гурток шукаєте?`}
-                    maxLength={50}>
-                    <OptGroup label="Категорії">
-                        {this.state.possibleResults.categories.map((result) => (
-                            <Option
-                                value={result.name}
-                                type={"category"}
-                                key={"category" + "#" + result.id}>
-                                {result.name}
-                            </Option>
-                        ))}
-                    </OptGroup>
-                    <OptGroup label="Гуртки">
-                        {this.state.possibleResults.clubs.map((result) => (
-                            <Option
-                                value={result.name.trim()}
-                                type={"club"}
-                                key={"club" + "#" + result.id}>
-                                {result.name.trim()}
-                            </Option>
-                        ))}
-                    </OptGroup>
-                </AutoComplete>
-
-
-                <div className="search-icon-group">
-                    <SearchOutlined
-                        className="advanced-icon"
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorPrimaryHover: "#fff",
+                    }
+                }}>
+                <div className="search">
+                    <AutoComplete
+                        allowClear={true}
+                        loading={this.state.loading}
+                        //disabled={searchParameters.isAdvancedSearch}
+                        onSelect={this.onSelect}
+                        onSearch={this.onSearch}
+                        onInputKeyDown={this.onKeyDown}
+                        onClear={this.onClear}
+                        onBlur={this.onKeyDown}
                         style={{
-                            borderRadius: 0,
-                            backgroundColor: "transparent",
-                            color: "white",
-                            //opacity: searchParameters.isAdvancedSearch
-                            //    ? 0.5
-                            //    : 1,
-                            marginLeft: 0,
-                            marginRight: 12,
+                            width: 230,
+                            //    opacity: searchParameters.isAdvancedSearch ? 0.5 : 1,
                         }}
-                        onClick={this.searchOnClick}
-                    />
-                    <ControlOutlined className="advanced-icon" title={"Розширений пошук"}
-                                     style={{color: "orange", backgroundColor: "white"}}
-                                     onClick={this.handleAdvancedSearch}
-                    />
+                        placeholder={this.props.centerOrClub ? `Який ${this.props.centerOrClub} шукаєте?` : `Який гурток шукаєте?`}
+                        maxLength={50}>
+                        <OptGroup label="Категорії">
+                            {this.state.possibleResults.categories.map((result) => (
+                                <Option
+                                    value={result.name}
+                                    type={"category"}
+                                    key={"category" + "#" + result.id}>
+                                    {result.name}
+                                </Option>
+                            ))}
+                        </OptGroup>
+                        <OptGroup label="Гуртки">
+                            {this.state.possibleResults.clubs.map((result) => (
+                                <Option
+                                    value={result.name.trim()}
+                                    type={"club"}
+                                    key={"club" + "#" + result.id}>
+                                    {result.name.trim()}
+                                </Option>
+                            ))}
+                        </OptGroup>
+                    </AutoComplete>
 
+                    <div className="search-icon-group">
+                        <SearchOutlined
+                            className="advanced-icon"
+                            style={{
+                                borderRadius: 0,
+                                backgroundColor: "transparent",
+                                color: "white",
+                                //opacity: searchParameters.isAdvancedSearch
+                                //    ? 0.5
+                                //    : 1,
+                                marginLeft: 0,
+                                marginRight: 12,
+                            }}
+                            onClick={this.searchOnClick}
+                        />
+                        <ControlOutlined className="advanced-icon" title={"Розширений пошук"}
+                                         style={{color: "orange", backgroundColor: "white"}}
+                                         onClick={this.handleAdvancedSearch}
+                        />
+
+                    </div>
+                    {this.state.user !== null && this.state.user !== undefined && this.state.user !== '' && this.state.user.roleName === "ROLE_ADMIN" ?
+                        <div className="search-icon-group">
+                            <FilePdfOutlined className="advanced-icon" title={"Завантажити результат пошуку"}
+                                             style={{color: "orange", backgroundColor: "white"}}
+                                             onClick={() => getResultSearchReport(searchParameters, "Result for " + searchParameters.clubName)}>
+                            </FilePdfOutlined>
+                        </div> : ""}
                 </div>
-                {this.state.user !== null && this.state.user !== undefined && this.state.user !== '' && this.state.user.roleName === "ROLE_ADMIN" ?
-                <div className="search-icon-group">
-                    <FilePdfOutlined className="advanced-icon" title={"Завантажити результат пошуку"}
-                                     style={{color: "orange", backgroundColor: "white"}}
-                                     onClick={() => getResultSearchReport(searchParameters, "Result for " + searchParameters.clubName)}>
-                    </FilePdfOutlined>
-                </div>:""}
-            </div>
+            </ConfigProvider>
         );
     }
 }

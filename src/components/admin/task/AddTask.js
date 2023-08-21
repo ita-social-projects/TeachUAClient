@@ -9,12 +9,11 @@ import {getAllChallenges} from "../../../service/ChallengeService";
 import {Link, useHistory} from "react-router-dom";
 import ChallengesInTasks from "./ChallengesInTasks";
 import {tokenToHeader} from "../../../service/UploadService";
+import locale from 'antd/es/date-picker/locale/uk_UA';
 
 const {Option} = Select;
 
 const {Title} = Typography;
-const {TextArea} = Input;
-
 const AddTask = () => {
     const [taskForm] = useForm();
     const [name, setName] = useState();
@@ -33,10 +32,10 @@ const AddTask = () => {
     });
     const [challengeList, setChallengeList] = useState([
         {
-            'id': 0,
-            'name': '',
-            'title': '',
-            'sortNumber': 0
+            'id' : 0,
+            'name' : '',
+            'title' : '',
+            'sortNumber' : 0
         }
     ]);
     const [loading, setLoading] = useState(true);
@@ -198,7 +197,7 @@ const AddTask = () => {
                         }
                     ]}
                 >
-                    <Editor/>
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Опис"
@@ -227,7 +226,7 @@ const AddTask = () => {
                         }
                     ]}
                 >
-                    <Editor/>
+                    <Editor />
                 </Form.Item>
                 <Form.Item
                     label="Челендж"

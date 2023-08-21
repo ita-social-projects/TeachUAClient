@@ -59,9 +59,6 @@ const Message = ({message, onDelete}) => {
                            <div className="date">
                                {message.date ? getFormattedDate(message.date) : ''}
                            </div>
-                           {/*<Button onClick={handleDelete} className="deleteButton">*/}
-                           {/*    Видалити*/}
-                           {/*</Button>*/}
                            {showReadMessage(active)}
                            <DeleteOutlined className="deleteButton" onClick={handleDelete} />
                        </div>

@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import {Button, Form, Input, InputNumber, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
-import {changeOrder, deleteItem, updateItemById} from "../../../service/AboutUsService";
+import React from 'react';
+import {Button, Form, InputNumber, Layout, message, Modal, Tooltip} from 'antd';
+import {changeOrder} from "../../../service/AboutUsService";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
-import {deleteFile, uploadImage} from "../../../service/UploadService";
 
 const ChangeItemOrder = ({ visible, setVisible, size, id}) => {
 
@@ -26,7 +24,7 @@ const ChangeItemOrder = ({ visible, setVisible, size, id}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onOk={() => closePopup()}
             onCancel={() => closePopup()}
             footer={null}
