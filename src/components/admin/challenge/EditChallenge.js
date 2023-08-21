@@ -136,6 +136,7 @@ const EditChallenge = (props) => {
                 </Button>
             </Link>
 
+
             <Title>Редагування челенджа</Title>
             <Form
                 initialValues={onFill()}

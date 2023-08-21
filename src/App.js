@@ -42,7 +42,6 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
-import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 import NotFoundPage from "./components/NotFoundPage";
 import HardChallengePage from "./components/challengePage/ChallengePage";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";

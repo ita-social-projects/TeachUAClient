@@ -1,7 +1,7 @@
 import {Button, Card, ConfigProvider, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import ClubLogo from "../clubPage/header/ClubLogo";

@@ -43,7 +43,7 @@ const UserPage = () => {
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/messages`} >
-                <UserMessagesPage  />
+                <UserMessagesPage />
             </UserRoute>
 
             <UserRoute exact path={`${routeMatch.path}/complaints`} >

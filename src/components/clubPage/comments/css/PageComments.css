@@ -138,6 +138,7 @@
 }
 
 .page-comments .comment-header .comment-button{
+    border-radius: 6px;
     border-color: #FA8C16;
     color: #FA8C16;
 }
