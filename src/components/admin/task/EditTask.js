@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 
 import {Button, Checkbox, DatePicker, Form, Input, message, Select, Upload} from "antd";
-import moment from "moment";
+import dayjs from 'dayjs';
 
 import {useForm} from "antd/es/form/Form";
 import {getTask, updateTask} from "../../../service/TaskService";
@@ -17,7 +17,6 @@ import {tokenToHeader} from "../../../service/UploadService";
 import locale from 'antd/es/date-picker/locale/uk_UA';
 
 const {Option} = Select;
-const {TextArea} = Input;
 
 const EditTask = () => {
     const [taskEditForm] = useForm();
@@ -92,7 +91,7 @@ const EditTask = () => {
 
     const onDateChange = (date, dateString) => {
         console.log(dateString);
-        setTask({...task, startDate: moment(date).format("YYYY-MM-DD")});
+        setTask({...task, startDate: dayjs(date).format("YYYY-MM-DD")});
         console.log(task);
     }
 
@@ -115,7 +114,7 @@ const EditTask = () => {
     }
 
     const handlePictureChange = (value) => {
-        if (value.file.status == "removed") {
+        if (value.file.status === "removed") {
             task.picture = null;
         } else {
             setPicture("/upload/tasks/" + value.file.name)
@@ -164,7 +163,7 @@ const EditTask = () => {
                         format={dateFormat}
                         name="startDate"
                         allowClear={false}
-                        value={moment(task.startDate, "YYYY-MM-DD")}
+                        value={dayjs(task.startDate, "YYYY-MM-DD")}
                         locale={locale}
                     />
                 </Form.Item>

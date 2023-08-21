@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Button, Form, Input, message, Modal, Upload} from "antd";
+import {Button, Form, Input, message, Upload} from "antd";
 import {UploadOutlined} from "@ant-design/icons";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
-import {tokenToHeader, uploadImage} from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
 
 /*export class PasswordUpdate extends React.Component {
 
@@ -21,7 +21,7 @@ export const PasswordUpdate = () => {
         console.log(e.target.value)
         if (e.target.id === "confirmPassword")
             passwordForm.newPassword = e.target.value
-        if (passwordForm.password != passwordForm.newPassword) {
+        if (passwordForm.password !== passwordForm.newPassword) {
             console.log(passwordForm.password + " " + passwordForm.newPassword)
             setEqual(false)
         } else {
@@ -79,7 +79,7 @@ export const PasswordUpdate = () => {
                     },
                     ({getFieldValue}) => ({
                         validator(_, value) {
-                            if (getFieldValue('currentPassword') != value) {
+                            if (getFieldValue('currentPassword') !== value) {
                                 return Promise.resolve();
                             }
 

@@ -35,7 +35,7 @@ const EditTitle = ({visible, setVisible, item, upd}) => {
 
         <Modal
                 centered
-                visible={isVisible()}
+                open={isVisible()}
                 onOk={() => closePopup()}
                 onCancel={() => closePopup()}
                 footer={null}

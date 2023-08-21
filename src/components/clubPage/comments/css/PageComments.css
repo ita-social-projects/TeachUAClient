@@ -24,6 +24,9 @@
     align-items: baseline;
 }
 
+.answer-comment:hover, .show-more-button:hover{
+    color: #236cad !important;
+}
 .answer-comment::after,
 .show-more-button::after {
     box-shadow: none !important;

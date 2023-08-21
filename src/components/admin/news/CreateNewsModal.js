@@ -6,9 +6,9 @@ import Editor from "../../../util/Editor";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import {tokenToHeader} from "../../../service/UploadService";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
-import moment from "moment";
+import dayjs from 'dayjs';
 import locale from 'antd/lib/locale/uk_UA';
-import 'moment/locale/uk';
+import 'dayjs/locale/uk';
 import {useHistory} from "react-router-dom";
 
 const CreateNewsModal = ({visible, setVisible, getData}) => {
@@ -47,7 +47,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                 className="createNewsModal"
                 centered
                 width={900}
-                visible={visible}
+                open={visible}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
                 footer={null}
@@ -68,7 +68,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                         <Form.Item
                             label="Дата новини"
                             name="date"
-                            initialValue={moment()}
+                            initialValue={dayjs()}
                             rules={[
                                 {
                                     required: true,
@@ -76,7 +76,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                                 },
                                 () => ({
                                     validator(_, value) {
-                                        if (!value || value > moment().startOf('day').valueOf()) {
+                                        if (!value || value > dayjs().startOf('day').valueOf()) {
                                             return Promise.resolve();
                                         }
                                         return Promise.reject(
@@ -87,7 +87,7 @@ const CreateNewsModal = ({visible, setVisible, getData}) => {
                         >
                             <DatePicker
                                 format={dateFormat}
-                                disabledDate={(selected) => selected < moment().startOf('day')}
+                                disabledDate={(selected) => selected < dayjs().startOf('day')}
                             />
                         </Form.Item>
                     </ConfigProvider>

@@ -1,6 +1,5 @@
-import {BASE_URL, DELETE_FILE_URL} from "./config/ApiConfig";
+import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
-import {searchParameters} from "../context/SearchContext";
 
 export const ABOUT_URL = BASE_URL + "/api/about"
 

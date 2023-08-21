@@ -41,7 +41,7 @@
 }
 
 .aboutProject .social-media .icon {
-    color: #2D4C68;
+    color: #2D4C68 !important;
     font-size: 1.3em;
 }
 

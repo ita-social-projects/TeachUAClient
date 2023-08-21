@@ -41,7 +41,7 @@ const AddChildModal = ({ isVisible, setIsVisible, onChildAdded }) => {
             title="Додати дитину"
             centered
             width={300}
-            visible={isVisible}
+            open={isVisible}
             onCancel={() => setIsVisible(false)}
             footer={null}
         >

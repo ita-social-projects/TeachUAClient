@@ -62,7 +62,7 @@ const AddClubGalery = ({ onChange }) => {
             </Upload>
 
             <Modal
-                visible={previewVisible}
+                open={previewVisible}
                 title={previewTitle}
                 footer={null}
                 onCancel={handleCancel}>

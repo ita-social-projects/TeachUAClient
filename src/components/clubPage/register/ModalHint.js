@@ -9,7 +9,7 @@ const ModalHint = ({children, visible, setVisible}) => {
                 className={classes.modalHint}
                 centered
                 width={521}
-                visible={visible}
+                open={visible}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
                 footer={null}

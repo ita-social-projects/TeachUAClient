@@ -2,13 +2,12 @@ import {Form, Input, message, Typography, Upload} from "antd";
 import React, { useEffect, useState } from "react";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import { saveContent } from "../../editor/EditorConverter";
-import { v4 as uuidv4 } from 'uuid';
-import { addClub, getAllClubsByUserId } from "../../../service/ClubService";
+import { addClub } from "../../../service/ClubService";
 import "../css/AddClubContent.css";
 import { getUserId } from "../../../service/StorageService";
 import { Button } from "antd";
 import AddClubGalery from "../AddClubGalery";
-import {tokenToHeader, uploadImage} from "../../../service/UploadService";
+import {tokenToHeader} from "../../../service/UploadService";
 import {UPLOAD_IMAGE_URL} from "../../../service/config/ApiConfig";
 import { useHistory } from "react-router-dom";
 

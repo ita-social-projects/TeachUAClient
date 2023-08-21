@@ -27,18 +27,22 @@ const UserPageContent = () => {
         }
     };
 
-    const menu = () => {
-        return (
-            <Menu className="menu">
-                <Menu.Item className="menu-item">
-                    <div onClick={() => setShowAddClub(true)}>Додати гурток</div>
-                </Menu.Item>
-                <Menu.Item>
-                    <div onClick={() => setShowAddCenter(true)}>Додати центр</div>
-                </Menu.Item>
-            </Menu>
-        )
-    };
+    // const menu = () => {
+    //     return (
+    //         <Menu className="menu">
+    //             <Menu.Item className="menu-item">
+    //                 <div onClick={() => setShowAddClub(true)}>Додати гурток</div>
+    //             </Menu.Item>
+    //             <Menu.Item>
+    //                 <div onClick={() => setShowAddCenter(true)}>Додати центр</div>
+    //             </Menu.Item>
+    //         </Menu>
+    //     )
+    // };
+
+    const items = [
+        {key: "add_club_admin", label: <div onClick={() => setShowAddClub(true)}>Додати гурток</div>},
+        {key: "add_center_admin", label: <div onClick={() => setShowAddCenter(true)}>Додати центр</div>}];
 
     return (
         <Content className="user-content">
@@ -59,10 +63,8 @@ const UserPageContent = () => {
                     <div className="add-club-dropdown">
                         <AddClubModal isShowing={showAddClub} setShowing={setShowAddClub}/>
                         <AddCenter isShowing={showAddCenter} setShowing={setShowAddCenter}/>
-                        <Dropdown сlassname overlay={menu} placement="bottomRight">
-                            <Button className="add-button">
-                                <PlusOutlined/>
-                                Додати</Button>
+                        <Dropdown placement="bottomRight" menu={{items}} >
+                            <Button type={"primary"} className="add-button" icon={<PlusOutlined/>}>Додати</Button>
                         </Dropdown>
                     </div>
                 </div>

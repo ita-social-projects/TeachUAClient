@@ -1,4 +1,4 @@
-import {Button, Form, Input, message, Modal, Select, Tooltip, Typography} from "antd";
+import {Button, Form, Input, Modal, Select, Tooltip, Typography} from "antd";
 import React, {useEffect, useState} from "react";
 import '../css/AddClubModal.css';
 import "../css/AddClubContent.css";
@@ -12,7 +12,16 @@ const {Option} = Select;
 const {Text} = Typography;
 
 
-const AddLocationModal = ({form, locations, setLocations, cities, visible, setVisible, editedLocation, setEditedLocation}) => {
+const AddLocationModal = ({
+                              form,
+                              locations,
+                              setLocations,
+                              cities,
+                              visible,
+                              setVisible,
+                              editedLocation,
+                              setEditedLocation
+                          }) => {
     const [cityOnInput, setCityOnInput] = useState(null);
     const [inputAddressProps, setInputAddressProps] = useState({});
     const [districts, setDistricts] = useState([]);
@@ -23,8 +32,8 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
     const [locationForm, setLocationForm] = useState({
         locationName: "",
         cityName: "",
-        district:"",
-        latAndLng:"",
+        district: "",
+        latAndLng: "",
         phoneNumber: "",
         inputAddress: ""
     })
@@ -100,11 +109,10 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
         });
         form.validateFields();
     }
-    const  changeStation = (value) =>{
-        const fields = form.getFieldValue();
-       locationForm.cityName = cityName;
-       locationForm.districtName = value;
-        getStationsByDistrictNameAndCityName(locationForm).then(response=> setStation(response));
+    const changeStation = (value) => {
+        locationForm.cityName = cityName;
+        locationForm.districtName = value;
+        getStationsByDistrictNameAndCityName(locationForm).then(response => setStation(response));
 
     }
 
@@ -145,69 +153,70 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    suffix={
                                        <Tooltip placement="bottomRight"
                                                 title="Це поле може містити українські та англійські символи довжиною від 5-100. також цифри і спец.символи (!#$%&'()*+,-./:;<=>?@[]^_`{}~)">
-                                           <InfoCircleOutlined className="info-icon" />
+                                           <InfoCircleOutlined className="info-icon"/>
                                        </Tooltip>
                                    }
-                                   placeholder="Назва локації" />
+                                   placeholder="Назва локації"/>
                         </Form.Item>
                         <div className="add-club-inline">
                             <div>
-                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Місто</Text>
-                            <Form.Item name="cityName"
-                                       className="add-club-row"
-                                       initialValue={editedLocation && editedLocation.cityName}
-                                       hasFeedback
-                                       rules={[{
-                                           required: true,
-                                           message: "Це поле є обов'язковим"
-                                       }]}>
-                                <Select
-                                    onClick={onChange}
-                                    className="add-club-select"
-                                    placeholder="Виберіть місто"
-                                    onChange={(value) => {
-                                        if (cityName) {
-                                            cityOnInput === value ?
-                                                setInputAddressProps({validateStatus: 'success'}) :
-                                                setInputAddressProps({validateStatus: 'error'});
-                                        }
-                                        changeCity();
-                                        setCityName(value);
-                                    }}
-                                    optionFilterProp="children">
-                                    {cities.map(city => <Option
-                                        value={city.name}>{city.name}</Option>)}
-                                </Select>
-                            </Form.Item>
+                                <Text style={{fontSize: '19px', color: 'GrayText'}}>Місто</Text>
+                                <Form.Item name="cityName"
+                                           className="add-club-row"
+                                           initialValue={editedLocation && editedLocation.cityName}
+                                           hasFeedback
+                                           rules={[{
+                                               required: true,
+                                               message: "Це поле є обов'язковим"
+                                           }]}>
+                                    <Select
+                                        onClick={onChange}
+                                        className="add-club-select"
+                                        placeholder="Виберіть місто"
+                                        onChange={(value) => {
+                                            if (cityName) {
+                                                cityOnInput === value ?
+                                                    setInputAddressProps({validateStatus: 'success'}) :
+                                                    setInputAddressProps({validateStatus: 'error'});
+                                            }
+                                            changeCity();
+                                            setCityName(value);
+                                        }}
+                                        optionFilterProp="children">
+                                        {cities.map(city => <Option
+                                            value={city.name}>{city.name}</Option>)}
+                                    </Select>
+                                </Form.Item>
                             </div>
                             <div>
-                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Район міста</Text>
-                            <Form.Item name="districtName"
-                                       className="add-club-row"
-                                       hasFeedback
+                                <Text style={{fontSize: '19px', color: 'GrayText'}}>Район міста</Text>
+                                <Form.Item name="districtName"
+                                           className="add-club-row"
+                                           hasFeedback
                                 >
-                                <Select
-                                    className="add-club-select"
-                                    placeholder="Виберіть район"
-                                    onChange={changeStation}
-                                    optionFilterProp="children">
-                                    {districts.map(district => <Option value={district.name}>{district.name}</Option>)}
-                                </Select>
-                            </Form.Item>
+                                    <Select
+                                        className="add-club-select"
+                                        placeholder="Виберіть район"
+                                        onChange={changeStation}
+                                        optionFilterProp="children">
+                                        {districts.map(district => <Option
+                                            value={district.name}>{district.name}</Option>)}
+                                    </Select>
+                                </Form.Item>
                             </div>
                             <div>
-                            <Text style={{fontSize: '19px', color: 'GrayText'}}>Метро/Місцевість</Text>
-                            <Form.Item name="stationName"
-                                       className="add-club-row"
-                                       hasFeedback
-                            >
-                                <Select
-                                    className="add-club-select"
-                                    placeholder="Виберіть місцевість"
-                                    optionFilterProp="children">
-                                    {station.map(station => <Option value={station.name}>{station.name}</Option>)}
-                                </Select>
-                            </Form.Item>
+                                <Text style={{fontSize: '19px', color: 'GrayText'}}>Метро/Місцевість</Text>
+                                <Form.Item name="stationName"
+                                           className="add-club-row"
+                                           hasFeedback
+                                >
+                                    <Select
+                                        className="add-club-select"
+                                        placeholder="Виберіть місцевість"
+                                        optionFilterProp="children">
+                                        {station.map(station => <Option value={station.name}>{station.name}</Option>)}
+                                    </Select>
+                                </Form.Item>
                             </div>
                         </div>
                         <Text style={{fontSize: '19px', color: 'GrayText'}}>Адреса</Text>
@@ -226,7 +235,7 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                    placeholder="Адреса"
                             />
                         </Form.Item>
-                            <div>
+                        <div>
                             <Text style={{fontSize: '19px', color: 'GrayText'}}>Географічні координати</Text>
                             <Form.Item name="coordinates"
                                        className="add-club-row"
@@ -245,11 +254,11 @@ const AddLocationModal = ({form, locations, setLocations, cities, visible, setVi
                                        onInput={e => setCoordinates(e.target.value)}
                                        placeholder="Широта та довгота"/>
                             </Form.Item>
-                            </div>
+                        </div>
                         <Text style={{fontSize: '19px', color: 'GrayText'}}>Номер телефону</Text>
                         <Form.Item name="phone"
                                    className="add-club-row"
-                                   // label="Номер телефону"
+                            // label="Номер телефону"
                                    hasFeedback
                                    rules={[
                                        {

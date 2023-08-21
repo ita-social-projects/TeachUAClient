@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Dropdown, Menu, message, Modal, Popconfirm} from "antd";
+import {Button, ConfigProvider, Dropdown, Menu, message, Modal, Popconfirm} from "antd";
 import "./css/ClubInfo.css";
 import {Link} from "react-router-dom";
 import Tags from "../Tags";
@@ -83,7 +83,7 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onCancel={() => setVisible(false)}
             width={900}
             footer={null}
@@ -141,11 +141,20 @@ const ClubListItemInfo = ({visible, setVisible, club, reloadAfterChange}) => {
                     </div>
                 </div>
                 <div>
+                    <ConfigProvider
+                        theme={{
+                            components:{
+                                Button:{
+                                    colorPrimaryHover: '#FFA940',
+                                }
+                            }
+                        }}>
                     <Button onClick={() => getClubReport(club.id, club.name)}
                             className="outlined-button details-button download-button">
                         Завантажити
                         <FilePdfOutlined/>
                     </Button>
+                    </ConfigProvider>
                 </div>
             </div>
         </Modal>

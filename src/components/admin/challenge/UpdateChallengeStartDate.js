@@ -5,7 +5,7 @@ import {Button, DatePicker, Form, message, Typography} from "antd";
 
 import {useForm} from "antd/es/form/Form";
 import {updateChallengeStartDate, getChallengeById} from "../../../service/ChallengeService";
-import moment from "moment";
+import dayjs from 'dayjs';
 
 const {Title} = Typography;
 
@@ -45,7 +45,7 @@ const UpdateChallengeStartDate = () => {
 
     const onDateChange = (date, dateString) => {
         console.log(dateString);
-        setStartDate({...startDate, updatedDate: moment(date).format("YYYY-MM-DD")});
+        setStartDate({...startDate, updatedDate: dayjs(date).format("YYYY-MM-DD")});
         console.log(startDate);
     }
 
@@ -97,7 +97,7 @@ const UpdateChallengeStartDate = () => {
                         onChange={onDateChange}
                         format={dateFormat}
                         name="startDate"
-                        value={moment(startDate.updatedDate,"YYYY-MM-DD")}
+                        value={dayjs(startDate.updatedDate,"YYYY-MM-DD")}
                     />
                 </Form.Item>
                 <Form.Item>

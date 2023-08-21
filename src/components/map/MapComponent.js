@@ -27,7 +27,7 @@ const MapComponent = ({ visible, setVisible, cityName}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onOk={() => closeMap()}
             onCancel={() => closeMap()}
             width={1200}

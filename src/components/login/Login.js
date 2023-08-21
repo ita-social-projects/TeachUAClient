@@ -40,7 +40,7 @@ const Login = () => {
                 className="modal-login"
                 centered
                 width={520}
-                visible={showLogin}
+                open={showLogin}
                 onOk={() => setShowLogin(false)}
                 onCancel={() => setShowLogin(false)}
                 footer={null}

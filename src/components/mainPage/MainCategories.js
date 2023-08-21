@@ -4,7 +4,7 @@ import { getAllCategories } from "../../service/CategoryService";
 import PrimitiveCard from "../PrimitiveCard";
 import "./css/AboutCategories.css";
 import CategoryLogo from "../CategoryLogo";
-import { Button, Carousel } from "antd";
+import {Button, Carousel, ConfigProvider} from "antd";
 import "./css/AboutCarousel.css";
 import ArrowLeftOutlined from "@ant-design/icons/lib/icons/ArrowLeftOutlined";
 import ArrowRightOutlined from "@ant-design/icons/lib/icons/ArrowRightOutlined";
@@ -58,6 +58,12 @@ const MainCategories = () => {
     };
 
     return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimaryHover: "#fff",
+                },
+            }}>
         <div className="about-categories">
             <div className="categories-header">
                 <h2 className="label">Оберіть напрям гуртків</h2>
@@ -114,6 +120,7 @@ const MainCategories = () => {
                 </a>
             </div>
         </div>
+        </ConfigProvider>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import './App.less';
-import {Layout} from 'antd';
+import {ConfigProvider, Layout} from 'antd';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HeaderComponent from "./components/header/HeaderComponent";
 import ClubListComponent from "./components/clubList/ClubListComponent";
@@ -42,7 +42,6 @@ import MarathonTaskPage from "./components/marathonPage/marathonTaskPage/Maratho
 import ScrollToTop from "./components/ScrollToTop";
 import BannerItemsTable from "./components/admin/banner/BannerItemsTable";
 import AboutUsEdit from "./components/AboutProject/AboutUsEdit";
-import PreviousAboutProject from "./components/AboutProject/PreviousAboutProject";
 import NotFoundPage from "./components/NotFoundPage";
 import HardChallengePage from "./components/challengePage/ChallengePage";
 import TeachUAChallenge from "./components/challengeTeachUkrainian/TeachUAChallenge";
@@ -80,7 +79,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
 import EditTemplate from "./components/admin/certificate_template/EditTemplate";
 import { getUserById } from "./service/UserService";
-import { deleteUserStorage, getUserId } from "./service/StorageService";
+import { getUserId } from "./service/StorageService";
 import AddCertificateType from "./components/admin/certificate_type/AddCertificateType";
 import ReactGA from 'react-ga4';
 import MetricsTable from "./components/admin/metrics/MetricsTable";
@@ -121,102 +120,109 @@ function App() {
     const pageProvider = useMemo(() => ({currentPage, setCurrentPage}), [currentPage, setCurrentPage]);
 
     return (
-        <Layout className="layout">
-            <div className="behind-header"/>
-            <Router basename={process.env.PUBLIC_URL}>
-            <AuthContext.Provider value={{showLogin, setShowLogin, user, setUser}}>
-            <WithAxios>
-                <ScrollToTop/>
-                <PageContext.Provider value={pageProvider}>
-                <SearchContext.Provider value={clubProvider}>
-                    <HeaderComponent/>
-                    <Layout>
-                        <Content className="global-content">
-                            <Switch>
-                                <AdminRoute path="/admin/banners" exact component={BannerItemsTable}/>
-                                <AdminRoute path="/admin/challenge/task/:id" exact component={EditTask}/>
-                                <AdminRoute path="/admin/challenge/:id" exact component={EditChallenge}/>
-                                <AdminRoute path="/admin/challenge/:id/clone" exact component={UpdateChallengeStartDate}/>
-                                <AdminRoute path="/admin/addTask" exact component={AddTask}/>
-                                <AdminRoute path="/admin/tasks" exact component={TasksTable}/>
-                                <AdminRoute path="/admin/addChallenge" exact component={AddChallenge}/>
-                                <AdminRoute path="/admin/challenges" exact component={ChallengesTable}/>
-                                <AdminRoute path="/admin/news" exact component={NewsTable}/>
-                                <AdminRoute path="/admin/news/:id" exact component={EditNews}/>
-                                <AdminRoute path="/admin/categories" exact component={CategoryTable}/>
-                                <AdminRoute path="/admin/districts" exact component={DistrictTable}/>
-                                <AdminRoute path="/admin/fix-clubs-categories" exact component={BrokenClubContent}/>
-                                <AdminRoute path="/admin/metrics" exact component={MetricsTable}/>
-                                <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
-                                <AdminRoute path="/admin/users" exact component={UsersTable}/>
-                                <AdminRoute path="/admin/contact-types" exact component={ContactTypeTable}/>
-                                <AdminRoute path="/admin/import-database" exact component={ImportDatabase}/>
-                                <AdminRoute path="/admin/cities" exact component={CityTable}/>
-                                <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
-                                <AdminRoute path="/admin/club-approve" exact component={ApproveClubTable}/>
-                                <AdminRoute path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
-                                <AdminRoute path="/admin/stations" exact component={StationTable}/>
-                                <AdminRoute path="/admin/about" exact component={AboutUsEdit}/>
-                                <AdminRoute path="/admin/questions/generate" exact component={ImportQuestionExcelData}/>
-                                <AdminRoute path="/admin/certificate/generate" exact component={ImportCertificateData}/>
-                                <AdminRoute path="/admin/certificate-by-template/generate" exact component={ImportCertificateByTemplateData}/>
-                                <AdminRoute path="/admin/templates" exact component={TemplatesTable}/>
-                                <AdminRoute path="/admin/template/:id" exact component={EditTemplate}/>
-                                <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
-                                <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
-                                <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
-                                <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
-                                <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
-                                <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
-                                <AdminRoute path="/admin/quiz/categories/edit" exact component={TestCategoryTable}/>
-                                <AdminRoute path="/admin/quiz/types/edit" exact component={TestTypeTable}/>
-                                <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
-                                <AdminRoute path="/admin/certificate-types" exact component={CertificateTypesTable}/>
-                                <AdminRoute path="/admin/add-certificate-type" exact component={AddCertificateType}/>
-                                <AdminRoute path="/admin/files" exact component={AllFileList}/>
-                                <AdminRoute path="/admin/files/:path+" exact component={AllFileList}/>
-                                <AdminRoute path="/admin/unused-files" exact component={UnusedFileList}/>
-                                <AdminRoute path="/logs" exact component={LogComponent}/>
-                                <AdminRoute path="/log/:id" exact component={LogByNameComponent}/>
-                                <UserRoute path="/user/:id" component={UserPage} />
-                                <Route path="/club/:id" exact component={ClubPage}/>
-                                <Route path="/center/:id" exact component={CenterPage}/>
-                                <Route path="/clubs" exact component={ClubListComponent}/>
-                                <Route path="/news" exact component={NewsListComponent}/>
-                                <Route path="/news/:id" exact component={NewsPage}/>
-                                <Route path="/verify" exact component={VerifyPage}/>
-                                <Route path="/verifyreset" exact component={ResetPasswordModal}/>
-                                <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
-                                <Route path="/service" exact component={ServiceInUkr}/>
-                                <Route path="/about" exact component={AboutProject}/>
-                                <Route path="/challenges/registration/:challengeId" exact
-                                        component={RegistrationPage}/>
-                                <Route path="/challenges/:challengeId" exact component={ChallengePage}/>
-                                <Route path="/challenges/task/:taskId" exact component={TaskPage}/>
-                                <Route path="/marathon" exact component={MarathonPage}/>
-                                <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
-                                <Route path="/marathon/task/:pathUrl" exact component={MarathonTaskPage}/>
-                                <Route path="/challenge" exact component={HardChallengePage}/>
-                                <Route path="/challengeUA" exact component={TeachUAChallenge}/>
-                                <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
-                                <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
-                                <Route path="/marathon" exact component={MarathonPage}/>
-                                <Route path="/speakingclub" exact component={SpeakingClubPage}/>
-                                <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
-                                <Route path="/certificate/:serialNumber" exact component={ValidateCertificatePage}/>
-                                <Route path="/certificate" exact component={CertificatesSearch}/>
-                                <Route path="/" exact component={MainComponent}/>
-                                <Route path="*" exact component={NotFoundPage}/>
-                            </Switch>
-                        </Content>
-                    </Layout>
-                </SearchContext.Provider>
-                </PageContext.Provider>
-                <FooterComponent/>
-            </WithAxios>
-            </AuthContext.Provider>
-            </Router>
-        </Layout>
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: "#fa8c16",
+                },
+            }}>
+            <Layout className="layout">
+                <div className="behind-header"/>
+                <Router basename={process.env.PUBLIC_URL}>
+                    <AuthContext.Provider value={{showLogin, setShowLogin, user, setUser}}>
+                        <WithAxios>
+                            <ScrollToTop/>
+                            <PageContext.Provider value={pageProvider}>
+                                <SearchContext.Provider value={clubProvider}>
+                                    <HeaderComponent/>
+                                    <Layout>
+                                        <Content className="global-content">
+                                            <Switch>
+                                                <AdminRoute path="/admin/banners" exact component={BannerItemsTable}/>
+                                                <AdminRoute path="/admin/challenge/task/:id" exact component={EditTask}/>
+                                                <AdminRoute path="/admin/challenge/:id" exact component={EditChallenge}/>
+                                                <AdminRoute path="/admin/challenge/:id/clone" exact component={UpdateChallengeStartDate}/>
+                                                <AdminRoute path="/admin/addTask" exact component={AddTask}/>
+                                                <AdminRoute path="/admin/tasks" exact component={TasksTable}/>
+                                                <AdminRoute path="/admin/addChallenge" exact component={AddChallenge}/>
+                                                <AdminRoute path="/admin/challenges" exact component={ChallengesTable}/>
+                                                <AdminRoute path="/admin/news" exact component={NewsTable}/>
+                                                <AdminRoute path="/admin/news/:id" exact component={EditNews}/>
+                                                <AdminRoute path="/admin/categories" exact component={CategoryTable}/>
+                                                <AdminRoute path="/admin/districts" exact component={DistrictTable}/>
+                                                <AdminRoute path="/admin/fix-clubs-categories" exact component={BrokenClubContent}/>
+                                                <AdminRoute path="/admin/metrics" exact component={MetricsTable}/>
+                                                <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
+                                                <AdminRoute path="/admin/users" exact component={UsersTable}/>
+                                                <AdminRoute path="/admin/contact-types" exact component={ContactTypeTable}/>
+                                                <AdminRoute path="/admin/import-database" exact component={ImportDatabase}/>
+                                                <AdminRoute path="/admin/cities" exact component={CityTable}/>
+                                                <AdminRoute path="/admin/questions" exact component={QuestionTable}/>
+                                                <AdminRoute path="/admin/club-approve" exact component={ApproveClubTable}/>
+                                                <AdminRoute path="/admin/change-club-owner" exact component={ChangeOwnerTable}/>
+                                                <AdminRoute path="/admin/stations" exact component={StationTable}/>
+                                                <AdminRoute path="/admin/about" exact component={AboutUsEdit}/>
+                                                <AdminRoute path="/admin/questions/generate" exact component={ImportQuestionExcelData}/>
+                                                <AdminRoute path="/admin/certificate/generate" exact component={ImportCertificateData}/>
+                                                <AdminRoute path="/admin/certificate-by-template/generate" exact component={ImportCertificateByTemplateData}/>
+                                                <AdminRoute path="/admin/templates" exact component={TemplatesTable}/>
+                                                <AdminRoute path="/admin/template/:id" exact component={EditTemplate}/>
+                                                <AdminRoute path="/admin/add-template" exact component={AddTemplate}/>
+                                                <AdminRoute path="/admin/questions-import" exact component={ImportQuestionsData}/>
+                                                <AdminRoute path="/admin/quiz/questions"  exact component={QuestionsTable}/>
+                                                <AdminRoute path="/admin/quiz/questions/edit" exact component={TestQuestionTable}/>
+                                                <AdminRoute path="/admin/quiz/questions/new" exact component={TestQuestion}/>
+                                                <AdminRoute path="/admin/quiz/questions/:id" exact component={TestQuestion}/>
+                                                <AdminRoute path="/admin/quiz/categories/edit" exact component={TestCategoryTable}/>
+                                                <AdminRoute path="/admin/quiz/types/edit" exact component={TestTypeTable}/>
+                                                <AdminRoute path="/admin/certificates" exact component={CertificatesTable}/>
+                                                <AdminRoute path="/admin/certificate-types" exact component={CertificateTypesTable}/>
+                                                <AdminRoute path="/admin/add-certificate-type" exact component={AddCertificateType}/>
+                                                <AdminRoute path="/admin/files" exact component={AllFileList}/>
+                                                <AdminRoute path="/admin/files/:path+" exact component={AllFileList}/>
+                                                <AdminRoute path="/admin/unused-files" exact component={UnusedFileList}/>
+                                                <AdminRoute path="/logs" exact component={LogComponent}/>
+                                                <AdminRoute path="/log/:id" exact component={LogByNameComponent}/>
+                                                <UserRoute path="/user/:id" component={UserPage} />
+                                                <Route path="/club/:id" exact component={ClubPage}/>
+                                                <Route path="/center/:id" exact component={CenterPage}/>
+                                                <Route path="/clubs" exact component={ClubListComponent}/>
+                                                <Route path="/news" exact component={NewsListComponent}/>
+                                                <Route path="/news/:id" exact component={NewsPage}/>
+                                                <Route path="/verify" exact component={VerifyPage}/>
+                                                <Route path="/verifyreset" exact component={ResetPasswordModal}/>
+                                                <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
+                                                <Route path="/service" exact component={ServiceInUkr}/>
+                                                <Route path="/about" exact component={AboutProject}/>
+                                                <Route path="/challenges/registration/:challengeId" exact
+                                                       component={RegistrationPage}/>
+                                                <Route path="/challenges/:challengeId" exact component={ChallengePage}/>
+                                                <Route path="/challenges/task/:taskId" exact component={TaskPage}/>
+                                                <Route path="/marathon" exact component={MarathonPage}/>
+                                                <Route path="/marathon/registration" exact component={MarathonRegistrationPage}/>
+                                                <Route path="/marathon/task/:pathUrl" exact component={MarathonTaskPage}/>
+                                                <Route path="/challenge" exact component={HardChallengePage}/>
+                                                <Route path="/challengeUA" exact component={TeachUAChallenge}/>
+                                                <Route path="/challengeUA/registration" exact component={HardRegistrationPage}/>
+                                                <Route path="/challengeUA/task/:pathUrl" exact component={HardTaskPage}/>
+                                                <Route path="/marathon" exact component={MarathonPage}/>
+                                                <Route path="/speakingclub" exact component={SpeakingClubPage}/>
+                                                <Route path="/speakingclub/registration" exact component={SpeakingClubRegistrationPage}/>
+                                                <Route path="/certificate/:serialNumber" exact component={ValidateCertificatePage}/>
+                                                <Route path="/certificate" exact component={CertificatesSearch}/>
+                                                <Route path="/" exact component={MainComponent}/>
+                                                <Route path="*" exact component={NotFoundPage}/>
+                                            </Switch>
+                                        </Content>
+                                    </Layout>
+                                </SearchContext.Provider>
+                            </PageContext.Provider>
+                            <FooterComponent/>
+                        </WithAxios>
+                    </AuthContext.Provider>
+                </Router>
+            </Layout>
+        </ConfigProvider>
     );
 }
 

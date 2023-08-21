@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {getTasks, getTasksByChallenge} from "../../../service/TaskService";
-import {Link, useParams} from "react-router-dom";
+import {getTasksByChallenge} from "../../../service/TaskService";
+import {useParams} from "react-router-dom";
 import {Table, Tooltip} from "antd";
-import moment from "moment";
+import dayjs from 'dayjs';
 
 const TasksInChallenge = () => {
     const [taskPreview, setTaskPreview] = useState();
@@ -32,7 +32,7 @@ const TasksInChallenge = () => {
             dataIndex: 'id',
             width: '5%',
             defaultSortOrder: 'ascend',
-            sorter: (a, b) => moment(a.startDate).unix() - moment(b.startDate).unix()
+            sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix()
         },
         {
             title: 'Назва',
@@ -61,7 +61,7 @@ const TasksInChallenge = () => {
             title: 'Дата початку',
             dataIndex: 'startDate',
             width: '35%',
-            render: (text)=>moment(text.toString()).format('YYYY-MM-DD'),
+            render: (text)=>dayjs(text.toString()).format('YYYY-MM-DD'),
         }
     ];
 

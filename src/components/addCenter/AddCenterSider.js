@@ -1,5 +1,5 @@
 import {Steps} from "antd";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./css/AddCenter.css";
 
 const {Step} = Steps;

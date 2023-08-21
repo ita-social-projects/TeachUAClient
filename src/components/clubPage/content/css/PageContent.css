@@ -7,6 +7,11 @@
     font-size: 18px;
 }
 
+.details-button:hover{
+    border-color: #FFA940;
+    color: #FFA940;
+}
+
 .page-content .carousel {
     margin-bottom: 54px;
 }

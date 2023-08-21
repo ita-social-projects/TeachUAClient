@@ -3,11 +3,11 @@
     max-width: 382px !important;
     min-width: 382px !important;
     width: 382px !important;
-    background: white;
+    background: white !important;
     padding-top: 54px;
     display: flex;
     justify-content: center;
-    margin-top: 1px;
+    margin-top: -10px;
     margin-right: 20px;
 }
 
@@ -23,8 +23,9 @@
     font-size: 18px;
     text-align: left;
     padding-right: 16px;
-    display: block;
     color: #2d4c68;
+    align-items: center;
+    display: flex;
 }
 
 .club-list-sider .club-list-row label:after {
@@ -58,8 +59,13 @@
 
 .club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner {
     border-color: #0050b3;
+    background-color: #fff;
 }
-
+/*.club-list-kind{*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*}*/
 .club-list-sider .club-list-kind .ant-radio-checked .ant-radio-inner::after,
 .club-list-sider .ant-checkbox-checked .ant-checkbox-inner {
     background-color: #0050b3;
@@ -132,6 +138,7 @@
     display: none;
 }
 
+
 @media (max-width: 900px) {
     .club-list-sider {
         flex: 0 0 300px !important;
@@ -139,7 +146,7 @@
         min-width: 300px !important;
         width: 300px !important;
         justify-content: center;
-        margin-top: 1px;
+        margin-top: 37px;
     }
 }
 

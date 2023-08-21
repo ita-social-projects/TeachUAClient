@@ -37,6 +37,9 @@
     border-color: #D9D9D9;
 }
 
+.add-club-content .add-club-input:hover {
+    border-color: #a4a4a4 !important;
+}
 
 .add-club-content .add-club-categories {
     width: 100%;
@@ -56,6 +59,11 @@
 
 .add-club-content .ant-checkbox-checked .ant-checkbox-inner {
     background-color: #0050B3;
+    border-color: #0050B3;
+}
+
+.ant-checkbox-inner:hover {
+    background-color: #0050B3 !important;
     border-color: #0050B3;
 }
 
@@ -206,3 +214,8 @@
         display: block;
     }
 }
+
+.ant-checkbox-checked:hover {
+  background-color: #0050B3 !important;
+    border-color: #0050B3;
+ }

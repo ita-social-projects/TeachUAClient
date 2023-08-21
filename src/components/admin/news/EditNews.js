@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { Button, Form, Image, Input, InputNumber, message, Switch, Typography, Upload } from 'antd';
+import { Button, Form, Input, message, Switch, Typography, Upload } from 'antd';
 import { useForm } from "antd/es/form/Form";
 
 import { getNewsById, updateNewsById} from "../../../service/NewsService";
@@ -36,14 +36,8 @@ const EditNews = (props) => {
     const [urlTitleLogo, setUrlTitleLogo] = useState();
     const [newsEditForm, form] = useForm();
     const newsId = useParams();
-    const [name, setName] = useState();
     const [isChecked, setIsChecked] = useState(news.isActive);
 
-
-    const handleNameChange = (value) => {
-        setName(value);
-    }
-    
     const getData = () => {
         getNewsById(newsId.id).then(response => {
             setNews(response);
@@ -96,7 +90,7 @@ const EditNews = (props) => {
     };
 
     const handleUrlTitleLogoChange = (value) => {
-        if (value.file.status == "removed") {
+        if (value.file.status === "removed") {
             news.urlTitleLogo = null;
         } else {
             setUrlTitleLogo("/upload/news/" + value.file.name);

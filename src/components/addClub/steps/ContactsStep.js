@@ -1,6 +1,5 @@
-import {Form, Input, List, message, Popconfirm, Select, Switch, Tooltip, Typography} from "antd";
+import {ConfigProvider, Form, Input, List, message, Popconfirm, Switch, Tooltip, Typography} from "antd";
 import React, { useState, useEffect } from "react";
-import AddClubContentFooter from "../AddClubContentFooter";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
@@ -8,6 +7,7 @@ import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
 import {Button} from "antd";
+
 
 const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
     const [contacts_data, setContactsData] = useState({});
@@ -128,6 +128,13 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 </span>
             </Form.Item>
             <div className="add-club-inline" style={{display:'grid'}}>
+                <ConfigProvider
+                    theme={{
+                        token: {
+                            colorPrimary: "#fff",
+                            colorPrimaryHover: "#fa8c16" ,
+                        },
+                    }}>
                 <Text style={{fontSize :'19px', color:'GrayText'}}>Доступний онлайн</Text>
                 <Form.Item name="isOnline"
                     className="add-club-row"
@@ -137,9 +144,16 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                         <InfoCircleOutlined className="info-icon" style={{margin:'10px'}}/>
                     </Tooltip>
                 </Form.Item>
+                </ConfigProvider>
 
             </div>
 
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorPrimaryHover: "#a4a4a4" ,
+                    },
+                }}>
             <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
             <Form.Item
                 className="add-club-row add-club-contacts"
@@ -182,6 +196,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                             suffix={<MaskIcon maskColor="#D9D9D9" iconUrl={contact.urlLogo} />} />
                     </Form.Item>)}
             </Form.Item>
+            </ConfigProvider>
 
             <div className="add-club-content-footer">
                 <Button ghost={true} className="add-club-content-prev" type="button" onClick={prevStep}>Назад</Button>

@@ -13,24 +13,12 @@ import {tokenToHeader} from "../../../service/UploadService";
 const {Option} = Select;
 
 const {Title} = Typography;
-const {TextArea} = Input;
-
 const AddTask = () => {
     const [taskForm] = useForm();
     const [name, setName] = useState();
-    const [headerText, setHeaderText] = useState();
     const [picture, setPicture] = useState();
     const [startDate, setStartDate] = useState();
     const history = useHistory();
-    const [task, setTask] = useState({
-        id: 0,
-        name: '',
-        headerText: '',
-        description: '',
-        picture: '',
-        startDate: '',
-        challengeId: 0,
-    });
     const [challengeList, setChallengeList] = useState([
         {
             'id': 0,

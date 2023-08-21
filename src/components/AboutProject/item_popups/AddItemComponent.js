@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import {Button, Layout, message, Modal, Tooltip} from 'antd';
-import { mapSearchParameters, searchParameters} from "../../../context/SearchContext";
+import React from 'react';
+import {Button, Layout, message, Modal} from 'antd';
 import {createItem} from "../../../service/AboutUsService";
 
 const AddItemComponent = ({ visible, setVisible}) => {
@@ -22,7 +21,7 @@ const AddItemComponent = ({ visible, setVisible}) => {
     return (
         <Modal
             centered
-            visible={visible}
+            open={visible}
             onOk={() => closePopup()}
             onCancel={() => closePopup()}
             footer={null}

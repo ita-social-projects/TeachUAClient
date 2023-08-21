@@ -1,6 +1,6 @@
-import {deleteUserById, getAllUsers, updateUser, updateUserByAdmin} from "../../../service/UserService";
+import {deleteUserById, getAllUsers, updateUser} from "../../../service/UserService";
 import {getAllRoles} from "../../../service/RoleService";
-import {Form, message, Popconfirm, Dropdown} from "antd";
+import {Form, message, Popconfirm} from "antd";
 import React, {useEffect, useState} from "react";
 import EditableTable from "../../EditableTable";
 import {deleteFromTable, editCellValue} from "../../../util/TableUtil";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../sider/css/Sider.less'
 import { MailOutlined, UserOutlined, FileDoneOutlined, CheckOutlined, ExclamationOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
+import {ConfigProvider, Menu} from "antd";
 import { Link, useHistory } from "react-router-dom";
 import { getRole } from "../../../service/StorageService"
 
@@ -21,6 +21,13 @@ const MenuSiderComponent = ({ url }) => {
     }, [router]);
 
     return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimaryHover: "#fff",
+                    colorPrimary: "#fff"
+                },
+            }}>
         <div className="menu-component">
 
             <div className="menu-title">Особистий кабінет</div>
@@ -82,6 +89,7 @@ const MenuSiderComponent = ({ url }) => {
                 </Menu.Item>
             </Menu>
         </div>
+        </ConfigProvider>
     );
 };
 
