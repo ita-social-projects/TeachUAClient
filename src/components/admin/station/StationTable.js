@@ -37,7 +37,7 @@ const StationTable = () => {
             width: '15%',
             editable: true,
             inputType: 'select',
-            selectData: cities.map(city => city.name),
+            selectData: cities.map(city => ({value: city.name, label: city.name})),
             defaultSortOrder: 'ascend',
             filters: cities.map(city => ({text: city.name, value: city.name})),
             onFilter: (value, record) => record.cityName.indexOf(value) === 0,
@@ -49,7 +49,7 @@ const StationTable = () => {
             width: '15%',
             editable: true,
             inputType: 'select',
-            selectData: district.map(district => district.name),
+            selectData: district.map(district => ({value: district.name, label: district.name})),
             defaultSortOrder: 'ascend',
             sorter: (a, b) => a.districtName - b.districtName,
         }

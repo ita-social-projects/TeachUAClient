@@ -126,7 +126,7 @@ const NewsTable = () => {
             title: 'Активна/неактивна',
             dataIndex: 'isActive',
             inputType: 'select',
-            selectData: ["true", "false"],
+            selectData: [{ value: 'true', label: 'true' }, { value: 'false', label: 'false' }],
             width: '7%',
             editable: true,
             render: (isActive) => isActive.toString()

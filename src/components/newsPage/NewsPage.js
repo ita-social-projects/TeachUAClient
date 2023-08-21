@@ -81,8 +81,8 @@ const NewsPage = () => {
                     <NewsCarousel newsList={newsList}/>
 				</div>
 				<Helmet>
-                    <script type="text/javascript" >
-                        {`
+					<script type="text/javascript" >
+						{`
 						window.addEventListener('scroll',(event) => {
 						    let image = document.getElementsByClassName('image')[0];
 							let lastKnownScrollPosition = window.scrollY;
