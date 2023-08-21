@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getUnapprovedClubRegistrations, getAllClubRegistrations } from "../../../../../service/ClubRegistrationService";
+import { getUnapprovedClubRegistrations, getAllClubRegistrations } from "../../../../../../service/ClubRegistrationService";
 
-export const useRegistrations = (userId, setLoading, isAll) => {
-    const [registrations, setRegistrations] = useState([]);
+export const useClubRegistrations = (userId, setLoading, isAll) => {
+    const [clubRegistrations, setClubRegistrations] = useState([]);
 
     useEffect(() => {
         const loadRegistrations = async () => {
@@ -13,7 +13,7 @@ export const useRegistrations = (userId, setLoading, isAll) => {
                 } else {
                     response = await getAllClubRegistrations(userId);
                 }
-                setRegistrations(response);
+                setClubRegistrations(response);
                 setLoading(false);
             } catch (error) {
                 console.error('Failed to load registrations', error);
@@ -24,9 +24,9 @@ export const useRegistrations = (userId, setLoading, isAll) => {
         loadRegistrations();
     }, [isAll]);
 
-    const updateRegistrations = (clubRegistrationId) => {
-        setRegistrations(registrations.filter(reg => reg.id !== clubRegistrationId));
+    const updateClubRegistrations = (clubRegistrationId) => {
+        setClubRegistrations(clubRegistrations.filter(reg => reg.hasOwnProperty("club") && reg.id !== clubRegistrationId));
     };
 
-    return [registrations, updateRegistrations, setRegistrations];
+    return [clubRegistrations, updateClubRegistrations, setClubRegistrations];
 }

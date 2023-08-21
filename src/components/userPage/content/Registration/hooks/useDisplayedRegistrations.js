@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
-export const useDisplayedRegistrations = (selectedClub, searchTerm, unapprovedRegistrations, isAll, selectedStatus) => {
+export const useDisplayedRegistrations = (selectedClub, selectedType, searchTerm, challengeRegistrations, clubRegistrations, isAll, selectedStatus) => {
     const [displayedRegistrations, setDisplayedRegistrations] = useState([]);
 
-    const filterRegistrationsByClub = (registrations, selectedClub) => {
-        if (selectedClub === "all") {
+    const filterRegistrationsByClub = (registrations, selectedClub, type) => {
+        if (selectedClub === "all" || type === "challenge") {
             return registrations;
         }
 
-        return registrations.filter(reg => reg.club.name === selectedClub);
+        return registrations.filter(reg => reg?.club?.name === selectedClub);
     };
 
     const filterRegistrationsByStatus = (registrations, selectedStatus, isAll) => {
@@ -39,25 +39,42 @@ export const useDisplayedRegistrations = (selectedClub, searchTerm, unapprovedRe
         return registrations.filter(reg => {
             const userName = reg.user ? `${reg.user.firstName} ${reg.user.lastName}`.toLowerCase() : '';
             const childName = reg.child ? `${reg.child.firstName} ${reg.child.lastName}`.toLowerCase() : '';
-            const clubName = reg.club.name.toLowerCase();
+            const typeName = reg?.club?.name.toLowerCase() ?? reg?.challenge?.name.toLowerCase() ?? '';
 
             return (
-                clubName.includes(lowerCaseSearchTerm) ||
+                typeName.includes(lowerCaseSearchTerm) ||
                 userName.includes(lowerCaseSearchTerm) ||
                 childName.includes(lowerCaseSearchTerm)
             );
         });
     };
+    const filterRegistrationsByType = (registrations, type) => {
+        if (type === "all") {
+            return registrations;
+        }
+
+        return registrations.filter(reg => {
+            switch (type) {
+                case "challenge":
+                    return reg.hasOwnProperty("challenge");
+                case "club":
+                    return reg.hasOwnProperty("club");
+                default:
+                    return true;
+            }
+        });
+    };
 
     useEffect(() => {
-        let updatedRegistrations = [...unapprovedRegistrations];
+        let updatedRegistrations = [...challengeRegistrations, ...clubRegistrations];
 
-        updatedRegistrations = filterRegistrationsByClub(updatedRegistrations, selectedClub);
+        updatedRegistrations = filterRegistrationsByClub(updatedRegistrations, selectedClub, selectedType);
         updatedRegistrations = filterRegistrationsByStatus(updatedRegistrations, selectedStatus, isAll);
         updatedRegistrations = filterRegistrationsBySearchTerm(updatedRegistrations, searchTerm);
+        updatedRegistrations = filterRegistrationsByType(updatedRegistrations, selectedType);
 
         setDisplayedRegistrations(updatedRegistrations);
-    }, [selectedClub, searchTerm, unapprovedRegistrations, isAll, selectedStatus]);
+    }, [selectedClub, selectedType, searchTerm, challengeRegistrations, clubRegistrations, isAll, selectedStatus]);
 
     return displayedRegistrations;
 }

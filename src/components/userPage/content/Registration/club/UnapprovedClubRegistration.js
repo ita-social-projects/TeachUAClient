@@ -1,14 +1,15 @@
 import React from 'react';
 import {Collapse, message} from 'antd';
-import classes from "./css/ClubRegistration.module.css";
-import ActionButtons from "./components/ActionButtons";
-import {approveClubRegistration, cancelClubRegistration} from "../../../../service/ClubRegistrationService";
+import classes from "../css/Registration.module.css";
+import ActionButtons from "../components/ActionButtons";
+import {approveClubRegistration, cancelClubRegistration} from "../../../../../service/ClubRegistrationService";
 
 const { Panel } = Collapse;
+const userIcon = `${process.env.PUBLIC_URL}/static/images/user/avatar/user-icon.png`;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
-const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
+const UnapprovedClubRegistration = ({ registration, updateRegistrations }) => {
     const approveRegistration = async (clubRegistrationId) => {
         try {
             const response = await approveClubRegistration(clubRegistrationId);
@@ -46,7 +47,7 @@ const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
                     />
                     <span>{registration.child.firstName} {registration.child.lastName}, {registration.child.age}р</span>
                 </div>
-                <span className={classes.clubName}>{registration.club.name}</span>
+                <span className={classes.typeName}>{registration.club.name}</span>
                 <ActionButtons
                     approveRegistration={approveRegistration}
                     statusClass={classes.labelPending}
@@ -57,8 +58,14 @@ const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
         )
         : (
             <div className={classes.label}>
-                <span className={classes.userDetails}>{registration.user.firstName} {registration.user.lastName}</span>
-                <span className={classes.clubName}>{registration.club.name}</span>
+                <div className={classes.childDetails}>
+                    <img
+                        src={userIcon}
+                        alt='User Icon'
+                        className={classes.childIcon}
+                    />
+                    <span className={classes.userDetails}>{registration.user.firstName} {registration.user.lastName}</span>
+                </div>                <span className={classes.typeName}>{registration.club.name}</span>
                 <ActionButtons
                     approveRegistration={approveRegistration}
                     statusClass={classes.labelPending}
@@ -91,4 +98,4 @@ const UnapprovedRegistration = ({ registration, updateRegistrations }) => {
     );
 };
 
-export default UnapprovedRegistration;
+export default UnapprovedClubRegistration;

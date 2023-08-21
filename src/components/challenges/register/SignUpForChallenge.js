@@ -7,7 +7,7 @@ import AddChildModal from "../../addChild/AddChildModal";
 import {
     postChildrenChallengeRegistration,
     postUserChallengeRegistration,
-    getChildrenForCurrentUserByChallengeId, getUserApplications
+    getChildrenForCurrentUserByChallengeId, checkUserAlreadyRegistered
 } from "../../../service/ChallengeRegistrationService";
 import './css/SignUpForChallenge.css';
 import classes from "./css/SignUpForChallenge.module.css";
@@ -26,8 +26,8 @@ const SignUpForChallenge = ({isShowing, setShowing, challenge}) => {
     const onCheckboxChangeChildren = checkedValues => {
         setSelectedChildrenIds(checkedValues);
     };
-    const onCheckboxChangeUser = checkedValues => {
-        setSelectedUser(checkedValues);
+    const onCheckboxChangeUser = checkedValue => {
+        setSelectedUser(checkedValue);
     };
     const handleChildAdded = (newChild) => {
         console.log("Child added:", newChild);
@@ -44,16 +44,16 @@ const SignUpForChallenge = ({isShowing, setShowing, challenge}) => {
                 .catch(error => {
                     console.error('There was an error!', error);
                 });
-            getUserApplications(getUserId()).then(data => {
-                for (const app of data) {
-                    if (app.challenge.id === challenge.id) {
-                        setUserRegistered(true);
-                        break;
-                    }
-                }
-            })
+            checkUserAlreadyRegistered(challenge.id, getUserId())
+                .then(data => {
+                    setUserRegistered(data);
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
         }
-
+        setSelectedChildrenIds([]);
+        setSelectedUser(false);
     }, [isShowing]);
 
     const onFinish = (values) => {
@@ -85,7 +85,7 @@ const SignUpForChallenge = ({isShowing, setShowing, challenge}) => {
             postUserChallengeRegistration(userChallengeRegistrationRequest)
                 .then(() => {
                     setShowing(false);
-                    setUserRegistered(false);
+                    setSelectedUser(false);
                     message.success("Запит на реєстрацію на челендж надіслано");
                 })
                 .catch((error) => {
@@ -109,7 +109,7 @@ const SignUpForChallenge = ({isShowing, setShowing, challenge}) => {
             <Modal
                 className={classes.signUpForChallengeModal}
                 centered
-                title="Записати на черендж"
+                title="Записати на челендж"
                 width={420}
                 open={isShowing}
                 onOk={() => setShowing(false)}
@@ -163,7 +163,7 @@ const SignUpForChallenge = ({isShowing, setShowing, challenge}) => {
                                             <span>
                                                 <Checkbox className={classes.customCheckbox}
                                                           onChange={onCheckboxChangeUser}
-                                                          value={true}
+                                                          checked={selectedUser}
                                                           disabled={userRegistered}>
                                                     Записати мене на челендж
                                                 </Checkbox>

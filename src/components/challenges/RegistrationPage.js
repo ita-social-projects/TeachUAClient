@@ -35,7 +35,7 @@ const RegistrationPage = () => {
                 setChallenge(response)
             }
         });
-    }, []);
+    });
 
     return (
         <Layout className="global-padding marathon-page">
@@ -47,9 +47,9 @@ const RegistrationPage = () => {
                             челенджу</Button></Link>
                     </div>
                     <div className="google-form">
-                        <iframe src={challenge.registrationLink} width="700" height="2000" frameborder="0"
-                                marginheight="0"
-                                marginwidth="0">Завантаження…
+                        <iframe src={challenge.registrationLink} width="700" height="2000" frameBorder="0"
+                                marginHeight="0"
+                                marginWidth="0">Завантаження…
                         </iframe>
                     </div>
                 </div> : <Result

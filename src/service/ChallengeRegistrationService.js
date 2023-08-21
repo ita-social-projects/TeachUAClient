@@ -1,4 +1,4 @@
-import { BASE_URL } from "./config/ApiConfig";
+import {BASE_URL} from "./config/ApiConfig";
 import fetchRequest from "./FetchRequest";
 
 export const postChildrenChallengeRegistration = async (challengeRegistrationRequest) => {
@@ -16,7 +16,16 @@ export const postUserChallengeRegistration = async (userChallengeRegistrationReq
             return response.data;
         });
 };
-
+export const getAllChallengeRegistrationsByManager = async (managerId) => {
+    return await fetchRequest
+        .get(`${BASE_URL}/api/challenge-registration/${managerId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
 export const getUnapprovedChallengeRegistrations = async (managerId) => {
     return await fetchRequest
         .get(`${BASE_URL}/api/challenge-registration/unapproved/${managerId}`)
@@ -27,18 +36,6 @@ export const getUnapprovedChallengeRegistrations = async (managerId) => {
             return error.response.data;
         });
 };
-
-export const approveChallengeRegistration = async (challengeRegistrationId) => {
-    return await fetchRequest
-        .patch(`${BASE_URL}/api/challenge-registration/approve/${challengeRegistrationId}`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => {
-            return error.response.data;
-        });
-};
-
 export const getChildrenForCurrentUserByChallengeId = async (challengeId) => {
     return await fetchRequest
         .get(`${BASE_URL}/api/challenge-registration/user-children/${challengeId}`)
@@ -60,9 +57,9 @@ export const getUserAndChildrenApplications = async (userId) => {
             return error.response.data;
         });
 };
-export const getUserApplications = async (userId) => {
+export const checkUserAlreadyRegistered = async (challengeId, userId) => {
     return await fetchRequest
-        .get(`${BASE_URL}/api/challenge-registration/${userId}`)
+        .get(`${BASE_URL}/api/challenge-registration/${challengeId}/${userId}`)
         .then((response) => {
             return response.data;
         })
@@ -70,6 +67,17 @@ export const getUserApplications = async (userId) => {
             return error.response.data;
         });
 };
+export const approveChallengeRegistration = async (challengeRegistrationId) => {
+    return await fetchRequest
+        .patch(`${BASE_URL}/api/challenge-registration/approve/${challengeRegistrationId}`)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
 export const cancelChallengeRegistration = async (challengeRegistrationId) => {
     return await fetchRequest
         .patch(`${BASE_URL}/api/challenge-registration/cancel/${challengeRegistrationId}`)
@@ -81,13 +89,4 @@ export const cancelChallengeRegistration = async (challengeRegistrationId) => {
         });
 };
 
-export const getAllChallengeRegistrations = async (managerId) => {
-    return await fetchRequest
-        .get(`${BASE_URL}/api/challenge-registration/${managerId}`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => {
-            return error.response.data;
-        });
-};
+

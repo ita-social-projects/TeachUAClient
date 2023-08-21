@@ -1,8 +1,9 @@
 import React from 'react';
 import { Collapse, Button } from 'antd';
-import classes from "./css/ClubRegistration.module.css";
+import classes from "../css/Registration.module.css";
 
 const { Panel } = Collapse;
+const userIcon = `${process.env.PUBLIC_URL}/static/images/user/avatar/user-icon.png`;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
@@ -42,7 +43,7 @@ const UserApplication = ({ application, cancelApplication }) => {
                     />
                     <span>{application.child.firstName} {application.child.lastName}, {application.child.age}р</span>
                 </div>
-                <span className={classes.clubName}>{application.club.name}</span>
+                <span className={classes.typeName}>{application.challenge.name}</span>
                 <Button
                     className={classes.cancelButton}
                     onClick={(event) => {
@@ -57,8 +58,15 @@ const UserApplication = ({ application, cancelApplication }) => {
         )
         : (
             <div className={labelClass}>
-                <span className={classes.userDetails}>{application.user.firstName} {application.user.lastName}</span>
-                <span className={classes.clubName}>{application.club.name}</span>
+                <div className={classes.childDetails}>
+                    <img
+                        src={userIcon}
+                        alt='UserIcon'
+                        className={classes.childIcon}
+                    />
+                    <span className={classes.userDetails}>{application.user.firstName} {application.user.lastName}</span>
+                </div>
+                <span className={classes.typeName}>{application.challenge.name}</span>
                 <Button
                     className={classes.cancelButton}
                     onClick={(event) => {

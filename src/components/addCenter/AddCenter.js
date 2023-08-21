@@ -6,7 +6,7 @@ import MainInformation from './MainInformation';
 import Contacts from './Contacts';
 import Description from './Description';
 import ClubsOfCenter from './ClubsOfCenter';
-import { getAllClubsByUserId, getClubsByUserId } from "../../service/ClubService";
+import { getAllClubsByUserId } from "../../service/ClubService";
 import { getUserId } from "../../service/StorageService";
 import { getAllCities } from '../../service/CityService';
 import { getAllContacts } from '../../service/ContactService';
@@ -37,9 +37,9 @@ const AddCenter = ({isShowing, setShowing}) => {
                     locations.push({
                         id: location.id,
                         name: location.name,
-                        cityName: location.locationCity.name,
-                        districtName: location.district?.name,
-                        stationName: location.station?.name,
+                        cityName: location.cityName,
+                        districtName: location.districtName,
+                        stationName: location.stationName,
                         address: location.address,
                         latitude: location.latitude,
                         longitude: location.longitude,

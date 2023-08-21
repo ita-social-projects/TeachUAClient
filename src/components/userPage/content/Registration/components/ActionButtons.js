@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'antd';
-import classes from "../css/ClubRegistration.module.css";
+import classes from "../css/Registration.module.css";
 
 const ActionButtons = ({ registration, statusClass, approveRegistration, cancelRegistration }) => {
     return (
