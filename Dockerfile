@@ -1,7 +1,7 @@
 # ===================================
 # STAGE 1: Build React Application
 # ===================================
-FROM node:16.20.0 AS react-build
+FROM node:18.17.1 AS react-build
 WORKDIR /react
 
 # Copy only the necessary files
