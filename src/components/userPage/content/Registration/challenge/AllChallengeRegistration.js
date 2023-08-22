@@ -1,14 +1,15 @@
 import React from 'react';
 import {Collapse} from 'antd';
-import classes from "./css/ClubRegistration.module.css";
-import ActionButtons from "./components/ActionButtons";
+import classes from "../css/Registration.module.css";
+import ActionButtons from "../components/ActionButtons";
 
 
 const { Panel } = Collapse;
+const userIcon = `${process.env.PUBLIC_URL}/static/images/user/avatar/user-icon.png`;
 const boyIcon = `${process.env.PUBLIC_URL}/static/images/children/boy-icon.png`;
 const girlIcon = `${process.env.PUBLIC_URL}/static/images/children/girl-icon.png`;
 
-const AllRegistration = ({ registration, approveRegistration, cancelRegistration }) => {
+const AllChallengeRegistration = ({ registration, approveRegistration, cancelRegistration }) => {
     let labelClass = classes.label;
     let statusClass;
     if (registration.active) {
@@ -42,7 +43,7 @@ const AllRegistration = ({ registration, approveRegistration, cancelRegistration
                     />
                     <span>{registration.child.firstName} {registration.child.lastName}, {registration.child.age}р</span>
                 </div>
-                <span className={classes.clubName}>{registration.club.name}</span>
+                <span className={classes.typeName}>{registration.challenge.name}</span>
                 <ActionButtons
                     approveRegistration={approveRegistration}
                     statusClass={statusClass}
@@ -53,8 +54,15 @@ const AllRegistration = ({ registration, approveRegistration, cancelRegistration
         )
         : (
             <div className={labelClass}>
-                <span className={classes.userDetails}>{registration.user.firstName} {registration.user.lastName}</span>
-                <span className={classes.clubName}>{registration.club.name}</span>
+                <div className={classes.childDetails}>
+                    <img
+                        src={userIcon}
+                        alt='User Icon'
+                        className={classes.childIcon}
+                    />
+                    <span className={classes.userDetails}>{registration.user.firstName} {registration.user.lastName}</span>
+                </div>
+                <span className={classes.typeName}>{registration.challenge.name}</span>
                 <ActionButtons
                     approveRegistration={approveRegistration}
                     statusClass={statusClass}
@@ -90,4 +98,4 @@ const AllRegistration = ({ registration, approveRegistration, cancelRegistration
     );
 };
 
-export default AllRegistration;
+export default AllChallengeRegistration;
