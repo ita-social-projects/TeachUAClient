@@ -14,6 +14,6 @@ FROM nginx
 
 COPY --from=build /app/build /etc/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]

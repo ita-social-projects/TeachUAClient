@@ -113,7 +113,7 @@ export const getAllUsers = async () => {
 };
 
 export const getUsersByRole = async (role) => {
-    return await fetchRequest.get(BASE_URL + "/api/v1/user/" + role)
+    return await fetchRequest.get(BASE_URL + "/api/v1/user/role/" + role)
         .then((response) => {
             return response.data
         }).catch((error) => {
