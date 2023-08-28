@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {Button, Layout, Result} from "antd";
 import AboutHeader from "../mainPage/MainHeader";
 import SocialInfo from "../SocialInfo";
@@ -10,8 +10,11 @@ import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 import ChallengeBanner from "./ChallengeBanner";
 import ChallengeCarousel from "./ChallengeCarousel";
+import ChallengeSignUp from "./ChallengeSignUp";
 
 const ChallengePage = () => {
+
+
     const [challenge, setChallenge] = useState({
         id: 0,
         name: "",
@@ -52,14 +55,15 @@ const ChallengePage = () => {
                     <ChallengeBanner challenge={challenge}/>
                     <SocialInfo/>
                     <ChallengeDescription challenge={challenge}/>
+                    <ChallengeSignUp challenge={challenge}/>
                     {challenge.registrationLink &&
-                    <div className="button-div">
-                        <Link to={"/challenges/registration/" + params.challengeId}>
-                            <Button className="details-button">Зареєструватись</Button>
-                        </Link>
-                    </div>}
+                        <div className="button-div">
+                            <Link to={"/challenges/registration/" + params.challengeId}>
+                                <Button className="details-button">Зареєструватись</Button>
+                            </Link>
+                        </div>}
                     {
-                        (challenge.tasks && challenge.tasks.length !== 0)  &&
+                        (challenge.tasks && challenge.tasks.length !== 0) &&
                         <ChallengeCarousel challenge={challenge}/>
                     }
                 </div>)

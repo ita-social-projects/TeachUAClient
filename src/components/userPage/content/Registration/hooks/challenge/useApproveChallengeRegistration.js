@@ -1,9 +1,9 @@
-import {approveClubRegistration} from "../../../../../service/ClubRegistrationService";
+import {approveChallengeRegistration} from "../../../../../../service/ChallengeRegistrationService";
 import {message} from "antd";
 
-export const useApproveRegistration = (registrations, setRegistrations) => {
-    return (clubRegistrationId) => {
-        approveClubRegistration(clubRegistrationId)
+export const useApproveChallengeRegistration = (registrations, setRegistrations) => {
+    return (challengeRegistrationId) => {
+        approveChallengeRegistration(challengeRegistrationId)
             .then((response) => {
                 const updatedRegistrations = registrations.map(registration =>
                     registration.id === response.id ? {...registration, approved: response.approved} : registration

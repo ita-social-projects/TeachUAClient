@@ -1,13 +1,16 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Content } from "antd/es/layout/layout";
-import { Input, Select, Spin, List } from 'antd';
-import { getUserId } from "../../../../service/StorageService";
-import { getUserApplications } from "../../../../service/ClubRegistrationService";
-import UserApplication from "./UserApplication";
-import "./css/ClubRegistration.css";
-import {useCancelRegistration} from "./hooks/useCancelRegistration"
+import React, {useEffect, useState, useMemo} from 'react';
+import {Content} from "antd/es/layout/layout";
+import {Input, Select, Spin, List} from 'antd';
+import {getUserId} from "../../../../service/StorageService";
+import {getUserApplications} from "../../../../service/ClubRegistrationService";
+import {getUserAndChildrenApplications} from "../../../../service/ChallengeRegistrationService";
+import UserClubApplication from "./club/UserClubApplication";
+import "./css/Registration.css";
+import {useCancelClubRegistration} from "./hooks/club/useCancelClubRegistration"
+import {useCancelChallengeRegistration} from "./hooks/challenge/useCancelChallengeRegistration"
+import UserChallengeApplication from "./challenge/UserChallengeApplication";
 
-const { Option } = Select;
+const {Option} = Select;
 
 const UserApplicationsPage = () => {
     const [loading, setLoading] = useState(true);
@@ -16,14 +19,18 @@ const UserApplicationsPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedChild, setSelectedChild] = useState("default");
     const [selectedStatus, setSelectedStatus] = useState("default");
+    const [selectedType, setSelectedType] = useState("default");
     const [childNames, setChildNames] = useState([]);
-    const cancelApplication = useCancelRegistration(applications, setApplications);
+    const cancelApplication = useCancelClubRegistration(applications, setApplications);
+    const cancelChallengeApplication = useCancelChallengeRegistration(applications, setApplications);
 
     useEffect(() => {
         const loadApplications = async () => {
             try {
-                const response = await getUserApplications(getUserId());
-                setApplications(response);
+                const responseClub = await getUserApplications(getUserId());
+                const responseChallenge = await getUserAndChildrenApplications(getUserId());
+                const combinedList = responseClub.concat(responseChallenge);
+                setApplications(combinedList);
                 setLoading(false);
             } catch (error) {
                 console.error('Failed to load applications', error);
@@ -48,7 +55,9 @@ const UserApplicationsPage = () => {
     const onStatusChange = (status) => {
         setSelectedStatus(status);
     };
-
+    const onTypeChange = (status) => {
+        setSelectedType(status);
+    };
     useMemo(() => {
         let displayedApplications = [...applications];
 
@@ -60,29 +69,37 @@ const UserApplicationsPage = () => {
 
         if (selectedStatus !== "default") {
             displayedApplications = displayedApplications.filter(app => {
-                if(selectedStatus === "Схвалено") return app.active && app.approved;
-                if(selectedStatus === "Скасовано") return !app.active;
-                if(selectedStatus === "На розгляді") return app.active && !app.approved;
+                if (selectedStatus === "Схвалено") return app.active && app.approved;
+                if (selectedStatus === "Скасовано") return !app.active;
+                if (selectedStatus === "На розгляді") return app.active && !app.approved;
                 return true;
             });
         }
-
+        if (selectedType !== "default") {
+            displayedApplications = displayedApplications.filter(app => {
+                if (selectedType === "Гуртки") return app.hasOwnProperty('club');
+                if (selectedType === "Челенджі") return app.hasOwnProperty('challenge');
+                return true;
+            });
+        }
         if (searchTerm !== "") {
             displayedApplications = displayedApplications.filter(app => {
                 const userName = app.user ? `${app.user.firstName} ${app.user.lastName}`.toLowerCase() : '';
                 const childName = app.child ? `${app.child.firstName} ${app.child.lastName}`.toLowerCase() : '';
-                const clubName = app.club.name.toLowerCase();
+                let placeName;
+                app.challenge ?
+                    placeName = app.challenge.name.toLowerCase() : placeName = app.club.name.toLowerCase()
+
 
                 return (
-                    clubName.includes(searchTerm.toLowerCase()) ||
+                    placeName.includes(searchTerm.toLowerCase()) ||
                     userName.includes(searchTerm.toLowerCase()) ||
                     childName.includes(searchTerm.toLowerCase())
                 );
             });
         }
-
         setDisplayedApplications(displayedApplications);
-    }, [selectedChild, selectedStatus, searchTerm, applications]);
+    }, [selectedChild, selectedStatus, selectedType, searchTerm, applications]);
 
     return (
         <Content className="registrationsContent">
@@ -107,6 +124,16 @@ const UserApplicationsPage = () => {
                         <Option value="Схвалено">Схвалено</Option>
                         <Option value="Скасовано">Скасовано</Option>
                         <Option value="На розгляді">На розгляді</Option>
+                    </Select>
+                    <Select
+                        defaultValue="default"
+                        className="filterSelectStatuses"
+                        onChange={onTypeChange}
+                        dropdownMatchSelectWidth={false}
+                    >
+                        <Option value="default">Всі заявки</Option>
+                        <Option value="Гуртки">Гуртки</Option>
+                        <Option value="Челенджі">Челенджі</Option>
                     </Select>
                     <Select
                         defaultValue="default"
@@ -141,18 +168,26 @@ const UserApplicationsPage = () => {
                                 className: "user-content-pagination"
                             }}
                             renderItem={(application) => (
-                                <UserApplication
-                                    application={application}
-                                    cancelApplication={cancelApplication}
-                                    key={application.id}
-                                />
+                                application.challenge ?
+                                    (<UserChallengeApplication
+                                            application={application}
+                                            cancelApplication={cancelChallengeApplication}
+                                            key={application.id}
+                                        />
+                                    ) : (
+                                        <UserClubApplication
+                                            application={application}
+                                            cancelApplication={cancelApplication}
+                                            key={application.id}
+                                        />)
                             )}
                         />
                     )}
                 </div>
             </div>
         </Content>
-    );
+    )
+        ;
 };
 
 export default UserApplicationsPage;
