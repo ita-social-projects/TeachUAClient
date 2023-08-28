@@ -7,8 +7,8 @@ WORKDIR /react
 # Copy only the necessary files
 COPY package*.json \
     craco.config.js \
-    .env.production \
     .env ./
+COPY .env.docker ./.env.production
 COPY src ./src
 COPY public ./public
 
