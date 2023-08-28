@@ -102,7 +102,6 @@ const MainInformation = ({step, setStep, clubs, cities, locations, setLocations,
                 editedLocation={editedLocation}
                 setEditedLocation={setEditedLocation}
                 cities={cities}/>
-
         </Form>
     )
 }

@@ -27,7 +27,7 @@
     width: 250px;
 }
 
-.clubName {
+.typeName {
     text-align: center;
     font-weight: bold; 
 }  
@@ -80,7 +80,7 @@
         text-align: center;
     }
 
-    .clubName {
+    .typeName {
         margin-top: 10px;
     }
 

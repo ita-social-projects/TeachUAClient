@@ -18,7 +18,7 @@ const EditChallenge = (props) => {
     const history = useHistory();
 
 
-    const [challenge, setChallenge] = useState([{
+    const [challenge, setChallenge] = useState({
         id: 0,
         name: "",
         title: "",
@@ -27,7 +27,7 @@ const EditChallenge = (props) => {
         sortNumber: 0,
         isActive: "",
         tasks: []
-    }]);
+    });
 
     const [currentPicture, setCurrentPicture] = useState([{
         uid: "",
@@ -38,7 +38,7 @@ const EditChallenge = (props) => {
     const [challengeNotFound, setChallengeNotFound] = useState(false);
     const [loading, setLoading] = useState(true);
     const [picture, setPicture] = useState();
-    const [challengeEditForm, form] = useForm();
+    const [challengeEditForm] = useForm();
     const challengeId = useParams();
     const [isChecked, setIsChecked] = useState(challenge.isActive);
 

@@ -1,14 +1,16 @@
-import {cancelClubRegistration} from "../../../../../service/ClubRegistrationService";
+import {cancelClubRegistration} from "../../../../../../service/ClubRegistrationService";
 import {message} from "antd";
 
-export const useCancelRegistration = (applications, setApplications) => {
+export const useCancelClubRegistration = (applications, setApplications) => {
     return (applicationId) => {
         cancelClubRegistration(applicationId)
             .then((response) => {
                 const updatedApplications = applications.map(application =>
-                    application.id === response.id ? {...application, active: response.active} : application
+                    (application.hasOwnProperty("club") && application.id === response.id) ? {
+                        ...application,
+                        active: response.active
+                    } : application
                 );
-
                 setApplications(updatedApplications);
                 message.success("Заявка скасована");
             })
