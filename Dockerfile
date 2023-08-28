@@ -5,10 +5,10 @@ FROM node:16.20.0 AS react-build
 WORKDIR /react
 
 # Copy only the necessary files
-COPY package*.json ./
-COPY craco.config.js ./
-COPY .env.production ./
-COPY .env ./
+COPY package*.json \
+    craco.config.js \
+    .env.production \
+    .env ./
 COPY src ./src
 COPY public ./public
 
@@ -26,6 +26,8 @@ COPY --from=react-build /react/build /usr/share/nginx/html
 
 # Copy the Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+ENV REACT_APP_ROOT_SERVER=''
 
 # Expose port 80
 EXPOSE 80
