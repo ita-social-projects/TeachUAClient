@@ -85,7 +85,8 @@ export const updateCertificateProfile = async (id, data) => {
         sendToEmail: data.sendToEmail,
         sendStatus: null,
         serialNumber: data.serialNumber,
-        updateStatus: data.updateStatus
+        updateStatus: data.updateStatus,
+        dates: data.dates
     }).then((response) => {
         return response.data
     }).catch((error) => {

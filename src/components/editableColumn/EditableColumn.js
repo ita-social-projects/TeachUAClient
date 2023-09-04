@@ -1,16 +1,21 @@
-import {Checkbox, Form, Input, InputNumber, Select, Upload} from "antd";
+import {Checkbox, DatePicker, Form, Input, InputNumber, Select, Upload} from "antd";
 import React from "react";
 import './css/EditableColumn.css';
 import {UPLOAD_IMAGE_URL} from "../../service/config/ApiConfig";
 import UploadOutlined from "@ant-design/icons/lib/icons/UploadOutlined";
 import {tokenToHeader} from "../../service/UploadService";
+import moment from "moment";
 
 const { TextArea } = Input;
+function getValueByPath(obj, path) {
+    if (!path || typeof path !== 'string') return undefined;
+
+    return path.split('.').reduce((o, i) => (o ? o[i] : undefined), obj);
+}
 
 const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploadFolder, record, index, children,
                             updateRecord, ...restProps}) => {
     let inputNode;
-
     switch (inputType) {
         case 'upload':
             inputNode = <Upload
@@ -55,6 +60,9 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
         case 'text':
             inputNode = <Input/>;
             break;
+        case 'date':
+            inputNode = <DatePicker format="DD.MM.YYYY" />;
+            break;
         default: {
             inputNode = <Input/>;
             break;
@@ -91,10 +99,22 @@ const EditableColumn = ({editing, dataIndex, title, inputType, selectData, uploa
                     >
                         {inputNode}
                     </Form.Item>
+                ) :    inputType === 'date' ? (
+                    <Form.Item
+                        name={dataIndex}
+                        rules={[
+                            {
+                                required: true,
+                                message: `Заповніть поле ${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
                 ) : (
                     <Form.Item
                         name={dataIndex}
-                        initialValue={record[dataIndex]}
+                        initialValue={getValueByPath(record, dataIndex)}
                         rules={[
                             {
                                 required: true,

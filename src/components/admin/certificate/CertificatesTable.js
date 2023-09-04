@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 import {getSentCertificates, updateCertificateProfile} from "../../../service/CertificateService";
-import {editCellValue} from "../../../util/TableUtil";
+import {editCellValueForCertificates} from "../../../util/TableUtil";
 import './css/CertificatesTable.css';
 import {Form, message, Typography, Input} from "antd";
 import EditableTable from "../../EditableTable";
@@ -21,7 +21,6 @@ const CertificatesTable = () => {
             setCertificates(response);
             console.log(response);
         });
-        console.log(certificates);
     };
 
     useEffect(() => {
@@ -39,20 +38,34 @@ const CertificatesTable = () => {
     };
 
     const save = async (record) => {
-        form.setFieldsValue({
-            ...form.getFieldsValue()
-        });
-        editCellValue(form, certificates, record.id)
-            .then((editedData) => {
-                updateCertificateProfile(record.id, editedData.item)
-                    .then(response => {
-                        if (response.status) {
-                            message.warning(response.message)
-                            return;
-                        }
-                        getData();
-                    })
-            })
+        const values = form.getFieldsValue();
+        const currentDates = record.dates || {};
+
+        if (values['dates.date'] || values['dates.duration']) {
+            if (values['dates.date']) {
+                currentDates.date = values['dates.date'].format("DD.MM.YYYY");
+            }
+            if (values['dates.duration']) {
+                currentDates.duration = values['dates.duration'];
+            }
+
+            values.dates = currentDates;
+
+            const {'dates.date': _, 'dates.duration': __, ...rest} = values;
+            form.setFieldsValue(rest);
+
+            editCellValueForCertificates(rest, certificates, record.id)
+                .then((editedData) => {
+                    updateCertificateProfile(record.id, editedData.item)
+                        .then(response => {
+                            if (response.status) {
+                                message.warning(response.message);
+                                return;
+                            }
+                            getData();
+                        });
+                });
+        }
     }
 
     const columns = [
@@ -94,16 +107,17 @@ const CertificatesTable = () => {
         },
         {
             title: 'Дата видачі',
-            dataIndex: 'date',
-            width: '7%',
-            editable: false,
+            dataIndex: 'dates.date',
+            inputType: 'date',
+            width: '9%',
+            editable: true,
             render: (text, record) => record.dates.date
         },
         {
-            title: 'Тривалість челенджу',
-            dataIndex: 'duration',
+            title: 'Тривалість навчання',
+            dataIndex: 'dates.duration',
             width: '18%',
-            editable: false,
+            editable: true,
             render: (text, record) => record.dates.duration
         },
         {
@@ -127,7 +141,7 @@ const CertificatesTable = () => {
 
     return (
         <div className="certificatesContent">
-            <Input.Search 
+            <Input.Search
             placeholder="Пошук по сертифікатах"
             onSearch={(value)=>{
                 setSearchedText(value);
