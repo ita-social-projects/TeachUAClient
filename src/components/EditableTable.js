@@ -19,7 +19,7 @@ const EditableTable = ({
     const [editingKey, setEditingKey] = useState('');
 
     const edit = (record) => {
-        console.log(record)
+        form.resetFields()
         form.setFieldsValue({
             ...record,
         });
