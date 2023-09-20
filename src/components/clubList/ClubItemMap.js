@@ -74,7 +74,7 @@ const ClubItemMap = ({ club, visible, setVisible }) => {
                     }}>
                     {(cluster) =>
                         club.locations.map(location =>
-                            location.address === searchParameters.cityName && <Marker
+                            location.cityName === searchParameters.cityName && <Marker
                                 id={club.id}
                                 position={{
                                     lat: location.latitude,
