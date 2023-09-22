@@ -8,11 +8,11 @@ const ClubItemMap = ({ club, visible, setVisible }) => {
 
     const [map, setMap] = useState(null);
     const [selected, setSelected] = useState(null);
-    const [zoom, setZoom] = useState(10);
+    const [zoom, setZoom] = useState(40);
 
     const [center, setCenter] = useState({
-        lat: club?.locations[0]?.city?.latitude,
-        lng: club?.locations[0]?.city?.longitude
+        lat: club?.locations[0]?.latitude,
+        lng: club?.locations[0]?.longitude
     });
 
     const { isLoaded, loadError } = useLoadScript({
@@ -74,7 +74,7 @@ const ClubItemMap = ({ club, visible, setVisible }) => {
                     }}>
                     {(cluster) =>
                         club.locations.map(location =>
-                            location.city.name === searchParameters.cityName && <Marker
+                            location.cityName === searchParameters.cityName && <Marker
                                 id={club.id}
                                 position={{
                                     lat: location.latitude,
@@ -96,9 +96,9 @@ const ClubItemMap = ({ club, visible, setVisible }) => {
 
                 {selected && (
                     <InfoWindow position={{ lat: center.lat, lng: center.lng }}
-                        onCloseClick={() => {
-                            setSelected(null);
-                        }}>
+                                onCloseClick={() => {
+                                    setSelected(null);
+                                }}>
                         <MarkItem mapClub={selected} />
                     </InfoWindow>)}
             </GoogleMap>

@@ -65,9 +65,9 @@ const CenterEditModal = ({ centerId, reloadAfterChange }) => {
                 locationsWithDuplicates.push({
                     id: location.id,
                     name: location.name,
-                    cityName: location.locationCity.name,
-                    districtName: location.district?.name,
-                    stationName: location.station?.name,
+                    cityName: location.cityName,
+                    districtName: location.districtName,
+                    stationName: location.stationName,
                     address: location.address,
                     latitude: location.latitude,
                     longitude: location.longitude,

@@ -5,14 +5,10 @@ import ApartmentOutlined from "@ant-design/icons/lib/icons/ApartmentOutlined";
 import CrownOutlined from "@ant-design/icons/lib/icons/CrownOutlined";
 import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import FolderOpenOutlined from "@ant-design/icons/lib/icons/FolderOpenOutlined";
-import HomeOutlined from "@ant-design/icons/lib/icons/HomeOutlined";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
 import {PageContext} from "../../context/PageContext";
-import {AppstoreOutlined, CaretDownOutlined} from "@ant-design/icons";
 import "./css/NavMenu.less";
-import {getActiveChallengesPreviews, getChallengesPreviews} from "../../service/ChallengeService";
-import MailOutlined from "@ant-design/icons/lib/icons/MailOutlined";
-import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined";
+import {getActiveChallengesPreviews} from "../../service/ChallengeService";
 
 
 const NavMenu = () => {
@@ -38,7 +34,13 @@ const NavMenu = () => {
 
         },
         {
-            label: <span className="challenge-text">
+            label: <span className="challenge-text" onClick={
+                () => {
+                    getActiveChallengesPreviews().then((response) => {
+                        setChallenges(response);
+                    })
+                }
+            }>
                 Челендж
             </span>,
             key: "challenge_ONE",
@@ -86,13 +88,6 @@ const NavMenu = () => {
         }
         window.addEventListener("resize", handleResize)
     });
-
-    useEffect(() => {
-        getActiveChallengesPreviews().then((response) => {
-            setChallenges(response);
-        })
-    }, []);
-
 
     return (
         <ConfigProvider

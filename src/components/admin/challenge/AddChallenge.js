@@ -24,7 +24,7 @@ const AddChallenge = () => {
         if (name && sortNumber && title && description && picture){
             return !(challengeForm.getFieldValue('name').length >= 5 &&
                 challengeForm.getFieldValue('name').length <= 30 &&
-                challengeForm.getFieldValue('sortNumber') >= 10000 &&
+                challengeForm.getFieldValue('sortNumber') >= 0 &&
                 challengeForm.getFieldValue('title').length >= 5 &&
                 challengeForm.getFieldValue('title').length <= 100 &&
                 challengeForm.getFieldValue('description').length >= 40 &&
@@ -107,8 +107,8 @@ const AddChallenge = () => {
                         {
                             required: true,
                             validator: (_, value) => {
-                                if (value && (value.toString().length < 5 || value.toString().length > 30)) {
-                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 5 максимум 30 символів");
+                                if (value && value.toString().length > 30) {
+                                    return Promise.reject("Поле 'Порядковий номер' може містити мінімум 1 максимум 30 символів");
                                 }
                                 return Promise.resolve();
                             },
