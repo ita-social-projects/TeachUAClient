@@ -14,11 +14,12 @@ export const getPossibleResults = async (parameters) => {
     });
 };
 
-export const getPossibleResultsByText = async (text, parameters) => {
+export const getPossibleResultsByText = async (text, parameters, userId) => {
     return await fetchRequest.get(BASE_URL + "/api/search", {
         params: {
             text: text,
-            cityName: parameters.cityName
+            cityName: parameters.cityName,
+            userId: userId
         }
     }).then((response) => {
         return response.data
