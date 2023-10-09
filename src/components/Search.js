@@ -18,6 +18,7 @@ import {FilePdfOutlined} from "@ant-design/icons";
 import {getUserId} from "../service/StorageService";
 import {getUserById} from "../service/UserService";
 import {getCentersByAdvancedSearch} from "../service/CenterService";
+import debounce from "lodash/debounce";
 
 
 const {Option, OptGroup} = Select;
@@ -39,6 +40,7 @@ class Search extends React.Component {
             searchClicked: false,
             user: ''
         };
+        this.debouncedSearch = debounce(this.onSearch, 1000);
     }
 
     componentWillUnmount() {
@@ -140,12 +142,13 @@ class Search extends React.Component {
     onSearch = (value) => {
         searchInputData.input = value;
         value = value.trim();
+        const userId = this.state.user !== null && this.state.user !== undefined && this.state.user !== '' ? this.state.user.id : null;
         clearTimeout(this.timer);
 
         this.timer = setTimeout(() => {
             this.onSearchChange(value, "all");
             this.setState({loading: true});
-            getPossibleResultsByText(value, searchParameters).then((response) => {
+            getPossibleResultsByText(value, searchParameters, userId).then((response) => {
                 this.setState({possibleResults: response, loading: false});
             });
         }, 1000);
