@@ -22,6 +22,7 @@ export const addClub = async (data) => {
             contacts: data.contacts,
             isApproved: data.isApproved,
             centerId: data.centerId,
+            workTimes: data.workTimes,
         })
         .then((response) => {
             return response.data;
@@ -40,7 +41,7 @@ export const updateClubById = async (data) => {
             urlLogo: data.urlLogo,
             urlBackground: data.urlBackground,
             urlGallery: data.urlGallery,
-            workTime: data.workTime,
+            workTimes: data.workTimes,
             categories: data.categories,
             user: data.user,
             center: data.center,

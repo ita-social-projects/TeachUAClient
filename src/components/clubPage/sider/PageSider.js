@@ -8,6 +8,7 @@ import ContactsInfoUtil from "../../../util/ContactsInfoUtil";
 import SimilarClubs from "./SimilarClubs";
 import ClubLocation from "./ClubLocaton";
 import {ConfigProvider} from "antd";
+import dayjs from "dayjs";
 
 class PageSider extends React.Component {
     state = {
@@ -22,6 +23,27 @@ class PageSider extends React.Component {
         });
 
     };
+
+
+    transformDay = (day) => {
+        switch (day) {
+            case "MONDAY":
+               return "Понеділок";
+            case "TUESDAY":
+                return "Вівторок";
+            case "WEDNESDAY":
+                return "Середа";
+            case "THURSDAY":
+               return "Четвер";
+            case "FRIDAY":
+               return "П'ятниця";
+            case "SATURDAY":
+               return "Субота";
+            case "SUNDAY":
+               return "Неділя";
+        }
+    }
+
 
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -74,6 +96,20 @@ class PageSider extends React.Component {
                     <div className="age">
                         <span className="sider-label">Вік аудиторії: </span>
                         <span className="years">від {this.props.club.ageFrom} до {this.props.club.ageTo} років</span>
+                    </div>
+                    <div className="work-time">
+                    {this.props.club.workTimes.length!==0 ? <div>
+                        <br/>
+                        <span className="sider-label">Графік роботи: </span>
+                        <br/>
+                        { this.props.club.workTimes.map(dayTime =>
+
+                            <div className="day-time">
+                                <span className="text"> {this.transformDay(dayTime.day)} : { dayjs(dayTime.startTime).format('HH:mm')} - {  dayjs(dayTime.endTime).format('HH:mm')}</span>
+
+                            </div>)
+                        }
+                        <br/></div>: ""}
                     </div>
                     {this.props.club.center &&
                         <div className="center">

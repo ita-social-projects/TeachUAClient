@@ -16,6 +16,8 @@ import MainInformationStep from './steps/MainInformationStep';
 const EditClubModal = ({ clubId, reloadAfterChange }) => {
     const [step, setStep] = useState(0);
     const [isShowing, setShowing] = useState(false);
+    const [workTime, setWorkTime] = useState([]);
+    const [workDay, setWorkDay] = useState([]);
 
     const [result, setResult] = useState({});
     const [categories, setCategories] = useState([]);
@@ -48,7 +50,11 @@ const EditClubModal = ({ clubId, reloadAfterChange }) => {
                     setResult={setResult}
                     result={result}
                     step={step}
-                    setStep={setStep} />;
+                    setStep={setStep}
+                    workTime={workTime}
+                    setWorkTime={setWorkTime}
+                    workDay={workDay}
+                    setWorkDay={setWorkDay}/>;
             case 2:
                 return <DescriptionStep
                     setResult={setResult}

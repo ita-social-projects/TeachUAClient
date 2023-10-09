@@ -1,13 +1,27 @@
-import { Button, Form, Input, List, message, Popconfirm, Switch, Tooltip, Typography } from "antd";
-import React, { useState, useEffect } from "react";
+import {
+    ConfigProvider,
+    Form,
+    Input,
+    List,
+    message,
+    Popconfirm,
+    Switch,
+    Tooltip,
+    Typography,
+    Button, Checkbox, Col
+} from "antd";
+import React, {useState, useEffect} from "react";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
+import RangeTimePicker from "../../RangeTimePicker";
 
-const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult, result }) => {
+const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult, result,workTime,setWorkTime,workDay,setWorkDay }) => {
     const [locations, setLocations] = useState([]);
+    const [contacts_data, setContactsData] = useState({});
+    const [workDay_data, setWorkDayData] = useState(workTime);
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
@@ -15,6 +29,36 @@ const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult
     const [checked, setChecked] = useState(result.isOnline);
     const { Text } = Typography;
 
+    const DAYS = [
+        {
+            value: "MONDAY",
+            label: "Понеділок"
+        },
+        {
+            value: "TUESDAY",
+            label: "Вівторок"
+        },
+        {
+            value: "WEDNESDAY",
+            label: "Середа"
+        },
+        {
+            value: "THURSDAY",
+            label: "Четвер"
+        },
+        {
+            value: "FRIDAY",
+            label: "П'ятниця"
+        },
+        {
+            value: "SATURDAY",
+            label: "Субота"
+        },
+        {
+            value: "SUNDAY",
+            label: "Неділя"
+        }
+    ];
 
     useEffect(() => {
         if (result) {
@@ -37,6 +81,13 @@ const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult
             values.isOnline = true;
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
+        setWorkTime(workDay_data);
+        result.workTimes = Object.keys(workDay_data).filter(key=>{
+          return !!workDay.includes(key)
+        }).map(key=>{
+                return { "day":key,
+            "startTime":workDay_data[key][0],
+            "endTime":workDay_data[key][1],}})
 
         result.contacts = contactTypes.map(contactType => 
             ({contactType: contactType, contactData: values[contactType.name]})
@@ -75,14 +126,24 @@ const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult
         }
     }
 
-    const isEmailField = (contactType) => {
-        return contactType.name === "Пошта";
+    const onChangeCheck = (list) => {
+        setWorkDay(list);
+    };
+
+    const isEmailField = (contact) => {
+        return contact.name === "Пошта";
     }
 
     const isPhoneField = (contactType) => {
         return contactType.name === "Телефон";
     }
-
+    const onOkTime = (event, workDay) => {
+        if(event[0]!=="" && event[1]!=="")
+            setWorkDayData({
+                ...workDay_data,
+                [workDay]: event
+            });
+    }
     return (
         <Form
             name="basic"
@@ -135,6 +196,39 @@ const ContactsStep = ({ contacts: contactTypes, cities, step, setStep, setResult
                     </Tooltip>
                 </Form.Item>
 
+
+            </div>
+            <div className="add-club-in" style={{display: 'grid'}}>
+                <ConfigProvider>
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Години роботи</Text>
+
+    <Form.Item name="workDay">
+                        <Checkbox.Group onChange={onChangeCheck}
+                                        style={{display: 'flex', flexDirection: 'column'}}
+                                        defaultValue={Object.keys(workTime)}>
+                            {DAYS.map((day, index) => (
+
+                                <Col key={day}>
+                                    <Checkbox value={day.value}
+                                              style={{padding: "1em 1em", display:"flex", alignContent:"center", textAlign:"center", flexDirection:"row"}}>
+                                        <div className="checkbox-item"
+                                             style={{display:"flex", alignItems:"center", textAlign:"center"}}>
+                                           <div style={{width:"5rem"}}> {day.label} </div>
+
+                                            <Form.Item name={`${day.value}`}>
+                                            <RangeTimePicker visible={workDay.includes(day.value)}
+                                                             onOk={ (e) =>  onOkTime(e,day.value)}
+                                            initialValue={workDay_data[day.value]}/>
+
+                                            </Form.Item>
+                                        </div>
+                                    </Checkbox>
+                                </Col>
+
+                            ))}
+                        </Checkbox.Group>
+    </Form.Item>
+                </ConfigProvider>
             </div>
 
             <Text style={{ fontSize: '19px', color: 'GrayText' }}>Контакти</Text>
