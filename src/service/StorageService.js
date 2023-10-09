@@ -45,3 +45,8 @@ export const getUserId = () => {
 export const getRole = () => {
     return localStorage.getItem("role");
 }
+
+export const UserLoggedIn = () => {
+    const userId = getUserId();
+    return userId !== null ? Number(userId) : null;
+  };

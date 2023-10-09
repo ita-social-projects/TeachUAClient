@@ -15,10 +15,9 @@ import ControlOutlined from "@ant-design/icons/lib/icons/ControlOutlined";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import {getAllCategories} from "../service/CategoryService";
 import {FilePdfOutlined} from "@ant-design/icons";
-import {getUserId} from "../service/StorageService";
+import {getUserId, UserLoggedIn} from "../service/StorageService";
 import {getUserById} from "../service/UserService";
 import {getCentersByAdvancedSearch} from "../service/CenterService";
-import debounce from "lodash/debounce";
 
 
 const {Option, OptGroup} = Select;
@@ -38,9 +37,9 @@ class Search extends React.Component {
             allCategories: [],
             loading: false,
             searchClicked: false,
+            searchText: '',
             user: ''
         };
-        this.debouncedSearch = debounce(this.onSearch, 1000);
     }
 
     componentWillUnmount() {
@@ -54,15 +53,16 @@ class Search extends React.Component {
         getAllCategories().then((response) => {
             this.setState({allCategories: response});
         });
-        this.setState({loading: true});
-        getPossibleResults(searchParameters).then((response) => {
-            this.setState({possibleResults: response, loading: false});
-        });
         if (getUserId()) {
             getUserById(getUserId()).then(response => {
                 this.setState({user: response});
             })
         }
+        this.setState({loading: true});
+        getPossibleResults(searchParameters).then((response) => {
+            this.setState({possibleResults: response, loading: false});
+        });
+        
     }
 
     onSearchChange = (value, option, page) => {
@@ -70,11 +70,6 @@ class Search extends React.Component {
 
         if (value === undefined) {
             return;
-        }
-        if (value.length === 0) {
-            getClubsByParameters(searchParameters).then((response) => {
-                this.context.setClubs(response);
-            });
         }
         if (this.props.redirect && value.length > 2) {
             this.timer = setTimeout(() => {
@@ -104,7 +99,7 @@ class Search extends React.Component {
                     }
                 }
             }
-            getClubsByParameters(searchParameters).then((response) => {
+            getClubsByParameters(searchParameters, UserLoggedIn()).then((response) => {
                 this.context.setClubs(response);
             });
         } else {
@@ -140,15 +135,15 @@ class Search extends React.Component {
     };
 
     onSearch = (value) => {
+        this.setState({ searchText: value });
         searchInputData.input = value;
         value = value.trim();
-        const userId = this.state.user !== null && this.state.user !== undefined && this.state.user !== '' ? this.state.user.id : null;
         clearTimeout(this.timer);
 
         this.timer = setTimeout(() => {
             this.onSearchChange(value, "all");
             this.setState({loading: true});
-            getPossibleResultsByText(value, searchParameters, userId).then((response) => {
+            getPossibleResultsByText(value, searchParameters).then((response) => {
                 this.setState({possibleResults: response, loading: false});
             });
         }, 1000);
@@ -163,7 +158,7 @@ class Search extends React.Component {
         if (!this.props.advancedSearch) {
             clearSearchParameters();
             searchInputData.input = "";
-            getClubsByParameters(searchParameters).then((response) => {
+            getClubsByParameters(searchParameters, UserLoggedIn()).then((response) => {
                 this.context.setClubs(response);
             });
         }
@@ -184,6 +179,11 @@ class Search extends React.Component {
         this.state.searchClicked = true;
         if (this.state.searchClicked) {
             this.setState({loading: true});
+
+            if (this.state.searchText === searchInputData.input) {
+                this.setState({ loading: false });
+                return;
+            }
 
             this.onSearchChange(searchInputData.input, {type: "all"});
             this.setState({loading: false});

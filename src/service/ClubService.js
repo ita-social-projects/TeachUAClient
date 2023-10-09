@@ -4,6 +4,7 @@ import {replaceCommaToSemicolon} from "../util/CategoryUtil";
 
 import {searchInputData, searchParameters} from "../context/SearchContext";
 import {handleDownloadFile} from "../util/FileUtil";
+import {UserLoggedIn} from "../service/StorageService";
 
 export const addClub = async (data) => {
     return await fetchRequest
@@ -166,7 +167,7 @@ export const getClubsByAdvancedSearch = async (
         });
 };
 
-export const getClubsByParameters = async (parameters, page) => {
+export const getClubsByParameters = async (parameters, userId) => {
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/search", {
             params: {
@@ -174,7 +175,8 @@ export const getClubsByParameters = async (parameters, page) => {
                 cityName: parameters.cityName,
                 isOnline: parameters.isOnline,
                 categoryName: parameters.categoryName,
-                page: page,
+                page: parameters.page,
+                userId: userId
             },
         })
         .then((response) => {
