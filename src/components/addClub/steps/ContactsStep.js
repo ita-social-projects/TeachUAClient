@@ -1,16 +1,26 @@
-import {ConfigProvider, Form, Input, List, message, Popconfirm, Switch, Tooltip, Typography} from "antd";
-import React, { useState, useEffect } from "react";
+import {
+    ConfigProvider,
+    Form,
+    Input,
+    List,
+    message,
+    Popconfirm,
+    Switch,
+    Tooltip,
+    Typography,
+    Button, Checkbox, Col
+} from "antd";
+import React, {useState, useEffect} from "react";
 import MaskIcon from "../../MaskIcon";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
 import AddLocationModal from "../location/AddLocationModal";
+import RangeTimePicker from "../../RangeTimePicker"
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
-import {Button} from "antd";
-
-
-const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations }) => {
+const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations,workTime,setWorkTime,workDay,setWorkDay }) => {
     const [contacts_data, setContactsData] = useState({});
+    const [workDay_data, setWorkDayData] = useState(workTime);
     const [locationVisible, setLocationVisible] = useState(false);
     const [editedLocation, setEditedLocation] = useState(null);
     const [locationForm] = Form.useForm();
@@ -18,6 +28,36 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     const [checked, setChecked] = useState(result.isOnline);
     const {Text} = Typography;
 
+    const DAYS = [
+        {
+            value: "MONDAY",
+            label: "Понеділок"
+        },
+        {
+            value: "TUESDAY",
+            label: "Вівторок"
+        },
+        {
+            value: "WEDNESDAY",
+            label: "Середа"
+        },
+        {
+            value: "THURSDAY",
+            label: "Четвер"
+        },
+        {
+            value: "FRIDAY",
+            label: "П'ятниця"
+        },
+        {
+            value: "SATURDAY",
+            label: "Субота"
+        },
+        {
+            value: "SUNDAY",
+            label: "Неділя"
+        }
+    ];
 
     useEffect(() => {
         if (result) {
@@ -39,10 +79,16 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             values.isOnline = true;
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
-
         values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
-        values.locations = locations;
+        setWorkTime(workDay_data);
+        values.workTimes = Object.keys(workDay_data).filter(key=>{
+          return !!workDay.includes(key)
+        }).map(key=>{
+                return { "day":key,
+            "startTime":workDay_data[key][0],
+            "endTime":workDay_data[key][1],}})
 
+        values.locations = locations;
         setResult(Object.assign(result, values));
         nextStep();
         contactsForm.resetFields();
@@ -78,12 +124,24 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
         }
     }
 
+    const onChangeCheck = (list) => {
+        setWorkDay(list);
+    };
+
     const isEmailField = (contact) => {
         return contact.name === "Пошта";
     }
 
     const isPhoneField = (contact) => {
         return contact.name === "Телефон";
+    }
+
+    const onOkTime = (event, workDay) => {
+        if(event[0]!=="" && event[1]!=="")
+        setWorkDayData({
+            ...workDay_data,
+            [workDay]: event
+        });
     }
 
     return (
@@ -95,8 +153,8 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
         >
             <Text style={{fontSize :'19px', color:'GrayText'}}>Локації</Text>
             <Form.Item name="locations"
-                className="add-club-row"
-                initialValue={result.locations}>
+                       className="add-club-row"
+                       initialValue={result.locations}>
                 <List
                     className="add-club-location-list"
                     itemLayout="horizontal"
@@ -147,7 +205,38 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 </ConfigProvider>
 
             </div>
+            <div className="add-club-in" style={{display: 'grid'}}>
+                <ConfigProvider>
+                    <Text style={{fontSize: '19px', color: 'GrayText'}}>Години роботи</Text>
 
+    <Form.Item name="workDay">
+                        <Checkbox.Group onChange={onChangeCheck}
+                                        style={{display: 'flex', flexDirection: 'column'}}
+                                        defaultValue={Object.keys(workTime)}>
+                            {DAYS.map((day, index) => (
+
+                                <Col key={day}>
+                                    <Checkbox value={day.value}
+                                              style={{padding: "1em 1em", display:"flex", alignContent:"center", textAlign:"center", flexDirection:"row"}}>
+                                        <div className="checkbox-item"
+                                             style={{display:"flex", alignItems:"center", textAlign:"center"}}>
+                                           <div style={{width:"5rem"}}> {day.label} </div>
+
+                                            <Form.Item name={`${day.value}`}>
+                                            <RangeTimePicker visible={workDay.includes(day.value)}
+                                                             onOk={ (e) =>  onOkTime(e,day.value)}
+                                            initialValue={workDay_data[day.value]}/>
+
+                                            </Form.Item>
+                                        </div>
+                                    </Checkbox>
+                                </Col>
+
+                            ))}
+                        </Checkbox.Group>
+    </Form.Item>
+                </ConfigProvider>
+            </div>
             <ConfigProvider
                 theme={{
                     token: {

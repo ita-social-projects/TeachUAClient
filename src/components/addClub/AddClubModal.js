@@ -22,6 +22,8 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
     const [contacts, setContacts] = useState([]);
     const [locations, setLocations] = useState([]);
     const [centers, setCenters] = useState([]);
+    const [workTime, setWorkTime] = useState([]);
+    const [workDay, setWorkDay] = useState([]);
 
     useEffect(() => {
         getAllCenters().then(response => setCenters(response))
@@ -53,6 +55,10 @@ const AddClubModal = ({isShowing, setShowing, clubs, setClubs, fromCenter}) => {
                     result={result}
                     step={step}
                     setStep={setStep}
+                    workTime={workTime}
+                    setWorkTime={setWorkTime}
+                    workDay={workDay}
+                    setWorkDay={setWorkDay}
                     locations={locations}
                     setLocations={setLocations}/>;
             case 2:
