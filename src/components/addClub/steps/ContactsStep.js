@@ -18,7 +18,20 @@ import AddLocationModal from "../location/AddLocationModal";
 import RangeTimePicker from "../../RangeTimePicker"
 import InfoCircleOutlined from "@ant-design/icons/lib/icons/InfoCircleOutlined";
 
-const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, locations, setLocations,workTime,setWorkTime,workDay,setWorkDay }) => {
+const ContactsStep = ({
+                          contacts,
+                          cities,
+                          step,
+                          setStep,
+                          setResult,
+                          result,
+                          locations,
+                          setLocations,
+                          workTime,
+                          setWorkTime,
+                          workDay,
+                          setWorkDay
+                      }) => {
     const [contacts_data, setContactsData] = useState({});
     const [workDay_data, setWorkDayData] = useState(workTime);
     const [locationVisible, setLocationVisible] = useState(false);
@@ -61,7 +74,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
 
     useEffect(() => {
         if (result) {
-            contactsForm.setFieldsValue({ ...result });
+            contactsForm.setFieldsValue({...result});
         }
     }, []);
 
@@ -79,14 +92,17 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             values.isOnline = true;
             message.info('Ви не додали жодної локації, гурток автоматично є онлайн');
         }
-        values.contacts = JSON.stringify(contacts_data).replaceAll(":","::");
+        values.contacts = JSON.stringify(contacts_data).replaceAll(":", "::");
         setWorkTime(workDay_data);
-        values.workTimes = Object.keys(workDay_data).filter(key=>{
-          return !!workDay.includes(key)
-        }).map(key=>{
-                return { "day":key,
-            "startTime":workDay_data[key][0],
-            "endTime":workDay_data[key][1],}})
+        values.workTimes = Object.keys(workDay_data).filter(key => {
+            return !!workDay.includes(key) && workDay_data[key]
+        }).map(key => {
+            return {
+                "day": key,
+                "startTime": workDay_data[key][0],
+                "endTime": workDay_data[key][1],
+            }
+        })
 
         values.locations = locations;
         setResult(Object.assign(result, values));
@@ -137,11 +153,17 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
     }
 
     const onOkTime = (event, workDay) => {
-        if(event[0]!=="" && event[1]!=="")
-        setWorkDayData({
-            ...workDay_data,
-            [workDay]: event
-        });
+        if(event===undefined){
+            setWorkDayData({
+                ...workDay_data,
+                [workDay]: event
+            });
+        }
+        else if (event[0] !== "" && event[1] !== "")
+            setWorkDayData({
+                ...workDay_data,
+                [workDay]: event
+            });
     }
 
     return (
@@ -151,7 +173,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
             form={contactsForm}
             onFinish={onFinish}
         >
-            <Text style={{fontSize :'19px', color:'GrayText'}}>Локації</Text>
+            <Text style={{fontSize: '19px', color: 'GrayText'}}>Локації</Text>
             <Form.Item name="locations"
                        className="add-club-row"
                        initialValue={result.locations}>
@@ -180,7 +202,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                                 description={`Адреса: ${item?.address}`}
                             />
                         </List.Item>
-                    )} />
+                    )}/>
                 <span className="add-club-location" onClick={() => setLocationVisible(true)}>
                     Додати локацію
                 </span>
@@ -209,38 +231,46 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 <ConfigProvider>
                     <Text style={{fontSize: '19px', color: 'GrayText'}}>Години роботи</Text>
 
-    <Form.Item name="workDay">
+                    <Form.Item name="workDay">
                         <Checkbox.Group onChange={onChangeCheck}
                                         style={{display: 'flex', flexDirection: 'column'}}
                                         defaultValue={Object.keys(workTime)}>
                             {DAYS.map((day, index) => (
 
                                 <Col key={day}>
-                                    <Checkbox value={day.value}
-                                              style={{padding: "1em 1em", display:"flex", alignContent:"center", textAlign:"center", flexDirection:"row"}}>
-                                        <div className="checkbox-item"
-                                             style={{display:"flex", alignItems:"center", textAlign:"center"}}>
-                                           <div style={{width:"5rem"}}> {day.label} </div>
+                                    <div className="checkbox-item"
+                                         style={{display: "flex", alignItems: "center", textAlign: "center"}}>
 
-                                            <Form.Item name={`${day.value}`}>
+                                        <Checkbox value={day.value}
+                                                  style={{
+                                                      padding: "1em 1em",
+                                                      display: "flex",
+                                                      alignContent: "center",
+                                                      textAlign: "center",
+                                                      flexDirection: "row"
+                                                  }}>
+                                            <div style={{width: "5rem"}}> {day.label} </div>
+                                        </Checkbox>
+
+                                        <Form.Item name={`${day.value}`}
+                                                   style={{margin: "0"}}>
                                             <RangeTimePicker visible={workDay.includes(day.value)}
-                                                             onOk={ (e) =>  onOkTime(e,day.value)}
-                                            initialValue={workDay_data[day.value]}/>
+                                                             onOk={(e) => onOkTime(e, day.value)}
+                                                             initialValue={workDay_data[day.value]}/>
 
-                                            </Form.Item>
-                                        </div>
-                                    </Checkbox>
+                                        </Form.Item>
+                                    </div>
                                 </Col>
 
                             ))}
                         </Checkbox.Group>
-    </Form.Item>
+                    </Form.Item>
                 </ConfigProvider>
             </div>
             <ConfigProvider
                 theme={{
                     token: {
-                        colorPrimaryHover: "#a4a4a4" ,
+                        colorPrimaryHover: "#a4a4a4",
                     },
                 }}>
             <Text style={{fontSize :'19px', color:'GrayText'}}>Контакти</Text>
@@ -300,7 +330,7 @@ const ContactsStep = ({ contacts, cities, step, setStep, setResult, result, loca
                 setVisible={setLocationVisible}
                 editedLocation={editedLocation}
                 setEditedLocation={setEditedLocation}
-                cities={cities} />
+                cities={cities}/>
         </Form>
     )
 };
