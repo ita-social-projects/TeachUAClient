@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React, {useState} from "react";
 import CenterLogo from "./CenterLogo";
 import "./css/CenterListRectangleItem.css";
+import ClubItemMap from "../clubList/ClubItemMap";
 
 
 const CenterListRectangleItem = ({center, onCenterClick}) => {
@@ -35,10 +36,10 @@ const CenterListRectangleItem = ({center, onCenterClick}) => {
                 }
             }}>
             <div>
-                <Card className="card center-list-rectangle-item" onClick={() => onCenterClick(center)}
+                <Card className="card center-list-rectangle-item"
                       key={center.name}>
                     <div className="item-rectangle-row">
-                        <div className="center-title">
+                        <div className="center-title" onClick={() => onCenterClick(center)}>
                             <CenterLogo urlLogo={center.urlLogo}/>
                             <div className="center-name">{center.name}</div>
                         </div>
@@ -87,6 +88,7 @@ const CenterListRectangleItem = ({center, onCenterClick}) => {
                         </Button>
                     </div>
                 </Card>
+                <ClubItemMap club={center} visible={visible} setVisible={setVisible}/>
             </div>
         </ConfigProvider>
     )

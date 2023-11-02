@@ -33,7 +33,7 @@ const ClubListItem = ({club, onClubClick}) => {
                         <ClubLogo logo={club.urlLogo} category={club.categories[0]}/>
                         <div className="name">{club.name}</div>
                     </div>
-                    <div className="club-tags-box" onClick={() => onClubClick(club)}>
+                    <div className="club-tags-box">
                         <Tags className="club-tags"
                               categories={club.categories.filter((_, idx) => idx < 2)}/>
                         <span
@@ -56,8 +56,7 @@ const ClubListItem = ({club, onClubClick}) => {
                         {/*<DribbbleOutlined className="club-online-icon"/>*/}
                         <span className="club-online-label">Гурток онлайн</span>
                     </div>}
-                    <Rate className="rating" disabled value={club.rating || 0} allowHalf
-                          onClick={() => onClubClick(club)}/>
+                    <Rate className="rating" disabled value={club.rating || 0} allowHalf />
                     {
                         club.locations.length > 0 &&
                         <div className="address" onClick={() => {
