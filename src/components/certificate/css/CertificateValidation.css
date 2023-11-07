@@ -32,5 +32,11 @@
 }
 
 .validation-content p{
+    margin-block-start: 0em;
+    text-indent: 40px;
+}
+
+.validation-content p+p{
+    margin-block-start: 1em;
     text-indent: 40px;
 }
