@@ -163,7 +163,7 @@ const EditTask = () => {
                         format={dateFormat}
                         name="startDate"
                         allowClear={false}
-                        value={dayjs(task.startDate, "YYYY-MM-DD")}
+                        value={dayjs(task.startDate)}
                         locale={locale}
                     />
                 </Form.Item>
