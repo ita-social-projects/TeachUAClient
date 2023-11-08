@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import CenterLogo from "./CenterLogo";
 import "./css/CenterList.less"
+import ClubItemMap from "../clubList/ClubItemMap";
 
 const CenterListItem = ({center, onCenterClick}) => {
 
@@ -29,15 +30,14 @@ const CenterListItem = ({center, onCenterClick}) => {
                     <CenterLogo urlLogo={center.urlLogo}/>
                     <div className="center-name">{center.name}</div>
                 </div>
-                <div className="center-tags-box" onClick={() => onCenterClick(center)}>
+                <div className="center-tags-box">
                 </div>
                 {
                     <p className="center-description-in-block">
                         {center.description}
                     </p>
                 }
-                <Rate className="center-rating" allowHalf disabled value={center.rating}
-                      onClick={() => onCenterClick(center)}/>
+                <Rate className="center-rating" allowHalf disabled value={center.rating} />
                 {
                     center.locations.length > 0 &&
                     <div className="address" onClick={() => {
@@ -70,7 +70,7 @@ const CenterListItem = ({center, onCenterClick}) => {
                     <Link to={`/center/${center.id}`}>Детальніше</Link>
                 </Button>
             </Card>
-            {/*<ClubItemMap club={club} visible={visible} setVisible={setVisible} />*/}
+            <ClubItemMap club={center} visible={visible} setVisible={setVisible} />
         </div>
         </ConfigProvider>
     )

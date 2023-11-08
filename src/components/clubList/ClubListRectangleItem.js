@@ -1,15 +1,18 @@
 import {Button, Card, ConfigProvider, Popover, Rate} from "antd";
 import EnvironmentFilled from "@ant-design/icons/lib/icons/EnvironmentFilled";
-import React from "react";
+import {React, useState} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import Tags from "../Tags";
 import ClubLogo from "../clubPage/header/ClubLogo";
 import "./css/ClubListRectangleItem.css"
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
+import ClubItemMap from "./ClubItemMap";
 
 
 const ClubListRectangleItem = ({club, onClubClick}) => {
+    const [visible, setVisible] = useState(false);
+
     return (
         <ConfigProvider
             theme={{
@@ -23,9 +26,9 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                 }
             }}>
         <div>
-            <Card className="card list-rectangle-item" onClick={() => onClubClick(club)}  key={club.name}>
+            <Card className="card list-rectangle-item" key={club.name}>
                 <div className="item-rectangle-row">
-                    <div className="title">
+                    <div className="title" onClick={() => onClubClick(club)}>
                         <ClubLogo logo={club.urlLogo} category={club.categories[0]}/>
                         <div className="name">{club.name}</div>
                     </div>
@@ -49,7 +52,9 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                         <Rate className="rating" disabled value={club.rating}/>
                         {
                             club.locations.length > 0 &&
-                            <div className="address" >
+                            <div className="address" onClick={() => {
+                                setVisible(true)
+                            }}>
                                 <EnvironmentFilled
                                     className="address-icon" />
                                 {
@@ -78,6 +83,7 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                     </Button>
                 </div>
             </Card>
+            <ClubItemMap club={club} visible={visible} setVisible={setVisible}/>
         </div>
         </ConfigProvider>
     )
