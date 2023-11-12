@@ -15,7 +15,7 @@ const {Text} = Typography;
 
 const ClubListSider = ({
                            setCurrentPage,
-                           form,
+                           setParams,
                            getAdvancedData,
                            isCenterChecked,
                            setShowHideMenu,
@@ -24,6 +24,7 @@ const ClubListSider = ({
                            toggleCenter,
                            changeCityName
                        }) => {
+    const [form] = Form.useForm();
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
@@ -76,6 +77,7 @@ const ClubListSider = ({
                 setStateForClub(false);
                 searchParameters.isCenter = false;
             } else {
+                form.setFieldsValue({categoriesName: undefined});
                 setStateForClub(true);
                 searchParameters.isCenter = true;
             }
@@ -94,6 +96,7 @@ const ClubListSider = ({
             }
         }
 
+        setParams(form.getFieldsValue());
     };
 
     const onCityChange = (value) => {

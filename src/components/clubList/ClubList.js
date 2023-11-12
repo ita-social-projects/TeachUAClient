@@ -49,7 +49,6 @@ const ClubList = ({
         let checkUndefPage = page === undefined ? 0 : page;
         if (advancedSearch && showHideMenu) {
 
-            setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
@@ -128,7 +127,7 @@ const ClubList = ({
             {advancedSearch && showHideMenu && (
                 <ClubListSider
                     setCurrentPage={setCurrentPage}
-                    form={searchForm}
+                    setParams={setParams}
                     getAdvancedData={getData}
                     setShowHideMenu={setShowHideMenu}
                     isCenterChecked={isCenterChecked}
