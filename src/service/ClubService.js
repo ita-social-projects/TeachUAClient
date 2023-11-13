@@ -138,8 +138,6 @@ export const getClubsByAdvancedSearch = async (
         age = undefined;
     }
 
-    console.log(parameters.categoriesName);
-
     return await fetchRequest
         .get(BASE_URL + "/api/clubs/search/advanced", {
             params: {

@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const AppContext = createContext();
+const CategoryContext = createContext();
 
-export const useAppContext = () => useContext(AppContext);
+export const useCategoryContext = () => useContext(CategoryContext);
 
-export const AppProvider = ({ children }) => {
+export const CategoryProvider = ({ children }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const toggleCategory = (categoryName) => {
@@ -16,8 +16,8 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ selectedCategories, toggleCategory }}>
+    <CategoryContext.Provider value={{ selectedCategories, toggleCategory }}>
       {children}
-    </AppContext.Provider>
+    </CategoryContext.Provider>
   );
 };

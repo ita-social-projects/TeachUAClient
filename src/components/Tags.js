@@ -2,10 +2,10 @@ import {Tag} from "antd";
 import React from "react";
 import PropTypes from "prop-types";
 import MaskIcon from "./MaskIcon";
-import { useAppContext } from "../context/CategoryContext";
+import { useCategoryContext } from "../context/CategoryContext";
 
 const Tags = ({categories, className}) => {
-    const { toggleCategory } = useAppContext();
+    const { toggleCategory } = useCategoryContext();
     return (
         <div className={`tags ${className ? className : ''}`}>
             {categories.map(category =>

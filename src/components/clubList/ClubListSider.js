@@ -8,7 +8,7 @@ import {getStationsByCity} from "../../service/StationService";
 import {searchParameters, mapSearchParameters} from "../../context/SearchContext";
 import {getClubReport} from "../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
-import { useAppContext } from "../../context/CategoryContext";
+import { useCategoryContext } from "../../context/CategoryContext";
 
 const {Sider} = Layout;
 const {Option} = Select;
@@ -33,7 +33,7 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub, setStateForClub] = useState(false);
-    const { selectedCategories, toggleCategory } = useAppContext();
+    const { selectedCategories, toggleCategory } = useCategoryContext();
 
 
     const getData = () => {

@@ -13,7 +13,7 @@ import {useLocation} from "react-router-dom";
 
 import {PageContext} from "../../context/PageContext";
 
-import { AppProvider } from "../../context/CategoryContext";
+import { useCategoryContext } from "../../context/CategoryContext";
 
 const {Content} = Layout;
 
@@ -46,6 +46,22 @@ const ClubList = ({
     const location = useLocation();
     const [params, setParams] = useState(mapSearchParameters);
     const [searchParams, setSearchParams] = useState(searchParameters);
+    const { selectedCategories } = useCategoryContext();
+
+    useEffect(() => {
+            getClubsByAdvancedSearch(
+                {categoriesName: selectedCategories},
+                1,
+                sortBy,
+                sortDirection
+            ).then((response) => {
+                setClubs(response);
+            });
+            setSearchParams((prevSearchParams) => ({
+                ...prevSearchParams,
+                categoryName: selectedCategories,
+            }));
+    }, [selectedCategories]);
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
@@ -125,7 +141,6 @@ const ClubList = ({
         setCenterInfoVisible(true);
     };
     return (
-        <AppProvider>
         <Layout className="club-list">
             {advancedSearch && showHideMenu && (
                 <ClubListSider
@@ -173,7 +188,6 @@ const ClubList = ({
              )}
 
         </Layout>
-        </AppProvider>
     );
 };
 
