@@ -13,6 +13,8 @@ import {useLocation} from "react-router-dom";
 
 import {PageContext} from "../../context/PageContext";
 
+import { AppProvider } from "../../context/CategoryContext";
+
 const {Content} = Layout;
 
 const ClubList = ({
@@ -123,6 +125,7 @@ const ClubList = ({
         setCenterInfoVisible(true);
     };
     return (
+        <AppProvider>
         <Layout className="club-list">
             {advancedSearch && showHideMenu && (
                 <ClubListSider
@@ -170,6 +173,7 @@ const ClubList = ({
              )}
 
         </Layout>
+        </AppProvider>
     );
 };
 

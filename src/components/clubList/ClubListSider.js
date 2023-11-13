@@ -8,6 +8,7 @@ import {getStationsByCity} from "../../service/StationService";
 import {searchParameters, mapSearchParameters} from "../../context/SearchContext";
 import {getClubReport} from "../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
+import { useAppContext } from "../../context/CategoryContext";
 
 const {Sider} = Layout;
 const {Option} = Select;
@@ -32,6 +33,7 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub, setStateForClub] = useState(false);
+    const { selectedCategories, toggleCategory } = useAppContext();
 
 
     const getData = () => {
@@ -39,6 +41,13 @@ const ClubListSider = ({
         getAdvancedData(0);
     };
     setIsCenterChecked(stateForClub);
+
+    useEffect(() => {
+        if(selectedCategories.length !== 0) {
+        form.setFieldsValue({categoriesName: selectedCategories});
+        onValuesChange(form.getFieldsValue);
+        }
+    }, [selectedCategories]);
 
     useEffect(() => {
         if (activeCategory) {
@@ -258,7 +267,8 @@ const ClubListSider = ({
                                         .map((category) => (
                                             <Checkbox
                                                 style={{display: "flex"}}
-                                                value={category.name}>
+                                                value={category.name}
+                                                onClick={() => toggleCategory(category.name)}>
                                                 {category.name}
                                             </Checkbox>
                                         ))}
