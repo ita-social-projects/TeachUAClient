@@ -15,8 +15,12 @@ export const CategoryProvider = ({ children }) => {
     }
   };
 
+  const setSelectedCategoriesList = (categories) => {
+    setSelectedCategories(categories);
+  };
+
   return (
-    <CategoryContext.Provider value={{ selectedCategories, toggleCategory }}>
+    <CategoryContext.Provider value={{ selectedCategories, toggleCategory, setSelectedCategoriesList }}>
       {children}
     </CategoryContext.Provider>
   );

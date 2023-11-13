@@ -153,6 +153,7 @@ const ClubList = ({
                     activeCategory={activeCategory}
                     toggleCenter={toggleCenter}
                     changeCityName={changeCityName}
+                    setSearchParams={setSearchParams}
                 />
             )}
 
