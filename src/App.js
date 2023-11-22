@@ -25,6 +25,7 @@ import StationTable from "./components/admin/station/StationTable";
 import CategoryTable from "./components/admin/category/CategoryTable";
 import LogComponent from "./components/log/LogComponent";
 import LogByNameComponent from "./components/log/LogByNameComponent";
+import VersionComponent from "./components/version/VersionComponent";
 import ChallengePage from "./components/challenges/ChallengePage";
 import MarathonRegistrationPage from "./components/marathonPage/MarathonRegistrationPage";
 import MarathonPage from "./components/marathonPage/MarathonPage";
@@ -194,6 +195,7 @@ function App() {
                                                 <Route path="/oauth2/redirect" exact component={OAuth2RedirectHandler}/>
                                                 <Route path="/service" exact component={ServiceInUkr}/>
                                                 <Route path="/about" exact component={AboutProject}/>
+                                                <Route path="/version" exact component={VersionComponent}/>
                                                 <Route path="/challenges/registration/:challengeId" exact
                                                        component={RegistrationPage}/>
                                                 <Route path="/challenges/:challengeId" exact component={ChallengePage}/>
