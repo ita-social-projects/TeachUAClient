@@ -190,7 +190,7 @@ const ImportCertificateData = () => {
                        name="type"
                        className="radio-button"
                        onChange={onTypeChange}/>
-                <label htmlFor="business_participant">учасника бізнес-курсу</label>
+                <label htmlFor="business_participant">учасника курсу української мови «PROукраїнська»</label>
             </div>
         </div>)
     };
