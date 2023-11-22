@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import MaskIcon from "./MaskIcon";
 import { useCategoryContext } from "../context/CategoryContext";
 
-const Tags = ({categories, className}) => {
+const Tags = ({categories, className, isClickable}) => {
     const { toggleCategory } = useCategoryContext();
     return (
         <div className={`tags ${className ? className : ''}`}>
             {categories.map(category =>
-                <Tag className="tag" onClick={() => toggleCategory(category.name)} key={category.id} style={{
+                <Tag className="tag" onClick={() =>  isClickable && toggleCategory(category.name)} key={category.id} style={{
                     backgroundColor: category.tagBackgroundColor,
                     color: category.tagTextColor,
                     cursor: 'pointer',
