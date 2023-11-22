@@ -6,7 +6,7 @@ import ClubListItemInfo from "./ClubListItemInfo";
 import ClubListControl from "./ClubListControl";
 import ClubListEmptySearch from "./ClubListEmptySearch";
 import {ConfigProvider, Layout, Pagination} from "antd";
-
+import TagList from "./ClubTagsList";
 
 const {Content} = Layout;
 
@@ -33,11 +33,11 @@ const ClubsListDisplayContent = ({
                     },
                 },
             }}>
+                
             <Content className="club-list-content"
                      style={{
                          maxWidth: advancedSearch ? '944px' : '1264px',
                      }}>
-
                 {advancedSearch &&
                     <ClubListControl setSortBy={setSortBy}
                                      setSortDirection={setSortDirection}
@@ -46,6 +46,8 @@ const ClubsListDisplayContent = ({
                                      sortDirection={sortDirection}
                                      setView={setView}
                                      centerIsChecked={false}/>}
+
+                <TagList />
 
                 {!loading && clubs.content.length === 0 ? <ClubListEmptySearch/> :
                     !advancedSearch ?
