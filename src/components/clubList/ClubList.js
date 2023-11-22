@@ -49,6 +49,20 @@ const ClubList = ({
     const { selectedCategories } = useCategoryContext();
 
     useEffect(() => {
+
+        console.log(selectedCategories.length)
+        if(selectedCategories.length === 0) {
+            getClubsByParameters(
+                {...searchParams,
+        categoryName: [],
+            },
+                1,
+                sortBy,
+                sortDirection
+            ).then((response) => {
+                setClubs(response);
+            });
+        } else {
             getClubsByAdvancedSearch(
                 {categoriesName: selectedCategories},
                 1,
@@ -57,10 +71,12 @@ const ClubList = ({
             ).then((response) => {
                 setClubs(response);
             });
+
             setSearchParams((prevSearchParams) => ({
                 ...prevSearchParams,
                 categoryName: selectedCategories,
             }));
+        }
     }, [selectedCategories]);
 
     const getData = (page) => {
