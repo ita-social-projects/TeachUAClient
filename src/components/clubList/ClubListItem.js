@@ -12,7 +12,7 @@ import ClubItemMap from "./ClubItemMap";
 import "./css/ClubList.less"
 
 
-const ClubListItem = ({club, onClubClick, isClickable=true}) => {
+const ClubListItem = ({club, onClubClick}) => {
     const [visible, setVisible] = useState(false);
 
     return (
@@ -35,7 +35,6 @@ const ClubListItem = ({club, onClubClick, isClickable=true}) => {
                     </div>
                     <div className="club-tags-box">
                         <Tags className="club-tags"
-                                isClickable={isClickable}
                               categories={club.categories.filter((_, idx) => idx < 2)}/>
                         <span
                             className="and">{club.categories.length > 2 && `і ще ${club.categories.length - 2}...`}</span>

@@ -8,7 +8,6 @@ import {getStationsByCity} from "../../service/StationService";
 import {searchParameters, mapSearchParameters} from "../../context/SearchContext";
 import {getClubReport} from "../../service/ClubService";
 import {FilePdfOutlined} from "@ant-design/icons";
-import { useCategoryContext } from "../../context/CategoryContext";
 
 const {Sider} = Layout;
 const {Option} = Select;
@@ -16,17 +15,15 @@ const {Text} = Typography;
 
 const ClubListSider = ({
                            setCurrentPage,
-                           setParams,
+                           form,
                            getAdvancedData,
                            isCenterChecked,
                            setShowHideMenu,
                            setIsCenterChecked,
                            activeCategory,
                            toggleCenter,
-                           changeCityName,
-                           setSearchParams
+                           changeCityName
                        }) => {
-    const [form] = Form.useForm();
     const [cityName, setCityName] = useState(null);
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
@@ -34,7 +31,6 @@ const ClubListSider = ({
     const [stations, setStations] = useState([]);
     const [age, setAge] = useState([]);
     const [stateForClub, setStateForClub] = useState(false);
-    const { selectedCategories, toggleCategory, setSelectedCategoriesList } = useCategoryContext();
 
 
     const getData = () => {
@@ -42,11 +38,6 @@ const ClubListSider = ({
         getAdvancedData(0);
     };
     setIsCenterChecked(stateForClub);
-
-    useEffect(() => {
-        form.setFieldsValue({categoriesName: selectedCategories});
-        onValuesChange(form.getFieldsValue);
-    }, [selectedCategories]);
 
     useEffect(() => {
         if (activeCategory) {
@@ -85,8 +76,6 @@ const ClubListSider = ({
                 setStateForClub(false);
                 searchParameters.isCenter = false;
             } else {
-                form.setFieldsValue({categoriesName: undefined});
-                setSelectedCategoriesList([]);
                 setStateForClub(true);
                 searchParameters.isCenter = true;
             }
@@ -105,17 +94,11 @@ const ClubListSider = ({
             }
         }
 
-        setParams(form.getFieldsValue());
     };
 
     const onCityChange = (value) => {
         setCityName(value);
         searchParameters.cityName = value;
-        setSearchParams((prevSearchParams) => ({
-            ...prevSearchParams,
-            categoryName: selectedCategories, 
-            cityName: value,
-        }));
         form.setFieldsValue({districtName: undefined});
         form.setFieldsValue({stationName: undefined});
     };
@@ -272,8 +255,7 @@ const ClubListSider = ({
                                         .map((category) => (
                                             <Checkbox
                                                 style={{display: "flex"}}
-                                                value={category.name}
-                                                onClick={() => toggleCategory(category.name)}>
+                                                value={category.name}>
                                                 {category.name}
                                             </Checkbox>
                                         ))}

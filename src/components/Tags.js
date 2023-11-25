@@ -2,17 +2,14 @@ import {Tag} from "antd";
 import React from "react";
 import PropTypes from "prop-types";
 import MaskIcon from "./MaskIcon";
-import { useCategoryContext } from "../context/CategoryContext";
 
-const Tags = ({categories, className, isClickable}) => {
-    const { toggleCategory } = useCategoryContext();
+const Tags = ({categories, className}) => {
     return (
         <div className={`tags ${className ? className : ''}`}>
             {categories.map(category =>
-                <Tag className="tag" onClick={() =>  isClickable && toggleCategory(category.name)} key={category.id} style={{
+                <Tag className="tag" key={category.id} style={{
                     backgroundColor: category.tagBackgroundColor,
                     color: category.tagTextColor,
-                    cursor: 'pointer',
                 }}>
                     <MaskIcon maskColor={category.tagTextColor} iconUrl={category.urlLogo}/>
                     <span className="name">{category.name}</span>
