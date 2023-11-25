@@ -5,5 +5,5 @@ export const DOWNLOAD_DATABASE_SQL = BASE_URL + "/api/download-database-sql";
 export const DELETE_FILE_URL = BASE_URL + "/api/delete-file";
 export const SERVICE_EMAIL = "fcrnx-hxenvavna@fcrnx-hxenvavna-362008.vnz.tfreivprnppbhag.pbz";
 
-export const FRONTEND_COMMIT_NUMBER="76ae1f5497e25b08a21daca6a548c5e642d09a53";
+export const FRONTEND_COMMIT_NUMBER="fc8307754339d025f786288124f035a7569ea70d";
 export const FRONTEND_COMMIT_DATE="22.11.2023";
