@@ -52,6 +52,7 @@ const ClubListComponent = () => {
         <Loader />
     ) : (
         <Layout>
+            <CategoryProvider>
             <ClubListHeader
                 setAdvancedSearch={setAdvancedSearch}
                 advancedSearch={advancedSearch}
@@ -61,7 +62,6 @@ const ClubListComponent = () => {
                 toggleCenter={toggleCenter}
                 centerOrClub={centerOrClub}
             />
-            <CategoryProvider>
             <ClubList
                 toggleCenter={toggleCenter}
                 loading={loading}

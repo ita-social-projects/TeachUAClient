@@ -49,12 +49,10 @@ const ClubList = ({
     const { selectedCategories } = useCategoryContext();
 
     useEffect(() => {
-
-        console.log(selectedCategories.length)
         if(selectedCategories.length === 0) {
             getClubsByParameters(
                 {...searchParams,
-        categoryName: [],
+                categoryName: "",
             },
                 1,
                 sortBy,
@@ -62,6 +60,10 @@ const ClubList = ({
             ).then((response) => {
                 setClubs(response);
             });
+            setSearchParams((prevSearchParams) => ({
+                ...prevSearchParams,
+                categoryName: "",
+            }));
         } else {
             getClubsByAdvancedSearch(
                 {categoriesName: selectedCategories},
@@ -71,7 +73,6 @@ const ClubList = ({
             ).then((response) => {
                 setClubs(response);
             });
-
             setSearchParams((prevSearchParams) => ({
                 ...prevSearchParams,
                 categoryName: selectedCategories,

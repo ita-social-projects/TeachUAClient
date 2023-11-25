@@ -10,7 +10,7 @@ import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined";
 import ClubItemMap from "./ClubItemMap";
 
 
-const ClubListRectangleItem = ({club, onClubClick}) => {
+const ClubListRectangleItem = ({club, onClubClick, isClickable=false}) => {
     const [visible, setVisible] = useState(false);
 
     return (
@@ -44,7 +44,7 @@ const ClubListRectangleItem = ({club, onClubClick}) => {
                     </div>}
                 </div>
                 <div className="club-tags-box">
-                    <Tags categories={club.categories.filter((_, idx) => idx < 3)}/>
+                    <Tags categories={club.categories.filter((_, idx) => idx < 3)} isClickable={isClickable}/>
                     <span>{club.categories.length > 3 && `і ще ${club.categories.length - 3}...`}</span>
                 </div>
                 <div className="item-rectangle-row">

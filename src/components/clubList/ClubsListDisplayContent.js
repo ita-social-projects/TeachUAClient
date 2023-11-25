@@ -53,14 +53,14 @@ const ClubsListDisplayContent = ({
                     !advancedSearch ?
                         <div className="content-clubs-list content-clubs-block">
                             {clubs.content.map((club, index) =>
-                                <ClubListItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                <ClubListItem club={club} key={index} onClubClick={onClubClick} isClickable={true}/>)}
                         </div> :
                         <div className={`content-clubs-list ${view === 'BLOCK' && "content-clubs-block"}`}>
                             {clubs.content.map((club, index) =>
                                 view === 'BLOCK' ?
-                                    <ClubListItem club={club} key={index} onClubClick={onClubClick} page={currentPage}/>
+                                    <ClubListItem club={club} key={index} onClubClick={onClubClick} page={currentPage} isClickable={true}/>
                                     :
-                                    <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick}/>)}
+                                    <ClubListRectangleItem club={club} key={index} onClubClick={onClubClick} isClickable={true}/>)}
                         </div>
                 }
 

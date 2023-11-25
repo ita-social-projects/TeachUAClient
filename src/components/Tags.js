@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MaskIcon from "./MaskIcon";
 import { useCategoryContext } from "../context/CategoryContext";
 
-const Tags = ({categories, className, isClickable}) => {
+const Tags = ({categories, className, isClickable=false}) => {
     const { toggleCategory } = useCategoryContext();
     return (
         <div className={`tags ${className ? className : ''}`}>

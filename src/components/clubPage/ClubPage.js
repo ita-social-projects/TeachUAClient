@@ -9,6 +9,7 @@ import Loader from "../Loader";
 import './css/ClubPage.css';
 import PageComments from "./comments/PageComments";
 import {searchParameters} from "../../context/SearchContext";
+import { CategoryProvider } from "../../context/CategoryContext";
 
 class ClubPage extends React.Component {
     state = {
@@ -48,6 +49,7 @@ class ClubPage extends React.Component {
                 subTitle="Гурток який ви намагаєтесь відкрити не існує"
             /> :
             !this.state.club.categories ? <Loader/> : (
+                <CategoryProvider>
                 <Layout className="global-padding">
                     <PageHeader club={this.state.club}/>
                     <Layout className="club-page" style={{padding: 40, background: 'white'}}>
@@ -55,7 +57,8 @@ class ClubPage extends React.Component {
                         <PageSider cityName={this.state.cityName} club={this.state.club}/>
                     </Layout>
                     <PageComments club={this.state.club}/>
-                </Layout>)
+                </Layout>
+                </CategoryProvider>)
     }
 }
 

@@ -12,7 +12,7 @@ import ClubItemMap from "./ClubItemMap";
 import "./css/ClubList.less"
 
 
-const ClubListItem = ({club, onClubClick, isClickable=true}) => {
+const ClubListItem = ({club, onClubClick, isClickable=false}) => {
     const [visible, setVisible] = useState(false);
 
     return (
