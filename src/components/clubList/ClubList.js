@@ -13,8 +13,6 @@ import {useLocation} from "react-router-dom";
 
 import {PageContext} from "../../context/PageContext";
 
-import { useCategoryContext } from "../../context/CategoryContext";
-
 const {Content} = Layout;
 
 const ClubList = ({
@@ -46,43 +44,12 @@ const ClubList = ({
     const location = useLocation();
     const [params, setParams] = useState(mapSearchParameters);
     const [searchParams, setSearchParams] = useState(searchParameters);
-    const { selectedCategories } = useCategoryContext();
-
-    useEffect(() => {
-
-        console.log(selectedCategories.length)
-        if(selectedCategories.length === 0) {
-            getClubsByParameters(
-                {...searchParams,
-        categoryName: [],
-            },
-                1,
-                sortBy,
-                sortDirection
-            ).then((response) => {
-                setClubs(response);
-            });
-        } else {
-            getClubsByAdvancedSearch(
-                {categoriesName: selectedCategories},
-                1,
-                sortBy,
-                sortDirection
-            ).then((response) => {
-                setClubs(response);
-            });
-
-            setSearchParams((prevSearchParams) => ({
-                ...prevSearchParams,
-                categoryName: selectedCategories,
-            }));
-        }
-    }, [selectedCategories]);
 
     const getData = (page) => {
         let checkUndefPage = page === undefined ? 0 : page;
         if (advancedSearch && showHideMenu) {
 
+            setParams(searchForm.getFieldsValue());
             if (isCenterChecked) {
                 getCentersByAdvancedSearch(params, page, sortBy, sortDirection).then((response) => {
                     setCenters(response);
@@ -161,7 +128,7 @@ const ClubList = ({
             {advancedSearch && showHideMenu && (
                 <ClubListSider
                     setCurrentPage={setCurrentPage}
-                    setParams={setParams}
+                    form={searchForm}
                     getAdvancedData={getData}
                     setShowHideMenu={setShowHideMenu}
                     isCenterChecked={isCenterChecked}
@@ -169,7 +136,6 @@ const ClubList = ({
                     activeCategory={activeCategory}
                     toggleCenter={toggleCenter}
                     changeCityName={changeCityName}
-                    setSearchParams={setSearchParams}
                 />
             )}
 

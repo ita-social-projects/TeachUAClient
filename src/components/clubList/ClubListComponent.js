@@ -12,7 +12,6 @@ import MainInformationStep from "../addClub/steps/MainInformationStep";
 import ContactsStep from "../addClub/steps/ContactsStep";
 import DescriptionStep from "../addClub/steps/DescriptionStep";
 import {mapSearchParameters, searchParameters} from "../../context/SearchContext";
-import { CategoryProvider } from "../../context/CategoryContext";
 
 const ClubListComponent = () => {
     const DEFAULT_SORT_BY = "name";
@@ -61,7 +60,6 @@ const ClubListComponent = () => {
                 toggleCenter={toggleCenter}
                 centerOrClub={centerOrClub}
             />
-            <CategoryProvider>
             <ClubList
                 toggleCenter={toggleCenter}
                 loading={loading}
@@ -74,7 +72,6 @@ const ClubListComponent = () => {
                 defaultSortDir={DEFAULT_SORT_DIRECTION}
                 defaultSortView={DEFAULT_SORT_VIEW}
             />
-            </CategoryProvider>
             <MapComponent visible={mapVisible} setVisible={setMapVisible} />
         </Layout>
     );
