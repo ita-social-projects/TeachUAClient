@@ -93,6 +93,15 @@ const ImportCertificateData = () => {
                 dataToDB.studyType !== null) {
                 setFormFilled(true)
             }
+        } else if (dataToDB.type === '6') {
+            if (dataToDB.type !== null &&
+                dataToDB.startDate !== '' && dataToDB.startDate !== 'Invalid date' &&
+                dataToDB.endDate !== '' && dataToDB.endDate !== 'Invalid date' &&
+                dataToDB.hours != null &&
+                dataToDB.courseNumber != null &&
+                dataToDB.studyType !== null) {
+                setFormFilled(true)
+            }
         }
     }
 
@@ -191,6 +200,15 @@ const ImportCertificateData = () => {
                        className="radio-button"
                        onChange={onTypeChange}/>
                 <label htmlFor="business_participant">учасника курсу української мови «PROукраїнська»</label>
+            </div>
+            <div>
+                <input type="radio"
+                       value="6"
+                       id="visiblecircle"
+                       name="type"
+                       className="radio-button"
+                       onChange={onTypeChange}/>
+                <label htmlFor="visiblecircle">курс української мови для творчих особистостей «Видноколо»</label>
             </div>
         </div>)
     };
